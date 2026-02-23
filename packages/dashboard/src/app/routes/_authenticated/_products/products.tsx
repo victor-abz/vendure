@@ -70,6 +70,7 @@ function ProductListPage() {
                     },
                 };
             }}
+            defaultSort={[{ id: 'updatedAt', desc: true }]}
             defaultVisibility={{
                 name: true,
                 featuredAsset: true,
