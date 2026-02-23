@@ -86,6 +86,7 @@ function ModifyOrderPage() {
         updateBillingAddress: updateBillingAddressInInput,
         addSurcharge,
         setNote,
+        setRecalculateShipping,
         hasModifications,
     } = useModifyOrder(entity);
 
@@ -205,6 +206,7 @@ function ModifyOrderPage() {
                             })) ?? []
                         }
                         onNoteChange={setNote}
+                        onRecalculateShippingChange={setRecalculateShipping}
                     />
                     <div className="mt-4 flex justify-end">
                         <Button
