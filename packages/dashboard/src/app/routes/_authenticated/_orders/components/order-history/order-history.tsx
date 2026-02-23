@@ -4,7 +4,7 @@ import { HistoryNoteInput } from '@/vdb/components/shared/history-timeline/histo
 import { HistoryTimelineWithGrouping } from '@/vdb/components/shared/history-timeline/history-timeline-with-grouping.js';
 import { useHistoryNoteEditor } from '@/vdb/components/shared/history-timeline/use-history-note-editor.js';
 import { HistoryEntryItem } from '@/vdb/framework/extension-api/types/index.js';
-import { HistoryEntryProps } from '@/vdb/framework/history-entry/history-entry.js';
+import { HistoryEntry, HistoryEntryProps } from '@/vdb/framework/history-entry/history-entry.js';
 import {
     OrderCancellationComponent,
     OrderCustomerUpdatedComponent,
@@ -77,7 +77,20 @@ export function OrderHistory({
         } else if (entry.type === 'ORDER_CANCELLATION') {
             return <OrderCancellationComponent {...props} />;
         }
-        return null;
+        return (
+            <HistoryEntry {...props}>
+                {entry.data && typeof entry.data === 'object' && !Array.isArray(entry.data) && Object.keys(entry.data).length > 0 && (
+                    <div className="text-xs text-muted-foreground space-y-0.5">
+                        {Object.entries(entry.data).map(([key, value]) => (
+                            <p key={key}>
+                                <span className="font-medium">{key}:</span>{' '}
+                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}
+                            </p>
+                        ))}
+                    </div>
+                )}
+            </HistoryEntry>
+        );
     };
 
     return (
