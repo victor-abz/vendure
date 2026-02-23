@@ -45,4 +45,35 @@ test.describe('Product List', () => {
 
         await expect(lp.newButton).toBeVisible();
     });
+
+    // #4393 — product list should default to sorting by updatedAt descending
+    test('should apply descending updatedAt sort by default', async ({ page }) => {
+        const lp = listPage(page);
+        await lp.goto();
+        await lp.expectLoaded();
+
+        const url = new URL(page.url());
+        const sort = url.searchParams.get('sort');
+        expect(sort).toContain('-updatedAt');
+    });
+
+    // #4393 — Reset button should be visible (outside scroll area) in column settings
+    test('should show the Reset button in the column settings dropdown', async ({ page }) => {
+        const lp = listPage(page);
+        await lp.goto();
+        await lp.expectLoaded();
+
+        // The column settings trigger is the gear icon (Settings2) in the data table toolbar.
+        // We exclude sidebar buttons (which also use Settings2) via :not([data-sidebar]).
+        const columnSettingsTrigger = page.locator('button:not([data-sidebar])').filter({
+            has: page.locator('svg.lucide-settings2'),
+        });
+        await columnSettingsTrigger.click();
+
+        const dropdownContent = page.locator('[data-slot="dropdown-menu-content"]');
+        await expect(dropdownContent).toBeVisible();
+
+        const resetItem = page.getByRole('menuitem', { name: 'Reset' });
+        await expect(resetItem).toBeVisible();
+    });
 });

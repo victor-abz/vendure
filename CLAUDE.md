@@ -97,6 +97,27 @@ DB=sqlite npm run populate
 - **E2E tests**: In `packages/<name>/e2e/` as `*.e2e-spec.ts`, run with `npm run e2e <test-file>` from package dir
 - **E2E cache**: Seed data gets cached in `packages/<name>/e2e/__data__` for speed. Delete to reset after schema changes.
 
+### Dashboard E2E Tests
+
+Dashboard Playwright tests live in `packages/dashboard/e2e/tests/`. When adding a new test (including regression tests for bug fixes), **always check existing suites first** before creating a new file:
+
+- `catalog/product-list.spec.ts` — product list behaviour (sorting, column settings, filtering)
+- `catalog/products.spec.ts` — product detail page
+- `catalog/custom-fields.spec.ts` — custom field rendering, editing, persistence
+- `sales/orders.spec.ts` — draft orders, order detail, order modification
+- `tests/regression/` — **only** for tests that genuinely don't fit any existing suite
+
+Add a comment referencing the issue number above the test, e.g.:
+```ts
+// #4393 — product list should default to sorting by updatedAt descending
+test('should apply descending updatedAt sort by default', async ({ page }) => {
+```
+
+Run dashboard e2e tests from `packages/dashboard`:
+```bash
+CI=true VITE_TEST_PORT=5176 npx playwright test --config e2e/playwright.config.ts <test-path> --reporter=list
+```
+
 ## Code Style
 
 - **Indentation**: 4 spaces

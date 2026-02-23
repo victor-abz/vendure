@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { VENDURE_PORT } from './constants.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const VITE_PORT = 5174;
+const VITE_PORT = Number(process.env.VITE_TEST_PORT) || 5174;
 
 export default defineConfig({
     testDir: './tests',

@@ -33,6 +33,7 @@ storybook-static
 # E2E tests (Playwright)
 e2e/.auth/
 e2e/__data__/
+e2e/fixtures/.compiled/
 e2e/test-results/
 e2e/playwright-report/
 test-results/
