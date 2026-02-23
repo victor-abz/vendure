@@ -95,7 +95,7 @@ export function CustomFieldsForm({ entityType, control, formPathPrefix }: Readon
     // Tabbed view
     return (
         <Tabs defaultValue={groupedFields[0]?.tabName} className="w-full">
-            <TabsList>
+            <TabsList className="h-auto w-full flex-wrap justify-start">
                 {groupedFields.map(group => (
                     <TabsTrigger key={group.tabName} value={group.tabName}>
                         {group.tabName === 'general' ? t`General` : group.tabName}
