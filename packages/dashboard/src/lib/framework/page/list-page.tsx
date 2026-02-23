@@ -259,7 +259,7 @@ export interface ListPageProps<
      *
      * @example
      * ```tsx
-     * defaultSort={[{ id: 'orderPlacedAt', desc: true }]}
+     * defaultSort={[{ id: 'updatedAt', desc: true }]}
      * ```
      */
     defaultSort?: SortingState;
