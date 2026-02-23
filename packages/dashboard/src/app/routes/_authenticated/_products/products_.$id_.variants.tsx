@@ -324,6 +324,31 @@ function ManageProductVariants() {
                                                 <TableCell key={group.id}>
                                                     {option ? (
                                                         <Badge variant="outline">{option.name}</Badge>
+                                                    ) : group.options.length === 1 ? (
+                                                        <div className="flex items-center gap-2">
+                                                            <Badge variant="outline">
+                                                                {group.options[0].name}
+                                                            </Badge>
+                                                            <Button
+                                                                size="sm"
+                                                                disabled={updateVariantMutation.isPending}
+                                                                onClick={() =>
+                                                                    updateVariantMutation.mutate({
+                                                                        input: {
+                                                                            id: variant.id,
+                                                                            optionIds: [
+                                                                                ...variant.options.map(
+                                                                                    o => o.id,
+                                                                                ),
+                                                                                group.options[0].id,
+                                                                            ],
+                                                                        },
+                                                                    })
+                                                                }
+                                                            >
+                                                                <Save className="h-4 w-4" />
+                                                            </Button>
+                                                        </div>
                                                     ) : (
                                                         <div className="flex items-center gap-2">
                                                             <Select

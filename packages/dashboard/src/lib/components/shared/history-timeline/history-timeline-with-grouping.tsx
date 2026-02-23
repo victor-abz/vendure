@@ -1,6 +1,7 @@
 import { Button } from '@/vdb/components/ui/button.js';
 import { HistoryEntryItem } from '@/vdb/framework/extension-api/types/history-entries.js';
 import { getCustomHistoryEntryForType } from '@/vdb/framework/history-entry/history-entry-extensions.js';
+import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import { CustomerHistoryCustomerDetail } from '../../../../app/routes/_authenticated/_customers/components/customer-history/customer-history-types.js';
@@ -99,7 +100,7 @@ export function HistoryTimelineWithGrouping({
                         return <div key={entry.id}>{renderEntry(entry)}</div>;
                     } else {
                         // Secondary group
-                        const shouldCollapse = group.entries.length > 2;
+                        const shouldCollapse = group.entries.length > 3;
                         const isExpanded = expandedGroups.has(groupIndex);
                         const visibleEntries =
                             shouldCollapse && !isExpanded ? group.entries.slice(0, 2) : group.entries;
@@ -120,12 +121,14 @@ export function HistoryTimelineWithGrouping({
                                             {isExpanded ? (
                                                 <>
                                                     <ChevronUp className="w-3 h-3 mr-1" />
-                                                    Show less
+                                                    <Trans>Show less</Trans>
                                                 </>
                                             ) : (
                                                 <>
                                                     <ChevronDown className="w-3 h-3 mr-1" />
-                                                    Show all ({group.entries.length - 2})
+                                                    <Trans>
+                                                        Show all ({group.entries.length - 2})
+                                                    </Trans>
                                                 </>
                                             )}
                                         </Button>

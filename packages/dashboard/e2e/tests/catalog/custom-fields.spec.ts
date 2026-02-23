@@ -433,4 +433,36 @@ test.describe('Custom Fields', () => {
         await expect(reloadedDim.locator('dd').filter({ hasText: 'Depth' })).toBeVisible();
         await expect(reloadedDim.locator('dd').filter({ hasText: '10' })).toBeVisible();
     });
+
+    // #4393 — datetime picker should have a "Now" button
+    test('datetime picker should display a "Now" button', async ({ page }) => {
+        await goToFirstProduct(page);
+        const dp = detailPage(page);
+
+        const releaseDateItem = dp.formItem('Release Date');
+        await releaseDateItem.getByRole('button').first().click();
+
+        const popover = page.locator('[data-slot="popover-content"]');
+        await expect(popover).toBeVisible();
+        const nowButton = popover.getByRole('button', { name: 'Now' });
+        await expect(nowButton).toBeVisible();
+    });
+
+    // #4393 — clicking "Now" should set the datetime and close the popover
+    test('datetime "Now" button should set date and close popover', async ({ page }) => {
+        await goToFirstProduct(page);
+        const dp = detailPage(page);
+
+        const releaseDateItem = dp.formItem('Release Date');
+        const triggerButton = releaseDateItem.getByRole('button').first();
+        await expect(triggerButton).toContainText('MM/DD/YYYY');
+
+        await triggerButton.click();
+        const popover = page.locator('[data-slot="popover-content"]');
+        await expect(popover).toBeVisible();
+        await popover.getByRole('button', { name: 'Now' }).click();
+
+        await expect(popover).not.toBeVisible();
+        await expect(triggerButton).not.toContainText('MM/DD/YYYY');
+    });
 });

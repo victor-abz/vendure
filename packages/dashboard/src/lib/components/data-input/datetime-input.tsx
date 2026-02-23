@@ -13,7 +13,8 @@ import { isReadonlyField } from '@/vdb/framework/form-engine/utils.js';
 import { useDisplayLocale } from '@/vdb/hooks/use-display-locale.js';
 import { cn } from '@/vdb/lib/utils.js';
 import type { Locale } from 'date-fns/locale';
-import { CalendarClock, X } from 'lucide-react';
+import { Trans } from '@lingui/react/macro';
+import { CalendarClock, Clock, X } from 'lucide-react';
 
 /**
  * @description
@@ -49,6 +50,11 @@ export function DateTimeInput({ value, onChange, fieldDef }: Readonly<DashboardF
         if (selectedDate) {
             onChange(selectedDate.toISOString());
         }
+    };
+
+    const handleSetToNow = () => {
+        onChange(new Date().toISOString());
+        setIsOpen(false);
     };
 
     const handleTimeChange = (type: 'hour' | 'minute' | 'ampm', value: string) => {
@@ -166,6 +172,17 @@ export function DateTimeInput({ value, onChange, fieldDef }: Readonly<DashboardF
                                 ))}
                             </div>
                         </ScrollArea>
+                    </div>
+                    <div className="border-t p-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full"
+                            onClick={handleSetToNow}
+                        >
+                            <Clock className="mr-2 h-4 w-4" />
+                            <Trans>Now</Trans>
+                        </Button>
                     </div>
                 </div>
             </PopoverContent>

@@ -1,4 +1,5 @@
 import { Money } from '@/vdb/components/data-display/money.js';
+import { Checkbox } from '@/vdb/components/ui/checkbox.js';
 import { Textarea } from '@/vdb/components/ui/textarea.js';
 import { Trans } from '@lingui/react/macro';
 import { ResultOf, VariablesOf } from 'gql.tada';
@@ -18,6 +19,7 @@ interface OrderModificationSummaryProps {
         name: string;
     }>;
     onNoteChange?: (note: string) => void;
+    onRecalculateShippingChange?: (recalculate: boolean) => void;
 }
 
 interface LineAdjustment {
@@ -35,6 +37,7 @@ export function OrderModificationSummary({
     addedVariants,
     eligibleShippingMethods,
     onNoteChange,
+    onRecalculateShippingChange,
 }: Readonly<OrderModificationSummaryProps>) {
     // Map by line id for quick lookup
     const originalLineMap = new Map(originalOrder.lines.map(line => [line.id, line]));
@@ -246,6 +249,19 @@ export function OrderModificationSummary({
                     <Trans>No modifications made</Trans>
                 </div>
             )}
+            <div className="mt-4 flex items-center gap-2">
+                <Checkbox
+                    id="recalculate-shipping"
+                    disabled={hasNoModifications}
+                    checked={modifyOrderInput.options?.recalculateShipping ?? true}
+                    onCheckedChange={checked =>
+                        onRecalculateShippingChange?.(checked === 'indeterminate' ? true : checked)
+                    }
+                />
+                <label htmlFor="recalculate-shipping" className="text-sm cursor-pointer">
+                    <Trans>Recalculate shipping</Trans>
+                </label>
+            </div>
             <div className="mb-4 mt-4">
                 <div className="font-medium mb-2">
                     <Trans>Note</Trans>
