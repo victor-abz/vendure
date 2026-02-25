@@ -241,24 +241,27 @@ function ModifyOrderPage() {
                 </PageBlock>
                 <PageBlock column="side" blockId="addresses" title={<Trans>Addresses</Trans>}>
                     <div className="mb-4">
-                        <div className="mb-1">
+                        <div className="mb-1 flex items-center">
                             <Trans>Shipping address</Trans>:
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="ml-2"
-                                onClick={() => setEditingShippingAddress(true)}
-                            >
-                                <Trans>Edit</Trans>
-                            </Button>
+                            {editingShippingAddress ? (
+                                <CustomerAddressSelector
+                                    customerId={entity.customer?.id}
+                                    onSelect={handleSelectShippingAddress}
+                                    onCancel={() => setEditingShippingAddress(false)}
+                                    defaultOpen
+                                />
+                            ) : (
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="ml-2"
+                                    onClick={() => setEditingShippingAddress(true)}
+                                >
+                                    <Trans>Edit</Trans>
+                                </Button>
+                            )}
                         </div>
-                        {editingShippingAddress ? (
-                            <CustomerAddressSelector
-                                customerId={entity.customer?.id}
-                                onSelect={handleSelectShippingAddress}
-                            />
-                        ) : null}
-                        {shippingAddress && !editingShippingAddress ? (
+                        {shippingAddress ? (
                             <OrderAddress address={shippingAddress} />
                         ) : (
                             <div className="text-muted-foreground text-xs font-medium">
@@ -267,24 +270,27 @@ function ModifyOrderPage() {
                         )}
                     </div>
                     <div>
-                        <div className="mb-1">
+                        <div className="mb-1 flex items-center">
                             <Trans>Billing address</Trans>:
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="ml-2"
-                                onClick={() => setEditingBillingAddress(true)}
-                            >
-                                <Trans>Edit</Trans>
-                            </Button>
+                            {editingBillingAddress ? (
+                                <CustomerAddressSelector
+                                    customerId={entity.customer?.id}
+                                    onSelect={handleSelectBillingAddress}
+                                    onCancel={() => setEditingBillingAddress(false)}
+                                    defaultOpen
+                                />
+                            ) : (
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="ml-2"
+                                    onClick={() => setEditingBillingAddress(true)}
+                                >
+                                    <Trans>Edit</Trans>
+                                </Button>
+                            )}
                         </div>
-                        {editingBillingAddress ? (
-                            <CustomerAddressSelector
-                                customerId={entity.customer?.id}
-                                onSelect={handleSelectBillingAddress}
-                            />
-                        ) : null}
-                        {billingAddress && !editingBillingAddress ? (
+                        {billingAddress ? (
                             <OrderAddress address={billingAddress} />
                         ) : (
                             <div className="text-muted-foreground text-xs font-medium">

@@ -148,6 +148,32 @@ test.describe('Orders', () => {
         await expect(page.getByText('Hello from a custom plugin')).toBeVisible();
     });
 
+    // #4391 — clicking Edit on address during order modification should not hide the address
+    test('should keep address visible when editing during order modification', async ({ page }) => {
+        test.setTimeout(60_000);
+
+        const orderId = await createModifyingOrder(page);
+
+        await page.goto(`/orders/${orderId}/modify`);
+        await expect(page.getByRole('heading', { name: 'Modify order' })).toBeVisible({ timeout: 10_000 });
+
+        // Verify the shipping address is displayed
+        await expect(page.getByText('123 Main St')).toBeVisible();
+        await expect(page.getByText('London')).toBeVisible();
+
+        // Click the Edit button for the shipping address
+        const editButtons = page.getByRole('button', { name: 'Edit' });
+        await editButtons.first().click();
+
+        // The address should still be visible after clicking Edit
+        await expect(page.getByText('123 Main St')).toBeVisible();
+        await expect(page.getByText('London')).toBeVisible();
+
+        // The address selector popover should auto-open
+        await expect(page.locator('[data-slot="popover-content"]')).toBeVisible({ timeout: 5_000 });
+        await expect(page.getByText('Select an address')).toBeVisible();
+    });
+
     // #4393 — order modify page should show a "Recalculate shipping" checkbox
     test('should show recalculate shipping checkbox on modify page', async ({ page }) => {
         test.setTimeout(60_000);
