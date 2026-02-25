@@ -286,25 +286,21 @@ async function checkMysqlDbExists(options: any, root: string): Promise<true> {
         port: options.port,
         database: options.database,
     };
-    const connection = mysql.createConnection(connectionOptions);
 
-    return new Promise<boolean>((resolve, reject) => {
-        connection.connect((err: any) => {
-            if (err) {
-                if (err.code === 'ER_BAD_DB_ERROR') {
-                    throwDatabaseDoesNotExist(options.database);
-                }
-                throwConnectionError(err);
-            }
-            resolve(true);
-        });
-    }).then(() => {
-        return new Promise((resolve, reject) => {
-            connection.end((err: any) => {
-                resolve(true);
-            });
-        });
-    });
+    let connection;
+    try {
+        // mysql2/promise's createConnection returns a Promise that resolves
+        // to a connection once connected, so we must await it.
+        connection = await mysql.createConnection(connectionOptions);
+    } catch (err: any) {
+        if (err.code === 'ER_BAD_DB_ERROR') {
+            throwDatabaseDoesNotExist(options.database);
+        }
+        throwConnectionError(err);
+    }
+
+    await connection.end();
+    return true;
 }
 
 async function checkPostgresDbExists(options: any, root: string): Promise<true> {
