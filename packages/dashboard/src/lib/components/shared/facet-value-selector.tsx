@@ -8,26 +8,13 @@ import {
     CommandList,
 } from '@/vdb/components/ui/command.js';
 import { Popover, PopoverContent, PopoverTrigger } from '@/vdb/components/ui/popover.js';
-import { api } from '@/vdb/graphql/api.js';
-import { graphql } from '@/vdb/graphql/graphql.js';
+import { useFacetValueBrowser } from '@/vdb/hooks/use-facet-value-browser.js';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { useDebounce } from '@uidotdev/usehooks';
 import { ChevronRight, Loader2, Plus } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-export interface FacetValue {
-    id: string;
-    name: string;
-    code: string;
-    facet: Facet;
-}
-
-export interface Facet {
-    id: string;
-    name: string;
-    code: string;
-}
+// Re-export types for backward compatibility — these are part of the public API
+export type { FacetValue, Facet } from '@/vdb/hooks/use-facet-value-browser.js';
 
 /**
  * @description
@@ -57,7 +44,7 @@ interface FacetValueSelectorProps {
      * }
      * ```
      */
-    onValueSelect: (value: FacetValue) => void;
+    onValueSelect: (value: { id: string; name: string; code: string; facet: { id: string; name: string; code: string } }) => void;
     /**
      * @description
      * Whether the selector is disabled.
@@ -72,59 +59,10 @@ interface FacetValueSelectorProps {
      * @description
      * The number of facet values to display per page.
      *
-     * @default 4
+     * @default 10
      */
     pageSize?: number;
 }
-
-const getFacetValueListDocument = graphql(`
-    query GetFacetValueList($options: FacetValueListOptions) {
-        facetValues(options: $options) {
-            items {
-                id
-                name
-                code
-                facet {
-                    id
-                    name
-                    code
-                }
-            }
-            totalItems
-        }
-    }
-`);
-
-const getFacetListDocument = graphql(`
-    query GetFacetList($options: FacetListOptions) {
-        facets(options: $options) {
-            items {
-                id
-                name
-                code
-            }
-            totalItems
-        }
-    }
-`);
-
-const getFacetValuesForFacetDocument = graphql(`
-    query GetFacetValuesForFacet($options: FacetValueListOptions) {
-        facetValues(options: $options) {
-            items {
-                id
-                name
-                code
-                facet {
-                    id
-                    name
-                    code
-                }
-            }
-            totalItems
-        }
-    }
-`);
 
 /**
  * @description
@@ -147,148 +85,31 @@ export function FacetValueSelector({
     pageSize = 10,
 }: FacetValueSelectorProps) {
     const [open, setOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [expandedFacetId, setExpandedFacetId] = useState<string | null>(null);
-    const [browseMode, setBrowseMode] = useState(false);
-    const debouncedSearch = useDebounce(searchTerm, 200);
     const { t } = useLingui();
-    const minSearchLength = 1;
 
-    // Query for facet values based on search
-    const { data: facetValueData, isLoading: isLoadingFacetValues } = useQuery({
-        queryKey: ['facetValues', debouncedSearch],
-        queryFn: () => {
-            if (debouncedSearch.length < minSearchLength) {
-                return { facetValues: { items: [], totalItems: 0 } };
-            }
-            return api.query(getFacetValueListDocument, {
-                options: {
-                    filter: {
-                        name: { contains: debouncedSearch },
-                    },
-                    take: 100,
-                },
-            });
-        },
-        enabled: debouncedSearch.length >= minSearchLength && !expandedFacetId,
-    });
-
-    // Query for facets based on search (use regular query for search, infinite for browse)
-    const { data: facetSearchData, isLoading: isLoadingFacetSearch } = useQuery({
-        queryKey: ['facets', debouncedSearch],
-        queryFn: () => {
-            if (debouncedSearch.length < minSearchLength) {
-                return { facets: { items: [], totalItems: 0 } };
-            }
-            return api.query(getFacetListDocument, {
-                options: {
-                    filter: {
-                        name: { contains: debouncedSearch },
-                    },
-                    take: 100,
-                },
-            });
-        },
-        enabled: !browseMode && debouncedSearch.length >= minSearchLength && !expandedFacetId,
-    });
-
-    // Infinite query for browse mode
     const {
-        data: facetBrowseData,
-        isLoading: isLoadingFacetBrowse,
-        fetchNextPage: fetchNextFacetsPage,
-        hasNextPage: hasNextFacetsPage,
-        isFetchingNextPage: isFetchingNextFacetsPage,
-    } = useInfiniteQuery({
-        queryKey: ['facets', 'browse'],
-        queryFn: async ({ pageParam = 0 }) => {
-            const response = await api.query(getFacetListDocument, {
-                options: {
-                    filter: {},
-                    sort: { name: 'ASC' },
-                    skip: pageParam * pageSize,
-                    take: pageSize,
-                },
-            });
-            return response.facets;
-        },
-        getNextPageParam: (lastPage, allPages) => {
-            if (!lastPage) return undefined;
-            const totalFetched = allPages.length * pageSize;
-            return totalFetched < lastPage.totalItems ? allPages.length : undefined;
-        },
-        enabled: browseMode && !expandedFacetId,
-        initialPageParam: 0,
-    });
-
-    // Query for paginated values of a specific facet when expanded
-    const {
-        data: expandedFacetData,
-        isLoading: isLoadingExpandedFacet,
-        fetchNextPage,
-        hasNextPage,
+        searchTerm,
+        setSearchTerm,
+        debouncedSearch,
+        minSearchLength,
+        browseMode,
+        setBrowseMode,
+        expandedFacetId,
+        setExpandedFacetId,
+        facetValues,
+        facets,
+        expandedFacetValues,
+        expandedFacetName,
+        facetGroups,
+        isLoading,
         isFetchingNextPage,
-    } = useInfiniteQuery({
-        queryKey: ['facetValues', expandedFacetId, 'infinite'],
-        queryFn: async ({ pageParam = 0 }) => {
-            if (!expandedFacetId) return null;
-            const response = await api.query(getFacetValuesForFacetDocument, {
-                options: {
-                    filter: { facetId: { eq: expandedFacetId } },
-                    sort: { code: 'ASC' },
-                    skip: pageParam * pageSize,
-                    take: pageSize,
-                },
-            });
-            return response.facetValues;
-        },
-        getNextPageParam: (lastPage, allPages) => {
-            if (!lastPage) return undefined;
-            const totalFetched = allPages.length * pageSize;
-            return totalFetched < lastPage.totalItems ? allPages.length : undefined;
-        },
-        enabled: !!expandedFacetId,
-        initialPageParam: 0,
-    });
-
-    const facetValues = facetValueData?.facetValues.items ?? [];
-    const facets = browseMode
-        ? (facetBrowseData?.pages.flatMap(page => page?.items ?? []) ?? [])
-        : (facetSearchData?.facets.items ?? []);
-    const expandedFacetValues = expandedFacetData?.pages.flatMap(page => page?.items ?? []) ?? [];
-    const expandedFacetName = expandedFacetValues[0]?.facet.name;
-
-    // Group facet values by facet
-    const facetGroups = facetValues.reduce<Record<string, FacetValue[]>>(
-        (groups: Record<string, FacetValue[]>, facetValue: FacetValue) => {
-            const facetId = facetValue.facet.id;
-            if (!groups[facetId]) {
-                groups[facetId] = [];
-            }
-            groups[facetId].push(facetValue);
-            return groups;
-        },
-        {},
-    );
-
-    const isLoading =
-        isLoadingFacetValues || isLoadingFacetSearch || isLoadingFacetBrowse || isLoadingExpandedFacet;
-
-    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-        const target = e.currentTarget;
-        const scrolledToBottom = Math.abs(target.scrollHeight - target.clientHeight - target.scrollTop) < 1;
-
-        if (scrolledToBottom && !isFetchingNextPage) {
-            // For expanded facet values
-            if (expandedFacetId && hasNextPage) {
-                void fetchNextPage();
-            }
-            // For browse mode facets
-            if (browseMode && !expandedFacetId && hasNextFacetsPage) {
-                void fetchNextFacetsPage();
-            }
-        }
-    };
+        isFetchingNextFacetsPage,
+        isLoadingExpandedFacet,
+        hasNextPage,
+        hasNextFacetsPage,
+        handleScroll,
+        reset,
+    } = useFacetValueBrowser({ pageSize, initialBrowseMode: false });
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -377,9 +198,7 @@ export function FacetValueSelector({
                                             value={facetValue.id}
                                             onSelect={() => {
                                                 onValueSelect(facetValue);
-                                                setSearchTerm('');
-                                                setExpandedFacetId(null);
-                                                setBrowseMode(false);
+                                                reset();
                                                 setOpen(false);
                                             }}
                                         >
@@ -428,26 +247,23 @@ export function FacetValueSelector({
                                     </>
                                 )}
 
-                                {Object.entries(facetGroups).map(
-                                    ([facetId, values]: [string, FacetValue[]]) => (
-                                        <CommandGroup key={facetId} heading={values[0]?.facet.name}>
-                                            {values.map((facetValue: FacetValue) => (
-                                                <CommandItem
-                                                    key={facetValue.id}
-                                                    value={facetValue.id}
-                                                    onSelect={() => {
-                                                        onValueSelect(facetValue);
-                                                        setSearchTerm('');
-                                                        setBrowseMode(false);
-                                                        setOpen(false);
-                                                    }}
-                                                >
-                                                    {facetValue.name}
-                                                </CommandItem>
-                                            ))}
-                                        </CommandGroup>
-                                    ),
-                                )}
+                                {Object.entries(facetGroups).map(([facetId, values]) => (
+                                    <CommandGroup key={facetId} heading={values[0]?.facet.name}>
+                                        {values.map(facetValue => (
+                                            <CommandItem
+                                                key={facetValue.id}
+                                                value={facetValue.id}
+                                                onSelect={() => {
+                                                    onValueSelect(facetValue);
+                                                    reset();
+                                                    setOpen(false);
+                                                }}
+                                            >
+                                                {facetValue.name}
+                                            </CommandItem>
+                                        ))}
+                                    </CommandGroup>
+                                ))}
                             </>
                         )}
                     </CommandList>

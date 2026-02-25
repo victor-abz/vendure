@@ -2,7 +2,7 @@
 title: "FacetValueSelector"
 generated: true
 ---
-<GenerationInfo sourceFile="packages/dashboard/src/lib/components/shared/facet-value-selector.tsx" sourceLine="143" packageName="@vendure/dashboard" since="3.4.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/components/shared/facet-value-selector.tsx" sourceLine="81" packageName="@vendure/dashboard" since="3.4.0" />
 
 A component for selecting facet values.
 
@@ -21,13 +21,13 @@ Parameters
 
 <MemberInfo kind="parameter" type={`<a href='/reference/dashboard/components/facet-value-selector#facetvalueselectorprops'>FacetValueSelectorProps</a>`} />
 
-<GenerationInfo sourceFile="packages/dashboard/src/lib/components/shared/facet-value-selector.tsx" sourceLine="40" packageName="@vendure/dashboard" since="3.4.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/components/shared/facet-value-selector.tsx" sourceLine="27" packageName="@vendure/dashboard" since="3.4.0" />
 
 A component for selecting facet values.
 
 ```ts title="Signature"
 interface FacetValueSelectorProps {
-    onValueSelect: (value: FacetValue) => void;
+    onValueSelect: (value: { id: string; name: string; code: string; facet: { id: string; name: string; code: string } }) => void;
     disabled?: boolean;
     placeholder?: string;
     pageSize?: number;
@@ -38,7 +38,7 @@ interface FacetValueSelectorProps {
 
 ### onValueSelect
 
-<MemberInfo kind="property" type={`(value: <a href='/reference/typescript-api/entities/facet-value#facetvalue'>FacetValue</a>) => void`}   />
+<MemberInfo kind="property" type={`(value: { id: string; name: string; code: string; facet: { id: string; name: string; code: string } }) => void`}   />
 
 The function to call when a facet value is selected.
 
@@ -68,7 +68,7 @@ Whether the selector is disabled.
 The placeholder text for the selector.
 ### pageSize
 
-<MemberInfo kind="property" type={`number`} default={`4`}   />
+<MemberInfo kind="property" type={`number`} default={`10`}   />
 
 The number of facet values to display per page.
 

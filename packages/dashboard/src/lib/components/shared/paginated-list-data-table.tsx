@@ -115,7 +115,7 @@ export type CustomizeColumnConfig<T extends TypedDocumentNode<any, any>> = {
 };
 
 export type FacetedFilterConfig<T extends TypedDocumentNode<any, any>> = {
-    [Key in AllItemFieldKeys<T>]?: FacetedFilter;
+    [Key in AllItemFieldKeys<T> | (string & {})]?: FacetedFilter;
 };
 
 export type ListQueryFields<T extends TypedDocumentNode<any, any>> = {

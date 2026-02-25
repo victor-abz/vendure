@@ -46,7 +46,11 @@ import React, { Suspense, useEffect, useId, useMemo, useRef } from 'react';
 import { AddFilterMenu } from './add-filter-menu.js';
 import { DataTableBulkActions } from './data-table-bulk-actions.js';
 import { DataTableProvider } from './data-table-context.js';
-import { DataTableFacetedFilter, DataTableFacetedFilterOption } from './data-table-faceted-filter.js';
+import {
+    DataTableFacetedFilter,
+    DataTableFacetedFilterOption,
+    DataTableFacetedFilterProps,
+} from './data-table-faceted-filter.js';
 import { DataTableFilterBadgeEditable } from './data-table-filter-badge-editable.js';
 import { useDragAndDrop } from '@/vdb/hooks/use-drag-and-drop.js';
 import { toast } from 'sonner';
@@ -107,6 +111,7 @@ export interface FacetedFilter {
     icon?: React.ComponentType<{ className?: string }>;
     optionsFn?: () => Promise<DataTableFacetedFilterOption[]>;
     options?: DataTableFacetedFilterOption[];
+    component?: React.ComponentType<DataTableFacetedFilterProps<any, any>>;
 }
 
 /**
@@ -355,16 +360,19 @@ export function DataTable<TData>({
                             />
                         )}
                         <Suspense>
-                            {Object.entries(facetedFilters ?? {}).map(([key, filter]) => (
-                                <DataTableFacetedFilter
-                                    key={key}
-                                    column={table.getColumn(key)}
-                                    title={filter?.title}
-                                    options={filter?.options}
-                                    optionsFn={filter?.optionsFn}
-                                    icon={filter?.icon}
-                                />
-                            ))}
+                            {Object.entries(facetedFilters ?? {}).map(([key, filter]) => {
+                                const FilterComponent = filter?.component ?? DataTableFacetedFilter;
+                                return (
+                                    <FilterComponent
+                                        key={key}
+                                        column={table.getColumn(key) as any}
+                                        title={filter?.title}
+                                        options={filter?.options}
+                                        optionsFn={filter?.optionsFn}
+                                        icon={filter?.icon}
+                                    />
+                                );
+                            })}
                         </Suspense>
                         {onFilterChange && <AddFilterMenu columns={table.getAllColumns()} />}
                         {pageId && onFilterChange && <MyViewsButton />}
