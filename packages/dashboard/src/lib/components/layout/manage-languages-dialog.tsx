@@ -14,11 +14,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/vdb/components/ui/separator.js';
 import { api } from '@/vdb/graphql/api.js';
 import { graphql } from '@/vdb/graphql/graphql.js';
+import { schemaLanguageCodes as globalLanguageCodes } from '@/vdb/graphql/schema-enums.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
-import { useLocalFormat } from '@/vdb/hooks/use-local-format.js';
 import { usePermissions } from '@/vdb/hooks/use-permissions.js';
 import { useSortedLanguages } from '@/vdb/hooks/use-sorted-languages.js';
-import { schemaLanguageCodes as globalLanguageCodes } from '@/vdb/graphql/schema-enums.js';
 import { Trans } from '@lingui/react/macro';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AlertCircle, Lock } from 'lucide-react';
@@ -113,6 +112,7 @@ export function ManageLanguagesDialog({ open, onClose }: ManageLanguagesDialogPr
             api.mutate(updateGlobalSettingsLanguagesDocument, { input }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['globalSettings'] });
+            queryClient.invalidateQueries({ queryKey: ['getServerConfig'] });
             toast.success('Global language settings updated successfully');
         },
         onError: (error: any) => {
@@ -128,6 +128,7 @@ export function ManageLanguagesDialog({ open, onClose }: ManageLanguagesDialogPr
         }) => api.mutate(updateChannelDocument, { input }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['channels'] });
+            queryClient.invalidateQueries({ queryKey: ['activeChannel'] });
             toast.success('Channel language settings updated successfully');
         },
         onError: (error: any) => {
