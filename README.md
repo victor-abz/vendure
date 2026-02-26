@@ -5,10 +5,10 @@
 </p>
 
 <h1 align="center">
-  Vendure
+  Vendure Core
 </h1>
 <h3 align="center">
-    Own Your Commerce. Build Without Workarounds. Ship Faster.
+    The Open Source Foundation of Vendure — The Enterprise Commerce Platform
 </h3>
 <h4 align="center">
   <a href="https://docs.vendure.io">Documentation</a> |
@@ -30,9 +30,9 @@
   </a>
 </p>
 
-## What is Vendure 
+## What is Vendure Core
 
-Vendure is an open-source headless commerce platform built with _TypeScript_ and _Node.js_. It provides a robust foundation for building enterprise-grade digital commerce applications with exceptional scalability and maintainability.
+Vendure Core is the open source heart of [Vendure](https://vendure.io), the enterprise commerce platform. Built with _TypeScript_ and _Node.js_, it provides a robust foundation for building enterprise-grade digital commerce applications with exceptional scalability and maintainability.
 
 - **Built for heavy customization**: Extensible plugin architecture allows you to tailor every aspect of your commerce solution
 - **Modern, AI-optimized tech stack**: Built on TypeScript, Node.js, NestJS, and GraphQL for outstanding performance and developer experience
@@ -40,11 +40,11 @@ Vendure is an open-source headless commerce platform built with _TypeScript_ and
 - **Enterprise-ready**: Trusted by thousands of teams worldwide, from startups to Fortune 500 companies
 - **Rich feature set**: Comprehensive out-of-the-box functionality with customizable admin dashboard and commerce framework
 
-Whether you're building a B2B platform, multi-vendor marketplace, or D2C storefront, Vendure provides the flexible foundation to create unique commerce experiences tailored to your business needs.
+Whether you're building a B2B platform, multi-vendor marketplace, or D2C storefront, Vendure Core provides the flexible foundation to create unique commerce experiences tailored to your business needs.
 
 ## Getting Started
 
-Visit our [Getting Started guide](https://docs.vendure.io/guides/getting-started/installation/) to get Vendure up and running locally in _less than 2 minutes_ with a single command.
+Visit our [Getting Started guide](https://docs.vendure.io/guides/getting-started/installation/) to get Vendure Core up and running locally in _less than 2 minutes_ with a single command.
 
 **Need Help?** Our community is here to help, join [our Discord](https://www.vendure.io/community) for support and discussions!
 
@@ -56,7 +56,7 @@ Have a look at all of our [ready-made Vendure plugins](https://vendure.io/plugin
 
 ## Contribution
 
-Contributions to Vendure are welcome and highly appreciated! Whether you're fixing bugs, adding features, or improving documentation, your help makes Vendure better for everyone.
+Contributions to Vendure Core are welcome and highly appreciated! Whether you're fixing bugs, adding features, or improving documentation, your help makes Vendure Core better for everyone.
 
 Our **[Contribution Guide](./CONTRIBUTING.md)** is covering everything from setting up your development environment to submitting your first pull request.
 
@@ -64,4 +64,4 @@ Our **[Contribution Guide](./CONTRIBUTING.md)** is covering everything from sett
 
 ## License
 
-Licensed under the [GPLv3 license](./LICENSE.md). Commercial license (VCL) [available](https://vendure.io/pricing).
+Vendure Core is licensed under the [GPLv3 license](./LICENSE.md). To learn more about the full Vendure platform and cloud offering, check out our [pricing page](https://vendure.io/pricing).
