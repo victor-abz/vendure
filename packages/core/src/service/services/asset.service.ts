@@ -276,7 +276,11 @@ export class AssetService {
                 .map(id => assets.find(a => idsAreEqual(a.id, id)))
                 .filter(notNullOrUndefined);
             await this.removeExistingOrderableAssets(ctx, entity);
-            entity.assets = await this.createOrderableAssets(ctx, entity, sortedAssets);
+            if (sortedAssets.length > 0) {
+                entity.assets = await this.createOrderableAssets(ctx, entity, sortedAssets);
+            } else {
+                entity.assets = [];
+            }
         } else if (assetIds && assetIds.length === 0) {
             await this.removeExistingOrderableAssets(ctx, entity);
         }
