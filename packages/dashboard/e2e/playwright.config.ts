@@ -43,6 +43,7 @@ export default defineConfig({
         env: {
             VITE_ADMIN_API_PORT: String(VENDURE_PORT),
             VITE_ADMIN_API_HOST: 'http://localhost',
+            VENDURE_CONFIG_PATH: path.join(__dirname, 'fixtures/e2e-vendure-config.ts'),
         },
         timeout: 120_000,
     },

@@ -400,6 +400,17 @@ export function isReadonlyField(input?: ConfigurableFieldDef): boolean {
 }
 
 /**
+ * Determines if a field should be disabled based on the `disabled` prop from
+ * react-hook-form's Controller and the field's own readonly configuration.
+ *
+ * This centralises the disabled check so that every input component handles
+ * both sources of disabled state consistently.
+ */
+export function isFieldDisabled(disabled?: boolean, fieldDef?: ConfigurableFieldDef): boolean {
+    return Boolean(disabled) || isReadonlyField(fieldDef);
+}
+
+/**
  * Determines if a field requires special permissions
  */
 export function hasPermissionRequirement(input: ConfigurableFieldDef): boolean {

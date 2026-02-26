@@ -109,7 +109,9 @@ when developing dashboard extensions.
 
 ## Testing
 
-Run `npm run test` to run tests once, or `npx vitest` to run tests in watch mode
+Run `npm run test` to run unit tests once, or `npx vitest` to run them in watch mode.
+
+For E2E (Playwright) tests, see [e2e/README.md](./e2e/README.md).
 
 ## Translations
 

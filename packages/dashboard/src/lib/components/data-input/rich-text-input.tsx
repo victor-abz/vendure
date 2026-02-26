@@ -1,5 +1,5 @@
 import { DashboardFormComponentProps } from '@/vdb/framework/form-engine/form-engine-types.js';
-import { isReadonlyField } from '@/vdb/framework/form-engine/utils.js';
+import { isFieldDisabled } from '@/vdb/framework/form-engine/utils.js';
 import { RichTextEditor } from '../shared/rich-text-editor/rich-text-editor.js';
 
 /**
@@ -9,8 +9,8 @@ import { RichTextEditor } from '../shared/rich-text-editor/rich-text-editor.js';
  * @docsCategory form-components
  * @docsPage RichTextInput
  */
-export function RichTextInput({ value, onChange, fieldDef }: Readonly<DashboardFormComponentProps>) {
-    const readOnly = isReadonlyField(fieldDef);
+export function RichTextInput({ value, onChange, fieldDef, disabled }: Readonly<DashboardFormComponentProps>) {
+    const readOnly = isFieldDisabled(disabled, fieldDef);
 
     return <RichTextEditor value={value} onChange={onChange} disabled={readOnly} />;
 }

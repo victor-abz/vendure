@@ -27,9 +27,10 @@ interface CustomFieldsFormProps {
     entityType: string;
     control: Control<any, any>;
     formPathPrefix?: string;
+    disabled?: boolean;
 }
 
-export function CustomFieldsForm({ entityType, control, formPathPrefix }: Readonly<CustomFieldsFormProps>) {
+export function CustomFieldsForm({ entityType, control, formPathPrefix, disabled }: Readonly<CustomFieldsFormProps>) {
     const { t } = useLingui();
     const customFields = useCustomFieldConfig(entityType);
 
@@ -86,6 +87,7 @@ export function CustomFieldsForm({ entityType, control, formPathPrefix }: Readon
                         fieldDef={fieldDef}
                         control={control}
                         fieldName={getFieldName(fieldDef)}
+                        disabled={disabled}
                     />
                 ))}
             </div>
@@ -111,6 +113,7 @@ export function CustomFieldsForm({ entityType, control, formPathPrefix }: Readon
                                 fieldDef={fieldDef}
                                 control={control}
                                 fieldName={getFieldName(fieldDef)}
+                                disabled={disabled}
                             />
                         ))}
                     </div>
@@ -124,9 +127,10 @@ interface CustomFieldItemProps {
     fieldDef: ConfigurableFieldDef;
     control: Control<any>;
     fieldName: string;
+    disabled?: boolean;
 }
 
-function CustomFieldItem({ fieldDef, control, fieldName }: Readonly<CustomFieldItemProps>) {
+function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<CustomFieldItemProps>) {
     const {
         settings: { displayLanguage },
     } = useUserSettings();
@@ -152,6 +156,7 @@ function CustomFieldItem({ fieldDef, control, fieldName }: Readonly<CustomFieldI
                 <TranslatableFormField
                     control={control}
                     name={fieldName}
+                    disabled={disabled}
                     render={({ field, ...props }) => (
                         <FormItem>
                             <FormLabel>{getTranslation(fieldDef.label) ?? field.name}</FormLabel>
@@ -182,6 +187,7 @@ function CustomFieldItem({ fieldDef, control, fieldName }: Readonly<CustomFieldI
                 <FormField
                     control={control}
                     name={fieldName}
+                    disabled={disabled}
                     render={fieldProps => (
                         <CustomFieldFormItem
                             fieldDef={fieldDef}
@@ -207,6 +213,7 @@ function CustomFieldItem({ fieldDef, control, fieldName }: Readonly<CustomFieldI
                     <FormField
                         control={control}
                         name={fieldName}
+                        disabled={disabled}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>{getTranslation(fieldDef.label) ?? fieldDef.name}</FormLabel>
@@ -235,6 +242,7 @@ function CustomFieldItem({ fieldDef, control, fieldName }: Readonly<CustomFieldI
                 <FormField
                     control={control}
                     name={fieldName}
+                    disabled={disabled}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>{getTranslation(fieldDef.label) ?? fieldDef.name}</FormLabel>
@@ -256,6 +264,7 @@ function CustomFieldItem({ fieldDef, control, fieldName }: Readonly<CustomFieldI
             <FormField
                 control={control}
                 name={fieldName}
+                disabled={disabled}
                 render={({ field }) => (
                     <CustomFieldFormItem
                         fieldDef={fieldDef}

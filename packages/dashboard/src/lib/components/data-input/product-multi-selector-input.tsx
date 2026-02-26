@@ -372,7 +372,7 @@ function ProductMultiSelectorDialog({
     );
 }
 
-export const ProductMultiInput: DashboardFormComponent = ({ value, onChange, ...props }) => {
+export const ProductMultiInput: DashboardFormComponent = ({ value, onChange, disabled, ...props }) => {
     const [open, setOpen] = useState(false);
     const mode = props.fieldDef?.ui?.selectionMode === 'variant' ? 'variant' : 'product';
     const selectedIds = value || [];
@@ -388,7 +388,7 @@ export const ProductMultiInput: DashboardFormComponent = ({ value, onChange, ...
     return (
         <>
             <div className="space-y-2">
-                <Button variant="outline" onClick={() => setOpen(true)}>
+                <Button variant="outline" disabled={disabled} onClick={() => setOpen(true)}>
                     <Plus className="h-4 w-4 mr-2" />
                     <Trans>{buttonText}</Trans>
                 </Button>

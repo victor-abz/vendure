@@ -15,11 +15,12 @@ export default ({ mode }: { mode: string }) => {
 
     process.env.IS_LOCAL_DEV = adminApiHost.includes('localhost') ? 'true' : 'false';
 
-    const vendureConfigPath = process.env.VITEST
-        ? // This should always be used for running the tests
-          './sample-vendure-config.ts'
-        : // This one might be changed to '../dev-server/dev-config.ts' to test ui extensions
-          './sample-vendure-config.ts';
+    const vendureConfigPath = process.env.VENDURE_CONFIG_PATH
+        ?? (process.env.VITEST
+            ? // This should always be used for running the tests
+              './sample-vendure-config.ts'
+            : // This one might be changed to '../dev-server/dev-config.ts' to test ui extensions
+              './sample-vendure-config.ts');
 
     return defineConfig({
         test: {

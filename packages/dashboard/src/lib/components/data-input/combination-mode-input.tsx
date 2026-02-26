@@ -9,6 +9,7 @@ export const CombinationModeInput = ({
     value,
     onChange,
     position,
+    disabled,
     ...props
 }: Readonly<CombinationModeInputProps>) => {
     const booleanValue = value === 'true' || value === true;
@@ -33,6 +34,7 @@ export const CombinationModeInput = ({
             <div className="bg-muted border px-3 py-1.5 rounded-full flex gap-1.5 text-xs shadow-sm">
                 <button
                     type="button"
+                    disabled={disabled}
                     className={`px-2 py-0.5 rounded-full transition-colors ${
                         booleanValue
                             ? 'bg-primary text-background'
@@ -45,6 +47,7 @@ export const CombinationModeInput = ({
                 </button>
                 <button
                     type="button"
+                    disabled={disabled}
                     className={`px-2 py-0.5 rounded-full transition-colors ${
                         !booleanValue
                             ? 'bg-primary text-background'

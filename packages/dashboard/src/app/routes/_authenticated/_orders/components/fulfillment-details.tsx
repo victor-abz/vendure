@@ -160,9 +160,11 @@ export function FulfillmentDetails({ order, fulfillment, onSuccess }: Readonly<F
             {customFieldConfig.length > 0 && (
                 <div className="mt-3 pt-3 border-t">
                     <Form {...customFieldsForm}>
-                        <fieldset disabled>
-                            <CustomFieldsForm entityType="Fulfillment" control={customFieldsForm.control} />
-                        </fieldset>
+                        <CustomFieldsForm
+                            entityType="Fulfillment"
+                            control={customFieldsForm.control}
+                            disabled
+                        />
                     </Form>
                 </div>
             )}

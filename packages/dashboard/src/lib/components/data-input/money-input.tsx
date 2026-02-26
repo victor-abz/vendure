@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { AffixedInput } from './affixed-input.js';
 
 import { DashboardFormComponentProps } from '@/vdb/framework/form-engine/form-engine-types.js';
-import { isReadonlyField } from '@/vdb/framework/form-engine/utils.js';
+import { isFieldDisabled } from '@/vdb/framework/form-engine/utils.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
 import { useDisplayLocale } from '@/vdb/hooks/use-display-locale.js';
 
@@ -23,7 +23,7 @@ export function MoneyInput(props: Readonly<MoneyInputProps>) {
     const { value, onChange, currency, ...rest } = props;
     const { activeChannel } = useChannel();
     const activeCurrency = currency ?? activeChannel?.defaultCurrencyCode;
-    const readOnly = isReadonlyField(props.fieldDef);
+    const readOnly = isFieldDisabled(props.disabled, props.fieldDef);
     const { bcp47Tag } = useDisplayLocale();
     const { toMajorUnits, toMinorUnits } = useLocalFormat();
     const [displayValue, setDisplayValue] = useState(toMajorUnits(value).toFixed(2));

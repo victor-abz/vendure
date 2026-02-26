@@ -164,7 +164,7 @@ export function FormControlAdapter({ fieldDef, field, valueMode }: Readonly<Form
             },
         };
         return transformedField;
-    }, [field.name, field.value, field.onChange, fieldDef, valueMode]);
+    }, [field.name, field.value, field.disabled, field.onChange, fieldDef, valueMode]);
 
     const CustomComponent = getInputComponent(componentId);
 

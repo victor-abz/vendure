@@ -9,7 +9,7 @@ import { Calendar } from '@/vdb/components/ui/calendar.js';
 import { Popover, PopoverContent, PopoverTrigger } from '@/vdb/components/ui/popover.js';
 import { ScrollArea, ScrollBar } from '@/vdb/components/ui/scroll-area.js';
 import { DashboardFormComponentProps } from '@/vdb/framework/form-engine/form-engine-types.js';
-import { isReadonlyField } from '@/vdb/framework/form-engine/utils.js';
+import { isFieldDisabled } from '@/vdb/framework/form-engine/utils.js';
 import { useDisplayLocale } from '@/vdb/hooks/use-display-locale.js';
 import { cn } from '@/vdb/lib/utils.js';
 import type { Locale } from 'date-fns/locale';
@@ -39,8 +39,8 @@ export function useDayPickerLocale() {
  * @docsCategory form-components
  * @docsPage DateTimeInput
  */
-export function DateTimeInput({ value, onChange, fieldDef }: Readonly<DashboardFormComponentProps>) {
-    const readOnly = isReadonlyField(fieldDef);
+export function DateTimeInput({ value, onChange, fieldDef, disabled }: Readonly<DashboardFormComponentProps>) {
+    const readOnly = isFieldDisabled(disabled, fieldDef);
     const locale = useDayPickerLocale();
     const date = value && value instanceof Date ? value.toISOString() : (value ?? '');
     const [isOpen, setIsOpen] = React.useState(false);
@@ -90,6 +90,7 @@ export function DateTimeInput({ value, onChange, fieldDef }: Readonly<DashboardF
                     {date ? (
                         <Button
                             variant="outline"
+                            disabled={readOnly}
                             className="rounded-l-none border-l-0"
                             onClick={e => {
                                 e.stopPropagation();

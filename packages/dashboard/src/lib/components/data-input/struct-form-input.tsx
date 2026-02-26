@@ -22,7 +22,7 @@ import {
     StructField,
 } from '@/vdb/framework/form-engine/form-engine-types.js';
 import {
-    isReadonlyField,
+    isFieldDisabled,
     isStringStructFieldWithOptions,
     isStructFieldConfig,
 } from '@/vdb/framework/form-engine/utils.js';
@@ -81,7 +81,7 @@ function DisplayMode({
     );
 }
 
-export function StructFormInput({ fieldDef, ...field }: Readonly<DashboardFormComponentProps>) {
+export function StructFormInput({ fieldDef, disabled, ...field }: Readonly<DashboardFormComponentProps>) {
     const { formatDate } = useLocalFormat();
     const [isEditing, setIsEditing] = useState(false);
     const { control } = useFormContext();
@@ -103,7 +103,7 @@ export function StructFormInput({ fieldDef, ...field }: Readonly<DashboardFormCo
         return input?.find(t => t.languageCode === displayLanguage)?.value;
     };
 
-    const isReadonly = isReadonlyField(fieldDef);
+    const isReadonly = isFieldDisabled(disabled, fieldDef);
 
     // Edit mode - memoized to prevent focus loss from re-renders
     const EditMode = useMemo(
@@ -280,7 +280,7 @@ const renderStructFieldInput = (
                     />
                 );
             case 'datetime':
-                return <DateTimeInput {...singleField} />;
+                return <DateTimeInput {...singleField} disabled={isReadonly} />;
             default:
                 return (
                     <Input
