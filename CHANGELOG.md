@@ -1,3 +1,38 @@
+## <small>3.5.5 (2026-02-27)</small>
+
+
+#### Fixes
+
+* **cli** Fix crash when cancelling follow-up feature selection during plugin creation (#4371) ([12d1ef8](https://github.com/vendurehq/vendure/commit/12d1ef8)), closes [#4371](https://github.com/vendurehq/vendure/issues/4371)
+* **core** Handle empty sortedAssets in updateEntityAssets (#4397) ([6c81359](https://github.com/vendurehq/vendure/commit/6c81359)), closes [#4397](https://github.com/vendurehq/vendure/issues/4397)
+* **core** Include channelId in productInStock cache key (#4214) ([b3d1903](https://github.com/vendurehq/vendure/commit/b3d1903)), closes [#4214](https://github.com/vendurehq/vendure/issues/4214)
+* **core** Persist customFields in updateGlobalSettings mutation (#4343) ([1633446](https://github.com/vendurehq/vendure/commit/1633446)), closes [#4343](https://github.com/vendurehq/vendure/issues/4343)
+* **core** Use channel language fallbacks in FacetService and FacetValueService (#4434) ([ee20cf7](https://github.com/vendurehq/vendure/commit/ee20cf7)), closes [#4434](https://github.com/vendurehq/vendure/issues/4434)
+* **create** Use promise-based mysql2 API for database check (#4418) ([bb79a09](https://github.com/vendurehq/vendure/commit/bb79a09)), closes [#4418](https://github.com/vendurehq/vendure/issues/4418)
+* **dashboard** Add "Now" button to date time picker ([92d9e40](https://github.com/vendurehq/vendure/commit/92d9e40)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Add custom fields of fulfillment in dashboard (#4386) ([d8ea154](https://github.com/vendurehq/vendure/commit/d8ea154)), closes [#4386](https://github.com/vendurehq/vendure/issues/4386)
+* **dashboard** Add missing dashboard dependency (#4384) ([0ebf1ca](https://github.com/vendurehq/vendure/commit/0ebf1ca)), closes [#4384](https://github.com/vendurehq/vendure/issues/4384)
+* **dashboard** Add recalculate shipping checkbox to order modification ([de0d2a8](https://github.com/vendurehq/vendure/commit/de0d2a8)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Add scroll to configurable operation dropdown (#4435) ([18471df](https://github.com/vendurehq/vendure/commit/18471df)), closes [#4435](https://github.com/vendurehq/vendure/issues/4435)
+* **dashboard** Default order list sort to updatedAt instead of orderPlacedAt ([8984612](https://github.com/vendurehq/vendure/commit/8984612)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Default product list sort to newest first ([3e1836a](https://github.com/vendurehq/vendure/commit/3e1836a)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Display custom order history entry types ([3baa5cc](https://github.com/vendurehq/vendure/commit/3baa5cc)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Fix column settings dropdown clipping and Reset button overlap ([01197a1](https://github.com/vendurehq/vendure/commit/01197a1)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Fix metrics tooltip text unreadable in dark mode ([63e7dd3](https://github.com/vendurehq/vendure/commit/63e7dd3)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Fix order line discounts showing `[object Object]` (#4378) ([89973ab](https://github.com/vendurehq/vendure/commit/89973ab)), closes [#4378](https://github.com/vendurehq/vendure/issues/4378)
+* **dashboard** Keep address visible when editing during order modification (#4413) ([7207123](https://github.com/vendurehq/vendure/commit/7207123)), closes [#4413](https://github.com/vendurehq/vendure/issues/4413)
+* **dashboard** Only show "Show all" button when 2+ items are hidden ([9c37579](https://github.com/vendurehq/vendure/commit/9c37579)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Propagate disabled state via React props for all form inputs (#4425) ([dcd8c81](https://github.com/vendurehq/vendure/commit/dcd8c81)), closes [#4425](https://github.com/vendurehq/vendure/issues/4425)
+* **dashboard** Refresh language selector after saving language (#4417) ([738473d](https://github.com/vendurehq/vendure/commit/738473d)), closes [#4417](https://github.com/vendurehq/vendure/issues/4417)
+* **dashboard** Return null for nullable non-string field defaults (#4339) ([80cdd07](https://github.com/vendurehq/vendure/commit/80cdd07)), closes [#4339](https://github.com/vendurehq/vendure/issues/4339)
+* **dashboard** Show badge instead of dropdown for single option groups ([36416a6](https://github.com/vendurehq/vendure/commit/36416a6)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+* **dashboard** Show custom fields edit button on OrderLine in modify order page (#4432) ([e7725c4](https://github.com/vendurehq/vendure/commit/e7725c4)), closes [#4432](https://github.com/vendurehq/vendure/issues/4432)
+* **dashboard** Wrap custom field tabs when they overflow container ([eede10d](https://github.com/vendurehq/vendure/commit/eede10d)), closes [#4393](https://github.com/vendurehq/vendure/issues/4393)
+
+#### Features
+
+* **dashboard** Add facet value filter to product & variant lists (#4415) ([d36e99c](https://github.com/vendurehq/vendure/commit/d36e99c)), closes [#4415](https://github.com/vendurehq/vendure/issues/4415)
+
 ## <small>3.5.4 (2026-02-17)</small>
 
 
