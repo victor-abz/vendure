@@ -268,7 +268,7 @@ export function ConfigurableOperationMultiSelector({
                             <Trans>{buttonText}</Trans>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className={showEnhancedDropdown ? 'w-80' : 'w-96'} align="start">
+                    <DropdownMenuContent className={showEnhancedDropdown ? 'w-80 max-h-[min(600px,50vh)] overflow-y-auto' : 'w-96 max-h-[min(600px,50vh)] overflow-y-auto'} align="start">
                         {showEnhancedDropdown && dropdownTitle && (
                             <div className="px-2 py-1.5 text-sm font-medium text-muted-foreground">
                                 {dropdownTitle}

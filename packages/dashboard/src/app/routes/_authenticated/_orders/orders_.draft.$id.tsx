@@ -58,7 +58,9 @@ function DraftOrderPage() {
     const navigate = useNavigate();
 
     const { entity, refreshEntity, form } = useDetailPage({
-        queryDocument: addCustomFields(orderDetailDocument),
+        queryDocument: addCustomFields(orderDetailDocument, {
+            includeNestedFragments: ['OrderLine', 'Fulfillment'],
+        }),
         setValuesForUpdate: entity => {
             return {
                 id: entity.id,
