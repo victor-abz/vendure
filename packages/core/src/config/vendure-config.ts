@@ -18,6 +18,7 @@ import { AssetNamingStrategy } from './asset-naming-strategy/asset-naming-strate
 import { AssetPreviewStrategy } from './asset-preview-strategy/asset-preview-strategy';
 import { AssetStorageStrategy } from './asset-storage-strategy/asset-storage-strategy';
 import { AuthenticationStrategy } from './auth/authentication-strategy';
+import { EntityAccessControlStrategy } from './auth/entity-access-control-strategy';
 import { PasswordHashingStrategy } from './auth/password-hashing-strategy';
 import { PasswordValidationStrategy } from './auth/password-validation-strategy';
 import { VerificationTokenStrategy } from './auth/verification-token-strategy';
@@ -536,6 +537,21 @@ export interface AuthOptions {
      * @since 3.2.0
      */
     verificationTokenStrategy?: VerificationTokenStrategy;
+    /**
+     * @description
+     * Allows you to define access control for entity queries at three levels:
+     *
+     * - `canAccess()` — gate-level permission check (once per request)
+     * - `prepareAccessControl()` — async pre-loading for row-level filtering (once per request)
+     * - `applyAccessControl()` — synchronous row-level QB filtering (every entity query)
+     *
+     * **Developer preview:** this API is subject to change in future releases.
+     *
+     * @default DefaultEntityAccessControlStrategy
+     * @since 3.6.0
+     * @experimental
+     */
+    entityAccessControlStrategy?: EntityAccessControlStrategy;
 }
 
 /**
