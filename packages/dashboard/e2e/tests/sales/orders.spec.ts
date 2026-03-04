@@ -1,7 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 
-import { VENDURE_PORT } from '../../constants.js';
 import { BaseListPage } from '../../page-objects/list-page.base.js';
+import { VendureAdminClient } from '../../utils/vendure-admin-client.js';
 
 // Orders use a multi-step draft flow rather than a single CRUD form.
 // Each action (set customer, add line, set address, set shipping) is an
@@ -205,48 +205,6 @@ test.describe('Orders', () => {
 });
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-
-const ADMIN_API = `http://localhost:${VENDURE_PORT}/admin-api`;
-
-/** Thin wrapper around Playwright's request API with Vendure bearer-token auth. */
-class VendureAdminClient {
-    private authToken: string | null = null;
-    constructor(private page: Page) {}
-
-    async login(username = 'superadmin', password = 'superadmin') {
-        const response = await this.page.request.post(ADMIN_API, {
-            data: {
-                query: `mutation ($u: String!, $p: String!) {
-                    login(username: $u, password: $p) {
-                        ... on CurrentUser { id }
-                        ... on ErrorResult { errorCode message }
-                    }
-                }`,
-                variables: { u: username, p: password },
-            },
-        });
-        this.authToken = response.headers()['vendure-auth-token'] ?? null;
-        const json = await response.json();
-        if (json.errors?.length) {
-            throw new Error(`Login failed: ${String(json.errors[0].message)}`);
-        }
-    }
-
-    async gql(query: string, variables?: Record<string, unknown>) {
-        if (!this.authToken) throw new Error('Call login() first');
-        const response = await this.page.request.post(ADMIN_API, {
-            headers: { Authorization: `Bearer ${this.authToken}` },
-            data: { query, variables },
-        });
-        const newToken = response.headers()['vendure-auth-token'];
-        if (newToken) this.authToken = newToken;
-        const json = await response.json();
-        if (json.errors?.length) {
-            throw new Error(`GraphQL error: ${String(json.errors[0].message)}`);
-        }
-        return json.data;
-    }
-}
 
 /**
  * Creates a payment method (idempotent), builds a fully-paid order via the

@@ -45,6 +45,10 @@ export function ConfigurableOperationInput({
         const isValid = operationDefinition.args.every(arg => {
             if (!arg.required || arg.list) return true;
             const argValue = value.arguments.find(a => a.name === arg.name)?.value;
+            // Args with a defaultValue are considered valid even when absent from
+            // stored data. This handles legacy collections created before an arg
+            // (e.g. combineWithAnd) was added to the filter definition.
+            if (argValue === undefined && arg.defaultValue != null) return true;
             return argValue !== undefined && argValue !== '';
         });
 
