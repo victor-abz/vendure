@@ -140,6 +140,8 @@ export function CreateProductVariantsDialog({
         [],
     );
     const createCount = Object.values(variantData?.variants ?? {}).filter(v => v.enabled).length;
+    const hasInvalidOptionGroups =
+        variantData?.optionGroups.some(g => !g.name || g.values.length === 0) ?? false;
 
     return (
         <>
@@ -174,7 +176,8 @@ export function CreateProductVariantsDialog({
                                 createOptionGroupMutation.isPending ||
                                 addOptionGroupToProductMutation.isPending ||
                                 createProductVariantsMutation.isPending ||
-                                createCount === 0
+                                createCount === 0 ||
+                                hasInvalidOptionGroups
                             }
                         >
                             {createOptionGroupMutation.isPending ||

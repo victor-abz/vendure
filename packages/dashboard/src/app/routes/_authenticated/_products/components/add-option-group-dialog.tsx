@@ -81,6 +81,7 @@ export function AddOptionGroupDialog({
 
             toast.success(t`Successfully created option group`);
             setOpen(false);
+            form.reset();
             onSuccess?.();
         } catch (error) {
             toast.error(t`Failed to create option group`, {
@@ -90,7 +91,10 @@ export function AddOptionGroupDialog({
     };
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={(isOpen) => {
+            setOpen(isOpen);
+            if (!isOpen) form.reset();
+        }}>
             <DialogTrigger asChild>
                 <Button variant="outline">
                     <Plus className="mr-2 h-4 w-4" />
