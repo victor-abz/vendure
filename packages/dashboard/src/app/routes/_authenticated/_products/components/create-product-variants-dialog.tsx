@@ -11,11 +11,11 @@ import {
 import { api } from '@/vdb/graphql/api.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { toast } from 'sonner';
 import { normalizeString } from '@/vdb/lib/utils.js';
 import { useMutation } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
 import { useCallback, useState } from 'react';
+import { toast } from 'sonner';
 import {
     addOptionGroupToProductDocument,
     createProductOptionGroupDocument,
@@ -129,7 +129,6 @@ export function CreateProductVariantsDialog({
             setOpen(false);
             onSuccess?.();
         } catch (error) {
-            console.error('Error creating variants:', error);
             toast.error(t`Failed to create product variants`, {
                 description: error instanceof Error ? error.message : t`Unknown error`,
             });
@@ -141,6 +140,8 @@ export function CreateProductVariantsDialog({
         [],
     );
     const createCount = Object.values(variantData?.variants ?? {}).filter(v => v.enabled).length;
+    const hasInvalidOptionGroups =
+        variantData?.optionGroups.some(g => !g.name || g.values.length === 0) ?? false;
 
     return (
         <>
@@ -175,7 +176,8 @@ export function CreateProductVariantsDialog({
                                 createOptionGroupMutation.isPending ||
                                 addOptionGroupToProductMutation.isPending ||
                                 createProductVariantsMutation.isPending ||
-                                createCount === 0
+                                createCount === 0 ||
+                                hasInvalidOptionGroups
                             }
                         >
                             {createOptionGroupMutation.isPending ||
