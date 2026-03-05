@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
+    CurrencyCode,
     DeletionResult,
     ErrorCode,
     GlobalFlag,
@@ -74,6 +75,7 @@ import {
     settlePaymentDocument,
     settleRefundDocument,
     transitFulfillmentDocument,
+    updateChannelDocument,
     updateOrderNoteDocument,
     updateProductVariantsDocument,
 } from './graphql/shared-definitions';
@@ -86,9 +88,12 @@ import {
     getActiveCustomerWithOrdersProductSlugDocument,
     getActiveOrderDocument,
     getOrderByCodeWithPaymentsDocument,
+    setCurrencyCodeForOrderDocument,
+    setCustomerDocument,
     setShippingAddressDocument,
     setShippingMethodDocument,
     testOrderWithPaymentsFragment,
+    transitionToStateDocument,
 } from './graphql/shop-definitions';
 import { assertThrowsWithMessage } from './utils/assert-throws-with-message';
 import { addPaymentToOrder, proceedToArrangingPayment, sortById } from './utils/test-order-utils';
@@ -2400,6 +2405,89 @@ describe('Orders resolver', () => {
                 id: order.id,
             });
             expect(order2?.state).toBe('PartiallyShipped');
+        });
+    });
+
+    describe('set order currency code', () => {
+        it('throws if currency is not available on channel', async () => {
+            await shopClient.asAnonymousUser();
+            await shopClient.query(addItemToOrderDocument, {
+                productVariantId: 'T_1',
+                quantity: 1,
+            });
+
+            try {
+                await shopClient.query(setCurrencyCodeForOrderDocument, {
+                    currencyCode: 'GBP' as CurrencyCode,
+                });
+                expect.fail('Should have thrown');
+            } catch (e: any) {
+                expect(e.message).toContain('error.currency-not-available');
+            }
+        });
+
+        it('returns order unchanged if setting same currency', async () => {
+            const { setCurrencyCodeForOrder } = await shopClient.query(setCurrencyCodeForOrderDocument, {
+                currencyCode: 'USD' as CurrencyCode,
+            });
+            expect(setCurrencyCodeForOrder.currencyCode).toBe('USD');
+        });
+
+        it('successfully changes currency code', async () => {
+            // First, add GBP as available currency on the default channel
+            await adminClient.query(updateChannelDocument, {
+                input: {
+                    id: 'T_1',
+                    availableCurrencyCodes: [CurrencyCode.USD, CurrencyCode.GBP],
+                },
+            });
+
+            const { setCurrencyCodeForOrder } = await shopClient.query(setCurrencyCodeForOrderDocument, {
+                currencyCode: 'GBP' as CurrencyCode,
+            });
+            expect(setCurrencyCodeForOrder.currencyCode).toBe('GBP');
+        });
+
+        it('creates a history entry when currency is changed', async () => {
+            const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+            expect(activeOrder).not.toBeNull();
+            const currencyUpdatedEntry = activeOrder!.history.items.find(
+                i => i.type === HistoryEntryType.ORDER_CURRENCY_UPDATED,
+            );
+            expect(currencyUpdatedEntry).toBeDefined();
+            expect(currencyUpdatedEntry!.data.previousCurrency).toBe('USD');
+            expect(currencyUpdatedEntry!.data.newCurrency).toBe('GBP');
+        });
+
+        it('returns error if order is not in AddingItems state', async () => {
+            await shopClient.query(setCustomerDocument, {
+                input: {
+                    firstName: 'Test',
+                    lastName: 'Person',
+                    emailAddress: 'currency-test@test.com',
+                },
+            });
+            await shopClient.query(setShippingAddressDocument, {
+                input: {
+                    fullName: 'name',
+                    streetLine1: '12 the street',
+                    city: 'Leedsburgh',
+                    postalCode: '123456',
+                    countryCode: 'AT',
+                },
+            });
+            await shopClient.query(setShippingMethodDocument, {
+                id: ['T_1'],
+            });
+            const { transitionOrderToState } = await shopClient.query(transitionToStateDocument, {
+                state: 'ArrangingPayment',
+            });
+            expect(transitionOrderToState?.state).toBe('ArrangingPayment');
+
+            const { setCurrencyCodeForOrder } = await shopClient.query(setCurrencyCodeForOrderDocument, {
+                currencyCode: 'USD' as CurrencyCode,
+            });
+            expect(setCurrencyCodeForOrder.errorCode).toBe('ORDER_MODIFICATION_ERROR');
         });
     });
 

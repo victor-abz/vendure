@@ -2,7 +2,7 @@
 title: "OrderService"
 generated: true
 ---
-<GenerationInfo sourceFile="packages/core/src/service/services/order.service.ts" sourceLine="140" packageName="@vendure/core" />
+<GenerationInfo sourceFile="packages/core/src/service/services/order.service.ts" sourceLine="141" packageName="@vendure/core" />
 
 Contains methods relating to [Order](/reference/typescript-api/entities/order#order) entities.
 
@@ -26,6 +26,7 @@ class OrderService {
     createDraft(ctx: RequestContext) => ;
     updateCustomFields(ctx: RequestContext, orderId: ID, customFields: any) => ;
     updateOrderCustomer(ctx: RequestContext, { customerId, orderId, note }: SetOrderCustomerInput) => ;
+    updateOrderCurrency(ctx: RequestContext, orderId: ID, currencyCode: CurrencyCode, relations?: RelationPaths<Order>) => Promise<ErrorResultUnion<UpdateOrderItemsResult, Order>>;
     addItemToOrder(ctx: RequestContext, orderId: ID, productVariantId: ID, quantity: number, customFields?: { [key: string]: any }, relations?: RelationPaths<Order>) => Promise<ErrorResultUnion<UpdateOrderItemsResult, Order>>;
     addItemsToOrder(ctx: RequestContext, orderId: ID, items: Array<{
             productVariantId: ID;
@@ -172,6 +173,12 @@ Updates the custom fields of an Order.
 
 Updates the Customer which is assigned to a given Order. The target Customer must be assigned to the same
 Channels as the Order, otherwise an error will be thrown.
+### updateOrderCurrency
+
+<MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, orderId: <a href='/reference/typescript-api/common/id#id'>ID</a>, currencyCode: <a href='/reference/typescript-api/common/currency-code#currencycode'>CurrencyCode</a>, relations?: RelationPaths<<a href='/reference/typescript-api/entities/order#order'>Order</a>>) => Promise<<a href='/reference/typescript-api/errors/error-result-union#errorresultunion'>ErrorResultUnion</a><UpdateOrderItemsResult, <a href='/reference/typescript-api/entities/order#order'>Order</a>>>`}  since="3.3.0"  />
+
+Updates the currency code of an Order. This will recalculate all prices
+in the new currency using `applyPriceAdjustments`.
 ### addItemToOrder
 
 <MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, orderId: <a href='/reference/typescript-api/common/id#id'>ID</a>, productVariantId: <a href='/reference/typescript-api/common/id#id'>ID</a>, quantity: number, customFields?: { [key: string]: any }, relations?: RelationPaths<<a href='/reference/typescript-api/entities/order#order'>Order</a>>) => Promise<<a href='/reference/typescript-api/errors/error-result-union#errorresultunion'>ErrorResultUnion</a><UpdateOrderItemsResult, <a href='/reference/typescript-api/entities/order#order'>Order</a>>>`}   />

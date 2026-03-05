@@ -287,6 +287,30 @@ export const addMultipleItemsToOrderDocument = graphql(
     [updatedOrderFragment],
 );
 
+export const setCurrencyCodeForOrderDocument = graphql(
+    `
+        mutation SetCurrencyCodeForOrder($currencyCode: CurrencyCode!) {
+            setCurrencyCodeForOrder(currencyCode: $currencyCode) {
+                ...UpdatedOrder
+                ... on ErrorResult {
+                    errorCode
+                    message
+                }
+                ... on InsufficientStockError {
+                    quantityAvailable
+                    order {
+                        ...UpdatedOrder
+                    }
+                }
+                ... on OrderInterceptorError {
+                    interceptorError
+                }
+            }
+        }
+    `,
+    [updatedOrderFragment],
+);
+
 export const searchProductsShopDocument = graphql(`
     query SearchProductsShop($input: SearchInput!) {
         search(input: $input) {

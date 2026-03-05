@@ -1287,6 +1287,7 @@ export enum HistoryEntryType {
     ORDER_CANCELLATION = 'ORDER_CANCELLATION',
     ORDER_COUPON_APPLIED = 'ORDER_COUPON_APPLIED',
     ORDER_COUPON_REMOVED = 'ORDER_COUPON_REMOVED',
+    ORDER_CURRENCY_UPDATED = 'ORDER_CURRENCY_UPDATED',
     ORDER_CUSTOMER_UPDATED = 'ORDER_CUSTOMER_UPDATED',
     ORDER_FULFILLMENT = 'ORDER_FULFILLMENT',
     ORDER_FULFILLMENT_TRANSITION = 'ORDER_FULFILLMENT_TRANSITION',
@@ -1915,6 +1916,8 @@ export type Mutation = {
     requestUpdateCustomerEmailAddress: RequestUpdateCustomerEmailAddressResult;
     /** Resets a Customer's password based on the provided token */
     resetPassword: ResetPasswordResult;
+    /** Sets the currency code for the active Order */
+    setCurrencyCodeForOrder: UpdateOrderItemsResult;
     /** Set the Customer for the Order. Required only if the Customer is not currently logged in */
     setCustomerForOrder: SetCustomerForOrderResult;
     /** Sets the billing address for the active Order */
@@ -2035,6 +2038,10 @@ export type MutationRequestUpdateCustomerEmailAddressArgs = {
 export type MutationResetPasswordArgs = {
     password: Scalars['String']['input'];
     token: Scalars['String']['input'];
+};
+
+export type MutationSetCurrencyCodeForOrderArgs = {
+    currencyCode: CurrencyCode;
 };
 
 export type MutationSetCustomerForOrderArgs = {
