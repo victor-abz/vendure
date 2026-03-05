@@ -70,6 +70,35 @@ export interface BootstrapOptions {
      * @since 3.1.0
      */
     ignoreCompatibilityErrorsForPlugins?: Array<DynamicModule | Type<any>>;
+
+    /**
+     * @description
+     * A function which is called before the app starts listening. This can be used to perform any final configuration of the Nest application.
+     * E.g., to set up OpenAPI specification with Swagger.
+     *
+     * @example
+     * ```ts
+     * import { bootstrap } from '\@vendure/core';
+     * import { config } from './vendure-config';
+     * import { SwaggerModule, DocumentBuilder } from '\@nestjs/swagger';
+     *
+     * bootstrap(config, {
+     *  onBeforeAppListen: async (app) => {
+     *    const config = new DocumentBuilder()
+     *      .setTitle('Cats example')
+     *      .setDescription('The cats API description')
+     *      .setVersion('1.0')
+     *      .addTag('cats')
+     *      .build();
+     *    const documentFactory = () => SwaggerModule.createDocument(app, config);
+     *    SwaggerModule.setup('api', app, documentFactory);
+     *  }
+     * });
+     * ```
+     * @default undefined
+     * @since 3.6.0
+     */
+    onBeforeAppListen?: (app: INestApplication) => void | Promise<void>;
 }
 
 /**
@@ -190,6 +219,7 @@ export async function bootstrap(
     earlyMiddlewares.forEach(mid => {
         app.use(mid.route, mid.handler);
     });
+    await options?.onBeforeAppListen?.(app);
     await app.listen(port, hostname || '');
     app.enableShutdownHooks();
     logWelcomeMessage(config);
