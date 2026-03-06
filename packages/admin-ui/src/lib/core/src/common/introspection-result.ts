@@ -101,6 +101,7 @@ const result: PossibleTypesResultData = {
             'PaymentMethodMissingError',
             'PaymentOrderMismatchError',
             'PaymentStateTransitionError',
+            'ProductOptionGroupInUseError',
             'ProductOptionInUseError',
             'QuantityTooGreatError',
             'RefundAmountError',
@@ -187,6 +188,7 @@ const result: PossibleTypesResultData = {
             'OrderList',
             'PaymentMethodList',
             'ProductList',
+            'ProductOptionGroupList',
             'ProductOptionList',
             'ProductVariantList',
             'PromotionList',
@@ -216,6 +218,7 @@ const result: PossibleTypesResultData = {
         RemoveFacetFromChannelResult: ['Facet', 'FacetInUseError'],
         RemoveOptionGroupFromProductResult: ['Product', 'ProductOptionInUseError'],
         RemoveOrderItemsResult: ['Order', 'OrderInterceptorError', 'OrderModificationError'],
+        RemoveProductOptionGroupFromChannelResult: ['ProductOptionGroup', 'ProductOptionGroupInUseError'],
         SearchResultPrice: ['PriceRange', 'SinglePrice'],
         SetCustomerForDraftOrderResult: ['EmailAddressConflictError', 'Order'],
         SetOrderShippingMethodResult: [

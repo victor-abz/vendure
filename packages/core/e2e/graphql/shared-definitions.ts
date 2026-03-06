@@ -742,6 +742,53 @@ export const removeFacetsFromChannelDocument = graphql(`
     }
 `);
 
+export const assignProductOptionGroupsToChannelDocument = graphql(`
+    mutation AssignProductOptionGroupsToChannel($input: AssignProductOptionGroupsToChannelInput!) {
+        assignProductOptionGroupsToChannel(input: $input) {
+            id
+            code
+            name
+        }
+    }
+`);
+
+export const removeProductOptionGroupsFromChannelDocument = graphql(`
+    mutation RemoveProductOptionGroupsFromChannel($input: RemoveProductOptionGroupsFromChannelInput!) {
+        removeProductOptionGroupsFromChannel(input: $input) {
+            ... on ProductOptionGroup {
+                id
+                code
+                name
+            }
+            ... on ProductOptionGroupInUseError {
+                errorCode
+                message
+                optionGroupCode
+                productCount
+                variantCount
+            }
+        }
+    }
+`);
+
+export const deleteProductOptionGroupDocument = graphql(`
+    mutation DeleteProductOptionGroup($id: ID!, $force: Boolean) {
+        deleteProductOptionGroup(id: $id, force: $force) {
+            result
+            message
+        }
+    }
+`);
+
+export const deleteProductOptionGroupsDocument = graphql(`
+    mutation DeleteProductOptionGroups($ids: [ID!]!, $force: Boolean) {
+        deleteProductOptionGroups(ids: $ids, force: $force) {
+            result
+            message
+        }
+    }
+`);
+
 export const getEntityDuplicatorsDocument = graphql(`
     query GetEntityDuplicators {
         entityDuplicators {

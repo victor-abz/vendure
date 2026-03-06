@@ -10,6 +10,8 @@ import { CustomChannelFields } from '../custom-entity-fields';
 import { EntityId } from '../entity-id.decorator';
 import { FacetValue } from '../facet-value/facet-value.entity';
 import { Facet } from '../facet/facet.entity';
+import { ProductOptionGroup } from '../product-option-group/product-option-group.entity';
+import { ProductOption } from '../product-option/product-option.entity';
 import { ProductVariant } from '../product-variant/product-variant.entity';
 import { Product } from '../product/product.entity';
 import { Seller } from '../seller/seller.entity';
@@ -121,6 +123,12 @@ export class Channel extends VendureEntity {
 
     @ManyToMany(type => Facet, facet => facet.channels, { onDelete: 'CASCADE' })
     facets: Facet[];
+
+    @ManyToMany(type => ProductOptionGroup, pog => pog.channels, { onDelete: 'CASCADE' })
+    productOptionGroups: ProductOptionGroup[];
+
+    @ManyToMany(type => ProductOption, po => po.channels, { onDelete: 'CASCADE' })
+    productOptions: ProductOption[];
 
     @ManyToMany(type => Collection, collection => collection.channels, { onDelete: 'CASCADE' })
     collections: Collection[];

@@ -814,12 +814,12 @@ type Query {
   type="query"
   typeName="productOptionGroups"
   typeLinks={{
-    ProductOptionGroup: '/reference/graphql-api/admin/object-types#productoptiongroup',
-    String: '/reference/graphql-api/admin/object-types#string',
+    ProductOptionGroupList: '/reference/graphql-api/admin/object-types#productoptiongrouplist',
+    ProductOptionGroupListOptions: '/reference/graphql-api/admin/input-types#productoptiongrouplistoptions',
   }}
 >
 {`type Query {
-  productOptionGroups(filterTerm: String): [ProductOptionGroup!]!
+  productOptionGroups(options: ProductOptionGroupListOptions): ProductOptionGroupList!
 }`}
 </GraphQLDoc>
 

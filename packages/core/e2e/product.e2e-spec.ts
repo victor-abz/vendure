@@ -1083,17 +1083,24 @@ describe('Product resolver', () => {
             ),
         );
 
-        it(
-            'addOptionGroupToProduct errors if the OptionGroup is already assigned to another Product',
-            assertThrowsWithMessage(
-                () =>
-                    adminClient.query(addOptionGroupToProductDocument, {
-                        optionGroupId: 'T_1',
-                        productId: 'T_2',
-                    }),
-                'The ProductOptionGroup "laptop-screen-size" is already assigned to the Product "Laptop"',
-            ),
-        );
+        it('addOptionGroupToProduct allows the same group on multiple products', async () => {
+            const result = await adminClient.query(addOptionGroupToProductDocument, {
+                optionGroupId: 'T_1',
+                productId: 'T_2',
+            });
+            expect(result.addOptionGroupToProduct.optionGroups.map((g: any) => g.id)).toContain('T_1');
+
+            // Clean up: remove the shared group from T_2
+            const { removeOptionGroupFromProduct } = await adminClient.query(
+                removeOptionGroupFromProductDocument,
+                {
+                    optionGroupId: 'T_1',
+                    productId: 'T_2',
+                    force: true,
+                },
+            );
+            removeOptionGuard.assertSuccess(removeOptionGroupFromProduct);
+        });
 
         it(
             'addOptionGroupToProduct errors with an invalid optionGroupId',

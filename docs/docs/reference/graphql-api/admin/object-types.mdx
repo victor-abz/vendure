@@ -3527,6 +3527,46 @@ type PriceRange {
 }`}
 </GraphQLDoc>
 
+<a name="productoptiongroupinuseerror"></a>
+
+## ProductOptionGroupInUseError
+
+<GraphQLDoc
+  type="type"
+  typeName="ProductOptionGroupInUseError"
+  typeLinks={{
+    ErrorCode: '/reference/graphql-api/admin/enums#errorcode',
+    String: '/reference/graphql-api/admin/object-types#string',
+    Int: '/reference/graphql-api/admin/object-types#int',
+  }}
+>
+{`type ProductOptionGroupInUseError {
+  errorCode: ErrorCode!
+  message: String!
+  optionGroupCode: String!
+  productCount: Int!
+  variantCount: Int!
+}`}
+</GraphQLDoc>
+
+<a name="productoptiongrouplist"></a>
+
+## ProductOptionGroupList
+
+<GraphQLDoc
+  type="type"
+  typeName="ProductOptionGroupList"
+  typeLinks={{
+    Int: '/reference/graphql-api/admin/object-types#int',
+    ProductOptionGroup: '/reference/graphql-api/admin/object-types#productoptiongroup',
+  }}
+>
+{`type ProductOptionGroupList {
+  totalItems: Int!
+  items: [ProductOptionGroup!]!
+}`}
+</GraphQLDoc>
+
 <a name="productoptiongrouptranslation"></a>
 
 ## ProductOptionGroupTranslation
@@ -4207,6 +4247,21 @@ type RefundStateTransitionError {
   }}
 >
 {`union RemoveOrderItemsResult = Order | OrderModificationError | OrderInterceptorError`}
+</GraphQLDoc>
+
+<a name="removeproductoptiongroupfromchannelresult"></a>
+
+## RemoveProductOptionGroupFromChannelResult
+
+<GraphQLDoc
+  type="union"
+  typeName="RemoveProductOptionGroupFromChannelResult"
+  typeLinks={{
+    ProductOptionGroup: '/reference/graphql-api/admin/object-types#productoptiongroup',
+    ProductOptionGroupInUseError: '/reference/graphql-api/admin/object-types#productoptiongroupinuseerror',
+  }}
+>
+{`union RemoveProductOptionGroupFromChannelResult = ProductOptionGroup | ProductOptionGroupInUseError`}
 </GraphQLDoc>
 
 <a name="return"></a>

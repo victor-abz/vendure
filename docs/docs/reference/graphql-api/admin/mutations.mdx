@@ -265,6 +265,24 @@ type Mutation {
 }`}
 </GraphQLDoc>
 
+<a name="assignproductoptiongroupstochannel"></a>
+
+## assignProductOptionGroupsToChannel
+
+<GraphQLDoc
+  type="mutation"
+  typeName="assignProductOptionGroupsToChannel"
+  typeLinks={{
+    ProductOptionGroup: '/reference/graphql-api/admin/object-types#productoptiongroup',
+    AssignProductOptionGroupsToChannelInput: '/reference/graphql-api/admin/input-types#assignproductoptiongroupstochannelinput',
+  }}
+>
+{`"""Assigns ProductOptionGroups to the specified Channel"""
+type Mutation {
+  assignProductOptionGroupsToChannel(input: AssignProductOptionGroupsToChannelInput!): [ProductOptionGroup!]!
+}`}
+</GraphQLDoc>
+
 <a name="assignproductvariantstochannel"></a>
 
 ## assignProductVariantsToChannel
@@ -1421,6 +1439,44 @@ type Mutation {
 }`}
 </GraphQLDoc>
 
+<a name="deleteproductoptiongroup"></a>
+
+## deleteProductOptionGroup
+
+<GraphQLDoc
+  type="mutation"
+  typeName="deleteProductOptionGroup"
+  typeLinks={{
+    DeletionResponse: '/reference/graphql-api/admin/object-types#deletionresponse',
+    ID: '/reference/graphql-api/admin/object-types#id',
+    Boolean: '/reference/graphql-api/admin/object-types#boolean',
+  }}
+>
+{`"""Delete a ProductOptionGroup"""
+type Mutation {
+  deleteProductOptionGroup(id: ID!, force: Boolean): DeletionResponse!
+}`}
+</GraphQLDoc>
+
+<a name="deleteproductoptiongroups"></a>
+
+## deleteProductOptionGroups
+
+<GraphQLDoc
+  type="mutation"
+  typeName="deleteProductOptionGroups"
+  typeLinks={{
+    DeletionResponse: '/reference/graphql-api/admin/object-types#deletionresponse',
+    ID: '/reference/graphql-api/admin/object-types#id',
+    Boolean: '/reference/graphql-api/admin/object-types#boolean',
+  }}
+>
+{`"""Delete multiple ProductOptionGroups"""
+type Mutation {
+  deleteProductOptionGroups(ids: [ID!]!, force: Boolean): [DeletionResponse!]!
+}`}
+</GraphQLDoc>
+
 <a name="deleteproductvariant"></a>
 
 ## deleteProductVariant
@@ -2110,6 +2166,24 @@ type Mutation {
 {`"""Removes PaymentMethods from the specified Channel"""
 type Mutation {
   removePaymentMethodsFromChannel(input: RemovePaymentMethodsFromChannelInput!): [PaymentMethod!]!
+}`}
+</GraphQLDoc>
+
+<a name="removeproductoptiongroupsfromchannel"></a>
+
+## removeProductOptionGroupsFromChannel
+
+<GraphQLDoc
+  type="mutation"
+  typeName="removeProductOptionGroupsFromChannel"
+  typeLinks={{
+    RemoveProductOptionGroupFromChannelResult: '/reference/graphql-api/admin/object-types#removeproductoptiongroupfromchannelresult',
+    RemoveProductOptionGroupsFromChannelInput: '/reference/graphql-api/admin/input-types#removeproductoptiongroupsfromchannelinput',
+  }}
+>
+{`"""Removes ProductOptionGroups from the specified Channel"""
+type Mutation {
+  removeProductOptionGroupsFromChannel(input: RemoveProductOptionGroupsFromChannelInput!): [RemoveProductOptionGroupFromChannelResult!]!
 }`}
 </GraphQLDoc>
 
