@@ -1,7 +1,7 @@
-const path = require('path');
+const path = require('node:path');
 const fs = require('fs-extra');
 const spawn = require('cross-spawn');
-const { exec } = require('child_process');
+const { exec } = require('node:child_process');
 
 const MESSAGES_DIR = path.join(__dirname, '../src/lib/static/i18n-messages');
 

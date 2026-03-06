@@ -119,7 +119,7 @@ export function TestOrderBuilder({ onOrderLinesChange }: Readonly<TestOrderBuild
                             type="number"
                             min="1"
                             value={row.original.quantity}
-                            onChange={e => updateQuantity(row.original.id, parseInt(e.target.value) || 1)}
+                            onChange={e => updateQuantity(row.original.id, Number.parseInt(e.target.value) || 1)}
                             className="w-16"
                         />
                         <Button

@@ -71,7 +71,7 @@ function mapGraphQLCustomFieldToConfig(field: StructField) {
 function parseDate(dateStr: string | undefined | null): Date | undefined {
     if (!dateStr) return undefined;
     const date = new Date(dateStr);
-    return isNaN(date.getTime()) ? undefined : date;
+    return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
 /**

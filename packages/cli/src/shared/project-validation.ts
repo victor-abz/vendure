@@ -1,5 +1,5 @@
 import * as fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 
 /**
  * Checks if the current working directory is a valid Vendure project directory.

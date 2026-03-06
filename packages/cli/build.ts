@@ -25,10 +25,8 @@ function findFilesWithSuffix(directory: string, suffix: string | string[]): stri
 
             if (stats.isDirectory()) {
                 traverseDirectory(itemPath);
-            } else {
-                if (suffixes.some(s => item.endsWith(s))) {
-                    files.push(itemPath);
-                }
+            } else if (suffixes.some(s => item.endsWith(s))) {
+                files.push(itemPath);
             }
         });
     }

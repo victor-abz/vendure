@@ -6,8 +6,8 @@ import {
 } from '@lingui/cli/api';
 import { getConfig, LinguiConfigNormalized } from '@lingui/conf';
 import glob from 'fast-glob';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 import type { Plugin } from 'vite';
 
 import { PluginInfo } from './types.js';

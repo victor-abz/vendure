@@ -1,6 +1,6 @@
 import { log } from '@clack/prompts';
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 
 import { CliCommand, CliCommandReturnVal } from '../../../shared/cli-command';
 import { analyzeProject, selectPlugin } from '../../../shared/shared-prompts';

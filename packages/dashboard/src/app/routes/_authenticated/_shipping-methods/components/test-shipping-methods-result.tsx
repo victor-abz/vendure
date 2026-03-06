@@ -36,7 +36,7 @@ export function TestShippingMethodsResult({
     const { activeChannel } = useChannel();
     const currencyCode = activeChannel?.defaultCurrencyCode ?? 'USD';
     const hasResults = testResult && testResult.length > 0;
-    const showEmptyState = testResult && testResult.length === 0 && !loading && !testDataUpdated;
+    const showEmptyState = testResult?.length === 0 && !loading && !testDataUpdated;
 
     return (
         <ShippingMethodTestResultWrapper

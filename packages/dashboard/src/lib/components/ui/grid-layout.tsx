@@ -244,7 +244,7 @@ export function GridLayout({
         draggedWidget?: GridLayout
     ): GridLayout => {
         const sortedLayouts = [...occupiedLayouts]
-            .filter(l => l.i !== widget.i && (!draggedWidget || l.i !== draggedWidget.i))
+            .filter(l => l.i !== widget.i && (l.i !== draggedWidget?.i))
             .sort((a, b) => a.y === b.y ? a.x - b.x : a.y - b.y);
 
         // Try to place widget in rows, starting from its current position

@@ -273,7 +273,7 @@ function ProductVariantDetailPage() {
                     </DetailFormGrid>
                     {activePrices.map((price, displayIndex) => {
                         // Find the actual index in the full prices array
-                        const actualIndex = prices?.findIndex(p => p === price) ?? displayIndex;
+                        const actualIndex = prices?.indexOf(price) ?? displayIndex;
 
                         const currencyCodeLabel = (
                             <div className="uppercase text-muted-foreground">{price.currencyCode}</div>

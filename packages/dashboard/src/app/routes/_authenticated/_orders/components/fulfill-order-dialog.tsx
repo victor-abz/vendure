@@ -273,7 +273,7 @@ export function FulfillOrderDialog({ order, onSuccess }: Readonly<FulfillOrderDi
                                                     max={quantity.max}
                                                     value={quantity.fulfillCount}
                                                     onChange={e => {
-                                                        const value = parseInt(e.target.value) || 0;
+                                                        const value = Number.parseInt(e.target.value) || 0;
                                                         updateFulfillmentQuantity(line.id, value);
                                                     }}
                                                     className="w-20"

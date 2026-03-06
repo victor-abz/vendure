@@ -9,8 +9,8 @@ import {
     VendurePlugin,
 } from '@vendure/core';
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { loggerCtx, PLUGIN_INIT_OPTIONS } from './constants';
 import { GraphiQLService } from './graphiql.service';

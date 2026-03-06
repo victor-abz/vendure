@@ -61,9 +61,9 @@ export function DateTimeInput({ value, onChange, fieldDef, disabled }: Readonly<
         if (date) {
             const newDate = new Date(date);
             if (type === 'hour') {
-                newDate.setHours((parseInt(value) % 12) + (newDate.getHours() >= 12 ? 12 : 0));
+                newDate.setHours((Number.parseInt(value) % 12) + (newDate.getHours() >= 12 ? 12 : 0));
             } else if (type === 'minute') {
-                newDate.setMinutes(parseInt(value));
+                newDate.setMinutes(Number.parseInt(value));
             } else if (type === 'ampm') {
                 const currentHours = newDate.getHours();
                 newDate.setHours(value === 'PM' ? currentHours + 12 : currentHours - 12);
@@ -114,7 +114,7 @@ export function DateTimeInput({ value, onChange, fieldDef, disabled }: Readonly<
                     <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
                         <ScrollArea className="w-64 sm:w-auto">
                             <div className="flex sm:flex-col p-2">
-                                {hours.reverse().map(hour => (
+                                {[...hours].reverse().map(hour => (
                                     <Button
                                         key={hour}
                                         size="icon"

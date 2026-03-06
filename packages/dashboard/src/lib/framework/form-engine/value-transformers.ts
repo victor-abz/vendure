@@ -56,7 +56,7 @@ export const jsonStringValueTransformer: ValueTransformer = {
                     return parsed === true || parsed === 'true';
                 case 'int':
                 case 'float':
-                    return typeof parsed === 'number' ? parsed : parseFloat(parsed) || 0;
+                    return typeof parsed === 'number' ? parsed : Number.parseFloat(parsed) || 0;
                 case 'datetime':
                     return parsed;
                 default:
@@ -69,7 +69,7 @@ export const jsonStringValueTransformer: ValueTransformer = {
                     return value === 'true';
                 case 'int':
                 case 'float':
-                    return parseFloat(value) || 0;
+                    return Number.parseFloat(value) || 0;
                 default:
                     return value;
             }
@@ -86,7 +86,9 @@ export const jsonStringValueTransformer: ValueTransformer = {
                 return (value === true || value === 'true').toString();
             case 'int':
             case 'float':
-                return typeof value === 'number' ? value.toString() : (parseFloat(value) || 0).toString();
+                return typeof value === 'number'
+                    ? value.toString()
+                    : (Number.parseFloat(value) || 0).toString();
             case 'string':
                 return typeof value === 'string' ? value : JSON.stringify(value);
             default:

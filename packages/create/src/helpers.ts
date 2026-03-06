@@ -4,10 +4,10 @@ import fs from 'fs-extra';
 import { execFile, execFileSync, execSync } from 'node:child_process';
 import { createWriteStream } from 'node:fs';
 import { platform } from 'node:os';
+import path from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { promisify } from 'node:util';
-import path from 'path';
 import pc from 'picocolors';
 import semver from 'semver';
 import * as tar from 'tar';
@@ -595,7 +595,7 @@ export async function downloadAndExtractStorefront(targetDir: string): Promise<v
         // Save the tarball to a temp file
         const fileStream = createWriteStream(tempTarPath);
         // Convert the web ReadableStream to a Node.js Readable stream
-        const nodeReadable = Readable.fromWeb(response.body as import('stream/web').ReadableStream);
+        const nodeReadable = Readable.fromWeb(response.body as import('node:stream/web').ReadableStream);
         await pipeline(nodeReadable, fileStream);
 
         // Create target directory

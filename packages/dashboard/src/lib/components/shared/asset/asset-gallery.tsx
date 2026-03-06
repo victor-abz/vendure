@@ -488,7 +488,7 @@ export function AssetGallery({
                         <Select
                             value={pageSize.toString()}
                             onValueChange={value => {
-                                const newPageSize = parseInt(value, 10);
+                                const newPageSize = Number.parseInt(value, 10);
                                 onPageSizeChange(newPageSize);
                                 setPage(1); // Reset to first page when changing page size
                             }}

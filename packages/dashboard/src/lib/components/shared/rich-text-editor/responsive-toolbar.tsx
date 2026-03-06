@@ -55,7 +55,7 @@ export function ResponsiveToolbar({ editor, disabled }: Readonly<ResponsiveToolb
             if (value === 'paragraph') {
                 editor.chain().focus().setParagraph().run();
             } else {
-                const level = parseInt(value.replace('h', '')) as 1 | 2 | 3 | 4 | 5 | 6;
+                const level = Number.parseInt(value.replace('h', '')) as 1 | 2 | 3 | 4 | 5 | 6;
                 editor.chain().focus().toggleHeading({ level }).run();
             }
         },

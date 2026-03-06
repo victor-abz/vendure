@@ -1,5 +1,5 @@
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 const appVersion = require('../package.json').version;
 
 const versionFilePath = path.join(__dirname + '/../src/lib/core/src/common/version.ts');

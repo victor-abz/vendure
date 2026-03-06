@@ -1,10 +1,10 @@
 import { VendureConfig } from '@vendure/core';
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import tsConfigPaths from 'tsconfig-paths';
 import { RegisterParams } from 'tsconfig-paths/lib/register.js';
 import * as ts from 'typescript';
-import { pathToFileURL } from 'url';
 
 import { Logger, PathAdapter, PluginInfo } from '../types.js';
 

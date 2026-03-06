@@ -29,7 +29,7 @@ export function SellerOrdersCard({ orderId }: Readonly<SellerOrdersCardProps>) {
         );
     }
 
-    if (error || !data?.order || !data.order.sellerOrders?.length) {
+    if (error || !data?.order?.sellerOrders?.length) {
         return null;
     }
 

@@ -154,7 +154,7 @@ export function VendureImage({
     ref,
     ...imgProps
 }: VendureImageProps) {
-    if (!asset || !asset.preview) {
+    if (!asset?.preview) {
         return fallback ? (
             <>{fallback}</>
         ) : (

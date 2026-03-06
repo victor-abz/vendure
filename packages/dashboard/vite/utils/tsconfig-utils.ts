@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 import stripJsonComments from 'strip-json-comments';
 import { CompilerOptions } from 'typescript';
 

@@ -1,5 +1,5 @@
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 // Copies the main package.json file into the lib directory so that
 // ng-packagr can use it when generating the library bundle
 console.log('Copying main package.json to library...');
