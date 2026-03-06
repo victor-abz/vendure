@@ -5509,6 +5509,8 @@ export type Query = {
   search: SearchResponse;
   seller?: Maybe<Seller>;
   sellers: SellerList;
+  /** Returns all registered settings store field definitions with their current values */
+  settingsStoreFieldDefinitions: Array<SettingsStoreFieldDefinition>;
   shippingCalculators: Array<ConfigurableOperationDefinition>;
   shippingEligibilityCheckers: Array<ConfigurableOperationDefinition>;
   shippingMethod?: Maybe<ShippingMethod>;
@@ -6282,10 +6284,26 @@ export type SetSettingsStoreValueResult = {
   result: Scalars['Boolean']['output'];
 };
 
+export type SettingsStoreFieldDefinition = {
+  __typename?: 'SettingsStoreFieldDefinition';
+  currentValue?: Maybe<Scalars['JSON']['output']>;
+  key: Scalars['String']['output'];
+  readonly: Scalars['Boolean']['output'];
+  scopeType: SettingsStoreScopeType;
+};
+
 export type SettingsStoreInput = {
   key: Scalars['String']['input'];
   value: Scalars['JSON']['input'];
 };
+
+export enum SettingsStoreScopeType {
+  CHANNEL = 'CHANNEL',
+  CUSTOM = 'CUSTOM',
+  GLOBAL = 'GLOBAL',
+  USER = 'USER',
+  USER_AND_CHANNEL = 'USER_AND_CHANNEL'
+}
 
 /** Returned if the Payment settlement fails */
 export type SettlePaymentError = ErrorResult & {

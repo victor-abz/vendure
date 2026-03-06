@@ -2,6 +2,7 @@
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { ADMIN_API_PATH, API_PORT, SHOP_API_PATH } from '@vendure/common/lib/shared-constants';
+import { OnApplicationBootstrap } from '@nestjs/common';
 import {
     DefaultJobQueuePlugin,
     DefaultLogger,
@@ -9,8 +10,12 @@ import {
     DefaultSearchPlugin,
     dummyPaymentHandler,
     LogLevel,
+    PluginCommonModule,
+    RequestContextService,
     SettingsStoreScopes,
-    VendureConfig
+    SettingsStoreService,
+    VendureConfig,
+    VendurePlugin,
 } from '@vendure/core';
 import { DashboardPlugin } from '@vendure/dashboard/plugin';
 import { defaultEmailHandlers, EmailPlugin, FileBasedTemplateLoader } from '@vendure/email-plugin';
@@ -23,6 +28,35 @@ import { DataSourceOptions } from 'typeorm';
 import { ReviewsPlugin } from './test-plugins/reviews/reviews-plugin';
 
 const IS_INSTRUMENTED = process.env.IS_INSTRUMENTED === 'true';
+
+@VendurePlugin({
+    imports: [PluginCommonModule],
+    configuration: config => {
+        config.settingsStoreFields = {
+            ...config.settingsStoreFields,
+            ReadonlyTest: [
+                { name: 'buildVersion', readonly: true },
+                { name: 'buildMeta', readonly: true },
+            ],
+        };
+        return config;
+    },
+})
+class ReadonlySettingsTestPlugin implements OnApplicationBootstrap {
+    constructor(
+        private settingsStoreService: SettingsStoreService,
+        private requestContextService: RequestContextService,
+    ) {}
+    async onApplicationBootstrap() {
+        const ctx = await this.requestContextService.create({ apiType: 'admin' });
+        await this.settingsStoreService.set(ctx, 'ReadonlyTest.buildVersion', 'v3.5.2' as any);
+        await this.settingsStoreService.set(ctx, 'ReadonlyTest.buildMeta', {
+            buildDate: '2026-03-06',
+            commit: 'd0384f3ed',
+            features: ['settings-store-ui', 'option-groups'],
+        });
+    }
+}
 
 /**
  * Config settings used during development
@@ -84,6 +118,7 @@ export const devConfig: VendureConfig = {
         //     platformFeePercent: 10,
         //     platformFeeSKU: 'FEE',
         // }),
+        ReadonlySettingsTestPlugin,
         ReviewsPlugin,
         GraphiqlPlugin.init(),
         AssetServerPlugin.init({

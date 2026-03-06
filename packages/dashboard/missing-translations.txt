@@ -24,192 +24,879 @@ msgid_text|translated_text
 
 ## Missing Translations:
 
+ar
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
+---
 bg
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 cs
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 de
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 es
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 fa
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 fr
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 he
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 hr
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 it
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 ja
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 nb
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 ne
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
+---
+nl
+Settings Store
+Running pending search index updates
+Type and press Enter or comma to add...
+refundReason.CustomerRequest
+refundReason.NotAvailable
+refundReason.DamagedInShipping
+refundReason.WrongItem
+refundReason.Other
+({maxRefundable} refundable)
+(max: {0})
+{selectedRowCount} of {0} row(s) selected.
+{successfulRefundCount} payment(s) refunded before failure. Check order history for details.
+{totalQuantity} item(s) refunded
+A reason for the refund is required
+Active
+Add a price in another currency
 Add at least one item to the order
+Add channel
+Add filters to preview the collection contents.
+Add stock level for another location
+Add surcharge
+Added
+Adding {0} surcharge(s)
+Alerts
+Allocated payment amount must equal refund total
+An unknown error occurred
+Are you sure you want to remove {0} {1} from this zone?
+Are you sure you want to remove this option group from the product?
+Authentication methods
+Available
+Average Order Value
+Back
+Browse facets
+Cannot move a collection into its own descendant
+Cannot remove from active channel
+Collection moved to new parent
+Collection position updated
+Content:
+Current
+Discounts
 Draft order status
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+Edit Layout
+Email
+end
+Enter custom reason...
+Failed to assign {entityIdsLength} {entityType} to channel
+Failed to cancel order items
+Failed to create administrator
+Failed to create product option
+Failed to create product option group
+Failed to create product variants
+Failed to create shipping method
+Failed to process refund
+Failed to remove countries from zone
+Failed to remove product from channel
+Failed to reorder items
+Failed to update administrator
+Failed to update collection position
+Failed to update product option
+Failed to update product option group
+Failed to update shipping method
+Failed to update value
+Force remove
+Force remove option group
+Go to first page
+Go to last page
+Go to next page
+Go to previous page
+Hide password
+Includes tax at {taxRate}%
+Insights
+Invalid number
+Items refunded
+Key
+Language: {0}
+Last 30 days
+Last 7 days
+Last month
+Latest Orders
+Load {0} more ({remaining} remaining)
+Metrics
+Month to date
+No alerts
+No more facets
+No widgets available
+Note
+Now
 Only draft orders can be completed
+Order Count
+Order custom fields updated
 Order draft is ready to be completed
 Order draft isn't ready to be completed
+Order metrics
+Order Total
+Orders Summary
+Override
+Page {0} of {1}
+Parent product
+Partial refund completed
+Placed At
+Preview
+Processing...
+Qty
+Readonly
+Reason:
+Recalculate shipping
+Refund
+Refund {0}
+Refund & Cancel
+Refund and cancel order
+Refund processed successfully
+Refund shipping
+Refund total
+Refund total cannot be negative
+Refund total exceeds maximum refundable amount of {0}
+Remove from zone
+Remove option group
+Removed {0} {1} from zone
+Return to stock
+Rows per page
+Save Layout
+Save View
+Scope
+Search by key...
+Search facet values...
 Select a customer to continue
+Select a reason...
+Select date range
+Select items to refund and optionally return to stock
+Select payments to refund
 Set a shipping address and select a shipping method
+Settings Store
+Shipping refunded
+Show all ({0})
+Show less
+Show password
+Sign in
+Sign in to access the admin dashboard
+SKU:
+start
+Successfully created administrator
+Successfully created product option
+Successfully created product option group
+Successfully created shipping method
+Successfully removed product from channel
+Successfully updated administrator
+Successfully updated product option
+Successfully updated product option group
+Successfully updated shipping method
+Tax description
+The variant could not be added. Ensure the parent product is enabled.
+This field is readonly
+This is a preview of the collection contents based on the current filter settings. Once you save the collection, the contents will be updated to reflect the new filter settings.
+This month
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+This week
+Today
+Total Orders
+Total Revenue
+useWidgetDimensions must be used within a DashboardBaseWidget
+useWidgetFilters must be used within a WidgetFiltersProvider
+Value
+Value updated
+Variant name
+Welcome to Vendure
+Yesterday
+Your latest orders
+Your orders summary
 ---
 pl
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 pt_BR
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 pt_PT
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 ru
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 sv
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 tr
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 uk
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 zh_Hans
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---
 zh_Hant
-Add at least one item to the order
-Draft order status
-Only draft orders can be completed
-Order draft is ready to be completed
-Order draft isn't ready to be completed
-Select a customer to continue
-Set a shipping address and select a shipping method
+Settings Store
+fulfillmentState.Created
+{selectedRowCount} of {0} row(s) selected.
+An unknown error occurred
+Are you sure you want to remove this option group from the product?
+Back
+Discounts
+Duplicate value "{trimmed}" already exists
+Edit JSON value
+end
+Failed to create product variants
+Failed to update value
+Force remove
+Force remove option group
+Invalid number
+Key
+No widgets available
+Now
+Readonly
+Recalculate shipping
+Remove option group
+Scope
+Search by key...
+Settings Store
+Show all ({0})
+Show less
+This field is readonly
+This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?
+Value
+Value updated
 ---

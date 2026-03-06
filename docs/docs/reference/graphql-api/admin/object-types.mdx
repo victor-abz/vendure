@@ -4644,6 +4644,28 @@ union SearchResultPrice = PriceRange | SinglePrice`}
 }`}
 </GraphQLDoc>
 
+<a name="settingsstorefielddefinition"></a>
+
+## SettingsStoreFieldDefinition
+
+<GraphQLDoc
+  type="type"
+  typeName="SettingsStoreFieldDefinition"
+  typeLinks={{
+    String: '/reference/graphql-api/admin/object-types#string',
+    SettingsStoreScopeType: '/reference/graphql-api/admin/enums#settingsstorescopetype',
+    Boolean: '/reference/graphql-api/admin/object-types#boolean',
+    JSON: '/reference/graphql-api/admin/object-types#json',
+  }}
+>
+{`type SettingsStoreFieldDefinition {
+  key: String!
+  scopeType: SettingsStoreScopeType!
+  readonly: Boolean!
+  currentValue: JSON
+}`}
+</GraphQLDoc>
+
 <a name="settlepaymenterror"></a>
 
 ## SettlePaymentError

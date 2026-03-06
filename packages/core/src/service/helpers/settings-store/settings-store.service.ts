@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Permission } from '@vendure/common/lib/generated-types';
+import { Permission, SettingsStoreScopeType } from '@vendure/common/lib/generated-types';
 import { JsonCompatible } from '@vendure/common/lib/shared-types';
 import ms from 'ms';
 
@@ -289,6 +289,32 @@ export class SettingsStoreService implements OnModuleInit {
      */
     getFieldDefinition(key: string): SettingsStoreFieldConfig | undefined {
         return this.fieldRegistry.get(key);
+    }
+
+    /**
+     * @description
+     * Returns all registered field definitions with their full keys.
+     *
+     * @since 3.6.0
+     */
+    getAllFieldDefinitions(): Array<{ key: string; config: SettingsStoreFieldConfig }> {
+        return Array.from(this.fieldRegistry.entries()).map(([key, config]) => ({ key, config }));
+    }
+
+    /**
+     * @description
+     * Determines the scope type of a field by comparing its scope function reference
+     * to the pre-built SettingsStoreScopes functions.
+     *
+     * @since 3.6.0
+     */
+    getScopeType(fieldConfig: SettingsStoreFieldConfig): SettingsStoreScopeType {
+        const scope = fieldConfig.scope;
+        if (!scope || scope === SettingsStoreScopes.global) return SettingsStoreScopeType.GLOBAL;
+        if (scope === SettingsStoreScopes.user) return SettingsStoreScopeType.USER;
+        if (scope === SettingsStoreScopes.channel) return SettingsStoreScopeType.CHANNEL;
+        if (scope === SettingsStoreScopes.userAndChannel) return SettingsStoreScopeType.USER_AND_CHANNEL;
+        return SettingsStoreScopeType.CUSTOM;
     }
 
     /**
