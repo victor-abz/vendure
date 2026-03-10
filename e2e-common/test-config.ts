@@ -38,7 +38,7 @@ export const testConfig = () => {
     const index = getIndexOfTestFileInParentDir();
     return mergeConfig(defaultTestConfig, {
         apiOptions: {
-            port: 3010 + index,
+            port: getBasePort() + index,
         },
         importExportOptions: {
             importAssetsDir: path.join(packageDir, 'fixtures/assets'),
@@ -46,6 +46,24 @@ export const testConfig = () => {
         dbConnectionOptions: getDbConfig(),
     });
 };
+
+/**
+ * Returns a base port unique to the current package, so that e2e tests
+ * from different packages (which Lerna may run in parallel) never collide.
+ * Core gets 3010–3199, other packages get 3200+.
+ */
+function getBasePort(): number {
+    const packageName = process.env.PACKAGE || 'core';
+    const offsets: Record<string, number> = {
+        core: 3010,
+        'elasticsearch-plugin': 3200,
+        'payments-plugin': 3210,
+        'asset-server-plugin': 3220,
+        'graphiql-plugin': 3230,
+        cli: 3240,
+    };
+    return offsets[packageName] ?? 3250;
+}
 
 /**
  * Returns the index of the test file in the parent directory.
