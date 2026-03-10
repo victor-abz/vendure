@@ -16,6 +16,7 @@ export default defineConfig({
         'cs',
         'fr',
         'ru',
+        'hu',
         'uk',
         'it',
         'fa',
