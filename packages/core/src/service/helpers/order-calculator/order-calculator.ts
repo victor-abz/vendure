@@ -314,7 +314,8 @@ export class OrderCalculator {
                 shippingLine?.shippingMethodId &&
                 (await this.shippingMethodService.findOne(ctx, shippingLine.shippingMethodId));
             if (!currentShippingMethod) {
-                return;
+                order.shippingLines = order.shippingLines.filter(sl => sl !== shippingLine);
+                continue;
             }
             const currentMethodStillEligible = await currentShippingMethod.test(ctx, order);
             if (currentMethodStillEligible) {
