@@ -225,6 +225,13 @@ export interface PaginatedListDataTableProps<
      * When true, drag and drop will be disabled. This will only have an effect if the onReorder prop is also set
      */
     disableDragAndDrop?: boolean;
+    /**
+     * @description
+     * When false, the row selection checkbox column will not be included.
+     *
+     * @default true
+     */
+    includeSelectionColumn?: boolean;
 }
 
 export const PaginatedListDataTableKey = 'PaginatedListDataTable';
@@ -371,6 +378,7 @@ export function PaginatedListDataTable<
     registerRefresher,
     onReorder,
     disableDragAndDrop = false,
+    includeSelectionColumn,
 }: Readonly<PaginatedListDataTableProps<T, U, V, AC>>) {
     const [searchTerm, setSearchTerm] = React.useState<string>('');
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -406,6 +414,7 @@ export function PaginatedListDataTable<
         deleteMutation,
         additionalColumns,
         defaultColumnOrder: getStandardizedDefaultColumnOrder(defaultColumnOrder),
+        includeSelectionColumn,
     });
     const columnVisibility = getColumnVisibility(columns, defaultVisibility, customFieldColumnNames);
     // Get the actual visible columns and only fetch those

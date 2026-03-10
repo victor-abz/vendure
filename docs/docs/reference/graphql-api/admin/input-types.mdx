@@ -2897,6 +2897,7 @@ input NumberOperators {
 {`input ProductFilterParameter {
   facetValueId: IDOperators
   sku: StringOperators
+  optionGroupId: IDOperators
   id: IDOperators
   createdAt: DateOperators
   updatedAt: DateOperators
@@ -2976,6 +2977,7 @@ input NumberOperators {
     IDOperators: '/reference/graphql-api/admin/input-types#idoperators',
     DateOperators: '/reference/graphql-api/admin/input-types#dateoperators',
     StringOperators: '/reference/graphql-api/admin/input-types#stringoperators',
+    NumberOperators: '/reference/graphql-api/admin/input-types#numberoperators',
     ProductOptionGroupFilterParameter: '/reference/graphql-api/admin/input-types#productoptiongroupfilterparameter',
   }}
 >
@@ -2986,6 +2988,7 @@ input NumberOperators {
   languageCode: StringOperators
   code: StringOperators
   name: StringOperators
+  productCount: NumberOperators
   _and: [ProductOptionGroupFilterParameter!]
   _or: [ProductOptionGroupFilterParameter!]
 }`}
@@ -3036,6 +3039,7 @@ input NumberOperators {
   updatedAt: SortOrder
   code: SortOrder
   name: SortOrder
+  productCount: SortOrder
 }`}
 </GraphQLDoc>
 

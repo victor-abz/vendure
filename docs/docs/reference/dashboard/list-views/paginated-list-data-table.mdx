@@ -2,7 +2,7 @@
 title: "PaginatedListDataTable"
 generated: true
 ---
-<GenerationInfo sourceFile="packages/dashboard/src/lib/components/shared/paginated-list-data-table.tsx" sourceLine="342" packageName="@vendure/dashboard" since="3.4.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/components/shared/paginated-list-data-table.tsx" sourceLine="349" packageName="@vendure/dashboard" since="3.4.0" />
 
 A wrapper around the [DataTable](/reference/dashboard/list-views/data-table#datatable) component, which automatically configures functionality common to
 list queries that implement the `PaginatedList` interface, which is the common way of representing lists
@@ -153,6 +153,7 @@ interface PaginatedListDataTableProps<T extends TypedDocumentNode<U, V>, U exten
         item: PaginatedListItemFields<T>,
     ) => void | Promise<void>;
     disableDragAndDrop?: boolean;
+    includeSelectionColumn?: boolean;
 }
 ```
 
@@ -289,6 +290,11 @@ When provided, enables drag-and-drop functionality.
 <MemberInfo kind="property" type={`boolean`}   />
 
 When true, drag and drop will be disabled. This will only have an effect if the onReorder prop is also set
+### includeSelectionColumn
+
+<MemberInfo kind="property" type={`boolean`} default={`true`}   />
+
+When false, the row selection checkbox column will not be included.
 
 
 </div>

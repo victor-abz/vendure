@@ -27,11 +27,17 @@ export const productOptionListDocument = graphql(`
 export interface ProductOptionsTableProps {
     productOptionGroupId: string;
     registerRefresher?: (refresher: () => void) => void;
+    getOptionHref?: (optionId: string) => string;
+    newOptionHref?: string;
+    linkSearch?: Record<string, string>;
 }
 
 export function ProductOptionsTable({
     productOptionGroupId,
     registerRefresher,
+    getOptionHref,
+    newOptionHref,
+    linkSearch,
 }: Readonly<ProductOptionsTableProps>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [page, setPage] = useState(1);
@@ -95,7 +101,12 @@ export function ProductOptionsTable({
                             <DetailPageButton
                                 id={row.original.id}
                                 label={row.original.name}
-                                href={`options/${row.original.id}`}
+                                href={
+                                    getOptionHref
+                                        ? getOptionHref(row.original.id)
+                                        : `options/${row.original.id}`
+                                }
+                                search={linkSearch}
                             />
                         ),
                     },
@@ -103,7 +114,7 @@ export function ProductOptionsTable({
             />
             <div className="mt-4">
                 <Button asChild variant="outline">
-                    <Link to="./options/new">
+                    <Link to={newOptionHref ?? './options/new'} search={linkSearch}>
                         <PlusIcon />
                         <Trans>Add product option</Trans>
                     </Link>

@@ -95,6 +95,14 @@ export class ProductService {
             effectiveRelations.push('variants');
             customPropertyMap.sku = 'variants.sku';
         }
+        const hasOptionGroupIdFilter = this.listQueryBuilder.filterObjectHasProperty<ProductFilterParameter>(
+            options?.filter,
+            'optionGroupId',
+        );
+        if (hasOptionGroupIdFilter) {
+            effectiveRelations.push('optionGroups');
+            customPropertyMap.optionGroupId = 'optionGroups.id';
+        }
 
         return this.listQueryBuilder
             .build(Product, options, {

@@ -41,6 +41,13 @@ export function registerDefaults() {
                         requiresPermission: ['ReadProduct', 'ReadCatalog'],
                     },
                     {
+                        id: 'option-groups',
+                        title: /* i18n*/ 'Option Groups',
+                        url: '/option-groups',
+                        order: 250,
+                        requiresPermission: ['ReadProduct', 'ReadCatalog'],
+                    },
+                    {
                         id: 'facets',
                         title: /* i18n*/ 'Facets',
                         url: '/facets',

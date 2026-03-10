@@ -2860,6 +2860,8 @@ export type ProductOptionGroup = Node & {
     languageCode: LanguageCode;
     name: Scalars['String']['output'];
     options: Array<ProductOption>;
+    /** The number of products that use this option group */
+    productCount: Scalars['Int']['output'];
     translations: Array<ProductOptionGroupTranslation>;
     updatedAt: Scalars['DateTime']['output'];
 };

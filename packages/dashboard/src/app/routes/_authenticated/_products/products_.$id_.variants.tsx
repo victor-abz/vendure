@@ -28,6 +28,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Page, PageBlock, PageLayout, PageTitle } from '@/vdb/framework/layout-engine/page-layout.js';
 import { api } from '@/vdb/graphql/api.js';
 import { ResultOf } from '@/vdb/graphql/graphql.js';
+import { useChannel } from '@/vdb/hooks/use-channel.js';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -71,11 +72,6 @@ export const Route = createFileRoute('/_authenticated/_products/products_/$id_/v
     errorComponent: ({ error }) => <ErrorPage message={error.message} />,
 });
 
-const optionGroupSchema = z.object({
-    name: z.string().min(1, 'Option group name is required'),
-    values: z.array(z.string()).min(1, 'At least one option value is required'),
-});
-
 const addOptionValueSchema = z.object({
     name: z.string().min(1, 'Option value name is required'),
 });
@@ -94,6 +90,7 @@ function AddOptionValueDialog({
 }>) {
     const [open, setOpen] = useState(false);
     const { t } = useLingui();
+    const { activeChannel } = useChannel();
 
     const form = useForm<AddOptionValueFormValues>({
         resolver: zodResolver(addOptionValueSchema),
@@ -124,7 +121,7 @@ function AddOptionValueDialog({
                 code: values.name.toLowerCase().replace(/\s+/g, '-'),
                 translations: [
                     {
-                        languageCode: 'en',
+                        languageCode: activeChannel?.defaultLanguageCode ?? 'en',
                         name: values.name,
                     },
                 ],
@@ -259,10 +256,8 @@ function ManageProductVariants() {
         });
     };
 
-    const deleteVariant = async (variant: Variant) => {
-        if (confirm(t`Are you sure you want to delete this variant?`)) {
-            await deleteVariantMutation.mutateAsync({ id: variant.id });
-        }
+    const deleteVariant = async (variantId: string) => {
+        await deleteVariantMutation.mutateAsync({ id: variantId });
     };
 
     const getOption = (variant: Variant, groupId: string) => {
@@ -336,7 +331,11 @@ function ManageProductVariants() {
                             ))
                         )}
                     </div>
-                    <AddOptionGroupDialog productId={id} onSuccess={() => refetch()} />
+                    <AddOptionGroupDialog
+                        productId={id}
+                        existingGroupIds={productData.product.optionGroups.map(g => g.id)}
+                        onSuccess={() => refetch()}
+                    />
                 </PageBlock>
 
                 <PageBlock column="main" blockId="product-variants" title={<Trans>Variants</Trans>}>
@@ -448,13 +447,19 @@ function ManageProductVariants() {
                                             );
                                         })}
                                         <TableCell>
-                                            <Button
-                                                size="sm"
-                                                variant="ghost"
-                                                onClick={() => deleteVariant(variant)}
+                                            <ConfirmationDialog
+                                                title={t`Delete variant`}
+                                                description={t`Are you sure you want to delete this variant?`}
+                                                onConfirm={() => deleteVariant(variant.id)}
                                             >
-                                                <Trash2 className="h-4 w-4 text-destructive" />
-                                            </Button>
+                                                <Button
+                                                    size="sm"
+                                                    variant="ghost"
+                                                    disabled={deleteVariantMutation.isPending}
+                                                >
+                                                    <Trash2 className="h-4 w-4 text-destructive" />
+                                                </Button>
+                                            </ConfirmationDialog>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -462,12 +467,14 @@ function ManageProductVariants() {
                         </Table>
                     </div>
 
-                    <AddProductVariantDialog
-                        productId={id}
-                        onSuccess={() => {
-                            refetch();
-                        }}
-                    />
+                    {productData.product.optionGroups.length > 0 && (
+                        <AddProductVariantDialog
+                            productId={id}
+                            onSuccess={() => {
+                                refetch();
+                            }}
+                        />
+                    )}
                 </PageBlock>
             </PageLayout>
             <AlertDialog open={!!forceRemoveGroupId} onOpenChange={(open) => { if (!open) setForceRemoveGroupId(null); }}>

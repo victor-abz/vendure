@@ -26,7 +26,8 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { PlusIcon } from 'lucide-react';
 import { useRef } from 'react';
 import { toast } from 'sonner';
-import { CreateProductVariantsDialog } from './components/create-product-variants-dialog.js';
+import { AddOptionGroupDialog } from './components/add-option-group-dialog.js';
+import { GenerateVariantsPanel } from './components/generate-variants-panel.js';
 import { ProductOptionGroupBadge } from './components/product-option-group-badge.js';
 import { ProductVariantsTable } from './components/product-variants-table.js';
 import {
@@ -38,6 +39,7 @@ import {
 } from './products.graphql.js';
 import { api } from '@/vdb/graphql/api.js';
 import { AssignedChannels } from '@/vdb/components/shared/assigned-channels.js';
+import { usePriceFactor } from '@/vdb/components/shared/assign-to-channel-dialog.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
 
 const pageId = 'product-detail';
@@ -64,6 +66,7 @@ function ProductDetailPage() {
     const { t } = useLingui();
     const refreshRef = useRef<() => void>(() => {});
     const { channels } = useChannel();
+    const { priceFactor, priceFactorField } = usePriceFactor();
 
     const { form, submitHandler, entity, isPending, refreshEntity, resetForm } = useDetailPage({
         pageId,
@@ -184,25 +187,53 @@ function ProductDetailPage() {
                     </PageBlock>
                 )}
                 {entity && entity.variantList.totalItems === 0 && (
-                    <PageBlock column="main" blockId="create-product-variants-dialog">
-                        <CreateProductVariantsDialog
+                    <PageBlock
+                        column="main"
+                        blockId="generate-variants"
+                        title={<Trans>Product variants</Trans>}
+                    >
+                        {entity.optionGroups.length === 0 ? (
+                            <div className="flex flex-col items-start gap-3">
+                                <p className="text-sm text-muted-foreground">
+                                    <Trans>
+                                        Add an option group to get started with variants.
+                                    </Trans>
+                                </p>
+                                <AddOptionGroupDialog
+                                    productId={entity.id}
+                                    existingGroupIds={entity.optionGroups.map(g => g.id)}
+                                    onSuccess={() => refreshEntity()}
+                                />
+                            </div>
+                        ) : (
+                            <GenerateVariantsPanel
+                                productId={entity.id}
+                                productName={entity.name}
+                                optionGroups={entity.optionGroups}
+                                onSuccess={() => refreshEntity()}
+                            />
+                        )}
+                    </PageBlock>
+                )}
+                {entity && entity.optionGroups.length > 0 && (
+                    <PageBlock column="side" blockId="option-groups" title={<Trans>Product Options</Trans>}>
+                        <div className="flex flex-wrap gap-1.5 mb-3">
+                            {entity.optionGroups.map(g => (
+                                <ProductOptionGroupBadge
+                                    key={g.id}
+                                    id={g.id}
+                                    name={g.name}
+                                    productId={entity.id}
+                                />
+                            ))}
+                        </div>
+                        <AddOptionGroupDialog
                             productId={entity.id}
-                            productName={entity.name}
-                            onSuccess={() => {
-                                refreshEntity();
-                            }}
+                            existingGroupIds={entity.optionGroups.map(g => g.id)}
+                            onSuccess={() => refreshEntity()}
                         />
                     </PageBlock>
                 )}
-                {entity?.optionGroups.length ? (
-                    <PageBlock column="side" blockId="option-groups" title={<Trans>Product Options</Trans>}>
-                        <div className="flex flex-wrap gap-1.5">
-                            {entity.optionGroups.map(g => (
-                                <ProductOptionGroupBadge key={g.id} id={g.id} name={g.name} />
-                            ))}
-                        </div>
-                    </PageBlock>
-                ) : null}
                 <PageBlock column="side" blockId="facet-values" title={<Trans>Facet Values</Trans>}>
                     <FormFieldWrapper
                         control={form.control}
@@ -217,9 +248,21 @@ function ProductDetailPage() {
                         <AssignedChannels
                             channels={entity.channels}
                             entityId={entity.id}
+                            entityType="product"
                             canUpdate={!creatingNewEntity}
                             assignMutationFn={api.mutate(assignProductsToChannelDocument)}
                             removeMutationFn={api.mutate(removeProductsFromChannelDocument)}
+                            buildRemoveInput={(eid, channelId) => ({
+                                productIds: [eid],
+                                channelId,
+                            })}
+                            buildAssignInput={(eid, channelId) => ({
+                                productIds: [eid],
+                                channelId,
+                                priceFactor,
+                            })}
+                            additionalAssignFields={priceFactorField}
+                            queryKeyScope={['DetailPage', 'product']}
                         />
                     </PageBlock>
                 )}

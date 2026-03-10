@@ -3505,16 +3505,19 @@ type PriceRange {
   type="type"
   typeName="ProductOptionGroup"
   typeLinks={{
+    Channel: '/reference/graphql-api/admin/object-types#channel',
     ID: '/reference/graphql-api/admin/object-types#id',
     DateTime: '/reference/graphql-api/admin/object-types#datetime',
     LanguageCode: '/reference/graphql-api/admin/enums#languagecode',
     String: '/reference/graphql-api/admin/object-types#string',
     ProductOption: '/reference/graphql-api/admin/object-types#productoption',
+    Int: '/reference/graphql-api/admin/object-types#int',
     ProductOptionGroupTranslation: '/reference/graphql-api/admin/object-types#productoptiongrouptranslation',
     JSON: '/reference/graphql-api/admin/object-types#json',
   }}
 >
 {`type ProductOptionGroup {
+  channels: [Channel!]!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -3522,6 +3525,8 @@ type PriceRange {
   code: String!
   name: String!
   options: [ProductOption!]!
+  """The number of products that use this option group"""
+  productCount: Int!
   translations: [ProductOptionGroupTranslation!]!
   customFields: JSON
 }`}

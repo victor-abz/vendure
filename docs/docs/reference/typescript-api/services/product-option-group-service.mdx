@@ -2,7 +2,7 @@
 title: "ProductOptionGroupService"
 generated: true
 ---
-<GenerationInfo sourceFile="packages/core/src/service/services/product-option-group.service.ts" sourceLine="46" packageName="@vendure/core" />
+<GenerationInfo sourceFile="packages/core/src/service/services/product-option-group.service.ts" sourceLine="47" packageName="@vendure/core" />
 
 Contains methods relating to [ProductOptionGroup](/reference/typescript-api/entities/product-option-group#productoptiongroup) entities.
 
@@ -12,6 +12,8 @@ class ProductOptionGroupService {
     findAll(ctx: RequestContext, options?: ListQueryOptions<ProductOptionGroup>, relations?: RelationPaths<ProductOptionGroup>) => Promise<PaginatedList<Translated<ProductOptionGroup>>>;
     findOne(ctx: RequestContext, id: ID, relations?: RelationPaths<ProductOptionGroup>, findOneOptions?: { includeSoftDeleted: boolean }) => Promise<Translated<ProductOptionGroup> | undefined>;
     getOptionGroupsByProductId(ctx: RequestContext, id: ID) => Promise<Array<Translated<ProductOptionGroup>>>;
+    getOptionGroupChannels(ctx: RequestContext, optionGroupId: ID) => Promise<Channel[]>;
+    getProductCount(ctx: RequestContext, optionGroupId: ID) => Promise<number>;
     create(ctx: RequestContext, input: Omit<CreateProductOptionGroupInput, 'options'>) => Promise<Translated<ProductOptionGroup>>;
     update(ctx: RequestContext, input: UpdateProductOptionGroupInput) => Promise<Translated<ProductOptionGroup>>;
     delete(ctx: RequestContext, id: ID, force: boolean = false) => Promise<DeletionResponse>;
@@ -45,6 +47,17 @@ class ProductOptionGroupService {
 <MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, id: <a href='/reference/typescript-api/common/id#id'>ID</a>) => Promise<Array<Translated<<a href='/reference/typescript-api/entities/product-option-group#productoptiongroup'>ProductOptionGroup</a>>>>`}   />
 
 
+### getOptionGroupChannels
+
+<MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, optionGroupId: <a href='/reference/typescript-api/common/id#id'>ID</a>) => Promise<<a href='/reference/typescript-api/entities/channel#channel'>Channel</a>[]>`}   />
+
+Returns all Channels to which the ProductOptionGroup is assigned.
+### getProductCount
+
+<MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, optionGroupId: <a href='/reference/typescript-api/common/id#id'>ID</a>) => Promise<number>`}   />
+
+Returns the number of non-deleted Products in the current channel
+that use the given ProductOptionGroup.
 ### create
 
 <MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, input: Omit<CreateProductOptionGroupInput, 'options'>) => Promise<Translated<<a href='/reference/typescript-api/entities/product-option-group#productoptiongroup'>ProductOptionGroup</a>>>`}   />

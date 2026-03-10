@@ -22,8 +22,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import * as z from 'zod';
-import { createProductOptionDocument } from '../products.graphql.js';
-import { CreateProductOptionsDialog } from './create-product-options-dialog.js';
+import { createProductOptionDocument, createProductVariantsDocument } from '../products.graphql.js';
 import { ProductOptionSelect } from './product-option-select.js';
 
 const getProductOptionGroupsDocument = graphql(`
@@ -52,14 +51,6 @@ const getProductOptionGroupsDocument = graphql(`
                     groupId
                 }
             }
-        }
-    }
-`);
-
-const createProductVariantDocument = graphql(`
-    mutation CreateProductVariant($input: CreateProductVariantInput!) {
-        createProductVariants(input: [$input]) {
-            id
         }
     }
 `);
@@ -164,8 +155,8 @@ export function AddProductVariantDialog({
     }, [open, productData?.product, checkForDuplicateVariant, form]);
 
     const createProductVariantMutation = useMutation({
-        mutationFn: api.mutate(createProductVariantDocument),
-        onSuccess: (result: ResultOf<typeof createProductVariantDocument>) => {
+        mutationFn: api.mutate(createProductVariantsDocument),
+        onSuccess: () => {
             toast.success(t`Successfully created product variant`);
             setOpen(false);
             onSuccess?.();
@@ -202,64 +193,29 @@ export function AddProductVariantDialog({
             if (duplicateVariantError) return;
 
             createProductVariantMutation.mutate({
-                input: {
-                    productId,
-                    sku: values.sku,
-                    price: Number(values.price),
-                    stockOnHand: Number(values.stockOnHand),
-                    optionIds: Object.values(values.options),
-                    translations: [
-                        {
-                            languageCode: 'en',
-                            name: values.name,
-                        },
-                    ],
-                },
+                input: [
+                    {
+                        productId,
+                        sku: values.sku,
+                        price: Number(values.price),
+                        stockOnHand: Number(values.stockOnHand),
+                        optionIds: Object.values(values.options),
+                        translations: [
+                            {
+                                languageCode: activeChannel?.defaultLanguageCode ?? 'en',
+                                name: values.name,
+                            },
+                        ],
+                    },
+                ],
             });
         },
         [createProductVariantMutation, productData?.product, duplicateVariantError, productId],
     );
 
-    // If there are no option groups and no variants, show the create options dialog instead
-    if (productData?.product?.optionGroups.length === 0 && productData?.product?.variants.length === 0) {
-        return (
-            <CreateProductOptionsDialog
-                productId={productId}
-                onSuccess={() => {
-                    refetch();
-                    onSuccess?.();
-                }}
-            />
-        );
-    }
-
-    // If there are no option groups but there are existing variants, show a different UI
-    if (productData?.product?.optionGroups.length === 0 && productData?.product?.variants.length > 0) {
-        return (
-            <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger asChild>
-                    <Button variant="outline">
-                        <Plus className="mr-2 h-4 w-4" />
-                        <Trans>Add variant</Trans>
-                    </Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>
-                            <Trans>Add product options first</Trans>
-                        </DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-4">
-                        <p className="text-sm text-muted-foreground">
-                            <Trans>
-                                This product has existing variants but no option groups defined. You need to
-                                add option groups before creating new variants.
-                            </Trans>
-                        </p>
-                    </div>
-                </DialogContent>
-            </Dialog>
-        );
+    // Don't show the "Add variant" button if there are no option groups
+    if (!productData?.product?.optionGroups.length) {
+        return null;
     }
 
     return (
@@ -312,7 +268,8 @@ export function AddProductVariantDialog({
                                                 code: name.toLowerCase().replace(/\s+/g, '-'),
                                                 translations: [
                                                     {
-                                                        languageCode: 'en',
+                                                        languageCode:
+                                                            activeChannel?.defaultLanguageCode ?? 'en',
                                                         name,
                                                     },
                                                 ],

@@ -2503,6 +2503,7 @@ type PriceRange {
     LanguageCode: '/reference/graphql-api/shop/enums#languagecode',
     String: '/reference/graphql-api/shop/object-types#string',
     ProductOption: '/reference/graphql-api/shop/object-types#productoption',
+    Int: '/reference/graphql-api/shop/object-types#int',
     ProductOptionGroupTranslation: '/reference/graphql-api/shop/object-types#productoptiongrouptranslation',
     JSON: '/reference/graphql-api/shop/object-types#json',
   }}
@@ -2515,6 +2516,8 @@ type PriceRange {
   code: String!
   name: String!
   options: [ProductOption!]!
+  """The number of products that use this option group"""
+  productCount: Int!
   translations: [ProductOptionGroupTranslation!]!
   customFields: JSON
 }`}
