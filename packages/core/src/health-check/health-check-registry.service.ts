@@ -43,6 +43,8 @@ import { HealthIndicatorFunction } from '@nestjs/terminus';
  * ```
  *
  * @docsCategory health-check
+ * @deprecated Use infrastructure-level health checks instead of application-level health checks.
+ * This service will be removed in v4.0.0.
  */
 export class HealthCheckRegistryService {
     /** @internal */
@@ -56,6 +58,8 @@ export class HealthCheckRegistryService {
      * Registers one or more `HealthIndicatorFunctions` (see [Nestjs docs](https://docs.nestjs.com/recipes/terminus#setting-up-a-healthcheck))
      * to be added to the health check endpoint.
      * The indicator will also appear in the Admin UI's "system status" view.
+     *
+     * @deprecated Use infrastructure-level health checks instead. This method will be removed in v4.0.0.
      */
     registerIndicatorFunction(fn: HealthIndicatorFunction | HealthIndicatorFunction[]) {
         const fnArray = Array.isArray(fn) ? fn : [fn];

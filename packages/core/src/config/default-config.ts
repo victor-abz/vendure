@@ -8,7 +8,6 @@ import {
 } from '@vendure/common/lib/shared-constants';
 import { randomBytes } from 'crypto';
 
-import { TypeORMHealthCheckStrategy } from '../health-check/typeorm-health-check-strategy';
 import { InMemoryJobQueueStrategy } from '../job-queue/in-memory-job-queue-strategy';
 import { InMemoryJobBufferStorageStrategy } from '../job-queue/job-buffer/in-memory-job-buffer-storage-strategy';
 import { NoopSchedulerStrategy } from '../scheduler/noop-scheduler-strategy';
@@ -254,7 +253,7 @@ export const defaultConfig: RuntimeVendureConfig = {
     plugins: [],
     systemOptions: {
         cacheStrategy: new InMemoryCacheStrategy({ cacheSize: 10_000 }),
-        healthChecks: [new TypeORMHealthCheckStrategy()],
+        healthChecks: [],
         errorHandlers: [],
         instrumentationStrategy: new NoopInstrumentationStrategy(),
     },

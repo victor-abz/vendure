@@ -6,6 +6,9 @@ import fetch from 'node-fetch';
 import { Injector } from '../common/injector';
 import { HealthCheckStrategy } from '../config/system/health-check-strategy';
 
+/**
+ * @deprecated This interface is part of the deprecated health check feature and will be removed in v4.0.0.
+ */
 export interface HttpHealthCheckOptions {
     key: string;
     url: string;
@@ -33,6 +36,8 @@ export interface HttpHealthCheckOptions {
  * ```
  *
  * @docsCategory health-check
+ * @deprecated Use infrastructure-level health checks (e.g. Kubernetes probes, Docker healthchecks,
+ * load balancer checks) instead of application-level health checks. This class will be removed in v4.0.0.
  */
 export class HttpHealthCheckStrategy implements HealthCheckStrategy {
     constructor(private options: HttpHealthCheckOptions) {}
@@ -54,6 +59,8 @@ export class HttpHealthCheckStrategy implements HealthCheckStrategy {
 /**
  * A much simplified version of the Terminus Modules' `HttpHealthIndicator` which has no
  * dependency on the @nestjs/axios package.
+ *
+ * @deprecated This class is part of the deprecated health check feature and will be removed in v4.0.0.
  */
 @Injectable({
     scope: Scope.TRANSIENT,

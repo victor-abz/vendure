@@ -1,7 +1,6 @@
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import {
     ChannelService,
-    configureDefaultOrderProcess,
     DefaultLogger,
     LanguageCode,
     Logger,
@@ -17,7 +16,6 @@ import {
     SqljsInitializer,
     testConfig,
 } from '@vendure/testing';
-import gql from 'graphql-tag';
 import path from 'path';
 
 import { initialData } from '../../../e2e-common/e2e-initial-data';
@@ -25,21 +23,16 @@ import { BraintreePlugin } from '../src/braintree';
 import { braintreePaymentMethodHandler } from '../src/braintree/braintree.handler';
 
 /* eslint-disable */
+import { Environment } from 'braintree';
+import { BraintreeTestPlugin } from './fixtures/braintree-checkout-test.plugin';
 import { CREATE_PAYMENT_METHOD } from './graphql/admin-queries';
 import {
     CreatePaymentMethodMutation,
     CreatePaymentMethodMutationVariables,
 } from './graphql/generated-admin-types';
-import {
-    AddItemToOrderMutation,
-    AddItemToOrderMutationVariables,
-    AddPaymentToOrderMutation,
-    AddPaymentToOrderMutationVariables,
-} from './graphql/generated-shop-types';
-import { ADD_ITEM_TO_ORDER, ADD_PAYMENT } from './graphql/shop-queries';
-import { GENERATE_BRAINTREE_CLIENT_TOKEN, proceedToArrangingPayment, setShipping } from './payment-helpers';
-import braintree, { Environment, Test } from 'braintree';
-import { BraintreeTestPlugin } from './fixtures/braintree-checkout-test.plugin';
+import { AddItemToOrderMutation, AddItemToOrderMutationVariables } from './graphql/generated-shop-types';
+import { ADD_ITEM_TO_ORDER } from './graphql/shop-queries';
+import { GENERATE_BRAINTREE_CLIENT_TOKEN, setShipping } from './payment-helpers';
 
 export let clientToken: string;
 export let exposedShopClient: SimpleGraphQLClient;

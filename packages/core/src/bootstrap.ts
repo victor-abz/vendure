@@ -230,7 +230,7 @@ export async function bootstrap(
  * @description
  * Bootstraps a Vendure worker. Resolves to a {@link VendureWorker} object containing a reference to the underlying
  * NestJs [standalone application](https://docs.nestjs.com/standalone-applications) as well as convenience
- * methods for starting the job queue and health check server.
+ * methods for starting the job queue.
  *
  * Read more about the [Vendure Worker](/developer-guide/worker-job-queue/).
  *
@@ -241,7 +241,6 @@ export async function bootstrap(
  *
  * bootstrapWorker(config)
  *   .then(worker => worker.startJobQueue())
- *   .then(worker => worker.startHealthCheckServer({ port: 3020 }))
  *   .catch(err => {
  *     console.log(err);
  *     process.exit(1);

@@ -301,18 +301,11 @@ export class ElasticsearchPlugin implements OnApplicationBootstrap {
         } catch (e: any) {
             Logger.error(`Could not connect to Elasticsearch instance at "${nodeName}"`, loggerCtx);
             Logger.error(JSON.stringify(e), loggerCtx);
-            this.healthCheckRegistryService.registerIndicatorFunction(() =>
-                this.elasticsearchHealthIndicator.startupCheckFailed(e.message),
-            );
             return;
         }
         Logger.info(`Successfully connected to Elasticsearch instance at "${nodeName}"`, loggerCtx);
 
         await this.elasticsearchService.createIndicesIfNotExists();
-        this.healthCheckRegistryService.registerIndicatorFunction(() =>
-            this.elasticsearchHealthIndicator.isHealthy(),
-        );
-
         this.eventBus.ofType(ProductEvent).subscribe(event => {
             if (event.type === 'deleted') {
                 return this.elasticsearchIndexService.deleteProduct(event.ctx, event.product);

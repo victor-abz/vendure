@@ -18,7 +18,6 @@ import { Route as AuthenticatedTaxCategoriesTaxCategoriesRouteImport } from './r
 import { Route as AuthenticatedSystemSettingsStoreRouteImport } from './routes/_authenticated/_system/settings-store'
 import { Route as AuthenticatedSystemScheduledTasksRouteImport } from './routes/_authenticated/_system/scheduled-tasks'
 import { Route as AuthenticatedSystemJobQueueRouteImport } from './routes/_authenticated/_system/job-queue'
-import { Route as AuthenticatedSystemHealthchecksRouteImport } from './routes/_authenticated/_system/healthchecks'
 import { Route as AuthenticatedStockLocationsStockLocationsRouteImport } from './routes/_authenticated/_stock-locations/stock-locations'
 import { Route as AuthenticatedShippingMethodsShippingMethodsRouteImport } from './routes/_authenticated/_shipping-methods/shipping-methods'
 import { Route as AuthenticatedSellersSellersRouteImport } from './routes/_authenticated/_sellers/sellers'
@@ -113,12 +112,6 @@ const AuthenticatedSystemJobQueueRoute =
   AuthenticatedSystemJobQueueRouteImport.update({
     id: '/_system/job-queue',
     path: '/job-queue',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedSystemHealthchecksRoute =
-  AuthenticatedSystemHealthchecksRouteImport.update({
-    id: '/_system/healthchecks',
-    path: '/healthchecks',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedStockLocationsStockLocationsRoute =
@@ -423,7 +416,6 @@ export interface FileRoutesByFullPath {
   '/sellers': typeof AuthenticatedSellersSellersRoute
   '/shipping-methods': typeof AuthenticatedShippingMethodsShippingMethodsRoute
   '/stock-locations': typeof AuthenticatedStockLocationsStockLocationsRoute
-  '/healthchecks': typeof AuthenticatedSystemHealthchecksRoute
   '/job-queue': typeof AuthenticatedSystemJobQueueRoute
   '/scheduled-tasks': typeof AuthenticatedSystemScheduledTasksRoute
   '/settings-store': typeof AuthenticatedSystemSettingsStoreRoute
@@ -480,7 +472,6 @@ export interface FileRoutesByTo {
   '/sellers': typeof AuthenticatedSellersSellersRoute
   '/shipping-methods': typeof AuthenticatedShippingMethodsShippingMethodsRoute
   '/stock-locations': typeof AuthenticatedStockLocationsStockLocationsRoute
-  '/healthchecks': typeof AuthenticatedSystemHealthchecksRoute
   '/job-queue': typeof AuthenticatedSystemJobQueueRoute
   '/scheduled-tasks': typeof AuthenticatedSystemScheduledTasksRoute
   '/settings-store': typeof AuthenticatedSystemSettingsStoreRoute
@@ -539,7 +530,6 @@ export interface FileRoutesById {
   '/_authenticated/_sellers/sellers': typeof AuthenticatedSellersSellersRoute
   '/_authenticated/_shipping-methods/shipping-methods': typeof AuthenticatedShippingMethodsShippingMethodsRoute
   '/_authenticated/_stock-locations/stock-locations': typeof AuthenticatedStockLocationsStockLocationsRoute
-  '/_authenticated/_system/healthchecks': typeof AuthenticatedSystemHealthchecksRoute
   '/_authenticated/_system/job-queue': typeof AuthenticatedSystemJobQueueRoute
   '/_authenticated/_system/scheduled-tasks': typeof AuthenticatedSystemScheduledTasksRoute
   '/_authenticated/_system/settings-store': typeof AuthenticatedSystemSettingsStoreRoute
@@ -598,7 +588,6 @@ export interface FileRouteTypes {
     | '/sellers'
     | '/shipping-methods'
     | '/stock-locations'
-    | '/healthchecks'
     | '/job-queue'
     | '/scheduled-tasks'
     | '/settings-store'
@@ -655,7 +644,6 @@ export interface FileRouteTypes {
     | '/sellers'
     | '/shipping-methods'
     | '/stock-locations'
-    | '/healthchecks'
     | '/job-queue'
     | '/scheduled-tasks'
     | '/settings-store'
@@ -713,7 +701,6 @@ export interface FileRouteTypes {
     | '/_authenticated/_sellers/sellers'
     | '/_authenticated/_shipping-methods/shipping-methods'
     | '/_authenticated/_stock-locations/stock-locations'
-    | '/_authenticated/_system/healthchecks'
     | '/_authenticated/_system/job-queue'
     | '/_authenticated/_system/scheduled-tasks'
     | '/_authenticated/_system/settings-store'
@@ -817,13 +804,6 @@ declare module '@tanstack/react-router' {
       path: '/job-queue'
       fullPath: '/job-queue'
       preLoaderRoute: typeof AuthenticatedSystemJobQueueRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/_system/healthchecks': {
-      id: '/_authenticated/_system/healthchecks'
-      path: '/healthchecks'
-      fullPath: '/healthchecks'
-      preLoaderRoute: typeof AuthenticatedSystemHealthchecksRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/_stock-locations/stock-locations': {
@@ -1172,7 +1152,6 @@ interface AuthenticatedRouteChildren {
   AuthenticatedSellersSellersRoute: typeof AuthenticatedSellersSellersRoute
   AuthenticatedShippingMethodsShippingMethodsRoute: typeof AuthenticatedShippingMethodsShippingMethodsRoute
   AuthenticatedStockLocationsStockLocationsRoute: typeof AuthenticatedStockLocationsStockLocationsRoute
-  AuthenticatedSystemHealthchecksRoute: typeof AuthenticatedSystemHealthchecksRoute
   AuthenticatedSystemJobQueueRoute: typeof AuthenticatedSystemJobQueueRoute
   AuthenticatedSystemScheduledTasksRoute: typeof AuthenticatedSystemScheduledTasksRoute
   AuthenticatedSystemSettingsStoreRoute: typeof AuthenticatedSystemSettingsStoreRoute
@@ -1238,7 +1217,6 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
     AuthenticatedShippingMethodsShippingMethodsRoute,
   AuthenticatedStockLocationsStockLocationsRoute:
     AuthenticatedStockLocationsStockLocationsRoute,
-  AuthenticatedSystemHealthchecksRoute: AuthenticatedSystemHealthchecksRoute,
   AuthenticatedSystemJobQueueRoute: AuthenticatedSystemJobQueueRoute,
   AuthenticatedSystemScheduledTasksRoute:
     AuthenticatedSystemScheduledTasksRoute,

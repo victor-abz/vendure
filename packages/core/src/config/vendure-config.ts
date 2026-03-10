@@ -1179,6 +1179,9 @@ export interface SystemOptions {
      *
      * @default [TypeORMHealthCheckStrategy]
      * @since 1.6.0
+     * @deprecated Use infrastructure-level health checks (e.g. Kubernetes probes, Docker healthchecks,
+     * load balancer checks) instead of application-level health checks. The application should not
+     * be responsible for determining its own health. This config option will be removed in v4.0.0.
      */
     healthChecks?: HealthCheckStrategy[];
     /**

@@ -253,7 +253,7 @@ class BraintreePlugin {
 
 
 </div>
-<GenerationInfo sourceFile="packages/payments-plugin/src/braintree/types.ts" sourceLine="25" packageName="@vendure/payments-plugin" />
+<GenerationInfo sourceFile="packages/payments-plugin/src/braintree/types.ts" sourceLine="26" packageName="@vendure/payments-plugin" />
 
 Options for the Braintree plugin.
 
@@ -262,6 +262,7 @@ interface BraintreePluginOptions {
     environment?: Environment;
     storeCustomersInBraintree?: boolean;
     extractMetadata?: (transaction: Transaction) => PaymentMetadata;
+    merchantAccountIds?: BraintreeMerchantAccountIds;
 }
 ```
 
@@ -336,6 +337,13 @@ const metadata = {
   }
 }
 ```
+### merchantAccountIds
+
+<MemberInfo kind="property" type={`BraintreeMerchantAccountIds`}   />
+
+An optional mapping of currency codes to Braintree Merchant Account IDs.
+When set, the corresponding Merchant Account ID will be used for transactions
+in the given currency.
 
 
 </div>

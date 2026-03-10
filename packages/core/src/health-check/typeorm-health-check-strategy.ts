@@ -5,6 +5,9 @@ import { HealthCheckStrategy } from '../config/system/health-check-strategy';
 
 let indicator: TypeOrmHealthIndicator;
 
+/**
+ * @deprecated This interface is part of the deprecated health check feature and will be removed in v4.0.0.
+ */
 export interface TypeORMHealthCheckOptions {
     key?: string;
     timeout?: number;
@@ -34,6 +37,8 @@ export interface TypeORMHealthCheckOptions {
  * ```
  *
  * @docsCategory health-check
+ * @deprecated Use infrastructure-level health checks (e.g. Kubernetes probes, Docker healthchecks,
+ * load balancer checks) instead of application-level health checks. This class will be removed in v4.0.0.
  */
 export class TypeORMHealthCheckStrategy implements HealthCheckStrategy {
     constructor(private options?: TypeORMHealthCheckOptions) {}

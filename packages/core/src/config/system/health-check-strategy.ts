@@ -44,6 +44,8 @@ import { InjectableStrategy } from '../../common/types/injectable-strategy';
  * ```
  *
  * @docsCategory health-check
+ * @deprecated Use infrastructure-level health checks (e.g. Kubernetes probes, Docker healthchecks,
+ * load balancer checks) instead of application-level health checks. This interface will be removed in v4.0.0.
  */
 export interface HealthCheckStrategy extends InjectableStrategy {
     /**

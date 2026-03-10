@@ -133,13 +133,6 @@ export function registerDefaults() {
                         requiresPermission: ['ReadSystem'],
                     },
                     {
-                        id: 'healthchecks',
-                        title: /* i18n*/ 'Healthchecks',
-                        url: '/healthchecks',
-                        order: 200,
-                        requiresPermission: ['ReadSystem'],
-                    },
-                    {
                         id: 'scheduled-tasks',
                         title: /* i18n*/ 'Scheduled Tasks',
                         url: '/scheduled-tasks',
