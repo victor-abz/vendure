@@ -188,6 +188,74 @@ describe('OrderCalculator', () => {
             expect(order.totalWithTax).toBe(order.subTotalWithTax + 1200);
             assertOrderTotalsAddUp(order);
         });
+
+        it('removes shipping line when shipping method no longer exists', async () => {
+            const deletedShippingMethodId = 'T_deleted';
+            const module = await Test.createTestingModule({
+                providers: [
+                    OrderCalculator,
+                    RequestContextCacheService,
+                    { provide: TaxRateService, useClass: MockTaxRateService },
+                    { provide: ShippingCalculator, useValue: { getEligibleShippingMethods: () => [] } },
+                    {
+                        provide: ShippingMethodService,
+                        useValue: {
+                            findOne: (requestCtx: RequestContext, id: string) => {
+                                if (id === deletedShippingMethodId) {
+                                    return undefined;
+                                }
+                                return {
+                                    id: mockShippingMethodId,
+                                    test: () => true,
+                                    apply() {
+                                        return {
+                                            price: 500,
+                                            priceIncludesTax: requestCtx.channel.pricesIncludeTax,
+                                            taxRate: 20,
+                                        };
+                                    },
+                                };
+                            },
+                        },
+                    },
+                    { provide: ListQueryBuilder, useValue: {} },
+                    { provide: ConfigService, useClass: MockConfigService },
+                    { provide: EventBus, useValue: { publish: () => ({}) } },
+                    { provide: ZoneService, useValue: { getAllWithMembers: () => [] } },
+                ],
+            }).compile();
+
+            const calc = module.get(OrderCalculator);
+            const mockConfigService = module.get<ConfigService, MockConfigService>(ConfigService);
+            mockConfigService.taxOptions = {
+                taxZoneStrategy: new DefaultTaxZoneStrategy(),
+                taxLineCalculationStrategy: new DefaultTaxLineCalculationStrategy(),
+            };
+
+            const ctx = createRequestContext({ pricesIncludeTax: false });
+            const order = createOrder({
+                ctx,
+                lines: [
+                    {
+                        listPrice: 100,
+                        taxCategory: taxCategoryStandard,
+                        quantity: 1,
+                    },
+                ],
+            });
+            order.shippingLines = [
+                new ShippingLine({
+                    shippingMethodId: deletedShippingMethodId as any,
+                }),
+            ];
+
+            await calc.applyPriceAdjustments(ctx, order, []);
+
+            expect(order.shippingLines.length).toBe(0);
+            expect(order.shipping).toBe(0);
+            expect(order.shippingWithTax).toBe(0);
+            assertOrderTotalsAddUp(order);
+        });
     });
 
     describe('promotions', () => {

@@ -270,7 +270,7 @@ export class AssetServer {
             let previousPath;
             do {
                 previousPath = sanitizedPath;
-                sanitizedPath = previousPath.replace(/(\.\.[\\/\\])+/g, '');
+                sanitizedPath = previousPath.replace(/(\.\.[\\/])+/g, '');
             } while (sanitizedPath !== previousPath);
             return sanitizedPath;
         }

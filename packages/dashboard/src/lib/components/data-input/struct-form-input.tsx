@@ -260,7 +260,7 @@ const renderStructFieldInput = (
                         value={singleField.value ?? ''}
                         onChange={e => {
                             const value = e.target.valueAsNumber;
-                            singleField.onChange(isNaN(value) ? undefined : value);
+                            singleField.onChange(Number.isNaN(value) ? undefined : value);
                         }}
                         onBlur={singleField.onBlur}
                         name={singleField.name}

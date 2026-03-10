@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CacheService, Logger, Order, RequestContext, TransactionalConnection } from '@vendure/core';
-import { createHash } from 'crypto';
 import { endOfDay, startOfDay } from 'date-fns';
+import { createHash } from 'node:crypto';
 
 import {
     AverageOrderValueMetric,
@@ -48,7 +48,7 @@ export class MetricsService {
                 JSON.stringify({
                     startDate: calculatedStartDate,
                     endDate: calculatedEndDate,
-                    types: types.sort(),
+                    types: [...types].sort(),
                     channel: ctx.channel.token,
                 }),
             )

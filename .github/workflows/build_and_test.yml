@@ -112,6 +112,20 @@ jobs:
             - name: Dashboard e2e tests
               run: npm run e2e:pw
               working-directory: packages/dashboard
+    sonarqube:
+        name: SonarQube
+        if: github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: SonarQube Scan
+              uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 # v6
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     e2e-sqljs:
         name: e2e (sqljs)
         runs-on: ubuntu-latest

@@ -1,7 +1,7 @@
 import type { DocsPackageManifestInput, FileInfo } from '@vendure-io/docs-provider';
 import { applyLastModifiedDates, createNestedNavigationFromFolder, resolveManifest } from '@vendure-io/docs-provider';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { lastModifiedDates } from './dates.generated.js';
 
 const packageRoot = dirname(dirname(fileURLToPath(import.meta.url)));

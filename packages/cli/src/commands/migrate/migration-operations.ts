@@ -1,6 +1,6 @@
 import { log } from '@clack/prompts';
 import { generateMigration, revertLastMigration, runMigrations, VendureConfig } from '@vendure/core';
-import path from 'path';
+import path from 'node:path';
 
 import { loadVendureConfigFile } from '../../shared/load-vendure-config-file';
 import { validateVendureProjectDirectory } from '../../shared/project-validation';

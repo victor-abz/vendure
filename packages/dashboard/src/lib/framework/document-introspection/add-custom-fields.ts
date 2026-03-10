@@ -50,11 +50,11 @@ function createOptionsKey(options?: {
     }
 
     if (options.includeCustomFields) {
-        parts.push(`include:${options.includeCustomFields.sort().join(',')}`);
+        parts.push(`include:${[...options.includeCustomFields].sort().join(',')}`);
     }
 
     if (options.includeNestedFragments) {
-        parts.push(`nested:${options.includeNestedFragments.sort().join(',')}`);
+        parts.push(`nested:${[...options.includeNestedFragments].sort().join(',')}`);
     }
 
     return parts.join('|') || 'default';

@@ -2,10 +2,10 @@ import { parse } from 'acorn';
 import { simple as walkSimple } from 'acorn-walk';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
-import { open } from 'fs/promises';
-import path from 'path';
+import { open } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import * as ts from 'typescript';
-import { fileURLToPath } from 'url';
 
 import { Logger, PluginInfo, TransformTsConfigPathMappingsFn } from '../types.js';
 
@@ -93,7 +93,7 @@ export async function discoverPlugins({
                                             const locationProp = prop.value.properties?.find(
                                                 (p: any) => p.key?.name === 'location',
                                             );
-                                            if (locationProp && locationProp.value.type === 'Literal') {
+                                            if (locationProp?.value.type === 'Literal') {
                                                 dashboardPath = locationProp.value.value;
                                                 hasVendurePlugin = true;
                                             }

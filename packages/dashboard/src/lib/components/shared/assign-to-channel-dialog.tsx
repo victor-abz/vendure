@@ -147,7 +147,7 @@ export function usePriceFactor() {
                 max="99999"
                 step="0.01"
                 value={priceFactor}
-                onChange={e => setPriceFactor(parseFloat(e.target.value) || 1)}
+                onChange={e => setPriceFactor(Number.parseFloat(e.target.value) || 1)}
             />
         </div>
     );

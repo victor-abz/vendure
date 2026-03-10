@@ -506,7 +506,7 @@ export class TypescriptDocsRenderer {
                 for (const [key] of sortedTypes) {
                     const re = new RegExp(`\\b(${key})\\b`);
                     const match = remaining.match(re);
-                    if (match && match.index !== undefined && match.index > 0 && match.index < nextTypeIndex) {
+                    if (match?.index !== undefined && match.index > 0 && match.index < nextTypeIndex) {
                         nextTypeIndex = match.index;
                     }
                 }
@@ -530,7 +530,7 @@ export class TypescriptDocsRenderer {
         const typeText = type
             .trim()
             // encode HTML entities
-            .replace(/[\u00A0-\u9999\&]/gim, i => '&#' + i.charCodeAt(0) + ';')
+            .replace(/[\u00A0-\u9999&]/gim, i => '&#' + i.charCodeAt(0) + ';')
             // remove newlines
             .replace(/\n/g, ' ');
 
@@ -561,7 +561,7 @@ export class TypescriptDocsRenderer {
                 for (const [key] of sortedTypes) {
                     const re = new RegExp(`\\b(${key})\\b`);
                     const match = remaining.match(re);
-                    if (match && match.index !== undefined && match.index > 0 && match.index < nextTypeIndex) {
+                    if (match?.index !== undefined && match.index > 0 && match.index < nextTypeIndex) {
                         nextTypeIndex = match.index;
                     }
                 }

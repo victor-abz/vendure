@@ -1,14 +1,14 @@
 import { intro, note, outro, select, spinner } from '@clack/prompts';
 import { SUPER_ADMIN_USER_IDENTIFIER, SUPER_ADMIN_USER_PASSWORD } from '@vendure/common/lib/shared-constants';
 import { program } from 'commander';
-import { randomBytes } from 'crypto';
 import fs from 'fs-extra';
 import Handlebars from 'handlebars';
 import { ChildProcess, spawn } from 'node:child_process';
+import { randomBytes } from 'node:crypto';
+import os from 'node:os';
+import path from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 import open from 'open';
-import os from 'os';
-import path from 'path';
 import pc from 'picocolors';
 
 import {

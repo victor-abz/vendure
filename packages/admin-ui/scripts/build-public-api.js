@@ -1,6 +1,6 @@
 // @ts-check
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 // This script finds all app sources and then generates a "public-api.ts" file exporting their
 // contents. This is then used as the public API entrypoint for the Angular CLI's library
 // builder process.

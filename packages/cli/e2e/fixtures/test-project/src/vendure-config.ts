@@ -1,5 +1,5 @@
 import { VendureConfig } from '@vendure/core';
-import * as path from 'path';
+import * as path from 'node:path';
 
 export const config: VendureConfig = {
     apiOptions: {
