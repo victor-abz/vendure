@@ -27,7 +27,7 @@ import {
     TestOrderFragmentFragment,
     UpdatedOrderFragment,
 } from './graphql/generated-e2e-shop-types';
-import { ATTEMPT_LOGIN, GET_CUSTOMER_LIST } from './graphql/shared-definitions';
+import { ATTEMPT_LOGIN, GET_CUSTOMER_LIST, UPDATE_PRODUCT } from './graphql/shared-definitions';
 import { GET_NEXT_STATES, TEST_ORDER_FRAGMENT } from './graphql/shop-definitions';
 import { sortById } from './utils/test-order-utils';
 
@@ -271,6 +271,61 @@ describe('Order merging', () => {
         );
 
         expect(login.id).toBe(customers[7].user?.id);
+    });
+
+    // https://github.com/vendurehq/vendure/issues/4481
+    // When the merge fails mid-operation (e.g. a guest cart item's product has been disabled),
+    // the merge should fail gracefully: the login should succeed and the existing order
+    // should be preserved unchanged.
+    it('should preserve existing order and succeed login when merge fails mid-operation', async () => {
+        DelegateMergeStrategy.activeStrategy = new UseGuestStrategy();
+
+        // Step 1: Customer logs in and adds an item to their order
+        await shopClient.asUserWithCredentials(customers[9].emailAddress, 'test');
+        await shopClient.query<AddItemToOrderMutation, AddItemToOrderWithCustomFields>(
+            ADD_ITEM_TO_ORDER_WITH_CUSTOM_FIELDS,
+            { productVariantId: 'T_1', quantity: 2 },
+        );
+
+        // Step 2: Log out and create a guest order with a different product
+        await shopClient.asAnonymousUser();
+        await shopClient.query<AddItemToOrderMutation, AddItemToOrderWithCustomFields>(
+            ADD_ITEM_TO_ORDER_WITH_CUSTOM_FIELDS,
+            { productVariantId: 'T_5', quantity: 1 },
+        );
+
+        // Step 3: Disable the product that owns variant T_5 (Curvy Monitor = product T_2).
+        // This will cause addItemsToOrder to throw EntityNotFoundError when the merge
+        // tries to insert the guest line into the existing order.
+        await adminClient.query(UPDATE_PRODUCT, {
+            input: { id: 'T_2', enabled: false },
+        });
+
+        // Step 4: Attempt login — triggers mergeOrders with UseGuestStrategy.
+        // UseGuestStrategy says "replace existing order contents with guest order contents",
+        // so the merge flow is:
+        //   1. deleteOrder(guestOrder) — DB mutation
+        //   2. removeItemFromOrder(T_1) — DB mutation (removes existing line)
+        //   3. addItemsToOrder([T_5]) — THROWS (product disabled)
+        // Without the fix: the error propagates, login fails
+        // With the fix: merge error is caught, rolled back, login succeeds
+        const { login } = await shopClient.query<AttemptLoginMutation, AttemptLoginMutationVariables>(
+            ATTEMPT_LOGIN,
+            { username: customers[9].emailAddress, password: 'test' },
+        );
+        expect(login.id).toBeDefined();
+
+        // Step 5: The existing order should be preserved with its original line
+        const { activeOrder } = await shopClient.query(GET_ACTIVE_ORDER_WITH_CUSTOM_FIELDS);
+        expect(activeOrder).not.toBeNull();
+        expect(activeOrder.lines.length).toBe(1);
+        expect(activeOrder.lines[0].productVariant.id).toBe('T_1');
+        expect(activeOrder.lines[0].quantity).toBe(2);
+
+        // Cleanup: re-enable the product
+        await adminClient.query(UPDATE_PRODUCT, {
+            input: { id: 'T_2', enabled: true },
+        });
     });
 });
 

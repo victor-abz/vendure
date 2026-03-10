@@ -1875,83 +1875,118 @@ export class OrderService {
             // so we do not want to merge at all. See https://github.com/vendurehq/vendure/issues/263
             return existingOrder;
         }
-        const mergeResult = this.orderMerger.merge(ctx, guestOrder, existingOrder);
-        const { orderToDelete, linesToInsert, linesToDelete, linesToModify } = mergeResult;
-        let { order } = mergeResult;
-        if (orderToDelete) {
-            try {
-                // Separate transaction to isolate foreign key failure, so it doesn't roll back the entire outer transaction
-                await this.connection.withTransaction(ctx, async innerCtx => {
-                    await this.deleteOrder(innerCtx, orderToDelete);
-                });
-            } catch (e: any) {
-                if (!isForeignKeyViolationError(e)) throw e;
-                if (!order)
-                    throw new Error(
-                        `Cannot complete order merge: active order not found, while cancelling order ${orderToDelete.id}`,
-                    );
-
-                // If the order has a foreign key violation (e.g. with cancelled payments),
-                // instead of deleting it we cancel the order and leave a note with an explanation.
-                // This way the previous order and all its information are preserved.
-                await this.cancelOrder(ctx, { orderId: orderToDelete.id });
-
-                const note = [
-                    'This order was cancelled during user sign-in because merging with the active order was not possible.',
-                    `The active order is ${order.code}. This order has been preserved for reference.`,
-                ].join(' ');
-
-                await this.historyService.createHistoryEntryForOrder(
-                    {
-                        ctx,
-                        orderId: orderToDelete.id,
-                        type: HistoryEntryType.ORDER_NOTE,
-                        data: { note },
-                    },
-                    false,
-                );
-            }
-        }
-        if (order && linesToDelete) {
-            const orderId = order.id;
-            for (const line of linesToDelete) {
-                const result = await this.removeItemFromOrder(ctx, orderId, line.orderLineId);
-                if (!isGraphQlErrorResult(result)) {
-                    order = result;
+        try {
+            return await this.connection.withTransaction(ctx, async txCtx => {
+                // Acquire a pessimistic lock on the existing order to prevent concurrent merges
+                // from interleaving their DB operations. See https://github.com/vendurehq/vendure/issues/4481
+                // Note: SQLite does not support pessimistic locks — the try-catch ensures we
+                // degrade gracefully (SQLite serializes writes at the engine level anyway).
+                if (existingOrder) {
+                    try {
+                        await this.connection
+                            .getRepository(txCtx, Order)
+                            .createQueryBuilder('order')
+                            .setLock('pessimistic_write')
+                            .where('order.id = :id', { id: existingOrder.id })
+                            .getOne();
+                    } catch {
+                        // Lock not supported (e.g. SQLite) — continue without it
+                    }
                 }
-            }
-        }
-        if (order && linesToInsert) {
-            const orderId = order.id;
-            const result = await this.addItemsToOrder(ctx, orderId, linesToInsert);
-            order = result.order;
-        }
-        if (order && linesToModify) {
-            const orderId = order.id;
-            const result = await this.adjustOrderLines(ctx, orderId, linesToModify);
-            order = result.order;
-        }
-        if (order && linesToDelete) {
-            const orderId = order.id;
-            try {
-                const result = await this.removeItemsFromOrder(
-                    ctx,
-                    orderId,
-                    linesToDelete.map(l => l.orderLineId),
-                );
-                if (!isGraphQlErrorResult(result)) {
-                    order = result;
+
+                // Re-read the guest order after acquiring the lock. A concurrent merge may have
+                // already deleted it, in which case there is nothing left to merge.
+                const freshGuestOrder = guestOrder ? await this.findOne(txCtx, guestOrder.id) : undefined;
+                if (!freshGuestOrder && guestOrder) {
+                    return existingOrder;
                 }
-            } catch (e: any) {
-                Logger.error(e.message, undefined, e.stack);
-            }
+
+                const mergeResult = this.orderMerger.merge(txCtx, freshGuestOrder, existingOrder);
+                const { orderToDelete, linesToInsert, linesToDelete, linesToModify } = mergeResult;
+                let { order } = mergeResult;
+                if (orderToDelete) {
+                    try {
+                        // Nested savepoint to isolate foreign key failure, so it doesn't
+                        // roll back the entire merge transaction
+                        await this.connection.withTransaction(txCtx, async innerCtx => {
+                            await this.deleteOrder(innerCtx, orderToDelete);
+                        });
+                    } catch (e: any) {
+                        if (!isForeignKeyViolationError(e)) throw e;
+                        if (!order)
+                            throw new Error(
+                                `Cannot complete order merge: active order not found, while cancelling order ${orderToDelete.id}`,
+                            );
+
+                        // If the order has a foreign key violation (e.g. with cancelled payments),
+                        // instead of deleting it we cancel the order and leave a note with an explanation.
+                        // This way the previous order and all its information are preserved.
+                        await this.cancelOrder(txCtx, { orderId: orderToDelete.id });
+
+                        const note = [
+                            'This order was cancelled during user sign-in because merging with the active order was not possible.',
+                            `The active order is ${order.code}. This order has been preserved for reference.`,
+                        ].join(' ');
+
+                        await this.historyService.createHistoryEntryForOrder(
+                            {
+                                ctx: txCtx,
+                                orderId: orderToDelete.id,
+                                type: HistoryEntryType.ORDER_NOTE,
+                                data: { note },
+                            },
+                            false,
+                        );
+                    }
+                }
+                if (order && linesToDelete) {
+                    const orderId = order.id;
+                    for (const line of linesToDelete) {
+                        const result = await this.removeItemFromOrder(txCtx, orderId, line.orderLineId);
+                        if (!isGraphQlErrorResult(result)) {
+                            order = result;
+                        }
+                    }
+                }
+                if (order && linesToInsert) {
+                    const orderId = order.id;
+                    const result = await this.addItemsToOrder(txCtx, orderId, linesToInsert);
+                    order = result.order;
+                }
+                if (order && linesToModify) {
+                    const orderId = order.id;
+                    const result = await this.adjustOrderLines(txCtx, orderId, linesToModify);
+                    order = result.order;
+                }
+                if (order && linesToDelete) {
+                    const orderId = order.id;
+                    try {
+                        const result = await this.removeItemsFromOrder(
+                            txCtx,
+                            orderId,
+                            linesToDelete.map(l => l.orderLineId),
+                        );
+                        if (!isGraphQlErrorResult(result)) {
+                            order = result;
+                        }
+                    } catch (e: any) {
+                        Logger.error(e.message, undefined, e.stack);
+                    }
+                }
+                const customer = await this.customerService.findOneByUserId(txCtx, user.id);
+                if (order && customer) {
+                    order.customer = customer;
+                    await this.connection.getRepository(txCtx, Order).save(order, { reload: false });
+                }
+                return order;
+            });
+        } catch (e: unknown) {
+            // If the merge fails for any reason, log the error and return the existing order
+            // unchanged rather than failing the entire login flow.
+            const error = e instanceof Error ? e : new Error(String(e));
+            Logger.error(`Failed to merge orders: ${error.message}`, undefined, error.stack);
+            return existingOrder;
         }
-        const customer = await this.customerService.findOneByUserId(ctx, user.id);
-        if (order && customer) {
-            order.customer = customer;
-            await this.connection.getRepository(ctx, Order).save(order, { reload: false });
-        }
-        return order;
     }
 
     private async getOrderOrThrow(
