@@ -58,6 +58,7 @@ import { defaultShippingEligibilityChecker } from './shipping-method/default-shi
 import { DefaultShippingLineAssignmentStrategy } from './shipping-method/default-shipping-line-assignment-strategy';
 import { InMemoryCacheStrategy } from './system/in-memory-cache-strategy';
 import { NoopInstrumentationStrategy } from './system/noop-instrumentation-strategy';
+import { DefaultOrderTaxCalculationStrategy } from './tax/default-order-tax-calculation-strategy';
 import { DefaultTaxLineCalculationStrategy } from './tax/default-tax-line-calculation-strategy';
 import { DefaultTaxZoneStrategy } from './tax/default-tax-zone-strategy';
 import { RuntimeVendureConfig } from './vendure-config';
@@ -195,6 +196,7 @@ export const defaultConfig: RuntimeVendureConfig = {
     taxOptions: {
         taxZoneStrategy: new DefaultTaxZoneStrategy(),
         taxLineCalculationStrategy: new DefaultTaxLineCalculationStrategy(),
+        orderTaxCalculationStrategy: new DefaultOrderTaxCalculationStrategy(),
     },
     importExportOptions: {
         importAssetsDir: __dirname,

@@ -364,30 +364,12 @@ export class OrderCalculator {
      * totals.
      */
     public calculateOrderTotals(order: Order) {
-        let totalPrice = 0;
-        let totalPriceWithTax = 0;
-
-        for (const line of order.lines) {
-            totalPrice += line.proratedLinePrice;
-            totalPriceWithTax += line.proratedLinePriceWithTax;
-        }
-        for (const surcharge of order.surcharges) {
-            totalPrice += surcharge.price;
-            totalPriceWithTax += surcharge.priceWithTax;
-        }
-
-        order.subTotal = totalPrice;
-        order.subTotalWithTax = totalPriceWithTax;
-
-        let shippingPrice = 0;
-        let shippingPriceWithTax = 0;
-        for (const shippingLine of order.shippingLines) {
-            shippingPrice += shippingLine.discountedPrice;
-            shippingPriceWithTax += shippingLine.discountedPriceWithTax;
-        }
-
-        order.shipping = shippingPrice;
-        order.shippingWithTax = shippingPriceWithTax;
+        const { orderTaxCalculationStrategy } = this.configService.taxOptions;
+        const result = orderTaxCalculationStrategy.calculateOrderTotals(order);
+        order.subTotal = result.subTotal;
+        order.subTotalWithTax = result.subTotalWithTax;
+        order.shipping = result.shipping;
+        order.shippingWithTax = result.shippingWithTax;
     }
 
     private addPromotion(order: Order, promotion: Promotion) {
