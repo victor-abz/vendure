@@ -4,7 +4,20 @@ on:
     push:
         branches:
             - master
-            - minor
+            # NOTE: The minor → major cascade is disabled because GitHub's
+            # "Automatically delete head branches" setting deletes the `minor`
+            # branch when a conflict-resolution PR (minor → major) is merged.
+            # There is no exclusion list for that setting, and rulesets' "Restrict
+            # deletions" rule does not reliably prevent it.
+            #
+            # Merge minor → major manually instead:
+            #   git checkout major && git pull && git merge origin/minor && git push
+            #
+            # See:
+            # - https://github.com/orgs/community/discussions/135012
+            # - https://github.com/orgs/community/discussions/152926
+            #
+            # - minor
     workflow_dispatch:
 
 concurrency:
@@ -26,9 +39,11 @@ jobs:
               run: |
                   if [ "$BRANCH" = "master" ]; then
                     echo "branch=minor" >> "$GITHUB_OUTPUT"
-                  elif [ "$BRANCH" = "minor" ]; then
-                    echo "branch=major" >> "$GITHUB_OUTPUT"
                   fi
+                  # Disabled: see comment at top of file
+                  # elif [ "$BRANCH" = "minor" ]; then
+                  #   echo "branch=major" >> "$GITHUB_OUTPUT"
+                  # fi
 
     back-merge:
         name: 'Merge ${{ needs.resolve-branches.outputs.source }} → ${{ needs.resolve-branches.outputs.target }}'
