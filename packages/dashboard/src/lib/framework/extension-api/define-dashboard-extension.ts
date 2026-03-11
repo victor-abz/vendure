@@ -1,3 +1,4 @@
+import { getNavMenuConfig, setNavMenuConfig } from '../nav-menu/nav-menu-extensions.js';
 import { globalRegistry } from '../registry/global-registry.js';
 
 import { DashboardExtension } from './extension-api-types.js';
@@ -16,14 +17,38 @@ import {
 
 globalRegistry.register('extensionSourceChangeCallbacks', new Set<() => void>());
 globalRegistry.register('registerDashboardExtensionCallbacks', new Set<() => void>());
+globalRegistry.register('navMenuModifiers', []);
 
 export function onExtensionSourceChange(callback: () => void) {
     globalRegistry.get('extensionSourceChangeCallbacks').add(callback);
 }
 
 export function executeDashboardExtensionCallbacks() {
+    // Phase 1: Register all extensions (array-form navSections, routes, etc.)
+    // Note: Phase 1 callbacks may push function-form modifiers into 'navMenuModifiers'
+    // as a side effect, which Phase 2 then consumes.
     for (const callback of globalRegistry.get('registerDashboardExtensionCallbacks') ?? []) {
         callback();
+    }
+
+    // Phase 2: Apply nav menu modifier functions (function-form navSections)
+    const modifiers = globalRegistry.get('navMenuModifiers');
+    if (modifiers?.length) {
+        let config = getNavMenuConfig();
+        for (const modifier of modifiers) {
+            const result = modifier(config);
+            if (result && typeof result === 'object' && Array.isArray(result.sections)) {
+                config = result;
+            } else {
+                // eslint-disable-next-line no-console
+                console.warn(
+                    `A navSections modifier function returned an invalid result. ` +
+                        `Expected an object with a "sections" array. The modifier will be skipped. ` +
+                        `Got: ${JSON.stringify(result)}`,
+                );
+            }
+        }
+        setNavMenuConfig(config);
     }
 }
 
@@ -64,7 +89,10 @@ export function executeDashboardExtensionCallbacks() {
 export function defineDashboardExtension(extension: DashboardExtension) {
     globalRegistry.get('registerDashboardExtensionCallbacks').add(() => {
         // Register navigation extensions (nav sections and routes)
-        registerNavigationExtensions(extension.navSections, extension.routes);
+        const navMenuModifier = registerNavigationExtensions(extension.navSections, extension.routes);
+        if (navMenuModifier) {
+            globalRegistry.get('navMenuModifiers').push(navMenuModifier);
+        }
 
         // Register layout extensions (action bar items and page blocks)
         registerLayoutExtensions(extension.actionBarItems, extension.pageBlocks);

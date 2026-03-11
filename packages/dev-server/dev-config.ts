@@ -25,6 +25,7 @@ import { TelemetryPlugin } from '@vendure/telemetry-plugin';
 import 'dotenv/config';
 import path from 'path';
 import { DataSourceOptions } from 'typeorm';
+import { NavModifierPlugin } from './test-plugins/nav-modifier-plugin/nav-modifier-plugin';
 import { ReviewsPlugin } from './test-plugins/reviews/reviews-plugin';
 
 const IS_INSTRUMENTED = process.env.IS_INSTRUMENTED === 'true';
@@ -120,6 +121,7 @@ export const devConfig: VendureConfig = {
         // }),
         ReadonlySettingsTestPlugin,
         ReviewsPlugin,
+        NavModifierPlugin,
         GraphiqlPlugin.init(),
         AssetServerPlugin.init({
             route: 'assets',

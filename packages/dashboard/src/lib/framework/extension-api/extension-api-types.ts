@@ -1,4 +1,6 @@
 // Import types for the main interface
+import { NavMenuConfig } from '../nav-menu/nav-menu-extensions.js';
+
 import {
     DashboardActionBarItem,
     DashboardAlertDefinition,
@@ -41,8 +43,35 @@ export interface DashboardExtension {
     /**
      * @description
      * Allows you to define custom nav sections for the dashboard.
+     *
+     * Can be provided as either:
+     * - An **array** of `DashboardNavSectionDefinition` objects to declaratively add new sections
+     * - A **function** that receives the current `NavMenuConfig` and returns a new one, allowing
+     *   full control over the nav menu (move, remove, reorder items between sections)
+     *
+     * When using the function form, the function is guaranteed to run _after_ all array-form
+     * registrations have completed, so it always sees the fully-populated nav config.
+     *
+     * @example
+     * ```ts
+     * // Array form (existing)
+     * navSections: [{ id: 'my-section', title: 'My Section' }]
+     *
+     * // Function form (new)
+     * navSections: (config) => ({
+     *     sections: config.sections.map(s =>
+     *         s.id === 'settings' && 'items' in s
+     *             ? { ...s, items: s.items?.filter(i => i.id !== 'administrators') }
+     *             : s
+     *     ),
+     * })
+     * ```
+     *
+     * Note: modifier functions should return a **new** config object rather than
+     * mutating the input, to ensure predictable behavior when multiple modifiers
+     * are composed. The function form was introduced in version 3.6.0.
      */
-    navSections?: DashboardNavSectionDefinition[];
+    navSections?: DashboardNavSectionDefinition[] | ((config: NavMenuConfig) => NavMenuConfig);
     /**
      * @description
      * Allows you to define custom page blocks for any page in the dashboard.
