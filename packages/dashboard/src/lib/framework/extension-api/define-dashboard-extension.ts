@@ -10,6 +10,7 @@ import {
     registerLayoutExtensions,
     registerLoginExtensions,
     registerNavigationExtensions,
+    registerToolbarExtensions,
     registerWidgetExtensions,
 } from './logic/index.js';
 
@@ -42,6 +43,7 @@ export function executeDashboardExtensionCallbacks() {
  * - Detail forms
  * - Login
  * - Custom history entries
+ * - Toolbar items
  *
  * @example
  * ```tsx
@@ -87,6 +89,9 @@ export function defineDashboardExtension(extension: DashboardExtension) {
 
         // Register custom history entry components
         registerHistoryEntryComponents(extension.historyEntries);
+
+        // Register toolbar extensions
+        registerToolbarExtensions(extension.toolbarItems);
 
         // Execute extension source change callbacks
         const callbacks = globalRegistry.get('extensionSourceChangeCallbacks');
