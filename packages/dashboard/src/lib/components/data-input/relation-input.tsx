@@ -35,7 +35,7 @@ export function SingleRelationInput<T>({
             config={singleConfig}
             value={value}
             selectorLabel={selectorLabel}
-            onChange={newValue => onChange(newValue as string)}
+            onChange={newValue => onChange(newValue)}
             disabled={disabled}
             className={className}
         />
@@ -69,7 +69,7 @@ export function MultiRelationInput<T>({
         <RelationSelector
             config={multiConfig}
             value={value}
-            onChange={newValue => onChange(newValue as string[])}
+            onChange={newValue => onChange(newValue)}
             disabled={disabled}
             className={className}
             selectorLabel={selectorLabel}

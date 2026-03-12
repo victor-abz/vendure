@@ -48,7 +48,7 @@ export interface RelationSelectorProps<T = any> {
      */
     selectorLabel?: React.ReactNode;
     value?: string | string[];
-    onChange: (value: string | string[] | undefined) => void;
+    onChange: (value: string | string[] | null | undefined) => void;
     disabled?: boolean;
     className?: string;
 }
@@ -344,7 +344,9 @@ export function RelationSelector<T>({
         } else {
             // Clear cache for single select
             setSelectedItemsCache([]);
-            onChange(undefined);
+            // Use null instead of undefined so the value is sent to the server
+            // (undefined gets stripped from JSON, null explicitly clears the field)
+            onChange(null);
         }
     };
 
