@@ -106,14 +106,32 @@ describe('transformRelationFields', () => {
         expect(result.customFields).toEqual({ featuredProductsIds: [] });
     });
 
-    it('should handle undefined/null list relation by deleting field', () => {
+    it('should handle undefined list relation by not setting the field', () => {
         const undefinedResult = transformRelationFields(createFieldsWithListRelation(), { customFields: {} });
-        const nullResult = transformRelationFields(createFieldsWithListRelation(), {
-            customFields: { featuredProducts: null },
-        });
 
         expect(undefinedResult.customFields).not.toHaveProperty('featuredProductsIds');
+    });
+
+    it('should pass null through when list relation is explicitly cleared', () => {
+        // Simulates clearing a relation: the form engine receives null from onChange,
+        // which the static types don't model
+        const nullResult = transformRelationFields(createFieldsWithListRelation(), {
+            customFields: { featuredProducts: null } as any,
+        });
+
+        expect(nullResult.customFields.featuredProductsIds).toBeNull();
         expect(nullResult.customFields).not.toHaveProperty('featuredProducts');
+    });
+
+    it('should pass null through when single relation is explicitly cleared', () => {
+        // Simulates clearing a relation: the form engine receives null from onChange,
+        // which the static types don't model
+        const result = transformRelationFields(createFieldsWithSingleRelation(), {
+            customFields: { featuredProduct: null } as any,
+        });
+
+        expect(result.customFields.featuredProductId).toBeNull();
+        expect(result.customFields).not.toHaveProperty('featuredProduct');
     });
 
     it('should extract ID from single relation and delete original field', () => {

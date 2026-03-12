@@ -58,7 +58,9 @@ export function transformRelationFields<E extends Record<string, any>>(fields: F
             const propertyAccessorKey = customField.name.replace(/Ids$/, '');
             const relationValue = entity.customFields[propertyAccessorKey];
 
-            if (Array.isArray(relationValue)) {
+            if (relationValue === null) {
+                processedEntity.customFields[relationField] = null;
+            } else if (Array.isArray(relationValue)) {
                 processedEntity.customFields[relationField] = relationValue.map((v: { id: string }) => v.id);
             }
             delete processedEntity.customFields[propertyAccessorKey];
@@ -66,7 +68,7 @@ export function transformRelationFields<E extends Record<string, any>>(fields: F
             // For single fields, the accessor is the field name without the "Id" suffix
             const propertyAccessorKey = customField.name.replace(/Id$/, '');
             const relationValue = entity.customFields[propertyAccessorKey];
-            processedEntity.customFields[relationField] = relationValue?.id;
+            processedEntity.customFields[relationField] = relationValue === null ? null : relationValue?.id;
             delete processedEntity.customFields[propertyAccessorKey];
         }
     }
