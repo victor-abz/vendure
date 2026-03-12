@@ -452,7 +452,7 @@ export class ListQueryBuilder implements OnApplicationBootstrap {
 
         // Get the related entity's table and column info
         const inverseEntityMeta = relation.inverseEntityMetadata;
-        const inverseTableName = inverseEntityMeta.tableName;
+        const inverseTableName = inverseEntityMeta.tablePath;
 
         // Generate unique alias using counter
         existsSubqueryCounter++;
@@ -475,6 +475,8 @@ export class ListQueryBuilder implements OnApplicationBootstrap {
 
         // Helper to escape identifiers for the current database driver (handles PostgreSQL quoting)
         const escapeId = (name: string) => mainQb.connection.driver.escape(name);
+        const escapeTablePath = (path: string) =>
+            path.split('.').map(segment => mainQb.connection.driver.escape(segment)).join('.');
 
         let existsQuery: string;
 
@@ -485,7 +487,7 @@ export class ListQueryBuilder implements OnApplicationBootstrap {
                 return null;
             }
 
-            const junctionTableName = junctionMeta.tableName;
+            const junctionTableName = junctionMeta.tablePath;
             const ownerColumn = junctionMeta.ownerColumns[0];
             const inverseColumn = junctionMeta.inverseColumns[0];
 
@@ -507,8 +509,8 @@ export class ListQueryBuilder implements OnApplicationBootstrap {
             //         INNER JOIN related_table rt ON jt.inverseColumn = rt.id
             //         WHERE jt.ownerColumn = main_entity.id AND rt.columnName = :paramValue)
             existsQuery = `EXISTS (
-                SELECT 1 FROM ${escapeId(junctionTableName)} ${escapeId(junctionAlias)}
-                INNER JOIN ${escapeId(inverseTableName)} ${escapeId(relatedAlias)}
+                SELECT 1 FROM ${escapeTablePath(junctionTableName)} ${escapeId(junctionAlias)}
+                INNER JOIN ${escapeTablePath(inverseTableName)} ${escapeId(relatedAlias)}
                     ON ${escapeId(junctionAlias)}.${escapeId(inverseColumn.databaseName)} = ${escapeId(relatedAlias)}.${escapeId('id')}
                     WHERE ${escapeId(junctionAlias)}.${escapeId(ownerColumn.databaseName)} = ${escapeId(mainQb.alias)}.${escapeId('id')} AND ${whereCondition}
             )`;
@@ -544,7 +546,7 @@ export class ListQueryBuilder implements OnApplicationBootstrap {
             // EXISTS (SELECT 1 FROM related_table rt
             //         WHERE rt.foreignKey = main_entity.id AND rt.columnName = :paramValue)
             existsQuery = `EXISTS (
-                SELECT 1 FROM ${escapeId(inverseTableName)} ${escapeId(relatedAlias)}
+                SELECT 1 FROM ${escapeTablePath(inverseTableName)} ${escapeId(relatedAlias)}
                 WHERE ${escapeId(relatedAlias)}.${escapeId(foreignKeyColumn)} = ${escapeId(mainQb.alias)}.${escapeId('id')} AND ${whereCondition}
             )`;
         } else {
