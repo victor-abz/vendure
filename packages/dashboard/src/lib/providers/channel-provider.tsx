@@ -228,6 +228,9 @@ export function ChannelProvider({ children }: Readonly<{ children: React.ReactNo
         queryClient.invalidateQueries({
             queryKey: ['channels', isAuthenticated],
         });
+        queryClient.invalidateQueries({
+            queryKey: ['activeChannel', isAuthenticated],
+        });
     }, [refreshCurrentUser, queryClient, isAuthenticated]);
 
     const contextValue: ChannelContext = React.useMemo(
