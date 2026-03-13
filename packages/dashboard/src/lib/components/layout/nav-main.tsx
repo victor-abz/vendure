@@ -1,4 +1,5 @@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/vdb/components/ui/collapsible.js';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/vdb/components/ui/hover-card.js';
 import {
     SidebarGroup,
     SidebarGroupLabel,
@@ -8,6 +9,7 @@ import {
     SidebarMenuSub,
     SidebarMenuSubButton,
     SidebarMenuSubItem,
+    useSidebar,
 } from '@/vdb/components/ui/sidebar.js';
 import {
     NavMenuItem,
@@ -15,6 +17,7 @@ import {
     NavMenuSectionPlacement,
 } from '@/vdb/framework/nav-menu/nav-menu-extensions.js';
 import { usePermissions } from '@/vdb/hooks/use-permissions.js';
+import { cn } from '@/vdb/lib/utils.js';
 import { useLingui } from '@lingui/react';
 import { Link, useRouter, useRouterState } from '@tanstack/react-router';
 import { ChevronRight } from 'lucide-react';
@@ -38,11 +41,68 @@ function escapeRegexChars(str: string): string {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+const HOVER_OPEN_DELAY = 150;
+const HOVER_CLOSE_DELAY = 250;
+
+function CollapsedSectionMenu({
+    item,
+    isPathActive,
+}: Readonly<{
+    item: NavMenuSection;
+    isPathActive: (url: string) => boolean;
+}>) {
+    const { i18n } = useLingui();
+    return (
+        <HoverCard openDelay={HOVER_OPEN_DELAY} closeDelay={HOVER_CLOSE_DELAY}>
+            <HoverCardTrigger asChild>
+                {/* No tooltip prop — the HoverCard replaces it in collapsed mode */}
+                <SidebarMenuButton
+                    isActive={item.items?.some(subItem => isPathActive(subItem.url))}
+                >
+                    {item.icon && <item.icon />}
+                    <span>{i18n.t(item.title)}</span>
+                </SidebarMenuButton>
+            </HoverCardTrigger>
+            <HoverCardContent
+                side="right"
+                align="start"
+                sideOffset={4}
+                className="w-auto min-w-[8rem] p-1"
+            >
+                <p className="px-2 py-1.5 text-sm font-semibold">
+                    {i18n.t(item.title)}
+                </p>
+                <div className="bg-border my-1 h-px" />
+                {item.items?.map(subItem => (
+                    <NavItemWrapper
+                        key={subItem.id}
+                        locationId={subItem.id}
+                        order={subItem.order}
+                        parentLocationId={item.id}
+                    >
+                        <Link
+                            to={subItem.url}
+                            className={cn(
+                                'flex items-center rounded-sm px-2 py-1.5 text-sm outline-hidden hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring',
+                                isPathActive(subItem.url) && 'bg-accent text-accent-foreground font-medium',
+                            )}
+                        >
+                            {i18n.t(subItem.title)}
+                        </Link>
+                    </NavItemWrapper>
+                ))}
+            </HoverCardContent>
+        </HoverCard>
+    );
+}
+
 export function NavMain({ items }: Readonly<{ items: Array<NavMenuSection | NavMenuItem> }>) {
     const router = useRouter();
     const routerState = useRouterState();
     const { hasPermissions } = usePermissions();
     const { i18n } = useLingui();
+    const { state: sidebarState, isMobile } = useSidebar();
+    const isCollapsed = sidebarState === 'collapsed' && !isMobile;
     const currentPath = routerState.location.pathname;
     const basePath = router.basepath || '';
 
@@ -181,8 +241,11 @@ export function NavMain({ items }: Readonly<{ items: Array<NavMenuSection | NavM
         }
     }, [currentPath, items, findActiveSections]);
 
-    // Render a top navigation section
-    const renderTopSection = (item: NavMenuSection | NavMenuItem) => {
+    const renderSection = (
+        item: NavMenuSection | NavMenuItem,
+        isOpen: boolean,
+        onToggle: (id: string, isOpen: boolean) => void,
+    ) => {
         if ('url' in item) {
             return (
                 <NavItemWrapper key={item.id} locationId={item.id} order={item.order} offset={true}>
@@ -202,17 +265,27 @@ export function NavMain({ items }: Readonly<{ items: Array<NavMenuSection | NavM
             );
         }
 
+        if (isCollapsed) {
+            return (
+                <NavItemWrapper key={item.id} locationId={item.id} order={item.order} offset={true}>
+                    <SidebarMenuItem>
+                        <CollapsedSectionMenu item={item} isPathActive={isPathActive} />
+                    </SidebarMenuItem>
+                </NavItemWrapper>
+            );
+        }
+
         return (
             <NavItemWrapper key={item.id} locationId={item.id} order={item.order} offset={true}>
                 <Collapsible
                     asChild
-                    open={openTopSectionIds.has(item.id)}
-                    onOpenChange={isOpen => handleTopSectionToggle(item.id, isOpen)}
+                    open={isOpen}
+                    onOpenChange={open => onToggle(item.id, open)}
                     className="group/collapsible"
                 >
                     <SidebarMenuItem>
                         <CollapsibleTrigger asChild>
-                            <SidebarMenuButton tooltip={item.title}>
+                            <SidebarMenuButton tooltip={i18n.t(item.title)}>
                                 {item.icon && <item.icon />}
                                 <span>{i18n.t(item.title)}</span>
                                 <ChevronRight className="ms-auto transition-transform duration-200 rtl:rotate-180 group-data-[state=open]/collapsible:rotate-90" />
@@ -247,83 +320,30 @@ export function NavMain({ items }: Readonly<{ items: Array<NavMenuSection | NavM
         );
     };
 
-    // Render a bottom navigation section with controlled open state
-    const renderBottomSection = (item: NavMenuSection | NavMenuItem) => {
-        if ('url' in item) {
-            return (
-                <NavItemWrapper key={item.title} locationId={item.id} order={item.order} offset={true}>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton
-                            tooltip={i18n.t(item.title)}
-                            asChild
-                            isActive={isPathActive(item.url)}
-                        >
-                            <Link to={item.url}>
-                                {item.icon && <item.icon />}
-                                <span>{i18n.t(item.title)}</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                </NavItemWrapper>
-            );
-        }
-        return (
-            <NavItemWrapper key={item.title} locationId={item.id} order={item.order} offset={true}>
-                <Collapsible
-                    asChild
-                    open={openBottomSectionId === item.id}
-                    onOpenChange={isOpen => handleBottomSectionToggle(item.id, isOpen)}
-                    className="group/collapsible"
-                >
-                    <SidebarMenuItem>
-                        <CollapsibleTrigger asChild>
-                            <SidebarMenuButton tooltip={i18n.t(item.title)}>
-                                {item.icon && <item.icon />}
-                                <span>{i18n.t(item.title)}</span>
-                                <ChevronRight className="ms-auto transition-transform duration-200 rtl:rotate-180 group-data-[state=open]/collapsible:rotate-90" />
-                            </SidebarMenuButton>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                            <SidebarMenuSub>
-                                {item.items?.map(subItem => (
-                                    <NavItemWrapper
-                                        key={i18n.t(subItem.title)}
-                                        locationId={subItem.id}
-                                        order={subItem.order}
-                                        parentLocationId={item.id}
-                                    >
-                                        <SidebarMenuSubItem>
-                                            <SidebarMenuSubButton
-                                                asChild
-                                                isActive={isPathActive(subItem.url)}
-                                            >
-                                                <Link to={subItem.url}>
-                                                    <span>{i18n.t(subItem.title)}</span>
-                                                </Link>
-                                            </SidebarMenuSubButton>
-                                        </SidebarMenuSubItem>
-                                    </NavItemWrapper>
-                                ))}
-                            </SidebarMenuSub>
-                        </CollapsibleContent>
-                    </SidebarMenuItem>
-                </Collapsible>
-            </NavItemWrapper>
-        );
-    };
-
     return (
         <>
             {/* Top sections */}
             <SidebarGroup>
-                <SidebarMenu>{topSections.map(renderTopSection)}</SidebarMenu>
+                <SidebarMenu>
+                    {topSections.map(item =>
+                        renderSection(item, openTopSectionIds.has(item.id), handleTopSectionToggle),
+                    )}
+                </SidebarMenu>
             </SidebarGroup>
 
             {/* Bottom sections - will be pushed to the bottom by CSS */}
             {bottomSections.length ? (
                 <SidebarGroup className="mt-auto">
                     <SidebarGroupLabel>Administration</SidebarGroupLabel>
-                    <SidebarMenu>{bottomSections.map(renderBottomSection)}</SidebarMenu>
+                    <SidebarMenu>
+                        {bottomSections.map(item =>
+                            renderSection(
+                                item,
+                                openBottomSectionId === item.id,
+                                handleBottomSectionToggle,
+                            ),
+                        )}
+                    </SidebarMenu>
                 </SidebarGroup>
             ) : null}
         </>
