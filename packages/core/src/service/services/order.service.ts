@@ -1952,7 +1952,7 @@ export class OrderService {
                     return existingOrder;
                 }
 
-                const mergeResult = this.orderMerger.merge(txCtx, freshGuestOrder, existingOrder);
+                const mergeResult = await this.orderMerger.merge(txCtx, freshGuestOrder, existingOrder);
                 const { orderToDelete, linesToInsert, linesToDelete, linesToModify } = mergeResult;
                 let { order } = mergeResult;
                 if (orderToDelete) {
