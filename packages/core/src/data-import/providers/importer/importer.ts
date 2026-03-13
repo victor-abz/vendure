@@ -19,7 +19,12 @@ import { FacetValueService } from '../../../service/services/facet-value.service
 import { FacetService } from '../../../service/services/facet.service';
 import { TaxCategoryService } from '../../../service/services/tax-category.service';
 import { AssetImporter } from '../asset-importer/asset-importer';
-import { ImportParser, ParsedFacet, ParsedProductWithVariants } from '../import-parser/import-parser';
+import {
+    ImportParser,
+    ParsedFacet,
+    ParsedOptionGroup,
+    ParsedProductWithVariants,
+} from '../import-parser/import-parser';
 
 import { FastImporterService } from './fast-importer.service';
 
@@ -172,6 +177,10 @@ export class Importer {
             );
         }
         await this.fastImporter.initialize(ctx.channel);
+
+        // Build a map of shared option groups (only groups with an explicit code are shared)
+        const sharedGroupMap = await this.buildSharedOptionGroupMap(ctx, rows);
+
         for (const { product, variants } of rows) {
             const productMainTranslation = this.getTranslationByCodeOrFirst(
                 product.translations,
@@ -213,36 +222,52 @@ export class Importer {
                     optionGroup.translations,
                     ctx.languageCode,
                 );
-                const code = normalizeString(
-                    `${productMainTranslation.name}-${optionGroupMainTranslation.name}`,
-                    '-',
-                );
-                const groupId = await this.fastImporter.createProductOptionGroup({
-                    code,
-                    options: optionGroupMainTranslation.values.map(name => ({}) as any),
-                    translations: optionGroup.translations.map(translation => {
-                        return {
-                            languageCode: translation.languageCode,
-                            name: translation.name,
-                        };
-                    }),
-                });
-                for (const [optionIndex, value] of optionGroupMainTranslation.values.map(
-                    (val, index) => [index, val] as const,
-                )) {
-                    const createdOptionId = await this.fastImporter.createProductOption({
-                        productOptionGroupId: groupId,
-                        code: normalizeString(value, '-'),
+                const shared = optionGroup.code ? sharedGroupMap.get(optionGroup.code) : undefined;
+                if (shared) {
+                    // Use the pre-created shared option group
+                    await this.fastImporter.addOptionGroupToProduct(createdProductId, shared.groupId);
+                    for (const value of optionGroupMainTranslation.values) {
+                        const optionId = shared.optionIds.get(value);
+                        if (!optionId) {
+                            throw new Error(
+                                `Option value "${value}" not found in shared option group "${optionGroup.code ?? ''}"`,
+                            );
+                        }
+                        optionsMap[`${optionGroupIndex}_${value}`] = optionId;
+                    }
+                } else {
+                    // Create a product-specific option group (original behaviour)
+                    const code = normalizeString(
+                        `${productMainTranslation.name}-${optionGroupMainTranslation.name}`,
+                        '-',
+                    );
+                    const groupId = await this.fastImporter.createProductOptionGroup({
+                        code,
+                        options: optionGroupMainTranslation.values.map(name => ({}) as any),
                         translations: optionGroup.translations.map(translation => {
                             return {
                                 languageCode: translation.languageCode,
-                                name: translation.values[optionIndex],
+                                name: translation.name,
                             };
                         }),
                     });
-                    optionsMap[`${optionGroupIndex}_${value}`] = createdOptionId;
+                    for (const [optionIndex, value] of optionGroupMainTranslation.values.map(
+                        (val, index) => [index, val] as const,
+                    )) {
+                        const createdOptionId = await this.fastImporter.createProductOption({
+                            productOptionGroupId: groupId,
+                            code: normalizeString(value, '-'),
+                            translations: optionGroup.translations.map(translation => {
+                                return {
+                                    languageCode: translation.languageCode,
+                                    name: translation.values[optionIndex],
+                                };
+                            }),
+                        });
+                        optionsMap[`${optionGroupIndex}_${value}`] = createdOptionId;
+                    }
+                    await this.fastImporter.addOptionGroupToProduct(createdProductId, groupId);
                 }
-                await this.fastImporter.addOptionGroupToProduct(createdProductId, groupId);
             }
 
             for (const variant of variants) {
@@ -417,5 +442,66 @@ export class Importer {
             translation = translations[0];
         }
         return translation;
+    }
+
+    /**
+     * Performs a first-pass analysis of all parsed products to identify option groups
+     * that should be shared. Only groups with an explicit code (from the `name:code` CSV syntax)
+     * are shared. Groups without a code are always product-scoped.
+     *
+     * Returns a map of code -> { groupId, optionIds } for shared groups that have
+     * been pre-created.
+     */
+    private async buildSharedOptionGroupMap(
+        ctx: RequestContext,
+        rows: ParsedProductWithVariants[],
+    ): Promise<Map<string, { groupId: ID; optionIds: Map<string, ID> }>> {
+        const sharedGroupMap = new Map<string, { groupId: ID; optionIds: Map<string, ID> }>();
+
+        // Collect the first occurrence of each explicit-code option group
+        const codeEntries = new Map<string, ParsedOptionGroup>();
+        for (const { product } of rows) {
+            for (const optionGroup of product.optionGroups) {
+                if (optionGroup.code && !codeEntries.has(optionGroup.code)) {
+                    codeEntries.set(optionGroup.code, optionGroup);
+                }
+            }
+        }
+
+        // Pre-create each shared option group
+        for (const [code, optionGroup] of codeEntries) {
+            const ogMainTranslation = this.getTranslationByCodeOrFirst(
+                optionGroup.translations,
+                ctx.languageCode,
+            );
+
+            const groupId = await this.fastImporter.createProductOptionGroup({
+                code,
+                options: ogMainTranslation.values.map(() => ({}) as any),
+                translations: optionGroup.translations.map(translation => ({
+                    languageCode: translation.languageCode,
+                    name: translation.name,
+                })),
+            });
+
+            const optionIds = new Map<string, ID>();
+            for (const [optionIndex, value] of ogMainTranslation.values.map(
+                (val, index) => [index, val] as const,
+            )) {
+                const createdOptionId = await this.fastImporter.createProductOption({
+                    productOptionGroupId: groupId,
+                    code: normalizeString(value, '-'),
+                    translations: optionGroup.translations.map(translation => ({
+                        languageCode: translation.languageCode,
+                        name: translation.values[optionIndex],
+                    })),
+                });
+                optionIds.set(value, createdOptionId);
+            }
+
+            sharedGroupMap.set(code, { groupId, optionIds });
+        }
+
+        return sharedGroupMap;
     }
 }

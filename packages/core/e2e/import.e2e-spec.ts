@@ -222,6 +222,81 @@ describe('Import resolver', () => {
         expect(paperStretcher.customFields.localName).toEqual('纸张拉伸器');
     }, 20000);
 
+    // https://github.com/vendurehq/vendure/issues/4482
+    it('imports products with shared option groups', async () => {
+        const timeout = process.env.CI ? 2000 : 1000;
+        await new Promise(resolve => {
+            setTimeout(resolve, timeout);
+        });
+
+        const csvFile = path.join(__dirname, 'fixtures', 'product-import-shared-options.csv');
+        const result = await adminClient.fileUploadMutation({
+            mutation: importProductsDocument1,
+            filePaths: [csvFile],
+            mapVariables: () => ({ csvFile: null }),
+        });
+
+        expect(result.importProducts.errors).toEqual([]);
+        expect(result.importProducts.imported).toBe(6);
+        expect(result.importProducts.processed).toBe(6);
+
+        const productResult = await adminClient.query(getSharedOptionsProductsDocument, {
+            options: { take: 100 },
+        });
+
+        const hoodie = productResult.products.items.find((p: any) => p.slug === 'hoodie')!;
+        const ramModule = productResult.products.items.find((p: any) => p.slug === 'ram-module')!;
+        const shoeA = productResult.products.items.find((p: any) => p.slug === 'running-shoe-a')!;
+        const shoeB = productResult.products.items.find((p: any) => p.slug === 'running-shoe-b')!;
+        const shoeC = productResult.products.items.find((p: any) => p.slug === 'running-shoe-c')!;
+        const tShirt = productResult.products.items.find((p: any) => p.slug === 't-shirt')!;
+
+        expect(hoodie).toBeDefined();
+        expect(ramModule).toBeDefined();
+        expect(shoeA).toBeDefined();
+        expect(shoeB).toBeDefined();
+        expect(shoeC).toBeDefined();
+        expect(tShirt).toBeDefined();
+
+        // Running shoes A, B, C share the same "size" option group via explicit code "shoe-size"
+        const shoeAGroupIds = shoeA.optionGroups.map((g: any) => g.id);
+        const shoeBGroupIds = shoeB.optionGroups.map((g: any) => g.id);
+        const shoeCGroupIds = shoeC.optionGroups.map((g: any) => g.id);
+        expect(shoeAGroupIds).toEqual(shoeBGroupIds);
+        expect(shoeBGroupIds).toEqual(shoeCGroupIds);
+        expect(shoeA.optionGroups[0].code).toBe('shoe-size');
+
+        // RAM module has "size" without an explicit code, so it gets a product-scoped group
+        const ramGroupIds = ramModule.optionGroups.map((g: any) => g.id);
+        expect(ramGroupIds).not.toEqual(shoeAGroupIds);
+        expect(ramModule.optionGroups[0].code).toBe('ram-module-size');
+
+        // T-Shirt and Hoodie should share the "size" group via explicit code "tshirt-size"
+        const tShirtSizeGroup = tShirt.optionGroups.find((g: any) => g.code === 'tshirt-size');
+        const hoodieSizeGroup = hoodie.optionGroups.find((g: any) => g.code === 'tshirt-size');
+        expect(tShirtSizeGroup).toBeDefined();
+        expect(hoodieSizeGroup).toBeDefined();
+        expect(tShirtSizeGroup!.id).toBe(hoodieSizeGroup!.id);
+
+        // T-Shirt and Hoodie should share the "color" group via explicit code "apparel-color"
+        const tShirtColorGroup = tShirt.optionGroups.find((g: any) => g.code === 'apparel-color');
+        const hoodieColorGroup = hoodie.optionGroups.find((g: any) => g.code === 'apparel-color');
+        expect(tShirtColorGroup).toBeDefined();
+        expect(hoodieColorGroup).toBeDefined();
+        expect(tShirtColorGroup!.id).toBe(hoodieColorGroup!.id);
+
+        // Verify variants have the correct option values
+        expect(shoeA.variants.length).toBe(3);
+        expect(shoeB.variants.length).toBe(3);
+        const shoeAOptions = shoeA.variants.map((v: any) => v.options[0].code).sort();
+        const shoeBOptions = shoeB.variants.map((v: any) => v.options[0].code).sort();
+        expect(shoeAOptions).toEqual(shoeBOptions);
+
+        // T-Shirt should have 4 variants with 2 options each
+        expect(tShirt.variants.length).toBe(4);
+        expect(tShirt.variants[0].options.length).toBe(2);
+    }, 30000);
+
     describe('asset urls', () => {
         let staticServer: http.Server;
 
@@ -390,6 +465,34 @@ const getProductsDocument1 = graphql(`
                     customFields {
                         valid
                         weight
+                    }
+                }
+            }
+        }
+    }
+`);
+
+const getSharedOptionsProductsDocument = graphql(`
+    query GetSharedOptionsProducts($options: ProductListOptions) {
+        products(options: $options) {
+            totalItems
+            items {
+                id
+                name
+                slug
+                optionGroups {
+                    id
+                    code
+                    name
+                }
+                variants {
+                    id
+                    name
+                    sku
+                    options {
+                        id
+                        code
+                        name
                     }
                 }
             }
