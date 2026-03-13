@@ -165,3 +165,4 @@ Scopes: core, common, admin-ui, dashboard, email-plugin, etc.
 - The dev-server imports packages via TypeScript paths, so rebuilds are picked up on restart
 - Check `packages/dev-server/test-plugins/` for example plugin implementations
 - Dashboard dev uses Vite with HMR, run separately with `npm run dashboard:dev`
+- **Dashboard stale build gotcha**: `packages/dev-server/dist/` can accumulate stale Vite build artifacts across branch switches. Vite doesn't clean old hashed files on rebuild, so old chunks can interfere (e.g. overwriting `window.schemaInfo`). Always `rm -rf packages/dev-server/dist` before rebuilding. Build with `npx vite build --base /dashboard/ --outDir ../dev-server/dist` from `packages/dashboard/`. Also check no stale Vite dev server is running on port 5173 — `DashboardPlugin` auto-proxies to it instead of serving static files.
