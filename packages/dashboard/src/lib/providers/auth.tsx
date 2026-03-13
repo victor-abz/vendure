@@ -141,7 +141,27 @@ export function AuthProvider({ children }: Readonly<{ children: React.ReactNode 
                 .then(async data => {
                     if (data.login.__typename === 'CurrentUser') {
                         setAuthenticationError(undefined);
-                        await refetchCurrentUser();
+                        const { data: refetchedData } = await refetchCurrentUser();
+                        // Synchronously set the channel token in localStorage before
+                        // invalidating queries. This is critical for non-superadmin users
+                        // whose roles are scoped only to non-default channels. Without this,
+                        // the invalidateQueries() call below triggers the activeChannel and
+                        // channels queries before React effects in ChannelProvider have a
+                        // chance to write the token to localStorage. When no vendure-token
+                        // header is present, the backend defaults to the default channel,
+                        // and the user gets FORBIDDEN because they have no permissions on it.
+                        if (refetchedData?.me?.channels?.length) {
+                            const previousChannel = settings.activeChannelId
+                                ? refetchedData.me.channels.find(c => c.id === settings.activeChannelId)
+                                : undefined;
+                            const channel = previousChannel ?? refetchedData.me.channels[0];
+                            try {
+                                localStorage.setItem(LS_KEY_SELECTED_CHANNEL_TOKEN, channel.token);
+                            } catch (e) {
+                                console.error('Failed to store selected channel in localStorage', e);
+                            }
+                            setActiveChannelId(channel.id);
+                        }
                         // Invalidate all queries to ensure fresh data after login
                         await queryClient.invalidateQueries();
                         setStatus('authenticated');
@@ -159,7 +179,7 @@ export function AuthProvider({ children }: Readonly<{ children: React.ReactNode 
                     setIsLoginLogoutInProgress(false);
                 });
         },
-        [refetchCurrentUser, queryClient],
+        [refetchCurrentUser, queryClient, settings.activeChannelId, setActiveChannelId],
     );
 
     const logout = React.useCallback(
