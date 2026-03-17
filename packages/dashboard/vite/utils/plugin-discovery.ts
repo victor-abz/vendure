@@ -71,8 +71,15 @@ export async function discoverPlugins({
             // Walk the AST to find the plugin class and its decorator
             walkSimple(ast, {
                 CallExpression(node: any) {
-                    // Look for __decorate calls
-                    const calleeName = node.callee.name;
+                    // Look for __decorate calls — handles both direct calls (__decorate(...))
+                    // and tslib member expressions (tslib_1.__decorate(...)) which occur
+                    // when packages are compiled with TypeScript's importHelpers: true
+                    const callee = node.callee;
+                    const calleeName =
+                        callee.name ??
+                        (callee.type === 'MemberExpression' && callee.property?.name === '__decorate'
+                            ? '__decorate'
+                            : undefined);
                     const nodeArgs = node.arguments;
                     const isDecoratorWithArgs = calleeName === '__decorate' && nodeArgs.length >= 2;
 
