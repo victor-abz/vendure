@@ -161,12 +161,6 @@ async function compileTypeScript({
         'compiling',
         ({ patterns }) => patterns, // No transformation - use original paths
     );
-    const transformedTsConfigInfo = await findTsConfigPaths(
-        inputPath,
-        logger,
-        'compiling',
-        transformTsConfigPathMappings, // Apply user's transformation
-    );
 
     const compilerOptions: ts.CompilerOptions = {
         target: ts.ScriptTarget.ES2020,
@@ -204,7 +198,6 @@ async function compileTypeScript({
     }
 
     logger.debug(`tsConfig original paths: ${JSON.stringify(originalTsConfigInfo?.paths, null, 2)}`);
-    logger.debug(`tsConfig transformed paths: ${JSON.stringify(transformedTsConfigInfo?.paths, null, 2)}`);
     logger.debug(`tsConfig baseUrl: ${originalTsConfigInfo?.baseUrl ?? 'UNKNOWN'}`);
 
     // Build custom transformers

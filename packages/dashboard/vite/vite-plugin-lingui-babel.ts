@@ -129,10 +129,7 @@ export function linguiBabelPlugin(options?: LinguiBabelPluginOptions): Plugin {
             try {
                 const result = await babel.transformAsync(code, {
                     filename: id,
-                    presets: [
-                        ['@babel/preset-typescript', { isTSX: true, allExtensions: true }],
-                        ['@babel/preset-react', { runtime: 'automatic' }],
-                    ],
+                    presets: [['@babel/preset-typescript', { isTSX: true, allExtensions: true }]],
                     plugins: ['@lingui/babel-plugin-lingui-macro'],
                     sourceMaps: true,
                     // Don't look for babel config files - we want to control the config completely

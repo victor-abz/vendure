@@ -297,21 +297,16 @@ export async function analyzeSourceFiles(
                 if (importPath.endsWith('.js')) {
                     possiblePaths.push(importPath.replace(/.js$/, '.ts'));
                 }
-                // Try each possible path
-                let found = false;
-                for (const possiblePath of possiblePaths) {
-                    const possiblePathExists = await fs.pathExists(possiblePath);
-                    if (possiblePathExists) {
-                        await processFile(possiblePath);
-                        found = true;
-                        break;
-                    }
-                }
-
-                // If none of the file paths worked, try the raw import path
-                // (it might be a directory)
-                const tryRawPath = !found && (await fs.pathExists(importPath));
-                if (tryRawPath) {
+                // Check all possible paths in parallel
+                const existResults = await Promise.all(
+                    possiblePaths.map(async p => ({ path: p, exists: await fs.pathExists(p) })),
+                );
+                const found = existResults.find(r => r.exists);
+                if (found) {
+                    await processFile(found.path);
+                } else if (await fs.pathExists(importPath)) {
+                    // If none of the file paths worked, try the raw import path
+                    // (it might be a directory)
                     await processFile(importPath);
                 }
             }
@@ -449,27 +444,13 @@ export async function findVendurePluginFiles({
         const results = await Promise.all(
             batch.map(async file => {
                 try {
-                    // Try reading just first 3000 bytes first - most imports are at the top
                     const fileHandle = await open(file, 'r');
                     try {
-                        const buffer = Buffer.alloc(3000);
-                        const { bytesRead } = await fileHandle.read(buffer, 0, 3000, 0);
-                        let content = buffer.toString('utf8', 0, bytesRead);
-
-                        // Quick check for common indicators
+                        const buffer = Buffer.alloc(5000);
+                        const { bytesRead } = await fileHandle.read(buffer, 0, 5000, 0);
+                        const content = buffer.toString('utf8', 0, bytesRead);
                         if (content.includes('@vendure/core')) {
                             return file;
-                        }
-
-                        // If we find a promising indicator but no definitive match,
-                        // read more of the file
-                        if (content.includes('@vendure') || content.includes('VendurePlugin')) {
-                            const largerBuffer = Buffer.alloc(5000);
-                            const { bytesRead: moreBytes } = await fileHandle.read(largerBuffer, 0, 5000, 0);
-                            content = largerBuffer.toString('utf8', 0, moreBytes);
-                            if (content.includes('@vendure/core')) {
-                                return file;
-                            }
                         }
                     } finally {
                         await fileHandle.close();

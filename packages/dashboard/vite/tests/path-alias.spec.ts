@@ -1,13 +1,24 @@
 import { rm } from 'node:fs/promises';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { compile } from '../utils/compiler.js';
 import { debugLogger, noopLogger } from '../utils/logger.js';
+import { clearRawTsConfigCache } from '../utils/tsconfig-utils.js';
+
+const tempRoot = join(__dirname, './__temp');
+
+afterAll(async () => {
+    await rm(tempRoot, { recursive: true, force: true });
+});
+
+beforeEach(() => {
+    clearRawTsConfigCache();
+});
 
 describe('detecting plugins using tsconfig path aliases', () => {
     it('should detect plugins using tsconfig path aliases', { timeout: 60_000 }, async () => {
-        const tempDir = join(__dirname, './__temp/path-alias');
+        const tempDir = join(tempRoot, 'path-alias');
         await rm(tempDir, { recursive: true, force: true });
 
         const result = await compile({
@@ -52,4 +63,35 @@ describe('detecting plugins using tsconfig path aliases', () => {
         );
         expect(plugins[2].pluginPath).toBe(join(tempDir, 'ts-aliased', 'src', 'ts-aliased.plugin.js'));
     });
+});
+
+describe('compile() invokes PathAdapter for both phases', () => {
+    it(
+        'should call transformTsConfigPathMappings with both compiling and loading phases',
+        { timeout: 60_000 },
+        async () => {
+            const tempDir = join(tempRoot, 'path-alias-phases');
+            await rm(tempDir, { recursive: true, force: true });
+
+            const transform = vi.fn(({ phase, patterns }) => {
+                if (phase === 'loading') {
+                    return patterns.map((pattern: string) => {
+                        return pattern.replace(/\/fixtures-path-alias/, '').replace(/.ts$/, '.js');
+                    });
+                }
+                return patterns;
+            });
+
+            await compile({
+                outputPath: tempDir,
+                vendureConfigPath: join(__dirname, 'fixtures-path-alias', 'vendure-config.ts'),
+                logger: process.env.LOG ? debugLogger : noopLogger,
+                pathAdapter: { transformTsConfigPathMappings: transform },
+            });
+
+            const phases = new Set(transform.mock.calls.map(call => call[0].phase));
+            expect(phases).toContain('compiling');
+            expect(phases).toContain('loading');
+        },
+    );
 });
