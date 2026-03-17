@@ -7,6 +7,7 @@ import {
     useQueryClient,
     useSuspenseQuery,
 } from '@tanstack/react-query';
+import { useRouter } from '@tanstack/react-router';
 import { ResultOf, VariablesOf } from 'gql.tada';
 import { DocumentNode } from 'graphql';
 import { FormEvent } from 'react';
@@ -262,6 +263,7 @@ export function useDetailPage<
         onError,
     } = options;
     const isNew = params.id === NEW_ENTITY_PATH;
+    const router = useRouter();
     const queryClient = useQueryClient();
     const returnEntityName = entityName ?? getEntityName(queryDocument);
     const customFieldConfig = useCustomFieldConfig(returnEntityName);
@@ -293,11 +295,12 @@ export function useDetailPage<
 
     const updateMutation = useMutation({
         mutationFn: updateDocument ? api.mutate(updateDocument) : undefined,
-        onSuccess: data => {
+        onSuccess: async data => {
             if (updateDocument) {
                 const updateMutationName = getMutationName(updateDocument);
                 onSuccess?.((data as any)[updateMutationName]);
-                void queryClient.invalidateQueries({ queryKey: detailQueryOptions.queryKey });
+                await queryClient.invalidateQueries({ queryKey: detailQueryOptions.queryKey });
+                void router.invalidate();
             }
         },
         onError,
