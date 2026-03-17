@@ -35,17 +35,17 @@ export type TranslatableFormFieldProps<TFieldValues extends TranslatableEntity |
     name: TFieldValues extends TranslatableEntity
         ? keyof Omit<NonNullable<TFieldValues['translations']>[number], 'languageCode'>
         : TFieldValues extends TranslatableEntity[]
-            ? keyof Omit<NonNullable<TFieldValues[number]['translations']>[number], 'languageCode'>
-            : never;
+          ? keyof Omit<NonNullable<TFieldValues[number]['translations']>[number], 'languageCode'>
+          : never;
 };
 
 export const TranslatableFormField = <
     TFieldValues extends TranslatableEntity | TranslatableEntity[] = TranslatableEntity,
 >({
-      name,
-      label,
-      ...props
-  }: TranslatableFormFieldProps<TFieldValues>) => {
+    name,
+    label,
+    ...props
+}: TranslatableFormFieldProps<TFieldValues>) => {
     const { formatLanguageName } = useLocalFormat();
     const { contentLanguage } = useUserSettings().settings;
     const formValues = props.control?._formValues;
@@ -112,19 +112,18 @@ export type TranslatableFormFieldWrapperProps<
 export const TranslatableFormFieldWrapper = <
     TFieldValues extends TranslatableEntity | TranslatableEntity[] = TranslatableEntity,
 >({
-      name,
-      label,
-      description,
-      render,
-      renderFormControl,
-      ...props
-  }: TranslatableFormFieldWrapperProps<TFieldValues>) => {
+    label,
+    description,
+    renderFormControl,
+    ...controllerProps
+}: TranslatableFormFieldWrapperProps<TFieldValues>) => {
+    const { name, render, ...rest } = controllerProps;
     return (
         <LocationWrapper identifier={name as string}>
             <TranslatableFormField
-                label={label}
-                control={props.control}
+                {...rest}
                 name={name}
+                label={label}
                 render={renderArgs => (
                     <FormItem>
                         {label && <FormLabel>{label}</FormLabel>}

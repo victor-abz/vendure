@@ -40,10 +40,10 @@ export type FormFieldWrapperProps<
 /**
  * @description
  * This is a wrapper that can be used in all forms to wrap the actual form control, and provide a label, description and error message.
- * 
+ *
  * Use this instead of the default Shadcn FormField (etc.) components, as it also supports
  * overridden form components.
- * 
+ *
  * @example
  * ```tsx
  * <PageBlock column="main" blockId="main-form">
@@ -63,7 +63,7 @@ export type FormFieldWrapperProps<
  *     </DetailFormGrid>
  * </PageBlock>
  * ```
- * 
+ *
  * If you are dealing with translatable fields, use the {@link TranslatableFormFieldWrapper} component instead.
  *
  * @docsCategory form-components
@@ -75,17 +75,16 @@ export function FormFieldWrapper<
     TFieldValues extends FieldValues = FieldValues,
     TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
-    control,
-    name,
-    render,
     label,
     description,
     renderFormControl = true,
+    ...controllerProps
 }: FormFieldWrapperProps<TFieldValues, TName>) {
+    const { name, render, ...rest } = controllerProps;
     return (
         <LocationWrapper identifier={name}>
             <FormField
-                control={control}
+                {...rest}
                 name={name}
                 render={renderArgs => (
                     <FormItem>
