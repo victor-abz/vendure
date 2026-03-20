@@ -52,7 +52,7 @@ export type Translation<T> =
  */
 export type TranslationInput<T> = { [K in TranslatableKeys<T>]?: string | null } & {
     id?: ID | null;
-    languageCode: LanguageCode;
+    languageCode: LanguageCode | `${LanguageCode}`;
 };
 
 /**
