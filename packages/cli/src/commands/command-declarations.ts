@@ -199,6 +199,27 @@ export const cliCommands: CliCommandDefinition[] = [
         },
     },
     {
+        name: 'codemod',
+        description: 'Run codemods to update your Vendure project code',
+        arguments: [
+            {
+                name: 'transform',
+                description: 'Name of the codemod to run (e.g. dashboard-ui)',
+                required: false,
+            },
+            {
+                name: 'path',
+                description: 'Path to the files or directory to transform',
+                required: false,
+            },
+        ],
+        action: async (transform, path, _options) => {
+            const { codemodCommand } = await import('./codemod/codemod');
+            await codemodCommand(transform, path);
+            process.exit(0);
+        },
+    },
+    {
         name: 'schema',
         description: 'Generate a schema file from your GraphQL APIs',
         options: [
@@ -235,7 +256,7 @@ export const cliCommands: CliCommandDefinition[] = [
         action: async options => {
             const { schemaCommand } = await import('./schema/schema');
             await schemaCommand({
-                ...(options as any),
+                ...options,
                 outputDir: options?.dir,
             });
             process.exit(0);

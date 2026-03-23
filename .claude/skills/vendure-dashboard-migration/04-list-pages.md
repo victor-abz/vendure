@@ -279,11 +279,9 @@ export const articleList: DashboardRouteDefinition = {
             ]}
         >
             <PageActionBarRight>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        New article
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    New article
                 </Button>
             </PageActionBarRight>
         </ListPage>

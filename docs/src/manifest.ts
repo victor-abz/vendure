@@ -443,6 +443,11 @@ const manifestInput: DocsPackageManifestInput = {
                     file: file('docs/guides/extending-the-dashboard/extending-overview/index.mdx'),
                 },
                 {
+                    title: 'Public API & Imports',
+                    slug: 'public-api',
+                    file: file('docs/guides/extending-the-dashboard/public-api/index.mdx'),
+                },
+                {
                     title: 'Creating Pages',
                     slug: 'creating-pages',
                     file: file('docs/guides/extending-the-dashboard/creating-pages/index.mdx'),

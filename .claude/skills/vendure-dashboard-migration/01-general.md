@@ -121,14 +121,13 @@ custom design system based on Clarity UI
 
 ### New
 
-tailwind + shadcn/ui. Shadcn components import from `@vendure/dashboard`
+Tailwind + Vendure Design System (Base UI). All UI components import from `@vendure/dashboard`
 
 ```tsx
 import { Button, DetailPageButton, VendureImage } from '@vendure/dashboard';
 import { Star } from 'lucide-react';
 
 export function MyComponent() {
-    // non-exhaustive - all standard Shadcn props are available
     return (
         <Button variant="default">Primary</Button>
         <Button variant="secondary">Secondary</Button>
@@ -154,7 +153,7 @@ Important:
 
   - When using `Badge`, prefer variant="secondary" unless especially important data
   - Where possible avoid specific tailwind colours like `text-blue-600`. Instead use (where possible)
-    the Shadcn theme colours, eg:
+    the semantic design token colours, eg:
     ```
     --color-background
     --color-foreground
