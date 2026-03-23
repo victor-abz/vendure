@@ -1,5 +1,3 @@
-'use client';
-
 import { format } from 'date-fns';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
@@ -74,8 +72,7 @@ export function DateTimeInput({ value, onChange, fieldDef, disabled }: Readonly<
 
     return (
         <Popover open={isOpen} onOpenChange={readOnly ? undefined : setIsOpen}>
-            <PopoverTrigger asChild>
-                <div className="flex items-center">
+            <PopoverTrigger render={<div className="flex items-center" />}>
                     <Button
                         variant="outline"
                         disabled={readOnly}
@@ -100,7 +97,6 @@ export function DateTimeInput({ value, onChange, fieldDef, disabled }: Readonly<
                             <X />
                         </Button>
                     ) : null}
-                </div>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
                 <div className="sm:flex">

@@ -68,13 +68,11 @@ export function DevModeToolbarItemWrapper({
                 )}
             >
                 <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                    <PopoverTrigger asChild>
-                        <DevModeButton className="h-5 w-5 top-0 -start-4" />
-                    </PopoverTrigger>
+                    <PopoverTrigger render={<DevModeButton className="h-5 w-5 top-0 -start-4" />} />
                     <PopoverContent className="w-40 p-2">
                         <div className="text-xs">
                             <div className="text-muted-foreground mb-0.5">itemId</div>
-                            <CopyableText text={itemId} />
+                            <CopyableText value={itemId} />
                         </div>
                     </PopoverContent>
                 </Popover>

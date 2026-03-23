@@ -108,7 +108,7 @@ export function RichTextEditor({ value, onChange, disabled = false }: Readonly<R
     }
 
     return (
-        <div className="border rounded-md overflow-hidden">
+        <div className="border rounded-md overflow-hidden" data-testid="rich-text-editor">
             <ResponsiveToolbar editor={editor} disabled={disabled} />
             <EditorContent editor={editor} />
             <TableEditIcons editor={editor} disabled={disabled} />

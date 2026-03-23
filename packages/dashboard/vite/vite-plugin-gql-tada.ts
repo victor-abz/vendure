@@ -4,7 +4,6 @@ import { printSchema } from 'graphql';
 import * as path from 'path';
 import { Plugin } from 'vite';
 
-import { generateSchema } from './utils/schema-generator.js';
 import { ConfigLoaderApi, getConfigLoaderApi } from './vite-plugin-config-loader.js';
 
 export function gqlTadaPlugin(options: {
@@ -21,6 +20,7 @@ export function gqlTadaPlugin(options: {
         },
         async buildStart() {
             const { vendureConfig } = await configLoaderApi.getVendureConfig();
+            const { generateSchema } = await import('./utils/schema-generator.js');
             const safeSchema = await generateSchema({ vendureConfig });
 
             const tsConfigContent = {

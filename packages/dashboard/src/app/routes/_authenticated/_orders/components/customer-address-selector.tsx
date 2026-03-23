@@ -59,13 +59,11 @@ export function CustomerAddressSelector({
                 }
             }}
         >
-            <PopoverTrigger asChild>
-                <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm" type="button" className="" disabled={!customerId}>
-                        <Plus className="h-4 w-4" />
-                        <Trans>Select address</Trans>
-                    </Button>
-                </div>
+            <PopoverTrigger render={<div className="flex items-center gap-2" />}>
+                <Button variant="outline" size="sm" type="button" className="" disabled={!customerId}>
+                    <Plus className="h-4 w-4" />
+                    <Trans>Select address</Trans>
+                </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[400px] p-0" align="start">
                 <div className="p-4">

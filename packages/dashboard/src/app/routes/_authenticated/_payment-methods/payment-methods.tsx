@@ -58,26 +58,27 @@ function PaymentMethodListPage() {
                 },
             }}
             bulkActions={[
-                {
-                    component: AssignPaymentMethodsToChannelBulkAction,
-                    order: 100,
-                },
-                {
-                    component: RemovePaymentMethodsFromChannelBulkAction,
-                    order: 200,
-                },
-                {
-                    component: DeletePaymentMethodsBulkAction,
-                    order: 500,
-                },
+                [
+                    {
+                        component: AssignPaymentMethodsToChannelBulkAction,
+                        order: 100,
+                    },
+                    {
+                        component: RemovePaymentMethodsFromChannelBulkAction,
+                        order: 200,
+                    },
+                ],
+                [
+                    {
+                        component: DeletePaymentMethodsBulkAction,
+                    },
+                ],
             ]}
         >
             <ActionBarItem itemId="create-button" requiresPermission={['CreatePaymentMethod']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        <Trans>New Payment Method</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    <Trans>New Payment Method</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

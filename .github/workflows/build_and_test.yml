@@ -85,23 +85,29 @@ jobs:
                     echo "changed=false" >> "$GITHUB_OUTPUT"
                   fi
     dashboard-e2e:
-        name: dashboard e2e
+        name: dashboard e2e (${{ matrix.shard }})
         needs: dashboard-changes
         if: needs.dashboard-changes.outputs.changed == 'true'
         runs-on: ubuntu-latest
         permissions:
             contents: read
+        strategy:
+            fail-fast: false
+            matrix:
+                shard: [1, 2, 3, 4]
         steps:
             - uses: actions/checkout@v4
             - uses: ./.github/actions/setup
             - name: Build
-              run: npx lerna run ci
+              run: npx lerna run ci --scope @vendure/testing --include-dependencies
             - name: Cache Playwright browsers
               id: playwright-cache
               uses: actions/cache@v4
               with:
                   path: ~/.cache/ms-playwright
                   key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      playwright-${{ runner.os }}-
             - name: Install Playwright browsers
               if: steps.playwright-cache.outputs.cache-hit != 'true'
               run: npx playwright install chromium
@@ -110,7 +116,7 @@ jobs:
               run: npx playwright install-deps chromium
               working-directory: packages/dashboard
             - name: Dashboard e2e tests
-              run: npm run e2e:pw
+              run: npm run e2e:pw -- --shard=${{ matrix.shard }}/4
               working-directory: packages/dashboard
     sonarqube:
         name: SonarQube

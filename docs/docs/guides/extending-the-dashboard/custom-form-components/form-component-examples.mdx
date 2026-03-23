@@ -15,9 +15,8 @@ the validity of the email address, as defined by the custom field "pattern" opti
 <Tabs>
 <TabItem value="Component" label="Component" default>
     ```tsx title="src/plugins/my-plugin/dashboard/components/email-input.tsx"
-    import {AffixedInput, DashboardFormComponent} from '@vendure/dashboard';
+    import {AffixedInput, DashboardFormComponent, useFormContext} from '@vendure/dashboard';
     import {Mail, Check, X} from 'lucide-react';
-    import {useFormContext} from 'react-hook-form';
 
     export const EmailInputComponent: DashboardFormComponent = ({name, value, onChange, disabled}) => {
         const {getFieldState} = useFormContext(); // [!code highlight]
@@ -320,8 +319,7 @@ react to changes in that field.
 <Tabs>
 <TabItem value="Component" label="Component" default>
 ```tsx title="src/plugins/my-plugin/dashboard/components/slug-input.tsx"
-    import { Input, Button, Switch, DashboardFormComponent } from '@vendure/dashboard';
-    import { useFormContext } from 'react-hook-form';
+    import { Input, Button, Switch, DashboardFormComponent, useFormContext } from '@vendure/dashboard';
     import { useState, useEffect } from 'react';
     import { RefreshCw, Lock, Unlock } from 'lucide-react';
 

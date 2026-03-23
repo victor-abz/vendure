@@ -15,6 +15,7 @@ interface DataTableBulkActionItemProps {
     className?: string;
     requiresPermission?: string[];
     disabled?: boolean;
+    closeOnClick?: boolean;
 }
 ```
 
@@ -55,10 +56,15 @@ interface DataTableBulkActionItemProps {
 <MemberInfo kind="property" type={`boolean`}   />
 
 
+### closeOnClick
+
+<MemberInfo kind="property" type={`boolean`}   />
+
+
 
 
 </div>
-<GenerationInfo sourceFile="packages/dashboard/src/lib/components/data-table/data-table-bulk-action-item.tsx" sourceLine="67" packageName="@vendure/dashboard" since="3.4.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/components/data-table/data-table-bulk-action-item.tsx" sourceLine="68" packageName="@vendure/dashboard" since="3.4.0" />
 
 A component that should be used to implement any bulk actions for list pages & data tables.
 
@@ -184,3 +190,64 @@ The React component that will be rendered as the bulk action item.
 
 
 </div>
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/extension-api/types/data-table.ts" sourceLine="132" packageName="@vendure/dashboard" since="3.4.0" />
+
+A group of bulk actions that are visually separated in the dropdown menu.
+Optionally includes a translatable label rendered as a `DropdownMenuLabel`.
+
+```ts title="Signature"
+type BulkActionGroup = {
+    label?: React.ReactNode;
+    actions: BulkAction[];
+}
+```
+
+<div className="members-wrapper">
+
+### label
+
+<MemberInfo kind="property" type={`React.ReactNode`}   />
+
+Optional label rendered as a `DropdownMenuLabel` at the top of the group.
+### actions
+
+<MemberInfo kind="property" type={`<a href='/reference/dashboard/list-views/bulk-actions#bulkaction'>BulkAction</a>[]`}   />
+
+The bulk actions in this group.
+
+
+</div>
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/extension-api/types/data-table.ts" sourceLine="179" packageName="@vendure/dashboard" since="3.4.0" />
+
+Bulk actions input supports three formats:
+
+1. **Flat array** (backwards compatible): `BulkAction[]` — all actions in one group.
+2. **Array of arrays**: `BulkAction[][]` — each inner array is a visually separated group.
+3. **Array of groups**: `BulkActionGroup[]` — groups with optional labels.
+
+Formats 2 and 3 can be mixed in the same array.
+
+*Example*
+
+```tsx
+// Flat (single group, backwards compatible)
+bulkActions={[
+  { component: AssignBulkAction },
+  { component: DeleteBulkAction },
+]}
+
+// Grouped with labels
+bulkActions={[
+  [
+    { component: AssignBulkAction },
+    { component: DuplicateBulkAction },
+  ],
+  { label: <Trans>Danger zone</Trans>, actions: [
+    { component: DeleteBulkAction },
+  ]},
+]}
+```
+
+```ts title="Signature"
+type BulkActionsInput = BulkAction[] | Array<BulkAction[] | BulkActionGroup>
+```

@@ -142,7 +142,7 @@ export function AppLayout() {
                         <div className="flex items-center justify-between gap-2 px-4 w-full">
                             <div className="flex items-center justify-start gap-2 min-w-0 overflow-hidden">
                                 <SidebarTrigger className="-ml-1 shrink-0" />
-                                <Separator orientation="vertical" className="mr-2 h-4 shrink-0" />
+                                <Separator orientation="vertical" className="mr-2 shrink-0" />
                                 <GeneratedBreadcrumbs />
                             </div>
                             <div className="flex items-center justify-end gap-2 shrink-0">

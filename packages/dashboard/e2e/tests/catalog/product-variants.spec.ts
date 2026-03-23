@@ -35,7 +35,9 @@ test.describe('product variant generation', () => {
 
     test('should add an option group to the product via the sidebar dialog', async ({ page }) => {
         await page.goto(`/products/${productId}`);
-        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible({
+            timeout: 10_000,
+        });
 
         // The empty state card should have an inline "Add option group" button
         await expect(page.getByRole('button', { name: 'Add option group' })).toBeVisible();
@@ -86,7 +88,9 @@ test.describe('product variant generation', () => {
 
     test('should show the generate variants panel after adding an option group', async ({ page }) => {
         await page.goto(`/products/${productId}`);
-        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible({
+            timeout: 10_000,
+        });
 
         // The "Product variants" block should now show the GenerateVariantsPanel
         // with rows for each option value (Small, Medium, Large)
@@ -94,21 +98,23 @@ test.describe('product variant generation', () => {
         await expect(page.locator('table')).toBeVisible();
 
         // Each variant row should have a SKU input
-        const skuInputs = page.locator('table input[placeholder="SKU"]');
+        const skuInputs = page.getByTestId('variant-sku-input');
         await expect(skuInputs).toHaveCount(3);
     });
 
     test('should generate variants by filling in the form and submitting', async ({ page }) => {
         await page.goto(`/products/${productId}`);
-        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible({
+            timeout: 10_000,
+        });
 
         // Fill in SKU and stock for each variant row
-        const skuInputs = page.locator('table input[placeholder="SKU"]');
+        const skuInputs = page.getByTestId('variant-sku-input');
         await skuInputs.nth(0).fill('EVTP-SM');
         await skuInputs.nth(1).fill('EVTP-MD');
         await skuInputs.nth(2).fill('EVTP-LG');
 
-        const stockInputs = page.locator('table input[type="number"]');
+        const stockInputs = page.getByTestId('variant-stock-input');
         await stockInputs.nth(0).fill('10');
         await stockInputs.nth(1).fill('10');
         await stockInputs.nth(2).fill('10');
@@ -127,20 +133,22 @@ test.describe('product variant generation', () => {
 
     test('should show variants in the product variants table after generation', async ({ page }) => {
         await page.goto(`/products/${productId}`);
-        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible({
+            timeout: 10_000,
+        });
 
         // The variants table should now show the generated variants (may need scrolling)
         // Variant names follow the pattern: "ProductName OptionName"
-        const variantLink = page.getByRole('link', { name: /E2E Variant Test Product Small/i });
+        const variantLink = page.getByRole('button', { name: /E2E Variant Test Product Small/i });
         await variantLink.scrollIntoViewIfNeeded();
         await expect(variantLink).toBeVisible({ timeout: 10_000 });
 
         // Verify multiple variants exist
-        await expect(page.getByRole('link', { name: /E2E Variant Test Product Medium/i })).toBeVisible();
-        await expect(page.getByRole('link', { name: /E2E Variant Test Product Large/i })).toBeVisible();
+        await expect(page.getByRole('button', { name: /E2E Variant Test Product Medium/i })).toBeVisible();
+        await expect(page.getByRole('button', { name: /E2E Variant Test Product Large/i })).toBeVisible();
 
         // The "Manage variants" link should be visible
-        const manageLink = page.getByRole('link', { name: /Manage variants/i });
+        const manageLink = page.getByRole('button', { name: /Manage variants/i });
         await manageLink.scrollIntoViewIfNeeded();
         await expect(manageLink).toBeVisible();
     });
@@ -232,12 +240,7 @@ test.describe('manage product variants', () => {
 
         // Click the delete button (trash icon) on the last variant row
         const lastRow = table.locator('tbody tr').last();
-        await lastRow
-            .getByRole('button')
-            .filter({
-                has: page.locator('svg.text-destructive'),
-            })
-            .click();
+        await lastRow.getByTestId('variant-delete-btn').click();
 
         // The confirmation dialog should appear (AlertDialog, not native window.confirm)
         const alertDialog = page.locator('[role="alertdialog"]');
@@ -291,9 +294,9 @@ test.describe('manage product variants', () => {
 
         // Fill in the SKU
         const skuInput = dialog
-            .locator('[data-slot="form-item"]')
+            .locator('[data-slot="field"]')
             .filter({
-                has: page.locator('[data-slot="form-label"]').getByText('SKU', { exact: true }),
+                has: page.locator('[data-slot="field-label"]').getByText('SKU', { exact: true }),
             })
             .getByRole('textbox');
         await skuInput.fill('E2E-LAPTOP-UNIQUE');

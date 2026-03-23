@@ -137,14 +137,12 @@ function SortableAsset({
             {updatePermissions && (
                 <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button
+                        <DropdownMenuTrigger render={<Button
                                 variant="secondary"
                                 size="icon"
                                 className="h-6 w-6 rounded-full shadow-md"
-                            >
+                            />}>
                                 <EllipsisIcon className="h-4 w-4" />
-                            </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuItem onClick={() => onPreview(asset)}>Preview</DropdownMenuItem>

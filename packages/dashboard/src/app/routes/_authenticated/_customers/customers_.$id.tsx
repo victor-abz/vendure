@@ -212,10 +212,8 @@ function CustomerDetailPage() {
                             </DetailFormGrid>
 
                             <Dialog open={newAddressOpen} onOpenChange={setNewAddressOpen}>
-                                <DialogTrigger asChild>
-                                    <Button variant="outline">
-                                        <Plus className="w-4 h-4" /> <Trans>Add new address</Trans>
-                                    </Button>
+                                <DialogTrigger render={<Button variant="outline" />}>
+                                    <Plus className="w-4 h-4" /> <Trans>Add new address</Trans>
                                 </DialogTrigger>
                                 <DialogContent>
                                     <DialogHeader>

@@ -8,11 +8,14 @@ import { PageContext } from './page-provider.js';
 import { globalRegistry } from '../registry/global-registry.js';
 import { UserSettingsContext, type UserSettingsContextType } from '../../providers/user-settings.js';
 
-const useMediaQueryMock = vi.hoisted(() => vi.fn());
+const useIsMobileMock = vi.hoisted(() => vi.fn(() => false));
 const useCopyToClipboardMock = vi.hoisted(() => vi.fn(() => [null, vi.fn()]));
 
+vi.mock('@/vdb/hooks/use-mobile.js', () => ({
+    useIsMobile: useIsMobileMock,
+}));
+
 vi.mock('@uidotdev/usehooks', () => ({
-    useMediaQuery: useMediaQueryMock,
     useCopyToClipboard: useCopyToClipboardMock,
 }));
 
@@ -34,7 +37,7 @@ function registerBlock(
 }
 
 function renderPageLayout(children: React.ReactNode, { isDesktop = true } = {}) {
-    useMediaQueryMock.mockReturnValue(isDesktop);
+    useIsMobileMock.mockReturnValue(!isDesktop);
     const noop = () => undefined;
     const contextValue = {
         settings: {
@@ -77,7 +80,7 @@ function getRenderedBlockIds(markup: string) {
 
 describe('PageLayout', () => {
     beforeEach(() => {
-        useMediaQueryMock.mockReset();
+        useIsMobileMock.mockReset();
         useCopyToClipboardMock.mockReset();
         useCopyToClipboardMock.mockReturnValue([null, vi.fn()]);
         const pageBlockRegistry = globalRegistry.get('dashboardPageBlockRegistry');

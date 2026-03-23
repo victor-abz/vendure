@@ -24,7 +24,6 @@ import {
     DropdownMenuTrigger,
 } from '../../ui/dropdown-menu.js';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select.js';
-import { Separator } from '../../ui/separator.js';
 import { ImageDialog } from './image-dialog.js';
 import { LinkDialog } from './link-dialog.js';
 
@@ -330,11 +329,10 @@ export function ResponsiveToolbar({ editor, disabled }: Readonly<ResponsiveToolb
             const toolbar = toolbarRef.current;
             const toolbarWidth = toolbar.clientWidth;
             const headingSelectWidth = 130; // Fixed width for heading select
-            const separatorWidth = 20; // Approximate separator width
             const overflowButtonWidth = 40; // Width for overflow button
             const padding = 16; // Toolbar padding
 
-            let usedWidth = headingSelectWidth + separatorWidth + padding;
+            let usedWidth = headingSelectWidth + padding;
             const visible: string[] = [];
             const overflow: string[] = [];
 
@@ -384,35 +382,30 @@ export function ResponsiveToolbar({ editor, disabled }: Readonly<ResponsiveToolb
 
     return (
         <div ref={toolbarRef} className="flex items-center gap-1 p-2 border-b bg-muted/30">
-            <Select value={getCurrentHeading()} onValueChange={handleHeadingChange} disabled={disabled}>
-                <SelectTrigger className="h-8 w-[130px]">
+            <Select
+                items={headingOptions}
+                value={getCurrentHeading()}
+                onValueChange={value => value != null && handleHeadingChange(value)}
+                disabled={disabled}
+            >
+                <SelectTrigger size="sm" className="w-[130px] py-1">
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                     {headingOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
-                            <span className="text-xs">{option.label}</span>
+                            {option.label}
                         </SelectItem>
                     ))}
                 </SelectContent>
             </Select>
 
-            <Separator orientation="vertical" className="mx-1 h-6" />
-
             {visibleElements}
 
             {overflowElements.length > 0 && (
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 px-2"
-                            disabled={disabled}
-                        >
+                    <DropdownMenuTrigger render={<Button type="button" variant="ghost" size="sm" className="h-8 px-2" disabled={disabled} />}>
                             <MoreHorizontalIcon className="h-4 w-4" />
-                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         {overflowElements.map((item, index) => (

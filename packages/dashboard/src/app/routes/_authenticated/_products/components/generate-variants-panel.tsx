@@ -2,7 +2,7 @@ import { MoneyInput } from '@/vdb/components/data-input/money-input.js';
 import { Alert, AlertDescription } from '@/vdb/components/ui/alert.js';
 import { Button } from '@/vdb/components/ui/button.js';
 import { Checkbox } from '@/vdb/components/ui/checkbox.js';
-import { FormControl, FormField, FormItem, FormMessage } from '@/vdb/components/ui/form.js';
+import { Field, FieldError } from '@/vdb/components/ui/field.js';
 import { Input } from '@/vdb/components/ui/input.js';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/vdb/components/ui/table.js';
 import { api } from '@/vdb/graphql/api.js';
@@ -12,7 +12,8 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { useMutation } from '@tanstack/react-query';
 import { Save } from 'lucide-react';
 import { useMemo } from 'react';
-import { FormProvider, useForm, useWatch } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+import { Form } from '@/vdb/components/ui/form.js';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { createProductVariantsDocument } from '../products.graphql.js';
@@ -170,7 +171,7 @@ export function GenerateVariantsPanel({
     }
 
     return (
-        <FormProvider {...form}>
+        <Form {...form}>
             <div className="space-y-4">
                 <Table>
                     <TableHeader>
@@ -201,18 +202,16 @@ export function GenerateVariantsPanel({
                             <TableRow key={variant.id}>
                                 {variants.length > 1 && (
                                     <TableCell>
-                                        <FormField
+                                        <Controller
                                             control={form.control}
                                             name={`variants.${variant.id}.enabled`}
                                             render={({ field }) => (
-                                                <FormItem className="flex items-center space-x-2">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value}
-                                                            onCheckedChange={field.onChange}
-                                                        />
-                                                    </FormControl>
-                                                </FormItem>
+                                                <Field className="flex items-center space-x-2">
+                                                    <Checkbox
+                                                        checked={field.value}
+                                                        onCheckedChange={field.onChange}
+                                                    />
+                                                </Field>
                                             )}
                                         />
                                     </TableCell>
@@ -225,60 +224,55 @@ export function GenerateVariantsPanel({
                                 )}
 
                                 <TableCell>
-                                    <FormField
+                                    <Controller
                                         control={form.control}
                                         name={`variants.${variant.id}.sku`}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <Input {...field} placeholder="SKU" />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
+                                        render={({ field, fieldState }) => (
+                                            <Field data-invalid={fieldState.invalid || undefined}>
+                                                <Input {...field} placeholder="SKU" data-testid="variant-sku-input" />
+                                                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                                            </Field>
                                         )}
                                     />
                                 </TableCell>
 
                                 <TableCell>
-                                    <FormField
+                                    <Controller
                                         control={form.control}
                                         name={`variants.${variant.id}.price`}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <MoneyInput
-                                                        {...field}
-                                                        value={Number(field.value) || 0}
-                                                        onChange={value =>
-                                                            field.onChange(value.toString())
-                                                        }
-                                                        currency={
-                                                            activeChannel?.defaultCurrencyCode
-                                                        }
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
+                                        render={({ field, fieldState }) => (
+                                            <Field data-invalid={fieldState.invalid || undefined}>
+                                                <MoneyInput
+                                                    {...field}
+                                                    value={Number(field.value) || 0}
+                                                    onChange={value =>
+                                                        field.onChange(value.toString())
+                                                    }
+                                                    currency={
+                                                        activeChannel?.defaultCurrencyCode
+                                                    }
+                                                />
+                                                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                                            </Field>
                                         )}
                                     />
                                 </TableCell>
 
                                 <TableCell>
-                                    <FormField
+                                    <Controller
                                         control={form.control}
                                         name={`variants.${variant.id}.stock`}
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        type="number"
-                                                        min="0"
-                                                        step="1"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
+                                        render={({ field, fieldState }) => (
+                                            <Field data-invalid={fieldState.invalid || undefined}>
+                                                <Input
+                                                    {...field}
+                                                    type="number"
+                                                    min="0"
+                                                    step="1"
+                                                    data-testid="variant-stock-input"
+                                                />
+                                                {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                                            </Field>
                                         )}
                                     />
                                 </TableCell>
@@ -302,6 +296,6 @@ export function GenerateVariantsPanel({
                     </Button>
                 </div>
             </div>
-        </FormProvider>
+        </Form>
     );
 }

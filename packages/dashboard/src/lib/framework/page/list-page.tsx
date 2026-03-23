@@ -16,7 +16,7 @@ import { AnyRoute, AnyRouter, useNavigate } from '@tanstack/react-router';
 import { ColumnFiltersState, SortingState, Table } from '@tanstack/react-table';
 import { TableOptions } from '@tanstack/table-core';
 
-import { BulkAction } from '@/vdb/framework/extension-api/types/index.js';
+import { BulkActionsInput } from '@/vdb/framework/extension-api/types/index.js';
 import {
     FullWidthPageBlock,
     Page,
@@ -361,7 +361,7 @@ export interface ListPageProps<
      * />
      * ```
      */
-    bulkActions?: BulkAction[];
+    bulkActions?: BulkActionsInput;
     /**
      * @description
      * Register a function that allows you to assign a refresh function for
@@ -464,11 +464,9 @@ export interface ListPageProps<
  *             }}
  *         >
  *             <PageActionBarRight>
- *                 <Button asChild>
- *                     <Link to="./new">
- *                         <PlusIcon className="mr-2 h-4 w-4" />
- *                         New article
- *                     </Link>
+ *                 <Button render={<Link to="./new" />}>
+ *                     <PlusIcon className="mr-2 h-4 w-4" />
+ *                     New article
  *                 </Button>
  *             </PageActionBarRight>
  *         </ListPage>

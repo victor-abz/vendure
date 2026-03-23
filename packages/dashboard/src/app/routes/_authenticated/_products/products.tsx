@@ -94,26 +94,15 @@ function ProductListPage() {
             }}
             route={Route}
             bulkActions={[
-                {
-                    component: AssignProductsToChannelBulkAction,
-                    order: 100,
-                },
-                {
-                    component: RemoveProductsFromChannelBulkAction,
-                    order: 200,
-                },
-                {
-                    component: AssignFacetValuesToProductsBulkAction,
-                    order: 300,
-                },
-                {
-                    component: DuplicateProductsBulkAction,
-                    order: 400,
-                },
-                {
-                    component: DeleteProductsBulkAction,
-                    order: 500,
-                },
+                [
+                    { component: AssignProductsToChannelBulkAction, order: 100 },
+                    { component: RemoveProductsFromChannelBulkAction, order: 200 },
+                    { component: AssignFacetValuesToProductsBulkAction, order: 300 },
+                    { component: DuplicateProductsBulkAction, order: 400 },
+                ],
+                [
+                    { component: DeleteProductsBulkAction },
+                ],
             ]}
         >
             <ActionBarItem itemId="rebuild-index-button" requiresPermission={['UpdateCatalog']}>
@@ -123,11 +112,9 @@ function ProductListPage() {
                 </Button>
             </ActionBarItem>
             <ActionBarItem itemId="create-button" requiresPermission={['CreateProduct', 'CreateCatalog']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        <Trans>New Product</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    <Trans>New Product</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

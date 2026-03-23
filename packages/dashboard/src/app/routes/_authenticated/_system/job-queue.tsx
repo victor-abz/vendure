@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import {
     Ban,
-    CheckCircle2Icon,
+    CheckIcon,
     ChevronDown,
     CircleXIcon,
     ClockIcon,
@@ -27,6 +27,21 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { PayloadDialog } from './components/payload-dialog.js';
 import { cancelJobDocument, jobListDocument, jobQueueListDocument } from './job-queue.graphql.js';
+
+function getJobStateBadgeVariant(state: string) {
+    switch (state) {
+        case 'PENDING':
+        case 'RETRYING':
+            return 'warning';
+        case 'COMPLETED':
+            return 'success';
+        case 'FAILED':
+        case 'CANCELLED':
+            return 'destructive';
+        default:
+            return 'secondary';
+    }
+}
 
 export const Route = createFileRoute('/_authenticated/_system/job-queue')({
     component: JobQueuePage,
@@ -42,7 +57,7 @@ const STATES = [
     {
         label: 'Completed',
         value: 'COMPLETED',
-        icon: CheckCircle2Icon,
+        icon: CheckIcon,
     },
     {
         label: 'Running',
@@ -161,43 +176,41 @@ function JobQueuePage() {
                         });
                         const state = STATES.find(s => s.value === row.original.state);
                         return (
-                            <Badge
-                                variant={
-                                    row.original.state === 'PENDING'
-                                        ? 'secondary'
-                                        : row.original.state === 'COMPLETED'
-                                          ? 'success'
-                                          : row.original.state === 'FAILED'
-                                            ? 'destructive'
-                                            : 'outline'
-                                }
-                            >
-                                {state && <state.icon />}
-                                {row.original.state}
-                                {row.original.state === 'RUNNING' ? (
-                                    <div className="flex items-center gap-2">
-                                        <DropdownMenu
-                                            onOpenChange={open => (isActionMenuOpenRef.current = open)}
-                                        >
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                                                    <MoreVertical className="h-4 w-4" />
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem
-                                                    onClick={() => cancelJobMutation.mutate(row.original.id)}
-                                                    disabled={cancelJobMutation.isPending}
-                                                    className="text-destructive focus:text-destructive"
-                                                >
-                                                    <Ban className="mr-2 h-4 w-4" />
-                                                    <Trans>Cancel Job</Trans>
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </div>
-                                ) : null}
-                            </Badge>
+                            <div className="flex items-center gap-2">
+                                <Badge
+                                    variant={getJobStateBadgeVariant(row.original.state)}
+                                >
+                                    {state && (
+                                        <state.icon
+                                            className={
+                                                row.original.state === 'RUNNING'
+                                                    ? 'animate-spin'
+                                                    : undefined
+                                            }
+                                        />
+                                    )}
+                                    {row.original.state}
+                                </Badge>
+                                {row.original.state === 'RUNNING' && (
+                                    <DropdownMenu
+                                        onOpenChange={open => (isActionMenuOpenRef.current = open)}
+                                    >
+                                        <DropdownMenuTrigger render={<Button variant="ghost" size="icon-xs" />}>
+                                                <MoreVertical />
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuItem
+                                                onClick={() => cancelJobMutation.mutate(row.original.id)}
+                                                disabled={cancelJobMutation.isPending}
+                                                className="text-destructive focus:text-destructive"
+                                            >
+                                                <Ban />
+                                                <Trans>Cancel Job</Trans>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                )}
+                            </div>
                         );
                     },
                 },
@@ -239,14 +252,12 @@ function JobQueuePage() {
         >
             <ActionBarItem itemId="auto-refresh-button">
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="sm" className="gap-2">
+                    <DropdownMenuTrigger render={<Button variant="outline" size="sm" className="gap-2" />}>
                             <RefreshCw className="h-4 w-4" />
                             <span>
                                 <Trans>Auto refresh: {currentInterval?.label}</Trans>
                             </span>
                             <ChevronDown className="h-4 w-4" />
-                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         {REFRESH_INTERVALS.map(interval => (

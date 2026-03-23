@@ -28,6 +28,7 @@ import {
     setOrderCustomFieldsDocument,
     transitionOrderToStateDocument,
 } from '../orders.graphql.js';
+import { OrderProcessDialog } from './order-process-dialog.js';
 import { canAddFulfillment, canRefundOrder, shouldShowAddManualPaymentButton } from '../utils/order-utils.js';
 
 import { AddManualPaymentDialog } from './add-manual-payment-dialog.js';
@@ -262,19 +263,20 @@ export function OrderDetailShared({
 
                 {/* Side Column Blocks */}
                 <PageBlock column="side" blockId="state">
-                    <StateTransitionControl
-                        currentState={entity?.state}
-                        actions={stateTransitionActions}
-                        isLoading={transitionOrderToStateMutation.isPending}
-                    />
+                    <div className="flex items-center gap-1.5">
+                        <StateTransitionControl
+                            currentState={entity?.state}
+                            actions={stateTransitionActions}
+                            isLoading={transitionOrderToStateMutation.isPending}
+                        />
+                        <OrderProcessDialog currentState={entity!.state} />
+                    </div>
                 </PageBlock>
                 <PageBlock column="side" blockId="customer" title={<Trans>Customer</Trans>}>
                     {entity?.customer ? (
-                        <Button variant="outline" asChild>
-                            <Link to={`/customers/${entity.customer.id}`}>
-                                <User className="w-4 h-4" />
-                                {entity.customer.firstName} {entity.customer.lastName}
-                            </Link>
+                        <Button variant="outline" render={<Link to={`/customers/${entity.customer.id}`} />}>
+                            <User className="w-4 h-4" />
+                            {entity.customer.firstName} {entity.customer.lastName}
                         </Button>
                     ) : (
                         <div className="text-muted-foreground text-xs font-medium p-3 border rounded-md">

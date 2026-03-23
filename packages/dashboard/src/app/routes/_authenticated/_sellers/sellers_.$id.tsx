@@ -1,6 +1,6 @@
 import { ErrorPage } from '@/vdb/components/shared/error-page.js';
 import { Button } from '@/vdb/components/ui/button.js';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/vdb/components/ui/form.js';
+import { FormFieldWrapper } from '@/vdb/components/shared/form-field-wrapper.js';
 import { Input } from '@/vdb/components/ui/input.js';
 import { NEW_ENTITY_PATH } from '@/vdb/constants.js';
 import {    CustomFieldsPageBlock,
@@ -83,20 +83,11 @@ function SellerDetailPage() {
                 <PageBlock column="main" blockId="main-form">
                     <div className="md:flex w-full gap-4">
                         <div className="w-1/2">
-                            <FormField
+                            <FormFieldWrapper
                                 control={form.control}
                                 name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>
-                                            <Trans>Name</Trans>
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
+                                label={<Trans>Name</Trans>}
+                                render={({ field }) => <Input placeholder="" {...field} />}
                             />
                         </div>
                     </div>

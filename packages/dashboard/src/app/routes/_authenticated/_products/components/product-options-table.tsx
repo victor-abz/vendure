@@ -113,11 +113,9 @@ export function ProductOptionsTable({
                 }}
             />
             <div className="mt-4">
-                <Button asChild variant="outline">
-                    <Link to={newOptionHref ?? './options/new'} search={linkSearch}>
-                        <PlusIcon />
-                        <Trans>Add product option</Trans>
-                    </Link>
+                <Button render={<Link to={newOptionHref ?? './options/new'} search={linkSearch} />} variant="outline">
+                    <PlusIcon />
+                    <Trans>Add product option</Trans>
                 </Button>
             </div>
         </>

@@ -20,9 +20,8 @@ underlying form library used by the Dashboard.
 Here's an example custom form component that has been annotated to explain the typical parts you will be working with:
 
 ```tsx title="src/plugins/my-plugin/dashboard/components/color-picker.tsx"
-import { Button, Card, CardContent, cn, DashboardFormComponent, Input } from '@vendure/dashboard';
+import { Button, Card, CardContent, cn, DashboardFormComponent, Input, useFormContext } from '@vendure/dashboard';
 import { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 
 // By typing your component as DashboardFormComponent, the props will be correctly typed
 export const ColorPickerComponent: DashboardFormComponent = ({ value, onChange, name }) => {
@@ -256,8 +255,7 @@ if the input does not match the pattern.
 :::
 
 ```tsx title="src/plugins/my-plugin/dashboard/components/validated-input.tsx"
-import { DashboardFormComponent, Input, Alert, AlertDescription } from '@vendure/dashboard';
-import { useFormContext } from 'react-hook-form';
+import { DashboardFormComponent, Input, Alert, AlertDescription, useFormContext } from '@vendure/dashboard';
 import { CheckCircle2 } from 'lucide-react';
 
 export const ValidatedInputComponent: DashboardFormComponent = ({ value, onChange, name }) => {
@@ -342,9 +340,9 @@ import {
     DialogTrigger,
     Form,
     DashboardFormComponent,
-    handleNestedFormSubmit
+    handleNestedFormSubmit,
+    useForm,
 } from '@vendure/dashboard';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -374,8 +372,8 @@ export const NestedFormDialogComponent: DashboardFormComponent = (props) => {
 
     return (
         <Dialog>
-            <DialogTrigger asChild>
-                <Button variant="outline">Open Form</Button>
+            <DialogTrigger render={<Button variant="outline" />}>
+                Open Form
             </DialogTrigger>
             <DialogContent>
                 <Form {...form}>

@@ -16,7 +16,7 @@ export function BooleanDisplayBadge({
     labelFalse?: string | React.ReactNode;
 }) {
     return (
-        <Badge variant={value ? 'success' : 'destructive'}>
+        <Badge variant={value ? 'success' : 'secondary'}>
             {value ? (labelTrue ?? 'Enabled') : (labelFalse ?? 'Disabled')}
         </Badge>
     );

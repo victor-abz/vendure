@@ -232,11 +232,9 @@ function ModifyOrderPage() {
                 </PageBlock>
                 <PageBlock column="side" blockId="customer" title={<Trans>Customer</Trans>}>
                     {entity.customer ? (
-                        <Button variant="outline" asChild>
-                            <Link to={`/customers/${entity?.customer?.id}`}>
-                                <User className="w-4 h-4" />
-                                {entity?.customer?.firstName} {entity?.customer?.lastName}
-                            </Link>
+                        <Button variant="outline" render={<Link to={`/customers/${entity?.customer?.id}`} />}>
+                            <User className="w-4 h-4" />
+                            {entity?.customer?.firstName} {entity?.customer?.lastName}
                         </Button>
                     ) : (
                         <div className="text-muted-foreground text-xs font-medium p-3 border rounded-md">

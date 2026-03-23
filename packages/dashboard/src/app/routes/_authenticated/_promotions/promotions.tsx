@@ -60,30 +60,31 @@ function PromotionListPage() {
                 },
             }}
             bulkActions={[
-                {
-                    order: 100,
-                    component: AssignPromotionsToChannelBulkAction,
-                },
-                {
-                    order: 200,
-                    component: RemovePromotionsFromChannelBulkAction,
-                },
-                {
-                    order: 300,
-                    component: DuplicatePromotionsBulkAction,
-                },
-                {
-                    order: 400,
-                    component: DeletePromotionsBulkAction,
-                },
+                [
+                    {
+                        order: 100,
+                        component: AssignPromotionsToChannelBulkAction,
+                    },
+                    {
+                        order: 200,
+                        component: RemovePromotionsFromChannelBulkAction,
+                    },
+                    {
+                        order: 300,
+                        component: DuplicatePromotionsBulkAction,
+                    },
+                ],
+                [
+                    {
+                        component: DeletePromotionsBulkAction,
+                    },
+                ],
             ]}
         >
             <ActionBarItem itemId="create-button" requiresPermission={['CreatePromotion']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        <Trans>New Promotion</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    <Trans>New Promotion</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

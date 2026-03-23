@@ -79,7 +79,7 @@ export function RelationSelectorItem<T>({
             {showCheckbox && (
                 <Checkbox
                     checked={isSelected}
-                    onChange={onSelect}
+                    onCheckedChange={() => onSelect()}
                     onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 />
             )}
@@ -399,8 +399,7 @@ export function RelationSelector<T>({
 
             {/* Selector trigger */}
             <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                    <Button variant="outline" size="sm" type="button" disabled={disabled} className="gap-2">
+                <PopoverTrigger render={<Button variant="outline" size="sm" type="button" disabled={disabled} className="gap-2" />}>
                         <Plus className="h-4 w-4" />
                         <Trans>
                             {isMultiple
@@ -411,7 +410,6 @@ export function RelationSelector<T>({
                                   ? 'Change selection'
                                   : (selectorLabel ?? <Trans>Select item</Trans>)}
                         </Trans>
-                    </Button>
                 </PopoverTrigger>
                 <PopoverContent className="p-0 w-[400px]" align="start">
                     <Command shouldFilter={false}>

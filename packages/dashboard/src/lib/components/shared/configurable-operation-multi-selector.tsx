@@ -262,11 +262,9 @@ export function ConfigurableOperationMultiSelector({
 
             <div className={hasOperations ? 'pt-2' : ''}>
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="w-full sm:w-auto">
+                    <DropdownMenuTrigger render={<Button variant="outline" className="w-full sm:w-auto" />}>
                             <Plus className="h-4 w-4" />
                             <Trans>{buttonText}</Trans>
-                        </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className={showEnhancedDropdown ? 'w-80 max-h-[min(600px,50vh)] overflow-y-auto' : 'w-96 max-h-[min(600px,50vh)] overflow-y-auto'} align="start">
                         {showEnhancedDropdown && dropdownTitle && (

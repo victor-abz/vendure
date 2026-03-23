@@ -17,6 +17,7 @@ import {
     Dialog,
     DialogContent,
     DialogFooter,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -131,16 +132,17 @@ function AddOptionValueDialog({
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <Button size="icon" variant="ghost">
-                    <Plus className="h-3 w-3" />
-                </Button>
+            <DialogTrigger render={<Button size="icon" variant="ghost" />}>
+                <Plus className="h-3 w-3" />
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
                         <Trans>Add option value to {groupName}</Trans>
                     </DialogTitle>
+                    <DialogDescription className="sr-only">
+                        <Trans>Add a new option value to the {groupName} option group</Trans>
+                    </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -396,6 +398,7 @@ function ManageProductVariants() {
                                                     ) : (
                                                         <div className="flex items-center gap-2">
                                                             <Select
+                                                                items={Object.fromEntries(group.options.map(opt => [opt.id, opt.name]))}
                                                                 value={
                                                                     optionsToAddToVariant[variant.id]?.[
                                                                         group.id
@@ -456,6 +459,7 @@ function ManageProductVariants() {
                                                     size="sm"
                                                     variant="ghost"
                                                     disabled={deleteVariantMutation.isPending}
+                                                    data-testid="variant-delete-btn"
                                                 >
                                                     <Trash2 className="h-4 w-4 text-destructive" />
                                                 </Button>

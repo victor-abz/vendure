@@ -29,7 +29,7 @@ test.describe('Issue #4327: Collection filters with same type share state', () =
         await page.getByRole('menuitem', { name: /Filter by product variant name/i }).click();
 
         // Fill the first filter's term
-        const termInputs = page.locator('[data-slot="form-item"]').filter({
+        const termInputs = page.locator('[data-slot="field"]').filter({
             has: page.getByText('Term', { exact: true }),
         });
         await termInputs.first().getByRole('textbox').fill('shirt');
@@ -40,7 +40,7 @@ test.describe('Issue #4327: Collection filters with same type share state', () =
 
         // Fill the second filter's term with a DIFFERENT value
         // After adding the second filter, there should be two "Term" inputs
-        const allTermInputs = page.locator('[data-slot="form-item"]').filter({
+        const allTermInputs = page.locator('[data-slot="field"]').filter({
             has: page.getByText('Term', { exact: true }),
         });
         await allTermInputs.last().getByRole('textbox').fill('pants');

@@ -50,22 +50,25 @@ export function ProductVariantsTable({
                 stockLevels: true,
             }}
             bulkActions={[
-                {
-                    component: AssignProductVariantsToChannelBulkAction,
-                    order: 100,
-                },
-                {
-                    component: RemoveProductVariantsFromChannelBulkAction,
-                    order: 200,
-                },
-                {
-                    component: AssignFacetValuesToProductVariantsBulkAction,
-                    order: 300,
-                },
-                {
-                    component: DeleteProductVariantsBulkAction,
-                    order: 400,
-                },
+                [
+                    {
+                        component: AssignProductVariantsToChannelBulkAction,
+                        order: 100,
+                    },
+                    {
+                        component: RemoveProductVariantsFromChannelBulkAction,
+                        order: 200,
+                    },
+                    {
+                        component: AssignFacetValuesToProductVariantsBulkAction,
+                        order: 300,
+                    },
+                ],
+                [
+                    {
+                        component: DeleteProductVariantsBulkAction,
+                    },
+                ],
             ]}
             customizeColumns={{
                 name: {

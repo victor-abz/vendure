@@ -1,13 +1,6 @@
 import { CustomFieldListInput } from '@/vdb/components/data-input/custom-field-list-input.js';
 import { StructFormInput } from '@/vdb/components/data-input/struct-form-input.js';
-import {
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/vdb/components/ui/form.js';
+import { Field, FieldDescription, FieldError, FieldLabel } from '@/vdb/components/ui/field.js';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/vdb/components/ui/tabs.js';
 import { CustomFormComponent } from '@/vdb/framework/form-engine/custom-form-component.js';
 import { ConfigurableFieldDef } from '@/vdb/framework/form-engine/form-engine-types.js';
@@ -17,7 +10,7 @@ import { customFieldConfigFragment } from '@/vdb/providers/server-config.js';
 import { useLingui } from '@lingui/react/macro';
 import { ResultOf } from 'gql.tada';
 import React, { useMemo } from 'react';
-import { Control } from 'react-hook-form';
+import { Control, Controller, ControllerFieldState } from 'react-hook-form';
 import { FormControlAdapter } from '../../framework/form-engine/form-control-adapter.js';
 import { TranslatableFormField } from './translatable-form-field.js';
 
@@ -157,23 +150,23 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
                     control={control}
                     name={fieldName}
                     disabled={disabled}
-                    render={({ field, ...props }) => (
-                        <FormItem>
-                            <FormLabel>{getTranslation(fieldDef.label) ?? field.name}</FormLabel>
-                            <FormControl>
-                                {hasCustomFormComponent ? (
-                                    <CustomFormComponent fieldDef={fieldDef} {...field} />
-                                ) : (
-                                    <FormControlAdapter
-                                        fieldDef={fieldDef}
-                                        field={field}
-                                        valueMode="native"
-                                    />
-                                )}
-                            </FormControl>
-                            <FormDescription>{getTranslation(fieldDef.description)}</FormDescription>
-                            <FormMessage />
-                        </FormItem>
+                    render={({ field, fieldState }) => (
+                        <CustomFieldFormItem
+                            fieldDef={fieldDef}
+                            getTranslation={getTranslation}
+                            fieldName={field.name}
+                            fieldState={fieldState}
+                        >
+                            {hasCustomFormComponent ? (
+                                <CustomFormComponent fieldDef={fieldDef} {...field} />
+                            ) : (
+                                <FormControlAdapter
+                                    fieldDef={fieldDef}
+                                    field={field}
+                                    valueMode="native"
+                                />
+                            )}
+                        </CustomFieldFormItem>
                     )}
                 />
             </div>
@@ -184,17 +177,18 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
     if (hasCustomFormComponent) {
         return (
             <div className={containerClassName}>
-                <FormField
+                <Controller
                     control={control}
                     name={fieldName}
                     disabled={disabled}
-                    render={fieldProps => (
+                    render={({ field, fieldState }) => (
                         <CustomFieldFormItem
                             fieldDef={fieldDef}
                             getTranslation={getTranslation}
-                            fieldName={fieldProps.field.name}
+                            fieldName={field.name}
+                            fieldState={fieldState}
                         >
-                            <CustomFormComponent fieldDef={fieldDef} {...fieldProps.field} />
+                            <CustomFormComponent fieldDef={fieldDef} {...field} />
                         </CustomFieldFormItem>
                     )}
                 />
@@ -210,26 +204,26 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
         if (isList) {
             return (
                 <div className={containerClassName}>
-                    <FormField
+                    <Controller
                         control={control}
                         name={fieldName}
                         disabled={disabled}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{getTranslation(fieldDef.label) ?? fieldDef.name}</FormLabel>
-                                <FormControl>
-                                    <CustomFieldListInput
-                                        {...field}
-                                        disabled={isReadonly}
-                                        renderInput={(index, inputField) => (
-                                            <StructFormInput {...inputField} fieldDef={fieldDef} />
-                                        )}
-                                        defaultValue={{}} // Empty struct object as default
-                                    />
-                                </FormControl>
-                                <FormDescription>{getTranslation(fieldDef.description)}</FormDescription>
-                                <FormMessage />
-                            </FormItem>
+                        render={({ field, fieldState }) => (
+                            <CustomFieldFormItem
+                                fieldDef={fieldDef}
+                                getTranslation={getTranslation}
+                                fieldName={fieldDef.name}
+                                fieldState={fieldState}
+                            >
+                                <CustomFieldListInput
+                                    {...field}
+                                    disabled={isReadonly}
+                                    renderInput={(index, inputField) => (
+                                        <StructFormInput {...inputField} fieldDef={fieldDef} />
+                                    )}
+                                    defaultValue={{}} // Empty struct object as default
+                                />
+                            </CustomFieldFormItem>
                         )}
                     />
                 </div>
@@ -239,19 +233,19 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
         // Handle single struct fields
         return (
             <div className={containerClassName}>
-                <FormField
+                <Controller
                     control={control}
                     name={fieldName}
                     disabled={disabled}
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>{getTranslation(fieldDef.label) ?? fieldDef.name}</FormLabel>
-                            <FormControl>
-                                <StructFormInput {...field} fieldDef={fieldDef} />
-                            </FormControl>
-                            <FormDescription>{getTranslation(fieldDef.description)}</FormDescription>
-                            <FormMessage />
-                        </FormItem>
+                    render={({ field, fieldState }) => (
+                        <CustomFieldFormItem
+                            fieldDef={fieldDef}
+                            getTranslation={getTranslation}
+                            fieldName={fieldDef.name}
+                            fieldState={fieldState}
+                        >
+                            <StructFormInput {...field} fieldDef={fieldDef} />
+                        </CustomFieldFormItem>
                     )}
                 />
             </div>
@@ -261,15 +255,16 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
     // For regular fields without custom components
     return (
         <div className={containerClassName}>
-            <FormField
+            <Controller
                 control={control}
                 name={fieldName}
                 disabled={disabled}
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                     <CustomFieldFormItem
                         fieldDef={fieldDef}
                         getTranslation={getTranslation}
                         fieldName={fieldDef.name}
+                        fieldState={fieldState}
                     >
                         <FormControlAdapter fieldDef={fieldDef} field={field} valueMode="native" />
                     </CustomFieldFormItem>
@@ -285,6 +280,7 @@ interface CustomFieldFormItemProps {
         input: string | Array<{ languageCode: string; value: string }> | null | undefined,
     ) => string | undefined;
     fieldName: string;
+    fieldState?: ControllerFieldState;
     children: React.ReactNode;
 }
 
@@ -292,14 +288,18 @@ function CustomFieldFormItem({
     fieldDef,
     getTranslation,
     fieldName,
+    fieldState,
     children,
 }: Readonly<CustomFieldFormItemProps>) {
+    const fieldId = `field-${fieldName}`;
     return (
-        <FormItem>
-            <FormLabel>{getTranslation(fieldDef.label) ?? fieldName}</FormLabel>
-            <FormControl>{children}</FormControl>
-            <FormDescription>{getTranslation(fieldDef.description)}</FormDescription>
-            <FormMessage />
-        </FormItem>
+        <Field data-invalid={fieldState?.invalid || undefined}>
+            <FieldLabel htmlFor={fieldId}>{getTranslation(fieldDef.label) ?? fieldName}</FieldLabel>
+            {children}
+            {getTranslation(fieldDef.description) && (
+                <FieldDescription>{getTranslation(fieldDef.description)}</FieldDescription>
+            )}
+            {fieldState?.invalid && <FieldError errors={[fieldState.error]} />}
+        </Field>
     );
 }

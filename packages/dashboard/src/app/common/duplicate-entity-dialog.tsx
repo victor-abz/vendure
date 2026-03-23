@@ -3,6 +3,7 @@ import { Button } from '@/vdb/components/ui/button.js';
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -82,6 +83,9 @@ export function DuplicateEntityDialog({
                     <DialogTitle>
                         <Trans>Duplicate {entityName.toLowerCase()}s</Trans>
                     </DialogTitle>
+                    <DialogDescription className="sr-only">
+                        <Trans>Configure duplication settings for {entityName.toLowerCase()}s</Trans>
+                    </DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-4">

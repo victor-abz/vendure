@@ -25,7 +25,7 @@ const detailPage = (page: Page) =>
         newTitle: 'New product',
     });
 
-/** Navigate to the first seeded product's detail page. */
+/** Navigate to the first seeded product's detail page and wait for the form to load. */
 async function goToFirstProduct(page: Page) {
     const lp = listPage(page);
     await lp.goto();
@@ -33,6 +33,14 @@ async function goToFirstProduct(page: Page) {
     await lp.search('Laptop');
     await lp.clickEntity('Laptop');
     await expect(page).toHaveURL(/\/products\/[^/]+$/);
+    // Wait for entity data AND custom fields to fully load before interacting.
+    // Custom fields load via separate async queries after the main product data.
+    const dp = detailPage(page);
+    await expect(dp.formItem('Product name').getByRole('textbox')).toHaveValue('Laptop', { timeout: 10_000 });
+    // Wait for all network requests to settle AND the Update button to be disabled
+    // (disabled = form is clean with server data loaded, no pending changes).
+    await page.waitForLoadState('networkidle');
+    await expect(page.getByRole('button', { name: 'Update', exact: true })).toBeDisabled({ timeout: 10_000 });
 }
 
 /**
@@ -40,8 +48,8 @@ async function goToFirstProduct(page: Page) {
  * Same logic as BaseDetailPage.formItem but scoped to a parent locator.
  */
 function scopedFormItem(container: Locator, page: Page, label: string): Locator {
-    return container.locator('[data-slot="form-item"]').filter({
-        has: page.locator('[data-slot="form-label"]').getByText(label, { exact: true }),
+    return container.locator('[data-slot="field"]').filter({
+        has: page.locator('[data-slot="field-label"]').getByText(label, { exact: true }),
     });
 }
 
@@ -63,7 +71,7 @@ test.describe('Custom Fields', () => {
         // boolean → switch
         await expect(dp.formItem('Downloadable').getByRole('switch')).toBeVisible();
         // datetime → button (calendar picker trigger)
-        await expect(dp.formItem('Release Date').getByRole('button')).toBeVisible();
+        await expect(dp.formItem('Release Date').getByRole('button').first()).toBeVisible();
         // text → textbox
         await expect(dp.formItem('Additional Info').getByRole('textbox')).toBeVisible();
         // string with options → combobox
@@ -84,9 +92,10 @@ test.describe('Custom Fields', () => {
         }
 
         // "General" should be the active tab by default
+        // Base UI uses `data-active` (boolean) instead of Radix's `data-state="active"`
         await expect(page.locator('[data-slot="tabs-trigger"]', { hasText: 'General' })).toHaveAttribute(
-            'data-state',
-            'active',
+            'data-active',
+            '',
         );
     });
 
@@ -115,8 +124,8 @@ test.describe('Custom Fields', () => {
         // Switch to SEO tab
         await page.locator('[data-slot="tabs-trigger"]', { hasText: 'SEO' }).click();
 
-        const seoTitleItem = page.locator('[data-slot="form-item"]').filter({
-            has: page.locator('[data-slot="form-label"]').getByText('SEO Title', { exact: true }),
+        const seoTitleItem = page.locator('[data-slot="field"]').filter({
+            has: page.locator('[data-slot="field-label"]').getByText('SEO Title', { exact: true }),
         });
         await expect(seoTitleItem).toBeVisible();
         await expect(seoTitleItem.getByRole('textbox')).toBeVisible();
@@ -145,7 +154,7 @@ test.describe('Custom Fields', () => {
         await expect(dp.formItem('Weight').getByRole('spinbutton')).toHaveValue('2.5');
         await expect(dp.formItem('Review Rating').getByRole('spinbutton')).toHaveValue('4');
         await expect(dp.formItem('Downloadable').getByRole('switch')).toBeChecked();
-        await expect(dp.formItem('Priority').getByRole('combobox')).toHaveText('high');
+        await expect(dp.formItem('Priority').getByRole('combobox')).toContainText('high');
     });
 
     // ─── String list (tag-style input) ───────────────────────────────────

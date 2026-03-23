@@ -259,7 +259,7 @@ export function SlugInput({
                         <Button
                             type="button"
                             variant="outline"
-                            size="sm"
+                            size="icon"
                             onClick={handleRegenerate}
                             className="shrink-0"
                             title={t`Regenerate slug from source field`}
@@ -273,7 +273,7 @@ export function SlugInput({
                     <Button
                         type="button"
                         variant="outline"
-                        size="sm"
+                        size="icon"
                         onClick={toggleReadonly}
                         className="shrink-0"
                         title={isManuallyReadonly ? t`Edit slug manually` : t`Generate slug automatically`}

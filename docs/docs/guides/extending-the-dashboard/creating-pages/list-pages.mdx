@@ -36,8 +36,8 @@ import {
     ListPage,
     ActionBarItem,
     DetailPageButton,
+    Link,
 } from '@vendure/dashboard';
-import { Link } from '@tanstack/react-router';
 import { PlusIcon } from 'lucide-react';
 
 // This function is generated for you by the `vendureDashboardPlugin` in your Vite config.
@@ -101,11 +101,9 @@ export const articleList: DashboardRouteDefinition = {
             }}
         >
             <ActionBarItem>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        New article
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    New article
                 </Button>
             </ActionBarItem>
         </ListPage>

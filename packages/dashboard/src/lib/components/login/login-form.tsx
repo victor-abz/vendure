@@ -7,12 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Loader2 } from 'lucide-react';
 import * as React from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
+import { Controller, useForm } from 'react-hook-form';
+import { toast } from '@/vdb/components/ui/sonner.js';
 import { z } from 'zod';
 import { useLoginExtensions } from '../../framework/extension-api/use-login-extensions.js';
 import { LogoMark } from '../shared/logo-mark.js';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form.js';
+import { Form } from '../ui/form.js';
+import { Field, FieldError } from '../ui/field.js';
 import { Separator } from '../ui/separator.js';
 
 export type LoginFormProps = Readonly<
@@ -75,28 +76,24 @@ export function LoginForm({ className, onFormSubmit, isVerifying, loginError, ..
                                 </div>
                             )}
                             <div className="grid gap-4 w-full">
-                                <FormField
+                                <Controller
                                     control={form.control}
                                     name="username"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <Input {...field} placeholder={t`Email`} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid || undefined}>
+                                            <Input {...field} id="field-username" placeholder={t`Email`} aria-invalid={fieldState.invalid || undefined} />
+                                            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                                        </Field>
                                     )}
                                 />
-                                <FormField
+                                <Controller
                                     control={form.control}
                                     name="password"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormControl>
-                                                <PasswordInput {...field} placeholder={t`Password`} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid || undefined}>
+                                            <PasswordInput {...field} id="field-password" placeholder={t`Password`} aria-invalid={fieldState.invalid || undefined} />
+                                            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                                        </Field>
                                     )}
                                 />
                                 <Button type="submit" className="w-full" disabled={isVerifying}>

@@ -76,7 +76,7 @@ export function LocationWrapper({ children, identifier }: Readonly<LocationWrapp
                     `ring-2 transition-all ring-offset-4 ring-offset-background delay-50 relative`,
                     isHovered || isPopoverOpen ? 'ring-dev-mode' : 'ring-transparent',
                     isPageWrapper ? 'ring-offset-8' : '',
-                    identifier ? 'rounded-md' : 'rounded',
+                    'rounded-none',
                 )}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -85,30 +85,32 @@ export function LocationWrapper({ children, identifier }: Readonly<LocationWrapp
                     className={`absolute top-1 right-1 transition-all delay-50 z-10 ${isHovered || isPopoverOpen ? 'visible' : 'invisible'}`}
                 >
                     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                        <PopoverTrigger asChild>
-                            <DevModeButton
-                                className={isPageWrapper ? '-top-8 -end-1 border-2' : '-top-4 -end-4'}
-                            />
-                        </PopoverTrigger>
+                        <PopoverTrigger
+                            render={
+                                <DevModeButton
+                                    className={isPageWrapper ? '-top-8 -end-1 border-2' : '-top-4 -end-4'}
+                                />
+                            }
+                        />
                         <PopoverContent className="w-48 p-3">
                             <div className="space-y-2">
                                 <div className="space-y-1">
                                     {pageId && (
                                         <div className="text-xs">
                                             <div className="text-muted-foreground mb-0.5">pageId</div>
-                                            <CopyableText text={pageId} />
+                                            <CopyableText value={pageId} />
                                         </div>
                                     )}
                                     {blockId && (
                                         <div className="text-xs">
                                             <div className="text-muted-foreground mb-0.5">blockId</div>
-                                            <CopyableText text={blockId} />
+                                            <CopyableText value={blockId} />
                                         </div>
                                     )}
                                     {identifier && (
                                         <div className="text-xs">
                                             <div className="text-muted-foreground mb-0.5">identifier</div>
-                                            <CopyableText text={identifier} />
+                                            <CopyableText value={identifier} />
                                         </div>
                                     )}
                                 </div>

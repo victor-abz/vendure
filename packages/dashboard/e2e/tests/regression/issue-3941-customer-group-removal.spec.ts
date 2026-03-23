@@ -65,7 +65,7 @@ test.describe('Issue #3941: Customer group member removal', () => {
         await membersTable.getByRole('checkbox').first().click();
 
         // Click "With selected" and expect "Remove from group" action
-        await page.getByRole('button', { name: /With selected/i }).click();
+        await page.getByRole('button', { name: /Actions/i }).click();
         await expect(page.getByRole('menuitem').filter({ hasText: /Remove from group/i })).toBeVisible();
     });
 
@@ -78,8 +78,8 @@ test.describe('Issue #3941: Customer group member removal', () => {
 
         const row = lp.getRows().filter({ hasText: 'E2E Removal Test Group' });
         await row.getByRole('checkbox').click();
-        await page.getByRole('button', { name: /With selected/i }).click();
-        await page.getByRole('menuitem').filter({ hasText: 'Delete' }).click();
+        await page.getByRole('button', { name: /Actions/i }).click();
+        await page.locator('[role="menu"]').getByText('Delete', { exact: true }).click();
         await page.locator('[role="alertdialog"]').getByRole('button', { name: 'Continue' }).click();
         await lp.expectSuccessToast();
     });

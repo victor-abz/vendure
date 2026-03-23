@@ -1,85 +1,39 @@
-# Dashboard Package Development Guide
+# Dashboard Package
 
-## React Context Pattern for Extension Compatibility
+## Extension Compatibility: Context/Hook Separation
 
-### The Problem
+Never put `createContext()` and its consuming `useContext()` in the same file within `src/lib/`. Extensions dynamically import hooks from `@vendure/dashboard`, and Vite can create duplicate module instances — breaking Context identity with "must be used within a Provider" errors even when inside the provider.
 
-When dashboard extensions dynamically import hooks from `@vendure/dashboard`, Vite can create duplicate module instances. If a React Context is defined in the same file as a hook that consumes it, the extension's hook will reference a different Context object than the one used by the main app's Provider - causing "must be used within a Provider" errors even when the component IS inside the provider.
+Split into: context + Provider in one file, hook in `src/lib/hooks/` importing via `@/vdb/` path. Enforced by `scripts/check-lib-imports.js` on pre-commit (lint-staged). Shadcn primitives (carousel, chart, form, toggle-group) are allowlisted.
 
-### The Solution
+## The `@/vdb/` Path Alias
 
-**Never define a React Context and its consuming hook in the same file within `src/lib/`.**
+Maps to `./src/lib/*`. This alias exists because dashboard extensions in user projects map it to `node_modules/@vendure/dashboard/src/lib/*` — the dashboard ships source files and the user's Vite compiles them. This is why:
+- Hooks in `src/lib/hooks/` must import via `@/vdb/` (not relative `../` paths)
+- Never import from `@/vdb/index.js` directly — it breaks module identity for extensions
 
-Split them into separate files:
+## UI Components Are External
 
-1. **Context file** - Contains `createContext()` and the Provider component
-2. **Hook file** - In `src/lib/hooks/`, imports context via `@/vdb/` path
+Low-level UI primitives come from `@vendure-io/ui` (BaseUI-based), not from this repo. Don't look for or create base components like Button, Select, Dialog, etc. here.
 
-### Example
+## Single Public API: `@vendure/dashboard`
 
-```tsx
-// ❌ BAD: Context and hook in same file (src/lib/components/my-context.tsx)
-export const MyContext = createContext<MyContextValue | undefined>(undefined);
+Extensions must import everything from `@vendure/dashboard` — never from third-party libraries directly. This package re-exports all components from `@vendure-io/ui`, `sonner` (toast), and other dependencies so that no implementation details leak into extension code. When adding new dependencies or components that extensions might use, always re-export them from this package's public API.
 
-export function MyProvider({ children }) {
-    return <MyContext.Provider value={...}>{children}</MyContext.Provider>;
-}
+## Styling: Semantic Tokens Only
 
-export function useMyContext() {
-    const context = useContext(MyContext);  // Same file = module identity issues
-    if (!context) throw new Error('...');
-    return context;
-}
-```
+Only semantic design tokens from `@vendure-io/design-tokens` are allowed. Use Tailwind classes mapped to semantic CSS variables (e.g., `bg-background`, `text-primary`, `border-border`). Never use raw color values or non-semantic Tailwind colors.
 
-```tsx
-// ✅ GOOD: Context in one file, hook in separate file
+## Select Component Gotcha
 
-// src/lib/components/my-context.tsx
-export const MyContext = createContext<MyContextValue | undefined>(undefined);
+`<Select>` from `@vendure-io/ui` requires an explicit `items` prop (`Record<string, string>`) — without it, selected options won't render their label. Always pass `items={Object.fromEntries(...)}` alongside `<SelectItem>` children.
 
-export function MyProvider({ children }) {
-    return <MyContext.Provider value={...}>{children}</MyContext.Provider>;
-}
+## Key Helpers (Don't Reinvent)
 
-// src/lib/hooks/use-my-context.ts
-import { MyContext } from '@/vdb/components/my-context.js';
+- **Routing**: `detailPageRouteLoader()` for detail page routes, `useDetailPage()` hook for form management. Loaders return `{ breadcrumb: ... }`.
+- **Data fetching**: `api.query(document)` / `api.mutate(document)` for GraphQL. Use `useExtendedDetailQuery` / `useExtendedListQuery` for pages with extension support.
+- **i18n**: Use `useLocalFormat()` hook for date/currency formatting — not `date-fns` functions directly.
 
-export function useMyContext() {
-    const context = useContext(MyContext);
-    if (!context) throw new Error('...');
-    return context;
-}
-```
+## Testing
 
-### Why This Works
-
-Both the main app and dynamically-imported extension code resolve the context import to the same module instance when using internal `@/vdb/` paths, preserving React Context identity.
-
-### Automated Enforcement
-
-This pattern is enforced by `scripts/check-lib-imports.js`, which runs on pre-commit. It will fail if any file in `src/lib/` contains both `createContext(` and `useContext(`.
-
-**Allowlist:** Some shadcn UI primitives (carousel, chart, form, toggle-group) are allowlisted because their contexts are internal implementation details not accessed by extensions.
-
-### Hooks Directory Rules
-
-All hooks in `src/lib/hooks/` must:
-- Import using `@/vdb/` prefix (not relative `../` paths)
-- Never import from `@/vdb/index.js` directly
-
-These rules are also enforced by the same lint script.
-
-## Internationalization (i18n)
-
-See `scripts/translate/README.md` for full documentation.
-
-```bash
-# Extract new strings and update .po files
-npm run i18n:extract --workspace=@vendure/dashboard
-
-# Apply LLM-translated strings
-npm run i18n:apply --workspace=@vendure/dashboard
-```
-
-For locale-aware date/currency formatting, use `useLocalFormat()` hook instead of `date-fns` formatting functions.
+Unit tests cover Vite plugin hooks. Run from `packages/dashboard/`.

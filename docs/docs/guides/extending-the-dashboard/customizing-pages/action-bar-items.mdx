@@ -147,10 +147,9 @@ defineDashboardExtension({
 ### Sync Button with Loading State
 
 ```tsx title="src/plugins/my-plugin/dashboard/index.tsx"
-import { Button, defineDashboardExtension } from '@vendure/dashboard';
+import { Button, defineDashboardExtension, toast } from '@vendure/dashboard';
 import { RefreshCwIcon } from 'lucide-react';
 import { useState } from 'react';
-import { toast } from 'sonner';
 
 defineDashboardExtension({
     actionBarItems: [

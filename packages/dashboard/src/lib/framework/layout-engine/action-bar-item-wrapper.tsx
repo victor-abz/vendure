@@ -70,20 +70,18 @@ function DevModeActionBarWrapper({
                 )}
             >
                 <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                    <PopoverTrigger asChild>
-                        <DevModeButton className="h-5 w-5 top-0 -start-4" />
-                    </PopoverTrigger>
+                    <PopoverTrigger render={<DevModeButton className="h-5 w-5 top-0 -start-4" />} />
                     <PopoverContent className="w-40 p-2">
                         <div className="space-y-1.5">
                             {page.pageId && (
                                 <div className="text-xs">
                                     <div className="text-muted-foreground mb-0.5">pageId</div>
-                                    <CopyableText text={page.pageId} />
+                                    <CopyableText value={page.pageId} />
                                 </div>
                             )}
                             <div className="text-xs">
                                 <div className="text-muted-foreground mb-0.5">itemId</div>
-                                <CopyableText text={itemId} />
+                                <CopyableText value={itemId} />
                             </div>
                         </div>
                     </PopoverContent>
@@ -130,6 +128,11 @@ export interface ActionBarItemProps {
  * A component for wrapping action bar items with a unique ID. This should be used inside
  * the {@link PageActionBarRight} component. Each item is given an `itemId` which allows
  * extensions to position their items relative to it using `position.itemId`.
+ *
+ * **Mobile behavior:** On mobile viewports, only the **last** inline `ActionBarItem` is
+ * visible (treated as the primary action, e.g. Save/Update/Create). All other inline items
+ * and extension items are hidden. Place your primary action as the last `ActionBarItem`
+ * child of {@link PageActionBar}.
  *
  * In developer mode, hovering over the item will show a popover with the `pageId` and `itemId`,
  * making it easy to discover the correct IDs for extension positioning.

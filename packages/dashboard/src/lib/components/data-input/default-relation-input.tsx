@@ -47,10 +47,10 @@ function StatusBadge({ condition, text, variant = 'orange' }: Readonly<StatusBad
     if (!condition) return null;
 
     const colorClasses = {
-        orange: 'text-orange-600',
-        green: 'bg-green-100 text-green-700',
-        red: 'bg-red-100 text-red-700',
-        blue: 'bg-blue-100 text-blue-700',
+        orange: 'text-warning',
+        green: 'bg-success/10 text-success',
+        red: 'bg-destructive/10 text-destructive',
+        blue: 'bg-primary/10 text-primary',
     };
 
     return (

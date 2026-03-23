@@ -152,6 +152,7 @@ export const RefundOrderDialog = forwardRef<RefundOrderDialogRef, RefundOrderDia
                                                             max={maxRefundable}
                                                             value={selection?.quantity || ''}
                                                             placeholder="0"
+                                                            data-testid="refund-quantity"
                                                             onChange={e => {
                                                                 const value = Math.min(
                                                                     Math.max(0, Number.parseInt(e.target.value, 10) || 0),
@@ -215,7 +216,11 @@ export const RefundOrderDialog = forwardRef<RefundOrderDialogRef, RefundOrderDia
                             <Label className="text-base font-medium">
                                 <Trans>Reason</Trans>
                             </Label>
-                            <Select value={refund.selectedReason} onValueChange={refund.setSelectedReason}>
+                            <Select
+                                items={Object.fromEntries(refundReasons.map(r => [r.value, getTranslatedRefundReason(r.label)]))}
+                                value={refund.selectedReason}
+                                onValueChange={(value) => { if (value != null) refund.setSelectedReason(value) }}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder={t`Select a reason...`} />
                                 </SelectTrigger>

@@ -1,5 +1,3 @@
-'use client';
-
 import { DataTablePagination } from '@/vdb/components/data-table/data-table-pagination.js';
 import { DataTableViewOptions } from '@/vdb/components/data-table/data-table-view-options.js';
 import { GlobalViewsBar } from '@/vdb/components/data-table/global-views-bar.js';
@@ -10,7 +8,7 @@ import { Button } from '@/vdb/components/ui/button.js';
 import { Input } from '@/vdb/components/ui/input.js';
 import { Skeleton } from '@/vdb/components/ui/skeleton.js';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/vdb/components/ui/table.js';
-import { BulkAction } from '@/vdb/framework/extension-api/types/index.js';
+import { BulkActionsInput } from '@/vdb/framework/extension-api/types/index.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
 import { usePage } from '@/vdb/hooks/use-page.js';
 import { useSavedViews } from '@/vdb/hooks/use-saved-views.js';
@@ -43,6 +41,9 @@ import {
 import { RowSelectionState, TableOptions } from '@tanstack/table-core';
 import { GripVertical } from 'lucide-react';
 import React, { Suspense, useEffect, useId, useMemo, useRef } from 'react';
+import { Separator } from '@/vdb/components/ui/separator.js';
+import { cn } from '@/vdb/lib/utils.js';
+import { ActiveFiltersPopover } from './data-table-active-filters-popover.js';
 import { AddFilterMenu } from './add-filter-menu.js';
 import { DataTableBulkActions } from './data-table-bulk-actions.js';
 import { DataTableProvider } from './data-table-context.js';
@@ -53,7 +54,7 @@ import {
 } from './data-table-faceted-filter.js';
 import { DataTableFilterBadgeEditable } from './data-table-filter-badge-editable.js';
 import { useDragAndDrop } from '@/vdb/hooks/use-drag-and-drop.js';
-import { toast } from 'sonner';
+import { toast } from '@/vdb/components/ui/sonner.js';
 
 interface DraggableRowProps<TData> {
     row: Row<TData>;
@@ -106,6 +107,8 @@ function DraggableRow<TData>({ row, isDragDisabled, getRowCanDrag }: Readonly<Dr
     );
 }
 
+const INLINE_FILTER_BADGE_LIMIT = 2;
+
 export interface FacetedFilter {
     title: string;
     icon?: React.ComponentType<{ className?: string }>;
@@ -140,7 +143,7 @@ interface DataTableProps<TData> {
     defaultColumnVisibility?: VisibilityState;
     facetedFilters?: { [key: string]: FacetedFilter | undefined };
     disableViewOptions?: boolean;
-    bulkActions?: BulkAction[];
+    bulkActions?: BulkActionsInput;
     /**
      * @description
      * This property allows full control over _all_ features of TanStack Table
@@ -332,6 +335,10 @@ export function DataTable<TData>({
     const visibleColumnCount = Object.values(columnVisibility).filter(Boolean).length;
 
     const isDragDisabled = disableDragAndDrop || !onReorder;
+    const hasSelection = Object.keys(rowSelection).length > 0;
+    const nonFacetedFilters = columnFilters.filter(f => !facetedFilters?.[f.id]);
+    const currencyCode = activeChannel?.defaultCurrencyCode ?? 'USD';
+    const clearNonFacetedFilters = () => setColumnFilters(old => old.filter(f => !!facetedFilters?.[f.id]));
 
     return (
         <DataTableProvider
@@ -349,83 +356,95 @@ export function DataTable<TData>({
             table={table}
         >
             <div className="space-y-2 @container/table">
-                <div className="flex items-start justify-between gap-2">
-                    <div className="flex flex-wrap items-center gap-2">
-                        {onSearchTermChange && (
-                            <Input
-                                placeholder={t`Filter...`}
-                                value={searchTerm}
-                                onChange={event => handleSearchChange(event.target.value)}
-                                className="w-64"
-                            />
-                        )}
-                        <Suspense>
-                            {Object.entries(facetedFilters ?? {}).map(([key, filter]) => {
-                                const FilterComponent = filter?.component ?? DataTableFacetedFilter;
-                                return (
-                                    <FilterComponent
-                                        key={key}
-                                        column={table.getColumn(key) as any}
-                                        title={filter?.title}
-                                        options={filter?.options}
-                                        optionsFn={filter?.optionsFn}
-                                        icon={filter?.icon}
-                                    />
-                                );
-                            })}
-                        </Suspense>
-                        {onFilterChange && <AddFilterMenu columns={table.getAllColumns()} />}
-                        {pageId && onFilterChange && <MyViewsButton />}
-                    </div>
-                    <div className="flex items-center gap-2">
-                        {pageId && onFilterChange && <SaveViewButton />}
-                        {!disableViewOptions && <DataTableViewOptions table={table} />}
-                        {onRefresh && <RefreshButton onRefresh={onRefresh} isLoading={isLoading ?? false} />}
-                    </div>
-                </div>
-
-                {(pageId && onFilterChange && globalViews.length > 0) ||
-                columnFilters.filter(f => !facetedFilters?.[f.id]).length > 0 ? (
-                    <div className="flex items-center justify-between bg-muted/40 rounded border border-border p-2 @container">
-                        <div className="flex items-center">
-                            {pageId && onFilterChange && <GlobalViewsBar />}
-                        </div>
-                        <div className="flex gap-1 flex-wrap items-center">
-                            {columnFilters
-                                .filter(f => !facetedFilters?.[f.id])
-                                .map(f => {
-                                    const column = table.getColumn(f.id);
-                                    const currency = activeChannel?.defaultCurrencyCode ?? 'USD';
+                <div className="relative">
+                    <div className={cn(
+                        "flex flex-wrap items-start justify-between gap-2 transition-opacity duration-150",
+                        hasSelection && "opacity-0 pointer-events-none"
+                    )}>
+                        <div className="flex flex-wrap items-center gap-2 min-w-0 flex-1">
+                            {onSearchTermChange && (
+                                <Input
+                                    placeholder={t`Filter...`}
+                                    value={searchTerm}
+                                    onChange={event => handleSearchChange(event.target.value)}
+                                    className="h-8 w-full @sm/table:w-64"
+                                />
+                            )}
+                            <Suspense>
+                                {Object.entries(facetedFilters ?? {}).map(([key, filter]) => {
+                                    const FilterComponent = filter?.component ?? DataTableFacetedFilter;
                                     return (
-                                        <DataTableFilterBadgeEditable
-                                            key={f.id}
-                                            filter={f}
-                                            column={column}
-                                            currencyCode={currency}
-                                            dataType={
-                                                (column?.columnDef.meta as any)?.fieldInfo?.type ?? 'String'
-                                            }
-                                            onRemove={() =>
-                                                setColumnFilters(old => old.filter(x => x.id !== f.id))
-                                            }
+                                        <FilterComponent
+                                            key={key}
+                                            column={table.getColumn(key) as any}
+                                            title={filter?.title}
+                                            options={filter?.options}
+                                            optionsFn={filter?.optionsFn}
+                                            icon={filter?.icon}
                                         />
                                     );
                                 })}
-                            {columnFilters.filter(f => !facetedFilters?.[f.id]).length > 0 && (
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => setColumnFilters([])}
-                                    className="text-xs opacity-60 hover:opacity-100"
-                                >
-                                    <Trans>Clear all</Trans>
-                                </Button>
+                            </Suspense>
+                            {onFilterChange && <AddFilterMenu columns={table.getAllColumns()} />}
+                            {pageId && onFilterChange && <MyViewsButton />}
+                            {pageId && onFilterChange && globalViews.length > 0 && (
+                                <div className="hidden @md/table:contents">
+                                    <GlobalViewsBar />
+                                </div>
+                            )}
+                            {nonFacetedFilters.length > 0 && (
+                                <>
+                                    <Separator orientation="vertical" className="self-stretch" />
+                                    {nonFacetedFilters.length <= INLINE_FILTER_BADGE_LIMIT ? (
+                                        <>
+                                            {nonFacetedFilters.map(f => {
+                                                const column = table.getColumn(f.id);
+                                                return (
+                                                    <DataTableFilterBadgeEditable
+                                                        key={f.id}
+                                                        filter={f}
+                                                        column={column}
+                                                        currencyCode={currencyCode}
+                                                        dataType={
+                                                            (column?.columnDef.meta as any)?.fieldInfo?.type ?? 'String'
+                                                        }
+                                                        onRemove={() =>
+                                                            setColumnFilters(old => old.filter(x => x.id !== f.id))
+                                                        }
+                                                    />
+                                                );
+                                            })}
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                onClick={clearNonFacetedFilters}
+                                                className="text-xs opacity-60 hover:opacity-100"
+                                            >
+                                                <Trans>Clear all</Trans>
+                                            </Button>
+                                        </>
+                                    ) : (
+                                        <ActiveFiltersPopover
+                                            filters={nonFacetedFilters}
+                                            table={table}
+                                            currencyCode={currencyCode}
+                                            onRemoveFilter={id => setColumnFilters(old => old.filter(x => x.id !== id))}
+                                            onClearAll={clearNonFacetedFilters}
+                                        />
+                                    )}
+                                </>
                             )}
                         </div>
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                            {pageId && onFilterChange && <SaveViewButton />}
+                            {!disableViewOptions && <DataTableViewOptions table={table} />}
+                            {onRefresh && <RefreshButton onRefresh={onRefresh} isLoading={isLoading ?? false} />}
+                        </div>
                     </div>
-                ) : null}
+                    <DataTableBulkActions bulkActions={bulkActions ?? []} table={table} />
+                </div>
 
-                <div className="rounded-md border my-2 relative shadow-sm">
+                <div className="rounded-md border my-2 relative shadow-sm bg-card">
                     <DndContext
                         sensors={sensors}
                         collisionDetection={closestCenter}
@@ -433,7 +452,7 @@ export function DataTable<TData>({
                         modifiers={[restrictToVerticalAxis]}
                     >
                         <Table>
-                            <TableHeader className="bg-muted/50">
+                            <TableHeader>
                                 {table.getHeaderGroups().map(headerGroup => (
                                     <TableRow key={headerGroup.id}>
                                         {headerGroup.headers.map(header => {
@@ -545,7 +564,6 @@ export function DataTable<TData>({
                             </SortableContext>
                         </Table>
                     </DndContext>
-                    <DataTableBulkActions bulkActions={bulkActions ?? []} table={table} />
                 </div>
                 {onPageChange && totalItems != null && <DataTablePagination table={table} />}
             </div>

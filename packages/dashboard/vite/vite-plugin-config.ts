@@ -68,7 +68,8 @@ export function viteConfigPlugin({ packageRoot }: { packageRoot: string }): Plug
                     '@vendure/common/lib/generated-types',
                     '@vendure/common/lib/shared-types',
                     '@vendure/common/lib/shared-utils',
-                    '@radix-ui/react-portal > react-dom',
+                    'use-sync-external-store/shim',
+                    'use-sync-external-store/shim/with-selector',
                     '@messageformat/parser',
                 ],
             };

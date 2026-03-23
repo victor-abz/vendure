@@ -84,12 +84,13 @@ Then paste the following prompt in full:
 - For short we use "old" to refer to code written for the Angular Admin UI, and "new" for the React Dashboard
 - old code is usually in a plugin's "ui" dir
 - new code should be in a plugin's "dashboard" dir
-- new code imports all components from `@vendure/dashboard`. It can also import the following as needed:
+- new code imports all components from `@vendure/dashboard`. This includes re-exports of common third-party utilities:
+    - `useQuery`, `useMutation`, `useQueryClient` etc. (TanStack Query)
+    - `Link`, `useNavigate`, `useRouter` etc. (TanStack Router)
+    - `useForm`, `useFormContext`, `Controller` etc. (React Hook Form)
+    - `toast` (Sonner)
+- The following are imported from their own packages:
     - hooks or anything else needed from `react`
-    - hooks etc from `@tanstack/react-query`
-    - `Link`, `useNavigate` etc from `@tanstack/react-router`
-    - `useForm` etc from `react-hook-form`
-    - `toast` from `sonner`
     - icons from `lucide-react`
     - for i18n: `Trans`, `useLingui` from `@lingui/react/macro`
 - Default to the style conventions of the current project as much as possible (single vs double quotes,
@@ -202,7 +203,7 @@ custom design system based on Clarity UI
 
 ### New
 
-tailwind + shadcn/ui. Shadcn components import from `@vendure/dashboard`
+Tailwind + Vendure Design System. Components import from `@vendure/dashboard`
 
 ```tsx
 import { Button, DetailPageButton, VendureImage } from '@vendure/dashboard';
@@ -283,8 +284,7 @@ this.dataService.query(GET_CUSTOMER_NAME, {
 ### New
 
 ```ts
-import { useQuery } from '@tanstack/react-query';  
-import { api } from '@vendure/dashboard';  
+import { useQuery, api } from '@vendure/dashboard';
 import { graphql } from '@/gql';
 
 const addressFragment = graphql(`
@@ -502,9 +502,8 @@ export default [
 ### New (React Dashboard)
 
 ```tsx title="src/plugins/my-plugin/dashboard/components/color-picker.tsx"
-import { Button, Card, CardContent, cn, DashboardFormComponent, Input } from '@vendure/dashboard';
+import { Button, Card, CardContent, cn, DashboardFormComponent, Input, useFormContext } from '@vendure/dashboard';
 import { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 
 // By typing your component as DashboardFormComponent, the props will be correctly typed
 export const ColorPickerComponent: DashboardFormComponent = ({ value, onChange, name }) => {
@@ -774,8 +773,8 @@ import {
     ListPage,
     PageActionBarRight,
     DetailPageButton,
+    Link,
 } from '@vendure/dashboard';
-import { Link } from '@tanstack/react-router';
 import { PlusIcon } from 'lucide-react';
 
 // This function is generated for you by the `vendureDashboardPlugin` in your Vite config.
@@ -854,11 +853,9 @@ export const articleList: DashboardRouteDefinition = {
             ]}
         >
             <PageActionBarRight>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        New article
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    New article
                 </Button>
             </PageActionBarRight>
         </ListPage>
@@ -1108,9 +1105,10 @@ import {
     Input,
     RichTextInput,
     CustomFieldsPageBlock,
+    useNavigate,
+    toast,
 } from '@vendure/dashboard';
-import { AnyRoute, useNavigate } from '@tanstack/react-router';
-import { toast } from 'sonner';
+import type { AnyRoute } from '@vendure/dashboard';
 
 import { graphql } from '@/gql';
 
@@ -1612,7 +1610,7 @@ Forms in the Angular Admin UI used `vdr-form-field` components within a `form-gr
 | `form-grid` (class) | `DetailFormGrid` | `@vendure/dashboard` | For grid layouts |
 | `vdr-rich-text-editor` | `RichTextInput` | `@vendure/dashboard` | |
 | - | `Input` | `@vendure/dashboard` | Basic text input |
-| `FormGroup` | `useForm` | `react-hook-form` | Form state management |
+| `FormGroup` | `useForm` | `@vendure/dashboard` | Form state management |
 
 ```tsx
 <PageBlock column="main" blockId="main-form">
@@ -1646,7 +1644,7 @@ Custom field inputs now use the `DashboardFormComponent` type and are registered
 | `FormInputComponent<T>` | `DashboardFormComponent` | `@vendure/dashboard` | Type for custom field components |
 | `registerFormInputComponent()` | `customFormComponents.customFields` | `@vendure/dashboard` | Registration method |
 | `formControl` (prop) | `value`, `onChange`, `name` (props) | - | Component receives these props |
-| - | `useFormContext()` | `react-hook-form` | Access field state and errors |
+| - | `useFormContext()` | `@vendure/dashboard` | Access field state and errors |
 
 ```tsx
 export const ColorPickerComponent: DashboardFormComponent = ({ value, onChange, name }) => {
@@ -1702,8 +1700,8 @@ export const articleList: DashboardRouteDefinition = {
             }}
         >
             <PageActionBarRight>
-                <Button asChild>
-                    <Link to="./new"><PlusIcon /> New article</Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon /> New article
                 </Button>
             </PageActionBarRight>
         </ListPage>

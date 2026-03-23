@@ -418,36 +418,23 @@ function CollectionListPage() {
             }}
             route={Route}
             bulkActions={[
-                {
-                    component: AssignCollectionsToChannelBulkAction,
-                    order: 100,
-                },
-                {
-                    component: RemoveCollectionsFromChannelBulkAction,
-                    order: 200,
-                },
-                {
-                    component: DuplicateCollectionsBulkAction,
-                    order: 300,
-                },
-                {
-                    component: MoveCollectionsBulkAction,
-                    order: 400,
-                },
-                {
-                    component: DeleteCollectionsBulkAction,
-                    order: 500,
-                },
+                [
+                    { component: AssignCollectionsToChannelBulkAction, order: 100 },
+                    { component: RemoveCollectionsFromChannelBulkAction, order: 200 },
+                    { component: DuplicateCollectionsBulkAction, order: 300 },
+                    { component: MoveCollectionsBulkAction, order: 400 },
+                ],
+                [
+                    { component: DeleteCollectionsBulkAction },
+                ],
             ]}
             onReorder={handleReorder}
             disableDragAndDrop={!!searchTerm}
         >
             <ActionBarItem itemId="create-button" requiresPermission={['CreateCollection', 'CreateCatalog']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        <Trans>New Collection</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    <Trans>New Collection</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

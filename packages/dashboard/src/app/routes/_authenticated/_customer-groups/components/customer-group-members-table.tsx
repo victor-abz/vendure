@@ -100,10 +100,8 @@ export function CustomerGroupMembersTable({
                         cell: ({ row }) => {
                             const value = `${row.original.firstName} ${row.original.lastName}`;
                             return (
-                                <Button asChild variant="ghost">
-                                    <Link to="/customers/$id" params={{ id: row.original.id }}>
-                                        {value}
-                                    </Link>
+                                <Button render={<Link to="/customers/$id" params={{ id: row.original.id }} />} variant="ghost">
+                                    {value}
                                 </Button>
                             );
                         },

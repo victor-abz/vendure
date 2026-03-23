@@ -112,7 +112,6 @@ export function AddOptionGroupDialog({
 
             toast.success(t`Successfully created option group`);
             setOpen(false);
-            form.reset();
             onSuccess?.();
         } catch (error) {
             toast.error(t`Failed to create option group`, {
@@ -132,11 +131,9 @@ export function AddOptionGroupDialog({
                 }
             }}
         >
-            <DialogTrigger asChild>
-                <Button variant="outline" size="sm" type="button" className="w-full gap-2">
-                    <Plus className="h-4 w-4" />
-                    <Trans>Add option group</Trans>
-                </Button>
+            <DialogTrigger render={<Button variant="outline" size="sm" type="button" className="w-full gap-2" />}>
+                <Plus className="h-4 w-4" />
+                <Trans>Add option group</Trans>
             </DialogTrigger>
             <DialogContent className="max-w-2xl">
                 <DialogHeader>

@@ -3,6 +3,7 @@ import { DataTableCellComponent } from '@/vdb/components/data-table/types.js';
 import { Badge } from '@/vdb/components/ui/badge.js';
 import { Button } from '@/vdb/components/ui/button.js';
 import { useDynamicTranslations } from '@/vdb/hooks/use-dynamic-translations.js';
+import { getTypeForState, stateTypeToBadgeVariant } from '@/vdb/utils/state-type.js';
 import { Link } from '@tanstack/react-router';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useMemo, useState } from 'react';
@@ -21,10 +22,8 @@ export const CustomerCell: DataTableCellComponent<CustomerCellData> = ({ row }) 
         return null;
     }
     return (
-        <Button asChild variant="ghost">
-            <Link to={`/customers/${value.id}`}>
+        <Button render={<Link to={`/customers/${value.id}`} />} variant="ghost">
                 {value.firstName} {value.lastName}
-            </Link>
         </Button>
     );
 };
@@ -32,7 +31,7 @@ export const CustomerCell: DataTableCellComponent<CustomerCellData> = ({ row }) 
 export const OrderStateCell: DataTableCellComponent<{ state: string }> = ({ row }) => {
     const { getTranslatedOrderState } = useDynamicTranslations();
     const value = row.original.state;
-    return <Badge variant="outline">{getTranslatedOrderState(value)}</Badge>;
+    return <Badge variant={stateTypeToBadgeVariant(getTypeForState(value))}>{getTranslatedOrderState(value)}</Badge>;
 };
 
 export const OrderMoneyCell: DataTableCellComponent<{ currencyCode: string }> = ({ cell, row }) => {

@@ -52,16 +52,13 @@ function CountryListPage() {
             bulkActions={[
                 {
                     component: DeleteCountriesBulkAction,
-                    order: 500,
                 },
             ]}
         >
             <ActionBarItem itemId="create-button" requiresPermission={['CreateCountry']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon />
-                        <Trans>Add Country</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon />
+                    <Trans>Add Country</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

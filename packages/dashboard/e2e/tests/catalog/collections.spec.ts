@@ -124,7 +124,7 @@ test.describe('Issue #4389: Collection form dirty state with filters', () => {
 
         // The description is a TipTap rich text editor (contenteditable),
         // not a regular input. Click the editor area and type.
-        const editor = page.locator('.rich-text-editor');
+        const editor = page.getByTestId('rich-text-editor');
         await editor.click();
         await page.keyboard.type('A test description');
 

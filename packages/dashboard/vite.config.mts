@@ -23,10 +23,16 @@ export default ({ mode }: { mode: string }) => {
               './sample-vendure-config.ts');
 
     return defineConfig({
+        optimizeDeps: {
+            include: ['lodash/get', 'lodash/isString', 'lodash/isNaN'],
+        },
         test: {
             globals: true,
             environment: 'jsdom',
             exclude: ['./e2e/**/*', './plugin/**/*', '**/node_modules/**/*'],
+            environmentMatchGlobs: [
+                ['vite/tests/**', 'node'],
+            ],
         },
         plugins: [
             vendureDashboardPlugin({

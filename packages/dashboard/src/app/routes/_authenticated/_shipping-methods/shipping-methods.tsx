@@ -45,29 +45,30 @@ function ShippingMethodListPage() {
                 };
             }}
             bulkActions={[
-                {
-                    component: AssignShippingMethodsToChannelBulkAction,
-                    order: 100,
-                },
-                {
-                    component: RemoveShippingMethodsFromChannelBulkAction,
-                    order: 200,
-                },
-                {
-                    component: DeleteShippingMethodsBulkAction,
-                    order: 500,
-                },
+                [
+                    {
+                        component: AssignShippingMethodsToChannelBulkAction,
+                        order: 100,
+                    },
+                    {
+                        component: RemoveShippingMethodsFromChannelBulkAction,
+                        order: 200,
+                    },
+                ],
+                [
+                    {
+                        component: DeleteShippingMethodsBulkAction,
+                    },
+                ],
             ]}
         >
             <ActionBarItem itemId="test-shipping-button">
                 <TestShippingMethodsSheet />
             </ActionBarItem>
             <ActionBarItem itemId="create-button" requiresPermission={['CreateShippingMethod']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        <Trans>New Shipping Method</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    <Trans>New Shipping Method</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

@@ -91,8 +91,12 @@ export function SelectWithOptions({
         }
     };
 
+    const selectItems = Object.fromEntries(
+        options.map(option => [option.value, option.label ? getTranslation(option.label) : option.value]),
+    );
+
     return (
-        <Select value={currentValue ?? undefined} onValueChange={handleValueChange} disabled={readOnly}>
+        <Select value={currentValue} onValueChange={handleValueChange} disabled={readOnly} items={selectItems}>
             <SelectTrigger className="mb-0">
                 <SelectValue placeholder={placeholder || <Trans>Select an option</Trans>} />
             </SelectTrigger>

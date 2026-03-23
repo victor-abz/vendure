@@ -161,9 +161,10 @@ import {
     RichTextInput,
     CustomFieldsPageBlock,
     ActionBarItem,
+    useNavigate,
+    toast,
 } from '@vendure/dashboard';
-import { AnyRoute, useNavigate } from '@tanstack/react-router';
-import { toast } from 'sonner';
+import type { AnyRoute } from '@vendure/dashboard';
 
 import { graphql } from '@/gql';
 

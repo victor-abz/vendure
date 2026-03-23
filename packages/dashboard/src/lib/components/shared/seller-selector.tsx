@@ -66,8 +66,7 @@ export function SellerSelector(props: SellerSelectorProps) {
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-                <Button variant="outline" size="sm" type="button" disabled={props.readOnly} className="gap-2">
+            <PopoverTrigger render={<Button variant="outline" size="sm" type="button" disabled={props.readOnly} className="gap-2" />}>
                     {selectedSeller ? (
                         <span className="flex-1 text-left">{selectedSeller.name}</span>
                     ) : (
@@ -76,7 +75,6 @@ export function SellerSelector(props: SellerSelectorProps) {
                             {props.label ?? <Trans>Select seller</Trans>}
                         </>
                     )}
-                </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0 w-[350px]" align="start">
                 <Command shouldFilter={false}>

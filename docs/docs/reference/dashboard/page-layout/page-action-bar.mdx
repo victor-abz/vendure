@@ -2,12 +2,16 @@
 title: "PageActionBar"
 generated: true
 ---
-<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/page-layout.tsx" sourceLine="364" packageName="@vendure/dashboard" since="3.3.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/page-layout.tsx" sourceLine="371" packageName="@vendure/dashboard" since="3.3.0" />
 
 A component for displaying the main actions for a page. This should be used inside the [Page](/reference/dashboard/page-layout/page#page) component.
 
 You can add action bar items by including [ActionBarItem](/reference/dashboard/page-layout/page-action-bar#actionbaritem) components as direct children.
 For backwards compatibility, [PageActionBarLeft](/reference/dashboard/page-layout/page-action-bar#pageactionbarleft) and [PageActionBarRight](/reference/dashboard/page-layout/page-action-bar#pageactionbarright) are also supported.
+
+**Mobile behavior:** On mobile viewports, only the last inline [ActionBarItem](/reference/dashboard/page-layout/page-action-bar#actionbaritem) is
+shown (the primary action). Extension items and plain children are hidden to prevent
+overflow. The dropdown menu and entity info remain visible on all viewports.
 
 *Example*
 
@@ -35,7 +39,7 @@ Parameters
 
 <MemberInfo kind="parameter" type={`Readonly<{     children: React.ReactNode;     /**      * @description      * Optional dropdown menu items to display in the action bar's context menu.      */     dropdownMenuItems?: InlineDropdownItem[]; }>`} />
 
-<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/action-bar-item-wrapper.tsx" sourceLine="105" packageName="@vendure/dashboard" since="3.5.2" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/action-bar-item-wrapper.tsx" sourceLine="103" packageName="@vendure/dashboard" since="3.5.2" />
 
 Props for the ActionBarItem component.
 
@@ -72,11 +76,16 @@ permissions in order for the item to render.
 
 
 </div>
-<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/action-bar-item-wrapper.tsx" sourceLine="150" packageName="@vendure/dashboard" since="3.5.2" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/action-bar-item-wrapper.tsx" sourceLine="153" packageName="@vendure/dashboard" since="3.5.2" />
 
 A component for wrapping action bar items with a unique ID. This should be used inside
 the [PageActionBarRight](/reference/dashboard/page-layout/page-action-bar#pageactionbarright) component. Each item is given an `itemId` which allows
 extensions to position their items relative to it using `position.itemId`.
+
+**Mobile behavior:** On mobile viewports, only the **last** inline `ActionBarItem` is
+visible (treated as the primary action, e.g. Save/Update/Create). All other inline items
+and extension items are hidden. Place your primary action as the last `ActionBarItem`
+child of [PageActionBar](/reference/dashboard/page-layout/page-action-bar#pageactionbar).
 
 In developer mode, hovering over the item will show a popover with the `pageId` and `itemId`,
 making it easy to discover the correct IDs for extension positioning.
@@ -100,7 +109,7 @@ Parameters
 
 <MemberInfo kind="parameter" type={`Readonly<<a href='/reference/dashboard/page-layout/page-action-bar#actionbaritemprops'>ActionBarItemProps</a>>`} />
 
-<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/page-layout.tsx" sourceLine="491" packageName="@vendure/dashboard" since="3.3.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/page-layout.tsx" sourceLine="518" packageName="@vendure/dashboard" since="3.3.0" />
 
 The PageActionBarLeft component is not used and will be removed in a future version.
 
@@ -113,7 +122,7 @@ Parameters
 
 <MemberInfo kind="parameter" type={`Readonly<{ children: React.ReactNode }>`} />
 
-<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/page-layout.tsx" sourceLine="670" packageName="@vendure/dashboard" since="3.3.0" />
+<GenerationInfo sourceFile="packages/dashboard/src/lib/framework/layout-engine/page-layout.tsx" sourceLine="694" packageName="@vendure/dashboard" since="3.3.0" />
 
 The PageActionBarRight component is used to display the right content of the action bar.
 

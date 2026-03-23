@@ -5,7 +5,7 @@ import { ErrorPage } from '@/vdb/components/shared/error-page.js';
 import { FormFieldWrapper } from '@/vdb/components/shared/form-field-wrapper.js';
 import { TranslatableFormFieldWrapper } from '@/vdb/components/shared/translatable-form-field.js';
 import { Button } from '@/vdb/components/ui/button.js';
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from '@/vdb/components/ui/form.js';
+import { Field, FieldLabel } from '@/vdb/components/ui/field.js';
 import { Input } from '@/vdb/components/ui/input.js';
 import { Switch } from '@/vdb/components/ui/switch.js';
 import { NEW_ENTITY_PATH } from '@/vdb/constants.js';
@@ -220,31 +220,27 @@ function CollectionDetailPage() {
                     />
                 </PageBlock>
                 <PageBlock column="side" blockId="assets">
-                    <FormItem>
-                        <FormLabel>
+                    <Field>
+                        <FieldLabel>
                             <Trans>Assets</Trans>
-                        </FormLabel>
-                        <FormControl>
-                            <EntityAssets
-                                assets={entity?.assets}
-                                featuredAsset={entity?.featuredAsset}
-                                compact={true}
-                                value={form.getValues()}
-                                onChange={value => {
-                                    form.setValue('featuredAssetId', value.featuredAssetId ?? undefined, {
-                                        shouldDirty: true,
-                                        shouldValidate: true,
-                                    });
-                                    form.setValue('assetIds', value.assetIds ?? [], {
-                                        shouldDirty: true,
-                                        shouldValidate: true,
-                                    });
-                                }}
-                            />
-                        </FormControl>
-                        <FormDescription></FormDescription>
-                        <FormMessage />
-                    </FormItem>
+                        </FieldLabel>
+                        <EntityAssets
+                            assets={entity?.assets}
+                            featuredAsset={entity?.featuredAsset}
+                            compact={true}
+                            value={form.getValues()}
+                            onChange={value => {
+                                form.setValue('featuredAssetId', value.featuredAssetId ?? undefined, {
+                                    shouldDirty: true,
+                                    shouldValidate: true,
+                                });
+                                form.setValue('assetIds', value.assetIds ?? [], {
+                                    shouldDirty: true,
+                                    shouldValidate: true,
+                                });
+                            }}
+                        />
+                    </Field>
                 </PageBlock>
                 <PageBlock column="main" blockId="contents" title={<Trans>Contents</Trans>}>
                     {pendingFilterApplication || shouldPreviewContents || creatingNewEntity ? (

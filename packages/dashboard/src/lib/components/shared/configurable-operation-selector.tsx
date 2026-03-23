@@ -134,11 +134,9 @@ export function ConfigurableOperationSelector({
             )}
             <DropdownMenu>
                 {!value?.code && (
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="w-fit">
+                    <DropdownMenuTrigger render={<Button variant="outline" className="w-fit" />}>
                             <Plus />
                             <Trans>{buttonText}</Trans>
-                        </Button>
                     </DropdownMenuTrigger>
                 )}
                 <DropdownMenuContent className="w-96">

@@ -117,6 +117,7 @@ export const MoveCollectionsBulkAction: BulkActionComponent<any> = ({ selection,
                 onClick={() => setDialogOpen(true)}
                 label={<Trans>Move</Trans>}
                 icon={FolderTree}
+                closeOnClick={false}
             />
             <MoveCollectionsDialog
                 open={dialogOpen}

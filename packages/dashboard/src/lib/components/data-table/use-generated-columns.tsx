@@ -9,7 +9,7 @@ import {
     generateDisplayComponentKey,
     getDisplayComponent,
 } from '@/vdb/framework/extension-api/display-component-extensions.js';
-import { BulkAction } from '@/vdb/framework/extension-api/types/index.js';
+import { BulkActionGroup, BulkActionsInput } from '@/vdb/framework/extension-api/types/index.js';
 import { api } from '@/vdb/graphql/api.js';
 import { usePageBlock } from '@/vdb/hooks/use-page-block.js';
 import { usePage } from '@/vdb/hooks/use-page.js';
@@ -26,7 +26,7 @@ import {
 } from '@tanstack/react-table';
 import { EllipsisIcon, TrashIcon } from 'lucide-react';
 import { memo, useMemo } from 'react';
-import { toast } from 'sonner';
+import { toast } from '@/vdb/components/ui/sonner.js';
 import {
     AdditionalColumns,
     AllItemFieldKeys,
@@ -51,7 +51,10 @@ import { Checkbox } from '../ui/checkbox.js';
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '../ui/dropdown-menu.js';
 import { DataTableColumnHeader } from './data-table-column-header.js';
@@ -82,7 +85,7 @@ export function useGeneratedColumns<T extends TypedDocumentNode<any, any>>({
     fields: FieldInfo[];
     customizeColumns?: CustomizeColumnConfig<T>;
     rowActions?: RowAction<PaginatedListItemFields<T>>[];
-    bulkActions?: BulkAction[];
+    bulkActions?: BulkActionsInput;
     deleteMutation?: TypedDocumentNode<any, any>;
     additionalColumns?: AdditionalColumns<T>;
     defaultColumnOrder?: Array<string | number | symbol>;
@@ -210,7 +213,7 @@ export function useGeneratedColumns<T extends TypedDocumentNode<any, any>>({
                         className="mx-1"
                         checked={table.getIsAllRowsSelected()}
                         onCheckedChange={checked =>
-                            table.toggleAllRowsSelected(checked === 'indeterminate' ? undefined : checked)
+                            table.toggleAllRowsSelected(checked)
                         }
                     />
                 ),
@@ -221,7 +224,7 @@ export function useGeneratedColumns<T extends TypedDocumentNode<any, any>>({
                         <Checkbox
                             className="mx-1"
                             checked={row.getIsSelected()}
-                            onCheckedChange={row.getToggleSelectedHandler()}
+                            onCheckedChange={(checked) => row.toggleSelected(!!checked)}
                         />
                     );
                 },
@@ -237,8 +240,11 @@ export function useGeneratedColumns<T extends TypedDocumentNode<any, any>>({
 function getRowActions(
     rowActions?: RowAction<any>[],
     deleteMutation?: TypedDocumentNode<any, any>,
-    bulkActions?: BulkAction[],
+    bulkActionGroups?: BulkActionGroup[],
 ): AccessorKeyColumnDef<any> | undefined {
+    const hasRowActions = rowActions && rowActions.length > 0;
+    const hasBulkActions = bulkActionGroups?.some(g => g.actions.length > 0);
+
     return {
         id: 'actions',
         accessorKey: 'actions',
@@ -248,29 +254,48 @@ function getRowActions(
         cell: ({ row, table }) => {
             return (
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon">
+                    <DropdownMenuTrigger render={<Button variant="ghost" size="icon" data-testid="dt-row-actions-trigger" />}>
                             <EllipsisIcon />
-                        </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        {rowActions?.map((action, index) => (
-                            <DropdownMenuItem
-                                onClick={() => action.onClick?.(row)}
-                                key={`${action.label}-${index}`}
-                            >
-                                {action.label}
-                            </DropdownMenuItem>
-                        ))}
-                        {bulkActions?.map((action, index) => (
-                            <action.component
-                                key={`bulk-action-${index}`}
-                                selection={[row.original]}
-                                table={table}
-                            />
-                        ))}
+                    <DropdownMenuContent className="min-w-56">
+                        {hasRowActions && (
+                            <DropdownMenuGroup>
+                                {rowActions.map((action, index) => (
+                                    <DropdownMenuItem
+                                        onClick={() => action.onClick?.(row)}
+                                        key={`${action.label}-${index}`}
+                                    >
+                                        {action.label}
+                                    </DropdownMenuItem>
+                                ))}
+                            </DropdownMenuGroup>
+                        )}
+                        {hasBulkActions && bulkActionGroups?.map((group, groupIndex) => {
+                            if (group.actions.length === 0) return null;
+                            const showSeparator = hasRowActions || groupIndex > 0;
+                            return (
+                                <div key={`group-${groupIndex}`}>
+                                    {showSeparator && <DropdownMenuSeparator />}
+                                    <DropdownMenuGroup>
+                                        {group.label && <DropdownMenuLabel>{group.label}</DropdownMenuLabel>}
+                                        {group.actions.map((action, index) => (
+                                            <action.component
+                                                key={`bulk-action-${groupIndex}-${index}`}
+                                                selection={[row.original]}
+                                                table={table}
+                                            />
+                                        ))}
+                                    </DropdownMenuGroup>
+                                </div>
+                            );
+                        })}
+                        {deleteMutation && (hasRowActions || hasBulkActions) && (
+                            <DropdownMenuSeparator />
+                        )}
                         {deleteMutation && (
-                            <DeleteMutationRowAction deleteMutation={deleteMutation} row={row} />
+                            <DropdownMenuGroup>
+                                <DeleteMutationRowAction deleteMutation={deleteMutation} row={row} />
+                            </DropdownMenuGroup>
                         )}
                     </DropdownMenuContent>
                 </DropdownMenu>
@@ -374,13 +399,11 @@ function DeleteMutationRowAction({
     });
     return (
         <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <DropdownMenuItem onSelect={e => e.preventDefault()}>
-                    <div className="flex items-center gap-2 text-destructive">
-                        <TrashIcon className="w-4 h-4 text-destructive" />
+            <AlertDialogTrigger nativeButton={false} render={<DropdownMenuItem closeOnClick={false} />}>
+                    <div className="flex items-center gap-2">
+                        <TrashIcon className="w-4 h-4" />
                         <Trans>Delete</Trans>
                     </div>
-                </DropdownMenuItem>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

@@ -1,5 +1,3 @@
-'use client';
-
 import { closestCenter, DndContext } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -16,7 +14,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/vdb/components/ui/dropdown-menu.js';
-// Note: we intentionally don't use Radix ScrollArea here because its viewport
+// Note: we intentionally don't use ScrollArea here because its viewport
 // doesn't properly resolve height:100% from a flex-computed parent height,
 // preventing scrolling. A plain overflow-y-auto div works correctly in a flex layout.
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/vdb/components/ui/tooltip.js';
@@ -84,12 +82,8 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
         <div className="flex items-center gap-2">
             <DropdownMenu modal={false}>
                 <Tooltip>
-                    <TooltipTrigger asChild>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="sm" className="ml-auto hidden h-8 lg:flex">
+                    <TooltipTrigger render={<DropdownMenuTrigger render={<Button variant="outline" size="icon-sm" className="ml-auto hidden lg:flex" data-testid="dt-column-settings-trigger" />} />}>
                                 <Settings2 />
-                            </Button>
-                        </DropdownMenuTrigger>
                     </TooltipTrigger>
                     <TooltipContent>
                         <Trans>Column settings</Trans>
@@ -112,7 +106,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
                                             className="capitalize"
                                             checked={column.getIsVisible()}
                                             onCheckedChange={value => column.toggleVisibility(value)}
-                                            onSelect={e => e.preventDefault()}
+                                            closeOnClick={false}
                                         >
                                             {getTranslatedFieldName(column.id)}
                                         </DropdownMenuCheckboxItem>

@@ -123,9 +123,7 @@ export function GeneratedBreadcrumbs() {
                 {breadcrumbs.map(({ label, path }, index, arr) => (
                     <Fragment key={`${path}-${index}`}>
                         <BreadcrumbItem className="hidden md:block">
-                            <BreadcrumbLink asChild>
-                                <Link to={path}>{typeof label === 'string' ? i18n.t(label) : label}</Link>
-                            </BreadcrumbLink>
+                            <BreadcrumbLink render={<Link to={path} />}>{typeof label === 'string' ? i18n.t(label) : label}</BreadcrumbLink>
                         </BreadcrumbItem>
                         {index < arr.length - 1 && <BreadcrumbSeparator className="hidden md:block" />}
                     </Fragment>

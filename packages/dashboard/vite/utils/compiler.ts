@@ -1,4 +1,4 @@
-import { VendureConfig } from '@vendure/core';
+import type { VendureConfig } from '@vendure/core';
 import fs from 'fs-extra';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

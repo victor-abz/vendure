@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { toast } from '@/vdb/components/ui/sonner.js';
 import { Plus } from 'lucide-react';
 
 import { ChannelChip } from '@/vdb/components/shared/channel-chip.js';

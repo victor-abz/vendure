@@ -2,6 +2,7 @@ import { Button } from '@/vdb/components/ui/button.js';
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -81,6 +82,9 @@ export function AssetPickerDialog({
             <DialogContent className="sm:max-w-[800px] lg:max-w-[1000px] h-[85vh] p-0 flex flex-col">
                 <DialogHeader className="px-6 pt-6">
                     <DialogTitle>{multiSelect ? title : title.replace('Assets', 'Asset')}</DialogTitle>
+                    <DialogDescription className="sr-only">
+                        {multiSelect ? 'Browse and select one or more assets' : 'Browse and select an asset'}
+                    </DialogDescription>
                 </DialogHeader>
 
                 <div className="flex-1 overflow-y-auto px-6 pt-1">

@@ -417,11 +417,9 @@ function DraftOrderPage() {
                 </PageBlock>
                 <PageBlock column="side" blockId="customer" title={<Trans>Customer</Trans>}>
                     {entity?.customer?.id ? (
-                        <Button variant="outline" asChild className="mb-4">
-                            <Link to={`/customers/${entity?.customer?.id}`}>
-                                <User className="w-4 h-4" />
-                                {entity?.customer?.firstName} {entity?.customer?.lastName}
-                            </Link>
+                        <Button variant="outline" render={<Link to={`/customers/${entity?.customer?.id}`} />} className="mb-4">
+                            <User className="w-4 h-4" />
+                            {entity?.customer?.firstName} {entity?.customer?.lastName}
                         </Button>
                     ) : null}
                     <CustomerSelector

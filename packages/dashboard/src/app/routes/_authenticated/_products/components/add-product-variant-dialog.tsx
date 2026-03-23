@@ -4,6 +4,7 @@ import { Button } from '@/vdb/components/ui/button.js';
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -220,17 +221,18 @@ export function AddProductVariantDialog({
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <Button variant="outline">
-                    <Plus className="mr-2 h-4 w-4" />
-                    <Trans>Add variant</Trans>
-                </Button>
+            <DialogTrigger render={<Button variant="outline" />}>
+                <Plus className="mr-2 h-4 w-4" />
+                <Trans>Add variant</Trans>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
                         <Trans>Add product variant</Trans>
                     </DialogTitle>
+                    <DialogDescription className="sr-only">
+                        <Trans>Create a new product variant with options, pricing, and stock</Trans>
+                    </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form

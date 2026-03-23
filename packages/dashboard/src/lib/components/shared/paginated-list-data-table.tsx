@@ -1,6 +1,4 @@
 import { DataTable, FacetedFilter } from '@/vdb/components/data-table/data-table.js';
-import { Alert, AlertDescription, AlertTitle } from '@/vdb/components/ui/alert.js';
-import { Trans } from '@lingui/react/macro';
 import { getObjectPathToPaginatedList } from '@/vdb/framework/document-introspection/get-document-structure.js';
 import { useListQueryFields } from '@/vdb/framework/document-introspection/hooks.js';
 import { api } from '@/vdb/graphql/api.js';
@@ -9,7 +7,7 @@ import { useDebounce } from '@uidotdev/usehooks';
 
 import { addCustomFields } from '@/vdb/framework/document-introspection/add-custom-fields.js';
 import { includeOnlySelectedListFields } from '@/vdb/framework/document-introspection/include-only-selected-list-fields.js';
-import { BulkAction } from '@/vdb/framework/extension-api/types/index.js';
+import { BulkActionsInput } from '@/vdb/framework/extension-api/types/index.js';
 import { ResultOf } from '@/vdb/graphql/graphql.js';
 import { useExtendedListQuery } from '@/vdb/hooks/use-extended-list-query.js';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
@@ -200,7 +198,7 @@ export interface PaginatedListDataTableProps<
     onColumnVisibilityChange?: (table: Table<any>, columnVisibility: VisibilityState) => void;
     facetedFilters?: FacetedFilterConfig<T>;
     rowActions?: RowAction<PaginatedListItemFields<T>>[];
-    bulkActions?: BulkAction[];
+    bulkActions?: BulkActionsInput;
     disableViewOptions?: boolean;
     transformData?: (data: PaginatedListItemFields<T>[]) => PaginatedListItemFields<T>[];
     setTableOptions?: (table: TableOptions<any>) => TableOptions<any>;
@@ -315,8 +313,8 @@ export const PaginatedListDataTableKey = 'PaginatedListDataTable';
  *                         const value = cell.getValue() as string;
  *                         const id = row.original.id;
  *                         return (
- *                             <Button asChild variant="ghost">
- *                                 <Link to={`/orders/${id}`}>{value}</Link>
+ *                             <Button variant="ghost" render={<Link to={`/orders/${id}`} />}>
+ *                                 {value}
  *                             </Button>
  *                         );
  *                     },
@@ -452,7 +450,7 @@ export function PaginatedListDataTable<
     ];
     const queryKey = transformQueryKey ? transformQueryKey(defaultQueryKey) : defaultQueryKey;
 
-    const { data, isFetching, error } = useQuery({
+    const { data, isFetching } = useQuery({
         queryFn: () => {
             const searchFilter = onSearchTermChange ? onSearchTermChange(debouncedSearchTerm) : {};
             const mergedFilter = { ...filter, ...searchFilter };
@@ -480,14 +478,6 @@ export function PaginatedListDataTable<
         typeof transformData === 'function' ? transformData(listData?.items ?? []) : (listData?.items ?? []);
     return (
         <PaginatedListContext.Provider value={{ refetchPaginatedList }}>
-            {error && (
-                <Alert variant="destructive" className="mb-4">
-                    <AlertTitle><Trans>Error</Trans></AlertTitle>
-                    <AlertDescription>
-                        {error instanceof Error ? error.message : <Trans>An unknown error occurred</Trans>}
-                    </AlertDescription>
-                </Alert>
-            )}
             <DataTable
                 columns={columns}
                 data={transformedData}

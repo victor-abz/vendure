@@ -1,6 +1,6 @@
 import { Button } from '@/vdb/components/ui/button.js';
 import { cn } from '@/vdb/lib/utils.js';
-import { Locate } from 'lucide-react';
+import { Crosshair } from 'lucide-react';
 import { forwardRef } from 'react';
 
 export const DevModeButton = forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
@@ -18,7 +18,7 @@ export const DevModeButton = forwardRef<HTMLButtonElement, React.ComponentProps<
                     )}
                     {...rest}
                 >
-                    <Locate className="w-4 h-4" />
+                    <Crosshair className="w-4 h-4" />
                 </Button>
             </div>
         );

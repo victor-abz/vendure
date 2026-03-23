@@ -122,6 +122,64 @@ export type BulkAction = {
 
 /**
  * @description
+ * A group of bulk actions that are visually separated in the dropdown menu.
+ * Optionally includes a translatable label rendered as a `DropdownMenuLabel`.
+ *
+ * @docsCategory list-views
+ * @docsPage bulk-actions
+ * @since 3.4.0
+ */
+export type BulkActionGroup = {
+    /**
+     * @description
+     * Optional label rendered as a `DropdownMenuLabel` at the top of the group.
+     */
+    label?: React.ReactNode;
+    /**
+     * @description
+     * The bulk actions in this group.
+     */
+    actions: BulkAction[];
+};
+
+/**
+ * @description
+ * Bulk actions input supports three formats:
+ *
+ * 1. **Flat array** (backwards compatible): `BulkAction[]` — all actions in one group.
+ * 2. **Array of arrays**: `BulkAction[][]` — each inner array is a visually separated group.
+ * 3. **Array of groups**: `BulkActionGroup[]` — groups with optional labels.
+ *
+ * Formats 2 and 3 can be mixed in the same array.
+ *
+ * @example
+ * ```tsx
+ * // Flat (single group, backwards compatible)
+ * bulkActions={[
+ *   { component: AssignBulkAction },
+ *   { component: DeleteBulkAction },
+ * ]}
+ *
+ * // Grouped with labels
+ * bulkActions={[
+ *   [
+ *     { component: AssignBulkAction },
+ *     { component: DuplicateBulkAction },
+ *   ],
+ *   { label: <Trans>Danger zone</Trans>, actions: [
+ *     { component: DeleteBulkAction },
+ *   ]},
+ * ]}
+ * ```
+ *
+ * @docsCategory list-views
+ * @docsPage bulk-actions
+ * @since 3.4.0
+ */
+export type BulkActionsInput = BulkAction[] | Array<BulkAction[] | BulkActionGroup>;
+
+/**
+ * @description
  * This allows you to customize aspects of existing data tables in the dashboard.
  *
  * @docsCategory extensions-api

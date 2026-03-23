@@ -44,18 +44,21 @@ function OptionGroupListPage() {
                 };
             }}
             bulkActions={[
-                {
-                    order: 100,
-                    component: AssignOptionGroupsToChannelBulkAction,
-                },
-                {
-                    order: 200,
-                    component: RemoveOptionGroupsFromChannelBulkAction,
-                },
-                {
-                    order: 300,
-                    component: DeleteOptionGroupsBulkAction,
-                },
+                [
+                    {
+                        order: 100,
+                        component: AssignOptionGroupsToChannelBulkAction,
+                    },
+                    {
+                        order: 200,
+                        component: RemoveOptionGroupsFromChannelBulkAction,
+                    },
+                ],
+                [
+                    {
+                        component: DeleteOptionGroupsBulkAction,
+                    },
+                ],
             ]}
             route={Route}
         >
@@ -63,11 +66,9 @@ function OptionGroupListPage() {
                 itemId="create-button"
                 requiresPermission={['CreateProduct', 'CreateCatalog']}
             >
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon className="mr-2 h-4 w-4" />
-                        <Trans>New Option Group</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon className="mr-2 h-4 w-4" />
+                    <Trans>New Option Group</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

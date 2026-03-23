@@ -2,6 +2,7 @@ import { Button } from '@/vdb/components/ui/button.js';
 import {
     DialogClose,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -50,6 +51,9 @@ export function DataTableFilterDialog({ column, onEnter }: Readonly<DataTableFil
                 <DialogTitle>
                     <Trans>Filter by {columnId}</Trans>
                 </DialogTitle>
+                <DialogDescription className="sr-only">
+                    <Trans>Set filter criteria for the {columnId} column</Trans>
+                </DialogDescription>
             </DialogHeader>
             {columnDataType === 'String' ? (
                 <DataTableStringFilter value={filter} onChange={e => setFilter(e)} />
@@ -74,17 +78,15 @@ export function DataTableFilterDialog({ column, onEnter }: Readonly<DataTableFil
                         <Trans>Clear filter</Trans>
                     </Button>
                 )}
-                <DialogClose asChild>
-                    <Button
+                <DialogClose render={<Button
                         type="button"
                         variant="secondary"
                         disabled={isEmpty}
                         onClick={() => {
                             setFilterOnColumn();
                         }}
-                    >
+                    />}>
                         <Trans>Apply filter</Trans>
-                    </Button>
                 </DialogClose>
             </DialogFooter>
         </DialogContent>

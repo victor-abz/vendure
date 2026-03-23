@@ -99,16 +99,13 @@ function TaxRateListPage() {
             bulkActions={[
                 {
                     component: DeleteTaxRatesBulkAction,
-                    order: 500,
                 },
             ]}
         >
             <ActionBarItem itemId="create-button" requiresPermission={['CreateTaxRate']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon />
-                        <Trans>New Tax Rate</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon />
+                    <Trans>New Tax Rate</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

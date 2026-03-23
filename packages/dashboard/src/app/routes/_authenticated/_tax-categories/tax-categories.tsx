@@ -40,7 +40,7 @@ function TaxCategoryListPage() {
                 },
                 isDefault: {
                     cell: ({ row }) => (
-                        <Badge variant={row.original.isDefault ? 'success' : 'destructive'}>
+                        <Badge variant={row.original.isDefault ? 'success' : 'secondary'}>
                             <Trans>{row.original.isDefault ? 'Yes' : 'No'}</Trans>
                         </Badge>
                     ),
@@ -49,16 +49,13 @@ function TaxCategoryListPage() {
             bulkActions={[
                 {
                     component: DeleteTaxCategoriesBulkAction,
-                    order: 500,
                 },
             ]}
         >
             <ActionBarItem itemId="create-button" requiresPermission={['CreateTaxCategory']}>
-                <Button asChild>
-                    <Link to="./new">
-                        <PlusIcon />
-                        <Trans>New Tax Category</Trans>
-                    </Link>
+                <Button render={<Link to="./new" />}>
+                    <PlusIcon />
+                    <Trans>New Tax Category</Trans>
                 </Button>
             </ActionBarItem>
         </ListPage>

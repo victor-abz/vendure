@@ -6,7 +6,9 @@ import { Form } from '@/vdb/components/ui/form.js';
 import { useCustomFieldConfig } from '@/vdb/hooks/use-custom-field-config.js';
 import { usePage } from '@/vdb/hooks/use-page.js';
 import { cn } from '@/vdb/lib/utils.js';
-import { useCopyToClipboard, useMediaQuery } from '@uidotdev/usehooks';
+import { useLocalFormat } from '@/vdb/hooks/use-local-format.js';
+import { useIsMobile } from '@/vdb/hooks/use-mobile.js';
+import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { CheckIcon, CopyIcon, EllipsisVerticalIcon, InfoIcon } from 'lucide-react';
 import React, { ComponentProps, useMemo, useState } from 'react';
 import { Control, UseFormReturn } from 'react-hook-form';
@@ -18,6 +20,7 @@ import { Button } from '@/vdb/components/ui/button.js';
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuGroup,
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
@@ -100,9 +103,9 @@ export function Page({ children, pageId, entity, form, submitHandler, ...props }
     );
 
     const pageHeader = (
-        <div className="flex items-center justify-between">
-            {pageTitle ?? <div />}
-            {pageActionBar}
+        <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0 shrink">{pageTitle ?? <div />}</div>
+            <div className="shrink-0">{pageActionBar}</div>
         </div>
     );
 
@@ -211,7 +214,7 @@ function isPageBlock(child: unknown): child is React.ReactElement<PageBlockProps
  */
 export function PageLayout({ children, className }: Readonly<PageLayoutProps>) {
     const page = usePage();
-    const isDesktop = useMediaQuery('only screen and (min-width : 769px)');
+    const isMobile = useIsMobile();
     // Separate blocks into categories
     const childArray: React.ReactElement<PageBlockProps>[] = [];
     const extensionBlocks = getDashboardPageBlocks(page.pageId ?? '');
@@ -242,7 +245,7 @@ export function PageLayout({ children, className }: Readonly<PageLayoutProps>) {
             );
 
             // sort the blocks to make sure we have the correct order
-            const arrangedExtensionBlocks = [...matchingExtensionBlocks].sort((a, b) => {
+            const arrangedExtensionBlocks = matchingExtensionBlocks.sort((a, b) => {
                 const orderPriority = { before: 1, replace: 2, after: 3 };
                 return orderPriority[a.location.position.order] - orderPriority[b.location.position.order];
             });
@@ -307,7 +310,9 @@ export function PageLayout({ children, className }: Readonly<PageLayoutProps>) {
 
     return (
         <div className={cn('w-full space-y-4', className, '@container/layout')}>
-            {isDesktop ? (
+            {isMobile ? (
+                <div className="space-y-4">{finalChildArray}</div>
+            ) : (
                 <div className="grid grid-cols-1 gap-4 @3xl/layout:grid-cols-4">
                     {fullWidthBlocks.length > 0 && (
                         <div className="@md/layout:col-span-5 space-y-4">{fullWidthBlocks}</div>
@@ -315,8 +320,6 @@ export function PageLayout({ children, className }: Readonly<PageLayoutProps>) {
                     <div className="@3xl/layout:col-span-3 space-y-4">{mainBlocks}</div>
                     <div className="@3xl/layout:col-span-1 space-y-4">{sideBlocks}</div>
                 </div>
-            ) : (
-                <div className="space-y-4">{finalChildArray}</div>
             )}
         </div>
     );
@@ -335,7 +338,7 @@ export function DetailFormGrid({ children }: Readonly<{ children: React.ReactNod
  * @since 3.3.0
  */
 export function PageTitle({ children }: Readonly<{ children: React.ReactNode }>) {
-    return <h1 className="text-2xl font-semibold">{children}</h1>;
+    return <h1 data-testid="page-heading" className="text-2xl font-semibold font-heading">{children}</h1>;
 }
 
 type InlineDropdownItem = Omit<DashboardActionBarItem, 'type' | 'pageId'>;
@@ -346,6 +349,10 @@ type InlineDropdownItem = Omit<DashboardActionBarItem, 'type' | 'pageId'>;
  *
  * You can add action bar items by including {@link ActionBarItem} components as direct children.
  * For backwards compatibility, {@link PageActionBarLeft} and {@link PageActionBarRight} are also supported.
+ *
+ * **Mobile behavior:** On mobile viewports, only the last inline {@link ActionBarItem} is
+ * shown (the primary action). Extension items and plain children are hidden to prevent
+ * overflow. The dropdown menu and entity info remain visible on all viewports.
  *
  * @example
  * ```tsx
@@ -434,6 +441,8 @@ export function PageActionBar({
     // Merge and sort inline items with extension items
     const mergedItems = mergeAndSortActionBarItems(actionBarItemChildren, extensionButtonItems);
 
+    const isMobile = useIsMobile();
+
     // Determine if we should render the right section
     const hasRightContent =
         mergedItems.length > 0 ||
@@ -441,34 +450,52 @@ export function PageActionBar({
         actionBarDropdownItems.length > 0 ||
         page.entity;
 
+    // On mobile, show only the primary inline action (e.g. Update/Save/Create)
+    // and hide extensions + plain children to prevent overflow
+    let primaryItemIndex = -1;
+    for (let i = mergedItems.length - 1; i >= 0; i--) {
+        if (mergedItems[i].type === 'inline') {
+            primaryItemIndex = i;
+            break;
+        }
+    }
+    let visibleMergedItems = mergedItems;
+    if (isMobile && mergedItems.length >= 2) {
+        visibleMergedItems = primaryItemIndex >= 0
+            ? [mergedItems[primaryItemIndex]]
+            : [mergedItems[mergedItems.length - 1]];
+    }
+
+    const renderMergedItem = (mergedItem: MergedActionBarItem, index: number) => {
+        if (mergedItem.type === 'inline') {
+            return React.cloneElement(mergedItem.element, {
+                key: `inline-${mergedItem.element.props.itemId}`,
+            });
+        } else {
+            const extItem = mergedItem.item;
+            const itemId = extItem.id ?? `extension-${extItem.component.name || index}`;
+            return (
+                <ActionBarItemWrapper
+                    key={`ext-${extItem.id ?? extItem.pageId}-${index}`}
+                    itemId={itemId}
+                >
+                    <PageActionBarItem item={extItem} page={page} />
+                </ActionBarItemWrapper>
+            );
+        }
+    };
+
     return (
         <div className={cn('flex gap-2', leftContent.length > 0 ? 'justify-between' : 'justify-end')}>
             {leftContent.length > 0 && <div className="flex justify-start gap-2">{leftContent}</div>}
             {hasRightContent && (
                 <div className="flex justify-end gap-2">
-                    {/* Plain children (buttons etc. not wrapped in ActionBarItem) */}
-                    {plainChildren.map((child, index) => (
+                    {/* Plain children only on desktop */}
+                    {!isMobile && plainChildren.map((child, index) => (
                         <React.Fragment key={`plain-${index}`}>{child}</React.Fragment>
                     ))}
-                    {/* Merged ActionBarItem children with extensions */}
-                    {mergedItems.map((mergedItem, index) => {
-                        if (mergedItem.type === 'inline') {
-                            return React.cloneElement(mergedItem.element, {
-                                key: `inline-${mergedItem.element.props.itemId}`,
-                            });
-                        } else {
-                            const extItem = mergedItem.item;
-                            const itemId = extItem.id ?? `extension-${extItem.component.name || index}`;
-                            return (
-                                <ActionBarItemWrapper
-                                    key={`ext-${extItem.id ?? extItem.pageId}-${index}`}
-                                    itemId={itemId}
-                                >
-                                    <PageActionBarItem item={extItem} page={page} />
-                                </ActionBarItemWrapper>
-                            );
-                        }
-                    })}
+                    {/* Merged ActionBarItem children (filtered on mobile) */}
+                    {visibleMergedItems.map((mergedItem, index) => renderMergedItem(mergedItem, index))}
                     {actionBarDropdownItems.length > 0 && (
                         <PageActionBarDropdown items={actionBarDropdownItems} page={page} />
                     )}
@@ -562,15 +589,12 @@ function mergeAndSortActionBarItems(
 function EntityInfoDropdown({ entity }: Readonly<{ entity: any }>) {
     const [copiedField, setCopiedField] = useState<string | null>(null);
     const [, copy] = useCopyToClipboard();
+    const { formatDate } = useLocalFormat();
 
     const handleCopy = async (text: string, field: string) => {
         await copy(text);
         setCopiedField(field);
         setTimeout(() => setCopiedField(null), 2000);
-    };
-
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleString();
     };
 
     if (!entity?.id) {
@@ -579,15 +603,15 @@ function EntityInfoDropdown({ entity }: Readonly<{ entity: any }>) {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-muted-foreground">
+            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="text-muted-foreground" data-testid="entity-info-trigger" />}>
                     <InfoIcon className="w-4 h-4" />
-                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-64">
-                <DropdownMenuLabel>
-                    <Trans>Entity Information</Trans>
-                </DropdownMenuLabel>
+                <DropdownMenuGroup>
+                    <DropdownMenuLabel>
+                        <Trans>Entity Information</Trans>
+                    </DropdownMenuLabel>
+                </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <div className="px-3 py-2">
                     <div className="flex items-center justify-between">
@@ -599,7 +623,7 @@ function EntityInfoDropdown({ entity }: Readonly<{ entity: any }>) {
                                 className="p-1 hover:bg-muted rounded-sm transition-colors"
                             >
                                 {copiedField === 'id' ? (
-                                    <CheckIcon className="h-3 w-3 text-green-500" />
+                                    <CheckIcon className="h-3 w-3 text-success" />
                                 ) : (
                                     <CopyIcon className="h-3 w-3" />
                                 )}
@@ -707,10 +731,8 @@ function PageActionBarDropdown({
 }: Readonly<{ items: DashboardActionBarItem[]; page: PageContextValue }>) {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
+            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" data-testid="action-bar-dropdown-trigger" />}>
                     <EllipsisVerticalIcon className="w-4 h-4" />
-                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 {items.map((item, index) => (
@@ -809,7 +831,7 @@ export function PageBlock({
                             {description && <CardDescription>{description}</CardDescription>}
                         </CardHeader>
                     ) : null}
-                    <CardContent className={cn(!title ? 'pt-6' : '', '')}>{children}</CardContent>
+                    <CardContent>{children}</CardContent>
                 </Card>
             </LocationWrapper>
         </PageBlockContext.Provider>
