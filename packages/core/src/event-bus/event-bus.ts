@@ -62,7 +62,7 @@ export type BlockingEventHandlerOptions<T extends VendureEvent> = {
  * * when an Order transitions state ({@link OrderStateTransitionEvent})
  * * when a Customer registers a new account ({@link AccountRegistrationEvent})
  *
- * Using the EventBus it is possible to subscribe to an take action when these events occur.
+ * Using the EventBus it is possible to subscribe to and take action when these events occur.
  * This is done with the `.ofType()` method, which takes an event type and returns an rxjs observable
  * stream of events:
  *
