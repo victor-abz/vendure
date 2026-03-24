@@ -14,6 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "Ошибка расширения запроса"
+
+#. js-lingui-explicit-id
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "Страница продолжит работу с запросом по умолчанию."
+
+#. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
 msgid "Failed to extend query document"
 msgstr "Не удалось расширить документ запроса"
@@ -37,18 +49,6 @@ msgstr "Расширение запроса содержит недопусти�
 #: src/lib/hooks/use-extended-list-query.ts:51
 msgid "Query extension error: "
 msgstr "Ошибка расширения запроса: "
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "Ошибка расширения запроса"
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "Страница продолжит работу с запросом по умолчанию."
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
@@ -771,7 +771,7 @@ msgstr "Не удалось удалить заметку"
 #~ msgstr "конец"
 
 #. placeholder {0}: selected.length
-#: src/lib/components/shared/asset/asset-gallery.tsx:470
+#: src/lib/components/shared/asset/asset-gallery.tsx:469
 msgid ", {0} selected"
 msgstr ", {0} выбрано"
 
@@ -784,7 +784,7 @@ msgid "({maxRefundable} refundable)"
 msgstr "({maxRefundable} к возврату)"
 
 #. placeholder {0}: formatCurrency(refund.totalRefundableAmount, order.currencyCode)
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:281
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:282
 msgid "(max: {0})"
 msgstr "(макс: {0})"
 
@@ -795,7 +795,7 @@ msgstr "(макс: {0})"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:115
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:37
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:44
-#: src/app/routes/_authenticated/_orders/components/state-transition-control.tsx:76
+#: src/app/routes/_authenticated/_orders/components/state-transition-control.tsx:77
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:189
 #: src/app/routes/_authenticated/_tax-categories/tax-categories.tsx:44
 #: src/lib/components/data-input/product-multi-selector-input.tsx:281
@@ -823,7 +823,7 @@ msgstr "{0} из {1} доступно для выполнения"
 
 #. placeholder {0}: selection.length
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:78
-#: src/lib/components/shared/asset/asset-bulk-actions.tsx:82
+#: src/lib/components/shared/asset/asset-bulk-actions.tsx:80
 msgid "{0} selected"
 msgstr "{0} выбрано"
 
@@ -864,7 +864,7 @@ msgid "{title}"
 msgstr "{title}"
 
 #. placeholder {0}: totalItems === 1 ? 'asset' : 'assets'
-#: src/lib/components/shared/asset/asset-gallery.tsx:466
+#: src/lib/components/shared/asset/asset-gallery.tsx:465
 msgid "{totalItems} {0} found"
 msgstr "{totalItems} {0} найдено"
 
@@ -893,7 +893,7 @@ msgstr "="
 msgid "A reason for the refund is required"
 msgstr "Требуется указать причину возврата"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:174
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:173
 msgid "A refund of {formattedDiff} is required. Select payment amounts and enter a note to proceed."
 msgstr "Требуется возврат в размере {formattedDiff}. Выберите суммы платежей и введите примечание для продолжения."
 
@@ -966,7 +966,7 @@ msgstr "Добавить столбец до"
 msgid "Add Country"
 msgstr "Добавить страну"
 
-#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:272
+#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:273
 msgid "Add coupon code"
 msgstr "Добавить код купона"
 
@@ -1121,7 +1121,7 @@ msgstr "Добавление {0} доплат(ы)"
 msgid "Adding..."
 msgstr "Добавление..."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:320
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:319
 msgid "Additional payment required"
 msgstr "Требуется дополнительный платёж"
 
@@ -1180,8 +1180,8 @@ msgstr "Все возможные состояния заказа и их пер
 #~ msgid "All resources are up and running"
 #~ msgstr "Все ресурсы работают"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:368
-#: src/lib/components/shared/asset/asset-gallery.tsx:380
+#: src/lib/components/shared/asset/asset-gallery.tsx:367
+#: src/lib/components/shared/asset/asset-gallery.tsx:379
 msgid "All types"
 msgstr "Все типы"
 
@@ -1194,11 +1194,11 @@ msgid "Allocated payment amount must equal refund total"
 msgstr "Выделенная сумма платежа должна равняться сумме возврата"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:170
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:316
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:317
 msgid "Amount"
 msgstr "Сумма"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:323
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:322
 msgid "An additional payment of {formattedDiff} will be required."
 msgstr "Потребуется дополнительный платёж в размере {formattedDiff}."
 
@@ -1211,7 +1211,7 @@ msgid "AND"
 msgstr "И"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:128
-#: src/lib/components/shared/customer-address-form.tsx:120
+#: src/lib/components/shared/customer-address-form.tsx:119
 msgid "Apartment, suite, etc."
 msgstr "Квартира, офис и т.д."
 
@@ -1287,7 +1287,7 @@ msgstr "Вы уверены, что хотите удалить {0} {entityType}
 msgid "Are you sure you want to remove this option group from the product?"
 msgstr "Вы уверены, что хотите удалить эту группу опций из товара?"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:377
+#: src/lib/components/shared/asset/asset-gallery.tsx:376
 msgid "Asset type"
 msgstr "Тип файла"
 
@@ -1334,11 +1334,11 @@ msgid "Authentication methods"
 msgstr "Методы аутентификации"
 
 #. placeholder {0}: currentInterval?.label
-#: src/app/routes/_authenticated/_system/job-queue.tsx:251
+#: src/app/routes/_authenticated/_system/job-queue.tsx:258
 msgid "Auto refresh: {0}"
 msgstr "Автообновление: {0}"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:305
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:306
 msgid "Available"
 msgstr "Доступно"
 
@@ -1347,7 +1347,7 @@ msgid "Available currencies"
 msgstr "Доступные валюты"
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:160
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:108
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:112
 msgid "Available languages"
 msgstr "Доступные языки"
 
@@ -1355,7 +1355,7 @@ msgstr "Доступные языки"
 msgid "Available Languages"
 msgstr "Доступные языки"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:236
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:235
 msgid "Available:"
 msgstr "Доступно:"
 
@@ -1398,8 +1398,8 @@ msgstr "Адрес выставления счета установлен для
 msgid "Billing address unset for order"
 msgstr "Адрес выставления счета удален из заказа"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:371
-#: src/lib/components/shared/asset/asset-gallery.tsx:383
+#: src/lib/components/shared/asset/asset-gallery.tsx:370
+#: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
 msgstr "Бинарный"
 
@@ -1418,12 +1418,12 @@ msgstr "Калькулятор"
 #: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:309
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:348
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:357
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:347
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:358
 #: src/app/routes/_authenticated/_orders/components/settle-refund-dialog.tsx:71
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:270
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:493
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:494
 #: src/app/routes/_authenticated/_system/settings-store.tsx:140
 #: src/lib/components/data-input/product-multi-selector-input.tsx:370
 #: src/lib/components/data-table/data-table-bulk-action-item.tsx:122
@@ -1434,14 +1434,14 @@ msgstr "Калькулятор"
 #: src/lib/components/shared/asset/asset-focal-point-editor.tsx:88
 #: src/lib/components/shared/assign-to-channel-dialog.tsx:126
 #: src/lib/components/shared/confirmation-dialog.tsx:42
-#: src/lib/components/shared/customer-address-form.tsx:242
+#: src/lib/components/shared/customer-address-form.tsx:241
 #: src/lib/components/shared/navigation-confirmation.tsx:55
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:208
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:146
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:201
+#: src/app/routes/_authenticated/_system/job-queue.tsx:208
 msgid "Cancel Job"
 msgstr "Отменить задачу"
 
@@ -1493,7 +1493,7 @@ msgstr "Выберите предпочтительный язык отобра�
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:138
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:196
-#: src/lib/components/shared/customer-address-form.tsx:130
+#: src/lib/components/shared/customer-address-form.tsx:129
 msgid "City"
 msgstr "Город"
 
@@ -1503,7 +1503,7 @@ msgstr "Очистить"
 
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:178
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:54
-#: src/lib/components/data-table/data-table.tsx:425
+#: src/lib/components/data-table/data-table.tsx:423
 msgid "Clear all"
 msgstr "Очистить всё"
 
@@ -1513,7 +1513,7 @@ msgstr "Очистить фильтр"
 
 #: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:282
 #: src/lib/components/data-table/data-table-faceted-filter.tsx:185
-#: src/lib/components/shared/asset/asset-gallery.tsx:362
+#: src/lib/components/shared/asset/asset-gallery.tsx:361
 msgid "Clear filters"
 msgstr "Очистить фильтры"
 
@@ -1557,13 +1557,13 @@ msgstr "Коллекции"
 msgid "Collections moved successfully"
 msgstr "Коллекции успешно перемещены"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:91
+#: src/lib/components/data-table/data-table-view-options.tsx:89
 msgid "Column settings"
 msgstr "Настройки столбцов"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:108
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:165
-#: src/lib/components/shared/customer-address-form.tsx:100
+#: src/lib/components/shared/customer-address-form.tsx:99
 msgid "Company"
 msgstr "Компания"
 
@@ -1585,7 +1585,7 @@ msgstr "Настройте доступные языки для вашего м�
 msgid "Configure duplication settings for {0}s"
 msgstr "Настроить параметры дублирования для {0}s"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:356
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:355
 #: src/lib/components/shared/navigation-confirmation.tsx:58
 msgid "Confirm"
 msgstr "Подтвердить"
@@ -1634,7 +1634,7 @@ msgstr "Страны"
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:170
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:217
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:53
-#: src/lib/components/shared/customer-address-form.tsx:162
+#: src/lib/components/shared/customer-address-form.tsx:161
 msgid "Country"
 msgstr "Страна"
 
@@ -1662,7 +1662,7 @@ msgstr "Код купона установлен для заказа"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:225
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:182
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:181
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:144
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:84
@@ -1720,7 +1720,7 @@ msgstr "Создать вариант"
 
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:639
+#: src/lib/framework/layout-engine/page-layout.tsx:640
 msgid "Created"
 msgstr "Создано"
 
@@ -1823,13 +1823,13 @@ msgstr "Клиент верифицирован"
 msgid "Customers"
 msgstr "Клиенты"
 
-#: src/lib/components/layout/nav-user.tsx:130
+#: src/lib/components/layout/nav-user.tsx:131
 msgctxt "theme"
 msgid "Dark"
 msgstr "Тёмная"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:235
-#: src/lib/components/shared/customer-address-form.tsx:227
+#: src/lib/components/shared/customer-address-form.tsx:226
 msgid "Default Billing Address"
 msgstr "Адрес выставления счёта по умолчанию"
 
@@ -1850,7 +1850,7 @@ msgid "Default Language"
 msgstr "Язык по умолчанию"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:217
-#: src/lib/components/shared/customer-address-form.tsx:209
+#: src/lib/components/shared/customer-address-form.tsx:208
 msgid "Default Shipping Address"
 msgstr "Адрес доставки по умолчанию"
 
@@ -1934,7 +1934,7 @@ msgid "Description (alt)"
 msgstr "Описание (альтернативный текст)"
 
 #: src/lib/components/layout/dev-mode-indicator.tsx:14
-#: src/lib/components/layout/nav-user.tsx:143
+#: src/lib/components/layout/nav-user.tsx:144
 msgid "Dev Mode"
 msgstr "Режим разработчика"
 
@@ -1948,7 +1948,7 @@ msgstr "Отключить"
 
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:123
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:58
-#: src/lib/components/layout/nav-user.tsx:154
+#: src/lib/components/layout/nav-user.tsx:155
 msgid "Disabled"
 msgstr "Отключено"
 
@@ -1956,7 +1956,7 @@ msgstr "Отключено"
 msgid "Discount"
 msgstr "Скидка"
 
-#: src/app/routes/_authenticated/_orders/components/order-table.tsx:126
+#: src/app/routes/_authenticated/_orders/components/order-table.tsx:120
 msgid "Discounts"
 msgstr "Скидки"
 
@@ -1994,7 +1994,7 @@ msgstr "Статус черновика заказа"
 msgid "Drag to reorder"
 msgstr "Перетащите для изменения порядка"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:439
+#: src/lib/components/shared/asset/asset-gallery.tsx:438
 msgid "Drop files here to upload"
 msgstr "Перетащите файлы сюда для загрузки"
 
@@ -2079,8 +2079,8 @@ msgstr "Редактировать заметку"
 msgid "Edit or delete existing tags"
 msgstr "Редактировать или удалить существующие теги"
 
-#: src/lib/components/data-input/slug-input.tsx:279
-#: src/lib/components/data-input/slug-input.tsx:281
+#: src/lib/components/data-input/slug-input.tsx:280
+#: src/lib/components/data-input/slug-input.tsx:282
 msgid "Edit slug manually"
 msgstr "Редактировать slug вручную"
 
@@ -2096,7 +2096,7 @@ msgstr "Редактировать свойства выбранного изо�
 msgid "Edit the selected link properties"
 msgstr "Редактировать свойства выбранной ссылки"
 
-#: src/lib/components/login/login-form.tsx:85
+#: src/lib/components/login/login-form.tsx:84
 msgid "Email"
 msgstr "Эл. почта"
 
@@ -2133,7 +2133,7 @@ msgstr "Включить"
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:55
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:57
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:57
-#: src/lib/components/layout/nav-user.tsx:151
+#: src/lib/components/layout/nav-user.tsx:152
 msgid "Enabled"
 msgstr "Включено"
 
@@ -2145,15 +2145,15 @@ msgstr "конец"
 msgid "Ends at"
 msgstr "Заканчивается"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:236
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:237
 msgid "Enter custom reason..."
 msgstr "Введите свою причину..."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:305
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:304
 msgid "Enter refund note"
 msgstr "Введите примечание к возврату"
 
-#: src/lib/components/data-input/slug-input.tsx:239
+#: src/lib/components/data-input/slug-input.tsx:240
 msgid "Enter slug manually"
 msgstr "Введите slug вручную"
 
@@ -2165,7 +2165,7 @@ msgstr "Введите ID транзакции для этого расчёта 
 msgid "Enter transaction ID"
 msgstr "Введите ID транзакции"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:611
+#: src/lib/framework/layout-engine/page-layout.tsx:612
 msgid "Entity Information"
 msgstr "Информация об объекте"
 
@@ -2191,19 +2191,19 @@ msgstr "Сообщение об ошибке"
 msgid "Error transitioning to state"
 msgstr "Ошибка перехода в состояние"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:72
+#: src/app/routes/_authenticated/_system/job-queue.tsx:87
 msgid "Every 10 seconds"
 msgstr "Каждые 10 секунд"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:73
+#: src/app/routes/_authenticated/_system/job-queue.tsx:88
 msgid "Every 30 seconds"
 msgstr "Каждые 30 секунд"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:71
+#: src/app/routes/_authenticated/_system/job-queue.tsx:86
 msgid "Every 5 seconds"
 msgstr "Каждые 5 секунд"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:74
+#: src/app/routes/_authenticated/_system/job-queue.tsx:89
 msgid "Every 60 seconds"
 msgstr "Каждые 60 секунд"
 
@@ -2215,7 +2215,7 @@ msgstr "без налога:"
 #~ msgid "Explore Enterprise Edition"
 #~ msgstr "Изучить Enterprise Edition"
 
-#: src/lib/components/layout/nav-user.tsx:101
+#: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
 msgstr "Обзор платформы и облака"
 
@@ -2389,7 +2389,7 @@ msgstr "Не удалось создать налоговую категорию
 msgid "Failed to create tax rate"
 msgstr "Не удалось создать налоговую ставку"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:152
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
 msgid "Failed to create variants"
 msgstr "Не удалось создать варианты"
 
@@ -2489,7 +2489,7 @@ msgstr "Не удалось переименовать глобальное пр
 msgid "Failed to rename view"
 msgstr "Не удалось переименовать представление"
 
-#: src/lib/components/data-table/data-table.tsx:230
+#: src/lib/components/data-table/data-table.tsx:228
 msgid "Failed to reorder items"
 msgstr "Не удалось изменить порядок позиций"
 
@@ -2558,8 +2558,8 @@ msgstr "Не удалось обновить значение фасета"
 msgid "Failed to update fulfillment state"
 msgstr "Не удалось обновить состояние выполнения"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:75
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:81
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:79
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:85
 msgid "Failed to update global settings"
 msgstr "Не удалось обновить глобальные настройки"
 
@@ -2638,6 +2638,10 @@ msgstr "Не удалось обновить значение"
 msgid "Failed to update zone"
 msgstr "Не удалось обновить зону"
 
+#: src/lib/utils/get-locale-fallback-placeholder.ts:31
+msgid "Fallback: {value}"
+msgstr ""
+
 #: src/lib/components/data-table/filters/data-table-boolean-filter.tsx:57
 msgid "False"
 msgstr "Ложь"
@@ -2655,7 +2659,7 @@ msgid "Filter by tags"
 msgstr "Фильтровать по тегам"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:48
-#: src/lib/components/data-table/data-table.tsx:369
+#: src/lib/components/data-table/data-table.tsx:367
 msgid "Filter..."
 msgstr "Фильтровать..."
 
@@ -2673,11 +2677,11 @@ msgstr "Имя"
 msgid "Focal Point"
 msgstr "Фокусная точка"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:504
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:505
 msgid "Force remove"
 msgstr "Принудительное удаление"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:486
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:487
 msgid "Force remove option group"
 msgstr "Принудительно удалить группу опций"
 
@@ -2695,7 +2699,7 @@ msgstr "С {0} по {1}"
 
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:221
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:227
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:315
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:316
 msgid "Fulfill order"
 msgstr "Выполнить заказ"
 
@@ -2704,7 +2708,7 @@ msgstr "Выполнить заказ"
 msgid "Fulfilled items ({0})"
 msgstr "Выполненные товары ({0})"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:313
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:314
 msgid "Fulfilling..."
 msgstr "Выполнение..."
 
@@ -2728,7 +2732,7 @@ msgstr "Выполнение создано"
 msgid "Fulfillment details"
 msgstr "Детали выполнения"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:291
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:292
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:170
 msgid "Fulfillment handler"
 msgstr "Обработчик выполнения"
@@ -2750,16 +2754,16 @@ msgstr "Выполнение переведено"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:100
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:159
-#: src/lib/components/shared/customer-address-form.tsx:92
+#: src/lib/components/shared/customer-address-form.tsx:91
 msgid "Full Name"
 msgstr "Полное имя"
 
-#: src/lib/components/shared/custom-fields-form.tsx:96
+#: src/lib/components/shared/custom-fields-form.tsx:99
 msgid "General"
 msgstr "Общие"
 
-#: src/lib/components/data-input/slug-input.tsx:279
-#: src/lib/components/data-input/slug-input.tsx:281
+#: src/lib/components/data-input/slug-input.tsx:280
+#: src/lib/components/data-input/slug-input.tsx:282
 msgid "Generate slug automatically"
 msgstr "Генерировать slug автоматически"
 
@@ -2767,12 +2771,12 @@ msgstr "Генерировать slug автоматически"
 msgid "Global Languages"
 msgstr "Глобальные языки"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:127
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:131
 msgid "Global out of stock threshold"
 msgstr "Глобальный порог отсутствия на складе"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:40
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:90
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:41
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:94
 msgid "Global Settings"
 msgstr "Глобальные настройки"
 
@@ -2816,7 +2820,7 @@ msgstr "больше чем"
 msgid "greater than or equal"
 msgstr "больше или равно"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:396
+#: src/lib/components/shared/asset/asset-gallery.tsx:395
 msgid "Grid view"
 msgstr "Вид сетки"
 
@@ -2881,8 +2885,8 @@ msgstr "Если включено, фильтры будут унаследов�
 msgid "Image"
 msgstr "Изображение"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:369
-#: src/lib/components/shared/asset/asset-gallery.tsx:381
+#: src/lib/components/shared/asset/asset-gallery.tsx:368
+#: src/lib/components/shared/asset/asset-gallery.tsx:380
 msgid "Images"
 msgstr "Изображения"
 
@@ -2984,7 +2988,7 @@ msgstr "пусто"
 msgid "Item added to order"
 msgstr "Товар добавлен к заказу"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:477
+#: src/lib/components/shared/asset/asset-gallery.tsx:476
 msgid "Items per page"
 msgstr "Элементов на странице"
 
@@ -2992,8 +2996,8 @@ msgstr "Элементов на странице"
 msgid "Items refunded"
 msgstr "Товары возвращены"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:33
-#: src/app/routes/_authenticated/_system/job-queue.tsx:103
+#: src/app/routes/_authenticated/_system/job-queue.tsx:48
+#: src/app/routes/_authenticated/_system/job-queue.tsx:118
 msgid "Job Queue"
 msgstr "Очередь задач"
 
@@ -3001,7 +3005,7 @@ msgstr "Очередь задач"
 msgid "Key"
 msgstr "Ключ"
 
-#: src/lib/components/layout/nav-user.tsx:111
+#: src/lib/components/layout/nav-user.tsx:112
 msgid "Language"
 msgstr "Язык"
 
@@ -3010,12 +3014,12 @@ msgstr "Язык"
 msgid "Language: {0}"
 msgstr "Язык: {0}"
 
-#: src/lib/components/date-range-picker.tsx:57
+#: src/lib/components/date-range-picker.tsx:55
 msgctxt "date-range"
 msgid "Last 30 days"
 msgstr "Последние 30 дней"
 
-#: src/lib/components/date-range-picker.tsx:41
+#: src/lib/components/date-range-picker.tsx:39
 msgctxt "date-range"
 msgid "Last 7 days"
 msgstr "Последние 7 дней"
@@ -3024,7 +3028,7 @@ msgstr "Последние 7 дней"
 msgid "Last Executed"
 msgstr "Последнее выполнение"
 
-#: src/lib/components/date-range-picker.tsx:81
+#: src/lib/components/date-range-picker.tsx:79
 msgctxt "date-range"
 msgid "Last month"
 msgstr "Прошлый месяц"
@@ -3055,7 +3059,7 @@ msgstr "меньше чем"
 msgid "less than or equal"
 msgstr "меньше или равно"
 
-#: src/lib/components/layout/nav-user.tsx:126
+#: src/lib/components/layout/nav-user.tsx:127
 msgctxt "theme"
 msgid "Light"
 msgstr "Светлая"
@@ -3072,7 +3076,7 @@ msgstr "Цель ссылки"
 msgid "Link title"
 msgstr "Заголовок ссылки"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:399
+#: src/lib/components/shared/asset/asset-gallery.tsx:398
 msgid "List view"
 msgstr "Вид списка"
 
@@ -3098,7 +3102,7 @@ msgstr "Загрузка коллекций..."
 msgid "Loading global settings..."
 msgstr "Загрузка глобальных настроек..."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:159
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:158
 msgid "Loading preview…"
 msgstr "Загрузка предпросмотра..."
 
@@ -3123,7 +3127,7 @@ msgstr "Загрузка..."
 msgid "Locale"
 msgstr "Локаль"
 
-#: src/lib/components/layout/nav-user.tsx:163
+#: src/lib/components/layout/nav-user.tsx:164
 msgid "Log out"
 msgstr "Выйти"
 
@@ -3202,7 +3206,7 @@ msgstr "Изменить заказ"
 #~ msgid "Monitored Resources"
 #~ msgstr "Отслеживаемые ресурсы"
 
-#: src/lib/components/date-range-picker.tsx:65
+#: src/lib/components/date-range-picker.tsx:63
 msgctxt "date-range"
 msgid "Month to date"
 msgstr "С начала месяца"
@@ -3474,7 +3478,7 @@ msgid "No"
 msgstr "Нет"
 
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:107
-#: src/lib/components/shared/asset/asset-bulk-actions.tsx:100
+#: src/lib/components/shared/asset/asset-bulk-actions.tsx:98
 msgid "No actions available"
 msgstr "Нет доступных действий"
 
@@ -3490,7 +3494,7 @@ msgstr "Адреса не найдены"
 msgid "No alerts"
 msgstr "Нет оповещений"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:629
+#: src/lib/components/shared/asset/asset-gallery.tsx:628
 msgid "No assets found. Try adjusting your filters."
 msgstr "Файлы не найдены. Попробуйте изменить фильтры."
 
@@ -3564,11 +3568,11 @@ msgstr "Группы опций ещё не определены. Добавьт
 msgid "No option groups found"
 msgstr "Группы опций не найдены"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:335
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:334
 msgid "No payment or refund is required for these changes."
 msgstr "Для этих изменений не требуется платёж или возврат."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:332
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:331
 msgid "No payment or refund required"
 msgstr "Не требуется платёж или возврат"
 
@@ -3576,12 +3580,12 @@ msgstr "Не требуется платёж или возврат"
 msgid "No products found"
 msgstr "Товары не найдены"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:149
+#: src/app/routes/_authenticated/_system/job-queue.tsx:164
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:186
 msgid "No result yet"
 msgstr "Результатов пока нет"
 
-#: src/lib/components/data-table/data-table.tsx:560
+#: src/lib/components/data-table/data-table.tsx:558
 #: src/lib/components/shared/customer-group-selector.tsx:56
 msgid "No results"
 msgstr "Нет результатов"
@@ -3619,7 +3623,7 @@ msgid "No tags selected"
 msgstr "Теги не выбраны"
 
 #. placeholder {0}: formatLanguageName(contentLanguage)
-#: src/lib/components/shared/translatable-form-field.tsx:67
+#: src/lib/components/shared/translatable-form-field.tsx:68
 msgid "No translation found for {0}"
 msgstr "Перевод для {0} не найден"
 
@@ -3656,11 +3660,11 @@ msgstr "Заметка добавлена"
 msgid "Note is private"
 msgstr "Заметка приватная"
 
-#: src/lib/components/data-input/datetime-input.tsx:183
+#: src/lib/components/data-input/datetime-input.tsx:181
 msgid "Now"
 msgstr "Сейчас"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:70
+#: src/app/routes/_authenticated/_system/job-queue.tsx:85
 msgid "Off"
 msgstr "Выкл."
 
@@ -3834,7 +3838,7 @@ msgstr "Сводка по заказам"
 msgid "Out-of-stock threshold"
 msgstr "Порог отсутствия на складе"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:262
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:263
 msgid "Override"
 msgstr "Переопределить"
 
@@ -3859,7 +3863,7 @@ msgstr "Частичный возврат завершён"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:133
 #: src/app/routes/_authenticated/_profile/profile.tsx:112
 #: src/app/routes/_authenticated/_profile/profile.tsx:129
-#: src/lib/components/login/login-form.tsx:95
+#: src/lib/components/login/login-form.tsx:94
 msgid "Password"
 msgstr "Пароль"
 
@@ -3953,7 +3957,7 @@ msgstr "Номер телефона"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:198
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:242
-#: src/lib/components/shared/customer-address-form.tsx:190
+#: src/lib/components/shared/customer-address-form.tsx:189
 msgid "Phone Number"
 msgstr "Номер телефона"
 
@@ -3971,7 +3975,7 @@ msgstr "Пожалуйста, выберите целевую коллекцию
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:160
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:208
-#: src/lib/components/shared/customer-address-form.tsx:152
+#: src/lib/components/shared/customer-address-form.tsx:151
 msgid "Postal Code"
 msgstr "Почтовый индекс"
 
@@ -3984,7 +3988,7 @@ msgstr "Предварительный просмотр"
 msgid "Preview changes"
 msgstr "Просмотр изменений"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:150
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:149
 msgid "Preview order modifications"
 msgstr "Просмотр изменений заказа"
 
@@ -3992,7 +3996,7 @@ msgstr "Просмотр изменений заказа"
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:280
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:299
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:194
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:193
 #: src/lib/components/layout/language-dialog.tsx:136
 msgid "Price"
 msgstr "Цена"
@@ -4026,7 +4030,7 @@ msgstr "Приватные коллекции не видны в магазин�
 msgid "Private facets are not visible in the shop"
 msgstr "Приватные фасеты не видны в магазине"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:364
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:365
 msgid "Processing..."
 msgstr "Обработка..."
 
@@ -4077,7 +4081,7 @@ msgstr "Товары"
 
 #: src/app/routes/_authenticated/_profile/profile.tsx:31
 #: src/app/routes/_authenticated/_profile/profile.tsx:76
-#: src/lib/components/layout/nav-user.tsx:107
+#: src/lib/components/layout/nav-user.tsx:108
 msgid "Profile"
 msgstr "Профиль"
 
@@ -4101,7 +4105,7 @@ msgstr "Кол-во"
 msgid "Quantity"
 msgstr "Количество"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:227
+#: src/app/routes/_authenticated/_system/job-queue.tsx:234
 msgid "Queue"
 msgstr "Очередь"
 
@@ -4116,7 +4120,7 @@ msgid "Readonly"
 msgstr "Только для чтения"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:233
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:216
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:217
 msgid "Reason"
 msgstr "Причина"
 
@@ -4145,7 +4149,7 @@ msgid "Refund"
 msgstr "Возврат"
 
 #. placeholder {0}: formatCurrency(refund.amountToRefundTotal, order.currencyCode)
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:366
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:367
 msgid "Refund {0}"
 msgstr "Вернуть {0}"
 
@@ -4163,7 +4167,7 @@ msgstr "Возврат #{0} переведён в {1}"
 msgid "Refund and cancel order"
 msgstr "Возврат и отмена заказа"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:230
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:229
 msgid "Refund from this method"
 msgstr "Возврат этим способом"
 
@@ -4175,7 +4179,7 @@ msgstr "ID возврата"
 msgid "Refund processed successfully"
 msgstr "Возврат успешно обработан"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:171
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:170
 msgid "Refund required"
 msgstr "Требуется возврат"
 
@@ -4187,11 +4191,11 @@ msgstr "Возврат проведён"
 msgid "Refund settled successfully"
 msgstr "Возврат успешно проведён"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:200
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:201
 msgid "Refund shipping"
 msgstr "Вернуть стоимость доставки"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:248
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:249
 msgid "Refund total"
 msgstr "Сумма возврата"
 
@@ -4213,8 +4217,8 @@ msgstr "Возврат переведён"
 msgid "Refunds ({0})"
 msgstr "Возвраты ({0})"
 
-#: src/lib/components/data-input/slug-input.tsx:265
 #: src/lib/components/data-input/slug-input.tsx:266
+#: src/lib/components/data-input/slug-input.tsx:267
 msgid "Regenerate slug from source field"
 msgstr "Перегенерировать slug из исходного поля"
 
@@ -4226,7 +4230,7 @@ msgstr "Регионы"
 msgid "Registered"
 msgstr "Зарегистрирован"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:288
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:287
 msgid "Remaining:"
 msgstr "Осталось:"
 
@@ -4285,7 +4289,7 @@ msgstr "Удаление {0} элемент(ов)"
 msgid "Rename"
 msgstr "Переименовать"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:122
+#: src/lib/components/data-table/data-table-view-options.tsx:120
 msgid "Reset"
 msgstr "Сбросить"
 
@@ -4297,7 +4301,7 @@ msgstr "Сбросить выбор"
 msgid "Return to stock"
 msgstr "Вернуть на склад"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:153
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:152
 msgid "Review the changes before applying them to the order."
 msgstr "Просмотрите изменения перед их применением к заказу."
 
@@ -4346,7 +4350,7 @@ msgid "Save a view as \"Global\" to make it available to all users."
 msgstr "Сохраните представление как «Глобальное», чтобы сделать его доступным для всех пользователей."
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:254
-#: src/lib/components/shared/customer-address-form.tsx:246
+#: src/lib/components/shared/customer-address-form.tsx:245
 msgid "Save Address"
 msgstr "Сохранить адрес"
 
@@ -4406,7 +4410,7 @@ msgstr "Область"
 msgid "Search {name}..."
 msgstr "Поиск {name}..."
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:350
+#: src/lib/components/shared/asset/asset-gallery.tsx:349
 msgid "Search assets..."
 msgstr "Поиск файлов..."
 
@@ -4479,7 +4483,7 @@ msgid "Select a channel to assign {0} {entityType} to"
 msgstr "Выберите канал для назначения {0} {entityType}"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:181
-#: src/lib/components/shared/customer-address-form.tsx:173
+#: src/lib/components/shared/customer-address-form.tsx:172
 msgid "Select a country"
 msgstr "Выберите страну"
 
@@ -4499,7 +4503,7 @@ msgstr "Выберите целевую коллекцию"
 msgid "Select a language"
 msgstr "Выберите язык"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:224
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:225
 msgid "Select a reason..."
 msgstr "Выберите причину..."
 
@@ -4544,7 +4548,7 @@ msgstr "Выбрать страну"
 msgid "Select customer"
 msgstr "Выбрать клиента"
 
-#: src/lib/components/date-range-picker.tsx:128
+#: src/lib/components/date-range-picker.tsx:126
 msgid "Select date range"
 msgstr "Выберите период"
 
@@ -4572,7 +4576,7 @@ msgstr "Выберите позиции для возврата и при нео
 msgid "Select next state"
 msgstr "Выбрать следующее состояние"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:289
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:290
 msgid "Select payments to refund"
 msgstr "Выберите платежи для возврата"
 
@@ -4634,11 +4638,11 @@ msgstr "Установить фокусную точку"
 msgid "Set link"
 msgstr "Установить ссылку"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:110
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:114
 msgid "Sets the languages that are available for all channels. Individual channels can then support a subset of these languages."
 msgstr "Устанавливает языки, доступные для всех каналов. Отдельные каналы затем могут поддерживать подмножество этих языков."
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:129
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:133
 msgid "Sets the stock level at which this a variant is considered to be out of stock. Using a negative value enables backorder support. Can be overridden by product variants."
 msgstr "Устанавливает уровень запасов, при котором этот вариант считается отсутствующим на складе. Использование отрицательного значения включает поддержку предзаказов. Может быть переопределено вариантами товара."
 
@@ -4663,7 +4667,7 @@ msgid "Settle refund"
 msgstr "Провести возврат"
 
 #: src/app/routes/_authenticated/_orders/components/order-table-totals.tsx:66
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:188
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:189
 #: src/app/routes/_authenticated/_orders/orders.tsx:85
 msgid "Shipping"
 msgstr "Доставка"
@@ -4738,11 +4742,11 @@ msgstr "Показать пароль"
 msgid "Showing all {0} results"
 msgstr "Показаны все {0} результатов"
 
-#: src/lib/components/login/login-form.tsx:107
+#: src/lib/components/login/login-form.tsx:106
 msgid "Sign in"
 msgstr "Войти"
 
-#: src/lib/components/login/login-form.tsx:75
+#: src/lib/components/login/login-form.tsx:74
 msgid "Sign in to access the admin dashboard"
 msgstr "Войдите для доступа к панели администратора"
 
@@ -4755,7 +4759,7 @@ msgstr "Размер"
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:253
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:293
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:191
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:190
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:352
 msgid "SKU"
 msgstr "SKU"
@@ -4769,11 +4773,11 @@ msgstr "Артикул:"
 msgid "Slug"
 msgstr "Slug"
 
-#: src/lib/components/data-input/slug-input.tsx:237
+#: src/lib/components/data-input/slug-input.tsx:238
 msgid "Slug is set"
 msgstr "Slug установлен"
 
-#: src/lib/components/data-input/slug-input.tsx:238
+#: src/lib/components/data-input/slug-input.tsx:239
 msgid "Slug will be generated automatically..."
 msgstr "Slug будет сгенерирован автоматически..."
 
@@ -4796,7 +4800,7 @@ msgstr "Начинается"
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:118
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:217
 #: src/app/routes/_authenticated/_orders/orders.tsx:101
-#: src/app/routes/_authenticated/_system/job-queue.tsx:238
+#: src/app/routes/_authenticated/_system/job-queue.tsx:245
 msgid "State"
 msgstr "Регион"
 
@@ -4805,7 +4809,7 @@ msgid "State / Province"
 msgstr "Регион / Область"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:146
-#: src/lib/components/shared/customer-address-form.tsx:138
+#: src/lib/components/shared/customer-address-form.tsx:137
 msgid "State/Province"
 msgstr "Регион/Область"
 
@@ -4841,13 +4845,13 @@ msgstr "Складские местоположения"
 msgid "Stock on hand"
 msgstr "Запас в наличии"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:197
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:196
 msgid "Stock on Hand"
 msgstr "Запас в наличии"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:118
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:175
-#: src/lib/components/shared/customer-address-form.tsx:110
+#: src/lib/components/shared/customer-address-form.tsx:109
 msgid "Street Address"
 msgstr "Улица"
 
@@ -4969,7 +4973,7 @@ msgstr "Налоговая категория успешно создана"
 msgid "Successfully created tax rate"
 msgstr "Налоговая ставка успешно создана"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:149
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:148
 msgid "Successfully created variants"
 msgstr "Варианты успешно созданы"
 
@@ -5045,7 +5049,7 @@ msgstr "Значение фасета успешно обновлено"
 msgid "Successfully updated facet values for {entityIdsLength} {entityType}"
 msgstr "Значения фасета успешно обновлены для {entityIdsLength} {entityType}"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:69
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:71
 msgid "Successfully updated global settings"
 msgstr "Глобальные настройки успешно обновлены"
 
@@ -5126,7 +5130,7 @@ msgstr "Суперадминистратор"
 msgid "Surcharge"
 msgstr "Доплата"
 
-#: src/lib/components/layout/nav-user.tsx:134
+#: src/lib/components/layout/nav-user.tsx:135
 msgctxt "theme"
 msgid "System"
 msgstr "Система"
@@ -5219,15 +5223,15 @@ msgstr "Проверка способа доставки..."
 msgid "Testing shipping methods..."
 msgstr "Проверка способов доставки..."
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:165
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:164
 msgid "The assigned option groups have no options yet. Add options to your option groups before generating variants."
 msgstr "Назначенные группы опций ещё не содержат опций. Добавьте опции в группы опций перед генерацией вариантов."
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:121
+#: src/app/routes/_authenticated/_system/job-queue.tsx:136
 msgid "The data that has been passed to the job"
 msgstr "Данные, переданные задаче"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:140
+#: src/app/routes/_authenticated/_system/job-queue.tsx:155
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:177
 msgid "The result of the job"
 msgstr "Результат задачи"
@@ -5244,7 +5248,7 @@ msgstr "Токен используется для указания канала
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "Не удалось добавить вариант. Убедитесь, что родительский товар включен."
 
-#: src/lib/components/layout/nav-user.tsx:117
+#: src/lib/components/layout/nav-user.tsx:118
 msgid "Theme"
 msgstr "Тема"
 
@@ -5276,12 +5280,12 @@ msgstr "Это предварительный просмотр содержим�
 msgid "This is the contents of the <0>{collectionName}</0> collection."
 msgstr "Это содержимое коллекции <0>{collectionName}</0>."
 
-#: src/lib/components/date-range-picker.tsx:73
+#: src/lib/components/date-range-picker.tsx:71
 msgctxt "date-range"
 msgid "This month"
 msgstr "Этот месяц"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:488
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:489
 msgid "This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?"
 msgstr "Эта группа опций используется существующими вариантами. Принудительное удаление может повлиять на эти варианты. Вы уверены?"
 
@@ -5293,7 +5297,7 @@ msgstr "Эта группа опций используется существу
 msgid "This shipping method's eligibility checker conditions are not met for the current order and shipping address."
 msgstr "Условия проверки соответствия этого способа доставки не выполнены для текущего заказа и адреса доставки."
 
-#: src/lib/components/date-range-picker.tsx:49
+#: src/lib/components/date-range-picker.tsx:47
 msgctxt "date-range"
 msgid "This week"
 msgstr "Эта неделя"
@@ -5303,7 +5307,7 @@ msgstr "Эта неделя"
 msgid "Title"
 msgstr "Заголовок"
 
-#: src/lib/components/date-range-picker.tsx:25
+#: src/lib/components/date-range-picker.tsx:23
 msgctxt "date-range"
 msgid "Today"
 msgstr "Сегодня"
@@ -5325,9 +5329,9 @@ msgstr "Переключить строку заголовка"
 msgid "Token"
 msgstr "Токен"
 
-#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:157
+#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:158
 #: src/app/routes/_authenticated/_orders/components/order-table-totals.tsx:88
-#: src/app/routes/_authenticated/_orders/components/order-table.tsx:112
+#: src/app/routes/_authenticated/_orders/components/order-table.tsx:106
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:228
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:121
 msgid "Total"
@@ -5337,7 +5341,7 @@ msgstr "Итого"
 msgid "Total Orders"
 msgstr "Всего заказов"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:274
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:273
 msgid "Total refund:"
 msgstr "Итого возврат:"
 
@@ -5350,7 +5354,7 @@ msgstr "Общая выручка"
 msgid "Track"
 msgstr "Отслеживать"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:140
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:144
 msgid "Track inventory by default"
 msgstr "Отслеживать запасы по умолчанию"
 
@@ -5404,12 +5408,12 @@ msgstr "Введите минимум 2 символа для поиска..."
 msgid "Unit price"
 msgstr "Цена за единицу"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:103
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:102
 #: src/app/routes/_authenticated/_orders/hooks/use-refund-order.ts:303
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:76
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:118
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:167
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:153
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:152
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:113
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
@@ -5427,7 +5431,7 @@ msgstr "Не верифицирован"
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:152
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:99
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:98
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:102
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:177
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:51
@@ -5452,11 +5456,11 @@ msgstr "Обновить"
 msgid "Update the note content or visibility"
 msgstr "Обновить содержимое или видимость заметки"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:652
+#: src/lib/framework/layout-engine/page-layout.tsx:653
 msgid "Updated"
 msgstr "Обновлено"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:407
+#: src/lib/components/shared/asset/asset-gallery.tsx:406
 msgid "Upload"
 msgstr "Загрузить"
 
@@ -5465,12 +5469,12 @@ msgid "Usage limit"
 msgstr "Лимит использования"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:238
-#: src/lib/components/shared/customer-address-form.tsx:230
+#: src/lib/components/shared/customer-address-form.tsx:229
 msgid "Use as the default billing address"
 msgstr "Использовать как адрес выставления счёта по умолчанию"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:220
-#: src/lib/components/shared/customer-address-form.tsx:212
+#: src/lib/components/shared/customer-address-form.tsx:211
 msgid "Use as the default shipping address"
 msgstr "Использовать как адрес доставки по умолчанию"
 
@@ -5482,7 +5486,7 @@ msgstr "Использовать глобальный порог отсутст�
 msgid "useWidgetDimensions must be used within a DashboardBaseWidget"
 msgstr "useWidgetDimensions должен использоваться внутри DashboardBaseWidget"
 
-#: src/lib/hooks/use-widget-filters.ts:18
+#: src/lib/hooks/use-widget-filters.ts:17
 msgid "useWidgetFilters must be used within a WidgetFiltersProvider"
 msgstr "useWidgetFilters должен использоваться внутри WidgetFiltersProvider"
 
@@ -5506,7 +5510,7 @@ msgstr "Значение обновлено"
 msgid "Values"
 msgstr "Значения"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:187
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:186
 msgid "Variant"
 msgstr "Вариант"
 
@@ -5530,8 +5534,8 @@ msgstr "Варианты"
 msgid "Verified"
 msgstr "Верифицирован"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:370
-#: src/lib/components/shared/asset/asset-gallery.tsx:382
+#: src/lib/components/shared/asset/asset-gallery.tsx:369
+#: src/lib/components/shared/asset/asset-gallery.tsx:381
 msgid "Video"
 msgstr "Видео"
 
@@ -5544,7 +5548,7 @@ msgstr "Посмотреть изменения"
 msgid "View converted to global successfully"
 msgstr "Представление успешно преобразовано в глобальное"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:124
+#: src/app/routes/_authenticated/_system/job-queue.tsx:139
 msgid "View data"
 msgstr "Посмотреть данные"
 
@@ -5560,11 +5564,11 @@ msgstr "Посмотреть детали"
 msgid "View duplicated successfully"
 msgstr "Представление успешно дублировано"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:119
+#: src/app/routes/_authenticated/_system/job-queue.tsx:134
 msgid "View job data"
 msgstr "Посмотреть данные задачи"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:138
+#: src/app/routes/_authenticated/_system/job-queue.tsx:153
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:176
 msgid "View job result"
 msgstr "Посмотреть результат задачи"
@@ -5577,7 +5581,7 @@ msgstr "Просмотр процесса заказа"
 msgid "View renamed successfully"
 msgstr "Представление успешно переименовано"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:143
+#: src/app/routes/_authenticated/_system/job-queue.tsx:158
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:180
 msgid "View result"
 msgstr "Посмотреть результат"
@@ -5598,7 +5602,7 @@ msgstr "Видно только администраторам"
 msgid "Visible to customer"
 msgstr "Видно клиенту"
 
-#: src/lib/components/login/login-form.tsx:72
+#: src/lib/components/login/login-form.tsx:71
 msgid "Welcome to Vendure"
 msgstr "Добро пожаловать в Vendure"
 
@@ -5615,7 +5619,7 @@ msgstr "При включении акция доступна в магазин�
 msgid "When this is enabled, the prices entered in the product catalog will be included in the tax for the default tax zone."
 msgstr "При включении цены, введённые в каталоге товаров, будут включать налог для зоны по умолчанию."
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:142
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:146
 msgid "When tracked, product variant stock levels will be automatically adjusted when sold. This setting can be overridden by individual product variants."
 msgstr "При отслеживании уровни запасов вариантов товара будут автоматически корректироваться при продаже. Эту настройку можно переопределить для отдельных вариантов товара."
 
@@ -5623,7 +5627,7 @@ msgstr "При отслеживании уровни запасов вариан
 msgid "Width"
 msgstr "Ширина"
 
-#: src/lib/components/shared/asset/asset-bulk-actions.tsx:86
+#: src/lib/components/shared/asset/asset-bulk-actions.tsx:84
 msgid "With selected..."
 msgstr "С выбранными..."
 
@@ -5631,7 +5635,7 @@ msgstr "С выбранными..."
 msgid "Yes"
 msgstr "Да"
 
-#: src/lib/components/date-range-picker.tsx:33
+#: src/lib/components/date-range-picker.tsx:31
 msgctxt "date-range"
 msgid "Yesterday"
 msgstr "Вчера"

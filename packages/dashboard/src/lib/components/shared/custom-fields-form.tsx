@@ -4,13 +4,16 @@ import { Field, FieldDescription, FieldError, FieldLabel } from '@/vdb/component
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/vdb/components/ui/tabs.js';
 import { CustomFormComponent } from '@/vdb/framework/form-engine/custom-form-component.js';
 import { ConfigurableFieldDef } from '@/vdb/framework/form-engine/form-engine-types.js';
+import { useChannel } from '@/vdb/hooks/use-channel.js';
 import { useCustomFieldConfig } from '@/vdb/hooks/use-custom-field-config.js';
 import { useUserSettings } from '@/vdb/hooks/use-user-settings.js';
+import { getLocaleFallbackPlaceholder } from '@/vdb/utils/get-locale-fallback-placeholder.js';
 import { customFieldConfigFragment } from '@/vdb/providers/server-config.js';
 import { useLingui } from '@lingui/react/macro';
 import { ResultOf } from 'gql.tada';
 import React, { useMemo } from 'react';
-import { Control, Controller, ControllerFieldState } from 'react-hook-form';
+import { Control, Controller, ControllerFieldState, useFormContext } from 'react-hook-form';
+import { applyControlProps } from './apply-control-props.js';
 import { FormControlAdapter } from '../../framework/form-engine/form-control-adapter.js';
 import { TranslatableFormField } from './translatable-form-field.js';
 
@@ -125,8 +128,12 @@ interface CustomFieldItemProps {
 
 function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<CustomFieldItemProps>) {
     const {
-        settings: { displayLanguage },
+        settings: { displayLanguage, contentLanguage },
     } = useUserSettings();
+    const { activeChannel } = useChannel();
+    const { watch } = useFormContext();
+    const translations = watch('translations');
+    const defaultLanguageCode = activeChannel?.defaultLanguageCode;
 
     const getTranslation = (
         input: string | Array<{ languageCode: string; value: string }> | null | undefined,
@@ -142,6 +149,14 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
     const containerClassName = shouldBeFullWidth ? 'col-span-2' : '';
     const isReadonly = (fieldDef as CustomFieldConfig).readonly ?? false;
 
+    const localeFallbackPlaceholder = useMemo(
+        () =>
+            isLocaleField
+                ? getLocaleFallbackPlaceholder(translations, defaultLanguageCode, contentLanguage, `customFields.${fieldDef.name}`)
+                : undefined,
+        [isLocaleField, translations, defaultLanguageCode, contentLanguage, fieldDef.name],
+    );
+
     // For locale fields, always use TranslatableFormField regardless of custom components
     if (isLocaleField) {
         return (
@@ -150,24 +165,29 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
                     control={control}
                     name={fieldName}
                     disabled={disabled}
-                    render={({ field, fieldState }) => (
-                        <CustomFieldFormItem
-                            fieldDef={fieldDef}
-                            getTranslation={getTranslation}
-                            fieldName={field.name}
-                            fieldState={fieldState}
-                        >
-                            {hasCustomFormComponent ? (
-                                <CustomFormComponent fieldDef={fieldDef} {...field} />
-                            ) : (
-                                <FormControlAdapter
-                                    fieldDef={fieldDef}
-                                    field={field}
-                                    valueMode="native"
-                                />
-                            )}
-                        </CustomFieldFormItem>
-                    )}
+                    render={({ field, fieldState }) => {
+                        const inputElement = hasCustomFormComponent ? (
+                            <CustomFormComponent fieldDef={fieldDef} {...field} />
+                        ) : (
+                            <FormControlAdapter
+                                fieldDef={fieldDef}
+                                field={field}
+                                valueMode="native"
+                            />
+                        );
+                        return (
+                            <CustomFieldFormItem
+                                fieldDef={fieldDef}
+                                getTranslation={getTranslation}
+                                fieldName={field.name}
+                                fieldState={fieldState}
+                            >
+                                {localeFallbackPlaceholder
+                                    ? applyControlProps(inputElement, { placeholder: localeFallbackPlaceholder })
+                                    : inputElement}
+                            </CustomFieldFormItem>
+                        );
+                    }}
                 />
             </div>
         );

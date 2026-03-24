@@ -396,46 +396,17 @@ describe('Custom fields', () => {
     });
 
     it('dashboard: false field is still queryable via Admin API', async () => {
-        const { product } = await adminClient.query(gql`
-            query {
-                product(id: "T_1") {
-                    id
-                    customFields {
-                        dashboardHidden
-                    }
-                }
-            }
-        `);
+        const { product } = await adminClient.query(getProductDashboardHiddenDocument);
         expect(product.customFields.dashboardHidden).toBeNull();
     });
 
     it('dashboard: false field is still queryable via Shop API', async () => {
-        const { product } = await shopClient.query(gql`
-            query {
-                product(id: "T_1") {
-                    id
-                    customFields {
-                        dashboardHidden
-                    }
-                }
-            }
-        `);
+        const { product } = await shopClient.query(getShopProductDashboardHiddenDocument);
         expect(product.customFields.dashboardHidden).toBeNull();
     });
 
     it('ui.dashboard: false field is still writable via Admin API', async () => {
-        const { updateProduct } = await adminClient.query(gql`
-            mutation {
-                updateProduct(
-                    input: { id: "T_1", customFields: { dashboardHiddenWritable: "set-by-plugin" } }
-                ) {
-                    id
-                    customFields {
-                        dashboardHiddenWritable
-                    }
-                }
-            }
-        `);
+        const { updateProduct } = await adminClient.query(updateProductDashboardHiddenWritableDocument);
         expect(updateProduct.customFields.dashboardHiddenWritable).toBe('set-by-plugin');
     });
 
@@ -1637,6 +1608,39 @@ const getShopProductPublicCustomFieldDocument = graphqlShop(`
             id
             customFields {
                 public
+            }
+        }
+    }
+`);
+
+const getProductDashboardHiddenDocument = graphql(`
+    query GetProductDashboardHidden {
+        product(id: "T_1") {
+            id
+            customFields {
+                dashboardHidden
+            }
+        }
+    }
+`);
+
+const getShopProductDashboardHiddenDocument = graphqlShop(`
+    query GetShopProductDashboardHidden {
+        product(id: "T_1") {
+            id
+            customFields {
+                dashboardHidden
+            }
+        }
+    }
+`);
+
+const updateProductDashboardHiddenWritableDocument = graphql(`
+    mutation UpdateProductDashboardHiddenWritable {
+        updateProduct(input: { id: "T_1", customFields: { dashboardHiddenWritable: "set-by-plugin" } }) {
+            id
+            customFields {
+                dashboardHiddenWritable
             }
         }
     }

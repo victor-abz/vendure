@@ -18,6 +18,7 @@ import {    CustomFieldsPageBlock,
 import { ActionBarItem } from '@/vdb/framework/layout-engine/action-bar-item-wrapper.js';
 import { getDetailQueryOptions, useDetailPage } from '@/vdb/framework/page/use-detail-page.js';
 import { Trans, useLingui } from '@lingui/react/macro';
+import { useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
 import { globalSettingsDocument, updateGlobalSettingsDocument } from './global-settings.graphql.js';
@@ -46,6 +47,7 @@ export const Route = createFileRoute('/_authenticated/_global-settings/global-se
 function GlobalSettingsPage() {
     const params = Route.useParams();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const creatingNewEntity = params.id === NEW_ENTITY_PATH;
     const { t } = useLingui();
 
@@ -68,6 +70,8 @@ function GlobalSettingsPage() {
             if (data.__typename === 'GlobalSettings') {
                 toast(t`Successfully updated global settings`);
                 form.reset(form.getValues());
+                await queryClient.invalidateQueries({ queryKey: ['availableGlobalLanguages'] });
+                await queryClient.invalidateQueries({ queryKey: ['getServerConfig'] });
                 if (creatingNewEntity) {
                     await navigate({ to: `../$id`, params: { id: data.id } });
                 }

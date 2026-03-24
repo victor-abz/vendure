@@ -14,6 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "Query extensie fout"
+
+#. js-lingui-explicit-id
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "De pagina zal doorgaan met de standaard query."
+
+#. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
 msgid "Failed to extend query document"
 msgstr "Kon query document niet uitbreiden"
@@ -37,18 +49,6 @@ msgstr "Query extensie bevat ongeldige GraphQL syntaxis"
 #: src/lib/hooks/use-extended-list-query.ts:51
 msgid "Query extension error: "
 msgstr "Query extensie fout: "
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "Query extensie fout"
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "De pagina zal doorgaan met de standaard query."
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
@@ -765,7 +765,7 @@ msgstr "Notitie verwijderen mislukt"
 #~ msgstr "Statuscontroles"
 
 #. placeholder {0}: selected.length
-#: src/lib/components/shared/asset/asset-gallery.tsx:470
+#: src/lib/components/shared/asset/asset-gallery.tsx:469
 msgid ", {0} selected"
 msgstr ", {0} geselecteerd"
 
@@ -778,7 +778,7 @@ msgid "({maxRefundable} refundable)"
 msgstr "({maxRefundable} restitueerbaar)"
 
 #. placeholder {0}: formatCurrency(refund.totalRefundableAmount, order.currencyCode)
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:281
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:282
 msgid "(max: {0})"
 msgstr "(max: {0})"
 
@@ -789,7 +789,7 @@ msgstr "(max: {0})"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:115
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:37
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:44
-#: src/app/routes/_authenticated/_orders/components/state-transition-control.tsx:76
+#: src/app/routes/_authenticated/_orders/components/state-transition-control.tsx:77
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:189
 #: src/app/routes/_authenticated/_tax-categories/tax-categories.tsx:44
 #: src/lib/components/data-input/product-multi-selector-input.tsx:281
@@ -817,7 +817,7 @@ msgstr "{0} van {1} beschikbaar om te verwerken"
 
 #. placeholder {0}: selection.length
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:78
-#: src/lib/components/shared/asset/asset-bulk-actions.tsx:82
+#: src/lib/components/shared/asset/asset-bulk-actions.tsx:80
 msgid "{0} selected"
 msgstr "{0} geselecteerd"
 
@@ -858,7 +858,7 @@ msgid "{title}"
 msgstr "{title}"
 
 #. placeholder {0}: totalItems === 1 ? 'asset' : 'assets'
-#: src/lib/components/shared/asset/asset-gallery.tsx:466
+#: src/lib/components/shared/asset/asset-gallery.tsx:465
 msgid "{totalItems} {0} found"
 msgstr "{totalItems} {0} gevonden"
 
@@ -883,7 +883,7 @@ msgstr "="
 msgid "A reason for the refund is required"
 msgstr "Een reden voor de restitutie is vereist"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:174
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:173
 msgid "A refund of {formattedDiff} is required. Select payment amounts and enter a note to proceed."
 msgstr "Een terugbetaling van {formattedDiff} is vereist. Selecteer betalingsbedragen en voer een notitie in om door te gaan."
 
@@ -956,7 +956,7 @@ msgstr "Kolom toevoegen voor"
 msgid "Add Country"
 msgstr "Land toevoegen"
 
-#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:272
+#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:273
 msgid "Add coupon code"
 msgstr "Couponcode toevoegen"
 
@@ -1111,7 +1111,7 @@ msgstr "{0} toeslag(en) toevoegen"
 msgid "Adding..."
 msgstr "Toevoegen..."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:320
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:319
 msgid "Additional payment required"
 msgstr "Extra betaling vereist"
 
@@ -1170,8 +1170,8 @@ msgstr "Alle mogelijke orderstatussen en hun overgangen. De huidige status is ge
 #~ msgid "All resources are up and running"
 #~ msgstr "Alle resources zijn operationeel"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:368
-#: src/lib/components/shared/asset/asset-gallery.tsx:380
+#: src/lib/components/shared/asset/asset-gallery.tsx:367
+#: src/lib/components/shared/asset/asset-gallery.tsx:379
 msgid "All types"
 msgstr "Alle typen"
 
@@ -1184,11 +1184,11 @@ msgid "Allocated payment amount must equal refund total"
 msgstr "Het toegewezen betalingsbedrag moet gelijk zijn aan het restitutietotaal"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:170
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:316
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:317
 msgid "Amount"
 msgstr "Bedrag"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:323
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:322
 msgid "An additional payment of {formattedDiff} will be required."
 msgstr "Een extra betaling van {formattedDiff} is vereist."
 
@@ -1201,7 +1201,7 @@ msgid "AND"
 msgstr "EN"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:128
-#: src/lib/components/shared/customer-address-form.tsx:120
+#: src/lib/components/shared/customer-address-form.tsx:119
 msgid "Apartment, suite, etc."
 msgstr "Appartement, suite, etc."
 
@@ -1277,7 +1277,7 @@ msgstr "Weet u zeker dat u {0} {entityType} uit het huidige kanaal wilt verwijde
 msgid "Are you sure you want to remove this option group from the product?"
 msgstr "Weet u zeker dat u deze optiegroep van het product wilt verwijderen?"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:377
+#: src/lib/components/shared/asset/asset-gallery.tsx:376
 msgid "Asset type"
 msgstr "Bestandstype"
 
@@ -1324,11 +1324,11 @@ msgid "Authentication methods"
 msgstr "Authenticatiemethoden"
 
 #. placeholder {0}: currentInterval?.label
-#: src/app/routes/_authenticated/_system/job-queue.tsx:251
+#: src/app/routes/_authenticated/_system/job-queue.tsx:258
 msgid "Auto refresh: {0}"
 msgstr "Automatisch vernieuwen: {0}"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:305
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:306
 msgid "Available"
 msgstr "Beschikbaar"
 
@@ -1337,7 +1337,7 @@ msgid "Available currencies"
 msgstr "Beschikbare valuta's"
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:160
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:108
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:112
 msgid "Available languages"
 msgstr "Beschikbare talen"
 
@@ -1345,7 +1345,7 @@ msgstr "Beschikbare talen"
 msgid "Available Languages"
 msgstr "Beschikbare talen"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:236
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:235
 msgid "Available:"
 msgstr "Beschikbaar:"
 
@@ -1388,8 +1388,8 @@ msgstr "Factuuradres ingesteld voor bestelling"
 msgid "Billing address unset for order"
 msgstr "Factuuradres verwijderd van bestelling"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:371
-#: src/lib/components/shared/asset/asset-gallery.tsx:383
+#: src/lib/components/shared/asset/asset-gallery.tsx:370
+#: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
 msgstr "Binair"
 
@@ -1408,12 +1408,12 @@ msgstr "Calculator"
 #: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:309
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:348
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:357
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:347
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:358
 #: src/app/routes/_authenticated/_orders/components/settle-refund-dialog.tsx:71
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:270
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:493
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:494
 #: src/app/routes/_authenticated/_system/settings-store.tsx:140
 #: src/lib/components/data-input/product-multi-selector-input.tsx:370
 #: src/lib/components/data-table/data-table-bulk-action-item.tsx:122
@@ -1424,14 +1424,14 @@ msgstr "Calculator"
 #: src/lib/components/shared/asset/asset-focal-point-editor.tsx:88
 #: src/lib/components/shared/assign-to-channel-dialog.tsx:126
 #: src/lib/components/shared/confirmation-dialog.tsx:42
-#: src/lib/components/shared/customer-address-form.tsx:242
+#: src/lib/components/shared/customer-address-form.tsx:241
 #: src/lib/components/shared/navigation-confirmation.tsx:55
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:208
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:146
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:201
+#: src/app/routes/_authenticated/_system/job-queue.tsx:208
 msgid "Cancel Job"
 msgstr "Taak annuleren"
 
@@ -1483,7 +1483,7 @@ msgstr "Kies uw voorkeurstaal en regio-instellingen"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:138
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:196
-#: src/lib/components/shared/customer-address-form.tsx:130
+#: src/lib/components/shared/customer-address-form.tsx:129
 msgid "City"
 msgstr "Plaats"
 
@@ -1493,7 +1493,7 @@ msgstr "Wissen"
 
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:178
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:54
-#: src/lib/components/data-table/data-table.tsx:425
+#: src/lib/components/data-table/data-table.tsx:423
 msgid "Clear all"
 msgstr "Alles wissen"
 
@@ -1503,7 +1503,7 @@ msgstr "Filter wissen"
 
 #: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:282
 #: src/lib/components/data-table/data-table-faceted-filter.tsx:185
-#: src/lib/components/shared/asset/asset-gallery.tsx:362
+#: src/lib/components/shared/asset/asset-gallery.tsx:361
 msgid "Clear filters"
 msgstr "Filters wissen"
 
@@ -1547,13 +1547,13 @@ msgstr "Collecties"
 msgid "Collections moved successfully"
 msgstr "Collecties succesvol verplaatst"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:91
+#: src/lib/components/data-table/data-table-view-options.tsx:89
 msgid "Column settings"
 msgstr "Kolominstellingen"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:108
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:165
-#: src/lib/components/shared/customer-address-form.tsx:100
+#: src/lib/components/shared/customer-address-form.tsx:99
 msgid "Company"
 msgstr "Bedrijf"
 
@@ -1575,7 +1575,7 @@ msgstr "Configureer beschikbare talen voor uw winkel en kanalen"
 msgid "Configure duplication settings for {0}s"
 msgstr "Duplicatie-instellingen configureren voor {0}s"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:356
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:355
 #: src/lib/components/shared/navigation-confirmation.tsx:58
 msgid "Confirm"
 msgstr "Bevestigen"
@@ -1624,7 +1624,7 @@ msgstr "Landen"
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:170
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:217
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:53
-#: src/lib/components/shared/customer-address-form.tsx:162
+#: src/lib/components/shared/customer-address-form.tsx:161
 msgid "Country"
 msgstr "Land"
 
@@ -1652,7 +1652,7 @@ msgstr "Couponcode ingesteld voor bestelling"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:225
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:182
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:181
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:144
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:84
@@ -1710,7 +1710,7 @@ msgstr "Variant aanmaken"
 
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:639
+#: src/lib/framework/layout-engine/page-layout.tsx:640
 msgid "Created"
 msgstr "Aangemaakt"
 
@@ -1813,13 +1813,13 @@ msgstr "Klant geverifieerd"
 msgid "Customers"
 msgstr "Klanten"
 
-#: src/lib/components/layout/nav-user.tsx:130
+#: src/lib/components/layout/nav-user.tsx:131
 msgctxt "theme"
 msgid "Dark"
 msgstr "Donker"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:235
-#: src/lib/components/shared/customer-address-form.tsx:227
+#: src/lib/components/shared/customer-address-form.tsx:226
 msgid "Default Billing Address"
 msgstr "Standaard factuuradres"
 
@@ -1840,7 +1840,7 @@ msgid "Default Language"
 msgstr "Standaardtaal"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:217
-#: src/lib/components/shared/customer-address-form.tsx:209
+#: src/lib/components/shared/customer-address-form.tsx:208
 msgid "Default Shipping Address"
 msgstr "Standaard verzendadres"
 
@@ -1924,7 +1924,7 @@ msgid "Description (alt)"
 msgstr "Beschrijving (alt-tekst)"
 
 #: src/lib/components/layout/dev-mode-indicator.tsx:14
-#: src/lib/components/layout/nav-user.tsx:143
+#: src/lib/components/layout/nav-user.tsx:144
 msgid "Dev Mode"
 msgstr "Ontwikkelaarsmodus"
 
@@ -1938,7 +1938,7 @@ msgstr "Uitschakelen"
 
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:123
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:58
-#: src/lib/components/layout/nav-user.tsx:154
+#: src/lib/components/layout/nav-user.tsx:155
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
@@ -1946,7 +1946,7 @@ msgstr "Uitgeschakeld"
 msgid "Discount"
 msgstr "Korting"
 
-#: src/app/routes/_authenticated/_orders/components/order-table.tsx:126
+#: src/app/routes/_authenticated/_orders/components/order-table.tsx:120
 msgid "Discounts"
 msgstr "Kortingen"
 
@@ -1984,7 +1984,7 @@ msgstr "Conceptbestelstatus"
 msgid "Drag to reorder"
 msgstr "Slepen om opnieuw te ordenen"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:439
+#: src/lib/components/shared/asset/asset-gallery.tsx:438
 msgid "Drop files here to upload"
 msgstr "Sleep bestanden hierheen om te uploaden"
 
@@ -2069,8 +2069,8 @@ msgstr "Notitie bewerken"
 msgid "Edit or delete existing tags"
 msgstr "Bestaande tags bewerken of verwijderen"
 
-#: src/lib/components/data-input/slug-input.tsx:279
-#: src/lib/components/data-input/slug-input.tsx:281
+#: src/lib/components/data-input/slug-input.tsx:280
+#: src/lib/components/data-input/slug-input.tsx:282
 msgid "Edit slug manually"
 msgstr "Slug handmatig bewerken"
 
@@ -2086,7 +2086,7 @@ msgstr "Eigenschappen van de geselecteerde afbeelding bewerken"
 msgid "Edit the selected link properties"
 msgstr "Eigenschappen van de geselecteerde link bewerken"
 
-#: src/lib/components/login/login-form.tsx:85
+#: src/lib/components/login/login-form.tsx:84
 msgid "Email"
 msgstr "E-mail"
 
@@ -2123,7 +2123,7 @@ msgstr "Inschakelen"
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:55
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:57
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:57
-#: src/lib/components/layout/nav-user.tsx:151
+#: src/lib/components/layout/nav-user.tsx:152
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
@@ -2135,15 +2135,15 @@ msgstr "einde"
 msgid "Ends at"
 msgstr "Eindigt op"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:236
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:237
 msgid "Enter custom reason..."
 msgstr "Voer een aangepaste reden in..."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:305
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:304
 msgid "Enter refund note"
 msgstr "Voer terugbetalingsnotitie in"
 
-#: src/lib/components/data-input/slug-input.tsx:239
+#: src/lib/components/data-input/slug-input.tsx:240
 msgid "Enter slug manually"
 msgstr "Voer slug handmatig in"
 
@@ -2155,7 +2155,7 @@ msgstr "Voer de transactie-ID in voor deze terugbetalingsafhandeling"
 msgid "Enter transaction ID"
 msgstr "Voer transactie-ID in"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:611
+#: src/lib/framework/layout-engine/page-layout.tsx:612
 msgid "Entity Information"
 msgstr "Entiteitsinformatie"
 
@@ -2181,19 +2181,19 @@ msgstr "Foutmelding"
 msgid "Error transitioning to state"
 msgstr "Fout bij overgaan naar status"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:72
+#: src/app/routes/_authenticated/_system/job-queue.tsx:87
 msgid "Every 10 seconds"
 msgstr "Elke 10 seconden"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:73
+#: src/app/routes/_authenticated/_system/job-queue.tsx:88
 msgid "Every 30 seconds"
 msgstr "Elke 30 seconden"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:71
+#: src/app/routes/_authenticated/_system/job-queue.tsx:86
 msgid "Every 5 seconds"
 msgstr "Elke 5 seconden"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:74
+#: src/app/routes/_authenticated/_system/job-queue.tsx:89
 msgid "Every 60 seconds"
 msgstr "Elke 60 seconden"
 
@@ -2205,7 +2205,7 @@ msgstr "excl. BTW:"
 #~ msgid "Explore Enterprise Edition"
 #~ msgstr "Ontdek Enterprise Edition"
 
-#: src/lib/components/layout/nav-user.tsx:101
+#: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
 msgstr "Verken platform en cloud"
 
@@ -2379,7 +2379,7 @@ msgstr "Belastingcategorie aanmaken mislukt"
 msgid "Failed to create tax rate"
 msgstr "Belastingtarief aanmaken mislukt"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:152
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
 msgid "Failed to create variants"
 msgstr "Aanmaken van varianten mislukt"
 
@@ -2479,7 +2479,7 @@ msgstr "Globale weergave hernoemen mislukt"
 msgid "Failed to rename view"
 msgstr "Weergave hernoemen mislukt"
 
-#: src/lib/components/data-table/data-table.tsx:230
+#: src/lib/components/data-table/data-table.tsx:228
 msgid "Failed to reorder items"
 msgstr "Kan artikelen niet herordenen"
 
@@ -2548,8 +2548,8 @@ msgstr "Facetwaarde bijwerken mislukt"
 msgid "Failed to update fulfillment state"
 msgstr "Afhandelingsstatus bijwerken mislukt"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:75
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:81
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:79
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:85
 msgid "Failed to update global settings"
 msgstr "Globale instellingen bijwerken mislukt"
 
@@ -2628,6 +2628,10 @@ msgstr "Kan waarde niet bijwerken"
 msgid "Failed to update zone"
 msgstr "Zone bijwerken mislukt"
 
+#: src/lib/utils/get-locale-fallback-placeholder.ts:31
+msgid "Fallback: {value}"
+msgstr ""
+
 #: src/lib/components/data-table/filters/data-table-boolean-filter.tsx:57
 msgid "False"
 msgstr "Onwaar"
@@ -2645,7 +2649,7 @@ msgid "Filter by tags"
 msgstr "Filteren op tags"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:48
-#: src/lib/components/data-table/data-table.tsx:369
+#: src/lib/components/data-table/data-table.tsx:367
 msgid "Filter..."
 msgstr "Filteren..."
 
@@ -2663,11 +2667,11 @@ msgstr "Voornaam"
 msgid "Focal Point"
 msgstr "Focuspunt"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:504
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:505
 msgid "Force remove"
 msgstr "Geforceerd verwijderen"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:486
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:487
 msgid "Force remove option group"
 msgstr "Optiegroep geforceerd verwijderen"
 
@@ -2685,7 +2689,7 @@ msgstr "Van {0} tot {1}"
 
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:221
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:227
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:315
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:316
 msgid "Fulfill order"
 msgstr "Bestelling afhandelen"
 
@@ -2694,7 +2698,7 @@ msgstr "Bestelling afhandelen"
 msgid "Fulfilled items ({0})"
 msgstr "Afgehandelde items ({0})"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:313
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:314
 msgid "Fulfilling..."
 msgstr "Afhandelen..."
 
@@ -2718,7 +2722,7 @@ msgstr "Afhandeling aangemaakt"
 msgid "Fulfillment details"
 msgstr "Afhandelingsdetails"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:291
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:292
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:170
 msgid "Fulfillment handler"
 msgstr "Afhandelingshandler"
@@ -2737,16 +2741,16 @@ msgstr "Afhandeling overgegaan"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:100
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:159
-#: src/lib/components/shared/customer-address-form.tsx:92
+#: src/lib/components/shared/customer-address-form.tsx:91
 msgid "Full Name"
 msgstr "Volledige naam"
 
-#: src/lib/components/shared/custom-fields-form.tsx:96
+#: src/lib/components/shared/custom-fields-form.tsx:99
 msgid "General"
 msgstr "Algemeen"
 
-#: src/lib/components/data-input/slug-input.tsx:279
-#: src/lib/components/data-input/slug-input.tsx:281
+#: src/lib/components/data-input/slug-input.tsx:280
+#: src/lib/components/data-input/slug-input.tsx:282
 msgid "Generate slug automatically"
 msgstr "Slug automatisch genereren"
 
@@ -2754,12 +2758,12 @@ msgstr "Slug automatisch genereren"
 msgid "Global Languages"
 msgstr "Globale talen"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:127
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:131
 msgid "Global out of stock threshold"
 msgstr "Globale uitverkocht-drempelwaarde"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:40
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:90
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:41
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:94
 msgid "Global Settings"
 msgstr "Globale instellingen"
 
@@ -2803,7 +2807,7 @@ msgstr "groter dan"
 msgid "greater than or equal"
 msgstr "groter dan of gelijk aan"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:396
+#: src/lib/components/shared/asset/asset-gallery.tsx:395
 msgid "Grid view"
 msgstr "Rasterweergave"
 
@@ -2868,8 +2872,8 @@ msgstr "Indien ingeschakeld, worden de filters overgenomen van de bovenliggende 
 msgid "Image"
 msgstr "Afbeelding"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:369
-#: src/lib/components/shared/asset/asset-gallery.tsx:381
+#: src/lib/components/shared/asset/asset-gallery.tsx:368
+#: src/lib/components/shared/asset/asset-gallery.tsx:380
 msgid "Images"
 msgstr "Afbeeldingen"
 
@@ -2971,7 +2975,7 @@ msgstr "is leeg"
 msgid "Item added to order"
 msgstr "Item toegevoegd aan bestelling"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:477
+#: src/lib/components/shared/asset/asset-gallery.tsx:476
 msgid "Items per page"
 msgstr "Items per pagina"
 
@@ -2979,8 +2983,8 @@ msgstr "Items per pagina"
 msgid "Items refunded"
 msgstr "Artikelen gerestitueerd"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:33
-#: src/app/routes/_authenticated/_system/job-queue.tsx:103
+#: src/app/routes/_authenticated/_system/job-queue.tsx:48
+#: src/app/routes/_authenticated/_system/job-queue.tsx:118
 msgid "Job Queue"
 msgstr "Taakwachtrij"
 
@@ -2988,7 +2992,7 @@ msgstr "Taakwachtrij"
 msgid "Key"
 msgstr "Sleutel"
 
-#: src/lib/components/layout/nav-user.tsx:111
+#: src/lib/components/layout/nav-user.tsx:112
 msgid "Language"
 msgstr "Taal"
 
@@ -2997,12 +3001,12 @@ msgstr "Taal"
 msgid "Language: {0}"
 msgstr "Taal: {0}"
 
-#: src/lib/components/date-range-picker.tsx:57
+#: src/lib/components/date-range-picker.tsx:55
 msgctxt "date-range"
 msgid "Last 30 days"
 msgstr "Laatste 30 dagen"
 
-#: src/lib/components/date-range-picker.tsx:41
+#: src/lib/components/date-range-picker.tsx:39
 msgctxt "date-range"
 msgid "Last 7 days"
 msgstr "Laatste 7 dagen"
@@ -3011,7 +3015,7 @@ msgstr "Laatste 7 dagen"
 msgid "Last Executed"
 msgstr "Laatst uitgevoerd"
 
-#: src/lib/components/date-range-picker.tsx:81
+#: src/lib/components/date-range-picker.tsx:79
 msgctxt "date-range"
 msgid "Last month"
 msgstr "Vorige maand"
@@ -3042,7 +3046,7 @@ msgstr "kleiner dan"
 msgid "less than or equal"
 msgstr "kleiner dan of gelijk aan"
 
-#: src/lib/components/layout/nav-user.tsx:126
+#: src/lib/components/layout/nav-user.tsx:127
 msgctxt "theme"
 msgid "Light"
 msgstr "Licht"
@@ -3059,7 +3063,7 @@ msgstr "Linkdoel"
 msgid "Link title"
 msgstr "Linktitel"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:399
+#: src/lib/components/shared/asset/asset-gallery.tsx:398
 msgid "List view"
 msgstr "Lijstweergave"
 
@@ -3085,7 +3089,7 @@ msgstr "Collecties laden..."
 msgid "Loading global settings..."
 msgstr "Globale instellingen laden..."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:159
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:158
 msgid "Loading preview…"
 msgstr "Voorbeeld laden..."
 
@@ -3110,7 +3114,7 @@ msgstr "Laden..."
 msgid "Locale"
 msgstr "Landinstelling"
 
-#: src/lib/components/layout/nav-user.tsx:163
+#: src/lib/components/layout/nav-user.tsx:164
 msgid "Log out"
 msgstr "Uitloggen"
 
@@ -3189,7 +3193,7 @@ msgstr "Bestelling wijzigen"
 #~ msgid "Monitored Resources"
 #~ msgstr "Gemonitorde bronnen"
 
-#: src/lib/components/date-range-picker.tsx:65
+#: src/lib/components/date-range-picker.tsx:63
 msgctxt "date-range"
 msgid "Month to date"
 msgstr "Maand tot heden"
@@ -3461,7 +3465,7 @@ msgid "No"
 msgstr "Nee"
 
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:107
-#: src/lib/components/shared/asset/asset-bulk-actions.tsx:100
+#: src/lib/components/shared/asset/asset-bulk-actions.tsx:98
 msgid "No actions available"
 msgstr "Geen acties beschikbaar"
 
@@ -3477,7 +3481,7 @@ msgstr "Geen adressen gevonden"
 msgid "No alerts"
 msgstr "Geen waarschuwingen"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:629
+#: src/lib/components/shared/asset/asset-gallery.tsx:628
 msgid "No assets found. Try adjusting your filters."
 msgstr "Geen bestanden gevonden. Probeer uw filters aan te passen."
 
@@ -3551,11 +3555,11 @@ msgstr "Nog geen optiegroepen gedefinieerd. Voeg optiegroepen toe om verschillen
 msgid "No option groups found"
 msgstr "Geen optiegroepen gevonden"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:335
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:334
 msgid "No payment or refund is required for these changes."
 msgstr "Voor deze wijzigingen is geen betaling of terugbetaling vereist."
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:332
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:331
 msgid "No payment or refund required"
 msgstr "Geen betaling of terugbetaling vereist"
 
@@ -3563,12 +3567,12 @@ msgstr "Geen betaling of terugbetaling vereist"
 msgid "No products found"
 msgstr "Geen producten gevonden"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:149
+#: src/app/routes/_authenticated/_system/job-queue.tsx:164
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:186
 msgid "No result yet"
 msgstr "Nog geen resultaat"
 
-#: src/lib/components/data-table/data-table.tsx:560
+#: src/lib/components/data-table/data-table.tsx:558
 #: src/lib/components/shared/customer-group-selector.tsx:56
 msgid "No results"
 msgstr "Geen resultaten"
@@ -3606,7 +3610,7 @@ msgid "No tags selected"
 msgstr "Geen tags geselecteerd"
 
 #. placeholder {0}: formatLanguageName(contentLanguage)
-#: src/lib/components/shared/translatable-form-field.tsx:67
+#: src/lib/components/shared/translatable-form-field.tsx:68
 msgid "No translation found for {0}"
 msgstr "Geen vertaling gevonden voor {0}"
 
@@ -3643,11 +3647,11 @@ msgstr "Notitie toegevoegd"
 msgid "Note is private"
 msgstr "Notitie is privé"
 
-#: src/lib/components/data-input/datetime-input.tsx:183
+#: src/lib/components/data-input/datetime-input.tsx:181
 msgid "Now"
 msgstr "Nu"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:70
+#: src/app/routes/_authenticated/_system/job-queue.tsx:85
 msgid "Off"
 msgstr "Uit"
 
@@ -3821,7 +3825,7 @@ msgstr "Besteloverzicht"
 msgid "Out-of-stock threshold"
 msgstr "Uitverkocht-drempelwaarde"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:262
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:263
 msgid "Override"
 msgstr "Overschrijven"
 
@@ -3846,7 +3850,7 @@ msgstr "Gedeeltelijke restitutie voltooid"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:133
 #: src/app/routes/_authenticated/_profile/profile.tsx:112
 #: src/app/routes/_authenticated/_profile/profile.tsx:129
-#: src/lib/components/login/login-form.tsx:95
+#: src/lib/components/login/login-form.tsx:94
 msgid "Password"
 msgstr "Wachtwoord"
 
@@ -3940,7 +3944,7 @@ msgstr "Telefoonnummer"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:198
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:242
-#: src/lib/components/shared/customer-address-form.tsx:190
+#: src/lib/components/shared/customer-address-form.tsx:189
 msgid "Phone Number"
 msgstr "Telefoonnummer"
 
@@ -3958,7 +3962,7 @@ msgstr "Selecteer een doelcollectie"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:160
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:208
-#: src/lib/components/shared/customer-address-form.tsx:152
+#: src/lib/components/shared/customer-address-form.tsx:151
 msgid "Postal Code"
 msgstr "Postcode"
 
@@ -3971,7 +3975,7 @@ msgstr "Voorbeeld"
 msgid "Preview changes"
 msgstr "Voorbeeld van wijzigingen"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:150
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:149
 msgid "Preview order modifications"
 msgstr "Voorbeeld van bestelwijzigingen"
 
@@ -3979,7 +3983,7 @@ msgstr "Voorbeeld van bestelwijzigingen"
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:280
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:299
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:194
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:193
 #: src/lib/components/layout/language-dialog.tsx:136
 msgid "Price"
 msgstr "Prijs"
@@ -4013,7 +4017,7 @@ msgstr "Privécollecties zijn niet zichtbaar in de winkel"
 msgid "Private facets are not visible in the shop"
 msgstr "Privéfacetten zijn niet zichtbaar in de winkel"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:364
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:365
 msgid "Processing..."
 msgstr "Verwerken..."
 
@@ -4064,7 +4068,7 @@ msgstr "Producten"
 
 #: src/app/routes/_authenticated/_profile/profile.tsx:31
 #: src/app/routes/_authenticated/_profile/profile.tsx:76
-#: src/lib/components/layout/nav-user.tsx:107
+#: src/lib/components/layout/nav-user.tsx:108
 msgid "Profile"
 msgstr "Profiel"
 
@@ -4088,7 +4092,7 @@ msgstr "Aantal"
 msgid "Quantity"
 msgstr "Aantal"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:227
+#: src/app/routes/_authenticated/_system/job-queue.tsx:234
 msgid "Queue"
 msgstr "Wachtrij"
 
@@ -4103,7 +4107,7 @@ msgid "Readonly"
 msgstr "Alleen-lezen"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:233
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:216
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:217
 msgid "Reason"
 msgstr "Reden"
 
@@ -4132,7 +4136,7 @@ msgid "Refund"
 msgstr "Restitutie"
 
 #. placeholder {0}: formatCurrency(refund.amountToRefundTotal, order.currencyCode)
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:366
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:367
 msgid "Refund {0}"
 msgstr "Restitueer {0}"
 
@@ -4150,7 +4154,7 @@ msgstr "Terugbetaling #{0} overgegaan naar {1}"
 msgid "Refund and cancel order"
 msgstr "Restitueer en annuleer bestelling"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:230
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:229
 msgid "Refund from this method"
 msgstr "Terugbetaling van deze methode"
 
@@ -4162,7 +4166,7 @@ msgstr "Terugbetalings-ID"
 msgid "Refund processed successfully"
 msgstr "Restitutie succesvol verwerkt"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:171
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:170
 msgid "Refund required"
 msgstr "Terugbetaling vereist"
 
@@ -4174,11 +4178,11 @@ msgstr "Terugbetaling afgehandeld"
 msgid "Refund settled successfully"
 msgstr "Terugbetaling succesvol afgehandeld"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:200
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:201
 msgid "Refund shipping"
 msgstr "Verzending restitueren"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:248
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:249
 msgid "Refund total"
 msgstr "Restitutietotaal"
 
@@ -4200,8 +4204,8 @@ msgstr "Terugbetaling overgegaan"
 msgid "Refunds ({0})"
 msgstr "Terugbetalingen ({0})"
 
-#: src/lib/components/data-input/slug-input.tsx:265
 #: src/lib/components/data-input/slug-input.tsx:266
+#: src/lib/components/data-input/slug-input.tsx:267
 msgid "Regenerate slug from source field"
 msgstr "Slug opnieuw genereren vanuit bronveld"
 
@@ -4213,7 +4217,7 @@ msgstr "Regio's"
 msgid "Registered"
 msgstr "Geregistreerd"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:288
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:287
 msgid "Remaining:"
 msgstr "Resterend:"
 
@@ -4272,7 +4276,7 @@ msgstr "{0} item(s) verwijderen"
 msgid "Rename"
 msgstr "Hernoemen"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:122
+#: src/lib/components/data-table/data-table-view-options.tsx:120
 msgid "Reset"
 msgstr "Resetten"
 
@@ -4284,7 +4288,7 @@ msgstr "Selectie resetten"
 msgid "Return to stock"
 msgstr "Terugzetten op voorraad"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:153
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:152
 msgid "Review the changes before applying them to the order."
 msgstr "Bekijk de wijzigingen voordat u ze toepast op de bestelling."
 
@@ -4333,7 +4337,7 @@ msgid "Save a view as \"Global\" to make it available to all users."
 msgstr "Sla een weergave op als \"Globaal\" om deze beschikbaar te maken voor alle gebruikers."
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:254
-#: src/lib/components/shared/customer-address-form.tsx:246
+#: src/lib/components/shared/customer-address-form.tsx:245
 msgid "Save Address"
 msgstr "Adres opslaan"
 
@@ -4393,7 +4397,7 @@ msgstr "Bereik"
 msgid "Search {name}..."
 msgstr "Zoeken {name}..."
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:350
+#: src/lib/components/shared/asset/asset-gallery.tsx:349
 msgid "Search assets..."
 msgstr "Bestanden zoeken..."
 
@@ -4466,7 +4470,7 @@ msgid "Select a channel to assign {0} {entityType} to"
 msgstr "Selecteer een kanaal om {0} {entityType} aan toe te wijzen"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:181
-#: src/lib/components/shared/customer-address-form.tsx:173
+#: src/lib/components/shared/customer-address-form.tsx:172
 msgid "Select a country"
 msgstr "Selecteer een land"
 
@@ -4486,7 +4490,7 @@ msgstr "Selecteer een doelcollectie"
 msgid "Select a language"
 msgstr "Selecteer een taal"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:224
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:225
 msgid "Select a reason..."
 msgstr "Selecteer een reden..."
 
@@ -4531,7 +4535,7 @@ msgstr "Selecteer land"
 msgid "Select customer"
 msgstr "Selecteer klant"
 
-#: src/lib/components/date-range-picker.tsx:128
+#: src/lib/components/date-range-picker.tsx:126
 msgid "Select date range"
 msgstr "Selecteer datumbereik"
 
@@ -4559,7 +4563,7 @@ msgstr "Selecteer artikelen om te restitueren en optioneel terug te zetten op vo
 msgid "Select next state"
 msgstr "Selecteer volgende status"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:289
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:290
 msgid "Select payments to refund"
 msgstr "Selecteer betalingen om te restitueren"
 
@@ -4621,11 +4625,11 @@ msgstr "Focuspunt instellen"
 msgid "Set link"
 msgstr "Link instellen"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:110
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:114
 msgid "Sets the languages that are available for all channels. Individual channels can then support a subset of these languages."
 msgstr "Stelt de talen in die beschikbaar zijn voor alle kanalen. Individuele kanalen kunnen vervolgens een subset van deze talen ondersteunen."
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:129
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:133
 msgid "Sets the stock level at which this a variant is considered to be out of stock. Using a negative value enables backorder support. Can be overridden by product variants."
 msgstr "Stelt het voorraadniveau in waarbij deze variant als uitverkocht wordt beschouwd. Het gebruik van een negatieve waarde schakelt ondersteuning voor nabestellingen in. Kan worden overschreven door productvarianten."
 
@@ -4650,7 +4654,7 @@ msgid "Settle refund"
 msgstr "Terugbetaling afhandelen"
 
 #: src/app/routes/_authenticated/_orders/components/order-table-totals.tsx:66
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:188
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:189
 #: src/app/routes/_authenticated/_orders/orders.tsx:85
 msgid "Shipping"
 msgstr "Verzending"
@@ -4725,11 +4729,11 @@ msgstr "Wachtwoord tonen"
 msgid "Showing all {0} results"
 msgstr "Alle {0} resultaten weergeven"
 
-#: src/lib/components/login/login-form.tsx:107
+#: src/lib/components/login/login-form.tsx:106
 msgid "Sign in"
 msgstr "Inloggen"
 
-#: src/lib/components/login/login-form.tsx:75
+#: src/lib/components/login/login-form.tsx:74
 msgid "Sign in to access the admin dashboard"
 msgstr "Log in om het beheerdashboard te openen"
 
@@ -4742,7 +4746,7 @@ msgstr "Grootte"
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:253
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:293
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:191
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:190
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:352
 msgid "SKU"
 msgstr "SKU"
@@ -4756,11 +4760,11 @@ msgstr "Artikelnr.:"
 msgid "Slug"
 msgstr "Slug"
 
-#: src/lib/components/data-input/slug-input.tsx:237
+#: src/lib/components/data-input/slug-input.tsx:238
 msgid "Slug is set"
 msgstr "Slug is ingesteld"
 
-#: src/lib/components/data-input/slug-input.tsx:238
+#: src/lib/components/data-input/slug-input.tsx:239
 msgid "Slug will be generated automatically..."
 msgstr "Slug wordt automatisch gegenereerd..."
 
@@ -4783,7 +4787,7 @@ msgstr "Begint op"
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:118
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:217
 #: src/app/routes/_authenticated/_orders/orders.tsx:101
-#: src/app/routes/_authenticated/_system/job-queue.tsx:238
+#: src/app/routes/_authenticated/_system/job-queue.tsx:245
 msgid "State"
 msgstr "Staat"
 
@@ -4792,7 +4796,7 @@ msgid "State / Province"
 msgstr "Staat / Provincie"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:146
-#: src/lib/components/shared/customer-address-form.tsx:138
+#: src/lib/components/shared/customer-address-form.tsx:137
 msgid "State/Province"
 msgstr "Staat/Provincie"
 
@@ -4828,13 +4832,13 @@ msgstr "Voorraadlocaties"
 msgid "Stock on hand"
 msgstr "Voorraad op voorraad"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:197
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:196
 msgid "Stock on Hand"
 msgstr "Voorraad op voorraad"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:118
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:175
-#: src/lib/components/shared/customer-address-form.tsx:110
+#: src/lib/components/shared/customer-address-form.tsx:109
 msgid "Street Address"
 msgstr "Straatnaam"
 
@@ -4956,7 +4960,7 @@ msgstr "Belastingcategorie succesvol aangemaakt"
 msgid "Successfully created tax rate"
 msgstr "Belastingtarief succesvol aangemaakt"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:149
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:148
 msgid "Successfully created variants"
 msgstr "Varianten succesvol aangemaakt"
 
@@ -5032,7 +5036,7 @@ msgstr "Facetwaarde succesvol bijgewerkt"
 msgid "Successfully updated facet values for {entityIdsLength} {entityType}"
 msgstr "Facetwaarden succesvol bijgewerkt voor {entityIdsLength} {entityType}"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:69
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:71
 msgid "Successfully updated global settings"
 msgstr "Globale instellingen succesvol bijgewerkt"
 
@@ -5113,7 +5117,7 @@ msgstr "Superbeheerder"
 msgid "Surcharge"
 msgstr "Toeslag"
 
-#: src/lib/components/layout/nav-user.tsx:134
+#: src/lib/components/layout/nav-user.tsx:135
 msgctxt "theme"
 msgid "System"
 msgstr "Systeem"
@@ -5206,15 +5210,15 @@ msgstr "Verzendmethode testen..."
 msgid "Testing shipping methods..."
 msgstr "Verzendmethoden testen..."
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:165
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:164
 msgid "The assigned option groups have no options yet. Add options to your option groups before generating variants."
 msgstr "De toegewezen optiegroepen hebben nog geen opties. Voeg opties toe aan uw optiegroepen voordat u varianten genereert."
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:121
+#: src/app/routes/_authenticated/_system/job-queue.tsx:136
 msgid "The data that has been passed to the job"
 msgstr "De gegevens die aan de taak zijn doorgegeven"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:140
+#: src/app/routes/_authenticated/_system/job-queue.tsx:155
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:177
 msgid "The result of the job"
 msgstr "Het resultaat van de taak"
@@ -5231,7 +5235,7 @@ msgstr "De token wordt gebruikt om het kanaal op te geven bij het doen van API-v
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "De variant kon niet worden toegevoegd. Zorg ervoor dat het bovenliggende product is ingeschakeld."
 
-#: src/lib/components/layout/nav-user.tsx:117
+#: src/lib/components/layout/nav-user.tsx:118
 msgid "Theme"
 msgstr "Thema"
 
@@ -5263,12 +5267,12 @@ msgstr "Dit is een voorbeeld van de collectie-inhoud op basis van de huidige fil
 msgid "This is the contents of the <0>{collectionName}</0> collection."
 msgstr "Dit is de inhoud van de collectie <0>{collectionName}</0>."
 
-#: src/lib/components/date-range-picker.tsx:73
+#: src/lib/components/date-range-picker.tsx:71
 msgctxt "date-range"
 msgid "This month"
 msgstr "Deze maand"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:488
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:489
 msgid "This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?"
 msgstr "Deze optiegroep wordt gebruikt door bestaande varianten. Geforceerd verwijderen kan deze varianten beïnvloeden. Weet u het zeker?"
 
@@ -5280,7 +5284,7 @@ msgstr "Deze optiegroep wordt gebruikt door bestaande varianten. Geforceerd verw
 msgid "This shipping method's eligibility checker conditions are not met for the current order and shipping address."
 msgstr "De geschiktheidsvoorwaarden van deze verzendmethode worden niet voldaan voor de huidige bestelling en het verzendadres."
 
-#: src/lib/components/date-range-picker.tsx:49
+#: src/lib/components/date-range-picker.tsx:47
 msgctxt "date-range"
 msgid "This week"
 msgstr "Deze week"
@@ -5290,7 +5294,7 @@ msgstr "Deze week"
 msgid "Title"
 msgstr "Titel"
 
-#: src/lib/components/date-range-picker.tsx:25
+#: src/lib/components/date-range-picker.tsx:23
 msgctxt "date-range"
 msgid "Today"
 msgstr "Vandaag"
@@ -5312,9 +5316,9 @@ msgstr "Rijkop schakelen"
 msgid "Token"
 msgstr "Token"
 
-#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:157
+#: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:158
 #: src/app/routes/_authenticated/_orders/components/order-table-totals.tsx:88
-#: src/app/routes/_authenticated/_orders/components/order-table.tsx:112
+#: src/app/routes/_authenticated/_orders/components/order-table.tsx:106
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:228
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:121
 msgid "Total"
@@ -5324,7 +5328,7 @@ msgstr "Totaal"
 msgid "Total Orders"
 msgstr "Totaal bestellingen"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:274
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:273
 msgid "Total refund:"
 msgstr "Totale terugbetaling:"
 
@@ -5337,7 +5341,7 @@ msgstr "Totale omzet"
 msgid "Track"
 msgstr "Volgen"
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:140
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:144
 msgid "Track inventory by default"
 msgstr "Voorraad standaard volgen"
 
@@ -5391,12 +5395,12 @@ msgstr "Typ minstens 2 tekens om te zoeken..."
 msgid "Unit price"
 msgstr "Stukprijs"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:103
+#: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:102
 #: src/app/routes/_authenticated/_orders/hooks/use-refund-order.ts:303
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:76
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:118
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:167
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:153
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:152
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:113
 msgid "Unknown error"
 msgstr "Onbekende fout"
@@ -5414,7 +5418,7 @@ msgstr "Niet geverifieerd"
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:152
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:99
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:98
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:102
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:177
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:51
@@ -5439,11 +5443,11 @@ msgstr "Bijwerken"
 msgid "Update the note content or visibility"
 msgstr "Notitie-inhoud of zichtbaarheid bijwerken"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:652
+#: src/lib/framework/layout-engine/page-layout.tsx:653
 msgid "Updated"
 msgstr "Bijgewerkt"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:407
+#: src/lib/components/shared/asset/asset-gallery.tsx:406
 msgid "Upload"
 msgstr "Uploaden"
 
@@ -5452,12 +5456,12 @@ msgid "Usage limit"
 msgstr "Gebruikslimiet"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:238
-#: src/lib/components/shared/customer-address-form.tsx:230
+#: src/lib/components/shared/customer-address-form.tsx:229
 msgid "Use as the default billing address"
 msgstr "Gebruiken als standaard factuuradres"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:220
-#: src/lib/components/shared/customer-address-form.tsx:212
+#: src/lib/components/shared/customer-address-form.tsx:211
 msgid "Use as the default shipping address"
 msgstr "Gebruiken als standaard verzendadres"
 
@@ -5473,7 +5477,7 @@ msgstr "Globale uitverkocht-drempelwaarde gebruiken"
 msgid "useWidgetDimensions must be used within a DashboardBaseWidget"
 msgstr "useWidgetDimensions moet worden gebruikt binnen een DashboardBaseWidget"
 
-#: src/lib/hooks/use-widget-filters.ts:18
+#: src/lib/hooks/use-widget-filters.ts:17
 msgid "useWidgetFilters must be used within a WidgetFiltersProvider"
 msgstr "useWidgetFilters moet worden gebruikt binnen een WidgetFiltersProvider"
 
@@ -5497,7 +5501,7 @@ msgstr "Waarde bijgewerkt"
 msgid "Values"
 msgstr "Waarden"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:187
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:186
 msgid "Variant"
 msgstr "Variant"
 
@@ -5521,8 +5525,8 @@ msgstr "Varianten"
 msgid "Verified"
 msgstr "Geverifieerd"
 
-#: src/lib/components/shared/asset/asset-gallery.tsx:370
-#: src/lib/components/shared/asset/asset-gallery.tsx:382
+#: src/lib/components/shared/asset/asset-gallery.tsx:369
+#: src/lib/components/shared/asset/asset-gallery.tsx:381
 msgid "Video"
 msgstr "Video"
 
@@ -5535,7 +5539,7 @@ msgstr "Wijzigingen bekijken"
 msgid "View converted to global successfully"
 msgstr "Weergave succesvol geconverteerd naar globaal"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:124
+#: src/app/routes/_authenticated/_system/job-queue.tsx:139
 msgid "View data"
 msgstr "Gegevens bekijken"
 
@@ -5551,11 +5555,11 @@ msgstr "Details bekijken"
 msgid "View duplicated successfully"
 msgstr "Weergave succesvol gedupliceerd"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:119
+#: src/app/routes/_authenticated/_system/job-queue.tsx:134
 msgid "View job data"
 msgstr "Taakgegevens bekijken"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:138
+#: src/app/routes/_authenticated/_system/job-queue.tsx:153
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:176
 msgid "View job result"
 msgstr "Taakresultaat bekijken"
@@ -5568,7 +5572,7 @@ msgstr "Orderproces bekijken"
 msgid "View renamed successfully"
 msgstr "Weergave succesvol hernoemd"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:143
+#: src/app/routes/_authenticated/_system/job-queue.tsx:158
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:180
 msgid "View result"
 msgstr "Resultaat bekijken"
@@ -5593,7 +5597,7 @@ msgstr "Zichtbaar voor klant"
 #~ msgid "Welcome back!"
 #~ msgstr "Welkom terug!"
 
-#: src/lib/components/login/login-form.tsx:72
+#: src/lib/components/login/login-form.tsx:71
 msgid "Welcome to Vendure"
 msgstr "Welkom bij Vendure"
 
@@ -5610,7 +5614,7 @@ msgstr "Wanneer ingeschakeld, is een promotie beschikbaar in de winkel"
 msgid "When this is enabled, the prices entered in the product catalog will be included in the tax for the default tax zone."
 msgstr "Wanneer dit is ingeschakeld, worden de prijzen die in de productcatalogus zijn ingevoerd, opgenomen in de belasting voor de standaard belastingzone."
 
-#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:142
+#: src/app/routes/_authenticated/_global-settings/global-settings.tsx:146
 msgid "When tracked, product variant stock levels will be automatically adjusted when sold. This setting can be overridden by individual product variants."
 msgstr "Wanneer gevolgd, worden de voorraadniveaus van productvarianten automatisch aangepast bij verkoop. Deze instelling kan worden overschreven door individuele productvarianten."
 
@@ -5618,7 +5622,7 @@ msgstr "Wanneer gevolgd, worden de voorraadniveaus van productvarianten automati
 msgid "Width"
 msgstr "Breedte"
 
-#: src/lib/components/shared/asset/asset-bulk-actions.tsx:86
+#: src/lib/components/shared/asset/asset-bulk-actions.tsx:84
 msgid "With selected..."
 msgstr "Met geselecteerde..."
 
@@ -5626,7 +5630,7 @@ msgstr "Met geselecteerde..."
 msgid "Yes"
 msgstr "Ja"
 
-#: src/lib/components/date-range-picker.tsx:33
+#: src/lib/components/date-range-picker.tsx:31
 msgctxt "date-range"
 msgid "Yesterday"
 msgstr "Gisteren"

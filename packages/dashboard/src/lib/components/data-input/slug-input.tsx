@@ -146,8 +146,9 @@ export function SlugInput({
     defaultReadonly = true,
     className,
     name,
+    placeholder: externalPlaceholder,
     ...props
-}: SlugInputProps) {
+}: SlugInputProps & { placeholder?: string }) {
     const { t } = useLingui();
     const form = useFormContext();
     const { contentLanguage } = useUserSettings().settings;
@@ -235,7 +236,7 @@ export function SlugInput({
                         isReadonly
                             ? value
                                 ? t`Slug is set`
-                                : t`Slug will be generated automatically...`
+                                : externalPlaceholder || t`Slug will be generated automatically...`
                             : t`Enter slug manually`
                     }
                     className={cn(
