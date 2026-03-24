@@ -81,34 +81,28 @@ function createCustomizeColumns(currencyCode: string) {
             accessorKey: 'quantity',
         },
         unitPrice: {
-            cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.unitPrice} />
-            ),
+            cell: ({ row }: { row: any }) => <Money currency={currencyCode} value={row.original.unitPrice} />,
         },
         proratedUnitPrice: {
             cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.proratedUnitPrice} />
+                <Money currency={currencyCode} value={row.original.proratedUnitPrice} />
             ),
         },
         proratedUnitPriceWithTax: {
             cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.proratedUnitPriceWithTax} />
+                <Money currency={currencyCode} value={row.original.proratedUnitPriceWithTax} />
             ),
         },
         linePrice: {
-            cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.linePrice} />
-            ),
+            cell: ({ row }: { row: any }) => <Money currency={currencyCode} value={row.original.linePrice} />,
         },
         discountedLinePrice: {
             cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.discountedLinePrice} />
+                <Money currency={currencyCode} value={row.original.discountedLinePrice} />
             ),
         },
         lineTax: {
-            cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.lineTax} />
-            ),
+            cell: ({ row }: { row: any }) => <Money currency={currencyCode} value={row.original.lineTax} />,
         },
         linePriceWithTax: {
             header: () => <Trans>Total</Trans>,
@@ -121,7 +115,7 @@ function createCustomizeColumns(currencyCode: string) {
         },
         discountedLinePriceWithTax: {
             cell: ({ row }: { row: any }) => (
-                <Money currencyCode={currencyCode} value={row.original.discountedLinePriceWithTax} />
+                <Money currency={currencyCode} value={row.original.discountedLinePriceWithTax} />
             ),
         },
         discounts: {
