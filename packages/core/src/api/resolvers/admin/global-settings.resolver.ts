@@ -131,8 +131,8 @@ export class GlobalSettingsResolver {
                     return;
                 }
                 const customFieldsConfig = customFields
-                    // Do not expose custom fields marked as "internal".
-                    .filter(c => !c.internal)
+                    // Do not expose custom fields marked as "internal" or hidden from the dashboard.
+                    .filter(c => !c.internal && (c as any).ui?.dashboard !== false)
                     .map(c => ({ ...c, list: !!c.list as any }))
                     .map(c => {
                         const { requiresPermission, deprecated } = c;
