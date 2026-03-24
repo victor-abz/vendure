@@ -26,7 +26,7 @@ export class ProductEvent extends VendureEntityEvent<Product, ProductInputTypes>
     }
 
     /**
-     * Return an product field to become compatible with the
+     * Return a product field to become compatible with the
      * deprecated old version of ProductEvent
      * @deprecated Use `entity` instead
      * @since 1.4
