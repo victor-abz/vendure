@@ -73,10 +73,11 @@ export function LocationWrapper({ children, identifier }: Readonly<LocationWrapp
         return (
             <div
                 className={cn(
-                    `ring-2 transition-all ring-offset-4 ring-offset-background delay-50 relative`,
-                    isHovered || isPopoverOpen ? 'ring-dev-mode' : 'ring-transparent',
-                    isPageWrapper ? 'ring-offset-8' : '',
-                    'rounded-none',
+                    `ring-2 transition-all delay-50 relative rounded-none`,
+                    isHovered || isPopoverOpen
+                        ? 'ring-dev-mode ring-offset-4 ring-offset-background'
+                        : 'ring-transparent ring-offset-0',
+                    isPageWrapper && (isHovered || isPopoverOpen) ? 'ring-offset-8' : '',
                 )}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
