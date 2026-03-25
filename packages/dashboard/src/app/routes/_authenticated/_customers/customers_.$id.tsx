@@ -14,6 +14,7 @@ import {
 } from '@/vdb/components/ui/dialog.js';
 import { Input } from '@/vdb/components/ui/input.js';
 import { NEW_ENTITY_PATH } from '@/vdb/constants.js';
+import { addCustomFields } from '@/vdb/framework/document-introspection/add-custom-fields.js';
 import {
     CustomFieldsPageBlock,
     DetailFormGrid,
@@ -53,7 +54,10 @@ export const Route = createFileRoute('/_authenticated/_customers/customers_/$id'
     component: CustomerDetailPage,
     loader: detailPageRouteLoader({
         pageId,
-        queryDocument: customerDetailDocument,
+        queryDocument: () =>
+            addCustomFields(customerDetailDocument, {
+                includeNestedFragments: ['Address'],
+            }),
         breadcrumb: (isNew, entity) => [
             { path: '/customers', label: <Trans>Customers</Trans> },
             isNew ? <Trans>New customer</Trans> : `${entity?.firstName} ${entity?.lastName}`,
@@ -71,7 +75,9 @@ function CustomerDetailPage() {
 
     const { form, submitHandler, entity, isPending, refreshEntity, resetForm } = useDetailPage({
         pageId,
-        queryDocument: customerDetailDocument,
+        queryDocument: addCustomFields(customerDetailDocument, {
+            includeNestedFragments: ['Address'],
+        }),
         createDocument: createCustomerDocument,
         updateDocument: updateCustomerDocument,
         setValuesForUpdate: entity => {

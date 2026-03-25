@@ -699,6 +699,63 @@ describe('addCustomFields()', () => {
             expect(printed).not.toContain('assetCustomField');
         });
 
+        it('Should add custom fields to Address fragment nested in customer detail query via includeNestedFragments', () => {
+            const addressFragment = graphql(`
+                fragment Address on Address {
+                    id
+                    fullName
+                    company
+                    streetLine1
+                    streetLine2
+                    city
+                    province
+                    postalCode
+                    phoneNumber
+                    defaultShippingAddress
+                    defaultBillingAddress
+                }
+            `);
+
+            const documentNode = graphql(
+                `
+                    query GetCustomerDetail($id: ID!) {
+                        customer(id: $id) {
+                            id
+                            firstName
+                            lastName
+                            addresses {
+                                ...Address
+                            }
+                            customFields
+                        }
+                    }
+                `,
+                [addressFragment],
+            );
+
+            const customFieldsConfig = new Map<string, CustomFieldConfig[]>();
+            customFieldsConfig.set('Customer', [
+                { name: 'customerCustomField', type: 'string', list: false },
+            ]);
+            customFieldsConfig.set('Address', [
+                { name: 'registrationNumber', type: 'string', list: false },
+                { name: 'vatNumber', type: 'string', list: false },
+            ]);
+
+            const result = addCustomFields(documentNode, {
+                customFieldsMap: customFieldsConfig,
+                includeNestedFragments: ['Address'],
+            });
+            const printed = print(result);
+
+            // Should add customFields to Customer (top-level)
+            expect(printed).toContain('customerCustomField');
+
+            // Should also add customFields to Address (nested, but explicitly included)
+            expect(printed).toContain('registrationNumber');
+            expect(printed).toContain('vatNumber');
+        });
+
         it('Works with the timing issue - called later when globalCustomFieldsMap is populated', () => {
             const orderLineFragment = graphql(`
                 fragment OrderLine on OrderLine {
