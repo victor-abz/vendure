@@ -6,6 +6,7 @@ import { VENDURE_VERSION } from '../version';
 import { ConfigCollector } from './collectors/config.collector';
 import { DatabaseCollector } from './collectors/database.collector';
 import { DeploymentCollector } from './collectors/deployment.collector';
+import { FeaturesCollector } from './collectors/features.collector';
 import { InstallationIdCollector } from './collectors/installation-id.collector';
 import { PluginCollector } from './collectors/plugin.collector';
 import { SystemInfoCollector } from './collectors/system-info.collector';
@@ -24,6 +25,7 @@ describe('TelemetryService', () => {
     let mockPluginCollector: Partial<PluginCollector>;
     let mockConfigCollector: Partial<ConfigCollector>;
     let mockDeploymentCollector: Partial<DeploymentCollector>;
+    let mockFeaturesCollector: Partial<FeaturesCollector>;
     let mockIsCI: ReturnType<typeof vi.fn>;
     let mockFetch: ReturnType<typeof vi.fn>;
 
@@ -38,6 +40,7 @@ describe('TelemetryService', () => {
             mockPluginCollector as PluginCollector,
             mockConfigCollector as ConfigCollector,
             mockDeploymentCollector as DeploymentCollector,
+            mockFeaturesCollector as FeaturesCollector,
         );
     }
 
@@ -77,7 +80,12 @@ describe('TelemetryService', () => {
             collect: vi.fn().mockResolvedValue({
                 databaseType: 'postgres',
                 metrics: {
-                    entities: { Product: '1-100' },
+                    entities: {
+                        Product: '1-100',
+                        Channel: '1-100',
+                        PaymentMethod: '1-100',
+                        ShippingMethod: '1-100',
+                    },
                     custom: { entityCount: 0 },
                 },
             }),
@@ -103,6 +111,19 @@ describe('TelemetryService', () => {
                 workerMode: 'integrated',
                 serverless: false,
             }),
+        };
+
+        mockFeaturesCollector = {
+            collect: vi.fn().mockImplementation((_config: any) =>
+                Promise.resolve({
+                    multiChannel: false,
+                    multiVendor: false,
+                    multiStockLocation: false,
+                    apiKeysEnabled: false,
+                    customFieldsInUse: false,
+                    scheduledTasks: false,
+                }),
+            ),
         };
 
         service = createService();
@@ -175,17 +196,20 @@ describe('TelemetryService', () => {
                 expect(mockPluginCollector.collect).toHaveBeenCalled();
                 expect(mockConfigCollector.collect).toHaveBeenCalled();
                 expect(mockDeploymentCollector.collect).toHaveBeenCalled();
+                expect(mockFeaturesCollector.collect).toHaveBeenCalled();
             });
 
-            it('still calls remaining collectors after one fails', async () => {
+            it('does not send telemetry when a required collector fails', async () => {
                 mockDatabaseCollector.collect = vi.fn().mockRejectedValue(new Error('DB error'));
 
                 service.onApplicationBootstrap();
                 await flushPromises();
 
-                // The error is caught, so we won't see fetch called, but we can verify
-                // the error doesn't propagate
-                expect(() => service.onApplicationBootstrap()).not.toThrow();
+                // When databaseCollector rejects, sendTelemetry catches the error
+                // and the fetch is never called
+                expect(mockFetch).not.toHaveBeenCalled();
+                // But the sync collectors that ran before the failure were still called
+                expect(mockInstallationIdCollector.collect).toHaveBeenCalled();
             });
         });
 
@@ -236,7 +260,6 @@ describe('TelemetryService', () => {
                 const fetchCall = mockFetch.mock.calls[0];
                 const body = JSON.parse(fetchCall[1].body);
 
-                expect(body.timestamp).toBeDefined();
                 // Verify it's a valid ISO date string
                 const date = new Date(body.timestamp);
                 expect(date.toISOString()).toBe(body.timestamp);
@@ -264,6 +287,35 @@ describe('TelemetryService', () => {
                 const body = JSON.parse(fetchCall[1].body);
 
                 expect(body.environment).toBeUndefined();
+            });
+
+            it('includes features in the payload', async () => {
+                service.onApplicationBootstrap();
+                await flushPromises();
+
+                const fetchCall = mockFetch.mock.calls[0];
+                const body = JSON.parse(fetchCall[1].body);
+
+                expect(body.features).toEqual({
+                    multiChannel: false,
+                    multiVendor: false,
+                    multiStockLocation: false,
+                    apiKeysEnabled: false,
+                    customFieldsInUse: false,
+                    scheduledTasks: false,
+                });
+            });
+
+            it('populates scale indicator config fields from entity metrics', async () => {
+                service.onApplicationBootstrap();
+                await flushPromises();
+
+                const fetchCall = mockFetch.mock.calls[0];
+                const body = JSON.parse(fetchCall[1].body);
+
+                expect(body.config.channelCount).toBe('1-100');
+                expect(body.config.paymentMethodCount).toBe('1-100');
+                expect(body.config.shippingMethodCount).toBe('1-100');
             });
         });
 
@@ -339,6 +391,130 @@ describe('TelemetryService', () => {
 
                 expect(() => service.onApplicationBootstrap()).not.toThrow();
                 await flushPromises();
+            });
+        });
+
+        describe('error paths — individual collector failures', () => {
+            it('silently handles installationIdCollector failure', async () => {
+                mockInstallationIdCollector.collect = vi.fn().mockRejectedValue(new Error('ID error'));
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('silently handles systemInfoCollector failure', async () => {
+                mockSystemInfoCollector.collect = vi.fn().mockImplementation(() => {
+                    throw new Error('System error');
+                });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('silently handles pluginCollector failure', async () => {
+                mockPluginCollector.collect = vi.fn().mockImplementation(() => {
+                    throw new Error('Plugin error');
+                });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('silently handles configCollector failure', async () => {
+                mockConfigCollector.collect = vi.fn().mockImplementation(() => {
+                    throw new Error('Config error');
+                });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('silently handles deploymentCollector failure', async () => {
+                mockDeploymentCollector.collect = vi.fn().mockImplementation(() => {
+                    throw new Error('Deployment error');
+                });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('silently handles featuresCollector failure', async () => {
+                mockFeaturesCollector.collect = vi.fn().mockRejectedValue(new Error('Features error'));
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('silently handles databaseCollector failure', async () => {
+                mockDatabaseCollector.collect = vi.fn().mockRejectedValue(new Error('DB error'));
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).not.toHaveBeenCalled();
+            });
+
+            it('handles databaseInfo with missing metrics gracefully', async () => {
+                mockDatabaseCollector.collect = vi.fn().mockResolvedValue({
+                    databaseType: 'postgres',
+                });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).toHaveBeenCalled();
+                const body = JSON.parse(mockFetch.mock.calls[0][1].body);
+                expect(body.databaseType).toBe('postgres');
+                expect(body.metrics).toBeUndefined();
+            });
+
+            it('handles databaseInfo with missing entities gracefully', async () => {
+                mockDatabaseCollector.collect = vi.fn().mockResolvedValue({
+                    databaseType: 'postgres',
+                    metrics: { custom: { entityCount: 0 } },
+                });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).toHaveBeenCalled();
+                const body = JSON.parse(mockFetch.mock.calls[0][1].body);
+                expect(body.config.channelCount).toBeUndefined();
+            });
+
+            it('handles systemInfoCollector returning empty object', async () => {
+                mockSystemInfoCollector.collect = vi.fn().mockReturnValue({});
+                service.onApplicationBootstrap();
+                await flushPromises();
+                expect(mockFetch).toHaveBeenCalled();
+                const body = JSON.parse(mockFetch.mock.calls[0][1].body);
+                expect(body.nodeVersion).toBeUndefined();
+                expect(body.platform).toBeUndefined();
+            });
+
+            it('silently swallows non-OK fetch responses (500)', async () => {
+                mockFetch.mockResolvedValue({ ok: false, status: 500 });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                // No error thrown — the 500 is silently ignored
+                expect(mockFetch).toHaveBeenCalled();
+            });
+
+            it('silently swallows non-OK fetch responses (403)', async () => {
+                mockFetch.mockResolvedValue({ ok: false, status: 403 });
+                service.onApplicationBootstrap();
+                await flushPromises();
+                // No error thrown — the 403 is silently ignored
+                expect(mockFetch).toHaveBeenCalled();
+            });
+
+            it('handles double onApplicationBootstrap call without error', async () => {
+                service.onApplicationBootstrap();
+                service.onApplicationBootstrap();
+                await flushPromises();
+                // At least one fetch call should succeed
+                expect(mockFetch).toHaveBeenCalled();
+            });
+
+            it('onApplicationShutdown is safe after telemetry already sent', async () => {
+                service.onApplicationBootstrap();
+                await flushPromises(); // telemetry fires
+                expect(mockFetch).toHaveBeenCalled();
+                expect(() => service.onApplicationShutdown()).not.toThrow();
             });
         });
     });

@@ -9,6 +9,7 @@ import { SettingsStoreService } from '../service/helpers/settings-store/settings
 import { ConfigCollector } from './collectors/config.collector';
 import { DatabaseCollector } from './collectors/database.collector';
 import { DeploymentCollector } from './collectors/deployment.collector';
+import { FeaturesCollector } from './collectors/features.collector';
 import { InstallationIdCollector } from './collectors/installation-id.collector';
 import { PluginCollector } from './collectors/plugin.collector';
 import { SystemInfoCollector } from './collectors/system-info.collector';
@@ -42,6 +43,7 @@ import { TelemetryService } from './telemetry.service';
         PluginCollector,
         ConfigCollector,
         DeploymentCollector,
+        FeaturesCollector,
     ],
     exports: [TelemetryService],
 })

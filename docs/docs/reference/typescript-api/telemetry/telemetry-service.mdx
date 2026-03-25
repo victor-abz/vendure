@@ -2,7 +2,7 @@
 title: "TelemetryService"
 generated: true
 ---
-<GenerationInfo sourceFile="packages/core/src/telemetry/telemetry.service.ts" sourceLine="40" packageName="@vendure/core" since="3.6.0" />
+<GenerationInfo sourceFile="packages/core/src/telemetry/telemetry.service.ts" sourceLine="41" packageName="@vendure/core" since="3.6.0" />
 
 The TelemetryService collects anonymous usage data on Vendure application startup
 and sends it to the Vendure telemetry endpoint. This data helps the Vendure team
@@ -23,7 +23,7 @@ Telemetry is automatically disabled in CI environments.
 
 ```ts title="Signature"
 class TelemetryService implements OnApplicationBootstrap, OnApplicationShutdown {
-    constructor(processContext: ProcessContext, installationIdCollector: InstallationIdCollector, systemInfoCollector: SystemInfoCollector, databaseCollector: DatabaseCollector, pluginCollector: PluginCollector, configCollector: ConfigCollector, deploymentCollector: DeploymentCollector)
+    constructor(processContext: ProcessContext, installationIdCollector: InstallationIdCollector, systemInfoCollector: SystemInfoCollector, databaseCollector: DatabaseCollector, pluginCollector: PluginCollector, configCollector: ConfigCollector, deploymentCollector: DeploymentCollector, featuresCollector: FeaturesCollector)
     onApplicationBootstrap() => ;
     onApplicationShutdown() => ;
 }
@@ -36,7 +36,7 @@ class TelemetryService implements OnApplicationBootstrap, OnApplicationShutdown 
 
 ### constructor
 
-<MemberInfo kind="method" type={`(processContext: <a href='/reference/typescript-api/common/process-context#processcontext'>ProcessContext</a>, installationIdCollector: InstallationIdCollector, systemInfoCollector: SystemInfoCollector, databaseCollector: DatabaseCollector, pluginCollector: PluginCollector, configCollector: ConfigCollector, deploymentCollector: DeploymentCollector) => TelemetryService`}   />
+<MemberInfo kind="method" type={`(processContext: <a href='/reference/typescript-api/common/process-context#processcontext'>ProcessContext</a>, installationIdCollector: InstallationIdCollector, systemInfoCollector: SystemInfoCollector, databaseCollector: DatabaseCollector, pluginCollector: PluginCollector, configCollector: ConfigCollector, deploymentCollector: DeploymentCollector, featuresCollector: FeaturesCollector) => TelemetryService`}   />
 
 
 ### onApplicationBootstrap

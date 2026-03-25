@@ -55,6 +55,55 @@ export interface TelemetryConfig {
     defaultLanguage?: string;
     customFieldsCount?: number;
     authenticationMethods?: string[];
+
+    // Scale indicators (range-bucketed entity counts)
+    channelCount?: RangeBucket;
+    paymentMethodCount?: RangeBucket;
+    shippingMethodCount?: RangeBucket;
+
+    // Additional strategy names
+    moneyStrategy?: string;
+    cacheStrategy?: string;
+    taxLineCalculationStrategy?: string;
+    orderSellerStrategy?: string;
+
+    // Integration codes (from ConfigurableOperationDef.code)
+    paymentHandlerCodes?: string[];
+    shippingCalculatorCodes?: string[];
+    fulfillmentHandlerCodes?: string[];
+
+    // Customization counts
+    promotionConditionCount?: number;
+    promotionActionCount?: number;
+    scheduledTaskCount?: number;
+
+    // Custom fields breakdown (entity name -> count, only entries > 0)
+    customFieldsPerEntity?: Record<string, number>;
+
+    // Process customization flags
+    hasCustomOrderProcess?: boolean;
+    hasCustomPaymentProcess?: boolean;
+    hasCustomFulfillmentProcess?: boolean;
+}
+
+/**
+ * Feature adoption flags derived from entity counts and configuration.
+ * These booleans give a quick overview of which major Vendure features
+ * an installation is actively using.
+ */
+export interface TelemetryFeatures {
+    /** More than one Channel configured */
+    multiChannel?: boolean;
+    /** Using multi-vendor/marketplace features (Sellers > 1 or custom OrderSellerStrategy) */
+    multiVendor?: boolean;
+    /** More than one StockLocation configured */
+    multiStockLocation?: boolean;
+    /** API keys in use */
+    apiKeysEnabled?: boolean;
+    /** Any custom fields defined */
+    customFieldsInUse?: boolean;
+    /** Scheduled tasks configured beyond defaults */
+    scheduledTasks?: boolean;
 }
 
 /**
@@ -75,4 +124,5 @@ export interface TelemetryPayload {
     metrics?: TelemetryEntityMetrics;
     deployment?: TelemetryDeployment;
     config?: TelemetryConfig;
+    features?: TelemetryFeatures;
 }
