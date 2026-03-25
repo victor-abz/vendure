@@ -163,6 +163,71 @@ describe('Administrator resolver', () => {
         expect(administrator).toBeNull();
     });
 
+    // EE-82 — deleted admin cannot log in
+    it('deleted admin cannot log in', async () => {
+        await adminClient.asAnonymousUser();
+        try {
+            const { login } = await adminClient.query(attemptLoginDocument, {
+                username: 'newest-email',
+                password: 'new password',
+            });
+            expect(login.errorCode).toBe('INVALID_CREDENTIALS_ERROR');
+        } finally {
+            await adminClient.asSuperAdmin();
+        }
+    });
+
+    // EE-82 — re-creating admin with same email as a soft-deleted admin should succeed
+    it('can create a new admin with same email as a deleted admin', async () => {
+        const { createAdministrator } = await adminClient.query(createAdministratorDocument, {
+            input: {
+                emailAddress: 'newest-email',
+                firstName: 'Recreated',
+                lastName: 'Admin',
+                password: 'recreated-password',
+                roleIds: ['1'],
+            },
+        });
+
+        expect(createAdministrator.emailAddress).toBe('newest-email');
+        expect(createAdministrator.firstName).toBe('Recreated');
+    });
+
+    // EE-82 — the new admin with the re-used email can log in
+    it('new admin with re-used email can log in', async () => {
+        const loginResultGuard: ErrorResultGuard<FragmentOf<typeof currentUserFragment>> =
+            createErrorResultGuard(input => !!input.identifier);
+        await adminClient.asAnonymousUser();
+        try {
+            const { login } = await adminClient.query(attemptLoginDocument, {
+                username: 'newest-email',
+                password: 'recreated-password',
+            });
+            loginResultGuard.assertSuccess(login);
+            expect(login.identifier).toBe('newest-email');
+        } finally {
+            await adminClient.asSuperAdmin();
+        }
+    });
+
+    // EE-82 — creating admin with same email as an active admin should throw
+    it('cannot create admin with same email as an active admin', async () => {
+        try {
+            await adminClient.query(createAdministratorDocument, {
+                input: {
+                    emailAddress: 'newest-email',
+                    firstName: 'Duplicate',
+                    lastName: 'Admin',
+                    password: 'password3',
+                    roleIds: ['1'],
+                },
+            });
+            fail('Should have thrown');
+        } catch (e: any) {
+            expect(e.message).toContain('email');
+        }
+    });
+
     it('activeAdministrator', async () => {
         await adminClient.asAnonymousUser();
 

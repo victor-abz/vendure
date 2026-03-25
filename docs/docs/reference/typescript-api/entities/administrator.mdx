@@ -15,7 +15,7 @@ class Administrator extends VendureEntity implements SoftDeletable, HasCustomFie
     deletedAt: Date | null;
     @Column() firstName: string;
     @Column() lastName: string;
-    @Column({ unique: true })
+    @Column()
     emailAddress: string;
     @OneToOne(type => User)
     @JoinColumn()
