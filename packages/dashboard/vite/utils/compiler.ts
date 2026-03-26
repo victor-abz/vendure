@@ -15,7 +15,9 @@ import { createPathTransformer } from './path-transformer.js';
 import { discoverPlugins } from './plugin-discovery.js';
 import { findTsConfigPaths } from './tsconfig-utils.js';
 
-const defaultPathAdapter: Required<PathAdapter> = {
+const defaultPathAdapter: Required<
+    Pick<PathAdapter, 'getCompiledConfigPath' | 'transformTsConfigPathMappings'>
+> = {
     getCompiledConfigPath: ({ outputPath, configFileName }) => path.join(outputPath, configFileName),
     transformTsConfigPathMappings: ({ patterns }) => patterns,
 };
@@ -60,6 +62,7 @@ export async function compile(options: CompilerOptions): Promise<CompileResult> 
         outputPath,
         logger,
         module: options.module ?? 'commonjs',
+        sourceRoot: pathAdapter?.sourceRoot,
     });
     logger.info(`TypeScript compilation completed in ${Date.now() - compileStart}ms`);
 
@@ -154,11 +157,13 @@ async function compileTypeScript({
     outputPath,
     logger,
     module,
+    sourceRoot: customSourceRoot,
 }: {
     inputPath: string;
     outputPath: string;
     logger: Logger;
     module: 'commonjs' | 'esm';
+    sourceRoot?: string;
 }): Promise<void> {
     await fs.ensureDir(outputPath);
 
@@ -190,14 +195,12 @@ async function compileTypeScript({
         });
     }
 
-    // 3. Use the config file's directory as the source root.
-    // This matches ts.createProgram's behaviour when given a single root file,
-    // and preserves the public getCompiledConfigPath API contract where
-    // configFileName is the basename at the output root. Files outside this
-    // directory (e.g. via path aliases to sibling dirs) get ../prefixed output
-    // paths, which is correct — those files are npm packages or pre-built libs
-    // that are resolved at runtime, not from the output directory.
-    const sourceRoot = path.dirname(inputPath);
+    // 3. Determine the source root for computing output directory structure.
+    // Compiled files preserve their directory structure relative to this root.
+    // In monorepos, set pathAdapter.sourceRoot to the workspace root so that
+    // e.g. apps/server/src/config.ts → {output}/apps/server/src/config.js.
+    // Defaults to the config file's directory, placing it at the output root.
+    const sourceRoot = customSourceRoot ?? path.dirname(inputPath);
 
     // 4. Transpile each file individually
     // Note: emitDecoratorMetadata with transpileModule emits `Object` for all
