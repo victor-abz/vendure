@@ -18,6 +18,7 @@ import { unique } from '@vendure/common/lib/unique';
 import { ReadStream as FSReadStream } from 'fs';
 import { ReadStream } from 'fs-extra';
 import { IncomingMessage } from 'http';
+import { imageSize } from 'image-size';
 import mime from 'mime-types';
 import path from 'path';
 import { Readable, Stream } from 'stream';
@@ -56,9 +57,6 @@ import { patchEntity } from '../helpers/utils/patch-entity';
 import { ChannelService } from './channel.service';
 import { RoleService } from './role.service';
 import { TagService } from './tag.service';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const sizeOf = require('image-size');
 
 /**
  * @description
@@ -673,8 +671,8 @@ export class AssetService {
 
     private getDimensions(imageFile: Buffer): { width: number; height: number } {
         try {
-            const { width, height } = sizeOf(imageFile);
-            return { width, height };
+            const { width, height } = imageSize(imageFile);
+            return { width: width ?? 0, height: height ?? 0 };
         } catch (e: any) {
             Logger.error('Could not determine Asset dimensions: ' + JSON.stringify(e));
             return { width: 0, height: 0 };

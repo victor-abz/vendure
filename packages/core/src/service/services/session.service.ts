@@ -1,7 +1,7 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import { ID } from '@vendure/common/lib/shared-types';
 import crypto from 'crypto';
-import ms from 'ms';
+import ms, { type StringValue } from 'ms';
 import { Brackets, EntitySubscriberInterface, InsertEvent, RemoveEvent, UpdateEvent } from 'typeorm';
 
 import { RequestContext } from '../../api/common/request-context';
@@ -50,7 +50,7 @@ export class SessionService implements EntitySubscriberInterface, OnApplicationB
 
         const { sessionDuration } = this.configService.authOptions;
         this.sessionDurationInMs =
-            typeof sessionDuration === 'string' ? ms(sessionDuration) : sessionDuration;
+            typeof sessionDuration === 'string' ? ms(sessionDuration as StringValue) : sessionDuration;
 
         // This allows us to register this class as a TypeORM Subscriber while also allowing
         // the injection on dependencies. See https://docs.nestjs.com/techniques/database#subscribers
@@ -186,7 +186,7 @@ export class SessionService implements EntitySubscriberInterface, OnApplicationB
     serializeSession(session: AuthenticatedSession | AnonymousSession): CachedSession {
         const { sessionCacheTTL } = this.configService.authOptions;
         const sessionCacheTTLSeconds =
-            typeof sessionCacheTTL === 'string' ? ms(sessionCacheTTL) / 1000 : sessionCacheTTL;
+            typeof sessionCacheTTL === 'string' ? ms(sessionCacheTTL as StringValue) / 1000 : sessionCacheTTL;
 
         const expiry = new Date().getTime() / 1000 + sessionCacheTTLSeconds;
         const serializedSession: CachedSession = {

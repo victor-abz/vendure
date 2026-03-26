@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { Permission } from '@vendure/common/lib/generated-types';
 import { Request, Response } from 'express';
 import { GraphQLResolveInfo } from 'graphql';
-import ms from 'ms';
+import ms, { type StringValue } from 'ms';
 
 import { ForbiddenError } from '../../common/error/errors';
 import { API_KEY_AUTH_STRATEGY_NAME } from '../../config';
@@ -212,7 +212,7 @@ export class AuthGuard implements CanActivate {
         const lastUsedThreshold = new Date(
             Date.now() -
                 (typeof strategy.lastUsedAtUpdateInterval === 'string'
-                    ? ms(strategy.lastUsedAtUpdateInterval)
+                    ? ms(strategy.lastUsedAtUpdateInterval as StringValue)
                     : strategy.lastUsedAtUpdateInterval),
         );
         if (!apiKey.lastUsedAt || apiKey.lastUsedAt < lastUsedThreshold) {

@@ -1,6 +1,6 @@
 import { UpdateScheduledTaskInput } from '@vendure/common/lib/generated-types';
 import { Cron } from 'croner';
-import ms from 'ms';
+import ms, { type StringValue } from 'ms';
 
 import { Injector } from '../../common';
 import { assertFound } from '../../common/utils';
@@ -85,7 +85,7 @@ export class DefaultSchedulerStrategy implements SchedulerStrategy {
             try {
                 this.runningTasks.push(task);
                 const timeout = task.options.timeout ?? (this.pluginOptions.defaultTimeout as number);
-                const timeoutMs = typeof timeout === 'number' ? timeout : ms(timeout);
+                const timeoutMs = typeof timeout === 'number' ? timeout : ms(timeout as StringValue);
 
                 let timeoutTimer: NodeJS.Timeout | undefined;
                 const timeoutPromise = new Promise((_, reject) => {

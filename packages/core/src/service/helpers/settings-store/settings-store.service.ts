@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { Permission, SettingsStoreScopeType } from '@vendure/common/lib/generated-types';
 import { JsonCompatible } from '@vendure/common/lib/shared-types';
-import ms from 'ms';
+import ms, { type StringValue } from 'ms';
 
 import { RequestContext } from '../../../api/common/request-context';
 import { InternalServerError, UserInputError } from '../../../common/error/errors';
@@ -463,7 +463,7 @@ export class SettingsStoreService implements OnModuleInit {
      * Parse a duration string (e.g., '7d', '30m', '2h') into a Date object.
      */
     private parseDuration(duration: string): Date {
-        const milliseconds = ms(duration);
+        const milliseconds = ms(duration as StringValue);
         if (!milliseconds) {
             throw new Error(`Invalid duration format: ${duration}. Use format like '7d', '2h', '30m'`);
         }
