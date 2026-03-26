@@ -9,6 +9,7 @@ import * as ts from 'typescript';
 import { Logger, PathAdapter, PluginInfo } from '../types.js';
 
 import { findConfigExport } from './ast-utils.js';
+import { resolvePathAliasImports, resolveSourceFile } from './import-resolution.js';
 import { noopLogger } from './logger.js';
 import { createPathTransformer } from './path-transformer.js';
 import { discoverPlugins } from './plugin-discovery.js';
@@ -58,7 +59,6 @@ export async function compile(options: CompilerOptions): Promise<CompileResult> 
         inputPath: vendureConfigPath,
         outputPath,
         logger,
-        transformTsConfigPathMappings,
         module: options.module ?? 'commonjs',
     });
     logger.info(`TypeScript compilation completed in ${Date.now() - compileStart}ms`);
@@ -77,6 +77,9 @@ export async function compile(options: CompilerOptions): Promise<CompileResult> 
     );
 
     // 3. Load the compiled config
+    // Note: configFileName is kept as the basename to preserve the public API contract.
+    // Custom pathAdapter implementations (e.g. in monorepos) rely on this being just
+    // the filename, not a relative path — they hardcode the directory structure themselves.
     const configFileName = path.basename(vendureConfigPath);
     const compiledConfigFilePath = pathToFileURL(
         getCompiledConfigPath({
@@ -84,7 +87,7 @@ export async function compile(options: CompilerOptions): Promise<CompileResult> 
             outputPath,
             configFileName,
         }),
-    ).href.replace(/.ts$/, '.js');
+    ).href.replace(/\.ts$/, '.js');
 
     // Create package.json with type commonjs
     await fs.writeFile(
@@ -135,137 +138,156 @@ export async function compile(options: CompilerOptions): Promise<CompileResult> 
 }
 
 /**
- * Compiles TypeScript files to JavaScript
+ * Compiles TypeScript files to JavaScript using per-file transpilation.
+ *
+ * Instead of using `ts.createProgram()` (which resolves all imports including
+ * node_modules type definitions and can OOM on projects with heavy dependencies),
+ * this function:
+ * 1. Walks the import tree via lightweight AST parsing to find all local source files
+ * 2. Transpiles each file individually with `ts.transpileModule()` (no type resolution)
+ *
+ * This avoids loading massive `.d.ts` files from packages like `openai`, `ai`, etc.
+ * See: https://github.com/vendurehq/vendure/issues/4559
  */
 async function compileTypeScript({
     inputPath,
     outputPath,
     logger,
-    transformTsConfigPathMappings,
     module,
 }: {
     inputPath: string;
     outputPath: string;
     logger: Logger;
-    transformTsConfigPathMappings: Required<PathAdapter>['transformTsConfigPathMappings'];
     module: 'commonjs' | 'esm';
 }): Promise<void> {
     await fs.ensureDir(outputPath);
 
-    // Find tsconfig paths - we need BOTH original and transformed versions
-    // Original paths: Used by TypeScript for module resolution during compilation
-    // Transformed paths: Used by the path transformer for rewriting output imports
+    // Find tsconfig paths for resolving path aliases in the import tree
     const originalTsConfigInfo = await findTsConfigPaths(
         inputPath,
         logger,
         'compiling',
         ({ patterns }) => patterns, // No transformation - use original paths
     );
-    const transformedTsConfigInfo = await findTsConfigPaths(
-        inputPath,
-        logger,
-        'compiling',
-        transformTsConfigPathMappings, // Apply user's transformation
-    );
 
+    logger.debug(`tsConfig paths: ${JSON.stringify(originalTsConfigInfo?.paths, null, 2)}`);
+    logger.debug(`tsConfig baseUrl: ${originalTsConfigInfo?.baseUrl ?? 'UNKNOWN'}`);
+
+    // 1. Collect all local source files by walking the import tree
+    const collectStart = Date.now();
+    const sourceFiles = await collectLocalSourceFiles(inputPath, originalTsConfigInfo);
+    logger.debug(`Collected ${sourceFiles.length} source files in ${Date.now() - collectStart}ms`);
+
+    // 2. Build path transformer for ESM mode
+    // This is necessary because tsconfig-paths.register() only works for CommonJS require(),
+    // not for ESM import(). We need to transform the import paths during transpilation.
+    let pathTransformer: ts.TransformerFactory<ts.SourceFile> | undefined;
+    if (module === 'esm' && originalTsConfigInfo) {
+        logger.debug('Adding path transformer for ESM mode');
+        pathTransformer = createPathTransformer({
+            baseUrl: originalTsConfigInfo.baseUrl,
+            paths: originalTsConfigInfo.paths,
+        });
+    }
+
+    // 3. Use the config file's directory as the source root.
+    // This matches ts.createProgram's behaviour when given a single root file,
+    // and preserves the public getCompiledConfigPath API contract where
+    // configFileName is the basename at the output root. Files outside this
+    // directory (e.g. via path aliases to sibling dirs) get ../prefixed output
+    // paths, which is correct — those files are npm packages or pre-built libs
+    // that are resolved at runtime, not from the output directory.
+    const sourceRoot = path.dirname(inputPath);
+
+    // 4. Transpile each file individually
+    // Note: emitDecoratorMetadata with transpileModule emits `Object` for all
+    // imported types since there is no type resolver. This is acceptable because
+    // the compiled output is only used for config loading and plugin discovery,
+    // not for runtime dependency injection.
     const compilerOptions: ts.CompilerOptions = {
         target: ts.ScriptTarget.ES2020,
         module: module === 'esm' ? ts.ModuleKind.ESNext : ts.ModuleKind.CommonJS,
-        moduleResolution: ts.ModuleResolutionKind.Node10, // More explicit CJS resolution
         experimentalDecorators: true,
         emitDecoratorMetadata: true,
         esModuleInterop: true,
-        skipLibCheck: true,
-        noEmit: false,
-        // Speed optimizations
-        noEmitOnError: false, // Emit output even if there are errors
-        noImplicitAny: false, // Don't require implicit any
-        noUnusedLocals: false, // Don't check for unused locals
-        noUnusedParameters: false, // Don't check for unused parameters
-        allowJs: true,
-        checkJs: false, // Don't type check JS files
-        skipDefaultLibCheck: true, // Skip checking .d.ts files
-        isolatedModules: false, // Need to check cross-file references to compile dependencies
-        incremental: false, // Don't use incremental compilation (faster for one-off builds)
-        resolveJsonModule: true,
-        preserveSymlinks: false,
-        outDir: outputPath,
     };
+    const transformers: ts.CustomTransformers | undefined = pathTransformer
+        ? { after: [pathTransformer] }
+        : undefined;
 
-    logger.debug(`Compiling ${inputPath} to ${outputPath} using TypeScript...`);
+    for (const filePath of sourceFiles) {
+        const content = await fs.readFile(filePath, 'utf-8');
+        const result = ts.transpileModule(content, {
+            compilerOptions,
+            fileName: filePath,
+            transformers,
+        });
 
-    // Add path mappings if found - use ORIGINAL paths for TypeScript module resolution
-    if (originalTsConfigInfo) {
-        // We need to set baseUrl and paths for TypeScript to resolve the imports
-        compilerOptions.baseUrl = originalTsConfigInfo.baseUrl;
-        compilerOptions.paths = originalTsConfigInfo.paths;
-        // This is critical - it tells TypeScript to preserve the paths in the output
-        // compilerOptions.rootDir = originalTsConfigInfo.baseUrl;
+        // Compute output path preserving directory structure relative to source root
+        const relativePath = path.relative(sourceRoot, filePath);
+        const outputFilePath = path.join(outputPath, relativePath).replace(/\.tsx?$/, '.js');
+
+        await fs.ensureDir(path.dirname(outputFilePath));
+        await fs.writeFile(outputFilePath, result.outputText);
     }
+}
 
-    logger.debug(`tsConfig original paths: ${JSON.stringify(originalTsConfigInfo?.paths, null, 2)}`);
-    logger.debug(`tsConfig transformed paths: ${JSON.stringify(transformedTsConfigInfo?.paths, null, 2)}`);
-    logger.debug(`tsConfig baseUrl: ${originalTsConfigInfo?.baseUrl ?? 'UNKNOWN'}`);
+/**
+ * Collects all local source files reachable from the entry point by following
+ * import/export declarations. Only follows local imports (relative paths and
+ * tsconfig path aliases), not npm package imports.
+ *
+ * This is intentionally lightweight — it uses TypeScript's AST parser only
+ * for reading import statements, without any module resolution or type loading.
+ */
+async function collectLocalSourceFiles(
+    entryFile: string,
+    tsConfigInfo?: { baseUrl: string; paths: Record<string, string[]> },
+): Promise<string[]> {
+    const visited = new Set<string>();
 
-    // Build custom transformers
-    const afterTransformers: Array<ts.TransformerFactory<ts.SourceFile>> = [];
+    async function processFile(filePath: string) {
+        const resolved = await resolveSourceFile(filePath);
+        if (!resolved) return;
 
-    // Add path transformer for ESM mode when there are path mappings
-    // This is necessary because tsconfig-paths.register() only works for CommonJS require(),
-    // not for ESM import(). We need to transform the import paths during compilation.
-    //
-    // IMPORTANT: We use 'after' transformers because:
-    // 1. 'before' runs before TypeScript resolves modules - changing paths there breaks resolution
-    // 2. 'after' runs after module resolution but before emit - paths are transformed in output only
-    //
-    // We use ORIGINAL (untransformed) paths here because the transformer resolves aliases
-    // relative to the source file's directory using path.relative(). Since TypeScript preserves
-    // directory nesting in output, the relative relationships between source files are the same
-    // in both the source and output trees.
-    if (module === 'esm' && originalTsConfigInfo) {
-        logger.debug('Adding path transformer for ESM mode');
-        afterTransformers.push(
-            createPathTransformer({
-                baseUrl: originalTsConfigInfo.baseUrl,
-                paths: originalTsConfigInfo.paths,
-            }),
-        );
-    }
+        // Skip declaration files and non-source files before adding to visited,
+        // so they don't leak into the returned sourceFiles array.
+        if (resolved.endsWith('.d.ts') || resolved.endsWith('.d.tsx')) return;
+        if (!/\.(ts|tsx|js|jsx)$/.test(resolved)) return;
 
-    // Add the existing transformer for non-entry-point files
-    afterTransformers.push(context => {
-        return sourceFile => {
-            // Only transform files that are not the entry point
-            if (sourceFile.fileName === inputPath) {
-                return sourceFile;
+        if (visited.has(resolved)) return;
+        visited.add(resolved);
+
+        const content = await fs.readFile(resolved, 'utf-8');
+        const sf = ts.createSourceFile(resolved, content, ts.ScriptTarget.Latest, true);
+        const dir = path.dirname(resolved);
+        const importsToFollow: string[] = [];
+
+        ts.forEachChild(sf, node => {
+            if (!ts.isImportDeclaration(node) && !ts.isExportDeclaration(node)) return;
+            const moduleSpecifier = node.moduleSpecifier;
+            if (!moduleSpecifier || !ts.isStringLiteral(moduleSpecifier)) return;
+            const importPath = moduleSpecifier.text;
+
+            // Follow local relative imports
+            if (importPath.startsWith('.')) {
+                importsToFollow.push(path.resolve(dir, importPath));
+                return;
             }
-            sourceFile.fileName = path.join(outputPath, path.basename(sourceFile.fileName));
-            return sourceFile;
-        };
-    });
 
-    const customTransformers: ts.CustomTransformers = {
-        after: afterTransformers,
-    };
+            // Follow tsconfig path aliases (uses shared resolution logic)
+            importsToFollow.push(...resolvePathAliasImports(importPath, tsConfigInfo));
+            // npm package imports are intentionally skipped — they are resolved
+            // at runtime via require() / import(), not during transpilation.
+        });
 
-    const program = ts.createProgram([inputPath], compilerOptions);
-    const emitResult = program.emit(undefined, undefined, undefined, undefined, customTransformers);
-
-    // Only log actual emit errors, not type errors
-    if (emitResult.emitSkipped) {
-        for (const diagnostic of emitResult.diagnostics) {
-            if (diagnostic.file && diagnostic.start !== undefined) {
-                const { line, character } = ts.getLineAndCharacterOfPosition(
-                    diagnostic.file,
-                    diagnostic.start,
-                );
-                const message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-                logger.warn(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
-            } else {
-                logger.warn(ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n'));
-            }
+        for (const imp of importsToFollow) {
+            await processFile(imp);
         }
     }
+
+    await processFile(entryFile);
+    return [...visited];
 }
 
 async function registerTsConfigPaths(options: {

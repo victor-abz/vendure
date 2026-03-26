@@ -10,7 +10,8 @@ import * as ts from 'typescript';
 import { Logger, PluginInfo, TransformTsConfigPathMappingsFn } from '../types.js';
 
 import { PackageScannerConfig } from './compiler.js';
-import { findTsConfigPaths, TsConfigPathsConfig } from './tsconfig-utils.js';
+import { resolvePathAliasImports, resolveSourceFile } from './import-resolution.js';
+import { findTsConfigPaths } from './tsconfig-utils.js';
 
 export async function discoverPlugins({
     vendureConfigPath,
@@ -262,7 +263,7 @@ export async function analyzeSourceFiles(
                             }
                         }
                         // Handle path aliases and local imports
-                        const pathAliasImports = getPotentialPathAliasImportPaths(importPath, tsConfigInfo);
+                        const pathAliasImports = resolvePathAliasImports(importPath, tsConfigInfo);
                         if (pathAliasImports.length) {
                             importsToFollow.push(...pathAliasImports);
                         }
@@ -284,35 +285,11 @@ export async function analyzeSourceFiles(
 
             await visit(sourceFile);
 
-            // Follow imports
+            // Follow imports using shared resolution logic
             for (const importPath of importsToFollow) {
-                // Try all possible file paths
-                const possiblePaths = [
-                    importPath + '.ts',
-                    importPath + '.js',
-                    path.join(importPath, 'index.ts'),
-                    path.join(importPath, 'index.js'),
-                    importPath,
-                ];
-                if (importPath.endsWith('.js')) {
-                    possiblePaths.push(importPath.replace(/.js$/, '.ts'));
-                }
-                // Try each possible path
-                let found = false;
-                for (const possiblePath of possiblePaths) {
-                    const possiblePathExists = await fs.pathExists(possiblePath);
-                    if (possiblePathExists) {
-                        await processFile(possiblePath);
-                        found = true;
-                        break;
-                    }
-                }
-
-                // If none of the file paths worked, try the raw import path
-                // (it might be a directory)
-                const tryRawPath = !found && (await fs.pathExists(importPath));
-                if (tryRawPath) {
-                    await processFile(importPath);
+                const resolved = await resolveSourceFile(importPath);
+                if (resolved) {
+                    await processFile(resolved);
                 }
             }
         } catch (e) {
@@ -357,26 +334,6 @@ function getNpmPackageNameFromImport(importPath: string): string | undefined {
             : importPath.split('/')[0];
         return packageName;
     }
-}
-
-function getPotentialPathAliasImportPaths(importPath: string, tsConfigInfo?: TsConfigPathsConfig) {
-    const importsToFollow: string[] = [];
-    if (!tsConfigInfo) {
-        return importsToFollow;
-    }
-    for (const [alias, patterns] of Object.entries(tsConfigInfo.paths)) {
-        const aliasPattern = alias.replace(/\*$/, '');
-        if (importPath.startsWith(aliasPattern)) {
-            const relativePart = importPath.slice(aliasPattern.length);
-            // Try each pattern
-            for (const pattern of patterns) {
-                const resolvedPattern = pattern.replace(/\*$/, '');
-                const resolvedPath = path.resolve(tsConfigInfo.baseUrl, resolvedPattern, relativePart);
-                importsToFollow.push(resolvedPath);
-            }
-        }
-    }
-    return importsToFollow;
 }
 
 function getDecoratorName(decorator: ts.Decorator): string | undefined {
