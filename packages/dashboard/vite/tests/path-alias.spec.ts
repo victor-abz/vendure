@@ -1,16 +1,12 @@
 import { rm } from 'node:fs/promises';
 import { join } from 'node:path';
-import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { compile } from '../utils/compiler.js';
 import { debugLogger, noopLogger } from '../utils/logger.js';
 import { clearRawTsConfigCache } from '../utils/tsconfig-utils.js';
 
 const tempRoot = join(__dirname, './__temp');
-
-afterAll(async () => {
-    await rm(tempRoot, { recursive: true, force: true });
-});
 
 beforeEach(() => {
     clearRawTsConfigCache();
