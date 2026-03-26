@@ -272,7 +272,8 @@ export function PaymentDetails({ payment, currencyCode, onSuccess }: Readonly<Pa
                 )}
                 <div className="mt-3 pt-3 border-t">
                     <StateTransitionControl
-                        currentState={getTranslatedPaymentState(payment.state)}
+                        currentState={payment.state}
+                        statesTranslationFunction={getTranslatedPaymentState}
                         actions={getPaymentActions()}
                         isLoading={
                             settlePaymentMutation.isPending ||

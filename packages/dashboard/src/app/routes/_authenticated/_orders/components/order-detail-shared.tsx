@@ -266,6 +266,7 @@ export function OrderDetailShared({
                     <div className="flex items-center gap-1.5">
                         <StateTransitionControl
                             currentState={entity?.state}
+                            statesTranslationFunction={getTranslatedOrderState}
                             actions={stateTransitionActions}
                             isLoading={transitionOrderToStateMutation.isPending}
                         />

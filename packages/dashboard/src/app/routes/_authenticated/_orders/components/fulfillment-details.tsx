@@ -171,7 +171,8 @@ export function FulfillmentDetails({ order, fulfillment, onSuccess }: Readonly<F
 
             <div className="mt-3 pt-3 border-t">
                 <StateTransitionControl
-                    currentState={getTranslatedFulfillmentState(fulfillment.state)}
+                    currentState={fulfillment.state}
+                    statesTranslationFunction={getTranslatedFulfillmentState}
                     actions={getFulfillmentActions()}
                     isLoading={transitionFulfillmentMutation.isPending}
                 />
