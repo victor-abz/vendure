@@ -18,7 +18,7 @@
         "format": "prettier --write --html-whitespace-sensitivity ignore",
         "docs:generate-typescript-docs": "ts-node scripts/docs/generate-typescript-docs.ts",
         "docs:generate-graphql-docs": "ts-node scripts/docs/generate-graphql-docs.ts --api=shop && ts-node scripts/docs/generate-graphql-docs.ts --api=admin",
-        "docs:build": "npm run docs:generate-typescript-docs && npm run docs:generate-graphql-docs && cd docs && npm run build",
+        "docs:build": "npm run docs:generate-typescript-docs && npm run docs:generate-graphql-docs",
         "codegen": "tsc -p scripts/codegen/plugins && ts-node scripts/codegen/generate-graphql-types.ts",
         "version": "npm i && npm run check-imports && npm run check-angular-versions && npm run build && npm run check-core-type-defs && npm run generate-changelog && git add CHANGELOG* && git add */version.ts",
         "test": "lerna run test --stream --no-bail",
@@ -109,6 +109,7 @@
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^5.54.1",
         "@typescript-eslint/parser": "^5.54.1",
+        "@vendure-io/docs-provider": "^0.11.0",
         "eslint": "^8.41.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-import": "^2.27.5",

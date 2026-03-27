@@ -1,44 +1,17 @@
 {
     "name": "@vendure/docs",
-    "version": "0.0.0-202601281114",
+    "private": true,
     "type": "module",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "exports": {
-        ".": "./dist/index.js",
-        "./manifest": "./dist/manifest.js"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/vendurehq/vendure"
-    },
-    "files": [
-        "dist",
-        "docs",
-        "src",
-        "README.md"
-    ],
     "scripts": {
-        "generate-dates": "tsx scripts/generate-dates.ts",
-        "prebuild": "npm run generate-dates",
-        "build": "rimraf dist && tsc -p ./tsconfig.build.json",
-        "prepublishOnly": "npm run test:mdx && npm run build",
-        "publish:local": "npm version 0.0.0-$(date +%Y%m%d%H%M) --no-git-tag-version && npm publish --tag latest",
-        "publish:local:next": "npm version 0.0.0-$(date +%Y%m%d%H%M) --no-git-tag-version && npm publish --tag next",
-        "pretest:mdx": "npm run generate-dates",
         "test:mdx": "tsx scripts/test-mdx.ts",
         "test:mdx:verbose": "tsx scripts/test-mdx.ts --verbose",
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
-        "@vendure-io/docs-provider": "^0.10.0"
+        "@vendure-io/docs-provider": "^0.11.0"
     },
     "devDependencies": {
         "@types/node": "^22.10.10",
-        "rimraf": "^5.0.5",
         "tsx": "^4.7.0",
         "typescript": "5.8.2"
     }
