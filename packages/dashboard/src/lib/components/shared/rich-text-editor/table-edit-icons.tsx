@@ -131,7 +131,7 @@ export function TableEditIcons({ editor, disabled }: Readonly<TableEditIconsProp
                             type="button"
                             variant="ghost"
                             size="sm"
-                            className="h-6 w-6 p-0 bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-0 shadow-sm"
+                            className="h-6 w-6 p-0 bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-0"
                         />}>
                             <MoreHorizontalIcon className="h-3 w-3" />
                     </DropdownMenuTrigger>
@@ -181,7 +181,7 @@ export function TableEditIcons({ editor, disabled }: Readonly<TableEditIconsProp
                             type="button"
                             variant="ghost"
                             size="sm"
-                            className="h-6 w-6 p-0 bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-0 shadow-sm"
+                            className="h-6 w-6 p-0 bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-0"
                         />}>
                             <MoreVerticalIcon className="h-3 w-3" />
                     </DropdownMenuTrigger>

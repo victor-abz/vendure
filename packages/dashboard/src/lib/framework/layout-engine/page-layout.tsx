@@ -4,10 +4,10 @@ import { PermissionGuard } from '@/vdb/components/shared/permission-guard.js';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/vdb/components/ui/card.js';
 import { Form } from '@/vdb/components/ui/form.js';
 import { useCustomFieldConfig } from '@/vdb/hooks/use-custom-field-config.js';
-import { usePage } from '@/vdb/hooks/use-page.js';
-import { cn } from '@/vdb/lib/utils.js';
 import { useLocalFormat } from '@/vdb/hooks/use-local-format.js';
 import { useIsMobile } from '@/vdb/hooks/use-mobile.js';
+import { usePage } from '@/vdb/hooks/use-page.js';
+import { cn } from '@/vdb/lib/utils.js';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { CheckIcon, CopyIcon, EllipsisVerticalIcon, InfoIcon } from 'lucide-react';
 import React, { ComponentProps, useMemo, useState } from 'react';
@@ -338,7 +338,11 @@ export function DetailFormGrid({ children }: Readonly<{ children: React.ReactNod
  * @since 3.3.0
  */
 export function PageTitle({ children }: Readonly<{ children: React.ReactNode }>) {
-    return <h1 data-testid="page-heading" className="text-2xl font-semibold font-heading">{children}</h1>;
+    return (
+        <h1 data-testid="page-heading" className="text-2xl font-semibold font-heading">
+            {children}
+        </h1>
+    );
 }
 
 type InlineDropdownItem = Omit<DashboardActionBarItem, 'type' | 'pageId'>;
@@ -461,9 +465,8 @@ export function PageActionBar({
     }
     let visibleMergedItems = mergedItems;
     if (isMobile && mergedItems.length >= 2) {
-        visibleMergedItems = primaryItemIndex >= 0
-            ? [mergedItems[primaryItemIndex]]
-            : [mergedItems[mergedItems.length - 1]];
+        visibleMergedItems =
+            primaryItemIndex >= 0 ? [mergedItems[primaryItemIndex]] : [mergedItems[mergedItems.length - 1]];
     }
 
     const renderMergedItem = (mergedItem: MergedActionBarItem, index: number) => {
@@ -475,10 +478,7 @@ export function PageActionBar({
             const extItem = mergedItem.item;
             const itemId = extItem.id ?? `extension-${extItem.component.name || index}`;
             return (
-                <ActionBarItemWrapper
-                    key={`ext-${extItem.id ?? extItem.pageId}-${index}`}
-                    itemId={itemId}
-                >
+                <ActionBarItemWrapper key={`ext-${extItem.id ?? extItem.pageId}-${index}`} itemId={itemId}>
                     <PageActionBarItem item={extItem} page={page} />
                 </ActionBarItemWrapper>
             );
@@ -491,9 +491,10 @@ export function PageActionBar({
             {hasRightContent && (
                 <div className="flex justify-end gap-2">
                     {/* Plain children only on desktop */}
-                    {!isMobile && plainChildren.map((child, index) => (
-                        <React.Fragment key={`plain-${index}`}>{child}</React.Fragment>
-                    ))}
+                    {!isMobile &&
+                        plainChildren.map((child, index) => (
+                            <React.Fragment key={`plain-${index}`}>{child}</React.Fragment>
+                        ))}
                     {/* Merged ActionBarItem children (filtered on mobile) */}
                     {visibleMergedItems.map((mergedItem, index) => renderMergedItem(mergedItem, index))}
                     {actionBarDropdownItems.length > 0 && (
@@ -603,8 +604,17 @@ function EntityInfoDropdown({ entity }: Readonly<{ entity: any }>) {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="text-muted-foreground" data-testid="entity-info-trigger" />}>
-                    <InfoIcon className="w-4 h-4" />
+            <DropdownMenuTrigger
+                render={
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-muted-foreground"
+                        data-testid="entity-info-trigger"
+                    />
+                }
+            >
+                <InfoIcon className="w-4 h-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-64">
                 <DropdownMenuGroup>
@@ -731,8 +741,10 @@ function PageActionBarDropdown({
 }: Readonly<{ items: DashboardActionBarItem[]; page: PageContextValue }>) {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" size="icon" data-testid="action-bar-dropdown-trigger" />}>
-                    <EllipsisVerticalIcon className="w-4 h-4" />
+            <DropdownMenuTrigger
+                render={<Button variant="ghost" size="icon" data-testid="action-bar-dropdown-trigger" />}
+            >
+                <EllipsisVerticalIcon className="w-4 h-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 {items.map((item, index) => (
@@ -824,7 +836,9 @@ export function PageBlock({
     return (
         <PageBlockContext.Provider value={contextValue}>
             <LocationWrapper>
-                <Card className={cn('@container  w-full', className, 'animate-in fade-in duration-300')}>
+                <Card
+                    className={cn('@container  w-full', className, 'animate-in fade-in duration-300')}
+                >
                     {title || description ? (
                         <CardHeader>
                             {title && <CardTitle>{title}</CardTitle>}

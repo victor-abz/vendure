@@ -132,6 +132,47 @@ describe('themeVariablesPlugin', () => {
         expect(result).toContain('.header { display: flex; }');
         expect(result).toContain('.footer { margin: 0; }');
     });
+
+    it('replaces virtual:admin-theme-inline with @theme inline block', () => {
+        const plugin = themeVariablesPlugin({});
+        const css = `@import 'virtual:admin-theme-inline';`;
+        const result = callTransform(plugin, css, '/app/styles.css');
+        expect(result).toContain('@theme inline');
+        expect(result).toContain('--color-background: var(--background);');
+        expect(result).toContain('--radius-sm:');
+        expect(result).toContain('--shadow-sm:');
+        expect(result).toContain('--font-sans: var(--font-sans);');
+        expect(result).toContain('--color-dev-mode: var(--dev-mode);');
+        expect(result).toContain('--color-vendure-brand: #17c1ff;');
+    });
+
+    it('generates radius values directly from design tokens (not calc-based)', () => {
+        const plugin = themeVariablesPlugin({});
+        const css = `@import 'virtual:admin-theme-inline';`;
+        const result = callTransform(plugin, css, '/app/styles.css');
+        // All radius values should be direct token values, not calc() expressions
+        expect(result).not.toContain('calc(');
+        expect(result).toContain('--radius-sm: 0.2rem;');
+        expect(result).toContain('--radius-md: 0.2rem;');
+        expect(result).toContain('--radius-lg: 0.2rem;');
+        expect(result).toContain('--radius-xl: 0.2rem;');
+    });
+
+    it('handles both virtual imports in the same file', () => {
+        const plugin = themeVariablesPlugin({});
+        const css = `@import 'virtual:admin-theme';\n@import 'virtual:admin-theme-inline';`;
+        const result = callTransform(plugin, css, '/app/styles.css');
+        expect(result).toContain(':root');
+        expect(result).toContain('.dark');
+        expect(result).toContain('@theme inline');
+    });
+
+    it('replaces double-quoted virtual:admin-theme-inline', () => {
+        const plugin = themeVariablesPlugin({});
+        const css = `@import "virtual:admin-theme-inline";`;
+        const result = callTransform(plugin, css, '/app/styles.css');
+        expect(result).toContain('@theme inline');
+    });
 });
 
 // ─── transformIndexHtmlPlugin ────────────────────────────────────────────────

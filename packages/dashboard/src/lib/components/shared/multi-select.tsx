@@ -69,9 +69,9 @@ export function MultiSelect<T extends boolean>(props: MultiSelectProps<T>) {
                     variant="outline"
                     role="combobox"
                     className={cn(
-                        'w-full justify-between',
+                        'w-full justify-between bg-transparent',
                         'min-h-[2.5rem] h-auto',
-                        'flex flex-wrap gap-1 p-1 shadow-xs',
+                        'flex flex-wrap gap-1 p-1',
                         className,
                     )}
                 >
@@ -117,7 +117,7 @@ export function MultiSelect<T extends boolean>(props: MultiSelectProps<T>) {
         }
         const selectedItem = items.find(i => i.value === value);
         return (
-            <Button variant="outline" role="combobox" className={cn('w-full justify-between', className)}>
+            <Button variant="outline" role="combobox" className={cn('w-full justify-between bg-transparent', className)}>
                 {selectedItem ? (selectedItem.display ?? selectedItem.label) : placeholder}
                 <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
             </Button>

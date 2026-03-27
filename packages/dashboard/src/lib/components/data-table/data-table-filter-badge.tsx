@@ -56,13 +56,25 @@ function FilterValue({
 }) {
     const { formatDate, formatCurrency } = useLocalFormat();
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-        return Object.entries(value as Record<string, unknown>).map(([key, value]) => (
-            <div key={key} className="flex gap-1 items-center">
+        const entries = Object.entries(value as Record<string, unknown>);
+        // Range values (start/end from "between" operator) — render inline with en dash
+        if (entries.length === 2 && 'start' in (value as Record<string, unknown>) && 'end' in (value as Record<string, unknown>)) {
+            const range = value as Record<string, unknown>;
+            return (
+                <span className="flex gap-1 items-center">
+                    <FilterValue value={range.start} dataType={dataType} currencyCode={currencyCode} />
+                    <span className="text-muted-foreground">–</span>
+                    <FilterValue value={range.end} dataType={dataType} currencyCode={currencyCode} />
+                </span>
+            );
+        }
+        return entries.map(([key, value]) => (
+            <span key={key} className="flex gap-1 items-center">
                 <span className="text-muted-foreground">
                     <FilterKeyLabel filterKey={key} />:{' '}
                 </span>
                 <FilterValue value={value} dataType={dataType} currencyCode={currencyCode} />
-            </div>
+            </span>
         ));
     }
     if (Array.isArray(value)) {

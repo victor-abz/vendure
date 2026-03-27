@@ -77,7 +77,7 @@ export function DateTimeInput({ value, onChange, fieldDef, disabled }: Readonly<
                         variant="outline"
                         disabled={readOnly}
                         className={cn(
-                            'flex-1 min-w-0 justify-start text-left font-normal shadow-xs',
+                            'flex-1 min-w-0 justify-start text-left font-normal',
                             date ? 'rounded-r-none' : 'text-muted-foreground',
                         )}
                     >
