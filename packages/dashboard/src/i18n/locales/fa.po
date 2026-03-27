@@ -14,16 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "خطای گسترش پرس‌وجو"
+#: src/lib/framework/defaults.ts:45
+msgid "Option Groups"
+msgstr ""
 
 #. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "صفحه با پرس‌وجوی پیش‌فرض ادامه می‌یابد."
+#: src/lib/framework/defaults.ts:151
+msgid "Settings Store"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
@@ -51,6 +49,18 @@ msgid "Query extension error: "
 msgstr "خطای گسترش پرس‌وجو:"
 
 #. js-lingui-explicit-id
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "خطای گسترش پرس‌وجو"
+
+#. js-lingui-explicit-id
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "صفحه با پرس‌وجوی پیش‌فرض ادامه می‌یابد."
+
+#. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
 msgid "Insights"
 msgstr "بینش‌ها"
@@ -69,11 +79,6 @@ msgstr "محصولات"
 #: src/lib/framework/defaults.ts:38
 msgid "Product Variants"
 msgstr "انواع محصول"
-
-#. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:45
-msgid "Option Groups"
-msgstr "گروه‌های گزینه"
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:52
@@ -135,11 +140,6 @@ msgstr "صف کارها"
 #: src/lib/framework/defaults.ts:144
 msgid "Scheduled Tasks"
 msgstr "وظایف زمان‌بندی شده"
-
-#. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:151
-msgid "Settings Store"
-msgstr "فروشگاه تنظیمات"
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:160
@@ -773,7 +773,7 @@ msgstr "حذف یادداشت ناموفق بود"
 #. placeholder {0}: selected.length
 #: src/lib/components/shared/asset/asset-gallery.tsx:469
 msgid ", {0} selected"
-msgstr "، {0} انتخاب شده"
+msgstr ""
 
 #: src/lib/components/data-table/human-readable-operator.tsx:26
 msgid "!="
@@ -849,7 +849,7 @@ msgstr "{operator}"
 
 #: src/app/routes/_authenticated/_products/components/shared-option-group-warning.tsx:13
 msgid "{productCount, plural, one {This option group is used by one other product. Changes will affect it too.} other {This option group is shared across # products. Changes will affect all of them.}}"
-msgstr "{productCount, plural, one {این گروه گزینه توسط یک محصول دیگر استفاده می‌شود. تغییرات آن را نیز تحت تأثیر قرار می‌دهد.} other {این گروه گزینه بین # محصول مشترک است. تغییرات همه آنها را تحت تأثیر قرار می‌دهد.}}"
+msgstr ""
 
 #: src/lib/components/data-table/data-table-pagination.tsx:17
 #~ msgid "{selectedRowCount} of {0} row(s) selected."
@@ -866,7 +866,7 @@ msgstr "{title}"
 #. placeholder {0}: totalItems === 1 ? 'asset' : 'assets'
 #: src/lib/components/shared/asset/asset-gallery.tsx:465
 msgid "{totalItems} {0} found"
-msgstr "{totalItems} {0} یافت شد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-history/default-order-history-components.tsx:117
 msgid "{totalQuantity} item(s) refunded"
@@ -911,7 +911,7 @@ msgstr "فعال"
 
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:27
 msgid "Active filters"
-msgstr "فیلترهای فعال"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/product-option-select.tsx:79
 msgid "Add \"{newOptionInput}\""
@@ -922,13 +922,13 @@ msgstr "افزودن \"{newOptionInput}\""
 msgid "Add a manual payment of {0}"
 msgstr "افزودن پرداخت دستی {0}"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:224
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:231
 msgid "Add a new address to the customer."
 msgstr "یک آدرس جدید به مشتری اضافه کنید."
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:144
 msgid "Add a new option value to the {groupName} option group"
-msgstr "افزودن مقدار گزینه جدید به گروه گزینه {groupName}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_product-variants/components/add-currency-dropdown.tsx:35
 msgid "Add a price in another currency"
@@ -936,7 +936,7 @@ msgstr "افزودن قیمت با ارز دیگر"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:196
 msgid "Add an option group to get started with variants."
-msgstr "یک گروه گزینه اضافه کنید تا با متغیرها شروع کنید."
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:318
 #~ msgid "Add another option group"
@@ -999,8 +999,8 @@ msgstr "فیلترها را برای پیش‌نمایش محتویات مجمو
 msgid "Add item"
 msgstr "افزودن مورد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:216
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:221
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:223
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:228
 msgid "Add new address"
 msgstr "افزودن آدرس جدید"
 
@@ -1035,7 +1035,7 @@ msgstr "افزودن یا حذف مقادیر ویژگی برای {0} {entityTyp
 
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:121
 msgid "Add payment"
-msgstr "افزودن پرداخت"
+msgstr ""
 
 #. placeholder {0}: formatCurrency(outstandingAmount, currencyCode)
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:177
@@ -1148,7 +1148,7 @@ msgstr "آدرس به‌روزرسانی شد"
 msgid "Address updated successfully"
 msgstr "آدرس با موفقیت به‌روزرسانی شد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:196
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:203
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:245
 msgid "Addresses"
 msgstr "آدرس‌ها"
@@ -1174,7 +1174,7 @@ msgstr "هشدارها"
 
 #: src/app/routes/_authenticated/_orders/components/order-process-dialog.tsx:85
 msgid "All possible order states and their transitions. The current state is highlighted."
-msgstr "تمام وضعیت‌های ممکن سفارش و انتقال‌های آنها. وضعیت فعلی برجسته شده است."
+msgstr ""
 
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:67
 #~ msgid "All resources are up and running"
@@ -1183,9 +1183,9 @@ msgstr "تمام وضعیت‌های ممکن سفارش و انتقال‌ها�
 #: src/lib/components/shared/asset/asset-gallery.tsx:367
 #: src/lib/components/shared/asset/asset-gallery.tsx:379
 msgid "All types"
-msgstr "همه انواع"
+msgstr ""
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:432
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:450
 msgid "Allocated"
 msgstr "تخصیص داده شده"
 
@@ -1204,7 +1204,7 @@ msgstr "یک پرداخت اضافی به مبلغ {formattedDiff} مورد نی
 
 #: src/lib/components/shared/paginated-list-data-table.tsx:478
 #~ msgid "An unknown error occurred"
-#~ msgstr "خطای ناشناخته‌ای رخ داد"
+#~ msgstr "یک خطای ناشناخته رخ داد"
 
 #: src/lib/components/data-input/combination-mode-input.tsx:46
 msgid "AND"
@@ -1289,13 +1289,13 @@ msgstr "آیا مطمئن هستید که می‌خواهید این گروه گ
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:376
 msgid "Asset type"
-msgstr "نوع فایل"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:39
 #: src/app/routes/_authenticated/_assets/assets.tsx:17
 #: src/app/routes/_authenticated/_assets/assets.tsx:40
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:225
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:464
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:482
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:268
 msgid "Assets"
 msgstr "فایل‌ها"
@@ -1310,11 +1310,11 @@ msgstr "اختصاص {entityType} به کانال"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:144
 msgid "Assign an existing option group or create a new one"
-msgstr "تخصیص یک گروه گزینه موجود یا ایجاد یک گروه جدید"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:151
 msgid "Assign existing"
-msgstr "تخصیص موجود"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:325
 #~ msgid "Assign options to existing variant"
@@ -1327,7 +1327,7 @@ msgstr "اختصاص به کانال"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:261
 msgid "Assigned"
-msgstr "تخصیص داده شده"
+msgstr ""
 
 #: src/app/routes/_authenticated/_profile/profile.tsx:120
 msgid "Authentication methods"
@@ -1380,7 +1380,7 @@ msgstr "قبل از"
 msgid "between"
 msgstr "بین"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:298
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:277
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:463
 msgid "Billing address"
@@ -1401,7 +1401,7 @@ msgstr "آدرس صورتحساب از سفارش حذف شد"
 #: src/lib/components/shared/asset/asset-gallery.tsx:370
 #: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
-msgstr "باینری"
+msgstr ""
 
 #: src/lib/components/shared/facet-value-selector.tsx:155
 #: src/lib/components/shared/facet-value-selector.tsx:172
@@ -1489,7 +1489,7 @@ msgstr "کانال‌ها"
 
 #: src/lib/components/layout/language-dialog.tsx:52
 msgid "Choose your preferred display language and locale settings"
-msgstr "زبان نمایش و تنظیمات منطقه‌ای مورد نظر خود را انتخاب کنید"
+msgstr ""
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:138
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:196
@@ -1583,7 +1583,7 @@ msgstr "پیکربندی زبان‌های موجود برای فروشگاه و
 #. placeholder {0}: entityName.toLowerCase()
 #: src/app/common/duplicate-entity-dialog.tsx:87
 msgid "Configure duplication settings for {0}s"
-msgstr "پیکربندی تنظیمات تکرار برای {0}s"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:355
 #: src/lib/components/shared/navigation-confirmation.tsx:58
@@ -1655,13 +1655,13 @@ msgstr "کد کوپن برای سفارش تنظیم شد"
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:84
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:93
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:152
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:159
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:99
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:177
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:225
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:226
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:181
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:144
@@ -1687,15 +1687,15 @@ msgstr "ایجاد \"{0}\""
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:294
 msgid "Create {enabledCount} variants"
-msgstr "ایجاد {enabledCount} متغیر"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:234
 msgid "Create a new product variant with options, pricing, and stock"
-msgstr "ایجاد یک متغیر محصول جدید با گزینه‌ها، قیمت‌گذاری و موجودی"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:155
 msgid "Create new"
-msgstr "ایجاد جدید"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:249
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:408
@@ -1758,7 +1758,7 @@ msgstr "فیلدهای سفارشی"
 msgid "Custom fields changed"
 msgstr "فیلدهای سفارشی تغییر کرد"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:275
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:276
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:233
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:418
 #: src/lib/components/shared/role-code-label.tsx:8
@@ -1777,7 +1777,7 @@ msgstr "جزئیات مشتری به‌روزرسانی شد"
 msgid "Customer group members for {customerGroupName}"
 msgstr "اعضای گروه مشتری {customerGroupName}"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:249
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:256
 msgid "Customer groups"
 msgstr "گروه‌های مشتری"
 
@@ -1788,7 +1788,7 @@ msgid "Customer Groups"
 msgstr "گروه‌های مشتری"
 
 #: src/app/routes/_authenticated/_customers/components/customer-history/customer-history-container.tsx:30
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:243
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:250
 msgid "Customer history"
 msgstr "تاریخچه مشتری"
 
@@ -1817,7 +1817,7 @@ msgid "Customer verified"
 msgstr "مشتری تایید شد"
 
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:110
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:56
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:61
 #: src/app/routes/_authenticated/_customers/customers.tsx:15
 #: src/app/routes/_authenticated/_customers/customers.tsx:21
 msgid "Customers"
@@ -1898,7 +1898,7 @@ msgstr "حذف سطر"
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:454
 msgid "Delete variant"
-msgstr "حذف متغیر"
+msgstr ""
 
 #: src/lib/components/data-table/views-sheet.tsx:163
 msgid "Delete View"
@@ -1940,7 +1940,7 @@ msgstr "حالت توسعه"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:746
 msgid "Dimensions"
-msgstr "ابعاد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:220
 msgid "Disable"
@@ -1964,8 +1964,8 @@ msgstr "تخفیف‌ها"
 msgid "Display language"
 msgstr "زبان نمایش"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:345
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:365
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:363
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:383
 msgid "Do not track"
 msgstr "دنبال نکردن"
 
@@ -1996,7 +1996,7 @@ msgstr "برای مرتب‌سازی بکشید"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:438
 msgid "Drop files here to upload"
-msgstr "فایل‌ها را اینجا رها کنید تا بارگذاری شوند"
+msgstr ""
 
 #: src/app/common/duplicate-bulk-action.tsx:131
 #: src/app/common/duplicate-entity-dialog.tsx:115
@@ -2011,7 +2011,7 @@ msgstr "تکثیر {0}"
 
 #: src/app/routes/_authenticated/_products/components/option-value-input.tsx:35
 msgid "Duplicate value \"{trimmed}\" already exists"
-msgstr "مقدار تکراری \\\"{trimmed}\\\" از قبل وجود دارد"
+msgstr "مقدار تکراری \"{trimmed}\" از قبل وجود دارد"
 
 #. placeholder {0}: progress.completed
 #. placeholder {1}: progress.total
@@ -2057,7 +2057,7 @@ msgstr "ویرایش تصویر"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:123
 msgid "Edit JSON value"
-msgstr "ویرایش مقدار JSON"
+msgstr ""
 
 #: src/app/routes/_authenticated/index.tsx:190
 msgid "Edit Layout"
@@ -2090,17 +2090,17 @@ msgstr "جزئیات آدرس زیر را ویرایش کنید."
 
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:109
 msgid "Edit the selected image properties"
-msgstr "ویرایش ویژگی‌های تصویر انتخاب شده"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:87
 msgid "Edit the selected link properties"
-msgstr "ویرایش ویژگی‌های پیوند انتخاب شده"
+msgstr ""
 
 #: src/lib/components/login/login-form.tsx:84
 msgid "Email"
 msgstr "ایمیل"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:181
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:188
 msgid "Email address"
 msgstr "آدرس ایمیل"
 
@@ -2124,7 +2124,7 @@ msgstr "فعال کردن"
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:92
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:147
 #: src/app/routes/_authenticated/_payment-methods/payment-methods.tsx:42
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:234
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:235
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:131
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:153
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:115
@@ -2217,7 +2217,7 @@ msgstr "بدون مالیات:"
 
 #: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
-msgstr "کاوش پلتفرم و ابر"
+msgstr ""
 
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:119
 msgid "Facet"
@@ -2229,7 +2229,7 @@ msgstr "ویژگی"
 msgid "Facet values"
 msgstr "مقادیر ویژگی"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:447
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:465
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:235
 msgid "Facet Values"
 msgstr "مقادیر ویژگی"
@@ -2248,7 +2248,7 @@ msgid "Facets"
 msgstr "ویژگی‌ها"
 
 #: src/app/routes/_authenticated/_customer-groups/components/customer-group-members-table.tsx:61
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:127
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:134
 msgid "Failed to add customer to group"
 msgstr "افزودن مشتری به گروه ناموفق بود"
 
@@ -2268,7 +2268,7 @@ msgstr "تخصیص {entityIdsLength} {entityType} به کانال ناموفق �
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:75
 msgid "Failed to assign option group"
-msgstr "تخصیص گروه گزینه ناموفق بود"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/hooks/use-refund-order.ts:259
 msgid "Failed to cancel order items"
@@ -2287,7 +2287,7 @@ msgstr "تبدیل نمای عمومی به نمای شخصی ناموفق بو�
 msgid "Failed to convert view to global"
 msgstr "تبدیل نما به عمومی ناموفق بود"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:117
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:124
 msgid "Failed to create address"
 msgstr "ایجاد آدرس ناموفق بود"
 
@@ -2308,8 +2308,8 @@ msgstr "ایجاد مجموعه ناموفق بود"
 msgid "Failed to create country"
 msgstr "ایجاد کشور ناموفق بود"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:98
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:104
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:105
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:111
 msgid "Failed to create customer"
 msgstr "ایجاد مشتری ناموفق بود"
 
@@ -2342,7 +2342,7 @@ msgstr "ایجاد محصول ناموفق بود"
 msgid "Failed to create product option"
 msgstr "ایجاد گزینه محصول ناموفق بود"
 
-#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:115
+#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:117
 #~ msgid "Failed to create product option group"
 #~ msgstr "ایجاد گروه گزینه‌های محصول ناموفق بود"
 
@@ -2351,7 +2351,7 @@ msgstr "ایجاد گزینه محصول ناموفق بود"
 #~ msgid "Failed to create product options"
 #~ msgstr "ایجاد گزینه‌های محصول ناموفق بود"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:136
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:137
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:166
 msgid "Failed to create product variant"
 msgstr "ایجاد نوع محصول ناموفق بود"
@@ -2391,7 +2391,7 @@ msgstr "ایجاد نرخ مالیات ناموفق بود"
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
 msgid "Failed to create variants"
-msgstr "ایجاد متغیرها ناموفق بود"
+msgstr ""
 
 #: src/app/routes/_authenticated/_zones/zones_.$id.tsx:68
 msgid "Failed to create zone"
@@ -2459,13 +2459,13 @@ msgstr "پردازش بازپرداخت ناموفق بود"
 
 #: src/lib/components/shared/assigned-channels.tsx:52
 msgid "Failed to remove {entityType} from channel"
-msgstr "حذف {entityType} از کانال ناموفق بود"
+msgstr ""
 
 #: src/app/routes/_authenticated/_zones/components/zone-bulk-actions.tsx:36
 msgid "Failed to remove countries from zone"
 msgstr "حذف کشورها از منطقه ناموفق بود"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:137
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:144
 msgid "Failed to remove customer from group"
 msgstr "حذف مشتری از گروه ناموفق بود"
 
@@ -2475,7 +2475,7 @@ msgstr "حذف ویژگی از کانال ناموفق بود: {message}"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-bulk-actions.tsx:78
 msgid "Failed to remove option group from channel: {message}"
-msgstr "حذف گروه گزینه از کانال ناموفق بود: {message}"
+msgstr ""
 
 #: src/lib/components/shared/assigned-channels.tsx:43
 #~ msgid "Failed to remove product from channel"
@@ -2536,8 +2536,8 @@ msgstr "به‌روزرسانی موقعیت مجموعه ناموفق بود"
 msgid "Failed to update country"
 msgstr "به‌روزرسانی کشور ناموفق بود"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:98
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:104
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:105
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:111
 msgid "Failed to update customer"
 msgstr "به‌روزرسانی مشتری ناموفق بود"
 
@@ -2565,7 +2565,7 @@ msgstr "به‌روزرسانی تنظیمات عمومی ناموفق بود"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:138
 msgid "Failed to update option group"
-msgstr "به‌روزرسانی گروه گزینه ناموفق بود"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:96
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:63
@@ -2589,11 +2589,11 @@ msgstr "به‌روزرسانی محصول ناموفق بود"
 msgid "Failed to update product option"
 msgstr "به‌روزرسانی گزینه محصول ناموفق بود"
 
-#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:116
+#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:118
 #~ msgid "Failed to update product option group"
 #~ msgstr "به‌روزرسانی گروه گزینه‌های محصول ناموفق بود"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:136
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:137
 msgid "Failed to update product variant"
 msgstr "به‌روزرسانی نوع محصول ناموفق بود"
 
@@ -2632,7 +2632,7 @@ msgstr "به‌روزرسانی نرخ مالیات ناموفق بود"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:239
 msgid "Failed to update value"
-msgstr "به‌روزرسانی مقدار ناموفق بود"
+msgstr ""
 
 #: src/app/routes/_authenticated/_zones/zones_.$id.tsx:68
 msgid "Failed to update zone"
@@ -2668,7 +2668,7 @@ msgid "Filters"
 msgstr "فیلترها"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:115
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:169
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:176
 #: src/app/routes/_authenticated/_profile/profile.tsx:94
 msgid "First name"
 msgstr "نام"
@@ -2728,7 +2728,7 @@ msgstr "تحویل شماره {0} از {1} به {2}"
 msgid "Fulfillment created"
 msgstr "تحویل ایجاد شد"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:308
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:309
 msgid "Fulfillment details"
 msgstr "جزئیات تحویل"
 
@@ -2822,7 +2822,7 @@ msgstr "بزرگتر یا مساوی"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:395
 msgid "Grid view"
-msgstr "نمای شبکه‌ای"
+msgstr ""
 
 #: src/app/routes/_authenticated/_product-variants/components/variant-price-detail.tsx:86
 msgid "Gross price: <0/>"
@@ -2888,7 +2888,7 @@ msgstr "تصویر"
 #: src/lib/components/shared/asset/asset-gallery.tsx:368
 #: src/lib/components/shared/asset/asset-gallery.tsx:380
 msgid "Images"
-msgstr "تصاویر"
+msgstr ""
 
 #: src/lib/components/data-table/human-readable-operator.tsx:36
 msgid "in"
@@ -2902,18 +2902,18 @@ msgstr "شامل مالیات {taxRate}%"
 msgid "Inherit filters"
 msgstr "وراثت فیلترها"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:343
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:359
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:361
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:377
 msgid "Inherit from global settings"
 msgstr "وراثت از تنظیمات عمومی"
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:87
 msgid "Insert a new hyperlink with URL and target options"
-msgstr "درج یک لینک جدید با URL و گزینه‌های هدف"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:109
 msgid "Insert a new image with source, title, and dimensions"
-msgstr "درج یک تصویر جدید با منبع، عنوان و ابعاد"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:106
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:211
@@ -2930,7 +2930,7 @@ msgstr "بینش‌ها"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:169
 msgid "Invalid number"
-msgstr "عدد نامعتبر"
+msgstr ""
 
 #: src/lib/components/data-table/human-readable-operator.tsx:30
 msgid "is after"
@@ -2990,7 +2990,7 @@ msgstr "مورد به سفارش اضافه شد"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:476
 msgid "Items per page"
-msgstr "موارد در هر صفحه"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:110
 msgid "Items refunded"
@@ -3003,7 +3003,7 @@ msgstr "صف کارها"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:260
 msgid "Key"
-msgstr "کلید"
+msgstr ""
 
 #: src/lib/components/layout/nav-user.tsx:112
 msgid "Language"
@@ -3034,7 +3034,7 @@ msgid "Last month"
 msgstr "ماه گذشته"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:121
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:175
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:182
 #: src/app/routes/_authenticated/_profile/profile.tsx:100
 msgid "Last name"
 msgstr "نام خانوادگی"
@@ -3078,7 +3078,7 @@ msgstr "عنوان پیوند"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:398
 msgid "List view"
-msgstr "نمای لیستی"
+msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
 #: src/app/routes/_authenticated/_collections/collections.tsx:395
@@ -3308,8 +3308,8 @@ msgstr "مجموعه جدید"
 msgid "New country"
 msgstr "کشور جدید"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:57
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:145
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:62
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:152
 msgid "New customer"
 msgstr "مشتری جدید"
 
@@ -3357,11 +3357,11 @@ msgstr "گزینه جدید"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:82
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:149
 msgid "New option group"
-msgstr "گروه گزینه جدید"
+msgstr ""
 
 #: src/app/routes/_authenticated/_option-groups/option-groups.tsx:71
 msgid "New Option Group"
-msgstr "گروه گزینه جدید"
+msgstr ""
 
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:42
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:124
@@ -3385,11 +3385,11 @@ msgstr "محصول جدید"
 msgid "New product option"
 msgstr "گزینه محصول جدید"
 
-#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:127
+#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:129
 #~ msgid "New product option group"
 #~ msgstr "گروه گزینه محصول جدید"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:217
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:218
 msgid "New product variant"
 msgstr "نوع محصول جدید"
 
@@ -3475,7 +3475,7 @@ msgstr "اجرای بعدی"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:327
 msgid "No"
-msgstr "خیر"
+msgstr ""
 
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:107
 #: src/lib/components/shared/asset/asset-bulk-actions.tsx:98
@@ -3496,7 +3496,7 @@ msgstr "هیچ هشداری وجود ندارد"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:628
 msgid "No assets found. Try adjusting your filters."
-msgstr "هیچ فایلی یافت نشد. فیلترهای خود را تنظیم کنید."
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:300
 msgid "No billing address"
@@ -3506,7 +3506,7 @@ msgstr "آدرس صورتحساب وجود ندارد"
 msgid "No countries found"
 msgstr "هیچ کشوری یافت نشد"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:283
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:284
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:241
 msgid "No customer"
 msgstr "مشتری وجود ندارد"
@@ -3527,7 +3527,7 @@ msgstr "هیچ روش ارسال واجد شرایطی برای این سفار�
 msgid "No facet values"
 msgstr "هیچ مقدار ویژگی وجود ندارد"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:325
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:326
 msgid "No fulfillments"
 msgstr "هیچ تحویلی وجود ندارد"
 
@@ -3566,7 +3566,7 @@ msgstr "هنوز هیچ گروه گزینه‌ای تعریف نشده است. �
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:239
 msgid "No option groups found"
-msgstr "هیچ گروه گزینه‌ای یافت نشد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:334
 msgid "No payment or refund is required for these changes."
@@ -3578,7 +3578,7 @@ msgstr "پرداخت یا بازپرداخت لازم نیست"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:63
 msgid "No products found"
-msgstr "هیچ محصولی یافت نشد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:164
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:186
@@ -3629,7 +3629,7 @@ msgstr "هیچ ترجمه‌ای برای {0} یافت نشد"
 
 #: src/app/routes/_authenticated/index.tsx:221
 msgid "No widgets available"
-msgstr "ابزارکی موجود نیست"
+msgstr "هیچ ابزارکی در دسترس نیست"
 
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:74
 msgid "Normal"
@@ -3682,7 +3682,7 @@ msgstr "گزینه"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:186
 msgid "Option Group"
-msgstr "گروه گزینه"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:368
 #~ msgid "Option group {0}"
@@ -3726,6 +3726,10 @@ msgstr "مقادیر گزینه"
 #: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:75
 msgid "Option Values"
 msgstr "مقادیر گزینه"
+
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:243
+msgid "Options"
+msgstr "گزینه‌ها"
 
 #: src/lib/components/data-input/combination-mode-input.tsx:59
 msgid "OR"
@@ -3804,7 +3808,7 @@ msgstr "سفارش ثبت شد"
 
 #: src/app/routes/_authenticated/_orders/components/order-process-dialog.tsx:82
 msgid "Order process"
-msgstr "فرآیند سفارش"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:88
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:94
@@ -3820,7 +3824,7 @@ msgstr "مجموع سفارش"
 msgid "Order transitioned"
 msgstr "سفارش منتقل شد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:240
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:247
 #: src/app/routes/_authenticated/_orders/orders.tsx:21
 #: src/app/routes/_authenticated/_orders/orders.tsx:37
 #: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:48
@@ -3834,7 +3838,7 @@ msgstr "سفارش‌ها"
 msgid "Orders Summary"
 msgstr "خلاصه سفارش‌ها"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:374
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:392
 msgid "Out-of-stock threshold"
 msgstr "آستانه اتمام موجودی"
 
@@ -3850,9 +3854,9 @@ msgstr "صفحه {0} از {1}"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:80
 msgid "Page {page} of {totalPages}"
-msgstr "صفحه {page} از {totalPages}"
+msgstr ""
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:457
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:475
 msgid "Parent product"
 msgstr "محصول والد"
 
@@ -3951,7 +3955,7 @@ msgstr "محدودیت استفاده به ازای هر مشتری"
 msgid "Permissions"
 msgstr "مجوزها"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:187
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:194
 msgid "Phone number"
 msgstr "شماره تلفن"
 
@@ -3994,14 +3998,14 @@ msgstr "پیش‌نمایش تغییرات سفارش"
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:89
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:280
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:298
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:299
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:193
 #: src/lib/components/layout/language-dialog.tsx:136
 msgid "Price"
 msgstr "قیمت"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:260
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:278
 msgid "Price and tax"
 msgstr "قیمت و مالیات"
 
@@ -4044,7 +4048,7 @@ msgstr "محصول"
 msgid "Product name"
 msgstr "نام محصول"
 
-#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:165
+#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:169
 #~ msgid "Product Option Group"
 #~ msgstr "گروه گزینه محصول"
 
@@ -4059,9 +4063,9 @@ msgstr "گزینه‌های محصول"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:191
 msgid "Product variants"
-msgstr "متغیرهای محصول"
+msgstr ""
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:68
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:69
 #: src/app/routes/_authenticated/_product-variants/product-variants.tsx:19
 #: src/app/routes/_authenticated/_product-variants/product-variants.tsx:28
 msgid "Product Variants"
@@ -4071,7 +4075,7 @@ msgstr "انواع محصول"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:71
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:211
 #: src/app/routes/_authenticated/_option-groups/option-groups.tsx:38
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:63
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:64
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:67
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:54
 #: src/app/routes/_authenticated/_products/products.tsx:24
@@ -4117,7 +4121,7 @@ msgstr "نرخ"
 #: src/app/routes/_authenticated/_system/settings-store.tsx:293
 #: src/app/routes/_authenticated/_system/settings-store.tsx:324
 msgid "Readonly"
-msgstr "فقط خواندنی"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:233
 #: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:217
@@ -4134,7 +4138,7 @@ msgstr "بازسازی فهرست جستجو"
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:262
 msgid "Recalculate shipping"
-msgstr "محاسبه مجدد حمل و نقل"
+msgstr "محاسبه مجدد هزینه ارسال"
 
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:47
 #~ msgid "Refresh"
@@ -4240,7 +4244,7 @@ msgstr "حذف"
 
 #: src/lib/components/shared/remove-from-channel-bulk-action.tsx:82
 msgid "Remove from channel"
-msgstr "حذف از کانال"
+msgstr ""
 
 #: src/lib/components/shared/remove-from-channel-bulk-action.tsx:82
 #~ msgid "Remove from current channel"
@@ -4295,7 +4299,7 @@ msgstr "بازنشانی"
 
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:119
 msgid "Reset selection"
-msgstr "بازنشانی انتخاب"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:105
 msgid "Return to stock"
@@ -4404,7 +4408,7 @@ msgstr "وظایف زمان‌بندی شده"
 #: src/app/routes/_authenticated/_system/settings-store.tsx:281
 #: src/app/routes/_authenticated/_system/settings-store.tsx:314
 msgid "Scope"
-msgstr "دامنه"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/product-option-select.tsx:64
 msgid "Search {name}..."
@@ -4412,11 +4416,7 @@ msgstr "جستجوی {name}..."
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:349
 msgid "Search assets..."
-msgstr "جستجوی فایل‌ها..."
-
-#: src/app/routes/_authenticated/_system/settings-store.tsx:299
-#~ msgid "Search by key..."
-#~ msgstr "جستجو بر اساس کلید..."
+msgstr ""
 
 #: src/lib/components/shared/channel-selector.tsx:48
 msgid "Search channels..."
@@ -4445,7 +4445,7 @@ msgstr "جستجوی زبان‌ها..."
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:233
 msgid "Search option groups..."
-msgstr "جستجوی گروه‌های گزینه..."
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:107
 msgid "Search payment methods..."
@@ -4628,7 +4628,7 @@ msgstr "تنظیم فیلدهای سفارشی"
 
 #: src/lib/components/data-table/data-table-filter-dialog.tsx:55
 msgid "Set filter criteria for the {columnId} column"
-msgstr "تنظیم معیارهای فیلتر برای ستون {columnId}"
+msgstr ""
 
 #: src/lib/components/shared/asset/asset-focal-point-editor.tsx:97
 msgid "Set Focal Point"
@@ -4646,15 +4646,15 @@ msgstr "زبان‌هایی را که برای همه کانال‌ها موجو
 msgid "Sets the stock level at which this a variant is considered to be out of stock. Using a negative value enables backorder support. Can be overridden by product variants."
 msgstr "سطح موجودی را تنظیم می‌کند که در آن این نوع اتمام موجودی در نظر گرفته می‌شود. استفاده از مقدار منفی پشتیبانی از پیش‌سفارش را فعال می‌کند. می‌تواند توسط انواع محصول لغو شود."
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:376
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:394
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:412
 msgid "Sets the stock level at which this variant is considered to be out of stock. Using a negative value enables backorder support."
 msgstr "سطح موجودی را تنظیم می‌کند که در آن این نوع اتمام موجودی در نظر گرفته می‌شود. استفاده از مقدار منفی پشتیبانی از پیش‌سفارش را فعال می‌کند."
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:37
 #: src/app/routes/_authenticated/_system/settings-store.tsx:304
 msgid "Settings Store"
-msgstr "فروشگاه تنظیمات"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:142
 msgid "Settle payment"
@@ -4672,7 +4672,7 @@ msgstr "تسویه بازپرداخت"
 msgid "Shipping"
 msgstr "ارسال"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:290
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:291
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:248
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
 msgid "Shipping address"
@@ -4752,11 +4752,11 @@ msgstr "برای دسترسی به داشبورد مدیریت وارد شوید
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:745
 msgid "Size"
-msgstr "اندازه"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:83
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:253
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:271
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:293
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:190
@@ -4813,12 +4813,12 @@ msgstr "ایالت / استان"
 msgid "State/Province"
 msgstr "ایالت/استان"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:246
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:253
 #: src/app/routes/_authenticated/_customers/customers.tsx:48
 msgid "Status"
 msgstr "وضعیت"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:333
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:351
 msgid "Stock"
 msgstr "موجودی"
 
@@ -4826,12 +4826,12 @@ msgstr "موجودی"
 msgid "Stock allocated"
 msgstr "موجودی تخصیص داده شده"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:417
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:435
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:312
 msgid "Stock level"
 msgstr "سطح موجودی"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:338
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:356
 msgid "Stock levels"
 msgstr "سطوح موجودی"
 
@@ -4881,7 +4881,7 @@ msgstr "{entityIdsLength} {entityType} با موفقیت به کانال اخت�
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:71
 msgid "Successfully assigned option group"
-msgstr "گروه گزینه با موفقیت تخصیص داده شد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:77
 msgid "Successfully created administrator"
@@ -4899,7 +4899,7 @@ msgstr "مجموعه با موفقیت ایجاد شد"
 msgid "Successfully created country"
 msgstr "کشور با موفقیت ایجاد شد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:91
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:98
 msgid "Successfully created customer"
 msgstr "مشتری با موفقیت ایجاد شد"
 
@@ -4932,7 +4932,7 @@ msgstr "محصول با موفقیت ایجاد شد"
 msgid "Successfully created product option"
 msgstr "گزینه محصول با موفقیت ایجاد شد"
 
-#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:104
+#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:106
 #~ msgid "Successfully created product option group"
 #~ msgstr "گروه گزینه‌های محصول با موفقیت ایجاد شد"
 
@@ -4940,7 +4940,7 @@ msgstr "گزینه محصول با موفقیت ایجاد شد"
 #~ msgid "Successfully created product options"
 #~ msgstr "گزینه‌های محصول با موفقیت ایجاد شد"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:126
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:161
 msgid "Successfully created product variant"
 msgstr "نوع محصول با موفقیت ایجاد شد"
@@ -4975,7 +4975,7 @@ msgstr "نرخ مالیات با موفقیت ایجاد شد"
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:148
 msgid "Successfully created variants"
-msgstr "متغیرها با موفقیت ایجاد شدند"
+msgstr ""
 
 #: src/app/routes/_authenticated/_zones/zones_.$id.tsx:61
 msgid "Successfully created zone"
@@ -4991,7 +4991,7 @@ msgstr "سفارش با موفقیت تحویل داده شد"
 
 #: src/lib/components/shared/assigned-channels.tsx:48
 msgid "Successfully removed {entityType} from channel"
-msgstr "{entityType} با موفقیت از کانال حذف شد"
+msgstr ""
 
 #: src/lib/components/shared/remove-from-channel-bulk-action.tsx:53
 msgid "Successfully removed {selectionLength} {entityType} from channel"
@@ -5003,7 +5003,7 @@ msgstr "{successCount} ویژگی با موفقیت از کانال حذف شد"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-bulk-actions.tsx:87
 msgid "Successfully removed {successCount} option groups from channel"
-msgstr "{successCount} گروه گزینه با موفقیت از کانال حذف شدند"
+msgstr ""
 
 #: src/lib/components/shared/assigned-channels.tsx:39
 #~ msgid "Successfully removed product from channel"
@@ -5029,7 +5029,7 @@ msgstr "مجموعه با موفقیت به‌روزرسانی شد"
 msgid "Successfully updated country"
 msgstr "کشور با موفقیت به‌روزرسانی شد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:91
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:98
 msgid "Successfully updated customer"
 msgstr "مشتری با موفقیت به‌روزرسانی شد"
 
@@ -5055,7 +5055,7 @@ msgstr "تنظیمات عمومی با موفقیت به‌روزرسانی شد
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:127
 msgid "Successfully updated option group"
-msgstr "گروه گزینه با موفقیت به‌روزرسانی شد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:92
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:59
@@ -5074,11 +5074,11 @@ msgstr "محصول با موفقیت به‌روزرسانی شد"
 msgid "Successfully updated product option"
 msgstr "گزینه محصول با موفقیت به‌روزرسانی شد"
 
-#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:105
+#: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:107
 #~ msgid "Successfully updated product option group"
 #~ msgstr "گروه گزینه‌های محصول با موفقیت به‌روزرسانی شد"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:128
 msgid "Successfully updated product variant"
 msgstr "نوع محصول با موفقیت به‌روزرسانی شد"
 
@@ -5149,7 +5149,7 @@ msgstr "پایه مالیاتی"
 msgid "Tax Categories"
 msgstr "دسته‌بندی‌های مالیاتی"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:265
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:283
 #: src/app/routes/_authenticated/_tax-rates/tax-rates_.$id.tsx:127
 msgid "Tax category"
 msgstr "دسته‌بندی مالیاتی"
@@ -5225,7 +5225,7 @@ msgstr "در حال آزمایش روش‌های ارسال..."
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:164
 msgid "The assigned option groups have no options yet. Add options to your option groups before generating variants."
-msgstr "گروه‌های گزینه تخصیص داده شده هنوز گزینه‌ای ندارند. قبل از ایجاد متغیرها، گزینه‌هایی به گروه‌های گزینه خود اضافه کنید."
+msgstr ""
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:136
 msgid "The data that has been passed to the job"
@@ -5266,7 +5266,7 @@ msgstr "این زبان‌ها برای استفاده همه کانال‌ها 
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:123
 msgid "This field is readonly"
-msgstr "این فیلد فقط خواندنی است"
+msgstr ""
 
 #: src/app/routes/_authenticated/_roles/roles.tsx:53
 msgid "This is a default Role and cannot be modified"
@@ -5287,7 +5287,7 @@ msgstr "این ماه"
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:489
 msgid "This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?"
-msgstr "این گروه گزینه توسط متغیرهای موجود استفاده می‌شود. حذف اجباری ممکن است بر آن متغیرها تأثیر بگذارد. آیا مطمئن هستید؟"
+msgstr "این گروه گزینه توسط متغیرهای موجود استفاده می‌شود. حذف اجباری آن ممکن است بر آن متغیرها تأثیر بگذارد. آیا مطمئن هستید؟"
 
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:254
 #~ msgid "This product has existing variants but no option groups defined. You need to add option groups before creating new variants."
@@ -5302,7 +5302,7 @@ msgctxt "date-range"
 msgid "This week"
 msgstr "این هفته"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:162
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:169
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:157
 msgid "Title"
 msgstr "عنوان"
@@ -5349,8 +5349,8 @@ msgstr "مجموع بازپرداخت:"
 msgid "Total Revenue"
 msgstr "کل درآمد"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:344
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:362
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:380
 msgid "Track"
 msgstr "دنبال کردن"
 
@@ -5396,7 +5396,7 @@ msgstr "درست"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:744
 msgid "Type"
-msgstr "نوع"
+msgstr ""
 
 #: src/lib/components/shared/facet-value-selector.tsx:147
 msgid "Type at least 2 characters to search..."
@@ -5428,7 +5428,7 @@ msgstr "تایید نشده"
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:84
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:93
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:152
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:159
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:99
 #: src/app/routes/_authenticated/_global-settings/global-settings.tsx:102
@@ -5436,7 +5436,7 @@ msgstr "تایید نشده"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:51
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:225
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:226
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:276
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_profile/profile.tsx:84
@@ -5478,7 +5478,7 @@ msgstr "استفاده به عنوان آدرس صورتحساب پیش‌فرض
 msgid "Use as the default shipping address"
 msgstr "استفاده به عنوان آدرس ارسال پیش‌فرض"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:392
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:410
 msgid "Use global out-of-stock threshold"
 msgstr "استفاده از آستانه عمومی اتمام موجودی"
 
@@ -5500,11 +5500,11 @@ msgstr "استفاده از استراتژی احراز هویت بومی"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:268
 msgid "Value"
-msgstr "مقدار"
+msgstr ""
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:236
 msgid "Value updated"
-msgstr "مقدار به‌روزرسانی شد"
+msgstr ""
 
 #: src/app/routes/_authenticated/_facets/facets.tsx:50
 msgid "Values"
@@ -5518,7 +5518,7 @@ msgstr "نوع"
 msgid "Variant deleted successfully"
 msgstr "نوع با موفقیت حذف شد"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:246
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:264
 msgid "Variant name"
 msgstr "نام نوع"
 
@@ -5537,7 +5537,7 @@ msgstr "تایید شده"
 #: src/lib/components/shared/asset/asset-gallery.tsx:369
 #: src/lib/components/shared/asset/asset-gallery.tsx:381
 msgid "Video"
-msgstr "ویدئو"
+msgstr ""
 
 #: src/app/routes/_authenticated/_customers/components/customer-history/default-customer-history-components.tsx:33
 #: src/app/routes/_authenticated/_customers/components/customer-history/default-customer-history-components.tsx:86
@@ -5575,7 +5575,7 @@ msgstr "مشاهده نتیجه کار"
 
 #: src/app/routes/_authenticated/_orders/components/order-process-dialog.tsx:73
 msgid "View order process"
-msgstr "مشاهده فرآیند سفارش"
+msgstr ""
 
 #: src/lib/components/data-table/views-sheet.tsx:63
 msgid "View renamed successfully"
@@ -5606,7 +5606,7 @@ msgstr "برای مشتری قابل مشاهده"
 msgid "Welcome to Vendure"
 msgstr "به Vendure خوش آمدید"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:235
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:236
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:132
 msgid "When enabled, a product is available in the shop"
 msgstr "وقتی فعال باشد، محصول در فروشگاه موجود است"
@@ -5633,7 +5633,7 @@ msgstr "با موارد انتخاب شده..."
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:326
 msgid "Yes"
-msgstr "بله"
+msgstr ""
 
 #: src/lib/components/date-range-picker.tsx:31
 msgctxt "date-range"

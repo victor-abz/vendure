@@ -8,6 +8,7 @@ import { ErrorPage } from '@/vdb/components/shared/error-page.js';
 import { FormFieldWrapper } from '@/vdb/components/shared/form-field-wrapper.js';
 import { TaxCategorySelector } from '@/vdb/components/shared/tax-category-selector.js';
 import { TranslatableFormFieldWrapper } from '@/vdb/components/shared/translatable-form-field.js';
+import { Badge } from '@/vdb/components/ui/badge.js';
 import { Button } from '@/vdb/components/ui/button.js';
 import { Field, FieldLabel } from '@/vdb/components/ui/field.js';
 import { Input } from '@/vdb/components/ui/input.js';
@@ -32,9 +33,9 @@ import { api } from '@/vdb/graphql/api.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { VariablesOf } from 'gql.tada';
-import { Trash } from 'lucide-react';
+import { Edit2, Trash } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { AddCurrencyDropdown } from './components/add-currency-dropdown.js';
@@ -238,6 +239,23 @@ function ProductVariantDetailPage() {
                         )}
                     />
                 </PageBlock>
+                {entity?.options && entity.options.length > 0 && (
+                    <PageBlock column="side" blockId="options" title={<Trans>Options</Trans>}>
+                        <div className="flex flex-wrap gap-1.5">
+                            {entity.options.map(option => (
+                                <Badge key={option.id} variant="secondary" className="text-xs" title={option.code}>
+                                    <span>{option.group.name}: {option.name}</span>
+                                    <Link
+                                        to={`/products/${entity.product.id}/option-groups/${option.group.id}`}
+                                        className="ml-1.5 inline-flex"
+                                    >
+                                        <Edit2 className="h-3 w-3" />
+                                    </Link>
+                                </Badge>
+                            ))}
+                        </div>
+                    </PageBlock>
+                )}
                 <PageBlock column="main" blockId="main-form">
                     <DetailFormGrid>
                         <TranslatableFormFieldWrapper
