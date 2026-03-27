@@ -444,7 +444,7 @@ export function DataTable<TData>({
                     <DataTableBulkActions bulkActions={bulkActions ?? []} table={table} />
                 </div>
 
-                <div className="rounded-md border my-2 relative shadow-sm bg-card">
+                <div className="rounded-md border my-2 relative bg-card">
                     <DndContext
                         sensors={sensors}
                         collisionDetection={closestCenter}

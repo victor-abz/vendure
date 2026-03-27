@@ -140,7 +140,7 @@ function SortableAsset({
                         <DropdownMenuTrigger render={<Button
                                 variant="secondary"
                                 size="icon"
-                                className="h-6 w-6 rounded-full shadow-md"
+                                className="h-6 w-6 rounded-full"
                             />}>
                                 <EllipsisIcon className="h-4 w-4" />
                         </DropdownMenuTrigger>

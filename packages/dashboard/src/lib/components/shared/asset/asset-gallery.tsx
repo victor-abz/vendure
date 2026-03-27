@@ -661,7 +661,7 @@ function AssetGridView({
                     key={asset.id}
                     className={`
                         group cursor-pointer transition-all overflow-hidden rounded-xl
-                        bg-card text-card-foreground shadow-xs ring-1 text-left
+                        bg-card text-card-foreground ring-1 text-left
                         hover:ring-primary/40
                         ${isSelected(asset) ? 'ring-2 ring-primary' : 'ring-foreground/10'}
                     `}
