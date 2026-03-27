@@ -228,10 +228,6 @@ msgstr "اكتب ثم اضغط Enter أو الفاصلة للإضافة."
 
 #. js-lingui-explicit-id
 #: src/i18n/common-strings.ts:7
-#: src/lib/components/data-table/data-table-filter-badge.tsx:111
-msgid "end"
-msgstr "النهاية"
-
 msgid "fulfillmentState.Created"
 msgstr "تم الإنشاء"
 
@@ -758,6 +754,12 @@ msgstr "تم حذف الملاحظة بنجاح"
 msgid "Failed to delete note"
 msgstr "فشل حذف الملاحظة"
 
+#. js-lingui-explicit-id
+#: src/i18n/common-strings.ts:7
+#: src/lib/components/data-table/data-table-filter-badge.tsx:111
+#~ msgid "end"
+#~ msgstr "النهاية"
+
 #: src/lib/components/data-table/human-readable-operator.tsx:26
 msgid "!="
 msgstr "!="
@@ -782,12 +784,8 @@ msgstr "(الحد الأقصى: {0})"
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:189
 #: src/app/routes/_authenticated/_tax-categories/tax-categories.tsx:45
 #: src/lib/components/data-input/product-multi-selector-input.tsx:278
-#: src/lib/components/data-input/relation-selector.tsx:403
+#: src/lib/components/data-input/relation-selector.tsx:405
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:425
-#: src/lib/components/data-table/data-table-filter-badge.tsx:109
-msgid "start"
-msgstr "البداية"
-
 msgid "{0}"
 msgstr "{0}"
 
@@ -803,7 +801,7 @@ msgstr "{0} عنصر محدد"
 
 #. placeholder {0}: quantity.max
 #. placeholder {1}: line.quantity
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:258
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:260
 msgid "{0} of {1} available to fulfill"
 msgstr "{0} من {1} متاح للتنفيذ"
 
@@ -819,8 +817,8 @@ msgid "{0} variants"
 msgstr "{0} متغير"
 
 #: src/lib/components/data-input/product-multi-selector-input.tsx:393
-#: src/lib/components/shared/configurable-operation-multi-selector.tsx:223
-#: src/lib/components/shared/configurable-operation-selector.tsx:135
+#: src/lib/components/shared/configurable-operation-multi-selector.tsx:268
+#: src/lib/components/shared/configurable-operation-selector.tsx:140
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
@@ -832,6 +830,11 @@ msgstr "{label}"
 #: src/lib/components/data-table/human-readable-operator.tsx:63
 msgid "{operator}"
 msgstr "{operator}"
+
+#. placeholder {0}: table.getFilteredRowModel().rows.length
+#: src/lib/components/data-table/data-table-pagination.tsx:17
+msgid "{selectedRowCount} of {0} row(s) selected."
+msgstr "تم تحديد {selectedRowCount} من {0} صف (صفوف)."
 
 #: src/app/routes/_authenticated/_orders/hooks/use-refund-order.ts:286
 msgid "{successfulRefundCount} payment(s) refunded before failure. Check order history for details."
@@ -870,7 +873,7 @@ msgstr "سبب الاسترداد مطلوب"
 msgid "A refund of {formattedDiff} is required. Select payment amounts and enter a note to proceed."
 msgstr "مطلوب استرداد بقيمة {formattedDiff}. حدد مبالغ الدفع وأدخل ملاحظة للمتابعة."
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:234
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:245
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:191
 #: src/lib/components/data-table/use-generated-columns.tsx:245
 msgid "Actions"
@@ -890,7 +893,7 @@ msgstr "إضافة \"{newOptionInput}\\"
 msgid "Add a manual payment of {0}"
 msgstr "إضافة دفعة يدوية بقيمة {0}"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:230
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:236
 msgid "Add a new address to the customer."
 msgstr "أضف عنوانًا جديدًا للعميل."
 
@@ -943,7 +946,7 @@ msgstr "إضافة مجموعات عملاء"
 msgid "Add facet value"
 msgstr "إضافة قيمة خاصية"
 
-#: src/lib/components/shared/facet-value-selector.tsx:298
+#: src/lib/components/shared/facet-value-selector.tsx:119
 msgid "Add facet values"
 msgstr "إضافة قيم الخصائص"
 
@@ -959,8 +962,8 @@ msgstr "أضف مرشحات لمعاينة محتويات المجموعة."
 msgid "Add item"
 msgstr "إضافة عنصر"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:221
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:227
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:233
 msgid "Add new address"
 msgstr "إضافة عنوان جديد"
 
@@ -968,23 +971,23 @@ msgstr "إضافة عنوان جديد"
 msgid "Add option"
 msgstr "إضافة خيار"
 
-#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:175
+#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:162
 msgid "Add Option"
 msgstr "إضافة خيار"
 
-#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:97
+#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:101
 msgid "Add option group"
 msgstr "إضافة مجموعة خيارات"
 
-#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:103
+#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:107
 msgid "Add option group to product"
 msgstr "إضافة مجموعة خيارات إلى المنتج"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:149
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:160
 msgid "Add option value"
 msgstr "إضافة قيمة خيار"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:134
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:145
 msgid "Add option value to {groupName}"
 msgstr "إضافة قيمة خيار إلى {groupName}"
 
@@ -1040,7 +1043,7 @@ msgid "Add Stock to Location"
 msgstr "إضافة مخزون إلى الموقع"
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:134
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:188
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:195
 msgid "Add surcharge"
 msgstr "إضافة رسوم إضافية"
 
@@ -1057,7 +1060,7 @@ msgstr "إضافة شكل"
 msgid "Added"
 msgstr "تمت الإضافة"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:206
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:209
 msgid "Added coupon codes"
 msgstr "رموز قسائم مضافة"
 
@@ -1066,12 +1069,12 @@ msgid "Added to group"
 msgstr "تمت الإضافة إلى المجموعة"
 
 #. placeholder {0}: addedLines.length
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:180
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:183
 msgid "Adding {0} item(s)"
 msgstr "إضافة {0} عنصر"
 
 #. placeholder {0}: addedSurcharges.length
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:230
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:233
 msgid "Adding {0} surcharge(s)"
 msgstr "جاري إضافة {0} رسوم إضافية"
 
@@ -1106,13 +1109,13 @@ msgstr "تم تحديث العنوان"
 msgid "Address updated successfully"
 msgstr "تم تحديث العنوان بنجاح"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:200
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:240
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:206
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:248
 msgid "Addresses"
 msgstr "العناوين"
 
 #. placeholder {0}: adjustedLines.length
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:149
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:152
 msgid "Adjusting {0} lines"
 msgstr "تعديل {0} بند"
 
@@ -1130,11 +1133,11 @@ msgstr "بعد"
 msgid "Alerts"
 msgstr "التنبيهات"
 
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:66
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:67
 msgid "All resources are up and running"
 msgstr "جميع الموارد تعمل بشكل جيد"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:431
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:449
 msgid "Allocated"
 msgstr "مخصص"
 
@@ -1151,7 +1154,11 @@ msgstr "المبلغ"
 msgid "An additional payment of {formattedDiff} will be required."
 msgstr "سيكون مطلوبًا دفع إضافي بقيمة {formattedDiff}."
 
-#: src/lib/components/data-input/combination-mode-input.tsx:44
+#: src/lib/components/shared/paginated-list-data-table.tsx:478
+msgid "An unknown error occurred"
+msgstr "حدث خطأ غير معروف"
+
+#: src/lib/components/data-input/combination-mode-input.tsx:46
 msgid "AND"
 msgstr "و"
 
@@ -1193,7 +1200,7 @@ msgstr "هل أنت متأكد من حذف {selectionLength} ملف؟"
 msgid "Are you sure you want to delete this address?"
 msgstr "هل أنت متأكد من حذف هذا العنوان؟"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:310
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:312
 msgid "Are you sure you want to delete this draft order?"
 msgstr "هل أنت متأكد من حذف طلب المسودة هذا؟"
 
@@ -1205,7 +1212,7 @@ msgstr "هل أنت متأكد من حذف هذا العرض العام؟ لا �
 msgid "Are you sure you want to delete this item? This action cannot be undone."
 msgstr "هل أنت متأكد من حذف هذا العنصر؟ لا يمكن التراجع عن هذا الإجراء."
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:236
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:263
 msgid "Are you sure you want to delete this variant?"
 msgstr "هل أنت متأكد من حذف هذا الشكل؟"
 
@@ -1228,11 +1235,15 @@ msgstr "هل أنت متأكد أنك تريد إزالة {0} {1} من هذه ا
 msgid "Are you sure you want to remove {0} {entityType} from the current channel?"
 msgstr "هل أنت متأكد من إزالة {0} {entityType} من القناة الحالية؟"
 
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:320
+msgid "Are you sure you want to remove this option group from the product?"
+msgstr "هل أنت متأكد أنك تريد إزالة مجموعة الخيارات هذه من المنتج؟"
+
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:38
 #: src/app/routes/_authenticated/_assets/assets.tsx:9
 #: src/app/routes/_authenticated/_assets/assets.tsx:30
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:217
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:463
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:229
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:481
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:231
 msgid "Assets"
 msgstr "الملفات"
@@ -1259,7 +1270,7 @@ msgid "Authentication methods"
 msgstr "طرق المصادقة"
 
 #. placeholder {0}: currentInterval?.label
-#: src/app/routes/_authenticated/_system/job-queue.tsx:245
+#: src/app/routes/_authenticated/_system/job-queue.tsx:246
 msgid "Auto refresh: {0}"
 msgstr "التحديث التلقائي: {0}"
 
@@ -1276,7 +1287,7 @@ msgstr "العملات المتاحة"
 msgid "Available languages"
 msgstr "اللغات المتاحة"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:322
+#: src/lib/components/layout/manage-languages-dialog.tsx:323
 msgid "Available Languages"
 msgstr "اللغات المتاحة"
 
@@ -1284,11 +1295,16 @@ msgstr "اللغات المتاحة"
 msgid "Available:"
 msgstr "متاح:"
 
-#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:72
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:36
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:83
 msgid "Average Order Value"
 msgstr "متوسط قيمة الطلب"
 
-#: src/lib/components/shared/facet-value-selector.tsx:370
+#: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:207
+msgid "Back"
+msgstr "رجوع"
+
+#: src/lib/components/shared/facet-value-selector.tsx:191
 msgid "Back to search"
 msgstr "العودة إلى البحث"
 
@@ -1300,31 +1316,31 @@ msgstr "قبل"
 msgid "between"
 msgstr "بين"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:297
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:269
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:466
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:280
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:468
 msgid "Billing address"
 msgstr "عنوان الفوترة"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:135
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:138
 msgid "Billing address changed"
 msgstr "تم تغيير عنوان الفوترة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:190
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:192
 msgid "Billing address set for order"
 msgstr "تم تعيين عنوان الفوترة للطلب"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:206
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:208
 msgid "Billing address unset for order"
 msgstr "تم إلغاء عنوان الفوترة من الطلب"
 
-#: src/lib/components/shared/facet-value-selector.tsx:336
-#: src/lib/components/shared/facet-value-selector.tsx:353
+#: src/lib/components/shared/facet-value-selector.tsx:157
+#: src/lib/components/shared/facet-value-selector.tsx:174
 msgid "Browse facets"
 msgstr "تصفح الفئات"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:186
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:186
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:197
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:193
 msgid "Calculator"
 msgstr "الحاسبة"
 
@@ -1333,17 +1349,18 @@ msgstr "الحاسبة"
 #: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:337
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:304
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:307
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:350
 #: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:353
 #: src/app/routes/_authenticated/_orders/components/settle-refund-dialog.tsx:71
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:270
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:483
 #: src/lib/components/data-input/product-multi-selector-input.tsx:364
 #: src/lib/components/data-table/data-table-bulk-action-item.tsx:122
 #: src/lib/components/data-table/use-generated-columns.tsx:398
 #: src/lib/components/data-table/views-sheet.tsx:217
 #: src/lib/components/data-table/views-sheet.tsx:295
-#: src/lib/components/layout/manage-languages-dialog.tsx:377
+#: src/lib/components/layout/manage-languages-dialog.tsx:378
 #: src/lib/components/shared/asset/asset-focal-point-editor.tsx:88
 #: src/lib/components/shared/assign-to-channel-dialog.tsx:122
 #: src/lib/components/shared/confirmation-dialog.tsx:43
@@ -1354,11 +1371,11 @@ msgstr "الحاسبة"
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:193
+#: src/app/routes/_authenticated/_system/job-queue.tsx:194
 msgid "Cancel Job"
 msgstr "إلغاء المهمة"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:167
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:174
 msgid "Cancel modification"
 msgstr "إلغاء التعديل"
 
@@ -1386,7 +1403,7 @@ msgstr "القناة"
 msgid "Channel defaults"
 msgstr "الإعدادات الافتراضية للقناة"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:305
+#: src/lib/components/layout/manage-languages-dialog.tsx:306
 msgid "Channel Languages"
 msgstr "لغات القناة"
 
@@ -1410,7 +1427,7 @@ msgid "Clear"
 msgstr "مسح"
 
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:180
-#: src/lib/components/data-table/data-table.tsx:413
+#: src/lib/components/data-table/data-table.tsx:421
 msgid "Clear all"
 msgstr "مسح الكل"
 
@@ -1418,6 +1435,7 @@ msgstr "مسح الكل"
 msgid "Clear filter"
 msgstr "مسح الفلتر"
 
+#: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:284
 #: src/lib/components/data-table/data-table-faceted-filter.tsx:185
 msgid "Clear filters"
 msgstr "مسح الفلاتر"
@@ -1430,13 +1448,13 @@ msgstr "انقر على \"تشغيل الاختبار\" لاختبار طريق�
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:114
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:141
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:130
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:158
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:168
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:155
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:187
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:104
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:150
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:156
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:61
-#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:97
+#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:98
 msgid "Code"
 msgstr "الرمز"
 
@@ -1452,7 +1470,7 @@ msgstr "تم نقل المجموعة إلى مجموعة أصل جديدة"
 msgid "Collection position updated"
 msgstr "تم تحديث موضع المجموعة"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:47
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:48
 #: src/app/routes/_authenticated/_collections/collections.tsx:38
 #: src/app/routes/_authenticated/_collections/collections.tsx:265
 msgid "Collections"
@@ -1462,7 +1480,7 @@ msgstr "المجموعات"
 msgid "Collections moved successfully"
 msgstr "تم نقل المجموعات بنجاح"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:93
+#: src/lib/components/data-table/data-table-view-options.tsx:95
 msgid "Column settings"
 msgstr "إعدادات الأعمدة"
 
@@ -1472,16 +1490,16 @@ msgstr "إعدادات الأعمدة"
 msgid "Company"
 msgstr "الشركة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:326
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:328
 msgid "Complete draft"
 msgstr "إكمال المسودة"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:222
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:174
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:232
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:180
 msgid "Conditions"
 msgstr "الشروط"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:243
+#: src/lib/components/layout/manage-languages-dialog.tsx:244
 msgid "Configure available languages for your store and channels"
 msgstr "تكوين اللغات المتاحة لمتجرك وقنواتك"
 
@@ -1510,7 +1528,7 @@ msgstr "يحتوي على"
 msgid "Content:"
 msgstr "المحتوى:"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:241
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:253
 #: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Contents"
 msgstr "المحتويات"
@@ -1538,36 +1556,36 @@ msgstr "البلدان"
 msgid "Country"
 msgstr "البلد"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:200
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:210
 msgid "Coupon code"
 msgstr "رمز القسيمة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:246
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:248
 msgid "Coupon code removed from order"
 msgstr "تم حذف رمز القسيمة من الطلب"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:233
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:235
 msgid "Coupon code set for order"
 msgstr "تم تعيين رمز القسيمة للطلب"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:108
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:125
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:143
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:151
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:87
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:96
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:155
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:161
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:113
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:102
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:131
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:227
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:141
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:228
 #: src/app/routes/_authenticated/_products/components/create-product-variants.tsx:200
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:138
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:159
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:137
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:147
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:87
 #: src/app/routes/_authenticated/_sellers/sellers_.$id.tsx:81
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:133
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:139
 #: src/app/routes/_authenticated/_stock-locations/stock-locations_.$id.tsx:99
 #: src/app/routes/_authenticated/_tax-categories/tax-categories_.$id.tsx:99
 #: src/app/routes/_authenticated/_tax-rates/tax-rates_.$id.tsx:95
@@ -1581,7 +1599,7 @@ msgstr "إنشاء"
 msgid "Create \"{0}\""
 msgstr "إنشاء \"{0}\""
 
-#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:182
+#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:188
 msgid "Create {createCount} variants"
 msgstr "إنشاء {createCount} شكل"
 
@@ -1598,15 +1616,15 @@ msgstr "إنشاء خيارات المنتج"
 msgid "Create variant"
 msgstr "إنشاء شكل"
 
-#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:153
+#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:158
 msgid "Create Variants"
 msgstr "إنشاء الأشكال"
 
-#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:156
+#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:161
 msgid "Create variants for your product"
 msgstr "إنشاء أشكال لمنتجك"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:114
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/framework/layout-engine/page-layout.tsx:433
 msgid "Created"
 msgstr "تم الإنشاء"
@@ -1616,7 +1634,7 @@ msgstr "تم الإنشاء"
 msgid "Created at"
 msgstr "تم الإنشاء في"
 
-#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:180
+#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:186
 msgid "Creating..."
 msgstr "جارٍ الإنشاء..."
 
@@ -1629,25 +1647,25 @@ msgstr "الحالي"
 msgid "Current facet values"
 msgstr "قيم الخصائص الحالية"
 
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:54
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:55
 msgid "Current status"
 msgstr "الحالة الحالية"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:393
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:395
 msgid "Custom fields"
 msgstr "الحقول المخصصة"
 
-#: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:42
+#: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:49
 msgid "Custom Fields"
 msgstr "الحقول المخصصة"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:169
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:172
 msgid "Custom fields changed"
 msgstr "تم تغيير الحقول المخصصة"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:272
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:226
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:419
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:274
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:234
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:421
 #: src/lib/components/shared/role-code-label.tsx:8
 msgid "Customer"
 msgstr "العميل"
@@ -1664,7 +1682,7 @@ msgstr "تم تحديث تفاصيل العميل"
 msgid "Customer group members for {customerGroupName}"
 msgstr "أعضاء مجموعة العملاء {customerGroupName}"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:255
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:261
 msgid "Customer groups"
 msgstr "مجموعات العملاء"
 
@@ -1675,7 +1693,7 @@ msgid "Customer Groups"
 msgstr "مجموعات العملاء"
 
 #: src/app/routes/_authenticated/_customers/components/customer-history/customer-history-container.tsx:30
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:249
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:255
 msgid "Customer history"
 msgstr "سجل العميل"
 
@@ -1691,7 +1709,7 @@ msgstr "لم يتم العثور على العميل"
 msgid "Customer registered"
 msgstr "تم تسجيل العميل"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:160
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:162
 msgid "Customer set for order"
 msgstr "تم تعيين العميل للطلب"
 
@@ -1704,7 +1722,7 @@ msgid "Customer verified"
 msgstr "تم التحقق من العميل"
 
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:114
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:58
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:62
 #: src/app/routes/_authenticated/_customers/customers.tsx:16
 #: src/app/routes/_authenticated/_customers/customers.tsx:22
 msgid "Customers"
@@ -1732,7 +1750,7 @@ msgstr "العملة الافتراضية"
 msgid "Default language"
 msgstr "اللغة الافتراضية"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:350
+#: src/lib/components/layout/manage-languages-dialog.tsx:351
 msgid "Default Language"
 msgstr "اللغة الافتراضية"
 
@@ -1751,7 +1769,7 @@ msgstr "المنطقة الضريبية الافتراضية"
 
 #: src/app/common/delete-bulk-action.tsx:139
 #: src/app/routes/_authenticated/_assets/components/asset-bulk-actions.tsx:41
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:312
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:357
 #: src/lib/components/data-table/use-generated-columns.tsx:381
 #: src/lib/components/data-table/use-generated-columns.tsx:412
 #: src/lib/components/data-table/views-sheet.tsx:272
@@ -1767,11 +1785,11 @@ msgstr "حذف العنوان"
 msgid "Delete column"
 msgstr "حذف العمود"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:316
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:318
 msgid "Delete draft"
 msgstr "حذف المسودة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:309
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:311
 msgid "Delete draft order"
 msgstr "حذف طلب المسودة"
 
@@ -1799,14 +1817,14 @@ msgstr "تم حذف {selectionLength} ملف"
 msgid "Deleted successfully"
 msgstr "تم الحذف بنجاح"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:186
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:194
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:77
 #: src/app/routes/_authenticated/_orders/components/order-tax-summary.tsx:14
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:165
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:175
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:166
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:168
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:178
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:98
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:158
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:164
 #: src/app/routes/_authenticated/_stock-locations/stock-locations_.$id.tsx:118
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:110
 msgid "Description"
@@ -1835,11 +1853,15 @@ msgstr "معطل"
 msgid "Discount"
 msgstr "الخصم"
 
+#: src/app/routes/_authenticated/_orders/components/order-table.tsx:122
+msgid "Discounts"
+msgstr "الخصومات"
+
 #: src/lib/components/layout/language-dialog.tsx:55
 msgid "Display language"
 msgstr "لغة العرض"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:364
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:382
 msgid "Do not track"
 msgstr "عدم التتبع"
 
@@ -1847,20 +1869,20 @@ msgstr "عدم التتبع"
 msgid "does not contain"
 msgstr "لا يحتوي على"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:303
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:305
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
 msgstr "طلب مسودة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:257
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:259
 msgid "Draft order completed"
 msgstr "اكتمل طلب المسودة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:274
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:276
 msgid "Draft order deleted"
 msgstr "تم حذف طلب المسودة"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:336
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:338
 msgid "Draft order status"
 msgstr "حالة طلب المسودة"
 
@@ -1879,6 +1901,10 @@ msgstr "نسخ"
 msgid "Duplicate {0}s"
 msgstr "نسخ {0}"
 
+#: src/app/routes/_authenticated/_products/components/option-value-input.tsx:35
+msgid "Duplicate value \"{trimmed}\" already exists"
+msgstr "القيمة المكررة \"{trimmed}\" موجودة بالفعل"
+
 #. placeholder {0}: progress.completed
 #. placeholder {1}: progress.total
 #: src/app/common/duplicate-bulk-action.tsx:127
@@ -1893,12 +1919,12 @@ msgstr "مثل الحجم"
 msgid "e.g. Small"
 msgstr "مثل صغير"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:144
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:155
 msgid "e.g., Red, Large, Cotton"
 msgstr "مثل أحمر، كبير، قطن"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:250
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:276
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:266
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:295
 #: src/lib/components/shared/asset/asset-gallery.tsx:462
 #: src/lib/components/shared/history-timeline/history-note-entry.tsx:48
 msgid "Edit"
@@ -1942,8 +1968,8 @@ msgstr "تحرير الملاحظة"
 msgid "Edit or delete existing tags"
 msgstr "تحرير أو حذف العلامات الموجودة"
 
-#: src/lib/components/data-input/slug-input.tsx:278
-#: src/lib/components/data-input/slug-input.tsx:280
+#: src/lib/components/data-input/slug-input.tsx:279
+#: src/lib/components/data-input/slug-input.tsx:281
 msgid "Edit slug manually"
 msgstr "تحرير الرابط المختصر يدويًا"
 
@@ -1955,7 +1981,7 @@ msgstr "قم بتحرير تفاصيل العنوان أدناه."
 msgid "Email"
 msgstr "البريد الإلكتروني"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:185
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:191
 msgid "Email address"
 msgstr "عنوان البريد الإلكتروني"
 
@@ -1977,11 +2003,11 @@ msgid "Enable"
 msgstr "تمكين"
 
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:96
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:141
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:151
 #: src/app/routes/_authenticated/_payment-methods/payment-methods.tsx:43
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:237
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:238
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:132
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:147
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:157
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:113
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:117
 #: src/app/routes/_authenticated/_tax-rates/tax-rates_.$id.tsx:105
@@ -1992,7 +2018,11 @@ msgstr "تمكين"
 msgid "Enabled"
 msgstr "ممكّن"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:188
+#: src/lib/components/data-table/data-table-filter-badge.tsx:111
+msgid "end"
+msgstr "نهاية"
+
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:198
 msgid "Ends at"
 msgstr "ينتهي في"
 
@@ -2004,7 +2034,7 @@ msgstr "أدخل سببًا مخصصًا..."
 msgid "Enter refund note"
 msgstr "أدخل ملاحظة الاسترداد"
 
-#: src/lib/components/data-input/slug-input.tsx:238
+#: src/lib/components/data-input/slug-input.tsx:239
 msgid "Enter slug manually"
 msgstr "أدخل الرابط المختصر يدويًا"
 
@@ -2021,6 +2051,7 @@ msgid "Entity Information"
 msgstr "معلومات الكيان"
 
 #: src/lib/components/shared/error-page.tsx:18
+#: src/lib/components/shared/paginated-list-data-table.tsx:476
 msgid "Error"
 msgstr "خطأ"
 
@@ -2071,10 +2102,12 @@ msgid "Facet"
 msgstr "الخاصية"
 
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:145
+#: src/app/routes/_authenticated/_product-variants/product-variants.tsx:92
+#: src/app/routes/_authenticated/_products/products.tsx:77
 msgid "Facet values"
 msgstr "قيم الخصائص"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:446
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:464
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:210
 msgid "Facet Values"
 msgstr "قيم الخصائص"
@@ -2087,16 +2120,17 @@ msgstr "قيم الخصائص لـ {facetName}"
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:37
 #: src/app/routes/_authenticated/_facets/facets.tsx:22
 #: src/app/routes/_authenticated/_facets/facets.tsx:29
-#: src/lib/components/shared/facet-value-selector.tsx:405
+#: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:235
+#: src/lib/components/shared/facet-value-selector.tsx:224
 msgid "Facets"
 msgstr "الخصائص"
 
 #: src/app/routes/_authenticated/_customer-groups/components/customer-group-members-table.tsx:61
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:129
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:135
 msgid "Failed to add customer to group"
 msgstr "فشل إضافة العميل إلى المجموعة"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:103
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:114
 msgid "Failed to add option value"
 msgstr "فشل إضافة قيمة الخيار"
 
@@ -2127,7 +2161,7 @@ msgstr "فشل تحويل العرض العام إلى عرض شخصي"
 msgid "Failed to convert view to global"
 msgstr "فشل تحويل العرض إلى عام"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:119
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:125
 msgid "Failed to create address"
 msgstr "فشل إنشاء العنوان"
 
@@ -2140,7 +2174,7 @@ msgstr "فشل في إنشاء المسؤول"
 msgid "Failed to create channel"
 msgstr "فشل إنشاء القناة"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:119
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:120
 msgid "Failed to create collection"
 msgstr "فشل إنشاء المجموعة"
 
@@ -2148,8 +2182,8 @@ msgstr "فشل إنشاء المجموعة"
 msgid "Failed to create country"
 msgstr "فشل إنشاء البلد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:100
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:106
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:112
 msgid "Failed to create customer"
 msgstr "فشل إنشاء العميل"
 
@@ -2165,11 +2199,11 @@ msgstr "فشل إنشاء الخاصية"
 msgid "Failed to create facet value"
 msgstr "فشل إنشاء قيمة الخاصية"
 
-#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:86
+#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:87
 msgid "Failed to create option group"
 msgstr "فشل إنشاء مجموعة الخيارات"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:111
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:112
 msgid "Failed to create payment method"
 msgstr "فشل إنشاء طريقة الدفع"
 
@@ -2190,13 +2224,17 @@ msgstr "فشل إنشاء مجموعة خيارات المنتج"
 msgid "Failed to create product options"
 msgstr "فشل إنشاء خيارات المنتج"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:137
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:138
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:174
 msgid "Failed to create product variant"
 msgstr "فشل إنشاء شكل المنتج"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:113
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:121
+#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:132
+msgid "Failed to create product variants"
+msgstr "فشل إنشاء متغيرات المنتج"
+
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:114
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:122
 msgid "Failed to create promotion"
 msgstr "فشل إنشاء العرض الترويجي"
 
@@ -2208,7 +2246,7 @@ msgstr "فشل إنشاء الدور"
 msgid "Failed to create seller"
 msgstr "فشل إنشاء البائع"
 
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:101
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:102
 msgid "Failed to create shipping method"
 msgstr "فشل إنشاء طريقة الشحن"
 
@@ -2265,17 +2303,17 @@ msgstr "فشل نسخ العرض العام"
 msgid "Failed to duplicate view"
 msgstr "فشل نسخ العرض"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:79
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:85
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:187
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:80
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:86
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:188
 msgid "Failed to fulfill order"
 msgstr "فشل تنفيذ الطلب"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:272
+#: src/lib/components/layout/manage-languages-dialog.tsx:273
 msgid "Failed to load global settings"
 msgstr "فشل تحميل الإعدادات العامة"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:148
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:149
 msgid "Failed to modify order"
 msgstr "فشل تعديل الطلب"
 
@@ -2292,7 +2330,7 @@ msgstr "فشل في معالجة الاسترداد"
 msgid "Failed to remove countries from zone"
 msgstr "فشل في إزالة البلدان من المنطقة"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:139
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:145
 msgid "Failed to remove customer from group"
 msgstr "فشل إزالة العميل من المجموعة"
 
@@ -2312,7 +2350,7 @@ msgstr "فشل إعادة تسمية العرض العام"
 msgid "Failed to rename view"
 msgstr "فشل إعادة تسمية العرض"
 
-#: src/lib/components/data-table/data-table.tsx:220
+#: src/lib/components/data-table/data-table.tsx:225
 msgid "Failed to reorder items"
 msgstr "فشل في إعادة ترتيب العناصر"
 
@@ -2326,7 +2364,7 @@ msgstr "فشل تسوية الدفع"
 msgid "Failed to settle refund"
 msgstr "فشل تسوية الاسترداد"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:127
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:129
 msgid "Failed to transition order to state"
 msgstr "فشل نقل الطلب إلى الحالة"
 
@@ -2347,7 +2385,7 @@ msgstr "فشل تحديث الملف"
 msgid "Failed to update channel"
 msgstr "فشل تحديث القناة"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:119
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:120
 msgid "Failed to update collection"
 msgstr "فشل تحديث المجموعة"
 
@@ -2359,8 +2397,8 @@ msgstr "فشل في تحديث موضع المجموعة"
 msgid "Failed to update country"
 msgstr "فشل تحديث البلد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:100
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:106
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:112
 msgid "Failed to update customer"
 msgstr "فشل تحديث العميل"
 
@@ -2376,8 +2414,8 @@ msgstr "فشل تحديث الخاصية"
 msgid "Failed to update facet value"
 msgstr "فشل تحديث قيمة الخاصية"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:42
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:46
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:52
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:56
 msgid "Failed to update fulfillment state"
 msgstr "فشل تحديث حالة التنفيذ"
 
@@ -2387,11 +2425,11 @@ msgid "Failed to update global settings"
 msgstr "فشل تحديث الإعدادات العامة"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:95
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:60
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:64
 msgid "Failed to update order"
 msgstr "فشل تحديث الطلب"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:111
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:112
 msgid "Failed to update payment method"
 msgstr "فشل تحديث طريقة الدفع"
 
@@ -2412,7 +2450,7 @@ msgstr "فشل تحديث خيار المنتج"
 msgid "Failed to update product option group"
 msgstr "فشل تحديث مجموعة خيارات المنتج"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:137
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:138
 msgid "Failed to update product variant"
 msgstr "فشل تحديث شكل المنتج"
 
@@ -2420,8 +2458,8 @@ msgstr "فشل تحديث شكل المنتج"
 msgid "Failed to update profile"
 msgstr "فشل تحديث الملف الشخصي"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:113
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:121
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:114
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:122
 msgid "Failed to update promotion"
 msgstr "فشل تحديث العرض الترويجي"
 
@@ -2433,7 +2471,7 @@ msgstr "فشل تحديث الدور"
 msgid "Failed to update seller"
 msgstr "فشل تحديث البائع"
 
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:101
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:102
 msgid "Failed to update shipping method"
 msgstr "فشل تحديث طريقة الشحن"
 
@@ -2469,16 +2507,16 @@ msgstr "تصفية حسب اسم المجموعة"
 msgid "Filter by tags"
 msgstr "تصفية حسب العلامات"
 
-#: src/lib/components/data-table/data-table.tsx:351
+#: src/lib/components/data-table/data-table.tsx:356
 msgid "Filter..."
 msgstr "تصفية..."
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:191
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:199
 msgid "Filters"
 msgstr "الفلاتر"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:119
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:173
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:179
 #: src/app/routes/_authenticated/_profile/profile.tsx:95
 msgid "First name"
 msgstr "الاسم الأول"
@@ -2486,6 +2524,14 @@ msgstr "الاسم الأول"
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:152
 msgid "Focal Point"
 msgstr "نقطة التركيز"
+
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:494
+msgid "Force remove"
+msgstr "إزالة إجبارية"
+
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:476
+msgid "Force remove option group"
+msgstr "إزالة مجموعة الخيارات إجبارياً"
 
 #. placeholder {0}: testResult.length
 #. placeholder {1}: testResult.length !== 1 ? 's' : ''
@@ -2499,18 +2545,18 @@ msgstr "تم العثور على {0} طريقة شحن مؤهلة"
 msgid "From {0} to {1}"
 msgstr "من {0} إلى {1}"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:219
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:225
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:221
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:227
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:313
 msgid "Fulfill order"
 msgstr "تنفيذ الطلب"
 
 #. placeholder {0}: fulfillment.lines.reduce((acc, line) => acc + line.quantity, 0)
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:121
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:131
 msgid "Fulfilled items ({0})"
 msgstr "العناصر المنفذة ({0})"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:308
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:311
 msgid "Fulfilling..."
 msgstr "جارٍ التنفيذ..."
 
@@ -2530,20 +2576,20 @@ msgstr "التنفيذ #{0} من {1} إلى {2}"
 msgid "Fulfillment created"
 msgstr "تم إنشاء التنفيذ"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:307
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:309
 msgid "Fulfillment details"
 msgstr "تفاصيل التنفيذ"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:289
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:166
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:291
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:172
 msgid "Fulfillment handler"
 msgstr "معالج التنفيذ"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:105
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:115
 msgid "Fulfillment ID"
 msgstr "معرف التنفيذ"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:39
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:49
 msgid "Fulfillment state updated successfully"
 msgstr "تم تحديث حالة التنفيذ بنجاح"
 
@@ -2551,22 +2597,25 @@ msgstr "تم تحديث حالة التنفيذ بنجاح"
 msgid "Fulfillment transitioned"
 msgstr "تم نقل التنفيذ"
 
+#~ msgid "fulfillmentState.Created"
+#~ msgstr "تم الإنشاء"
+
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:109
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:159
 #: src/lib/components/shared/customer-address-form.tsx:100
 msgid "Full Name"
 msgstr "الاسم الكامل"
 
-#: src/lib/components/shared/custom-fields-form.tsx:101
+#: src/lib/components/shared/custom-fields-form.tsx:103
 msgid "General"
 msgstr "عام"
 
-#: src/lib/components/data-input/slug-input.tsx:278
-#: src/lib/components/data-input/slug-input.tsx:280
+#: src/lib/components/data-input/slug-input.tsx:279
+#: src/lib/components/data-input/slug-input.tsx:281
 msgid "Generate slug automatically"
 msgstr "إنشاء الرابط المختصر تلقائيًا"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:252
+#: src/lib/components/layout/manage-languages-dialog.tsx:253
 msgid "Global Languages"
 msgstr "اللغات العامة"
 
@@ -2595,19 +2644,19 @@ msgstr "تم نسخ العرض العام بنجاح"
 msgid "Global view renamed successfully"
 msgstr "تمت إعادة تسمية العرض العام بنجاح"
 
-#: src/lib/components/data-table/data-table-pagination.tsx:58
+#: src/lib/components/data-table/data-table-pagination.tsx:60
 msgid "Go to first page"
 msgstr "الانتقال إلى الصفحة الأولى"
 
-#: src/lib/components/data-table/data-table-pagination.tsx:95
+#: src/lib/components/data-table/data-table-pagination.tsx:97
 msgid "Go to last page"
 msgstr "الانتقال إلى الصفحة الأخيرة"
 
-#: src/lib/components/data-table/data-table-pagination.tsx:83
+#: src/lib/components/data-table/data-table-pagination.tsx:85
 msgid "Go to next page"
 msgstr "الانتقال إلى الصفحة التالية"
 
-#: src/lib/components/data-table/data-table-pagination.tsx:70
+#: src/lib/components/data-table/data-table-pagination.tsx:72
 msgid "Go to previous page"
 msgstr "الانتقال إلى الصفحة السابقة"
 
@@ -2647,7 +2696,7 @@ msgstr "عنوان 5"
 msgid "Heading 6"
 msgstr "عنوان 6"
 
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:42
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:43
 msgid "Health checks"
 msgstr "فحوصات الصحة"
 
@@ -2671,7 +2720,7 @@ msgstr "المعرف"
 msgid "Identifier"
 msgstr "المعرف"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:197
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:205
 msgid "If enabled, the filters will be inherited from the parent collection and combined with the filters set on this collection."
 msgstr "إذا تم التمكين، سيتم وراثة الفلاتر من المجموعة الأصل ودمجها مع الفلاتر المعينة على هذه المجموعة."
 
@@ -2688,11 +2737,11 @@ msgstr "في"
 msgid "Includes tax at {taxRate}%"
 msgstr "يشمل ضريبة بنسبة {taxRate}%"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:195
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:203
 msgid "Inherit filters"
 msgstr "وراثة الفلاتر"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:358
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:376
 msgid "Inherit from global settings"
 msgstr "الوراثة من الإعدادات العامة"
 
@@ -2761,7 +2810,7 @@ msgstr "ليس في"
 msgid "is null"
 msgstr "فارغ"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:107
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:109
 msgid "Item added to order"
 msgstr "تمت إضافة عنصر إلى الطلب"
 
@@ -2770,7 +2819,7 @@ msgid "Items refunded"
 msgstr "العناصر المستردة"
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:33
-#: src/app/routes/_authenticated/_system/job-queue.tsx:102
+#: src/app/routes/_authenticated/_system/job-queue.tsx:103
 msgid "Job Queue"
 msgstr "قائمة انتظار المهام"
 
@@ -2803,7 +2852,7 @@ msgid "Last month"
 msgstr "الشهر الماضي"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:125
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:179
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:185
 #: src/app/routes/_authenticated/_profile/profile.tsx:101
 msgid "Last name"
 msgstr "اسم العائلة"
@@ -2812,12 +2861,12 @@ msgstr "اسم العائلة"
 msgid "Last Result"
 msgstr "آخر نتيجة"
 
-#. placeholder {0}: formatRelative(dataUpdatedAt, new Date())
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:57
+#. placeholder {0}: formatRelativeDate(new Date(dataUpdatedAt))
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:58
 msgid "Last updated {0}"
 msgstr "آخر تحديث {0}"
 
-#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:77
+#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Latest Orders"
 msgstr "أحدث الطلبات"
 
@@ -2856,7 +2905,7 @@ msgstr "تحميل {0} إضافية ({remaining} متبقية)"
 msgid "Load more"
 msgstr "تحميل المزيد"
 
-#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:63
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:78
 msgid "Loading addresses..."
 msgstr "جارٍ تحميل العناوين..."
 
@@ -2864,7 +2913,7 @@ msgstr "جارٍ تحميل العناوين..."
 msgid "Loading collections..."
 msgstr "جارٍ تحميل المجموعات..."
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:266
+#: src/lib/components/layout/manage-languages-dialog.tsx:267
 msgid "Loading global settings..."
 msgstr "جارٍ تحميل الإعدادات العامة..."
 
@@ -2878,11 +2927,11 @@ msgstr "جارٍ تحميل العلامات..."
 
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:124
 #: src/lib/components/data-input/product-multi-selector-input.tsx:82
-#: src/lib/components/data-input/relation-selector.tsx:427
+#: src/lib/components/data-input/relation-selector.tsx:429
 #: src/lib/components/shared/country-selector.tsx:88
 #: src/lib/components/shared/customer-group-selector.tsx:58
 #: src/lib/components/shared/customer-selector.tsx:90
-#: src/lib/components/shared/facet-value-selector.tsx:340
+#: src/lib/components/shared/facet-value-selector.tsx:161
 #: src/lib/components/shared/seller-selector.tsx:92
 msgid "Loading..."
 msgstr "جارٍ التحميل..."
@@ -2912,7 +2961,7 @@ msgid "Manage Global Views"
 msgstr "إدارة العروض العامة"
 
 #: src/lib/components/layout/channel-switcher.tsx:193
-#: src/lib/components/layout/manage-languages-dialog.tsx:240
+#: src/lib/components/layout/manage-languages-dialog.tsx:241
 msgid "Manage Languages"
 msgstr "إدارة اللغات"
 
@@ -2924,12 +2973,12 @@ msgstr "إدارة العلامات"
 msgid "Manage Tags"
 msgstr "إدارة العلامات"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:252
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:279
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:184
 msgid "Manage variants"
 msgstr "إدارة الأشكال"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:56
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:67
 msgid "Manage Variants"
 msgstr "إدارة الأشكال"
 
@@ -2949,24 +2998,24 @@ msgstr "تاريخ متوسط"
 msgid "Metadata"
 msgstr "البيانات الوصفية"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:106
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:116
 msgid "Method"
 msgstr "الطريقة"
 
-#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:63
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:74
 msgid "Metrics"
 msgstr "المقاييس"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:158
-#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:75
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:159
+#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:78
 msgid "Modify"
 msgstr "تعديل"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:162
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:169
 msgid "Modify order"
 msgstr "تعديل الطلب"
 
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:82
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:83
 msgid "Monitored Resources"
 msgstr "الموارد المراقبة"
 
@@ -3012,20 +3061,20 @@ msgid "My Saved Views"
 msgstr "عروضي المحفوظة"
 
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:46
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:165
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:173
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:108
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:107
 #: src/app/routes/_authenticated/_customers/customers.tsx:75
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:135
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:124
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:152
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:162
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:328
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:303
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:348
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:149
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:181
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:159
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:169
 #: src/app/routes/_authenticated/_sellers/sellers_.$id.tsx:96
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:144
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:150
 #: src/app/routes/_authenticated/_stock-locations/stock-locations_.$id.tsx:109
 #: src/app/routes/_authenticated/_tax-categories/tax-categories_.$id.tsx:110
 #: src/app/routes/_authenticated/_tax-rates/tax-rates_.$id.tsx:116
@@ -3056,8 +3105,8 @@ msgstr "قناة جديدة"
 msgid "New Channel"
 msgstr "قناة جديدة"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:48
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:135
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:49
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:138
 msgid "New collection"
 msgstr "مجموعة جديدة"
 
@@ -3070,8 +3119,8 @@ msgstr "مجموعة جديدة"
 msgid "New country"
 msgstr "بلد جديد"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:59
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:147
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:63
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:153
 msgid "New customer"
 msgstr "عميل جديد"
 
@@ -3114,8 +3163,8 @@ msgstr "قيم خصائص جديدة للإضافة:"
 msgid "New option"
 msgstr "خيار جديد"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:43
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:122
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:44
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:126
 msgid "New payment method"
 msgstr "طريقة دفع جديدة"
 
@@ -3128,7 +3177,7 @@ msgstr "طريقة دفع جديدة"
 msgid "New product"
 msgstr "منتج جديد"
 
-#: src/app/routes/_authenticated/_products/products.tsx:114
+#: src/app/routes/_authenticated/_products/products.tsx:131
 msgid "New Product"
 msgstr "منتج جديد"
 
@@ -3140,12 +3189,12 @@ msgstr "خيار منتج جديد"
 msgid "New product option group"
 msgstr "مجموعة خيارات منتج جديدة"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:218
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:219
 msgid "New product variant"
 msgstr "شكل منتج جديد"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:45
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:129
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:46
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:133
 msgid "New promotion"
 msgstr "عرض ترويجي جديد"
 
@@ -3171,8 +3220,8 @@ msgstr "بائع جديد"
 msgid "New Seller"
 msgstr "بائع جديد"
 
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:44
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:115
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:45
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:119
 msgid "New shipping method"
 msgstr "طريقة شحن جديدة"
 
@@ -3233,7 +3282,7 @@ msgstr "لا توجد إجراءات متاحة"
 msgid "No address"
 msgstr "لا يوجد عنوان"
 
-#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:67
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:82
 msgid "No addresses found"
 msgstr "لم يتم العثور على عناوين"
 
@@ -3241,7 +3290,7 @@ msgstr "لم يتم العثور على عناوين"
 msgid "No alerts"
 msgstr "لا توجد تنبيهات"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:289
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:303
 msgid "No billing address"
 msgstr "لا يوجد عنوان فوترة"
 
@@ -3249,8 +3298,8 @@ msgstr "لا يوجد عنوان فوترة"
 msgid "No countries found"
 msgstr "لم يتم العثور على بلدان"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:282
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:236
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:284
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:244
 msgid "No customer"
 msgstr "لا يوجد عميل"
 
@@ -3270,11 +3319,11 @@ msgstr "لم يتم العثور على طرق شحن مؤهلة لهذا الط
 msgid "No facet values"
 msgstr "لا توجد قيم خصائص"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:327
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:326
 msgid "No fulfillments"
 msgstr "لا توجد تنفيذات"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:336
+#: src/lib/components/layout/manage-languages-dialog.tsx:337
 msgid "No global languages configured"
 msgstr "لم يتم تكوين لغات عامة"
 
@@ -3290,20 +3339,20 @@ msgstr "لم يتم العثور على عناصر"
 msgid "No items selected"
 msgstr "لم يتم تحديد عناصر"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:246
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:249
 msgid "No modifications made"
 msgstr "لم يتم إجراء تعديلات"
 
-#: src/lib/components/shared/facet-value-selector.tsx:425
+#: src/lib/components/shared/facet-value-selector.tsx:244
 msgid "No more facets"
 msgstr "لا توجد فئات أخرى"
 
-#: src/lib/components/data-input/relation-selector.tsx:458
-#: src/lib/components/shared/facet-value-selector.tsx:397
+#: src/lib/components/data-input/relation-selector.tsx:460
+#: src/lib/components/shared/facet-value-selector.tsx:216
 msgid "No more items"
 msgstr "لا توجد عناصر أخرى"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:259
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:286
 msgid "No option groups defined yet. Add option groups to create different variants of your product (e.g., Size, Color, Material)"
 msgstr "لم يتم تعريف مجموعات خيارات بعد. أضف مجموعات خيارات لإنشاء أشكال مختلفة من منتجك (مثل الحجم، اللون، المادة)"
 
@@ -3315,18 +3364,19 @@ msgstr "لا يلزم دفع أو استرداد لهذه التغييرات."
 msgid "No payment or refund required"
 msgstr "لا يلزم دفع أو استرداد"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:148
+#: src/app/routes/_authenticated/_system/job-queue.tsx:149
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:184
 msgid "No result yet"
 msgstr "لا توجد نتيجة بعد"
 
-#: src/lib/components/data-table/data-table.tsx:531
+#: src/lib/components/data-table/data-table.tsx:539
 #: src/lib/components/shared/customer-group-selector.tsx:58
 msgid "No results"
 msgstr "لا توجد نتائج"
 
-#: src/lib/components/data-input/relation-selector.tsx:430
-#: src/lib/components/shared/facet-value-selector.tsx:344
+#: src/lib/components/data-input/relation-selector.tsx:432
+#: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:192
+#: src/lib/components/shared/facet-value-selector.tsx:165
 msgid "No results found"
 msgstr "لم يتم العثور على نتائج"
 
@@ -3334,7 +3384,7 @@ msgstr "لم يتم العثور على نتائج"
 msgid "No sellers found"
 msgstr "لم يتم العثور على بائعين"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:263
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:274
 msgid "No shipping address"
 msgstr "لا يوجد عنوان شحن"
 
@@ -3361,6 +3411,10 @@ msgstr "لم يتم تحديد علامات"
 msgid "No translation found for {0}"
 msgstr "لم يتم العثور على ترجمة لـ {0}"
 
+#: src/app/routes/_authenticated/index.tsx:225
+msgid "No widgets available"
+msgstr "لا توجد أدوات متاحة"
+
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:75
 msgid "Normal"
 msgstr "عادي"
@@ -3377,7 +3431,7 @@ msgstr "غير قيد التشغيل"
 msgid "Not set"
 msgstr "غير معين"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:251
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:267
 msgid "Note"
 msgstr "ملاحظة"
 
@@ -3389,6 +3443,10 @@ msgstr "تمت إضافة الملاحظة"
 #: src/lib/components/shared/history-timeline/history-note-checkbox.tsx:21
 msgid "Note is private"
 msgstr "الملاحظة خاصة"
+
+#: src/lib/components/data-input/datetime-input.tsx:185
+msgid "Now"
+msgstr "الآن"
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:70
 msgid "Off"
@@ -3402,7 +3460,7 @@ msgstr "البريد الإلكتروني القديم:"
 msgid "Only draft orders can be completed"
 msgstr "يمكن إكمال طلبات المسودة فقط"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:269
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:296
 msgid "Option"
 msgstr "الخيار"
 
@@ -3415,15 +3473,16 @@ msgstr "مجموعة الخيارات {0}"
 msgid "Option group name"
 msgstr "اسم مجموعة الخيارات"
 
-#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:81
+#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:66
 msgid "Option Group Name"
 msgstr "اسم مجموعة الخيارات"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:190
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:208
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:217
 msgid "Option group removed"
 msgstr "تمت إزالة مجموعة الخيارات"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:255
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:282
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:63
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:81
 msgid "Option Groups"
@@ -3433,19 +3492,23 @@ msgstr "مجموعات الخيارات"
 msgid "Option name"
 msgstr "اسم الخيار"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:142
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:153
 msgid "Option value name"
 msgstr "اسم قيمة الخيار"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:275
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:302
 msgid "Option values"
 msgstr "قيم الخيارات"
 
-#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:90
+#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:75
 msgid "Option Values"
 msgstr "قيم الخيارات"
 
-#: src/lib/components/data-input/combination-mode-input.tsx:56
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:246
+msgid "Options"
+msgstr "الخيارات"
+
+#: src/lib/components/data-input/combination-mode-input.tsx:59
 msgid "OR"
 msgstr "أو"
 
@@ -3455,11 +3518,12 @@ msgstr "أو"
 msgid "Order cancelled"
 msgstr "تم إلغاء الطلب"
 
-#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:69
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:32
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:80
 msgid "Order Count"
 msgstr "عدد الطلبات"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:90
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:92
 msgid "Order custom fields updated"
 msgstr "تم تحديث الحقول المخصصة للطلب"
 
@@ -3479,26 +3543,26 @@ msgstr "طلب المسودة غير جاهز للإكمال"
 msgid "Order fulfilled"
 msgstr "تم تنفيذ الطلب"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:260
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:261
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-container.tsx:30
 msgid "Order history"
 msgstr "سجل الطلب"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:144
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:146
 msgid "Order line removed"
 msgstr "تمت إزالة بند الطلب"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:128
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:130
 msgid "Order line updated"
 msgstr "تم تحديث بند الطلب"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:241
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:243
 #: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:83
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:172
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:179
 msgid "Order lines"
 msgstr "بنود الطلب"
 
-#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:64
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:75
 msgid "Order metrics"
 msgstr "مقاييس الطلبات"
 
@@ -3524,7 +3588,8 @@ msgstr "تم إنشاء الطلب"
 msgid "Order shipped"
 msgstr "تم شحن الطلب"
 
-#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:70
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:34
+#: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:81
 msgid "Order Total"
 msgstr "إجمالي الطلب"
 
@@ -3532,13 +3597,13 @@ msgstr "إجمالي الطلب"
 msgid "Order transitioned"
 msgstr "تم نقل الطلب"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:246
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:252
 #: src/app/routes/_authenticated/_orders/orders.tsx:21
 #: src/app/routes/_authenticated/_orders/orders.tsx:37
-#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:45
-#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:59
-#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:73
-#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:122
+#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:48
+#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:62
+#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:76
+#: src/app/routes/_authenticated/_orders/utils/order-detail-loaders.tsx:128
 msgid "Orders"
 msgstr "الطلبات"
 
@@ -3546,7 +3611,7 @@ msgstr "الطلبات"
 msgid "Orders Summary"
 msgstr "ملخص الطلبات"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:373
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:391
 msgid "Out-of-stock threshold"
 msgstr "حد نفاد المخزون"
 
@@ -3556,11 +3621,11 @@ msgstr "تجاوز"
 
 #. placeholder {0}: table.getState().pagination.pageIndex + 1
 #. placeholder {1}: table.getPageCount() || 1
-#: src/lib/components/data-table/data-table-pagination.tsx:44
+#: src/lib/components/data-table/data-table-pagination.tsx:46
 msgid "Page {0} of {1}"
 msgstr "الصفحة {0} من {1}"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:456
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:474
 msgid "Parent product"
 msgstr "المنتج الأساسي"
 
@@ -3604,11 +3669,11 @@ msgstr "تم تفويض الدفع"
 msgid "Payment cancelled successfully"
 msgstr "تم إلغاء الدفع بنجاح"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:248
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:249
 msgid "Payment details"
 msgstr "تفاصيل الدفع"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:173
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:183
 msgid "Payment eligibility checker"
 msgstr "فاحص أهلية الدفع"
 
@@ -3629,7 +3694,7 @@ msgstr "طريقة الدفع"
 msgid "Payment method is required"
 msgstr "طريقة الدفع مطلوبة"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:42
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:43
 #: src/app/routes/_authenticated/_payment-methods/payment-methods.tsx:20
 #: src/app/routes/_authenticated/_payment-methods/payment-methods.tsx:30
 msgid "Payment Methods"
@@ -3651,7 +3716,7 @@ msgstr "تم تحديث حالة الدفع بنجاح"
 msgid "Payment transitioned"
 msgstr "تم نقل الدفع"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:206
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:216
 msgid "Per customer usage limit"
 msgstr "حد الاستخدام لكل عميل"
 
@@ -3659,7 +3724,7 @@ msgstr "حد الاستخدام لكل عميل"
 msgid "Permissions"
 msgstr "الصلاحيات"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:191
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:197
 msgid "Phone number"
 msgstr "رقم الهاتف"
 
@@ -3669,7 +3734,7 @@ msgstr "رقم الهاتف"
 msgid "Phone Number"
 msgstr "رقم الهاتف"
 
-#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:107
+#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:108
 msgid "Placed At"
 msgstr "تاريخ الطلب"
 
@@ -3692,7 +3757,7 @@ msgstr "الرمز البريدي"
 msgid "Preview"
 msgstr "معاينة"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:215
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:223
 msgid "Preview changes"
 msgstr "معاينة التغييرات"
 
@@ -3702,14 +3767,14 @@ msgstr "معاينة تعديلات الطلب"
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:89
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:283
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:301
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:340
 #: src/app/routes/_authenticated/_products/components/create-product-variants.tsx:212
 #: src/lib/components/layout/language-dialog.tsx:121
 msgid "Price"
 msgstr "السعر"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:263
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:281
 msgid "Price and tax"
 msgstr "السعر والضريبة"
 
@@ -3725,12 +3790,12 @@ msgstr "الأسعار تشمل الضريبة للمنطقة الضريبية �
 msgid "private"
 msgstr "خاص"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:153
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:161
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:112
 msgid "Private"
 msgstr "خاص"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:154
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:162
 msgid "Private collections are not visible in the shop"
 msgstr "المجموعات الخاصة غير مرئية في المتجر"
 
@@ -3765,19 +3830,19 @@ msgstr "خيارات المنتج"
 msgid "Product Options"
 msgstr "خيارات المنتج"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:69
-#: src/app/routes/_authenticated/_product-variants/product-variants.tsx:18
-#: src/app/routes/_authenticated/_product-variants/product-variants.tsx:26
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:70
+#: src/app/routes/_authenticated/_product-variants/product-variants.tsx:19
+#: src/app/routes/_authenticated/_product-variants/product-variants.tsx:28
 msgid "Product Variants"
 msgstr "أشكال المنتجات"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:64
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:54
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:65
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:65
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:54
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:61
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:79
-#: src/app/routes/_authenticated/_products/products.tsx:24
-#: src/app/routes/_authenticated/_products/products.tsx:47
+#: src/app/routes/_authenticated/_products/products.tsx:25
+#: src/app/routes/_authenticated/_products/products.tsx:48
 msgid "Products"
 msgstr "المنتجات"
 
@@ -3787,7 +3852,7 @@ msgstr "المنتجات"
 msgid "Profile"
 msgstr "الملف الشخصي"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:44
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:45
 #: src/app/routes/_authenticated/_promotions/promotions.tsx:21
 #: src/app/routes/_authenticated/_promotions/promotions.tsx:30
 msgid "Promotions"
@@ -3802,12 +3867,12 @@ msgid "Qty"
 msgstr "الكمية"
 
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:111
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:265
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:267
 #: src/app/routes/_authenticated/_orders/components/order-table.tsx:80
 msgid "Quantity"
 msgstr "الكمية"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:220
+#: src/app/routes/_authenticated/_system/job-queue.tsx:221
 msgid "Queue"
 msgstr "قائمة الانتظار"
 
@@ -3824,11 +3889,15 @@ msgstr "السبب"
 msgid "Reason:"
 msgstr "السبب:"
 
-#: src/app/routes/_authenticated/_products/products.tsx:107
+#: src/app/routes/_authenticated/_products/products.tsx:124
 msgid "Rebuild search index"
 msgstr "إعادة بناء فهرس البحث"
 
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:46
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:262
+msgid "Recalculate shipping"
+msgstr "إعادة حساب الشحن"
+
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:47
 msgid "Refresh"
 msgstr "تحديث"
 
@@ -3845,7 +3914,7 @@ msgstr "استرداد"
 msgid "Refund {0}"
 msgstr "استرداد {0}"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:169
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:170
 msgid "Refund & Cancel"
 msgstr "استرداد وإلغاء"
 
@@ -3909,8 +3978,8 @@ msgstr "تم نقل الاسترداد"
 msgid "Refunds ({0})"
 msgstr "الاستردادات ({0})"
 
-#: src/lib/components/data-input/slug-input.tsx:264
 #: src/lib/components/data-input/slug-input.tsx:265
+#: src/lib/components/data-input/slug-input.tsx:266
 msgid "Regenerate slug from source field"
 msgstr "إعادة إنشاء الرابط المختصر من الحقل المصدر"
 
@@ -3926,7 +3995,7 @@ msgstr "مسجل"
 msgid "Remaining:"
 msgstr "المتبقي:"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:507
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:509
 msgid "Remove"
 msgstr "إزالة"
 
@@ -3950,13 +4019,17 @@ msgstr "إزالة العنصر"
 msgid "Remove link"
 msgstr "إزالة الرابط"
 
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:319
+msgid "Remove option group"
+msgstr "إزالة مجموعة الخيارات"
+
 #. placeholder {0}: selection.length
 #. placeholder {1}: selection.length === 1 ? 'country' : 'countries'
 #: src/app/routes/_authenticated/_zones/components/zone-bulk-actions.tsx:31
 msgid "Removed {0} {1} from zone"
 msgstr "تمت إزالة {0} {1} من المنطقة"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:218
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:221
 msgid "Removed coupon codes"
 msgstr "رموز قسائم محذوفة"
 
@@ -3965,7 +4038,7 @@ msgid "Removed from group"
 msgstr "تمت الإزالة من المجموعة"
 
 #. placeholder {0}: removedLines.length
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:194
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:197
 msgid "Removing {0} item(s)"
 msgstr "إزالة {0} عنصر"
 
@@ -3973,7 +4046,7 @@ msgstr "إزالة {0} عنصر"
 msgid "Rename"
 msgstr "إعادة التسمية"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:123
+#: src/lib/components/data-table/data-table-view-options.tsx:126
 msgid "Reset"
 msgstr "إعادة تعيين"
 
@@ -3993,7 +4066,7 @@ msgstr "راجع التغييرات قبل تطبيقها على الطلب."
 msgid "Roles"
 msgstr "الأدوار"
 
-#: src/lib/components/data-table/data-table-pagination.tsx:22
+#: src/lib/components/data-table/data-table-pagination.tsx:24
 msgid "Rows per page"
 msgstr "صفوف لكل صفحة"
 
@@ -4018,7 +4091,7 @@ msgstr "نفس النافذة"
 msgid "Sample Formatting"
 msgstr "تنسيق نموذجي"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:243
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:244
 #: src/lib/components/data-table/views-sheet.tsx:210
 #: src/lib/components/shared/history-timeline/history-note-editor.tsx:54
 msgid "Save"
@@ -4038,7 +4111,7 @@ msgstr "حفظ العنوان"
 #~ msgstr "حفظ التغييرات"
 
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:206
-#: src/lib/components/layout/manage-languages-dialog.tsx:380
+#: src/lib/components/layout/manage-languages-dialog.tsx:381
 msgid "Save Changes"
 msgstr "حفظ التغييرات"
 
@@ -4046,7 +4119,7 @@ msgstr "حفظ التغييرات"
 msgid "Save Layout"
 msgstr "حفظ التخطيط"
 
-#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:121
+#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:125
 msgid "Save option group"
 msgstr "حفظ مجموعة الخيارات"
 
@@ -4055,7 +4128,7 @@ msgid "Save View"
 msgstr "حفظ العرض"
 
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:206
-#: src/lib/components/layout/manage-languages-dialog.tsx:380
+#: src/lib/components/layout/manage-languages-dialog.tsx:381
 msgid "Saving..."
 msgstr "جارٍ الحفظ..."
 
@@ -4092,15 +4165,16 @@ msgstr "بحث في القنوات..."
 msgid "Search currencies..."
 msgstr "بحث في العملات..."
 
-#: src/lib/components/shared/facet-value-selector.tsx:304
+#: src/lib/components/data-table/data-table-facet-value-faceted-filter.tsx:172
+#: src/lib/components/shared/facet-value-selector.tsx:125
 msgid "Search facet values..."
 msgstr "البحث في قيم الفئات..."
 
-#: src/app/routes/_authenticated/_products/products.tsx:35
+#: src/app/routes/_authenticated/_products/products.tsx:36
 msgid "Search index rebuild could not be started"
 msgstr "تعذر بدء إعادة بناء فهرس البحث"
 
-#: src/app/routes/_authenticated/_products/products.tsx:32
+#: src/app/routes/_authenticated/_products/products.tsx:33
 msgid "Search index rebuild started"
 msgstr "بدأت إعادة بناء فهرس البحث"
 
@@ -4185,11 +4259,11 @@ msgstr "حدد فئة ضريبية"
 msgid "Select a zone"
 msgstr "حدد منطقة"
 
-#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:51
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:66
 msgid "Select address"
 msgstr "تحديد عنوان"
 
-#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:58
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx:73
 msgid "Select an address"
 msgstr "حدد عنوانًا"
 
@@ -4197,7 +4271,7 @@ msgstr "حدد عنوانًا"
 msgid "Select an option"
 msgstr "حدد خيارًا"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:278
+#: src/lib/components/layout/manage-languages-dialog.tsx:279
 msgid "Select Available Languages"
 msgstr "تحديد اللغات المتاحة"
 
@@ -4217,15 +4291,15 @@ msgstr "اختر نطاق التاريخ"
 msgid "Select display language"
 msgstr "حدد لغة العرض"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:340
+#: src/lib/components/layout/manage-languages-dialog.tsx:341
 msgid "Select from globally available languages for this channel"
 msgstr "حدد من اللغات المتاحة عالميًا لهذه القناة"
 
-#: src/lib/components/data-input/relation-selector.tsx:410
+#: src/lib/components/data-input/relation-selector.tsx:412
 msgid "Select item"
 msgstr "تحديد عنصر"
 
-#: src/lib/components/data-input/relation-selector.tsx:407
+#: src/lib/components/data-input/relation-selector.tsx:409
 msgid "Select items"
 msgstr "تحديد عناصر"
 
@@ -4241,7 +4315,7 @@ msgstr "حدد الحالة التالية"
 msgid "Select payments to refund"
 msgstr "اختر المدفوعات للاسترداد"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:228
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:230
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "حدد الكميات للتنفيذ وقم بتكوين معالج التنفيذ"
 
@@ -4284,7 +4358,7 @@ msgstr "البائعون"
 msgid "Set a shipping address and select a shipping method"
 msgstr "قم بتعيين عنوان الشحن واختيار طريقة الشحن"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:414
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:416
 msgid "Set custom fields"
 msgstr "تعيين الحقول المخصصة"
 
@@ -4304,8 +4378,8 @@ msgstr "يعين اللغات المتاحة لجميع القنوات. يمكن
 msgid "Sets the stock level at which this a variant is considered to be out of stock. Using a negative value enables backorder support. Can be overridden by product variants."
 msgstr "يحدد مستوى المخزون الذي يعتبر عنده هذا الشكل نفد من المخزون. استخدام قيمة سالبة يمكّن دعم الطلب المسبق. يمكن تجاوزه بواسطة أشكال المنتج."
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:375
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:393
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:411
 msgid "Sets the stock level at which this variant is considered to be out of stock. Using a negative value enables backorder support."
 msgstr "يحدد مستوى المخزون الذي يعتبر عنده هذا الشكل نفد من المخزون. استخدام قيمة سالبة يمكّن دعم الطلب المسبق."
 
@@ -4325,9 +4399,9 @@ msgstr "تسوية الاسترداد"
 msgid "Shipping"
 msgstr "الشحن"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:289
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:243
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:434
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:291
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:251
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:436
 msgid "Shipping address"
 msgstr "عنوان الشحن"
 
@@ -4335,19 +4409,19 @@ msgstr "عنوان الشحن"
 msgid "Shipping Address"
 msgstr "عنوان الشحن"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:128
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:131
 msgid "Shipping address changed"
 msgstr "تم تغيير عنوان الشحن"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:182
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:184
 msgid "Shipping address set for order"
 msgstr "تم تعيين عنوان الشحن للطلب"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:198
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:200
 msgid "Shipping address unset for order"
 msgstr "تم إلغاء تعيين عنوان الشحن للطلب"
 
-#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:142
+#: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:145
 msgid "Shipping method changed"
 msgstr "تم تغيير طريقة الشحن"
 
@@ -4359,11 +4433,11 @@ msgstr "طريقة الشحن مؤهلة لهذا الطلب"
 msgid "Shipping method is not eligible for this order"
 msgstr "طريقة الشحن غير مؤهلة لهذا الطلب"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:217
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:219
 msgid "Shipping method set for order"
 msgstr "تم تعيين طريقة الشحن للطلب"
 
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:43
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:44
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods.tsx:20
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods.tsx:29
 msgid "Shipping Methods"
@@ -4376,6 +4450,15 @@ msgstr "تم استرداد الشحن"
 #: src/lib/components/layout/language-dialog.tsx:115
 msgid "Short date"
 msgstr "تاريخ قصير"
+
+#. placeholder {0}: group.entries.length - 2
+#: src/lib/components/shared/history-timeline/history-timeline-with-grouping.tsx:129
+msgid "Show all ({0})"
+msgstr "عرض الكل ({0})"
+
+#: src/lib/components/shared/history-timeline/history-timeline-with-grouping.tsx:124
+msgid "Show less"
+msgstr "عرض أقل"
 
 #: src/lib/components/ui/password-input.tsx:20
 msgid "Show password"
@@ -4396,11 +4479,11 @@ msgstr "سجل الدخول للوصول إلى لوحة تحكم المسؤول
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:83
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:256
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:274
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:334
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
 #: src/app/routes/_authenticated/_products/components/create-product-variants.tsx:209
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:306
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:351
 msgid "SKU"
 msgstr "SKU"
 
@@ -4408,20 +4491,20 @@ msgstr "SKU"
 msgid "SKU:"
 msgstr "رمز المنتج:"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:171
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:179
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:150
 msgid "Slug"
 msgstr "الرابط المختصر"
 
-#: src/lib/components/data-input/slug-input.tsx:236
+#: src/lib/components/data-input/slug-input.tsx:237
 msgid "Slug is set"
 msgstr "تم تعيين الرابط المختصر"
 
-#: src/lib/components/data-input/slug-input.tsx:237
+#: src/lib/components/data-input/slug-input.tsx:238
 msgid "Slug will be generated automatically..."
 msgstr "سيتم إنشاء الرابط المختصر تلقائيًا..."
 
-#: src/app/routes/_authenticated/_system/healthchecks.tsx:73
+#: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 msgid "Some resources are down"
 msgstr "بعض الموارد معطلة"
 
@@ -4429,14 +4512,18 @@ msgstr "بعض الموارد معطلة"
 msgid "Source"
 msgstr "المصدر"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:176
+#: src/lib/components/data-table/data-table-filter-badge.tsx:109
+msgid "start"
+msgstr "البداية"
+
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:186
 msgid "Starts at"
 msgstr "يبدأ في"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:108
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:118
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:217
 #: src/app/routes/_authenticated/_orders/orders.tsx:101
-#: src/app/routes/_authenticated/_system/job-queue.tsx:231
+#: src/app/routes/_authenticated/_system/job-queue.tsx:232
 msgid "State"
 msgstr "الحالة"
 
@@ -4449,12 +4536,12 @@ msgstr "الولاية / المحافظة"
 msgid "State/Province"
 msgstr "الولاية/المحافظة"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:252
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:258
 #: src/app/routes/_authenticated/_customers/customers.tsx:49
 msgid "Status"
 msgstr "الحالة"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:336
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:354
 msgid "Stock"
 msgstr "المخزون"
 
@@ -4462,12 +4549,12 @@ msgstr "المخزون"
 msgid "Stock allocated"
 msgstr "مخزون مخصص"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:416
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:434
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:353
 msgid "Stock level"
 msgstr "مستوى المخزون"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:341
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:359
 msgid "Stock levels"
 msgstr "مستويات المخزون"
 
@@ -4503,7 +4590,7 @@ msgstr "المجموع الفرعي"
 msgid "Subtotal"
 msgstr "المجموع الفرعي"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:97
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:108
 msgid "Successfully added option value"
 msgstr "تمت إضافة قيمة الخيار بنجاح"
 
@@ -4523,7 +4610,7 @@ msgstr "تم إنشاء المسؤول بنجاح"
 msgid "Successfully created channel"
 msgstr "تم إنشاء القناة بنجاح"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:105
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:106
 msgid "Successfully created collection"
 msgstr "تم إنشاء المجموعة بنجاح"
 
@@ -4531,7 +4618,7 @@ msgstr "تم إنشاء المجموعة بنجاح"
 msgid "Successfully created country"
 msgstr "تم إنشاء البلد بنجاح"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:93
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:99
 msgid "Successfully created customer"
 msgstr "تم إنشاء العميل بنجاح"
 
@@ -4551,7 +4638,7 @@ msgstr "تم إنشاء قيمة الخاصية بنجاح"
 msgid "Successfully created option group"
 msgstr "تم إنشاء مجموعة الخيارات بنجاح"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:101
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:102
 msgid "Successfully created payment method"
 msgstr "تم إنشاء طريقة الدفع بنجاح"
 
@@ -4571,12 +4658,12 @@ msgstr "تم إنشاء مجموعة خيارات المنتج بنجاح"
 msgid "Successfully created product options"
 msgstr "تم إنشاء خيارات المنتج بنجاح"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:128
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:169
 msgid "Successfully created product variant"
 msgstr "تم إنشاء شكل المنتج بنجاح"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:105
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:106
 msgid "Successfully created promotion"
 msgstr "تم إنشاء العرض الترويجي بنجاح"
 
@@ -4588,7 +4675,7 @@ msgstr "تم إنشاء الدور بنجاح"
 msgid "Successfully created seller"
 msgstr "تم إنشاء البائع بنجاح"
 
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:91
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:92
 msgid "Successfully created shipping method"
 msgstr "تم إنشاء طريقة الشحن بنجاح"
 
@@ -4612,7 +4699,7 @@ msgstr "تم إنشاء المنطقة بنجاح"
 msgid "Successfully duplicated {count} {entityName}"
 msgstr "تم نسخ {count} {entityName} بنجاح"
 
-#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:76
+#: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:77
 msgid "Successfully fulfilled order"
 msgstr "تم تنفيذ الطلب بنجاح"
 
@@ -4640,7 +4727,7 @@ msgstr "تم تحديث الملف بنجاح"
 msgid "Successfully updated channel"
 msgstr "تم تحديث القناة بنجاح"
 
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:105
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:106
 msgid "Successfully updated collection"
 msgstr "تم تحديث المجموعة بنجاح"
 
@@ -4648,7 +4735,7 @@ msgstr "تم تحديث المجموعة بنجاح"
 msgid "Successfully updated country"
 msgstr "تم تحديث البلد بنجاح"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:93
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:99
 msgid "Successfully updated customer"
 msgstr "تم تحديث العميل بنجاح"
 
@@ -4673,11 +4760,11 @@ msgid "Successfully updated global settings"
 msgstr "تم تحديث الإعدادات العامة بنجاح"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:91
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:56
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:60
 msgid "Successfully updated order"
 msgstr "تم تحديث الطلب بنجاح"
 
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:102
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:103
 msgid "Successfully updated payment method"
 msgstr "تم تحديث طريقة الدفع بنجاح"
 
@@ -4693,7 +4780,7 @@ msgstr "تم تحديث خيار المنتج بنجاح"
 msgid "Successfully updated product option group"
 msgstr "تم تحديث مجموعة خيارات المنتج بنجاح"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:128
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:129
 msgid "Successfully updated product variant"
 msgstr "تم تحديث شكل المنتج بنجاح"
 
@@ -4701,7 +4788,7 @@ msgstr "تم تحديث شكل المنتج بنجاح"
 msgid "Successfully updated profile"
 msgstr "تم تحديث الملف الشخصي بنجاح"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:105
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:106
 msgid "Successfully updated promotion"
 msgstr "تم تحديث العرض الترويجي بنجاح"
 
@@ -4713,7 +4800,7 @@ msgstr "تم تحديث الدور بنجاح"
 msgid "Successfully updated seller"
 msgstr "تم تحديث البائع بنجاح"
 
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:92
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:93
 msgid "Successfully updated shipping method"
 msgstr "تم تحديث طريقة الشحن بنجاح"
 
@@ -4733,7 +4820,7 @@ msgstr "تم تحديث معدل الضريبة بنجاح"
 msgid "Successfully updated zone"
 msgstr "تم تحديث المنطقة بنجاح"
 
-#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:195
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:202
 msgid "Summary of modifications"
 msgstr "ملخص التعديلات"
 
@@ -4764,7 +4851,7 @@ msgstr "أساس الضريبة"
 msgid "Tax Categories"
 msgstr "فئات الضرائب"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:268
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:286
 #: src/app/routes/_authenticated/_tax-rates/tax-rates_.$id.tsx:130
 msgid "Tax category"
 msgstr "الفئة الضريبية"
@@ -4788,7 +4875,7 @@ msgstr "معدل الضريبة: {taxRate}%"
 msgid "Tax Rates"
 msgstr "معدلات الضرائب"
 
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:232
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:233
 msgid "Tax summary"
 msgstr "ملخص الضرائب"
 
@@ -4838,11 +4925,11 @@ msgstr "جارٍ اختبار طريقة الشحن..."
 msgid "Testing shipping methods..."
 msgstr "جارٍ اختبار طرق الشحن..."
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:120
+#: src/app/routes/_authenticated/_system/job-queue.tsx:121
 msgid "The data that has been passed to the job"
 msgstr "البيانات التي تم تمريرها إلى المهمة"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:139
+#: src/app/routes/_authenticated/_system/job-queue.tsx:140
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:175
 msgid "The result of the job"
 msgstr "نتيجة المهمة"
@@ -4855,7 +4942,7 @@ msgstr "سيتم تطبيق الصلاحيات المحددة على هذه ال
 msgid "The token is used to specify the channel when making API requests."
 msgstr "يُستخدم الرمز المميز لتحديد القناة عند إجراء طلبات API."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:117
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:119
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "تعذرت إضافة المتغير. تأكد من تفعيل المنتج الأصلي."
 
@@ -4871,7 +4958,7 @@ msgstr "هؤلاء هم العملاء في مجموعة العملاء <0>{cust
 msgid "These are the facet values for the <0>{facetName}</0> facet."
 msgstr "هذه هي قيم الخصائص للخاصية <0>{facetName}</0>."
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:293
+#: src/lib/components/layout/manage-languages-dialog.tsx:294
 msgid "These languages will be available for all channels to use"
 msgstr "ستكون هذه اللغات متاحة لجميع القنوات للاستخدام"
 
@@ -4892,6 +4979,10 @@ msgctxt "date-range"
 msgid "This month"
 msgstr "هذا الشهر"
 
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:478
+msgid "This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?"
+msgstr "مجموعة الخيارات هذه مستخدمة من قبل متغيرات موجودة. قد تؤثر الإزالة الإجبارية على تلك المتغيرات. هل أنت متأكد؟"
+
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:254
 msgid "This product has existing variants but no option groups defined. You need to add option groups before creating new variants."
 msgstr "يحتوي هذا المنتج على أشكال موجودة ولكن لم يتم تحديد مجموعات خيارات. تحتاج إلى إضافة مجموعات خيارات قبل إنشاء أشكال جديدة."
@@ -4905,7 +4996,7 @@ msgctxt "date-range"
 msgid "This week"
 msgstr "هذا الأسبوع"
 
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:166
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:172
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:154
 msgid "Title"
 msgstr "العنوان"
@@ -4934,9 +5025,9 @@ msgstr "الرمز المميز"
 
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:157
 #: src/app/routes/_authenticated/_orders/components/order-table-totals.tsx:88
-#: src/app/routes/_authenticated/_orders/components/order-table.tsx:114
+#: src/app/routes/_authenticated/_orders/components/order-table.tsx:108
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:228
-#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:120
+#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:121
 msgid "Total"
 msgstr "الإجمالي"
 
@@ -4952,7 +5043,7 @@ msgstr "إجمالي الاسترداد:"
 msgid "Total Revenue"
 msgstr "إجمالي الإيرادات"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:361
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:379
 msgid "Track"
 msgstr "تتبع"
 
@@ -4960,7 +5051,7 @@ msgstr "تتبع"
 msgid "Track inventory by default"
 msgstr "تتبع المخزون افتراضيًا"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:112
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:122
 msgid "Tracking code"
 msgstr "رمز التتبع"
 
@@ -4978,13 +5069,13 @@ msgstr "معرف المعاملة مطلوب"
 #. placeholder {0}: getTranslatedFulfillmentState(state)
 #. placeholder {0}: getTranslatedOrderState(state)
 #. placeholder {0}: getTranslatedPaymentState(state)
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:92
-#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:122
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:102
+#: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:124
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:154
 msgid "Transition to {0}"
 msgstr "الانتقال إلى {0}"
 
-#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:84
+#: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:94
 msgid "Transition to {suggestedState}"
 msgstr "الانتقال إلى {suggestedState}"
 
@@ -4996,7 +5087,7 @@ msgstr "الانتقال إلى الحالة المحددة"
 msgid "True"
 msgstr "صحيح"
 
-#: src/lib/components/shared/facet-value-selector.tsx:328
+#: src/lib/components/shared/facet-value-selector.tsx:149
 msgid "Type at least 2 characters to search..."
 msgstr "اكتب حرفين على الأقل للبحث..."
 
@@ -5008,11 +5099,12 @@ msgstr "سعر الوحدة"
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:102
 #: src/app/routes/_authenticated/_orders/hooks/use-refund-order.ts:303
-#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:87
+#: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:88
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:175
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:125
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:210
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:104
+#: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:133
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:115
 msgid "Unknown error"
 msgstr "خطأ غير معروف"
 
@@ -5023,25 +5115,25 @@ msgstr "غير مُتحقق منه"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:108
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:101
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:125
-#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:143
+#: src/app/routes/_authenticated/_collections/collections_.$id.tsx:151
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:87
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:96
-#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:155
+#: src/app/routes/_authenticated/_customers/customers_.$id.tsx:161
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:113
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:102
 #: src/app/routes/_authenticated/_global-settings/global-settings.tsx:101
-#: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:46
-#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:131
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:227
+#: src/app/routes/_authenticated/_orders/components/order-line-custom-fields-form.tsx:53
+#: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:141
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:228
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:276
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$id.tsx:138
 #: src/app/routes/_authenticated/_products/products_.$productId.option-groups.$productOptionGroupId.options_.$id.tsx:159
 #: src/app/routes/_authenticated/_profile/profile.tsx:85
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:137
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:147
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:87
 #: src/app/routes/_authenticated/_sellers/sellers_.$id.tsx:81
-#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:133
+#: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:139
 #: src/app/routes/_authenticated/_stock-locations/stock-locations_.$id.tsx:99
 #: src/app/routes/_authenticated/_tax-categories/tax-categories_.$id.tsx:99
 #: src/app/routes/_authenticated/_tax-rates/tax-rates_.$id.tsx:95
@@ -5062,7 +5154,7 @@ msgstr "تم التحديث"
 msgid "Upload"
 msgstr "رفع"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:214
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:224
 msgid "Usage limit"
 msgstr "حد الاستخدام"
 
@@ -5076,7 +5168,7 @@ msgstr "استخدام كعنوان فوترة افتراضي"
 msgid "Use as the default shipping address"
 msgstr "استخدام كعنوان شحن افتراضي"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:391
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:409
 msgid "Use global out-of-stock threshold"
 msgstr "استخدام حد نفاد المخزون العام"
 
@@ -5104,19 +5196,19 @@ msgstr "القيم"
 msgid "Variant"
 msgstr "الشكل"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:182
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:193
 msgid "Variant deleted successfully"
 msgstr "تم حذف الشكل بنجاح"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:249
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:267
 msgid "Variant name"
 msgstr "اسم المتغير"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:174
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:185
 msgid "Variant updated successfully"
 msgstr "تم تحديث الشكل بنجاح"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:297
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:342
 msgid "Variants"
 msgstr "الأشكال"
 
@@ -5133,7 +5225,7 @@ msgstr "عرض التغييرات"
 msgid "View converted to global successfully"
 msgstr "تم تحويل العرض إلى عام بنجاح"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:123
+#: src/app/routes/_authenticated/_system/job-queue.tsx:124
 msgid "View data"
 msgstr "عرض البيانات"
 
@@ -5149,11 +5241,11 @@ msgstr "عرض التفاصيل"
 msgid "View duplicated successfully"
 msgstr "تم نسخ العرض بنجاح"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:118
+#: src/app/routes/_authenticated/_system/job-queue.tsx:119
 msgid "View job data"
 msgstr "عرض بيانات المهمة"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:137
+#: src/app/routes/_authenticated/_system/job-queue.tsx:138
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:174
 msgid "View job result"
 msgstr "عرض نتيجة المهمة"
@@ -5162,7 +5254,7 @@ msgstr "عرض نتيجة المهمة"
 msgid "View renamed successfully"
 msgstr "تمت إعادة تسمية العرض بنجاح"
 
-#: src/app/routes/_authenticated/_system/job-queue.tsx:142
+#: src/app/routes/_authenticated/_system/job-queue.tsx:143
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:178
 msgid "View result"
 msgstr "عرض النتيجة"
@@ -5187,12 +5279,12 @@ msgstr "مرئي للعميل"
 msgid "Welcome to Vendure"
 msgstr "مرحباً بك في Vendure"
 
-#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:238
+#: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:239
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:133
 msgid "When enabled, a product is available in the shop"
 msgstr "عند التمكين، يصبح المنتج متاحًا في المتجر"
 
-#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:148
+#: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:158
 msgid "When enabled, a promotion is available in the shop"
 msgstr "عند التمكين، يصبح العرض الترويجي متاحًا في المتجر"
 
@@ -5218,11 +5310,11 @@ msgctxt "date-range"
 msgid "Yesterday"
 msgstr "أمس"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:315
+#: src/lib/components/layout/manage-languages-dialog.tsx:316
 msgid "You don't have permission to view channel settings"
 msgstr "ليس لديك إذن لعرض إعدادات القناة"
 
-#: src/lib/components/layout/manage-languages-dialog.tsx:261
+#: src/lib/components/layout/manage-languages-dialog.tsx:262
 msgid "You don't have permission to view global language settings"
 msgstr "ليس لديك إذن لعرض إعدادات اللغة العامة"
 
@@ -5230,7 +5322,7 @@ msgstr "ليس لديك إذن لعرض إعدادات اللغة العامة"
 msgid "You haven't saved any views yet."
 msgstr "لم تحفظ أي عروض بعد."
 
-#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:77
+#: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Your latest orders"
 msgstr "أحدث طلباتك"
 
