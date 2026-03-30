@@ -61,7 +61,7 @@
           "title": "Search",
           "slug": "search",
           "file": "docs/guides/core-concepts/search/index.mdx",
-          "lastModified": "2026-03-30T20:58:01+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         },
         {
           "title": "Facets & Filters",
@@ -85,7 +85,7 @@
           "title": "Payment",
           "slug": "payment",
           "file": "docs/guides/core-concepts/payment/index.mdx",
-          "lastModified": "2026-03-30T20:58:01+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         },
         {
           "title": "Customers",
@@ -224,7 +224,7 @@
           "title": "Configuration",
           "slug": "configuration",
           "file": "docs/guides/developer-guide/configuration/index.mdx",
-          "lastModified": "2026-03-30T21:29:53+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         },
         {
           "title": "Custom Fields",
@@ -404,7 +404,7 @@
           "title": "Telemetry",
           "slug": "telemetry",
           "file": "docs/guides/developer-guide/telemetry/index.mdx",
-          "lastModified": "2026-03-30T20:58:01+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         }
       ]
     },
@@ -680,7 +680,7 @@
           "title": "Listing Products",
           "slug": "listing-products",
           "file": "docs/guides/storefront/listing-products/index.mdx",
-          "lastModified": "2026-03-30T20:58:01+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         },
         {
           "title": "Product Detail",
@@ -698,7 +698,7 @@
           "title": "Checkout Flow",
           "slug": "checkout-flow",
           "file": "docs/guides/storefront/checkout-flow/index.mdx",
-          "lastModified": "2026-03-30T20:58:01+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         },
         {
           "title": "Customer Accounts",
@@ -3659,7 +3659,7 @@
               "lastModified": "2026-01-28T14:49:21+01:00"
             }
           ],
-          "lastModified": "2026-03-30T21:29:53+02:00"
+          "lastModified": "2026-03-30T21:48:02+02:00"
         },
         {
           "title": "GraphQL API",
