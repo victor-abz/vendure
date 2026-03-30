@@ -14,14 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:45
-msgid "Option Groups"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "Greška proširenja upita"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:151
-msgid "Settings Store"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "Stranica će nastaviti sa zadanim upitom."
 
 #. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
@@ -49,18 +51,6 @@ msgid "Query extension error: "
 msgstr "Greška proširenja upita:"
 
 #. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "Greška proširenja upita"
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "Stranica će nastaviti sa zadanim upitom."
-
-#. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
 msgid "Insights"
 msgstr "Uvidi"
@@ -79,6 +69,11 @@ msgstr "Proizvodi"
 #: src/lib/framework/defaults.ts:38
 msgid "Product Variants"
 msgstr "Varijante proizvoda"
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:45
+msgid "Option Groups"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:52
@@ -142,82 +137,92 @@ msgid "Scheduled Tasks"
 msgstr "Planirani zadaci"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:160
+#: src/lib/framework/defaults.ts:151
+msgid "Settings Store"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:158
+msgid "API Keys"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:167
 msgid "Settings"
 msgstr "Postavke"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:167
+#: src/lib/framework/defaults.ts:174
 msgid "Sellers"
 msgstr "Prodavači"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:174
+#: src/lib/framework/defaults.ts:181
 msgid "Channels"
 msgstr "Kanali"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:181
+#: src/lib/framework/defaults.ts:188
 msgid "Stock Locations"
 msgstr "Lokacije zaliha"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:188
+#: src/lib/framework/defaults.ts:195
 msgid "Administrators"
 msgstr "Administratori"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:195
+#: src/lib/framework/defaults.ts:202
 msgid "Roles"
 msgstr "Uloge"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:202
+#: src/lib/framework/defaults.ts:209
 msgid "Shipping Methods"
 msgstr "Načini dostave"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:209
+#: src/lib/framework/defaults.ts:216
 msgid "Payment Methods"
 msgstr "Načini plaćanja"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:216
+#: src/lib/framework/defaults.ts:223
 msgid "Tax Categories"
 msgstr "Porezne kategorije"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:223
+#: src/lib/framework/defaults.ts:230
 msgid "Tax Rates"
 msgstr "Porezne stope"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:230
+#: src/lib/framework/defaults.ts:237
 msgid "Countries"
 msgstr "Zemlje"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:237
+#: src/lib/framework/defaults.ts:244
 msgid "Zones"
 msgstr "Zone"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:244
+#: src/lib/framework/defaults.ts:251
 msgid "Global Settings"
 msgstr "Globalne postavke"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:256
+#: src/lib/framework/defaults.ts:263
 msgid "Metrics Widget"
 msgstr "Widget metrika"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:264
+#: src/lib/framework/defaults.ts:271
 msgid "Latest Orders Widget"
 msgstr "Widget najnovijih narudžbi"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:271
+#: src/lib/framework/defaults.ts:278
 msgid "Orders Summary Widget"
 msgstr "Widget sažetka narudžbi"
 
@@ -828,7 +833,7 @@ msgid "{0} selected"
 msgstr "{0} odabrano"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:331
+#: src/app/routes/_authenticated/_collections/collections.tsx:408
 msgid "{0} variants"
 msgstr "{0} varijanti"
 
@@ -877,7 +882,7 @@ msgstr "{totalQuantity} stavki vraćeno"
 msgid "+ {0} more"
 msgstr "+ {0} više"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:349
+#: src/app/routes/_authenticated/_collections/collections.tsx:426
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} više"
 
@@ -1215,6 +1220,20 @@ msgstr "I"
 msgid "Apartment, suite, etc."
 msgstr "Stan, apartman itd."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:85
+msgid "API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:32
+msgid "API key rotated successfully"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:48
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:14
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:25
+msgid "API Keys"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:49
 msgid "Applied global view \"{viewName}\""
 msgstr "Primijenjen globalni prikaz \"{viewName}\""
@@ -1414,8 +1433,9 @@ msgid "Calculator"
 msgstr "Kalkulator"
 
 #: src/app/common/duplicate-entity-dialog.tsx:112
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:61
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
@@ -1453,7 +1473,7 @@ msgstr "Otkaži izmjenu"
 msgid "Cancel payment"
 msgstr "Otkaži uplatu"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:210
+#: src/app/routes/_authenticated/_collections/collections.tsx:288
 msgid "Cannot move a collection into its own descendant"
 msgstr "Nije moguće premjestiti kolekciju u vlastiti podskup"
 
@@ -1521,6 +1541,10 @@ msgstr "Obriši filtere"
 msgid "Click \"Run Test\" to test this shipping method."
 msgstr "Kliknite \"Pokreni test\" za testiranje ovog načina dostave."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:125
+msgid "Close"
+msgstr ""
+
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:132
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:137
@@ -1539,17 +1563,17 @@ msgstr "Kod"
 msgid "Collection contents for {collectionName}"
 msgstr "Sadržaj kolekcije {collectionName}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:248
+#: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Collection moved to new parent"
 msgstr "Kolekcija premještena u novi nadređeni element"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:242
+#: src/app/routes/_authenticated/_collections/collections.tsx:323
 msgid "Collection position updated"
 msgstr "Pozicija kolekcije ažurirana"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:46
-#: src/app/routes/_authenticated/_collections/collections.tsx:36
-#: src/app/routes/_authenticated/_collections/collections.tsx:262
+#: src/app/routes/_authenticated/_collections/collections.tsx:51
+#: src/app/routes/_authenticated/_collections/collections.tsx:339
 msgid "Collections"
 msgstr "Kolekcije"
 
@@ -1611,7 +1635,7 @@ msgid "Content:"
 msgstr "Sadržaj:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:324
+#: src/app/routes/_authenticated/_collections/collections.tsx:401
 msgid "Contents"
 msgstr "Sadržaj"
 
@@ -1651,6 +1675,7 @@ msgid "Coupon code set for order"
 msgstr "Kod kupona postavljen za narudžbu"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:84
@@ -1718,9 +1743,10 @@ msgstr "Stvori varijantu"
 #~ msgid "Create variants for your product"
 #~ msgstr "Stvorite varijante za svoj proizvod"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:640
+#: src/lib/framework/layout-engine/page-layout.tsx:650
 msgid "Created"
 msgstr "Stvoreno"
 
@@ -1728,6 +1754,11 @@ msgstr "Stvoreno"
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:221
 msgid "Created at"
 msgstr "Stvoreno u"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:210
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:66
+msgid "Created by"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:292
 msgid "Creating..."
@@ -1973,6 +2004,10 @@ msgstr "Ne prati"
 msgid "does not contain"
 msgstr "ne sadrži"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:108
+msgid "Download as .env file"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
@@ -2137,7 +2172,7 @@ msgstr "Omogući"
 msgid "Enabled"
 msgstr "Omogućeno"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:110
+#: src/lib/components/data-table/data-table-filter-badge.tsx:122
 msgid "end"
 msgstr "kraj"
 
@@ -2165,7 +2200,7 @@ msgstr "Unesite ID transakcije za ovo izvršenje povrata"
 msgid "Enter transaction ID"
 msgstr "Unesite ID transakcije"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:612
+#: src/lib/framework/layout-engine/page-layout.tsx:622
 msgid "Entity Information"
 msgstr "Informacije o entitetu"
 
@@ -2294,6 +2329,10 @@ msgstr "Stvaranje adrese nije uspjelo"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:86
 msgid "Failed to create administrator"
 msgstr "Neuspješno kreiranje administratora"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to create API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:90
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:96
@@ -2448,7 +2487,7 @@ msgstr "Učitavanje globalnih postavki nije uspjelo"
 msgid "Failed to modify order"
 msgstr "Izmjena narudžbe nije uspjela"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:293
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:294
 msgid "Failed to move collections"
 msgstr "Premještanje kolekcija nije uspjelo"
 
@@ -2493,6 +2532,10 @@ msgstr "Preimenovanje prikaza nije uspjelo"
 msgid "Failed to reorder items"
 msgstr "Nije uspjelo preurediti stavke"
 
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:35
+msgid "Failed to rotate API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:48
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:52
 msgid "Failed to settle payment"
@@ -2515,6 +2558,10 @@ msgstr "Ažuriranje adrese nije uspjelo"
 msgid "Failed to update administrator"
 msgstr "Neuspješno ažuriranje administratora"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to update API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:89
 msgid "Failed to update asset"
 msgstr "Ažuriranje datoteke nije uspjelo"
@@ -2528,7 +2575,7 @@ msgstr "Ažuriranje kanala nije uspjelo"
 msgid "Failed to update collection"
 msgstr "Ažuriranje kolekcije nije uspjelo"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:253
+#: src/app/routes/_authenticated/_collections/collections.tsx:330
 msgid "Failed to update collection position"
 msgstr "Nije uspjelo ažurirati poziciju kolekcije"
 
@@ -2650,7 +2697,7 @@ msgstr "Netočno"
 msgid "Filter by {columnId}"
 msgstr "Filtriraj po {columnId}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:369
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:370
 msgid "Filter by collection name"
 msgstr "Filtriraj po nazivu kolekcije"
 
@@ -2868,6 +2915,10 @@ msgstr "Visina"
 msgid "Hide password"
 msgstr "Sakrij lozinku"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:118
+msgid "I have saved this API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:108
 msgid "ID"
 msgstr "ID"
@@ -3047,6 +3098,11 @@ msgstr "Posljednji rezultat"
 #~ msgid "Last updated {0}"
 #~ msgstr "Posljednje ažurirano {0}"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:214
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:46
+msgid "Last used"
+msgstr ""
+
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Latest Orders"
 msgstr "Najnovije narudžbe"
@@ -3081,7 +3137,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:395
+#: src/app/routes/_authenticated/_collections/collections.tsx:477
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "Učitaj još {0} ({remaining} preostalo)"
 
@@ -3094,7 +3150,7 @@ msgstr "Učitaj više"
 msgid "Loading addresses..."
 msgstr "Učitavanje adresa..."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:378
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:379
 msgid "Loading collections..."
 msgstr "Učitavanje kolekcija..."
 
@@ -3119,7 +3175,6 @@ msgstr "Učitavanje oznaka..."
 #: src/lib/components/shared/customer-group-selector.tsx:56
 #: src/lib/components/shared/customer-selector.tsx:88
 #: src/lib/components/shared/facet-value-selector.tsx:159
-#: src/lib/components/shared/seller-selector.tsx:90
 msgid "Loading..."
 msgstr "Učitavanje..."
 
@@ -3130,6 +3185,12 @@ msgstr "Lokalitet"
 #: src/lib/components/layout/nav-user.tsx:164
 msgid "Log out"
 msgstr "Odjava"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:204
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:60
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:95
+msgid "Lookup ID"
+msgstr ""
 
 #: src/lib/components/data-table/views-sheet.tsx:261
 msgid "Make Global"
@@ -3181,6 +3242,7 @@ msgstr "odgovara regex-u"
 msgid "Medium date"
 msgstr "Srednji datum"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:201
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:245
 msgid "Metadata"
 msgstr "Metapodaci"
@@ -3215,12 +3277,12 @@ msgstr "Od početka mjeseca"
 msgid "More views"
 msgstr "Više prikaza"
 
-#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:118
+#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:116
 msgid "Move"
 msgstr "Premjesti"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:339
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:426
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:340
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:427
 msgid "Move Collections"
 msgstr "Premjesti kolekcije"
 
@@ -3235,7 +3297,7 @@ msgstr "Premjesti na najvišu razinu"
 msgid "Moving {0} collection{1} into {2}"
 msgstr "Premještanje {0} kolekcija u {2}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:424
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:425
 msgid "Moving..."
 msgstr "Premještanje..."
 
@@ -3248,6 +3310,7 @@ msgid "My Saved Views"
 msgstr "Moji spremljeni prikazi"
 
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:45
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:165
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:152
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:169
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:104
@@ -3271,6 +3334,8 @@ msgstr "Moji spremljeni prikazi"
 msgid "Name"
 msgstr "Naziv"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:221
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:50
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:142
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:152
 msgid "Never"
@@ -3280,6 +3345,12 @@ msgstr "Nikada"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:97
 msgid "New administrator"
 msgstr "Novi administrator"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:49
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:136
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:79
+msgid "New API Key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:40
 msgid "New asset"
@@ -3299,7 +3370,7 @@ msgstr "Novi kanal"
 msgid "New collection"
 msgstr "Nova kolekcija"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:437
+#: src/app/routes/_authenticated/_collections/collections.tsx:519
 msgid "New Collection"
 msgstr "Nova kolekcija"
 
@@ -3597,8 +3668,8 @@ msgid "No results found"
 msgstr "Nisu pronađeni rezultati"
 
 #: src/lib/components/shared/seller-selector.tsx:90
-msgid "No sellers found"
-msgstr "Nisu pronađeni prodavači"
+#~ msgid "No sellers found"
+#~ msgstr "Nisu pronađeni prodavači"
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -3675,6 +3746,10 @@ msgstr "Stara e-pošta:"
 #: src/app/routes/_authenticated/_orders/components/draft-order-status.tsx:29
 msgid "Only draft orders can be completed"
 msgstr "Samo nacrti narudžbi mogu biti dovršeni"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:195
+msgid "Only roles assigned to your account are available."
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:293
 msgid "Option"
@@ -3973,7 +4048,11 @@ msgstr "Naručeno"
 msgid "Please add products and complete the shipping address to run the test."
 msgstr "Molimo dodajte proizvode i dovršite adresu za dostavu kako biste pokrenuli test."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:311
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:53
+msgid "Please confirm you have saved the API key before closing."
+msgstr ""
+
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:312
 msgid "Please select a target collection"
 msgstr "Molimo odaberite ciljnu kolekciju"
 
@@ -4311,11 +4390,25 @@ msgstr "Pregledajte izmjene prije njihove primjene na narudžbu."
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:139
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:55
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:170
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:32
 #: src/app/routes/_authenticated/_roles/roles.tsx:18
 #: src/app/routes/_authenticated/_roles/roles.tsx:27
 msgid "Roles"
 msgstr "Uloge"
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:51
+msgid "Rotate API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:45
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:68
+msgid "Rotate Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:53
+msgid "Rotating this key will immediately invalidate the current key. Any integrations using it will stop working until updated with the new key."
+msgstr ""
 
 #: src/lib/components/data-table/data-table-pagination.tsx:20
 msgid "Rows per page"
@@ -4451,9 +4544,14 @@ msgstr ""
 msgid "Search payment methods..."
 msgstr "Pretraži načine plaćanja..."
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:188
 #: src/lib/components/shared/role-selector.tsx:53
 msgid "Search roles..."
 msgstr "Pretraži uloge..."
+
+#: src/lib/components/shared/seller-selector.tsx:37
+msgid "Search sellers..."
+msgstr ""
 
 #. placeholder {0}: entityName.toLowerCase()
 #. placeholder {0}: group.name
@@ -4512,7 +4610,7 @@ msgid "Select a role"
 msgstr "Odaberite uloga"
 
 #. placeholder {0}: collectionsToMove.length === 1 ? 'this collection' : `${collectionsToMove.length} collections`
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:342
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:343
 msgid "Select a target collection to move {0} to."
 msgstr "Odaberite ciljnu kolekciju za premještanje {0}."
 
@@ -4584,7 +4682,11 @@ msgstr "Odaberite plaćanja za povrat"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "Odaberite količine za izvršenje i konfigurirajte rukovatelja izvršenja"
 
-#: src/lib/components/shared/seller-selector.tsx:75
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:187
+msgid "Select roles"
+msgstr ""
+
+#: src/lib/components/shared/seller-selector.tsx:39
 msgid "Select seller"
 msgstr "Odaberi prodavača"
 
@@ -4789,7 +4891,7 @@ msgstr "URL naziv će se automatski generirati..."
 msgid "Source"
 msgstr "Izvor"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:108
+#: src/lib/components/data-table/data-table-filter-badge.tsx:120
 msgid "start"
 msgstr "početak"
 
@@ -4886,6 +4988,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:77
 msgid "Successfully created administrator"
 msgstr "Administrator uspješno kreiran"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:108
+msgid "Successfully created API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:83
 msgid "Successfully created channel"
@@ -5012,6 +5118,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:78
 msgid "Successfully updated administrator"
 msgstr "Administrator uspješno ažuriran"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:115
+msgid "Successfully updated API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:85
 msgid "Successfully updated asset"
@@ -5280,6 +5390,10 @@ msgstr "Ovo je pregled sadržaja kolekcije temeljen na trenutnim postavkama filt
 msgid "This is the contents of the <0>{collectionName}</0> collection."
 msgstr "Ovo je sadržaj kolekcije <0>{collectionName}</0>."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:77
+msgid "This is the only time the full API key will be displayed. Copy or download it now — it cannot be retrieved later."
+msgstr ""
+
 #: src/lib/components/date-range-picker.tsx:71
 msgctxt "date-range"
 msgid "This month"
@@ -5423,6 +5537,7 @@ msgid "Unverified"
 msgstr "Neverificiran"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:115
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
@@ -5456,7 +5571,7 @@ msgstr "Ažuriraj"
 msgid "Update the note content or visibility"
 msgstr "Ažurirajte sadržaj ili vidljivost bilješke"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:653
+#: src/lib/framework/layout-engine/page-layout.tsx:663
 msgid "Updated"
 msgstr "Ažurirano"
 
@@ -5651,6 +5766,10 @@ msgstr "Nemate dozvolu za pregled globalnih postavki jezika"
 #: src/lib/components/data-table/views-sheet.tsx:152
 msgid "You haven't saved any views yet."
 msgstr "Još niste spremili nijedan prikaz."
+
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:67
+msgid "Your API Key"
+msgstr ""
 
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Your latest orders"

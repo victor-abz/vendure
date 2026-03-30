@@ -14,14 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:45
-msgid "Option Groups"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "Query extensie fout"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:151
-msgid "Settings Store"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "De pagina zal doorgaan met de standaard query."
 
 #. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
@@ -49,18 +51,6 @@ msgid "Query extension error: "
 msgstr "Query extensie fout: "
 
 #. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "Query extensie fout"
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "De pagina zal doorgaan met de standaard query."
-
-#. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
 msgid "Insights"
 msgstr "Inzichten"
@@ -79,6 +69,11 @@ msgstr "Producten"
 #: src/lib/framework/defaults.ts:38
 msgid "Product Variants"
 msgstr "Productvarianten"
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:45
+msgid "Option Groups"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:52
@@ -142,82 +137,92 @@ msgid "Scheduled Tasks"
 msgstr "Geplande taken"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:160
+#: src/lib/framework/defaults.ts:151
+msgid "Settings Store"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:158
+msgid "API Keys"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:167
 msgid "Settings"
 msgstr "Instellingen"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:167
+#: src/lib/framework/defaults.ts:174
 msgid "Sellers"
 msgstr "Verkopers"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:174
+#: src/lib/framework/defaults.ts:181
 msgid "Channels"
 msgstr "Kanalen"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:181
+#: src/lib/framework/defaults.ts:188
 msgid "Stock Locations"
 msgstr "Voorraadlocaties"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:188
+#: src/lib/framework/defaults.ts:195
 msgid "Administrators"
 msgstr "Beheerders"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:195
+#: src/lib/framework/defaults.ts:202
 msgid "Roles"
 msgstr "Rollen"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:202
+#: src/lib/framework/defaults.ts:209
 msgid "Shipping Methods"
 msgstr "Verzendmethoden"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:209
+#: src/lib/framework/defaults.ts:216
 msgid "Payment Methods"
 msgstr "Betaalmethoden"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:216
+#: src/lib/framework/defaults.ts:223
 msgid "Tax Categories"
 msgstr "Belastingcategorieën"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:223
+#: src/lib/framework/defaults.ts:230
 msgid "Tax Rates"
 msgstr "Belastingtarieven"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:230
+#: src/lib/framework/defaults.ts:237
 msgid "Countries"
 msgstr "Landen"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:237
+#: src/lib/framework/defaults.ts:244
 msgid "Zones"
 msgstr "Zones"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:244
+#: src/lib/framework/defaults.ts:251
 msgid "Global Settings"
 msgstr "Globale instellingen"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:256
+#: src/lib/framework/defaults.ts:263
 msgid "Metrics Widget"
 msgstr "Statistieken-widget"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:264
+#: src/lib/framework/defaults.ts:271
 msgid "Latest Orders Widget"
 msgstr "Widget nieuwste bestellingen"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:271
+#: src/lib/framework/defaults.ts:278
 msgid "Orders Summary Widget"
 msgstr "Widget bestellingsoverzicht"
 
@@ -822,7 +827,7 @@ msgid "{0} selected"
 msgstr "{0} geselecteerd"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:331
+#: src/app/routes/_authenticated/_collections/collections.tsx:408
 msgid "{0} variants"
 msgstr "{0} varianten"
 
@@ -871,7 +876,7 @@ msgstr "{totalQuantity} artikel(en) gerestitueerd"
 msgid "+ {0} more"
 msgstr "+ {0} meer"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:349
+#: src/app/routes/_authenticated/_collections/collections.tsx:426
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} meer"
 
@@ -1205,6 +1210,20 @@ msgstr "EN"
 msgid "Apartment, suite, etc."
 msgstr "Appartement, suite, etc."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:85
+msgid "API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:32
+msgid "API key rotated successfully"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:48
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:14
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:25
+msgid "API Keys"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:49
 msgid "Applied global view \"{viewName}\""
 msgstr "Globale weergave „{viewName}\" toegepast"
@@ -1404,8 +1423,9 @@ msgid "Calculator"
 msgstr "Calculator"
 
 #: src/app/common/duplicate-entity-dialog.tsx:112
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:61
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
@@ -1443,7 +1463,7 @@ msgstr "Wijziging annuleren"
 msgid "Cancel payment"
 msgstr "Betaling annuleren"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:210
+#: src/app/routes/_authenticated/_collections/collections.tsx:288
 msgid "Cannot move a collection into its own descendant"
 msgstr "Een collectie kan niet naar een eigen subniveau worden verplaatst"
 
@@ -1511,6 +1531,10 @@ msgstr "Filters wissen"
 msgid "Click \"Run Test\" to test this shipping method."
 msgstr "Klik op \"Test uitvoeren\" om deze verzendmethode te testen."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:125
+msgid "Close"
+msgstr ""
+
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:132
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:137
@@ -1529,17 +1553,17 @@ msgstr "Code"
 msgid "Collection contents for {collectionName}"
 msgstr "Collectie-inhoud voor {collectionName}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:248
+#: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Collection moved to new parent"
 msgstr "Collectie naar nieuw bovenliggend niveau verplaatst"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:242
+#: src/app/routes/_authenticated/_collections/collections.tsx:323
 msgid "Collection position updated"
 msgstr "Collectiepositie bijgewerkt"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:46
-#: src/app/routes/_authenticated/_collections/collections.tsx:36
-#: src/app/routes/_authenticated/_collections/collections.tsx:262
+#: src/app/routes/_authenticated/_collections/collections.tsx:51
+#: src/app/routes/_authenticated/_collections/collections.tsx:339
 msgid "Collections"
 msgstr "Collecties"
 
@@ -1601,7 +1625,7 @@ msgid "Content:"
 msgstr "Inhoud:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:324
+#: src/app/routes/_authenticated/_collections/collections.tsx:401
 msgid "Contents"
 msgstr "Inhoud"
 
@@ -1641,6 +1665,7 @@ msgid "Coupon code set for order"
 msgstr "Couponcode ingesteld voor bestelling"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:84
@@ -1708,9 +1733,10 @@ msgstr "Variant aanmaken"
 #~ msgid "Create variants for your product"
 #~ msgstr "Maak varianten aan voor uw product"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:640
+#: src/lib/framework/layout-engine/page-layout.tsx:650
 msgid "Created"
 msgstr "Aangemaakt"
 
@@ -1718,6 +1744,11 @@ msgstr "Aangemaakt"
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:221
 msgid "Created at"
 msgstr "Aangemaakt op"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:210
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:66
+msgid "Created by"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:292
 msgid "Creating..."
@@ -1963,6 +1994,10 @@ msgstr "Niet volgen"
 msgid "does not contain"
 msgstr "bevat niet"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:108
+msgid "Download as .env file"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
@@ -2127,7 +2162,7 @@ msgstr "Inschakelen"
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:110
+#: src/lib/components/data-table/data-table-filter-badge.tsx:122
 msgid "end"
 msgstr "einde"
 
@@ -2155,7 +2190,7 @@ msgstr "Voer de transactie-ID in voor deze terugbetalingsafhandeling"
 msgid "Enter transaction ID"
 msgstr "Voer transactie-ID in"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:612
+#: src/lib/framework/layout-engine/page-layout.tsx:622
 msgid "Entity Information"
 msgstr "Entiteitsinformatie"
 
@@ -2284,6 +2319,10 @@ msgstr "Adres aanmaken mislukt"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:86
 msgid "Failed to create administrator"
 msgstr "Aanmaken van beheerder mislukt"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to create API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:90
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:96
@@ -2438,7 +2477,7 @@ msgstr "Globale instellingen laden mislukt"
 msgid "Failed to modify order"
 msgstr "Bestelling wijzigen mislukt"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:293
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:294
 msgid "Failed to move collections"
 msgstr "Collecties verplaatsen mislukt"
 
@@ -2483,6 +2522,10 @@ msgstr "Weergave hernoemen mislukt"
 msgid "Failed to reorder items"
 msgstr "Opnieuw ordenen van artikelen mislukt"
 
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:35
+msgid "Failed to rotate API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:48
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:52
 msgid "Failed to settle payment"
@@ -2505,6 +2548,10 @@ msgstr "Adres bijwerken mislukt"
 msgid "Failed to update administrator"
 msgstr "Bijwerken van beheerder mislukt"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to update API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:89
 msgid "Failed to update asset"
 msgstr "Bestand bijwerken mislukt"
@@ -2518,7 +2565,7 @@ msgstr "Kanaal bijwerken mislukt"
 msgid "Failed to update collection"
 msgstr "Collectie bijwerken mislukt"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:253
+#: src/app/routes/_authenticated/_collections/collections.tsx:330
 msgid "Failed to update collection position"
 msgstr "Bijwerken van collectiepositie mislukt"
 
@@ -2640,7 +2687,7 @@ msgstr "Onwaar"
 msgid "Filter by {columnId}"
 msgstr "Filteren op {columnId}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:369
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:370
 msgid "Filter by collection name"
 msgstr "Filteren op collectienaam"
 
@@ -2855,6 +2902,10 @@ msgstr "Hoogte"
 msgid "Hide password"
 msgstr "Wachtwoord verbergen"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:118
+msgid "I have saved this API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:108
 msgid "ID"
 msgstr "ID"
@@ -3034,6 +3085,11 @@ msgstr "Laatste resultaat"
 #~ msgid "Last updated {0}"
 #~ msgstr "Laatst bijgewerkt {0}"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:214
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:46
+msgid "Last used"
+msgstr ""
+
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Latest Orders"
 msgstr "Laatste bestellingen"
@@ -3068,7 +3124,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:395
+#: src/app/routes/_authenticated/_collections/collections.tsx:477
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "{0} meer laden ({remaining} resterend)"
 
@@ -3081,7 +3137,7 @@ msgstr "Meer laden"
 msgid "Loading addresses..."
 msgstr "Adressen laden..."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:378
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:379
 msgid "Loading collections..."
 msgstr "Collecties laden..."
 
@@ -3106,7 +3162,6 @@ msgstr "Tags laden..."
 #: src/lib/components/shared/customer-group-selector.tsx:56
 #: src/lib/components/shared/customer-selector.tsx:88
 #: src/lib/components/shared/facet-value-selector.tsx:159
-#: src/lib/components/shared/seller-selector.tsx:90
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -3117,6 +3172,12 @@ msgstr "Landinstelling"
 #: src/lib/components/layout/nav-user.tsx:164
 msgid "Log out"
 msgstr "Uitloggen"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:204
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:60
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:95
+msgid "Lookup ID"
+msgstr ""
 
 #: src/lib/components/data-table/views-sheet.tsx:261
 msgid "Make Global"
@@ -3168,6 +3229,7 @@ msgstr "komt overeen met regex"
 msgid "Medium date"
 msgstr "Gemiddelde datum"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:201
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:245
 msgid "Metadata"
 msgstr "Metadata"
@@ -3202,12 +3264,12 @@ msgstr "Maand tot heden"
 msgid "More views"
 msgstr "Meer weergaven"
 
-#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:118
+#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:116
 msgid "Move"
 msgstr "Verplaatsen"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:339
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:426
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:340
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:427
 msgid "Move Collections"
 msgstr "Collecties verplaatsen"
 
@@ -3222,7 +3284,7 @@ msgstr "Verplaatsen naar het hoogste niveau"
 msgid "Moving {0} collection{1} into {2}"
 msgstr "{0} collectie(s) verplaatsen naar {2}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:424
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:425
 msgid "Moving..."
 msgstr "Verplaatsen..."
 
@@ -3235,6 +3297,7 @@ msgid "My Saved Views"
 msgstr "Mijn opgeslagen weergaven"
 
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:45
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:165
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:152
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:169
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:104
@@ -3258,6 +3321,8 @@ msgstr "Mijn opgeslagen weergaven"
 msgid "Name"
 msgstr "Naam"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:221
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:50
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:142
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:152
 msgid "Never"
@@ -3267,6 +3332,12 @@ msgstr "Nooit"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:97
 msgid "New administrator"
 msgstr "Nieuwe beheerder"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:49
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:136
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:79
+msgid "New API Key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:40
 msgid "New asset"
@@ -3286,7 +3357,7 @@ msgstr "Nieuw kanaal"
 msgid "New collection"
 msgstr "Nieuwe collectie"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:437
+#: src/app/routes/_authenticated/_collections/collections.tsx:519
 msgid "New Collection"
 msgstr "Nieuwe collectie"
 
@@ -3584,8 +3655,8 @@ msgid "No results found"
 msgstr "Geen resultaten gevonden"
 
 #: src/lib/components/shared/seller-selector.tsx:90
-msgid "No sellers found"
-msgstr "Geen verkopers gevonden"
+#~ msgid "No sellers found"
+#~ msgstr "Geen verkopers gevonden"
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -3662,6 +3733,10 @@ msgstr "Oud e-mailadres:"
 #: src/app/routes/_authenticated/_orders/components/draft-order-status.tsx:29
 msgid "Only draft orders can be completed"
 msgstr "Alleen conceptbestellingen kunnen worden voltooid"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:195
+msgid "Only roles assigned to your account are available."
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:293
 msgid "Option"
@@ -3960,7 +4035,11 @@ msgstr "Geplaatst op"
 msgid "Please add products and complete the shipping address to run the test."
 msgstr "Voeg producten toe en voltooi het verzendadres om de test uit te voeren."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:311
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:53
+msgid "Please confirm you have saved the API key before closing."
+msgstr ""
+
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:312
 msgid "Please select a target collection"
 msgstr "Selecteer een doelcollectie"
 
@@ -4298,11 +4377,25 @@ msgstr "Bekijk de wijzigingen voordat u ze toepast op de bestelling."
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:139
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:55
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:170
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:32
 #: src/app/routes/_authenticated/_roles/roles.tsx:18
 #: src/app/routes/_authenticated/_roles/roles.tsx:27
 msgid "Roles"
 msgstr "Rollen"
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:51
+msgid "Rotate API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:45
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:68
+msgid "Rotate Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:53
+msgid "Rotating this key will immediately invalidate the current key. Any integrations using it will stop working until updated with the new key."
+msgstr ""
 
 #: src/lib/components/data-table/data-table-pagination.tsx:20
 msgid "Rows per page"
@@ -4438,9 +4531,14 @@ msgstr ""
 msgid "Search payment methods..."
 msgstr "Betaalmethoden zoeken..."
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:188
 #: src/lib/components/shared/role-selector.tsx:53
 msgid "Search roles..."
 msgstr "Rollen zoeken..."
+
+#: src/lib/components/shared/seller-selector.tsx:37
+msgid "Search sellers..."
+msgstr ""
 
 #. placeholder {0}: entityName.toLowerCase()
 #. placeholder {0}: group.name
@@ -4499,7 +4597,7 @@ msgid "Select a role"
 msgstr "Selecteer een rol"
 
 #. placeholder {0}: collectionsToMove.length === 1 ? 'this collection' : `${collectionsToMove.length} collections`
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:342
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:343
 msgid "Select a target collection to move {0} to."
 msgstr "Selecteer een doelcollectie om {0} naar te verplaatsen."
 
@@ -4571,7 +4669,11 @@ msgstr "Selecteer betalingen om te restitueren"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "Selecteer hoeveelheden om af te handelen en configureer de afhandelingshandler"
 
-#: src/lib/components/shared/seller-selector.tsx:75
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:187
+msgid "Select roles"
+msgstr ""
+
+#: src/lib/components/shared/seller-selector.tsx:39
 msgid "Select seller"
 msgstr "Selecteer verkoper"
 
@@ -4776,7 +4878,7 @@ msgstr "Slug wordt automatisch gegenereerd..."
 msgid "Source"
 msgstr "Bron"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:108
+#: src/lib/components/data-table/data-table-filter-badge.tsx:120
 msgid "start"
 msgstr "begin"
 
@@ -4873,6 +4975,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:77
 msgid "Successfully created administrator"
 msgstr "Beheerder succesvol aangemaakt"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:108
+msgid "Successfully created API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:83
 msgid "Successfully created channel"
@@ -4999,6 +5105,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:78
 msgid "Successfully updated administrator"
 msgstr "Beheerder succesvol bijgewerkt"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:115
+msgid "Successfully updated API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:85
 msgid "Successfully updated asset"
@@ -5267,6 +5377,10 @@ msgstr "Dit is een voorbeeld van de collectie-inhoud op basis van de huidige fil
 msgid "This is the contents of the <0>{collectionName}</0> collection."
 msgstr "Dit is de inhoud van de collectie <0>{collectionName}</0>."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:77
+msgid "This is the only time the full API key will be displayed. Copy or download it now — it cannot be retrieved later."
+msgstr ""
+
 #: src/lib/components/date-range-picker.tsx:71
 msgctxt "date-range"
 msgid "This month"
@@ -5410,6 +5524,7 @@ msgid "Unverified"
 msgstr "Niet geverifieerd"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:115
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
@@ -5443,7 +5558,7 @@ msgstr "Bijwerken"
 msgid "Update the note content or visibility"
 msgstr "Notitie-inhoud of zichtbaarheid bijwerken"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:653
+#: src/lib/framework/layout-engine/page-layout.tsx:663
 msgid "Updated"
 msgstr "Bijgewerkt"
 
@@ -5646,6 +5761,10 @@ msgstr "U heeft geen toestemming om globale taalinstellingen te bekijken"
 #: src/lib/components/data-table/views-sheet.tsx:152
 msgid "You haven't saved any views yet."
 msgstr "U heeft nog geen weergaven opgeslagen."
+
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:67
+msgid "Your API Key"
+msgstr ""
 
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Your latest orders"

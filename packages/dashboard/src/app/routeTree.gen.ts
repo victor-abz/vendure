@@ -37,6 +37,7 @@ import { Route as AuthenticatedCountriesCountriesRouteImport } from './routes/_a
 import { Route as AuthenticatedCollectionsCollectionsRouteImport } from './routes/_authenticated/_collections/collections'
 import { Route as AuthenticatedChannelsChannelsRouteImport } from './routes/_authenticated/_channels/channels'
 import { Route as AuthenticatedAssetsAssetsRouteImport } from './routes/_authenticated/_assets/assets'
+import { Route as AuthenticatedApiKeysApiKeysRouteImport } from './routes/_authenticated/_api-keys/api-keys'
 import { Route as AuthenticatedAdministratorsAdministratorsRouteImport } from './routes/_authenticated/_administrators/administrators'
 import { Route as AuthenticatedZonesZonesIdRouteImport } from './routes/_authenticated/_zones/zones_.$id'
 import { Route as AuthenticatedTaxRatesTaxRatesIdRouteImport } from './routes/_authenticated/_tax-rates/tax-rates_.$id'
@@ -58,6 +59,7 @@ import { Route as AuthenticatedCountriesCountriesIdRouteImport } from './routes/
 import { Route as AuthenticatedCollectionsCollectionsIdRouteImport } from './routes/_authenticated/_collections/collections_.$id'
 import { Route as AuthenticatedChannelsChannelsIdRouteImport } from './routes/_authenticated/_channels/channels_.$id'
 import { Route as AuthenticatedAssetsAssetsIdRouteImport } from './routes/_authenticated/_assets/assets_.$id'
+import { Route as AuthenticatedApiKeysApiKeysIdRouteImport } from './routes/_authenticated/_api-keys/api-keys_.$id'
 import { Route as AuthenticatedAdministratorsAdministratorsIdRouteImport } from './routes/_authenticated/_administrators/administrators_.$id'
 import { Route as AuthenticatedProductsProductsIdVariantsRouteImport } from './routes/_authenticated/_products/products_.$id_.variants'
 import { Route as AuthenticatedOrdersOrdersDraftIdRouteImport } from './routes/_authenticated/_orders/orders_.draft.$id'
@@ -228,6 +230,12 @@ const AuthenticatedAssetsAssetsRoute =
     path: '/assets',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedApiKeysApiKeysRoute =
+  AuthenticatedApiKeysApiKeysRouteImport.update({
+    id: '/_api-keys/api-keys',
+    path: '/api-keys',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedAdministratorsAdministratorsRoute =
   AuthenticatedAdministratorsAdministratorsRouteImport.update({
     id: '/_administrators/administrators',
@@ -354,6 +362,12 @@ const AuthenticatedAssetsAssetsIdRoute =
     path: '/assets/$id',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedApiKeysApiKeysIdRoute =
+  AuthenticatedApiKeysApiKeysIdRouteImport.update({
+    id: '/_api-keys/api-keys_/$id',
+    path: '/api-keys/$id',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedAdministratorsAdministratorsIdRoute =
   AuthenticatedAdministratorsAdministratorsIdRouteImport.update({
     id: '/_administrators/administrators_/$id',
@@ -403,6 +417,7 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
   '/administrators': typeof AuthenticatedAdministratorsAdministratorsRoute
+  '/api-keys': typeof AuthenticatedApiKeysApiKeysRoute
   '/assets': typeof AuthenticatedAssetsAssetsRoute
   '/channels': typeof AuthenticatedChannelsChannelsRoute
   '/collections': typeof AuthenticatedCollectionsCollectionsRoute
@@ -429,6 +444,7 @@ export interface FileRoutesByFullPath {
   '/tax-rates': typeof AuthenticatedTaxRatesTaxRatesRoute
   '/zones': typeof AuthenticatedZonesZonesRoute
   '/administrators/$id': typeof AuthenticatedAdministratorsAdministratorsIdRoute
+  '/api-keys/$id': typeof AuthenticatedApiKeysApiKeysIdRoute
   '/assets/$id': typeof AuthenticatedAssetsAssetsIdRoute
   '/channels/$id': typeof AuthenticatedChannelsChannelsIdRoute
   '/collections/$id': typeof AuthenticatedCollectionsCollectionsIdRoute
@@ -460,6 +476,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/': typeof AuthenticatedIndexRoute
   '/administrators': typeof AuthenticatedAdministratorsAdministratorsRoute
+  '/api-keys': typeof AuthenticatedApiKeysApiKeysRoute
   '/assets': typeof AuthenticatedAssetsAssetsRoute
   '/channels': typeof AuthenticatedChannelsChannelsRoute
   '/collections': typeof AuthenticatedCollectionsCollectionsRoute
@@ -486,6 +503,7 @@ export interface FileRoutesByTo {
   '/tax-rates': typeof AuthenticatedTaxRatesTaxRatesRoute
   '/zones': typeof AuthenticatedZonesZonesRoute
   '/administrators/$id': typeof AuthenticatedAdministratorsAdministratorsIdRoute
+  '/api-keys/$id': typeof AuthenticatedApiKeysApiKeysIdRoute
   '/assets/$id': typeof AuthenticatedAssetsAssetsIdRoute
   '/channels/$id': typeof AuthenticatedChannelsChannelsIdRoute
   '/collections/$id': typeof AuthenticatedCollectionsCollectionsIdRoute
@@ -519,6 +537,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/_administrators/administrators': typeof AuthenticatedAdministratorsAdministratorsRoute
+  '/_authenticated/_api-keys/api-keys': typeof AuthenticatedApiKeysApiKeysRoute
   '/_authenticated/_assets/assets': typeof AuthenticatedAssetsAssetsRoute
   '/_authenticated/_channels/channels': typeof AuthenticatedChannelsChannelsRoute
   '/_authenticated/_collections/collections': typeof AuthenticatedCollectionsCollectionsRoute
@@ -545,6 +564,7 @@ export interface FileRoutesById {
   '/_authenticated/_tax-rates/tax-rates': typeof AuthenticatedTaxRatesTaxRatesRoute
   '/_authenticated/_zones/zones': typeof AuthenticatedZonesZonesRoute
   '/_authenticated/_administrators/administrators_/$id': typeof AuthenticatedAdministratorsAdministratorsIdRoute
+  '/_authenticated/_api-keys/api-keys_/$id': typeof AuthenticatedApiKeysApiKeysIdRoute
   '/_authenticated/_assets/assets_/$id': typeof AuthenticatedAssetsAssetsIdRoute
   '/_authenticated/_channels/channels_/$id': typeof AuthenticatedChannelsChannelsIdRoute
   '/_authenticated/_collections/collections_/$id': typeof AuthenticatedCollectionsCollectionsIdRoute
@@ -578,6 +598,7 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/administrators'
+    | '/api-keys'
     | '/assets'
     | '/channels'
     | '/collections'
@@ -604,6 +625,7 @@ export interface FileRouteTypes {
     | '/tax-rates'
     | '/zones'
     | '/administrators/$id'
+    | '/api-keys/$id'
     | '/assets/$id'
     | '/channels/$id'
     | '/collections/$id'
@@ -635,6 +657,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/'
     | '/administrators'
+    | '/api-keys'
     | '/assets'
     | '/channels'
     | '/collections'
@@ -661,6 +684,7 @@ export interface FileRouteTypes {
     | '/tax-rates'
     | '/zones'
     | '/administrators/$id'
+    | '/api-keys/$id'
     | '/assets/$id'
     | '/channels/$id'
     | '/collections/$id'
@@ -693,6 +717,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/_authenticated/'
     | '/_authenticated/_administrators/administrators'
+    | '/_authenticated/_api-keys/api-keys'
     | '/_authenticated/_assets/assets'
     | '/_authenticated/_channels/channels'
     | '/_authenticated/_collections/collections'
@@ -719,6 +744,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_tax-rates/tax-rates'
     | '/_authenticated/_zones/zones'
     | '/_authenticated/_administrators/administrators_/$id'
+    | '/_authenticated/_api-keys/api-keys_/$id'
     | '/_authenticated/_assets/assets_/$id'
     | '/_authenticated/_channels/channels_/$id'
     | '/_authenticated/_collections/collections_/$id'
@@ -950,6 +976,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAssetsAssetsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/_api-keys/api-keys': {
+      id: '/_authenticated/_api-keys/api-keys'
+      path: '/api-keys'
+      fullPath: '/api-keys'
+      preLoaderRoute: typeof AuthenticatedApiKeysApiKeysRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/_administrators/administrators': {
       id: '/_authenticated/_administrators/administrators'
       path: '/administrators'
@@ -1097,6 +1130,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAssetsAssetsIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/_api-keys/api-keys_/$id': {
+      id: '/_authenticated/_api-keys/api-keys_/$id'
+      path: '/api-keys/$id'
+      fullPath: '/api-keys/$id'
+      preLoaderRoute: typeof AuthenticatedApiKeysApiKeysIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/_administrators/administrators_/$id': {
       id: '/_authenticated/_administrators/administrators_/$id'
       path: '/administrators/$id'
@@ -1152,6 +1192,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAdministratorsAdministratorsRoute: typeof AuthenticatedAdministratorsAdministratorsRoute
+  AuthenticatedApiKeysApiKeysRoute: typeof AuthenticatedApiKeysApiKeysRoute
   AuthenticatedAssetsAssetsRoute: typeof AuthenticatedAssetsAssetsRoute
   AuthenticatedChannelsChannelsRoute: typeof AuthenticatedChannelsChannelsRoute
   AuthenticatedCollectionsCollectionsRoute: typeof AuthenticatedCollectionsCollectionsRoute
@@ -1178,6 +1219,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedTaxRatesTaxRatesRoute: typeof AuthenticatedTaxRatesTaxRatesRoute
   AuthenticatedZonesZonesRoute: typeof AuthenticatedZonesZonesRoute
   AuthenticatedAdministratorsAdministratorsIdRoute: typeof AuthenticatedAdministratorsAdministratorsIdRoute
+  AuthenticatedApiKeysApiKeysIdRoute: typeof AuthenticatedApiKeysApiKeysIdRoute
   AuthenticatedAssetsAssetsIdRoute: typeof AuthenticatedAssetsAssetsIdRoute
   AuthenticatedChannelsChannelsIdRoute: typeof AuthenticatedChannelsChannelsIdRoute
   AuthenticatedCollectionsCollectionsIdRoute: typeof AuthenticatedCollectionsCollectionsIdRoute
@@ -1210,6 +1252,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAdministratorsAdministratorsRoute:
     AuthenticatedAdministratorsAdministratorsRoute,
+  AuthenticatedApiKeysApiKeysRoute: AuthenticatedApiKeysApiKeysRoute,
   AuthenticatedAssetsAssetsRoute: AuthenticatedAssetsAssetsRoute,
   AuthenticatedChannelsChannelsRoute: AuthenticatedChannelsChannelsRoute,
   AuthenticatedCollectionsCollectionsRoute:
@@ -1248,6 +1291,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedZonesZonesRoute: AuthenticatedZonesZonesRoute,
   AuthenticatedAdministratorsAdministratorsIdRoute:
     AuthenticatedAdministratorsAdministratorsIdRoute,
+  AuthenticatedApiKeysApiKeysIdRoute: AuthenticatedApiKeysApiKeysIdRoute,
   AuthenticatedAssetsAssetsIdRoute: AuthenticatedAssetsAssetsIdRoute,
   AuthenticatedChannelsChannelsIdRoute: AuthenticatedChannelsChannelsIdRoute,
   AuthenticatedCollectionsCollectionsIdRoute:

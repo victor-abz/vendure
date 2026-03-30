@@ -14,14 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:45
-msgid "Option Groups"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "خطای گسترش پرس‌وجو"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:151
-msgid "Settings Store"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "صفحه با پرس‌وجوی پیش‌فرض ادامه می‌یابد."
 
 #. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
@@ -49,18 +51,6 @@ msgid "Query extension error: "
 msgstr "خطای گسترش پرس‌وجو:"
 
 #. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "خطای گسترش پرس‌وجو"
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "صفحه با پرس‌وجوی پیش‌فرض ادامه می‌یابد."
-
-#. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
 msgid "Insights"
 msgstr "بینش‌ها"
@@ -79,6 +69,11 @@ msgstr "محصولات"
 #: src/lib/framework/defaults.ts:38
 msgid "Product Variants"
 msgstr "انواع محصول"
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:45
+msgid "Option Groups"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:52
@@ -142,82 +137,92 @@ msgid "Scheduled Tasks"
 msgstr "وظایف زمان‌بندی شده"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:160
+#: src/lib/framework/defaults.ts:151
+msgid "Settings Store"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:158
+msgid "API Keys"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:167
 msgid "Settings"
 msgstr "تنظیمات"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:167
+#: src/lib/framework/defaults.ts:174
 msgid "Sellers"
 msgstr "فروشندگان"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:174
+#: src/lib/framework/defaults.ts:181
 msgid "Channels"
 msgstr "کانال‌ها"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:181
+#: src/lib/framework/defaults.ts:188
 msgid "Stock Locations"
 msgstr "محل‌های انبار"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:188
+#: src/lib/framework/defaults.ts:195
 msgid "Administrators"
 msgstr "مدیران"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:195
+#: src/lib/framework/defaults.ts:202
 msgid "Roles"
 msgstr "نقش‌ها"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:202
+#: src/lib/framework/defaults.ts:209
 msgid "Shipping Methods"
 msgstr "روش‌های ارسال"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:209
+#: src/lib/framework/defaults.ts:216
 msgid "Payment Methods"
 msgstr "روش‌های پرداخت"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:216
+#: src/lib/framework/defaults.ts:223
 msgid "Tax Categories"
 msgstr "دسته‌بندی‌های مالیاتی"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:223
+#: src/lib/framework/defaults.ts:230
 msgid "Tax Rates"
 msgstr "نرخ‌های مالیات"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:230
+#: src/lib/framework/defaults.ts:237
 msgid "Countries"
 msgstr "کشورها"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:237
+#: src/lib/framework/defaults.ts:244
 msgid "Zones"
 msgstr "مناطق"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:244
+#: src/lib/framework/defaults.ts:251
 msgid "Global Settings"
 msgstr "تنظیمات عمومی"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:256
+#: src/lib/framework/defaults.ts:263
 msgid "Metrics Widget"
 msgstr "ابزارک معیارها"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:264
+#: src/lib/framework/defaults.ts:271
 msgid "Latest Orders Widget"
 msgstr "ابزارک آخرین سفارش‌ها"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:271
+#: src/lib/framework/defaults.ts:278
 msgid "Orders Summary Widget"
 msgstr "ابزارک خلاصه سفارش‌ها"
 
@@ -828,7 +833,7 @@ msgid "{0} selected"
 msgstr "{0} انتخاب شده"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:331
+#: src/app/routes/_authenticated/_collections/collections.tsx:408
 msgid "{0} variants"
 msgstr "{0} نوع"
 
@@ -877,7 +882,7 @@ msgstr "{totalQuantity} کالا بازپرداخت شد"
 msgid "+ {0} more"
 msgstr "+ {0} بیشتر"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:349
+#: src/app/routes/_authenticated/_collections/collections.tsx:426
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} بیشتر"
 
@@ -1215,6 +1220,20 @@ msgstr "و"
 msgid "Apartment, suite, etc."
 msgstr "آپارتمان، سوئیت و غیره"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:85
+msgid "API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:32
+msgid "API key rotated successfully"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:48
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:14
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:25
+msgid "API Keys"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:49
 msgid "Applied global view \"{viewName}\""
 msgstr "نمای عمومی \"{viewName}\" اعمال شد"
@@ -1414,8 +1433,9 @@ msgid "Calculator"
 msgstr "ماشین‌حساب"
 
 #: src/app/common/duplicate-entity-dialog.tsx:112
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:61
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
@@ -1453,7 +1473,7 @@ msgstr "لغو تغییر"
 msgid "Cancel payment"
 msgstr "لغو پرداخت"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:210
+#: src/app/routes/_authenticated/_collections/collections.tsx:288
 msgid "Cannot move a collection into its own descendant"
 msgstr "نمی‌توان یک مجموعه را به زیرمجموعه خودش منتقل کرد"
 
@@ -1521,6 +1541,10 @@ msgstr "پاک کردن فیلترها"
 msgid "Click \"Run Test\" to test this shipping method."
 msgstr "برای آزمایش این روش ارسال روی \"اجرای آزمون\" کلیک کنید."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:125
+msgid "Close"
+msgstr ""
+
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:132
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:137
@@ -1539,17 +1563,17 @@ msgstr "کد"
 msgid "Collection contents for {collectionName}"
 msgstr "محتویات مجموعه {collectionName}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:248
+#: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Collection moved to new parent"
 msgstr "مجموعه به والد جدید منتقل شد"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:242
+#: src/app/routes/_authenticated/_collections/collections.tsx:323
 msgid "Collection position updated"
 msgstr "موقعیت مجموعه به‌روزرسانی شد"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:46
-#: src/app/routes/_authenticated/_collections/collections.tsx:36
-#: src/app/routes/_authenticated/_collections/collections.tsx:262
+#: src/app/routes/_authenticated/_collections/collections.tsx:51
+#: src/app/routes/_authenticated/_collections/collections.tsx:339
 msgid "Collections"
 msgstr "مجموعه‌ها"
 
@@ -1611,7 +1635,7 @@ msgid "Content:"
 msgstr "محتوا:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:324
+#: src/app/routes/_authenticated/_collections/collections.tsx:401
 msgid "Contents"
 msgstr "محتویات"
 
@@ -1651,6 +1675,7 @@ msgid "Coupon code set for order"
 msgstr "کد کوپن برای سفارش تنظیم شد"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:84
@@ -1718,9 +1743,10 @@ msgstr "ایجاد نوع"
 #~ msgid "Create variants for your product"
 #~ msgstr "انواع را برای محصول خود ایجاد کنید"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:640
+#: src/lib/framework/layout-engine/page-layout.tsx:650
 msgid "Created"
 msgstr "ایجاد شد"
 
@@ -1728,6 +1754,11 @@ msgstr "ایجاد شد"
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:221
 msgid "Created at"
 msgstr "ایجاد شده در"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:210
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:66
+msgid "Created by"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:292
 msgid "Creating..."
@@ -1973,6 +2004,10 @@ msgstr "دنبال نکردن"
 msgid "does not contain"
 msgstr "شامل نیست"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:108
+msgid "Download as .env file"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
@@ -2137,7 +2172,7 @@ msgstr "فعال کردن"
 msgid "Enabled"
 msgstr "فعال"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:110
+#: src/lib/components/data-table/data-table-filter-badge.tsx:122
 msgid "end"
 msgstr "پایان"
 
@@ -2165,7 +2200,7 @@ msgstr "شناسه تراکنش را برای این تسویه بازپرداخ
 msgid "Enter transaction ID"
 msgstr "شناسه تراکنش را وارد کنید"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:612
+#: src/lib/framework/layout-engine/page-layout.tsx:622
 msgid "Entity Information"
 msgstr "اطلاعات موجودیت"
 
@@ -2294,6 +2329,10 @@ msgstr "ایجاد آدرس ناموفق بود"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:86
 msgid "Failed to create administrator"
 msgstr "ایجاد مدیر ناموفق بود"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to create API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:90
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:96
@@ -2448,7 +2487,7 @@ msgstr "بارگذاری تنظیمات عمومی ناموفق بود"
 msgid "Failed to modify order"
 msgstr "تغییر سفارش ناموفق بود"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:293
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:294
 msgid "Failed to move collections"
 msgstr "جابجایی مجموعه‌ها ناموفق بود"
 
@@ -2493,6 +2532,10 @@ msgstr "تغییر نام نما ناموفق بود"
 msgid "Failed to reorder items"
 msgstr "مرتب‌سازی مجدد اقلام ناموفق بود"
 
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:35
+msgid "Failed to rotate API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:48
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:52
 msgid "Failed to settle payment"
@@ -2515,6 +2558,10 @@ msgstr "به‌روزرسانی آدرس ناموفق بود"
 msgid "Failed to update administrator"
 msgstr "به‌روزرسانی مدیر ناموفق بود"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to update API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:89
 msgid "Failed to update asset"
 msgstr "به‌روزرسانی فایل ناموفق بود"
@@ -2528,7 +2575,7 @@ msgstr "به‌روزرسانی کانال ناموفق بود"
 msgid "Failed to update collection"
 msgstr "به‌روزرسانی مجموعه ناموفق بود"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:253
+#: src/app/routes/_authenticated/_collections/collections.tsx:330
 msgid "Failed to update collection position"
 msgstr "به‌روزرسانی موقعیت مجموعه ناموفق بود"
 
@@ -2650,7 +2697,7 @@ msgstr "نادرست"
 msgid "Filter by {columnId}"
 msgstr "فیلتر بر اساس {columnId}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:369
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:370
 msgid "Filter by collection name"
 msgstr "فیلتر بر اساس نام مجموعه"
 
@@ -2868,6 +2915,10 @@ msgstr "ارتفاع"
 msgid "Hide password"
 msgstr "مخفی کردن رمز عبور"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:118
+msgid "I have saved this API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:108
 msgid "ID"
 msgstr "شناسه"
@@ -3047,6 +3098,11 @@ msgstr "آخرین نتیجه"
 #~ msgid "Last updated {0}"
 #~ msgstr "آخرین به‌روزرسانی {0}"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:214
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:46
+msgid "Last used"
+msgstr ""
+
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Latest Orders"
 msgstr "آخرین سفارش‌ها"
@@ -3081,7 +3137,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:395
+#: src/app/routes/_authenticated/_collections/collections.tsx:477
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "بارگذاری {0} مورد دیگر ({remaining} باقی‌مانده)"
 
@@ -3094,7 +3150,7 @@ msgstr "بارگذاری بیشتر"
 msgid "Loading addresses..."
 msgstr "در حال بارگذاری آدرس‌ها..."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:378
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:379
 msgid "Loading collections..."
 msgstr "در حال بارگذاری مجموعه‌ها..."
 
@@ -3119,7 +3175,6 @@ msgstr "در حال بارگذاری برچسب‌ها..."
 #: src/lib/components/shared/customer-group-selector.tsx:56
 #: src/lib/components/shared/customer-selector.tsx:88
 #: src/lib/components/shared/facet-value-selector.tsx:159
-#: src/lib/components/shared/seller-selector.tsx:90
 msgid "Loading..."
 msgstr "در حال بارگذاری..."
 
@@ -3130,6 +3185,12 @@ msgstr "محلی‌سازی"
 #: src/lib/components/layout/nav-user.tsx:164
 msgid "Log out"
 msgstr "خروج"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:204
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:60
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:95
+msgid "Lookup ID"
+msgstr ""
 
 #: src/lib/components/data-table/views-sheet.tsx:261
 msgid "Make Global"
@@ -3181,6 +3242,7 @@ msgstr "با عبارت باقاعده مطابقت دارد"
 msgid "Medium date"
 msgstr "تاریخ متوسط"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:201
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:245
 msgid "Metadata"
 msgstr "فراداده"
@@ -3215,12 +3277,12 @@ msgstr "از ابتدای ماه تاکنون"
 msgid "More views"
 msgstr "نماهای بیشتر"
 
-#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:118
+#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:116
 msgid "Move"
 msgstr "جابجایی"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:339
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:426
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:340
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:427
 msgid "Move Collections"
 msgstr "جابجایی مجموعه‌ها"
 
@@ -3235,7 +3297,7 @@ msgstr "جابجایی به سطح بالا"
 msgid "Moving {0} collection{1} into {2}"
 msgstr "جابجایی {0} مجموعه به {2}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:424
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:425
 msgid "Moving..."
 msgstr "در حال جابجایی..."
 
@@ -3248,6 +3310,7 @@ msgid "My Saved Views"
 msgstr "نماهای ذخیره شده من"
 
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:45
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:165
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:152
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:169
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:104
@@ -3271,6 +3334,8 @@ msgstr "نماهای ذخیره شده من"
 msgid "Name"
 msgstr "نام"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:221
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:50
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:142
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:152
 msgid "Never"
@@ -3280,6 +3345,12 @@ msgstr "هرگز"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:97
 msgid "New administrator"
 msgstr "مدیر جدید"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:49
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:136
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:79
+msgid "New API Key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:40
 msgid "New asset"
@@ -3299,7 +3370,7 @@ msgstr "کانال جدید"
 msgid "New collection"
 msgstr "مجموعه جدید"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:437
+#: src/app/routes/_authenticated/_collections/collections.tsx:519
 msgid "New Collection"
 msgstr "مجموعه جدید"
 
@@ -3597,8 +3668,8 @@ msgid "No results found"
 msgstr "هیچ نتیجه‌ای یافت نشد"
 
 #: src/lib/components/shared/seller-selector.tsx:90
-msgid "No sellers found"
-msgstr "هیچ فروشنده‌ای یافت نشد"
+#~ msgid "No sellers found"
+#~ msgstr "هیچ فروشنده‌ای یافت نشد"
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -3675,6 +3746,10 @@ msgstr "ایمیل قدیمی:"
 #: src/app/routes/_authenticated/_orders/components/draft-order-status.tsx:29
 msgid "Only draft orders can be completed"
 msgstr "فقط پیش‌نویس سفارشات می‌تواند تکمیل شود"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:195
+msgid "Only roles assigned to your account are available."
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:293
 msgid "Option"
@@ -3973,7 +4048,11 @@ msgstr "ثبت شده در"
 msgid "Please add products and complete the shipping address to run the test."
 msgstr "لطفا برای اجرای آزمون محصولات اضافه کنید و آدرس ارسال را تکمیل کنید."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:311
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:53
+msgid "Please confirm you have saved the API key before closing."
+msgstr ""
+
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:312
 msgid "Please select a target collection"
 msgstr "لطفا یک مجموعه هدف انتخاب کنید"
 
@@ -4311,11 +4390,25 @@ msgstr "قبل از اعمال تغییرات به سفارش، آنها را ب
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:139
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:55
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:170
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:32
 #: src/app/routes/_authenticated/_roles/roles.tsx:18
 #: src/app/routes/_authenticated/_roles/roles.tsx:27
 msgid "Roles"
 msgstr "نقش‌ها"
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:51
+msgid "Rotate API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:45
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:68
+msgid "Rotate Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:53
+msgid "Rotating this key will immediately invalidate the current key. Any integrations using it will stop working until updated with the new key."
+msgstr ""
 
 #: src/lib/components/data-table/data-table-pagination.tsx:20
 msgid "Rows per page"
@@ -4451,9 +4544,14 @@ msgstr ""
 msgid "Search payment methods..."
 msgstr "جستجوی روش‌های پرداخت..."
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:188
 #: src/lib/components/shared/role-selector.tsx:53
 msgid "Search roles..."
 msgstr "جستجوی نقش‌ها..."
+
+#: src/lib/components/shared/seller-selector.tsx:37
+msgid "Search sellers..."
+msgstr ""
 
 #. placeholder {0}: entityName.toLowerCase()
 #. placeholder {0}: group.name
@@ -4512,7 +4610,7 @@ msgid "Select a role"
 msgstr "یک نقش انتخاب کنید"
 
 #. placeholder {0}: collectionsToMove.length === 1 ? 'this collection' : `${collectionsToMove.length} collections`
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:342
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:343
 msgid "Select a target collection to move {0} to."
 msgstr "یک مجموعه هدف برای جابجایی {0} انتخاب کنید."
 
@@ -4584,7 +4682,11 @@ msgstr "پرداخت‌ها را برای بازپرداخت انتخاب کنی
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "تعداد را برای تحویل انتخاب کنید و مدیریت تحویل را پیکربندی کنید"
 
-#: src/lib/components/shared/seller-selector.tsx:75
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:187
+msgid "Select roles"
+msgstr ""
+
+#: src/lib/components/shared/seller-selector.tsx:39
 msgid "Select seller"
 msgstr "انتخاب فروشنده"
 
@@ -4789,7 +4891,7 @@ msgstr "نامک به طور خودکار ایجاد خواهد شد..."
 msgid "Source"
 msgstr "منبع"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:108
+#: src/lib/components/data-table/data-table-filter-badge.tsx:120
 msgid "start"
 msgstr "شروع"
 
@@ -4886,6 +4988,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:77
 msgid "Successfully created administrator"
 msgstr "مدیر با موفقیت ایجاد شد"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:108
+msgid "Successfully created API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:83
 msgid "Successfully created channel"
@@ -5012,6 +5118,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:78
 msgid "Successfully updated administrator"
 msgstr "مدیر با موفقیت به‌روزرسانی شد"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:115
+msgid "Successfully updated API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:85
 msgid "Successfully updated asset"
@@ -5280,6 +5390,10 @@ msgstr "این پیش‌نمایشی از محتویات مجموعه بر اس�
 msgid "This is the contents of the <0>{collectionName}</0> collection."
 msgstr "این محتویات مجموعه <0>{collectionName}</0> است."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:77
+msgid "This is the only time the full API key will be displayed. Copy or download it now — it cannot be retrieved later."
+msgstr ""
+
 #: src/lib/components/date-range-picker.tsx:71
 msgctxt "date-range"
 msgid "This month"
@@ -5423,6 +5537,7 @@ msgid "Unverified"
 msgstr "تایید نشده"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:115
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
@@ -5456,7 +5571,7 @@ msgstr "به‌روزرسانی"
 msgid "Update the note content or visibility"
 msgstr "محتوا یا قابلیت مشاهده یادداشت را به‌روزرسانی کنید"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:653
+#: src/lib/framework/layout-engine/page-layout.tsx:663
 msgid "Updated"
 msgstr "به‌روزرسانی شد"
 
@@ -5651,6 +5766,10 @@ msgstr "شما مجوز مشاهده تنظیمات زبان عمومی را ن�
 #: src/lib/components/data-table/views-sheet.tsx:152
 msgid "You haven't saved any views yet."
 msgstr "هنوز هیچ نمایی ذخیره نکرده‌اید."
+
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:67
+msgid "Your API Key"
+msgstr ""
 
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Your latest orders"

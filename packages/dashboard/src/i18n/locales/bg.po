@@ -14,14 +14,16 @@ msgstr ""
 "X-Generator: @lingui/cli\n"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:45
-msgid "Option Groups"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:23
+#: src/lib/hooks/use-extended-list-query.ts:64
+msgid "Query extension error"
+msgstr "Грешка в разширението на заявката"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:151
-msgid "Settings Store"
-msgstr ""
+#: src/lib/hooks/use-extended-detail-query.ts:25
+#: src/lib/hooks/use-extended-list-query.ts:66
+msgid "The page will continue with the default query."
+msgstr "Страницата ще продължи със заявката по подразбиране."
 
 #. js-lingui-explicit-id
 #: src/lib/hooks/use-extended-list-query.ts:41
@@ -49,18 +51,6 @@ msgid "Query extension error: "
 msgstr "Грешка в разширението на заявката:"
 
 #. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:23
-#: src/lib/hooks/use-extended-list-query.ts:64
-msgid "Query extension error"
-msgstr "Грешка в разширението на заявката"
-
-#. js-lingui-explicit-id
-#: src/lib/hooks/use-extended-detail-query.ts:25
-#: src/lib/hooks/use-extended-list-query.ts:66
-msgid "The page will continue with the default query."
-msgstr "Страницата ще продължи със заявката по подразбиране."
-
-#. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:16
 msgid "Insights"
 msgstr "Анализи"
@@ -79,6 +69,11 @@ msgstr "Продукти"
 #: src/lib/framework/defaults.ts:38
 msgid "Product Variants"
 msgstr "Варианти"
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:45
+msgid "Option Groups"
+msgstr ""
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:52
@@ -142,82 +137,92 @@ msgid "Scheduled Tasks"
 msgstr "Планирани задачи"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:160
+#: src/lib/framework/defaults.ts:151
+msgid "Settings Store"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:158
+msgid "API Keys"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/lib/framework/defaults.ts:167
 msgid "Settings"
 msgstr "Настройки"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:167
+#: src/lib/framework/defaults.ts:174
 msgid "Sellers"
 msgstr "Продавачи"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:174
+#: src/lib/framework/defaults.ts:181
 msgid "Channels"
 msgstr "Канали"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:181
+#: src/lib/framework/defaults.ts:188
 msgid "Stock Locations"
 msgstr "Складови местоположения"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:188
+#: src/lib/framework/defaults.ts:195
 msgid "Administrators"
 msgstr "Администратори"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:195
+#: src/lib/framework/defaults.ts:202
 msgid "Roles"
 msgstr "Роли"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:202
+#: src/lib/framework/defaults.ts:209
 msgid "Shipping Methods"
 msgstr "Методи за доставка"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:209
+#: src/lib/framework/defaults.ts:216
 msgid "Payment Methods"
 msgstr "Начини на плащане"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:216
+#: src/lib/framework/defaults.ts:223
 msgid "Tax Categories"
 msgstr "Данъчни категории"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:223
+#: src/lib/framework/defaults.ts:230
 msgid "Tax Rates"
 msgstr "Данъчни ставки"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:230
+#: src/lib/framework/defaults.ts:237
 msgid "Countries"
 msgstr "Държави"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:237
+#: src/lib/framework/defaults.ts:244
 msgid "Zones"
 msgstr "Зони"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:244
+#: src/lib/framework/defaults.ts:251
 msgid "Global Settings"
 msgstr "Глобални настройки"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:256
+#: src/lib/framework/defaults.ts:263
 msgid "Metrics Widget"
 msgstr "Уиджет за показатели"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:264
+#: src/lib/framework/defaults.ts:271
 msgid "Latest Orders Widget"
 msgstr "Уиджет за най-нови поръчки"
 
 #. js-lingui-explicit-id
-#: src/lib/framework/defaults.ts:271
+#: src/lib/framework/defaults.ts:278
 msgid "Orders Summary Widget"
 msgstr "Уиджет за обобщение на поръчките"
 
@@ -828,7 +833,7 @@ msgid "{0} selected"
 msgstr "{0} избрани"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:331
+#: src/app/routes/_authenticated/_collections/collections.tsx:408
 msgid "{0} variants"
 msgstr "{0} варианта"
 
@@ -877,7 +882,7 @@ msgstr "{totalQuantity} артикул(и) възстановен(и)"
 msgid "+ {0} more"
 msgstr "+ още {0}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:349
+#: src/app/routes/_authenticated/_collections/collections.tsx:426
 msgid "+ {leftOver} more"
 msgstr "+ още {leftOver}"
 
@@ -1217,6 +1222,20 @@ msgstr "И"
 msgid "Apartment, suite, etc."
 msgstr "Апартамент, офис и др."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:85
+msgid "API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:32
+msgid "API key rotated successfully"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:48
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:14
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:25
+msgid "API Keys"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:49
 msgid "Applied global view \"{viewName}\""
 msgstr "Приложен е глобален изглед „{viewName}“"
@@ -1416,8 +1435,9 @@ msgid "Calculator"
 msgstr "Калкулатор"
 
 #: src/app/common/duplicate-entity-dialog.tsx:112
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:61
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
@@ -1455,7 +1475,7 @@ msgstr "Отмяна на модификацията"
 msgid "Cancel payment"
 msgstr "Отказ от плащането"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:210
+#: src/app/routes/_authenticated/_collections/collections.tsx:288
 msgid "Cannot move a collection into its own descendant"
 msgstr "Не може да се премести колекция в собствен наследник"
 
@@ -1523,6 +1543,10 @@ msgstr "Изчистване на филтрите"
 msgid "Click \"Run Test\" to test this shipping method."
 msgstr "Щракнете върху „Изпълни тест“, за да тествате този метод на доставка."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:125
+msgid "Close"
+msgstr ""
+
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:132
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:110
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:137
@@ -1541,17 +1565,17 @@ msgstr "Код"
 msgid "Collection contents for {collectionName}"
 msgstr "Съдържание на колекция за {collectionName}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:248
+#: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Collection moved to new parent"
 msgstr "Колекцията е преместена в нов родител"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:242
+#: src/app/routes/_authenticated/_collections/collections.tsx:323
 msgid "Collection position updated"
 msgstr "Позицията на колекцията е актуализирана"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:46
-#: src/app/routes/_authenticated/_collections/collections.tsx:36
-#: src/app/routes/_authenticated/_collections/collections.tsx:262
+#: src/app/routes/_authenticated/_collections/collections.tsx:51
+#: src/app/routes/_authenticated/_collections/collections.tsx:339
 msgid "Collections"
 msgstr "Колекции"
 
@@ -1613,7 +1637,7 @@ msgid "Content:"
 msgstr "Съдържание:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:324
+#: src/app/routes/_authenticated/_collections/collections.tsx:401
 msgid "Contents"
 msgstr "Съдържание"
 
@@ -1653,6 +1677,7 @@ msgid "Coupon code set for order"
 msgstr "Кодът на купона е зададен за поръчка"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:84
@@ -1720,9 +1745,10 @@ msgstr "Създай вариант"
 #~ msgid "Create variants for your product"
 #~ msgstr "Създай варианти за вашия продукт"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:640
+#: src/lib/framework/layout-engine/page-layout.tsx:650
 msgid "Created"
 msgstr "Създаден"
 
@@ -1730,6 +1756,11 @@ msgstr "Създаден"
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:221
 msgid "Created at"
 msgstr "Създаден на"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:210
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:66
+msgid "Created by"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:292
 msgid "Creating..."
@@ -1981,6 +2012,10 @@ msgstr "Не проследявайте"
 msgid "does not contain"
 msgstr "не съдържа"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:108
+msgid "Download as .env file"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
@@ -2145,7 +2180,7 @@ msgstr "Активиране"
 msgid "Enabled"
 msgstr "Активирано"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:110
+#: src/lib/components/data-table/data-table-filter-badge.tsx:122
 msgid "end"
 msgstr "край"
 
@@ -2173,7 +2208,7 @@ msgstr "Въведете ID на транзакцията за това възс
 msgid "Enter transaction ID"
 msgstr "Въведете ID на транзакцията"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:612
+#: src/lib/framework/layout-engine/page-layout.tsx:622
 msgid "Entity Information"
 msgstr "Информация за обекта"
 
@@ -2302,6 +2337,10 @@ msgstr "Неуспешно създаване на адрес"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:86
 msgid "Failed to create administrator"
 msgstr "Неуспешно създаване на администратор"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to create API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:90
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:96
@@ -2456,7 +2495,7 @@ msgstr "Неуспешно зареждане на глобалните наст
 msgid "Failed to modify order"
 msgstr "Неуспешна промяна на поръчката"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:293
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:294
 msgid "Failed to move collections"
 msgstr "Неуспешно преместване на колекции"
 
@@ -2501,6 +2540,10 @@ msgstr "Неуспешно преименуване на изглед"
 msgid "Failed to reorder items"
 msgstr "Неуспешно пренареждане на артикули"
 
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:35
+msgid "Failed to rotate API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:48
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:52
 msgid "Failed to settle payment"
@@ -2523,6 +2566,10 @@ msgstr "Неуспешно актуализиране на адреса"
 msgid "Failed to update administrator"
 msgstr "Неуспешно актуализиране на администратора"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
+msgid "Failed to update API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:89
 msgid "Failed to update asset"
 msgstr "Неуспешно актуализиране на актива"
@@ -2536,7 +2583,7 @@ msgstr "Неуспешно актуализиране на канала"
 msgid "Failed to update collection"
 msgstr "Неуспешно актуализиране на колекцията"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:253
+#: src/app/routes/_authenticated/_collections/collections.tsx:330
 msgid "Failed to update collection position"
 msgstr "Неуспешно актуализиране на позицията на колекцията"
 
@@ -2658,7 +2705,7 @@ msgstr "Грешно"
 msgid "Filter by {columnId}"
 msgstr "Филтриране по {columnId}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:369
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:370
 msgid "Filter by collection name"
 msgstr "Филтриране по име на колекция"
 
@@ -2876,6 +2923,10 @@ msgstr "Височина"
 msgid "Hide password"
 msgstr "Скриване на паролата"
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:118
+msgid "I have saved this API key"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:108
 msgid "ID"
 msgstr "ID"
@@ -3064,6 +3115,11 @@ msgstr "Последен резултат"
 #~ msgid "Last updated {0}"
 #~ msgstr "Последна актуализация {0}"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:214
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:46
+msgid "Last used"
+msgstr ""
+
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Latest Orders"
 msgstr "Последни поръчки"
@@ -3101,7 +3157,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:395
+#: src/app/routes/_authenticated/_collections/collections.tsx:477
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "Зареди още {0} ({remaining} оставащи)"
 
@@ -3114,7 +3170,7 @@ msgstr "Зареди още"
 msgid "Loading addresses..."
 msgstr "Адресите се зареждат..."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:378
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:379
 msgid "Loading collections..."
 msgstr "Колекциите се зареждат..."
 
@@ -3139,7 +3195,6 @@ msgstr "Таговете се зареждат..."
 #: src/lib/components/shared/customer-group-selector.tsx:56
 #: src/lib/components/shared/customer-selector.tsx:88
 #: src/lib/components/shared/facet-value-selector.tsx:159
-#: src/lib/components/shared/seller-selector.tsx:90
 msgid "Loading..."
 msgstr "Зареждане..."
 
@@ -3150,6 +3205,12 @@ msgstr "Локализация"
 #: src/lib/components/layout/nav-user.tsx:164
 msgid "Log out"
 msgstr "Изход"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:204
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:60
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:95
+msgid "Lookup ID"
+msgstr ""
 
 #: src/lib/components/data-table/views-sheet.tsx:261
 msgid "Make Global"
@@ -3201,6 +3262,7 @@ msgstr "съответства на регулярен израз"
 msgid "Medium date"
 msgstr "Средна дата"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:201
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:245
 msgid "Metadata"
 msgstr "Метаданни"
@@ -3238,12 +3300,12 @@ msgstr "От началото на месеца"
 msgid "More views"
 msgstr "Още гледания"
 
-#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:118
+#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:116
 msgid "Move"
 msgstr "Премести"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:339
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:426
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:340
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:427
 msgid "Move Collections"
 msgstr "Преместване на колекции"
 
@@ -3258,7 +3320,7 @@ msgstr "Преминете към най-горното ниво"
 msgid "Moving {0} collection{1} into {2}"
 msgstr "Преместване на {0} колекция{1} в {2}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:424
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:425
 msgid "Moving..."
 msgstr "Преместване..."
 
@@ -3271,6 +3333,7 @@ msgid "My Saved Views"
 msgstr "Моите запазени изгледи"
 
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:45
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:165
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:152
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:169
 #: src/app/routes/_authenticated/_countries/countries_.$id.tsx:104
@@ -3294,6 +3357,8 @@ msgstr "Моите запазени изгледи"
 msgid "Name"
 msgstr "Име"
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:221
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:50
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:142
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:152
 msgid "Never"
@@ -3303,6 +3368,12 @@ msgstr "Никога"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:97
 msgid "New administrator"
 msgstr "Нов администратор"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:49
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:136
+#: src/app/routes/_authenticated/_api-keys/api-keys.tsx:79
+msgid "New API Key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:40
 msgid "New asset"
@@ -3322,7 +3393,7 @@ msgstr "Нов канал"
 msgid "New collection"
 msgstr "Нова колекция"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:437
+#: src/app/routes/_authenticated/_collections/collections.tsx:519
 msgid "New Collection"
 msgstr "Нова колекция"
 
@@ -3620,8 +3691,8 @@ msgid "No results found"
 msgstr "Няма намерени резултати"
 
 #: src/lib/components/shared/seller-selector.tsx:90
-msgid "No sellers found"
-msgstr "Няма намерени продавачи"
+#~ msgid "No sellers found"
+#~ msgstr "Няма намерени продавачи"
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -3698,6 +3769,10 @@ msgstr "Стар имейл:"
 #: src/app/routes/_authenticated/_orders/components/draft-order-status.tsx:29
 msgid "Only draft orders can be completed"
 msgstr "Само черновите на поръчки могат да бъдат завършени"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:195
+msgid "Only roles assigned to your account are available."
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:293
 msgid "Option"
@@ -3996,7 +4071,11 @@ msgstr "Поставен при"
 msgid "Please add products and complete the shipping address to run the test."
 msgstr "Моля, добавете продукти и попълнете адреса за доставка, за да стартирате теста."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:311
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:53
+msgid "Please confirm you have saved the API key before closing."
+msgstr ""
+
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:312
 msgid "Please select a target collection"
 msgstr "Моля, изберете целева колекция"
 
@@ -4334,11 +4413,25 @@ msgstr "Прегледайте промените, преди да ги прил
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:139
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:55
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:170
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:32
 #: src/app/routes/_authenticated/_roles/roles.tsx:18
 #: src/app/routes/_authenticated/_roles/roles.tsx:27
 msgid "Roles"
 msgstr "Роли"
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:51
+msgid "Rotate API Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:45
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:68
+msgid "Rotate Key"
+msgstr ""
+
+#: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:53
+msgid "Rotating this key will immediately invalidate the current key. Any integrations using it will stop working until updated with the new key."
+msgstr ""
 
 #: src/lib/components/data-table/data-table-pagination.tsx:20
 msgid "Rows per page"
@@ -4473,9 +4566,14 @@ msgstr ""
 msgid "Search payment methods..."
 msgstr "Търсете начини на плащане..."
 
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:188
 #: src/lib/components/shared/role-selector.tsx:53
 msgid "Search roles..."
 msgstr "Търсене на роли..."
+
+#: src/lib/components/shared/seller-selector.tsx:37
+msgid "Search sellers..."
+msgstr ""
 
 #. placeholder {0}: entityName.toLowerCase()
 #. placeholder {0}: group.name
@@ -4534,7 +4632,7 @@ msgid "Select a role"
 msgstr "Изберете роля"
 
 #. placeholder {0}: collectionsToMove.length === 1 ? 'this collection' : `${collectionsToMove.length} collections`
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:342
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:343
 msgid "Select a target collection to move {0} to."
 msgstr "Изберете целева колекция, към която да преместите {0}."
 
@@ -4606,7 +4704,11 @@ msgstr "Изберете плащания за възстановяване"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "Изберете количества за изпълнение и конфигурирайте манипулатора за изпълнение"
 
-#: src/lib/components/shared/seller-selector.tsx:75
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:187
+msgid "Select roles"
+msgstr ""
+
+#: src/lib/components/shared/seller-selector.tsx:39
 msgid "Select seller"
 msgstr "Изберете продавач"
 
@@ -4811,7 +4913,7 @@ msgstr "Slug ще се генерира автоматично..."
 msgid "Source"
 msgstr "Източник"
 
-#: src/lib/components/data-table/data-table-filter-badge.tsx:108
+#: src/lib/components/data-table/data-table-filter-badge.tsx:120
 msgid "start"
 msgstr "начало"
 
@@ -4908,6 +5010,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:77
 msgid "Successfully created administrator"
 msgstr "Успешно създаден администратор"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:108
+msgid "Successfully created API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:83
 msgid "Successfully created channel"
@@ -5034,6 +5140,10 @@ msgstr ""
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:78
 msgid "Successfully updated administrator"
 msgstr "Успешно актуализиран администратор"
+
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:115
+msgid "Successfully updated API key"
+msgstr ""
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:85
 msgid "Successfully updated asset"
@@ -5305,6 +5415,10 @@ msgstr "Това е визуализация на съдържанието на 
 msgid "This is the contents of the <0>{collectionName}</0> collection."
 msgstr "Това е съдържанието на колекцията <0>{collectionName}</0>."
 
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:77
+msgid "This is the only time the full API key will be displayed. Copy or download it now — it cannot be retrieved later."
+msgstr ""
+
 #~ msgid "This month"
 #~ msgstr "Този месец"
 
@@ -5457,6 +5571,7 @@ msgid "Unverified"
 msgstr "Непроверено"
 
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:105
+#: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:155
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:115
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:122
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:148
@@ -5490,7 +5605,7 @@ msgstr "Актуализация"
 msgid "Update the note content or visibility"
 msgstr "Актуализирайте съдържанието или видимостта на бележката"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:653
+#: src/lib/framework/layout-engine/page-layout.tsx:663
 msgid "Updated"
 msgstr "Актуализиран"
 
@@ -5688,6 +5803,10 @@ msgstr "Нямате разрешение да видите глобалните
 #: src/lib/components/data-table/views-sheet.tsx:152
 msgid "You haven't saved any views yet."
 msgstr "Все още не сте запазили изгледи."
+
+#: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:67
+msgid "Your API Key"
+msgstr ""
 
 #: src/lib/framework/dashboard-widget/latest-orders-widget/index.tsx:78
 msgid "Your latest orders"

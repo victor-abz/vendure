@@ -153,6 +153,13 @@ export function registerDefaults() {
                         order: 400,
                         requiresPermission: ['ReadSystem'],
                     },
+                    {
+                        id: 'api-keys',
+                        title: /* i18n*/ 'API Keys',
+                        url: '/api-keys',
+                        order: 550,
+                        requiresPermission: ['ReadApiKey'],
+                    },
                 ],
             },
             {
