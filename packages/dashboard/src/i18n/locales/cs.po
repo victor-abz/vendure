@@ -812,7 +812,7 @@ msgid "{0} selected"
 msgstr "{0} vybráno"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:332
+#: src/app/routes/_authenticated/_collections/collections.tsx:408
 msgid "{0} variants"
 msgstr "{0} variant"
 
@@ -853,7 +853,7 @@ msgstr "{totalQuantity} položek vráceno"
 msgid "+ {0} more"
 msgstr "+ {0} dalších"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:350
+#: src/app/routes/_authenticated/_collections/collections.tsx:426
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} dalších"
 
@@ -1346,7 +1346,7 @@ msgstr "Kalkulačka"
 
 #: src/app/common/duplicate-entity-dialog.tsx:108
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:337
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:307
@@ -1383,7 +1383,7 @@ msgstr "Zrušit úpravu"
 msgid "Cancel payment"
 msgstr "Zrušit platbu"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:213
+#: src/app/routes/_authenticated/_collections/collections.tsx:290
 msgid "Cannot move a collection into its own descendant"
 msgstr "Nelze přesunout kolekci do jejího vlastního potomka"
 
@@ -1462,17 +1462,17 @@ msgstr "Kód"
 msgid "Collection contents for {collectionName}"
 msgstr "Obsah kolekce {collectionName}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:251
+#: src/app/routes/_authenticated/_collections/collections.tsx:327
 msgid "Collection moved to new parent"
 msgstr "Kolekce přesunuta do nového rodiče"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:245
+#: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Collection position updated"
 msgstr "Pozice kolekce aktualizována"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:48
-#: src/app/routes/_authenticated/_collections/collections.tsx:38
-#: src/app/routes/_authenticated/_collections/collections.tsx:265
+#: src/app/routes/_authenticated/_collections/collections.tsx:52
+#: src/app/routes/_authenticated/_collections/collections.tsx:341
 msgid "Collections"
 msgstr "Kolekce"
 
@@ -1529,7 +1529,7 @@ msgid "Content:"
 msgstr "Obsah:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:253
-#: src/app/routes/_authenticated/_collections/collections.tsx:325
+#: src/app/routes/_authenticated/_collections/collections.tsx:401
 msgid "Contents"
 msgstr "Obsah"
 
@@ -2317,7 +2317,7 @@ msgstr "Nepodařilo se načíst globální nastavení"
 msgid "Failed to modify order"
 msgstr "Nepodařilo se upravit objednávku"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:293
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:294
 msgid "Failed to move collections"
 msgstr "Nepodařilo se přesunout kolekce"
 
@@ -2389,7 +2389,7 @@ msgstr "Nepodařilo se aktualizovat kanál"
 msgid "Failed to update collection"
 msgstr "Nepodařilo se aktualizovat kolekci"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:256
+#: src/app/routes/_authenticated/_collections/collections.tsx:332
 msgid "Failed to update collection position"
 msgstr "Nepodařilo se aktualizovat pozici kolekce"
 
@@ -2499,7 +2499,7 @@ msgstr "Nepravda"
 msgid "Filter by {columnId}"
 msgstr "Filtrovat podle {columnId}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:369
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:370
 msgid "Filter by collection name"
 msgstr "Filtrovat podle názvu kolekce"
 
@@ -2896,7 +2896,7 @@ msgid "Link title"
 msgstr "Nadpis odkazu"
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:395
+#: src/app/routes/_authenticated/_collections/collections.tsx:476
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "Načíst dalších {0} ({remaining} zbývá)"
 
@@ -2909,7 +2909,7 @@ msgstr "Načíst více"
 msgid "Loading addresses..."
 msgstr "Načítání adres..."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:378
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:379
 msgid "Loading collections..."
 msgstr "Načítání kolekcí..."
 
@@ -3028,12 +3028,12 @@ msgstr "Od začátku měsíce"
 msgid "More views"
 msgstr "Více pohledů"
 
-#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:118
+#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:116
 msgid "Move"
 msgstr "Přesunout"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:339
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:426
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:340
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:427
 msgid "Move Collections"
 msgstr "Přesunout kolekce"
 
@@ -3048,7 +3048,7 @@ msgstr "Přesunout na nejvyšší úroveň"
 msgid "Moving {0} collection{1} into {2}"
 msgstr "Přesouvání {0} kolekce do {2}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:424
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:425
 msgid "Moving..."
 msgstr "Přesouvání..."
 
@@ -3110,7 +3110,7 @@ msgstr "Nový kanál"
 msgid "New collection"
 msgstr "Nová kolekce"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:450
+#: src/app/routes/_authenticated/_collections/collections.tsx:531
 msgid "New Collection"
 msgstr "Nová kolekce"
 
@@ -3742,7 +3742,7 @@ msgstr "Vytvořeno"
 msgid "Please add products and complete the shipping address to run the test."
 msgstr "Pro spuštění testu přidejte produkty a vyplňte doručovací adresu."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:311
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:312
 msgid "Please select a target collection"
 msgstr "Prosím vyberte cílovou kolekci"
 
@@ -4247,7 +4247,7 @@ msgid "Select a role"
 msgstr "Vyberte roli"
 
 #. placeholder {0}: collectionsToMove.length === 1 ? 'this collection' : `${collectionsToMove.length} collections`
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:342
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:343
 msgid "Select a target collection to move {0} to."
 msgstr "Vyberte cílovou kolekci pro přesunutí {0}."
 

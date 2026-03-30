@@ -812,7 +812,7 @@ msgid "{0} selected"
 msgstr "{0} selecionados"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:332
+#: src/app/routes/_authenticated/_collections/collections.tsx:408
 msgid "{0} variants"
 msgstr "{0} variantes"
 
@@ -853,7 +853,7 @@ msgstr "{totalQuantity} item(ns) reembolsado(s)"
 msgid "+ {0} more"
 msgstr "+ {0} mais"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:350
+#: src/app/routes/_authenticated/_collections/collections.tsx:426
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} mais"
 
@@ -1346,7 +1346,7 @@ msgstr "Calculadora"
 
 #: src/app/common/duplicate-entity-dialog.tsx:108
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:417
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
 #: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:337
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:307
@@ -1383,7 +1383,7 @@ msgstr "Cancelar modificação"
 msgid "Cancel payment"
 msgstr "Cancelar pagamento"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:213
+#: src/app/routes/_authenticated/_collections/collections.tsx:290
 msgid "Cannot move a collection into its own descendant"
 msgstr "Não é possível mover uma coleção para seu próprio descendente"
 
@@ -1462,17 +1462,17 @@ msgstr "Código"
 msgid "Collection contents for {collectionName}"
 msgstr "Conteúdo da coleção {collectionName}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:251
+#: src/app/routes/_authenticated/_collections/collections.tsx:327
 msgid "Collection moved to new parent"
 msgstr "Coleção movida para novo pai"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:245
+#: src/app/routes/_authenticated/_collections/collections.tsx:325
 msgid "Collection position updated"
 msgstr "Posição da coleção atualizada"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:48
-#: src/app/routes/_authenticated/_collections/collections.tsx:38
-#: src/app/routes/_authenticated/_collections/collections.tsx:265
+#: src/app/routes/_authenticated/_collections/collections.tsx:52
+#: src/app/routes/_authenticated/_collections/collections.tsx:341
 msgid "Collections"
 msgstr "Coleções"
 
@@ -1529,7 +1529,7 @@ msgid "Content:"
 msgstr "Conteúdo:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:253
-#: src/app/routes/_authenticated/_collections/collections.tsx:325
+#: src/app/routes/_authenticated/_collections/collections.tsx:401
 msgid "Contents"
 msgstr "Conteúdo"
 
@@ -2317,7 +2317,7 @@ msgstr "Falha ao carregar configurações globais"
 msgid "Failed to modify order"
 msgstr "Falha ao modificar pedido"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:293
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:294
 msgid "Failed to move collections"
 msgstr "Falha ao mover coleções"
 
@@ -2389,7 +2389,7 @@ msgstr "Falha ao atualizar canal"
 msgid "Failed to update collection"
 msgstr "Falha ao atualizar coleção"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:256
+#: src/app/routes/_authenticated/_collections/collections.tsx:332
 msgid "Failed to update collection position"
 msgstr "Falha ao atualizar posição da coleção"
 
@@ -2499,7 +2499,7 @@ msgstr "Falso"
 msgid "Filter by {columnId}"
 msgstr "Filtrar por {columnId}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:369
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:370
 msgid "Filter by collection name"
 msgstr "Filtrar por nome de coleção"
 
@@ -2896,7 +2896,7 @@ msgid "Link title"
 msgstr "Título do link"
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:395
+#: src/app/routes/_authenticated/_collections/collections.tsx:476
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "Carregar mais {0} ({remaining} restantes)"
 
@@ -2909,7 +2909,7 @@ msgstr "Carregar mais"
 msgid "Loading addresses..."
 msgstr "Carregando endereços..."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:378
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:379
 msgid "Loading collections..."
 msgstr "Carregando coleções..."
 
@@ -3028,12 +3028,12 @@ msgstr "Mês até a data"
 msgid "More views"
 msgstr "Mais visões"
 
-#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:118
+#: src/app/routes/_authenticated/_collections/components/collection-bulk-actions.tsx:116
 msgid "Move"
 msgstr "Mover"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:339
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:426
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:340
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:427
 msgid "Move Collections"
 msgstr "Mover coleções"
 
@@ -3048,7 +3048,7 @@ msgstr "Mover para o nível superior"
 msgid "Moving {0} collection{1} into {2}"
 msgstr "Movendo {0} coleção(ões) para {2}"
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:424
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:425
 msgid "Moving..."
 msgstr "Movendo..."
 
@@ -3110,7 +3110,7 @@ msgstr "Novo canal"
 msgid "New collection"
 msgstr "Nova coleção"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:450
+#: src/app/routes/_authenticated/_collections/collections.tsx:531
 msgid "New Collection"
 msgstr "Nova coleção"
 
@@ -3742,7 +3742,7 @@ msgstr "Realizado em"
 msgid "Please add products and complete the shipping address to run the test."
 msgstr "Adicione produtos e complete o endereço de entrega para executar o teste."
 
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:311
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:312
 msgid "Please select a target collection"
 msgstr "Selecione uma coleção de destino"
 
@@ -4247,7 +4247,7 @@ msgid "Select a role"
 msgstr "Selecione uma função"
 
 #. placeholder {0}: collectionsToMove.length === 1 ? 'this collection' : `${collectionsToMove.length} collections`
-#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:342
+#: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:343
 msgid "Select a target collection to move {0} to."
 msgstr "Selecione uma coleção de destino para mover {0}."
 
