@@ -558,7 +558,8 @@ export function ListPage<
         const sort = sortToString(listState.sort ?? tableState.sorting);
         const filters = listState.filters ?? tableState.columnFilters;
         navigate({
-            search: () => ({ sort, page, perPage, filters: filters.length ? filters : undefined }) as never,
+            search: (prev: Record<string, unknown>) =>
+                ({ ...prev, sort, page, perPage, filters: filters.length ? filters : undefined }) as never,
         });
     }
 
