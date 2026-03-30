@@ -2231,6 +2231,12 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 },
                 {
+                  "title": "MigrateAssetTranslationData",
+                  "slug": "migrate-asset-translation-data",
+                  "file": "docs/reference/typescript-api/migration/migrate-asset-translation-data.mdx",
+                  "lastModified": "2026-03-30T08:49:21Z"
+                },
+                {
                   "title": "MigrateProductOptionGroupData",
                   "slug": "migrate-product-option-group-data",
                   "file": "docs/reference/typescript-api/migration/migrate-product-option-group-data.mdx",
