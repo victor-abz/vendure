@@ -37,24 +37,7 @@ const sections: DocsSectionConfig[] = [
         outputPath: '',
     },
     {
-        sourceDirs: ['packages/elasticsearch-plugin/src/'],
-        outputPath: '',
-    },
-    {
-        sourceDirs: ['packages/payments-plugin/src/'],
-        exclude: [/generated-shop-types/],
-        outputPath: '',
-    },
-    {
         sourceDirs: ['packages/harden-plugin/src/'],
-        outputPath: '',
-    },
-    {
-        sourceDirs: ['packages/stellate-plugin/src/'],
-        outputPath: '',
-    },
-    {
-        sourceDirs: ['packages/sentry-plugin/src/'],
         outputPath: '',
     },
     {

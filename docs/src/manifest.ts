@@ -877,17 +877,6 @@ const manifestInput: DocsPackageManifestInput = {
                             ),
                         },
                         {
-                            title: 'ElasticsearchPlugin',
-                            slug: 'elasticsearch-plugin',
-                            file: file('docs/reference/core-plugins/elasticsearch-plugin/index.mdx'),
-                            children: createNestedNavigationFromFolder(
-                                folder('docs/reference/core-plugins/elasticsearch-plugin'),
-                                {
-                                    filter: (info: FileInfo) => info.filename !== 'index.mdx',
-                                },
-                            ),
-                        },
-                        {
                             title: 'EmailPlugin',
                             slug: 'email-plugin',
                             file: file('docs/reference/core-plugins/email-plugin/index.mdx'),
@@ -926,39 +915,6 @@ const manifestInput: DocsPackageManifestInput = {
                             file: file('docs/reference/core-plugins/job-queue-plugin/index.mdx'),
                             children: createNestedNavigationFromFolder(
                                 folder('docs/reference/core-plugins/job-queue-plugin'),
-                                {
-                                    filter: (info: FileInfo) => info.filename !== 'index.mdx',
-                                },
-                            ),
-                        },
-                        {
-                            title: 'PaymentsPlugin',
-                            slug: 'payments-plugin',
-                            file: file('docs/reference/core-plugins/payments-plugin/index.mdx'),
-                            children: createNestedNavigationFromFolder(
-                                folder('docs/reference/core-plugins/payments-plugin'),
-                                {
-                                    filter: (info: FileInfo) => info.filename !== 'index.mdx',
-                                },
-                            ),
-                        },
-                        {
-                            title: 'SentryPlugin',
-                            slug: 'sentry-plugin',
-                            file: file('docs/reference/core-plugins/sentry-plugin/index.mdx'),
-                            children: createNestedNavigationFromFolder(
-                                folder('docs/reference/core-plugins/sentry-plugin'),
-                                {
-                                    filter: (info: FileInfo) => info.filename !== 'index.mdx',
-                                },
-                            ),
-                        },
-                        {
-                            title: 'StellatePlugin',
-                            slug: 'stellate-plugin',
-                            file: file('docs/reference/core-plugins/stellate-plugin/index.mdx'),
-                            children: createNestedNavigationFromFolder(
-                                folder('docs/reference/core-plugins/stellate-plugin'),
                                 {
                                     filter: (info: FileInfo) => info.filename !== 'index.mdx',
                                 },

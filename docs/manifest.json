@@ -61,7 +61,7 @@
           "title": "Search",
           "slug": "search",
           "file": "docs/guides/core-concepts/search/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-03-30T20:58:01+02:00"
         },
         {
           "title": "Facets & Filters",
@@ -85,7 +85,7 @@
           "title": "Payment",
           "slug": "payment",
           "file": "docs/guides/core-concepts/payment/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-03-30T20:58:01+02:00"
         },
         {
           "title": "Customers",
@@ -224,7 +224,7 @@
           "title": "Configuration",
           "slug": "configuration",
           "file": "docs/guides/developer-guide/configuration/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-03-30T21:29:53+02:00"
         },
         {
           "title": "Custom Fields",
@@ -404,7 +404,7 @@
           "title": "Telemetry",
           "slug": "telemetry",
           "file": "docs/guides/developer-guide/telemetry/index.mdx",
-          "lastModified": "2026-02-06T13:30:40+01:00"
+          "lastModified": "2026-03-30T20:58:01+02:00"
         }
       ]
     },
@@ -680,7 +680,7 @@
           "title": "Listing Products",
           "slug": "listing-products",
           "file": "docs/guides/storefront/listing-products/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-03-30T20:58:01+02:00"
         },
         {
           "title": "Product Detail",
@@ -698,7 +698,7 @@
           "title": "Checkout Flow",
           "slug": "checkout-flow",
           "file": "docs/guides/storefront/checkout-flow/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-03-30T20:58:01+02:00"
         },
         {
           "title": "Customer Accounts",
@@ -3500,20 +3500,6 @@
               "lastModified": "2026-01-28T14:49:21+01:00"
             },
             {
-              "title": "ElasticsearchPlugin",
-              "slug": "elasticsearch-plugin",
-              "file": "docs/reference/core-plugins/elasticsearch-plugin/index.mdx",
-              "children": [
-                {
-                  "title": "ElasticsearchOptions",
-                  "slug": "elasticsearch-options",
-                  "file": "docs/reference/core-plugins/elasticsearch-plugin/elasticsearch-options.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                }
-              ],
-              "lastModified": "2026-02-23T21:37:46+01:00"
-            },
-            {
               "title": "EmailPlugin",
               "slug": "email-plugin",
               "file": "docs/reference/core-plugins/email-plugin/index.mdx",
@@ -3636,93 +3622,9 @@
                   "slug": "bull-mqplugin-options",
                   "file": "docs/reference/core-plugins/job-queue-plugin/bull-mqplugin-options.mdx",
                   "lastModified": "2026-02-23T21:37:46+01:00"
-                },
-                {
-                  "title": "PubSubJobQueueStrategy",
-                  "slug": "pub-sub-job-queue-strategy",
-                  "file": "docs/reference/core-plugins/job-queue-plugin/pub-sub-job-queue-strategy.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                },
-                {
-                  "title": "PubSubPlugin",
-                  "slug": "pub-sub-plugin",
-                  "file": "docs/reference/core-plugins/job-queue-plugin/pub-sub-plugin.mdx",
-                  "lastModified": "2026-02-10T09:51:26+01:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
-            },
-            {
-              "title": "PaymentsPlugin",
-              "slug": "payments-plugin",
-              "file": "docs/reference/core-plugins/payments-plugin/index.mdx",
-              "children": [
-                {
-                  "title": "BraintreePlugin",
-                  "slug": "braintree-plugin",
-                  "file": "docs/reference/core-plugins/payments-plugin/braintree-plugin.mdx",
-                  "lastModified": "2026-03-10T13:44:11+01:00"
-                },
-                {
-                  "title": "MolliePlugin",
-                  "slug": "mollie-plugin",
-                  "file": "docs/reference/core-plugins/payments-plugin/mollie-plugin.mdx",
-                  "lastModified": "2026-02-23T21:37:46+01:00"
-                },
-                {
-                  "title": "StripePlugin",
-                  "slug": "stripe-plugin",
-                  "file": "docs/reference/core-plugins/payments-plugin/stripe-plugin.mdx",
-                  "lastModified": "2026-02-10T09:51:26+01:00"
-                }
-              ],
-              "lastModified": "2026-01-28T14:49:21+01:00"
-            },
-            {
-              "title": "SentryPlugin",
-              "slug": "sentry-plugin",
-              "file": "docs/reference/core-plugins/sentry-plugin/index.mdx",
-              "children": [
-                {
-                  "title": "SentryPluginOptions",
-                  "slug": "sentry-plugin-options",
-                  "file": "docs/reference/core-plugins/sentry-plugin/sentry-plugin-options.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                },
-                {
-                  "title": "SentryService",
-                  "slug": "sentry-service",
-                  "file": "docs/reference/core-plugins/sentry-plugin/sentry-service.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                }
-              ],
-              "lastModified": "2026-02-10T09:51:26+01:00"
-            },
-            {
-              "title": "StellatePlugin",
-              "slug": "stellate-plugin",
-              "file": "docs/reference/core-plugins/stellate-plugin/index.mdx",
-              "children": [
-                {
-                  "title": "PurgeRule",
-                  "slug": "purge-rule",
-                  "file": "docs/reference/core-plugins/stellate-plugin/purge-rule.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                },
-                {
-                  "title": "StellatePluginOptions",
-                  "slug": "stellate-plugin-options",
-                  "file": "docs/reference/core-plugins/stellate-plugin/stellate-plugin-options.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                },
-                {
-                  "title": "StellateService",
-                  "slug": "stellate-service",
-                  "file": "docs/reference/core-plugins/stellate-plugin/stellate-service.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
-                }
-              ],
-              "lastModified": "2026-02-10T09:51:26+01:00"
             },
             {
               "title": "TelemetryPlugin",
@@ -3757,7 +3659,7 @@
               "lastModified": "2026-01-28T14:49:21+01:00"
             }
           ],
-          "lastModified": "2026-01-28T14:49:21+01:00"
+          "lastModified": "2026-03-30T21:29:53+02:00"
         },
         {
           "title": "GraphQL API",

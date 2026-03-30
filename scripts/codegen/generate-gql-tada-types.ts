@@ -9,8 +9,6 @@ const SHOP_SCHEMA_JSON = join(__dirname, '../../schema-shop.json');
 
 const PACKAGES_WITH_E2E = [
     'packages/core/e2e',
-    'packages/elasticsearch-plugin/e2e',
-    'packages/payments-plugin/e2e',
     'packages/asset-server-plugin/e2e',
 ];
 

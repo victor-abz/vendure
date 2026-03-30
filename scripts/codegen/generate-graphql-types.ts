@@ -102,17 +102,6 @@ Promise.all([downloadIntrospectionSchema('admin'), downloadIntrospectionSchema('
                         maybeValue: 'T',
                     },
                 },
-                [path.join(
-                    __dirname,
-                    '../../packages/payments-plugin/src/mollie/graphql/generated-shop-types.ts',
-                )]: {
-                    schema: [
-                        SHOP_SCHEMA_OUTPUT_FILE,
-                        path.join(__dirname, '../../packages/payments-plugin/src/mollie/api-extensions.ts'),
-                    ],
-                    plugins: clientPlugins,
-                    config,
-                },
             },
         };
         return generate(codegenConfig);

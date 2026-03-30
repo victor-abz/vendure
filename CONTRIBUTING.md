@@ -205,7 +205,7 @@ This will auto restart when you make changes to the Admin UI.
 
 ### Testing your changes locally
 
-This example shows how to test changes to the `payments-plugin` package locally.
+This example shows how to test changes to the `email-plugin` package locally.
 This same workflow can be used for other packages as well.
 
 ### Terminal Setup
@@ -215,7 +215,7 @@ This same workflow can be used for other packages as well.
 **Terminal 1** - Watch changes to the package:
 
 ```bash
-cd packages/payments-plugin
+cd packages/email-plugin
 npm run watch
 ```
 
@@ -407,7 +407,7 @@ Running `npm run codegen` will generate the following files:
 - [`packages/common/src/generated-shop-types.ts`](./packages/common/src/generated-shop-types.ts): Types, Inputs & resolver args relating to the Shop API
 - [`packages/admin-ui/src/lib/core/src/common/generated-types.ts`](./packages/admin-ui/src/lib/core/src/common/generated-types.ts): Types & operations relating to the admin-ui queries & mutations.
 - [`packages/admin-ui/src/lib/core/src/common/introspection-result.ts`](./packages/admin-ui/src/lib/core/src/common/introspection-result.ts): Used by the Apollo Client [`IntrospectionFragmentMatcher`](https://www.apollographql.com/docs/react/data/fragments/#fragments-on-unions-and-interfaces) to correctly handle fragments in the Admin UI.
-- Also generates types used in e2e tests in those packages which feature e2e tests (core, elasticsearch-plugin, asset-server-plugin etc).
+- Also generates types used in e2e tests in those packages which feature e2e tests (core, asset-server-plugin etc).
 
 ### Testing
 

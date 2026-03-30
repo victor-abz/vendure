@@ -23,18 +23,16 @@ const KNOWN_VENDURE_PLUGINS: Record<string, string> = {
     DashboardPlugin: '@vendure/dashboard',
     // @vendure/job-queue-plugin
     BullMQJobQueuePlugin: '@vendure/job-queue-plugin',
-    // @vendure/elasticsearch-plugin
-    ElasticsearchPlugin: '@vendure/elasticsearch-plugin',
     // @vendure/graphiql-plugin
     GraphiqlPlugin: '@vendure/graphiql-plugin',
     // @vendure/harden-plugin
     HardenPlugin: '@vendure/harden-plugin',
-    // @vendure/sentry-plugin
-    SentryPlugin: '@vendure/sentry-plugin',
-    // @vendure/payments-plugin
-    StripePlugin: '@vendure/payments-plugin',
-    MolliePlugin: '@vendure/payments-plugin',
-    BraintreePlugin: '@vendure/payments-plugin',
+    // Community plugins (moved to @vendure-community/*)
+    ElasticsearchPlugin: '@vendure-community/elasticsearch-plugin',
+    SentryPlugin: '@vendure-community/sentry-plugin',
+    StripePlugin: '@vendure-community/stripe-plugin',
+    MolliePlugin: '@vendure-community/mollie-plugin',
+    BraintreePlugin: '@vendure-community/braintree-plugin',
 };
 
 /**

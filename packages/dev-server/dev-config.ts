@@ -20,7 +20,6 @@ import {
 import { DashboardPlugin } from '@vendure/dashboard/plugin';
 import { defaultEmailHandlers, EmailPlugin, FileBasedTemplateLoader } from '@vendure/email-plugin';
 import { GraphiqlPlugin } from '@vendure/graphiql-plugin';
-import { SentryPlugin } from '@vendure/sentry-plugin';
 import { TelemetryPlugin } from '@vendure/telemetry-plugin';
 import 'dotenv/config';
 import path from 'path';
@@ -134,11 +133,6 @@ export const devConfig: VendureConfig = {
         // BullMQJobQueuePlugin.init({}),
         DefaultJobQueuePlugin.init({}),
         // JobQueueTestPlugin.init({ queueCount: 10 }),
-        // ElasticsearchPlugin.init({
-        //     host: 'http://localhost',
-        //     port: 9200,
-        //     bufferUpdates: true,
-        // }),
         DefaultSchedulerPlugin.init({}),
         EmailPlugin.init({
             devMode: true,
@@ -153,13 +147,6 @@ export const devConfig: VendureConfig = {
             },
         }),
         ...(IS_INSTRUMENTED ? [TelemetryPlugin.init({})] : []),
-        ...(process.env.ENABLE_SENTRY === 'true' && process.env.SENTRY_DSN
-            ? [
-                SentryPlugin.init({
-                    includeErrorTestMutation: true,
-                }),
-            ]
-            : []),
         // AdminUiPlugin.init({
         //     route: 'admin',
         //     port: 5001,
