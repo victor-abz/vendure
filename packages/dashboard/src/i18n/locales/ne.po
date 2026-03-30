@@ -833,7 +833,7 @@ msgid "{0} selected"
 msgstr "{0} चयन गरियो"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:408
+#: src/app/routes/_authenticated/_collections/collections.tsx:409
 msgid "{0} variants"
 msgstr "{0} प्रकारहरू"
 
@@ -882,7 +882,7 @@ msgstr "{totalQuantity} वस्तु(हरू) फिर्ता गरि�
 msgid "+ {0} more"
 msgstr "+ {0} थप"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:426
+#: src/app/routes/_authenticated/_collections/collections.tsx:427
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} थप"
 
@@ -1635,7 +1635,7 @@ msgid "Content:"
 msgstr "सामग्री:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:401
+#: src/app/routes/_authenticated/_collections/collections.tsx:402
 msgid "Contents"
 msgstr "सामग्रीहरू"
 
@@ -3137,7 +3137,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:477
+#: src/app/routes/_authenticated/_collections/collections.tsx:478
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "थप {0} लोड गर्नुहोस् ({remaining} बाँकी)"
 
@@ -3370,7 +3370,7 @@ msgstr "नयाँ च्यानल"
 msgid "New collection"
 msgstr "नयाँ संग्रह"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:519
+#: src/app/routes/_authenticated/_collections/collections.tsx:520
 msgid "New Collection"
 msgstr "नयाँ संग्रह"
 

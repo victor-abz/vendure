@@ -827,7 +827,7 @@ msgid "{0} selected"
 msgstr "{0} geselecteerd"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:408
+#: src/app/routes/_authenticated/_collections/collections.tsx:409
 msgid "{0} variants"
 msgstr "{0} varianten"
 
@@ -876,7 +876,7 @@ msgstr "{totalQuantity} artikel(en) gerestitueerd"
 msgid "+ {0} more"
 msgstr "+ {0} meer"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:426
+#: src/app/routes/_authenticated/_collections/collections.tsx:427
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} meer"
 
@@ -1625,7 +1625,7 @@ msgid "Content:"
 msgstr "Inhoud:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:401
+#: src/app/routes/_authenticated/_collections/collections.tsx:402
 msgid "Contents"
 msgstr "Inhoud"
 
@@ -3124,7 +3124,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:477
+#: src/app/routes/_authenticated/_collections/collections.tsx:478
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "{0} meer laden ({remaining} resterend)"
 
@@ -3357,7 +3357,7 @@ msgstr "Nieuw kanaal"
 msgid "New collection"
 msgstr "Nieuwe collectie"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:519
+#: src/app/routes/_authenticated/_collections/collections.tsx:520
 msgid "New Collection"
 msgstr "Nieuwe collectie"
 

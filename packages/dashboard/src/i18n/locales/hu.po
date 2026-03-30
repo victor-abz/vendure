@@ -827,7 +827,7 @@ msgid "{0} selected"
 msgstr "{0} kijelölve"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:408
+#: src/app/routes/_authenticated/_collections/collections.tsx:409
 msgid "{0} variants"
 msgstr "{0} termékváltozat"
 
@@ -876,7 +876,7 @@ msgstr "{totalQuantity} tétel visszatérítve"
 msgid "+ {0} more"
 msgstr "+ {0} további"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:426
+#: src/app/routes/_authenticated/_collections/collections.tsx:427
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} további"
 
@@ -1625,7 +1625,7 @@ msgid "Content:"
 msgstr "Tartalom:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:401
+#: src/app/routes/_authenticated/_collections/collections.tsx:402
 msgid "Contents"
 msgstr "Tartalom"
 
@@ -3124,7 +3124,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:477
+#: src/app/routes/_authenticated/_collections/collections.tsx:478
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "{0} további betöltése ({remaining} maradt)"
 
@@ -3357,7 +3357,7 @@ msgstr "Új csatorna"
 msgid "New collection"
 msgstr "Új gyűjtemény"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:519
+#: src/app/routes/_authenticated/_collections/collections.tsx:520
 msgid "New Collection"
 msgstr "Új gyűjtemény"
 

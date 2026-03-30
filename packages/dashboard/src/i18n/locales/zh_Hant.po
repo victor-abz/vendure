@@ -833,7 +833,7 @@ msgid "{0} selected"
 msgstr "已選取 {0} 個"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:408
+#: src/app/routes/_authenticated/_collections/collections.tsx:409
 msgid "{0} variants"
 msgstr "{0} 個變體"
 
@@ -882,7 +882,7 @@ msgstr "{totalQuantity}件商品已退款"
 msgid "+ {0} more"
 msgstr "+ {0} 個更多"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:426
+#: src/app/routes/_authenticated/_collections/collections.tsx:427
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} 個更多"
 
@@ -1635,7 +1635,7 @@ msgid "Content:"
 msgstr "內容:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:401
+#: src/app/routes/_authenticated/_collections/collections.tsx:402
 msgid "Contents"
 msgstr "內容"
 
@@ -3137,7 +3137,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:477
+#: src/app/routes/_authenticated/_collections/collections.tsx:478
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "載入更多{0}個 (剩餘{remaining}個)"
 
@@ -3370,7 +3370,7 @@ msgstr "新增通路"
 msgid "New collection"
 msgstr "新增集合"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:519
+#: src/app/routes/_authenticated/_collections/collections.tsx:520
 msgid "New Collection"
 msgstr "新增集合"
 

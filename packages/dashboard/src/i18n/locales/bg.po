@@ -833,7 +833,7 @@ msgid "{0} selected"
 msgstr "{0} избрани"
 
 #. placeholder {0}: row.original.productVariantCount
-#: src/app/routes/_authenticated/_collections/collections.tsx:408
+#: src/app/routes/_authenticated/_collections/collections.tsx:409
 msgid "{0} variants"
 msgstr "{0} варианта"
 
@@ -882,7 +882,7 @@ msgstr "{totalQuantity} артикул(и) възстановен(и)"
 msgid "+ {0} more"
 msgstr "+ още {0}"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:426
+#: src/app/routes/_authenticated/_collections/collections.tsx:427
 msgid "+ {leftOver} more"
 msgstr "+ още {leftOver}"
 
@@ -1637,7 +1637,7 @@ msgid "Content:"
 msgstr "Съдържание:"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:245
-#: src/app/routes/_authenticated/_collections/collections.tsx:401
+#: src/app/routes/_authenticated/_collections/collections.tsx:402
 msgid "Contents"
 msgstr "Съдържание"
 
@@ -3157,7 +3157,7 @@ msgid "List view"
 msgstr ""
 
 #. placeholder {0}: Math.min(remaining, CHILDREN_PAGE_SIZE)
-#: src/app/routes/_authenticated/_collections/collections.tsx:477
+#: src/app/routes/_authenticated/_collections/collections.tsx:478
 msgid "Load {0} more ({remaining} remaining)"
 msgstr "Зареди още {0} ({remaining} оставащи)"
 
@@ -3393,7 +3393,7 @@ msgstr "Нов канал"
 msgid "New collection"
 msgstr "Нова колекция"
 
-#: src/app/routes/_authenticated/_collections/collections.tsx:519
+#: src/app/routes/_authenticated/_collections/collections.tsx:520
 msgid "New Collection"
 msgstr "Нова колекция"
 
