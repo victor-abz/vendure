@@ -367,6 +367,7 @@ function CollectionListPage() {
                                 <Button
                                     size="icon"
                                     variant="secondary"
+                                    aria-label={isExpanded ? 'Collapse' : 'Expand'}
                                     onClick={row.getToggleExpandedHandler()}
                                     disabled={!hasChildren}
                                     className={!hasChildren ? 'opacity-20' : ''}
