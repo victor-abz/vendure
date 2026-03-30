@@ -2234,7 +2234,7 @@
                   "title": "MigrateAssetTranslationData",
                   "slug": "migrate-asset-translation-data",
                   "file": "docs/reference/typescript-api/migration/migrate-asset-translation-data.mdx",
-                  "lastModified": "2026-03-30T08:49:21Z"
+                  "lastModified": "2026-03-30T12:56:43+02:00"
                 },
                 {
                   "title": "MigrateProductOptionGroupData",
