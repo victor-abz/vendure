@@ -94,19 +94,17 @@ export const DeleteCollectionsBulkAction: BulkActionComponent<any> = ({ selectio
 
 export const MoveCollectionsBulkAction: BulkActionComponent<any> = ({ selection, table }) => {
     const [dialogOpen, setDialogOpen] = useState(false);
-    const queryClient = useQueryClient();
     const { refetchPaginatedList } = usePaginatedList();
 
     const handleSuccess = () => {
-        queryClient.invalidateQueries({ queryKey: ['childCollections'] });
         refetchPaginatedList();
         table.resetRowSelection();
     };
 
     const handleResetExpanded = () => {
-        const resetExpanded = (table.options.meta as { resetExpanded: () => void })?.resetExpanded;
-        if (resetExpanded) {
-            resetExpanded();
+        const refreshChildCaches = (table.options.meta as { refreshChildCaches: () => void })?.refreshChildCaches;
+        if (refreshChildCaches) {
+            refreshChildCaches();
         }
     };
 

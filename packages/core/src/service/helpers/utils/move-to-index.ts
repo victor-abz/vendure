@@ -19,12 +19,14 @@ export function moveToIndex<T extends Orderable & VendureEntity>(
     currentIndex = siblingsWithTarget.findIndex(sibling => idsAreEqual(sibling.id, target.id));
     if (currentIndex !== normalizedIndex) {
         siblingsWithTarget.splice(normalizedIndex, 0, siblingsWithTarget.splice(currentIndex, 1)[0]);
-        siblingsWithTarget.forEach((collection, i) => {
-            collection.position = i;
-            if (target.id === collection.id) {
-                target.position = i;
-            }
-        });
     }
+    // Always reassign positions to ensure consistency — the target item
+    // may carry a stale position value from a different parent.
+    siblingsWithTarget.forEach((collection, i) => {
+        collection.position = i;
+        if (target.id === collection.id) {
+            target.position = i;
+        }
+    });
     return siblingsWithTarget;
 }
