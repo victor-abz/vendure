@@ -29,6 +29,7 @@ export default defineConfig({
         'bg',
         'nl'
     ],
+    orderBy: 'messageId',
     catalogs: [
         {
             path: '<rootDir>/src/i18n/locales/{locale}',
