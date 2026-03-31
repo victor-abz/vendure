@@ -247,6 +247,11 @@ const manifestInput: DocsPackageManifestInput = {
                     file: file('docs/guides/developer-guide/security/index.mdx'),
                 },
                 {
+                    title: 'API Keys',
+                    slug: 'api-keys',
+                    file: file('docs/guides/developer-guide/api-keys/index.mdx'),
+                },
+                {
                     title: 'Strategies & Configurable Operations',
                     slug: 'strategies-configurable-operations',
                     file: file('docs/guides/developer-guide/strategies-configurable-operations/index.mdx'),

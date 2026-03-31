@@ -263,6 +263,12 @@
           "lastModified": "2026-02-12T16:47:03+01:00"
         },
         {
+          "title": "API Keys",
+          "slug": "api-keys",
+          "file": "docs/guides/developer-guide/api-keys/index.mdx",
+          "lastModified": "2026-03-31T14:58:50+02:00"
+        },
+        {
           "title": "Strategies & Configurable Operations",
           "slug": "strategies-configurable-operations",
           "file": "docs/guides/developer-guide/strategies-configurable-operations/index.mdx",
