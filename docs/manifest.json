@@ -970,7 +970,7 @@
                   "title": "ApiKeyStrategy",
                   "slug": "api-key-strategy",
                   "file": "docs/reference/typescript-api/auth/api-key-strategy.mdx",
-                  "lastModified": "2026-03-31T13:40:42Z"
+                  "lastModified": "2026-03-31T16:05:42+02:00"
                 },
                 {
                   "title": "AuthenticationStrategy",
@@ -982,7 +982,7 @@
                   "title": "AuthOptions",
                   "slug": "auth-options",
                   "file": "docs/reference/typescript-api/auth/auth-options.mdx",
-                  "lastModified": "2026-03-31T13:40:42Z"
+                  "lastModified": "2026-03-31T16:05:42+02:00"
                 },
                 {
                   "title": "BcryptPasswordHashingStrategy",
@@ -1018,7 +1018,7 @@
                   "title": "EntityAccessControlStrategy",
                   "slug": "entity-access-control-strategy",
                   "file": "docs/reference/typescript-api/auth/entity-access-control-strategy.mdx",
-                  "lastModified": "2026-03-31T13:40:42Z"
+                  "lastModified": "2026-03-31T16:05:42+02:00"
                 },
                 {
                   "title": "ExternalAuthenticationService",
