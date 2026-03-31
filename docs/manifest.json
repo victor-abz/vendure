@@ -970,7 +970,7 @@
                   "title": "ApiKeyStrategy",
                   "slug": "api-key-strategy",
                   "file": "docs/reference/typescript-api/auth/api-key-strategy.mdx",
-                  "lastModified": "2026-02-23T21:37:46+01:00"
+                  "lastModified": "2026-03-31T13:40:42Z"
                 },
                 {
                   "title": "AuthenticationStrategy",
@@ -982,7 +982,7 @@
                   "title": "AuthOptions",
                   "slug": "auth-options",
                   "file": "docs/reference/typescript-api/auth/auth-options.mdx",
-                  "lastModified": "2026-03-11T12:31:39+01:00"
+                  "lastModified": "2026-03-31T13:40:42Z"
                 },
                 {
                   "title": "BcryptPasswordHashingStrategy",
@@ -995,12 +995,6 @@
                   "slug": "cookie-options",
                   "file": "docs/reference/typescript-api/auth/cookie-options.mdx",
                   "lastModified": "2026-03-11T12:31:39+01:00"
-                },
-                {
-                  "title": "DefaultEntityAccessControlStrategy",
-                  "slug": "default-entity-access-control-strategy",
-                  "file": "docs/reference/typescript-api/auth/default-entity-access-control-strategy.mdx",
-                  "lastModified": "2026-03-03T11:07:42+01:00"
                 },
                 {
                   "title": "DefaultPasswordValidationStrategy",
@@ -1024,7 +1018,7 @@
                   "title": "EntityAccessControlStrategy",
                   "slug": "entity-access-control-strategy",
                   "file": "docs/reference/typescript-api/auth/entity-access-control-strategy.mdx",
-                  "lastModified": "2026-03-03T11:07:42+01:00"
+                  "lastModified": "2026-03-31T13:40:42Z"
                 },
                 {
                   "title": "ExternalAuthenticationService",
@@ -1067,12 +1061,6 @@
                   "slug": "permission-definition",
                   "file": "docs/reference/typescript-api/auth/permission-definition.mdx",
                   "lastModified": "2026-01-28T14:49:21+01:00"
-                },
-                {
-                  "title": "RandomBytesApiKeyStrategy",
-                  "slug": "random-bytes-api-key-strategy",
-                  "file": "docs/reference/typescript-api/auth/random-bytes-api-key-strategy.mdx",
-                  "lastModified": "2026-02-23T21:37:46+01:00"
                 },
                 {
                   "title": "SessionCacheStrategy",
