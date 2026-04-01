@@ -175,9 +175,10 @@ jobs:
                       playwright-${{ runner.os }}-
             - name: Install Playwright
               run: |
+                  cd ~/install/test-app
+                  npm install --no-save playwright
                   npx playwright install chromium
                   npx playwright install-deps chromium
-              working-directory: ~/install/test-app
             - name: Start dashboard and run tests
               run: |
                 cd ~/install/test-app
@@ -199,7 +200,7 @@ jobs:
                 # Wait for the dashboard to be available
                 wait-on http://localhost:5173/dashboard --timeout 120000
                 # Run the dashboard tests
-                node $GITHUB_WORKSPACE/.github/workflows/scripts/dashboard-tests.js
+                NODE_PATH=~/install/test-app/node_modules node $GITHUB_WORKSPACE/.github/workflows/scripts/dashboard-tests.js
                 # Clean up dashboard process
                 kill $DASHBOARD_PID 2>/dev/null || true
                 # Clean up dev server process
