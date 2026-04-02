@@ -16,7 +16,7 @@ test.describe('Issue #4327: Collection filters with same type share state', () =
             newTitle: 'New collection',
         });
 
-    test.fixme('should maintain independent state for two filters of the same type', async ({ page }) => {
+    test('should maintain independent state for two filters of the same type', async ({ page }) => {
         const dp = detailPage(page);
         await dp.gotoNew();
         await dp.expectNewPageLoaded();

@@ -184,11 +184,8 @@ export function ConfigurableOperationMultiSelector({
         ]);
     };
 
-    const onOperationValueChange = (
-        operation: ConfigurableOperationInputType,
-        newVal: ConfigurableOperationInputType,
-    ) => {
-        onChange(value.map(op => (op.code === operation.code ? newVal : op)));
+    const onOperationValueChange = (index: number, newVal: ConfigurableOperationInputType) => {
+        onChange(value.map((op, i) => (i === index ? newVal : op)));
     };
 
     const onOperationRemove = (index: number) => {
@@ -250,7 +247,7 @@ export function ConfigurableOperationMultiSelector({
                                 <ConfigurableOperationInput
                                     operationDefinition={operationDef}
                                     value={operation}
-                                    onChange={value => onOperationValueChange(operation, value)}
+                                    onChange={value => onOperationValueChange(index, value)}
                                     onRemove={() => onOperationRemove(index)}
                                     onValidityChange={isValid => updateOperationValidity(index, isValid)}
                                 />
