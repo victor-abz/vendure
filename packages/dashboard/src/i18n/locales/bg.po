@@ -1238,7 +1238,7 @@ msgid "Only roles assigned to your account are available."
 msgstr ""
 
 #: src/lib/components/data-input/product-multi-selector-input.tsx:399
-#: src/lib/components/shared/configurable-operation-multi-selector.tsx:267
+#: src/lib/components/shared/configurable-operation-multi-selector.tsx:264
 #: src/lib/components/shared/configurable-operation-selector.tsx:139
 msgid "{buttonText}"
 msgstr "{buttonText}"
