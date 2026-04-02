@@ -246,7 +246,7 @@ function ProductVariantDetailPage() {
                                 <Badge key={option.id} variant="secondary" className="text-xs" title={option.code}>
                                     <span>{option.group.name}: {option.name}</span>
                                     <Link
-                                        to={`/products/${entity.product.id}/option-groups/${option.group.id}`}
+                                        to={`/option-groups/${option.group.id}`}
                                         className="ml-1.5 inline-flex"
                                     >
                                         <Edit2 className="h-3 w-3" />
