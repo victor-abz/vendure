@@ -1,10 +1,9 @@
 import { api } from '@/vdb/graphql/api.js';
 import { graphql } from '@/vdb/graphql/graphql.js';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z, zodResolver } from '@/vdb/lib/zod.js';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Button } from '../ui/button.js';
 import { Checkbox } from '../ui/checkbox.js';
 import { FieldDescription, FieldLabel } from '../ui/field.js';
@@ -27,7 +26,6 @@ const getAvailableCountriesDocument = graphql(`
     }
 `);
 
-// Define the form schema using zod
 const addressFormSchema = z.object({
     id: z.string(),
     fullName: z.string().optional(),
@@ -39,8 +37,8 @@ const addressFormSchema = z.object({
     postalCode: z.string().optional(),
     countryCode: z.string().min(1, { message: 'Country is required' }),
     phoneNumber: z.string().optional(),
-    defaultShippingAddress: z.boolean().default(false),
-    defaultBillingAddress: z.boolean().default(false),
+    defaultShippingAddress: z.boolean(),
+    defaultBillingAddress: z.boolean(),
     customFields: z.any().optional(),
 });
 
@@ -68,9 +66,23 @@ export function CustomerAddressForm<T>({
         staleTime: 1000 * 60 * 60 * 24, // 24 hours
     });
 
-    // Set up form with react-hook-form and zod
     const form = useForm<AddressFormValues>({
         resolver: zodResolver(addressFormSchema),
+        defaultValues: {
+            id: '',
+            fullName: '',
+            company: '',
+            streetLine1: '',
+            streetLine2: '',
+            city: '',
+            province: '',
+            postalCode: '',
+            countryCode: '',
+            phoneNumber: '',
+            defaultShippingAddress: false,
+            defaultBillingAddress: false,
+            customFields: {},
+        },
         values: address ? setValuesForUpdate?.(address) : undefined,
     });
 

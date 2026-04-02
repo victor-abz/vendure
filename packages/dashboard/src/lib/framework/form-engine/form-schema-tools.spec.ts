@@ -424,7 +424,7 @@ describe('form-schema-tools', () => {
             } catch (error: any) {
                 expect(error.issues).toBeDefined();
                 expect(error.issues.length).toBeGreaterThan(0);
-                expect(error.issues[0].message).toContain('Date must be after');
+                expect(error.errors[0].message).toContain('Date must be after');
             }
 
             // Test with Date object as well
@@ -434,7 +434,7 @@ describe('form-schema-tools', () => {
             } catch (error: any) {
                 expect(error.issues).toBeDefined();
                 expect(error.issues.length).toBeGreaterThan(0);
-                expect(error.issues[0].message).toContain('Date must be after');
+                expect(error.errors[0].message).toContain('Date must be after');
             }
         });
     });

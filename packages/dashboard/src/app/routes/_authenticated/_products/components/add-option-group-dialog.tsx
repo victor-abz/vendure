@@ -19,7 +19,7 @@ import {
 import { Form } from '@/vdb/components/ui/form.js';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/vdb/components/ui/tabs.js';
 import { api } from '@/vdb/graphql/api.js';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '@/vdb/lib/zod.js';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useDebounce } from '@uidotdev/usehooks';
