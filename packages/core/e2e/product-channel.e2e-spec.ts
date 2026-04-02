@@ -196,6 +196,47 @@ describe('ChannelAware Products and ProductVariants', () => {
             expect(assignProductsToChannel[0].channels.map(c => c.id).sort()).toEqual(['T_1', 'T_2']);
         });
 
+        // https://github.com/vendurehq/vendure/issues/4614
+        it('assigns Product without variants to Channel', async () => {
+            adminClient.setChannelToken(E2E_DEFAULT_CHANNEL_TOKEN);
+            await adminClient.asSuperAdmin();
+
+            // Create a product with no variants
+            const { createProduct } = await adminClient.query(createProductDocument, {
+                input: {
+                    translations: [
+                        {
+                            languageCode: LanguageCode.en,
+                            name: 'Product Without Variants',
+                            slug: 'product-without-variants',
+                            description: '',
+                        },
+                    ],
+                },
+            });
+
+            expect(createProduct.variants).toEqual([]);
+
+            // Assign the variant-less product to the second channel
+            const { assignProductsToChannel } = await adminClient.query(assignProductToChannelDocument, {
+                input: {
+                    channelId: 'T_2',
+                    productIds: [createProduct.id],
+                },
+            });
+
+            expect(assignProductsToChannel[0].channels.map(c => c.id).sort()).toEqual(['T_1', 'T_2']);
+
+            // Verify the product is visible from the second channel
+            adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+            const { product } = await adminClient.query(getProductWithVariantsDocument, {
+                id: createProduct.id,
+            });
+            productGuard.assertSuccess(product);
+            expect(product.id).toBe(createProduct.id);
+            expect(product.name).toBe('Product Without Variants');
+        });
+
         it(
             'throws if attempting to remove Product from default Channel',
             assertThrowsWithMessage(async () => {
