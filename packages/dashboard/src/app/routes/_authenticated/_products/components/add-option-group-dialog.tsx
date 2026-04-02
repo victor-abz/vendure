@@ -35,10 +35,12 @@ export function AddOptionGroupDialog({
     productId,
     existingGroupIds,
     onSuccess,
+    trigger,
 }: Readonly<{
     productId: string;
     existingGroupIds?: string[];
     onSuccess?: () => void;
+    trigger?: React.ReactElement;
 }>) {
     const [open, setOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<string>('existing');
@@ -131,10 +133,14 @@ export function AddOptionGroupDialog({
                 }
             }}
         >
-            <DialogTrigger render={<Button variant="outline" size="sm" type="button" className="w-full gap-2" />}>
-                <Plus className="h-4 w-4" />
-                <Trans>Add option group</Trans>
-            </DialogTrigger>
+            {trigger ? (
+                <DialogTrigger render={trigger} />
+            ) : (
+                <DialogTrigger render={<Button variant="outline" size="sm" type="button" className="w-full gap-2" />}>
+                    <Plus className="h-4 w-4" />
+                    <Trans>Add option group</Trans>
+                </DialogTrigger>
+            )}
             <DialogContent className="max-w-2xl">
                 <DialogHeader>
                     <DialogTitle>

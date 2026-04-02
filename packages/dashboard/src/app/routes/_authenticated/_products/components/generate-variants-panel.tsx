@@ -1,5 +1,5 @@
 import { MoneyInput } from '@/vdb/components/data-input/money-input.js';
-import { Alert, AlertDescription } from '@/vdb/components/ui/alert.js';
+import { ConfirmationDialog } from '@/vdb/components/shared/confirmation-dialog.js';
 import { Button } from '@/vdb/components/ui/button.js';
 import { Checkbox } from '@/vdb/components/ui/checkbox.js';
 import { Field, FieldError } from '@/vdb/components/ui/field.js';
@@ -76,7 +76,9 @@ type VariantFormValues = z.infer<typeof formSchema>;
 
 function generateVariantCombinations(optionGroups: OptionGroup[]): GeneratedVariant[] {
     const validGroups = optionGroups.filter(g => g.options.length > 0);
-    if (validGroups.length === 0) return [];
+    if (validGroups.length === 0) {
+        return [{ id: 'default', name: '', optionIds: [], optionNames: [] }];
+    }
 
     const combine = (
         groups: OptionGroup[],
@@ -108,11 +110,16 @@ export function GenerateVariantsPanel({
     productName,
     optionGroups,
     onSuccess,
+    onBack,
 }: Readonly<{
     productId: string;
     productName: string;
     optionGroups: OptionGroup[];
     onSuccess?: () => void;
+    onBack?: {
+        handler: () => void;
+        confirmation?: { title: string; description: string };
+    };
 }>) {
     const { t } = useLingui();
     const { activeChannel } = useChannel();
@@ -177,19 +184,6 @@ export function GenerateVariantsPanel({
 
     const watchedVariants = useWatch({ control: form.control, name: 'variants' });
     const enabledCount = variants.filter(v => watchedVariants?.[v.id]?.enabled).length;
-
-    if (variants.length === 0) {
-        return (
-            <Alert>
-                <AlertDescription>
-                    <Trans>
-                        The assigned option groups have no options yet. Add options to your option groups
-                        before generating variants.
-                    </Trans>
-                </AlertDescription>
-            </Alert>
-        );
-    }
 
     return (
         <Form {...form}>
@@ -300,18 +294,42 @@ export function GenerateVariantsPanel({
                     </TableBody>
                 </Table>
 
-                <div className="flex justify-end">
+                <div className="flex justify-between items-center">
+                    <div>
+                        {onBack && (
+                            onBack.confirmation ? (
+                                <ConfirmationDialog
+                                    title={onBack.confirmation.title}
+                                    description={onBack.confirmation.description}
+                                    onConfirm={onBack.handler}
+                                >
+                                    <button
+                                        type="button"
+                                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                    >
+                                        ← <Trans>Back</Trans>
+                                    </button>
+                                </ConfirmationDialog>
+                            ) : (
+                                <button
+                                    type="button"
+                                    onClick={onBack.handler}
+                                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                    ← <Trans>Back</Trans>
+                                </button>
+                            )
+                        )}
+                    </div>
                     <Button
                         type="button"
                         onClick={handleCreateVariants}
                         disabled={createVariantsMutation.isPending || enabledCount === 0}
                     >
                         <Save className="mr-2 h-4 w-4" />
-                        {createVariantsMutation.isPending ? (
-                            <Trans>Creating...</Trans>
-                        ) : (
-                            <Trans>Create {enabledCount} variants</Trans>
-                        )}
+                        {createVariantsMutation.isPending && <Trans>Creating...</Trans>}
+                        {!createVariantsMutation.isPending && enabledCount === 1 && <Trans>Create variant</Trans>}
+                        {!createVariantsMutation.isPending && enabledCount !== 1 && <Trans>Create {enabledCount} variants</Trans>}
                     </Button>
                 </div>
             </div>
