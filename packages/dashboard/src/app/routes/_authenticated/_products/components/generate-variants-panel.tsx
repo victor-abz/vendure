@@ -35,16 +35,38 @@ interface GeneratedVariant {
     optionNames: string[];
 }
 
-const variantSchema = z.object({
-    enabled: z.boolean(),
-    sku: z.string().min(1, { message: 'SKU is required' }),
-    price: z.string().refine(val => !isNaN(Number(val)) && Number(val) >= 0, {
-        message: 'Price must be a positive number',
-    }),
-    stock: z.string().refine(val => !isNaN(Number(val)) && parseInt(val, 10) >= 0, {
-        message: 'Stock must be a non-negative integer',
-    }),
-});
+const variantSchema = z
+    .object({
+        enabled: z.boolean(),
+        sku: z.string(),
+        price: z.string(),
+        stock: z.string(),
+    })
+    .superRefine((data, ctx) => {
+        if (!data.enabled) return;
+        if (!data.sku || data.sku.length === 0) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: 'SKU is required',
+                path: ['sku'],
+            });
+        }
+        if (data.price !== '' && (Number.isNaN(Number(data.price)) || Number(data.price) < 0)) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: 'Price must be a non-negative number',
+                path: ['price'],
+            });
+        }
+        const stockNum = Number(data.stock);
+        if (data.stock !== '' && (Number.isNaN(stockNum) || stockNum < 0 || !Number.isInteger(stockNum))) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: 'Stock must be a non-negative integer',
+                path: ['stock'],
+            });
+        }
+    });
 
 const formSchema = z.object({
     variants: z.record(variantSchema),
@@ -205,12 +227,10 @@ export function GenerateVariantsPanel({
                                             control={form.control}
                                             name={`variants.${variant.id}.enabled`}
                                             render={({ field }) => (
-                                                <Field className="flex items-center space-x-2">
-                                                    <Checkbox
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                    />
-                                                </Field>
+                                                <Checkbox
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
                                             )}
                                         />
                                     </TableCell>

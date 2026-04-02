@@ -102,50 +102,59 @@ test.describe('product variant generation', () => {
         await expect(skuInputs).toHaveCount(3);
     });
 
-    test('should generate variants by filling in the form and submitting', async ({ page }) => {
+    // #4608 — unchecked variant rows should not trigger validation errors
+    test('should not validate unchecked variant rows', async ({ page }) => {
         await page.goto(`/products/${productId}`);
         await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible({
             timeout: 10_000,
         });
 
-        // Fill in SKU and stock for each variant row
+        const table = page.locator('table');
+        const rows = table.locator('tbody tr');
+
+        // Uncheck Large (row 2), leave Small (row 0) and Medium (row 1) checked
+        await rows.nth(2).getByRole('checkbox').click();
+
+        // Fill in only the checked rows (Small and Medium), leave Large empty
         const skuInputs = page.getByTestId('variant-sku-input');
         await skuInputs.nth(0).fill('EVTP-SM');
         await skuInputs.nth(1).fill('EVTP-MD');
-        await skuInputs.nth(2).fill('EVTP-LG');
-
         const stockInputs = page.getByTestId('variant-stock-input');
         await stockInputs.nth(0).fill('10');
         await stockInputs.nth(1).fill('10');
-        await stockInputs.nth(2).fill('10');
 
-        // Click "Create 3 variants"
-        await page.getByRole('button', { name: /Create 3 variants/i }).click();
+        // Button should say "Create 2 variants"
+        await expect(page.getByRole('button', { name: /Create 2 variants/i })).toBeVisible();
 
-        // Wait for success toast
+        // Click Create — should NOT show validation errors on the unchecked Large row
+        await page.getByRole('button', { name: /Create 2 variants/i }).click();
+
+        // Wait for success toast — proves form submitted without validation blocking it
         await expect(
             page
                 .locator('[data-sonner-toast]')
                 .filter({ hasText: /created/i })
                 .first(),
         ).toBeVisible({ timeout: 10_000 });
+
+        // Verify no validation errors appeared on the unchecked row (role="alert" is the ARIA role for field errors)
+        await expect(rows.nth(2).getByRole('alert')).toHaveCount(0);
     });
 
-    test('should show variants in the product variants table after generation', async ({ page }) => {
+    test('should show only the created variants in the product variants table', async ({ page }) => {
         await page.goto(`/products/${productId}`);
         await expect(page.getByRole('heading', { name: 'E2E Variant Test Product' })).toBeVisible({
             timeout: 10_000,
         });
 
-        // The variants table should now show the generated variants (may need scrolling)
-        // Variant names follow the pattern: "ProductName OptionName"
+        // Only Small and Medium were created (Large was unchecked)
         const variantLink = page.getByRole('button', { name: /E2E Variant Test Product Small/i });
         await variantLink.scrollIntoViewIfNeeded();
         await expect(variantLink).toBeVisible({ timeout: 10_000 });
-
-        // Verify multiple variants exist
         await expect(page.getByRole('button', { name: /E2E Variant Test Product Medium/i })).toBeVisible();
-        await expect(page.getByRole('button', { name: /E2E Variant Test Product Large/i })).toBeVisible();
+
+        // Large should NOT exist as a variant
+        await expect(page.getByRole('button', { name: /E2E Variant Test Product Large/i })).toHaveCount(0);
 
         // The "Manage variants" link should be visible
         const manageLink = page.getByRole('button', { name: /Manage variants/i });

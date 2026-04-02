@@ -341,7 +341,7 @@ msgstr "已成功建立庫存位置"
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:76
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:118
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:166
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:173
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:112
 msgid "Unknown error"
 msgstr "未知錯誤"
@@ -528,7 +528,7 @@ msgstr "搜尋付款方式..."
 msgid "Shipping address unset for order"
 msgstr "訂單已取消配送地址"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:293
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:313
 msgid "Create {enabledCount} variants"
 msgstr ""
 
@@ -998,7 +998,7 @@ msgstr "已成功建立集合"
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:298
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:298
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:192
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:214
 #: src/lib/components/layout/language-dialog.tsx:136
 msgid "Price"
 msgstr "價格"
@@ -1175,7 +1175,7 @@ msgstr ""
 msgid "No countries found"
 msgstr "找不到國家"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:147
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:169
 msgid "Successfully created variants"
 msgstr ""
 
@@ -2363,7 +2363,7 @@ msgstr "訂單已設定客戶"
 msgid "Facets"
 msgstr "屬性"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:195
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:217
 msgid "Stock on Hand"
 msgstr "現有庫存"
 
@@ -2621,7 +2621,7 @@ msgstr "商品選項"
 msgid "Select country"
 msgstr "選取國家"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:291
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:311
 msgid "Creating..."
 msgstr "正在建立..."
 
@@ -2693,7 +2693,7 @@ msgstr "刪除全域檢視"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:226
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:180
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:202
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:144
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:84
@@ -4157,7 +4157,7 @@ msgstr "舊電子郵件："
 msgid "Save a view as \"Global\" to make it available to all users."
 msgstr "將檢視儲存為「全域」以使其對所有使用者可用。"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:150
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:172
 msgid "Failed to create variants"
 msgstr ""
 
@@ -4704,7 +4704,7 @@ msgstr "內容"
 msgid "Failed to convert global view to personal view"
 msgstr "將全域檢視轉換為個人檢視失敗"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:163
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:185
 msgid "The assigned option groups have no options yet. Add options to your option groups before generating variants."
 msgstr ""
 
@@ -5535,7 +5535,7 @@ msgstr "向 {groupName} 新增選項值"
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:271
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:292
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:189
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:211
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:351
 msgid "SKU"
 msgstr "SKU"
@@ -5758,7 +5758,7 @@ msgstr "電話號碼"
 msgid "Private"
 msgstr "私人"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:185
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:207
 msgid "Variant"
 msgstr "變體"
 

@@ -341,7 +341,7 @@ msgstr "Місце зберігання успішно створено"
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:76
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:118
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:166
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:173
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:112
 msgid "Unknown error"
 msgstr "Невідома помилка"
@@ -528,7 +528,7 @@ msgstr "Пошук способів оплати..."
 msgid "Shipping address unset for order"
 msgstr "Адресу доставки знято для замовлення"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:293
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:313
 msgid "Create {enabledCount} variants"
 msgstr ""
 
@@ -998,7 +998,7 @@ msgstr "Колекцію успішно створено"
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:298
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:298
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:192
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:214
 #: src/lib/components/layout/language-dialog.tsx:136
 msgid "Price"
 msgstr "Ціна"
@@ -1175,7 +1175,7 @@ msgstr ""
 msgid "No countries found"
 msgstr "Країни не знайдено"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:147
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:169
 msgid "Successfully created variants"
 msgstr ""
 
@@ -2363,7 +2363,7 @@ msgstr "Клієнта встановлено для замовлення"
 msgid "Facets"
 msgstr "Фасети"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:195
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:217
 msgid "Stock on Hand"
 msgstr "Запас у наявності"
 
@@ -2621,7 +2621,7 @@ msgstr "Опції товару"
 msgid "Select country"
 msgstr "Вибрати країну"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:291
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:311
 msgid "Creating..."
 msgstr "Створення..."
 
@@ -2693,7 +2693,7 @@ msgstr "Видалити глобальне подання"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:226
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:180
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:202
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:144
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:84
@@ -4157,7 +4157,7 @@ msgstr "Стара електронна пошта:"
 msgid "Save a view as \"Global\" to make it available to all users."
 msgstr "Збережіть подання як «Глобальне», щоб зробити його доступним для всіх користувачів."
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:150
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:172
 msgid "Failed to create variants"
 msgstr ""
 
@@ -4704,7 +4704,7 @@ msgstr "Вміст"
 msgid "Failed to convert global view to personal view"
 msgstr "Не вдалося перетворити глобальне подання на особисте"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:163
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:185
 msgid "The assigned option groups have no options yet. Add options to your option groups before generating variants."
 msgstr ""
 
@@ -5535,7 +5535,7 @@ msgstr "Додати значення опції до {groupName}"
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:271
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:292
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:189
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:211
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:351
 msgid "SKU"
 msgstr "SKU"
@@ -5758,7 +5758,7 @@ msgstr "Номер телефону"
 msgid "Private"
 msgstr "Приватне"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:185
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:207
 msgid "Variant"
 msgstr "Варіант"
 
