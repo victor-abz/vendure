@@ -23,8 +23,9 @@ import { detailPageRouteLoader } from '@/vdb/framework/page/detail-page-route-lo
 import { useDetailPage } from '@/vdb/framework/page/use-detail-page.js';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
-import { PlusIcon } from 'lucide-react';
-import { useRef } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { Layers, Package, PlusIcon } from 'lucide-react';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { AddOptionGroupDialog } from './components/add-option-group-dialog.js';
 import { GenerateVariantsPanel } from './components/generate-variants-panel.js';
@@ -34,6 +35,7 @@ import {
     assignProductsToChannelDocument,
     createProductDocument,
     productDetailDocument,
+    removeOptionGroupFromProductDocument,
     removeProductsFromChannelDocument,
     updateProductDocument,
 } from './products.graphql.js';
@@ -58,6 +60,65 @@ export const Route = createFileRoute('/_authenticated/_products/products_/$id')(
     }),
     errorComponent: ({ error }) => <ErrorPage message={error.message} />,
 });
+
+function NoVariantsPrompt({
+    productId,
+    productName,
+    onOptionGroupCreated,
+    onVariantCreated,
+}: Readonly<{
+    productId: string;
+    productName: string;
+    onOptionGroupCreated: () => void;
+    onVariantCreated: () => void;
+}>) {
+    const [mode, setMode] = useState<'choose' | 'single'>('choose');
+
+    if (mode === 'single') {
+        return (
+            <GenerateVariantsPanel
+                productId={productId}
+                productName={productName}
+                optionGroups={[]}
+                onSuccess={onVariantCreated}
+                onBack={{ handler: () => setMode('choose') }}
+            />
+        );
+    }
+
+    return (
+        <div className="grid grid-cols-2 gap-3">
+            <button
+                type="button"
+                onClick={() => setMode('single')}
+                className="flex flex-col items-center gap-2 rounded-md border border-dashed border-border p-6 text-center transition-colors hover:border-primary hover:bg-accent cursor-pointer"
+            >
+                <Package className="h-8 w-8 text-muted-foreground" />
+                <span className="font-medium"><Trans>Simple product</Trans></span>
+                <span className="text-sm text-muted-foreground">
+                    <Trans>Single variant, no options</Trans>
+                </span>
+            </button>
+            <AddOptionGroupDialog
+                productId={productId}
+                existingGroupIds={[]}
+                onSuccess={onOptionGroupCreated}
+                trigger={
+                    <button
+                        type="button"
+                        className="flex w-full flex-col items-center gap-2 rounded-md border border-dashed border-border p-6 text-center transition-colors hover:border-primary hover:bg-accent cursor-pointer"
+                    >
+                        <Layers className="h-8 w-8 text-muted-foreground" />
+                        <span className="font-medium"><Trans>Product with options</Trans></span>
+                        <span className="text-sm text-muted-foreground">
+                            <Trans>Size, colour, etc.</Trans>
+                        </span>
+                    </button>
+                }
+            />
+        </div>
+    );
+}
 
 function ProductDetailPage() {
     const params = Route.useParams();
@@ -109,6 +170,42 @@ function ProductDetailPage() {
             });
         },
     });
+
+    const removeOptionGroupMutation = useMutation({
+        mutationFn: api.mutate(removeOptionGroupFromProductDocument),
+    });
+
+    const removeAllOptionGroups = async (
+        productId: string,
+        optionGroups: Array<{ id: string }>,
+    ) => {
+        try {
+            for (const group of optionGroups) {
+                const result = await removeOptionGroupMutation.mutateAsync({
+                    productId,
+                    optionGroupId: group.id,
+                });
+                const removeResult = result?.removeOptionGroupFromProduct;
+                if (
+                    removeResult &&
+                    '__typename' in removeResult &&
+                    removeResult.__typename === 'ProductOptionInUseError'
+                ) {
+                    toast.error(t`Could not remove option group`, {
+                        description: removeResult.message,
+                    });
+                    refreshEntity();
+                    return;
+                }
+            }
+            refreshEntity();
+        } catch (error) {
+            toast.error(t`Failed to remove option groups`, {
+                description: error instanceof Error ? error.message : t`Unknown error`,
+            });
+            refreshEntity();
+        }
+    };
 
     return (
         <Page pageId={pageId} form={form} submitHandler={submitHandler} entity={entity}>
@@ -191,24 +288,25 @@ function ProductDetailPage() {
                         title={<Trans>Product variants</Trans>}
                     >
                         {entity.optionGroups.length === 0 ? (
-                            <div className="flex flex-col items-start gap-3">
-                                <p className="text-sm text-muted-foreground">
-                                    <Trans>
-                                        Add an option group to get started with variants.
-                                    </Trans>
-                                </p>
-                                <AddOptionGroupDialog
-                                    productId={entity.id}
-                                    existingGroupIds={entity.optionGroups.map(g => g.id)}
-                                    onSuccess={() => refreshEntity()}
-                                />
-                            </div>
+                            <NoVariantsPrompt
+                                productId={entity.id}
+                                productName={entity.name}
+                                onOptionGroupCreated={() => refreshEntity()}
+                                onVariantCreated={() => refreshEntity()}
+                            />
                         ) : (
                             <GenerateVariantsPanel
                                 productId={entity.id}
                                 productName={entity.name}
                                 optionGroups={entity.optionGroups}
                                 onSuccess={() => refreshEntity()}
+                                onBack={{
+                                    handler: () => removeAllOptionGroups(entity.id, entity.optionGroups),
+                                    confirmation: {
+                                        title: t`Remove option groups?`,
+                                        description: t`This will remove all option groups from this product and return to the variant setup choice.`,
+                                    },
+                                }}
                             />
                         )}
                     </PageBlock>
