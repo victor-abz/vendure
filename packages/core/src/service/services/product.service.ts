@@ -329,6 +329,10 @@ export class ProductService {
             where: { id: In(input.productIds) },
             relations: ['variants', 'assets', 'optionGroups', 'optionGroups.options'],
         });
+        const productIds = unique(productsWithVariants.map(p => p.id));
+        await Promise.all(
+            productIds.map(id => this.channelService.assignToChannels(ctx, Product, id, [input.channelId])),
+        );
         await this.productVariantService.assignProductVariantsToChannel(ctx, {
             productVariantIds: ([] as ID[]).concat(
                 ...productsWithVariants.map(p => p.variants.map(v => v.id)),
@@ -409,6 +413,10 @@ export class ProductService {
                 );
             }
         }
+        const productIds = unique(productsWithVariants.map(p => p.id));
+        await Promise.all(
+            productIds.map(id => this.channelService.removeFromChannels(ctx, Product, id, [input.channelId])),
+        );
         const products = await this.connection
             .getRepository(ctx, Product)
             .find({ where: { id: In(input.productIds) } });
