@@ -96,19 +96,7 @@ jobs:
             - uses: ./.github/actions/setup
             - name: Check i18n catalogs are in sync
               working-directory: packages/dashboard
-              run: |
-                  npx lingui extract 2>/dev/null
-                  if git diff --exit-code src/i18n/locales/ > /dev/null 2>&1; then
-                    echo "i18n catalogs are in sync"
-                  else
-                    echo "::error::i18n catalogs are out of sync with source code."
-                    echo ""
-                    echo "The .po files differ after running 'lingui extract':"
-                    git diff --stat src/i18n/locales/
-                    echo ""
-                    echo "Fix: run 'npm run i18n:extract --workspace=@vendure/dashboard' and commit the updated .po files."
-                    exit 1
-                  fi
+              run: bash scripts/check-i18n-sync.sh
     dashboard-e2e:
         name: dashboard e2e (${{ matrix.shard }})
         needs: dashboard-changes
