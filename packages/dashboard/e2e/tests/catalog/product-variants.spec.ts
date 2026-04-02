@@ -39,11 +39,10 @@ test.describe('product variant generation', () => {
             timeout: 10_000,
         });
 
-        // The empty state card should have an inline "Add option group" button
-        await expect(page.getByRole('button', { name: 'Add option group' })).toBeVisible();
-
-        // Click the "Add option group" button
-        await page.getByRole('button', { name: 'Add option group' }).click();
+        // The variant choice cards should be visible — click "Product with options"
+        // to open the Add Option Group dialog
+        await expect(page.getByRole('button', { name: /Product with options/i })).toBeVisible();
+        await page.getByRole('button', { name: /Product with options/i }).click();
 
         // The dialog should open with "Assign existing" and "Create new" tabs
         await expect(page.getByRole('dialog')).toBeVisible();
@@ -335,5 +334,45 @@ test.describe('manage product variants', () => {
             id: uniqueOptionId,
         });
         await page.close();
+    });
+});
+
+// Regression: the edit icon on the variant detail Options badge should navigate
+// to the option group detail page, not a broken route.
+test.describe('variant option group edit link', () => {
+    test('should navigate to option group detail when clicking edit icon on variant page', async ({
+        page,
+    }) => {
+        // Navigate to product variants list and click a Laptop variant (seed data, has options)
+        await page.goto('/product-variants');
+        await expect(page.getByRole('heading', { name: 'Product Variants' })).toBeVisible({
+            timeout: 10_000,
+        });
+
+        // Click a variant that has options (Laptop variants have screen size + RAM)
+        await page
+            .locator('table')
+            .getByRole('button', { name: /Laptop/ })
+            .first()
+            .click();
+        await expect(page).toHaveURL(/\/product-variants\/[^/]+$/);
+
+        // The Options block should be visible with edit icons
+        const optionsBlock = page.getByRole('main');
+        await expect(optionsBlock.getByText('Options', { exact: true })).toBeVisible({
+            timeout: 10_000,
+        });
+
+        // Click the edit link (pencil icon) on the first option badge, capturing its group name
+        const firstBadge = optionsBlock.locator('[data-slot="badge"]').first();
+        const badgeText = await firstBadge.innerText();
+        const groupName = badgeText.split(':')[0].trim();
+        await firstBadge.getByRole('link').click();
+
+        // Should navigate to the option group detail page with the correct group
+        await expect(page).toHaveURL(/\/option-groups\/[^/]+$/);
+        await expect(page.getByRole('heading', { level: 1 })).toContainText(groupName, {
+            timeout: 10_000,
+        });
     });
 });
