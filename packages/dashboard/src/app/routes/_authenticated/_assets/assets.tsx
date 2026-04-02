@@ -2,7 +2,7 @@ import { AssetGallery, AssetViewMode } from '@/vdb/components/shared/asset/asset
 import { Page, PageBlock, PageTitle } from '@/vdb/framework/layout-engine/page-layout.js';
 import { Trans } from '@lingui/react/macro';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { z } from 'zod';
+import { z } from '@/vdb/lib/zod.js';
 import { DeleteAssetsBulkAction } from './components/asset-bulk-actions.js';
 
 const assetSearchSchema = z.object({

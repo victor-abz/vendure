@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '@/vdb/lib/zod.js';
 import { VariablesOf } from 'gql.tada';
 import { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';

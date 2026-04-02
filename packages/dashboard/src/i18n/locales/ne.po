@@ -13,9 +13,8 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:100
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:159
-#: src/lib/components/shared/customer-address-form.tsx:91
+#: src/lib/components/shared/customer-address-form.tsx:103
 msgid "Full Name"
 msgstr "पूरा नाम"
 
@@ -36,7 +35,7 @@ msgstr "ट्र्याकिङ कोड"
 msgid "The selected permissions will be applied to the these channels."
 msgstr "चयन गरिएका अनुमतिहरू यी च्यानलहरूमा लागू गरिनेछन्।"
 
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:249
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:248
 msgid "Product options"
 msgstr "उत्पादन विकल्पहरू"
 
@@ -53,8 +52,7 @@ msgstr ""
 msgid "New role"
 msgstr "नयाँ भूमिका"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:128
-#: src/lib/components/shared/customer-address-form.tsx:119
+#: src/lib/components/shared/customer-address-form.tsx:131
 msgid "Apartment, suite, etc."
 msgstr "अपार्टमेन्ट, सुइट, आदि"
 
@@ -280,7 +278,7 @@ msgstr ""
 msgid "Successfully created role"
 msgstr "भूमिका सफलतापूर्वक सिर्जना गरियो"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:455
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:454
 msgid "Are you sure you want to delete this variant?"
 msgstr "के तपाईं निश्चित हुनुहुन्छ कि तपाईं यो भेरियन्ट मेट्न चाहनुहुन्छ?"
 
@@ -342,9 +340,9 @@ msgstr "स्टक स्थान सफलतापूर्वक सिर
 #: src/app/routes/_authenticated/_orders/hooks/use-refund-order.ts:303
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:76
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:118
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:167
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:152
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:113
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:166
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:112
 msgid "Unknown error"
 msgstr "अज्ञात त्रुटि"
 
@@ -435,7 +433,7 @@ msgstr "ठेगाना अपडेट गर्न असफल"
 msgid "Address deleted successfully"
 msgstr "ठेगाना सफलतापूर्वक मेटियो"
 
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:110
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:109
 #: src/app/routes/_authenticated/_orders/components/order-tax-summary.tsx:17
 msgid "Tax rate"
 msgstr "कर दर"
@@ -477,9 +475,8 @@ msgstr "उत्पादन विकल्प सफलतापूर्व�
 msgid "Parent product"
 msgstr "मुख्य उत्पादन"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:138
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:196
-#: src/lib/components/shared/customer-address-form.tsx:129
+#: src/lib/components/shared/customer-address-form.tsx:141
 msgid "City"
 msgstr "शहर"
 
@@ -531,7 +528,7 @@ msgstr "भुक्तानी विधिहरू खोज्नुहो�
 msgid "Shipping address unset for order"
 msgstr "अर्डरको लागि ढुवानी ठेगाना हटाइयो"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:294
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:293
 msgid "Create {enabledCount} variants"
 msgstr ""
 
@@ -550,7 +547,7 @@ msgstr "ग्राहक इतिहास लोड गर्न त्र�
 msgid "Successfully removed {selectionLength} {entityType} from channel"
 msgstr "च्यानलबाट {selectionLength} {entityType} सफलतापूर्वक हटाइयो"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:159
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:158
 msgid "Add option value"
 msgstr "विकल्प मान थप्नुहोस्"
 
@@ -615,7 +612,7 @@ msgstr "पूर्ति संक्रमण भयो"
 msgid "Are you sure you want to delete {selectionLength} assets?"
 msgstr "के तपाईं निश्चित हुनुहुन्छ कि तपाईं {selectionLength} सम्पत्तिहरू मेट्न चाहनुहुन्छ?"
 
-#: src/lib/components/login/login-form.tsx:106
+#: src/lib/components/login/login-form.tsx:105
 msgid "Sign in"
 msgstr "साइन इन गर्नुहोस्"
 
@@ -739,8 +736,8 @@ msgstr "मस्यौदा पूरा गर्नुहोस्"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:202
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:170
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:158
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:287
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:349
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:286
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:348
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:165
 #: src/app/routes/_authenticated/_sellers/sellers_.$id.tsx:89
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:148
@@ -801,9 +798,8 @@ msgstr "पासवर्ड देखाउनुहोस्"
 msgid "(max: {0})"
 msgstr "(अधिकतम: {0})"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:108
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:165
-#: src/lib/components/shared/customer-address-form.tsx:99
+#: src/lib/components/shared/customer-address-form.tsx:111
 msgid "Company"
 msgstr "कम्पनी"
 
@@ -920,7 +916,7 @@ msgstr "क्षेत्र अपडेट गर्न असफल"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx:133
 #: src/app/routes/_authenticated/_profile/profile.tsx:112
 #: src/app/routes/_authenticated/_profile/profile.tsx:129
-#: src/lib/components/login/login-form.tsx:94
+#: src/lib/components/login/login-form.tsx:93
 msgid "Password"
 msgstr "पासवर्ड"
 
@@ -998,11 +994,11 @@ msgstr "प्रत्येक ५ सेकेन्ड"
 msgid "Successfully created collection"
 msgstr "संग्रह सफलतापूर्वक सिर्जना गरियो"
 
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:89
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:88
 #: src/app/routes/_authenticated/_orders/components/shipping-method-selector.tsx:49
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:298
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:299
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:193
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:298
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:192
 #: src/lib/components/layout/language-dialog.tsx:136
 msgid "Price"
 msgstr "मूल्य"
@@ -1179,7 +1175,7 @@ msgstr ""
 msgid "No countries found"
 msgstr "कुनै देशहरू फेला परेन"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:148
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:147
 msgid "Successfully created variants"
 msgstr ""
 
@@ -1276,7 +1272,7 @@ msgstr ""
 msgid "Addresses"
 msgstr "ठेगानाहरू"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:144
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:143
 msgid "Add a new option value to the {groupName} option group"
 msgstr ""
 
@@ -1387,14 +1383,13 @@ msgstr "नवीनतम अर्डरहरू"
 msgid "+ {leftOver} more"
 msgstr "+ {leftOver} थप"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:238
-#: src/lib/components/shared/customer-address-form.tsx:229
+#: src/lib/components/shared/customer-address-form.tsx:241
 msgid "Use as the default billing address"
 msgstr "पूर्वनिर्धारित बिलिङ ठेगानाको रूपमा प्रयोग गर्नुहोस्"
 
 #: src/app/common/delete-bulk-action.tsx:139
 #: src/app/routes/_authenticated/_assets/components/asset-bulk-actions.tsx:41
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:358
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:357
 #: src/lib/components/data-table/use-generated-columns.tsx:405
 #: src/lib/components/data-table/use-generated-columns.tsx:435
 #: src/lib/components/data-table/views-sheet.tsx:270
@@ -1411,7 +1406,7 @@ msgstr "असक्षम पार्नुहोस्"
 msgid "Collections"
 msgstr "संग्रहहरू"
 
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:226
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:225
 msgid "Add variant"
 msgstr "भेरियन्ट थप्नुहोस्"
 
@@ -1517,14 +1512,13 @@ msgstr "अन्तिम पृष्ठमा जानुहोस्"
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:61
 #: src/app/routes/_authenticated/_assets/components/manage-tags-dialog.tsx:203
 #: src/app/routes/_authenticated/_collections/components/move-collections-dialog.tsx:418
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:250
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:310
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:347
 #: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:358
 #: src/app/routes/_authenticated/_orders/components/settle-refund-dialog.tsx:71
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:270
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:494
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:493
 #: src/app/routes/_authenticated/_system/settings-store.tsx:140
 #: src/lib/components/data-input/product-multi-selector-input.tsx:370
 #: src/lib/components/data-table/data-table-bulk-action-item.tsx:122
@@ -1535,7 +1529,7 @@ msgstr "अन्तिम पृष्ठमा जानुहोस्"
 #: src/lib/components/shared/asset/asset-focal-point-editor.tsx:88
 #: src/lib/components/shared/assign-to-channel-dialog.tsx:126
 #: src/lib/components/shared/confirmation-dialog.tsx:42
-#: src/lib/components/shared/customer-address-form.tsx:241
+#: src/lib/components/shared/customer-address-form.tsx:253
 #: src/lib/components/shared/navigation-confirmation.tsx:55
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:208
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:146
@@ -1543,7 +1537,7 @@ msgid "Cancel"
 msgstr "रद्द गर्नुहोस्"
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:161
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:160
 msgid "Successfully created product variant"
 msgstr "उत्पादन भेरियन्ट सफलतापूर्वक सिर्जना गरियो"
 
@@ -1551,9 +1545,8 @@ msgstr "उत्पादन भेरियन्ट सफलतापूर�
 msgid "Refund from this method"
 msgstr "यो विधिबाट रिफन्ड"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:160
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:208
-#: src/lib/components/shared/customer-address-form.tsx:151
+#: src/lib/components/shared/customer-address-form.tsx:163
 msgid "Postal Code"
 msgstr "हुलाक कोड"
 
@@ -1584,7 +1577,7 @@ msgstr "कस्टम फिल्डहरू सेट गर्नुहो
 msgid "Collections"
 msgstr "संग्रहहरू"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:454
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:453
 msgid "Delete variant"
 msgstr ""
 
@@ -1651,8 +1644,7 @@ msgstr "असक्षम"
 msgid "New promotion"
 msgstr "नयाँ प्रमोशन"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:217
-#: src/lib/components/shared/customer-address-form.tsx:208
+#: src/lib/components/shared/customer-address-form.tsx:220
 msgid "Default Shipping Address"
 msgstr "पूर्वनिर्धारित ढुवानी ठेगाना"
 
@@ -1755,7 +1747,7 @@ msgstr "भुक्तानी विधि"
 msgid "Edit"
 msgstr "सम्पादन गर्नुहोस्"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:184
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:183
 msgid "Variant updated successfully"
 msgstr "भेरियन्ट सफलतापूर्वक अपडेट गरियो"
 
@@ -2371,7 +2363,7 @@ msgstr "अर्डरको लागि ग्राहक सेट गर�
 msgid "Facets"
 msgstr "विशेषताहरू"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:196
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:195
 msgid "Stock on Hand"
 msgstr "हातमा स्टक"
 
@@ -2601,9 +2593,8 @@ msgstr "च्यानल"
 msgid "Amount"
 msgstr "रकम"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:198
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:242
-#: src/lib/components/shared/customer-address-form.tsx:189
+#: src/lib/components/shared/customer-address-form.tsx:201
 msgid "Phone Number"
 msgstr "फोन नम्बर"
 
@@ -2630,7 +2621,7 @@ msgstr "उत्पादन विकल्पहरू"
 msgid "Select country"
 msgstr "देश चयन गर्नुहोस्"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:292
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:291
 msgid "Creating..."
 msgstr "सिर्जना गर्दै..."
 
@@ -2638,7 +2629,7 @@ msgstr "सिर्जना गर्दै..."
 msgid "Are you sure you want to delete this global view? This action cannot be undone and will affect all users."
 msgstr "के तपाईं निश्चित हुनुहुन्छ कि तपाईं यो ग्लोबल दृश्य मेट्न चाहनुहुन्छ? यो कार्य पूर्ववत गर्न सकिँदैन र सबै प्रयोगकर्ताहरूलाई असर गर्नेछ।"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:487
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:486
 msgid "Force remove option group"
 msgstr "विकल्प समूह बलपूर्वक हटाउनुहोस्"
 
@@ -2702,7 +2693,7 @@ msgstr "ग्लोबल दृश्य मेट्नुहोस्"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:160
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:138
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:226
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:181
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:180
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:122
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:144
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:84
@@ -2735,12 +2726,11 @@ msgstr "{0} बाट {1} सम्म"
 msgid "Failed to create customer"
 msgstr "ग्राहक सिर्जना गर्न असफल"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:299
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:298
 msgid "Option values"
 msgstr "विकल्प मानहरू"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:235
-#: src/lib/components/shared/customer-address-form.tsx:226
+#: src/lib/components/shared/customer-address-form.tsx:238
 msgid "Default Billing Address"
 msgstr "पूर्वनिर्धारित बिलिङ ठेगाना"
 
@@ -2925,7 +2915,7 @@ msgstr "{0} वस्तु(हरू) हटाउँदै"
 msgid "Track"
 msgstr "ट्र्याक गर्नुहोस्"
 
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:323
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:322
 msgid "Create variant"
 msgstr "भेरियन्ट सिर्जना गर्नुहोस्"
 
@@ -2958,7 +2948,7 @@ msgstr "हेडर स्तम्भ टगल गर्नुहोस्"
 msgid "New Promotion"
 msgstr "नयाँ प्रमोशन"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:152
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:151
 msgid "Option value name"
 msgstr "विकल्प मान नाम"
 
@@ -2979,8 +2969,7 @@ msgstr "स्लग सेट गरिएको छ"
 msgid "Successfully updated zone"
 msgstr "क्षेत्र सफलतापूर्वक अपडेट गरियो"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:146
-#: src/lib/components/shared/customer-address-form.tsx:137
+#: src/lib/components/shared/customer-address-form.tsx:149
 msgid "State/Province"
 msgstr "राज्य/प्रान्त"
 
@@ -3000,10 +2989,9 @@ msgstr "कर वर्ग सिर्जना गर्न असफल"
 msgid "Set filter criteria for the {columnId} column"
 msgstr ""
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:170
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:217
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:53
-#: src/lib/components/shared/customer-address-form.tsx:161
+#: src/lib/components/shared/customer-address-form.tsx:173
 msgid "Country"
 msgstr "देश"
 
@@ -3024,7 +3012,7 @@ msgstr "मेटाउने पुष्टि गर्नुहोस्"
 msgid "Failed to modify order"
 msgstr "अर्डर परिमार्जन गर्न असफल"
 
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:102
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:101
 msgid "Includes tax at {taxRate}%"
 msgstr "{taxRate}% कर समावेश"
 
@@ -3175,7 +3163,7 @@ msgstr "ढुवानी"
 msgid "useWidgetDimensions must be used within a DashboardBaseWidget"
 msgstr "useWidgetDimensions लाई DashboardBaseWidget भित्र प्रयोग गर्नुपर्छ"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:489
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:488
 msgid "This option group is in use by existing variants. Force removing it may affect those variants. Are you sure?"
 msgstr "यो विकल्प समूह अवस्थित भेरियन्टहरूमा प्रयोगमा छ। बलपूर्वक हटाउँदा ती भेरियन्टहरूमा असर पर्न सक्छ। के तपाईं निश्चित हुनुहुन्छ?"
 
@@ -3203,8 +3191,7 @@ msgstr "भुक्तानी अधिकृत गरियो"
 msgid "Successfully updated role"
 msgstr "भूमिका सफलतापूर्वक अपडेट गरियो"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:181
-#: src/lib/components/shared/customer-address-form.tsx:172
+#: src/lib/components/shared/customer-address-form.tsx:184
 msgid "Select a country"
 msgstr "देश चयन गर्नुहोस्"
 
@@ -3260,7 +3247,7 @@ msgstr "{collectionName} को संग्रह सामग्री"
 msgid "Shipping method changed"
 msgstr "ढुवानी विधि परिवर्तन भयो"
 
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:124
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:123
 msgid "Tax description"
 msgstr "कर विवरण"
 
@@ -3341,7 +3328,7 @@ msgstr "{0} नक्कल गर्नुहोस्"
 msgid "Failed to update fulfillment state"
 msgstr "पूर्ति स्थिति अपडेट गर्न असफल"
 
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:234
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:233
 msgid "Create a new product variant with options, pricing, and stock"
 msgstr ""
 
@@ -3483,7 +3470,7 @@ msgstr "सक्रिय च्यानलबाट हटाउन सकि
 msgid "Not set"
 msgstr "सेट गरिएको छैन"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:505
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:504
 msgid "Force remove"
 msgstr "बलपूर्वक हटाउनुहोस्"
 
@@ -3491,7 +3478,7 @@ msgstr "बलपूर्वक हटाउनुहोस्"
 msgid "New Channel"
 msgstr "नयाँ च्यानल"
 
-#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:66
+#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:65
 msgid "Option Group Name"
 msgstr "विकल्प समूह नाम"
 
@@ -3520,7 +3507,7 @@ msgstr "पूर्ति स्थिति सफलतापूर्वक 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:211
 #: src/app/routes/_authenticated/_option-groups/option-groups.tsx:38
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:64
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:67
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:66
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:54
 #: src/app/routes/_authenticated/_products/products.tsx:24
 #: src/app/routes/_authenticated/_products/products.tsx:47
@@ -3610,8 +3597,7 @@ msgstr "स्टक स्थान अपडेट गर्न असफल"
 msgid "Order shipped"
 msgstr "अर्डर पठाइयो"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:254
-#: src/lib/components/shared/customer-address-form.tsx:245
+#: src/lib/components/shared/customer-address-form.tsx:257
 msgid "Save Address"
 msgstr "ठेगाना सुरक्षित गर्नुहोस्"
 
@@ -3667,7 +3653,7 @@ msgid "Failed to settle refund"
 msgstr "रिफन्ड सम्पन्न गर्न असफल"
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:435
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:312
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:311
 msgid "Stock level"
 msgstr "स्टक स्तर"
 
@@ -3691,12 +3677,12 @@ msgstr "खोजीमा फर्कनुहोस्"
 msgid "View duplicated successfully"
 msgstr "दृश्य सफलतापूर्वक नक्कल गरियो"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:316
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:315
 msgid "Remove option group"
 msgstr "विकल्प समूह हटाउनुहोस्"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:190
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:77
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:76
 #: src/app/routes/_authenticated/_orders/components/order-tax-summary.tsx:14
 #: src/app/routes/_authenticated/_payment-methods/payment-methods_.$id.tsx:171
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:165
@@ -3750,7 +3736,7 @@ msgstr "{0} को म्यानुअल भुक्तानी थप्�
 msgid "is in"
 msgstr "मा छ"
 
-#: src/lib/components/login/login-form.tsx:84
+#: src/lib/components/login/login-form.tsx:83
 msgid "Email"
 msgstr "इमेल"
 
@@ -3766,7 +3752,7 @@ msgstr "यस तालिकाको लागि तपाईंको व�
 msgid "Filter by tags"
 msgstr "ट्यागद्वारा फिल्टर गर्नुहोस्"
 
-#: src/lib/components/login/login-form.tsx:74
+#: src/lib/components/login/login-form.tsx:73
 msgid "Sign in to access the admin dashboard"
 msgstr "प्रशासक ड्यासबोर्ड पहुँच गर्न साइन इन गर्नुहोस्"
 
@@ -4171,7 +4157,7 @@ msgstr "पुरानो इमेल:"
 msgid "Save a view as \"Global\" to make it available to all users."
 msgstr "सबै प्रयोगकर्ताहरूलाई उपलब्ध गराउन दृश्यलाई \"ग्लोबल\" को रूपमा सुरक्षित गर्नुहोस्।"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:151
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:150
 msgid "Failed to create variants"
 msgstr ""
 
@@ -4197,7 +4183,7 @@ msgstr "पासवर्ड लुकाउनुहोस्"
 msgid "New seller"
 msgstr "नयाँ विक्रेता"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:154
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:153
 msgid "e.g., Red, Large, Cotton"
 msgstr "जस्तै रातो, ठूलो, कपास"
 
@@ -4559,7 +4545,7 @@ msgstr "ID"
 msgid "Alerts"
 msgstr "सूचनाहरू"
 
-#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:75
+#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:74
 msgid "Option Values"
 msgstr "विकल्प मानहरू"
 
@@ -4571,7 +4557,7 @@ msgstr "परिवर्तनहरू पूर्वावलोकन ग�
 msgid "Failed to remove {entityType} from channel"
 msgstr ""
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:192
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:191
 msgid "Variant deleted successfully"
 msgstr "भेरियन्ट सफलतापूर्वक मेटियो"
 
@@ -4601,7 +4587,7 @@ msgstr "अनुसूचित कार्यहरू"
 msgid "Are you sure you want to delete this item? This action cannot be undone."
 msgstr "के तपाईं निश्चित हुनुहुन्छ कि तपाईं यो वस्तु मेट्न चाहनुहुन्छ? यो कार्य पूर्ववत गर्न सकिँदैन।"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:343
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:342
 msgid "Variants"
 msgstr "भेरियन्टहरू"
 
@@ -4624,7 +4610,7 @@ msgstr ""
 msgid "Heading 3"
 msgstr "शीर्षक ३"
 
-#: src/lib/components/login/login-form.tsx:71
+#: src/lib/components/login/login-form.tsx:70
 msgid "Welcome to Vendure"
 msgstr "Vendure मा स्वागत छ"
 
@@ -4718,7 +4704,7 @@ msgstr "सामग्रीहरू"
 msgid "Failed to convert global view to personal view"
 msgstr "ग्लोबल दृश्यलाई व्यक्तिगत दृश्यमा रूपान्तरण गर्न असफल"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:164
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:163
 msgid "The assigned option groups have no options yet. Add options to your option groups before generating variants."
 msgstr ""
 
@@ -4797,9 +4783,8 @@ msgstr "अर्डर परिमार्जनहरू पूर्वा�
 msgid "The page will continue with the default query."
 msgstr "पृष्ठ पूर्वनिर्धारित क्वेरीसँग जारी रहनेछ।"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:118
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:175
-#: src/lib/components/shared/customer-address-form.tsx:109
+#: src/lib/components/shared/customer-address-form.tsx:121
 msgid "Street Address"
 msgstr "सडक ठेगाना"
 
@@ -4884,7 +4869,7 @@ msgstr "तपाईंको स्टोर र च्यानलहरूक
 msgid "Successfully created product"
 msgstr "उत्पादन सफलतापूर्वक सिर्जना गरियो"
 
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:231
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:230
 msgid "Add product variant"
 msgstr "उत्पादन भेरियन्ट थप्नुहोस्"
 
@@ -4901,7 +4886,7 @@ msgstr "टिप्पणी सम्पादन गर्नुहोस्"
 msgid "No assets found. Try adjusting your filters."
 msgstr ""
 
-#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:162
+#: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:161
 msgid "Add Option"
 msgstr "विकल्प थप्नुहोस्"
 
@@ -4973,7 +4958,7 @@ msgstr "कर बाहेक:"
 #~ msgid "Add Stock to Location"
 #~ msgstr "स्थानमा स्टक थप्नुहोस्"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:106
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:105
 msgid "Successfully added option value"
 msgstr "विकल्प मान सफलतापूर्वक थपियो"
 
@@ -4981,8 +4966,8 @@ msgstr "विकल्प मान सफलतापूर्वक थपि
 msgid "Collection moved to new parent"
 msgstr "संग्रह नयाँ अभिभावकमा सारियो"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:207
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:216
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:206
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:215
 msgid "Option group removed"
 msgstr "विकल्प समूह हटाइयो"
 
@@ -5138,11 +5123,11 @@ msgstr ""
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:81
 #: src/app/routes/_authenticated/_option-groups/option-groups.tsx:17
 #: src/app/routes/_authenticated/_option-groups/option-groups.tsx:24
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:279
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:278
 msgid "Option Groups"
 msgstr "विकल्प समूहहरू"
 
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:134
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:133
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:194
 msgid "Add surcharge"
 msgstr "अतिरिक्त शुल्क थप्नुहोस्"
@@ -5299,7 +5284,7 @@ msgstr "विक्रेता अर्डर"
 msgid "New facet"
 msgstr "नयाँ विशेषता"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:317
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:316
 msgid "Are you sure you want to remove this option group from the product?"
 msgstr "के तपाईं यो विकल्प समूहलाई उत्पादनबाट हटाउन चाहनुहुन्छ?"
 
@@ -5357,8 +5342,7 @@ msgstr ""
 msgid "Failed to duplicate view"
 msgstr "दृश्य नक्कल गर्न असफल"
 
-#: src/app/routes/_authenticated/_customers/components/customer-address-form.tsx:220
-#: src/lib/components/shared/customer-address-form.tsx:211
+#: src/lib/components/shared/customer-address-form.tsx:223
 msgid "Use as the default shipping address"
 msgstr "पूर्वनिर्धारित ढुवानी ठेगानाको रूपमा प्रयोग गर्नुहोस्"
 
@@ -5479,7 +5463,7 @@ msgstr "नयाँ विक्रेता"
 msgid "Edit image"
 msgstr "छवि सम्पादन गर्नुहोस्"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:69
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:68
 msgid "Manage Variants"
 msgstr "भेरियन्टहरू व्यवस्थापन गर्नुहोस्"
 
@@ -5538,21 +5522,21 @@ msgstr "ग्राहक समूहमा थपियो"
 msgid "Seller orders"
 msgstr "विक्रेता अर्डरहरू"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:112
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:111
 msgid "Failed to add option value"
 msgstr "विकल्प मान थप्न असफल"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:141
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:140
 msgid "Add option value to {groupName}"
 msgstr "{groupName} मा विकल्प मान थप्नुहोस्"
 
-#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:83
+#: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:82
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:271
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:293
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:292
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:195
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:190
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:352
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:189
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:351
 msgid "SKU"
 msgstr "SKU"
 
@@ -5560,7 +5544,7 @@ msgstr "SKU"
 msgid "{totalQuantity} item(s) refunded"
 msgstr "{totalQuantity} वस्तु(हरू) फिर्ता गरियो"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:283
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:282
 msgid "No option groups defined yet. Add option groups to create different variants of your product (e.g., Size, Color, Material)"
 msgstr "अझै कुनै विकल्प समूहहरू परिभाषित गरिएको छैन। तपाईंको उत्पादनका विभिन्न भेरियन्टहरू सिर्जना गर्न विकल्प समूहहरू थप्नुहोस् (जस्तै साइज, रङ, सामग्री)"
 
@@ -5582,7 +5566,7 @@ msgid "Created at"
 msgstr "सिर्जना मिति"
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:137
-#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:166
+#: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:165
 msgid "Failed to create product variant"
 msgstr "उत्पादन भेरियन्ट सिर्जना गर्न असफल"
 
@@ -5731,7 +5715,7 @@ msgstr "भुक्तानी विधि आवश्यक छ"
 msgid "Failed to add customer to group"
 msgstr "समूहमा ग्राहक थप्न असफल"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:276
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:275
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:182
 msgid "Manage variants"
 msgstr "भेरियन्टहरू व्यवस्थापन गर्नुहोस्"
@@ -5757,7 +5741,7 @@ msgstr ""
 msgid "Successfully created promotion"
 msgstr "प्रमोशन सफलतापूर्वक सिर्जना गरियो"
 
-#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:293
+#: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:292
 msgid "Option"
 msgstr "विकल्प"
 
@@ -5774,7 +5758,7 @@ msgstr "फोन नम्बर"
 msgid "Private"
 msgstr "निजी"
 
-#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:186
+#: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:185
 msgid "Variant"
 msgstr "भेरियन्ट"
 
