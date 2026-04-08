@@ -61,7 +61,7 @@
           "title": "Search",
           "slug": "search",
           "file": "docs/guides/core-concepts/search/index.mdx",
-          "lastModified": "2026-03-30T21:48:02+02:00"
+          "lastModified": "2026-04-08T18:11:57+02:00"
         },
         {
           "title": "Facets & Filters",
@@ -85,7 +85,7 @@
           "title": "Payment",
           "slug": "payment",
           "file": "docs/guides/core-concepts/payment/index.mdx",
-          "lastModified": "2026-03-30T21:48:02+02:00"
+          "lastModified": "2026-04-08T18:11:57+02:00"
         },
         {
           "title": "Customers",
@@ -686,7 +686,7 @@
           "title": "Listing Products",
           "slug": "listing-products",
           "file": "docs/guides/storefront/listing-products/index.mdx",
-          "lastModified": "2026-03-30T21:48:02+02:00"
+          "lastModified": "2026-04-08T18:11:57+02:00"
         },
         {
           "title": "Product Detail",
@@ -704,7 +704,7 @@
           "title": "Checkout Flow",
           "slug": "checkout-flow",
           "file": "docs/guides/storefront/checkout-flow/index.mdx",
-          "lastModified": "2026-03-30T21:48:02+02:00"
+          "lastModified": "2026-04-08T18:11:57+02:00"
         },
         {
           "title": "Customer Accounts",
