@@ -1,3 +1,25 @@
+## <small>3.6.1 (2026-04-09)</small>
+
+
+#### Features
+
+* **dashboard** Add requiresPermissions support to dashboard widgets (#4627) ([d0c895f](https://github.com/vendurehq/vendure/commit/d0c895f)), closes [#4627](https://github.com/vendurehq/vendure/issues/4627)
+* **dashboard** Allow creating single variant without option groups (#4616) ([98b4cf3](https://github.com/vendurehq/vendure/commit/98b4cf3)), closes [#4616](https://github.com/vendurehq/vendure/issues/4616)
+* **dashboard** Support Zod v4 and re-export Zod from @vendure/dashboard (#4607) ([b3a6426](https://github.com/vendurehq/vendure/commit/b3a6426)), closes [#4607](https://github.com/vendurehq/vendure/issues/4607)
+
+#### Fixes
+
+* **cli** Resolve tsconfig by walking up from target directory (#4599) ([5817ea1](https://github.com/vendurehq/vendure/commit/5817ea1)), closes [#4599](https://github.com/vendurehq/vendure/issues/4599)
+* **core** Assign Product entity to channel in assignProductsToChannel (#4618) ([830ec9c](https://github.com/vendurehq/vendure/commit/830ec9c)), closes [#4618](https://github.com/vendurehq/vendure/issues/4618)
+* **core** Deduplicate channels in OrderSplitter when channelId matches default (#4631) (#4632) ([739f049](https://github.com/vendurehq/vendure/commit/739f049)), closes [#4631](https://github.com/vendurehq/vendure/issues/4631) [#4632](https://github.com/vendurehq/vendure/issues/4632)
+* **dashboard** Fix collection filter e2e test selector (#4615) ([490506f](https://github.com/vendurehq/vendure/commit/490506f)), closes [#4615](https://github.com/vendurehq/vendure/issues/4615)
+* **dashboard** Fix hiding of toast notifications by dialogs (#4634) ([1f1070d](https://github.com/vendurehq/vendure/commit/1f1070d)), closes [#4634](https://github.com/vendurehq/vendure/issues/4634)
+* **dashboard** Fix option group edit link on variant detail page (#4620) ([e63387a](https://github.com/vendurehq/vendure/commit/e63387a)), closes [#4620](https://github.com/vendurehq/vendure/issues/4620)
+* **dashboard** Make address dialog scrollable with max h (#4622) ([4e50814](https://github.com/vendurehq/vendure/commit/4e50814)), closes [#4622](https://github.com/vendurehq/vendure/issues/4622)
+* **dashboard** Match query key invalidation for channels (#4630) ([2fe3f4d](https://github.com/vendurehq/vendure/commit/2fe3f4d)), closes [#4630](https://github.com/vendurehq/vendure/issues/4630)
+* **dashboard** Skip validation for unchecked variant rows (#4610) ([2896b4c](https://github.com/vendurehq/vendure/commit/2896b4c)), closes [#4610](https://github.com/vendurehq/vendure/issues/4610)
+* **dashboard** Use index-based identification for collection filters (#4428) ([328994d](https://github.com/vendurehq/vendure/commit/328994d)), closes [#4428](https://github.com/vendurehq/vendure/issues/4428)
+
 ## 3.6.0 (2026-03-31)
 
 
