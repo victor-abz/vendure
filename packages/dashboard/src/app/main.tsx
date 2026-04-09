@@ -9,6 +9,7 @@ import { useServerConfig } from '@/vdb/hooks/use-server-config.js';
 import { defaultLocale, dynamicActivate } from '@/vdb/providers/i18n-provider.js';
 import { AnyRoute, createRouter, RouterOptions, RouterProvider } from '@tanstack/react-router';
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import ReactDOM from 'react-dom/client';
 
 import { useDisplayLocale } from '@/vdb/hooks/use-display-locale.js';
@@ -116,7 +117,7 @@ function App() {
         extensionsLoaded && (
             <AppProviders>
                 <InnerApp />
-                <Toaster />
+                {createPortal(<Toaster />, document.body)}
             </AppProviders>
         )
     );
