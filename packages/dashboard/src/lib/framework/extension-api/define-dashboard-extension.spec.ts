@@ -1,6 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
+    getDashboardWidgetRegistry,
+    registerDashboardWidget,
+} from '../dashboard-widget/widget-extensions.js';
+import {
     addNavMenuSection,
     getNavMenuConfig,
     NavMenuConfig,
@@ -12,12 +16,17 @@ import {
     defineDashboardExtension,
     executeDashboardExtensionCallbacks,
 } from './define-dashboard-extension.js';
+import { DashboardWidgetDefinition } from './types/index.js';
 
 function resetNavState() {
     setNavMenuConfig({ sections: [] });
     // Re-register fresh callback and modifier sets
     (globalRegistry as any).registry.set('registerDashboardExtensionCallbacks', new Set<() => void>());
     (globalRegistry as any).registry.set('navMenuModifiers', []);
+}
+
+function resetWidgetRegistry() {
+    globalRegistry.set('dashboardWidgetRegistry', () => new Map<string, DashboardWidgetDefinition>());
 }
 
 describe('defineDashboardExtension - navSections', () => {
@@ -218,5 +227,73 @@ describe('defineDashboardExtension - navSections', () => {
             expect.objectContaining({ id: 'administrators' }),
             expect.objectContaining({ id: 'roles' }),
         ]);
+    });
+});
+
+describe('DashboardWidgetDefinition - requiresPermissions', () => {
+    beforeEach(() => {
+        resetWidgetRegistry();
+    });
+
+    it('registers a widget without requiresPermissions', () => {
+        const DummyComponent = () => null;
+        registerDashboardWidget({
+            id: 'test-widget',
+            name: 'Test Widget',
+            component: DummyComponent,
+            defaultSize: { w: 6, h: 3 },
+        });
+
+        const registry = getDashboardWidgetRegistry();
+        const widget = registry.get('test-widget');
+        expect(widget).toBeDefined();
+        expect(widget?.requiresPermissions).toBeUndefined();
+    });
+
+    it('registers a widget with requiresPermissions and preserves the value', () => {
+        const DummyComponent = () => null;
+        registerDashboardWidget({
+            id: 'restricted-widget',
+            name: 'Restricted Widget',
+            component: DummyComponent,
+            defaultSize: { w: 6, h: 3 },
+            requiresPermissions: ['ReadOrder'],
+        });
+
+        const registry = getDashboardWidgetRegistry();
+        const widget = registry.get('restricted-widget');
+        expect(widget).toBeDefined();
+        expect(widget?.requiresPermissions).toEqual(['ReadOrder']);
+    });
+
+    it('supports multiple permissions', () => {
+        const DummyComponent = () => null;
+        registerDashboardWidget({
+            id: 'multi-perm-widget',
+            name: 'Multi Permission Widget',
+            component: DummyComponent,
+            defaultSize: { w: 4, h: 2 },
+            requiresPermissions: ['ReadOrder', 'ReadCatalog'],
+        });
+
+        const registry = getDashboardWidgetRegistry();
+        const widget = registry.get('multi-perm-widget');
+        expect(widget?.requiresPermissions).toEqual(['ReadOrder', 'ReadCatalog']);
+    });
+
+    it('preserves an empty requiresPermissions array (public widget)', () => {
+        const DummyComponent = () => null;
+        registerDashboardWidget({
+            id: 'empty-perm-widget',
+            name: 'Empty Perm Widget',
+            component: DummyComponent,
+            defaultSize: { w: 6, h: 3 },
+            requiresPermissions: [],
+        });
+
+        const registry = getDashboardWidgetRegistry();
+        const widget = registry.get('empty-perm-widget');
+        expect(widget).toBeDefined();
+        expect(widget?.requiresPermissions).toEqual([]);
     });
 });

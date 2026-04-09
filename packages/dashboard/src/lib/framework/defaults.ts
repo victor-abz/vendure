@@ -264,6 +264,7 @@ export function registerDefaults() {
         component: MetricsWidget,
         defaultSize: { w: 12, h: 6, x: 0, y: 0 },
         minSize: { w: 6, h: 4 },
+        requiresPermissions: ['ReadOrder'],
     });
 
     registerDashboardWidget({
@@ -271,6 +272,7 @@ export function registerDefaults() {
         name: /* i18n*/ 'Latest Orders Widget',
         component: LatestOrdersWidget,
         defaultSize: { w: 6, h: 7, x: 0, y: 0 },
+        requiresPermissions: ['ReadOrder'],
     });
 
     registerDashboardWidget({
@@ -278,6 +280,7 @@ export function registerDefaults() {
         name: /* i18n*/ 'Orders Summary Widget',
         component: OrdersSummaryWidget,
         defaultSize: { w: 6, h: 3, x: 6, y: 0 },
+        requiresPermissions: ['ReadOrder'],
     });
 
     registerAlert(searchIndexBufferAlert);
