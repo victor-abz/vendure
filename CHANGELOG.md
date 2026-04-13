@@ -1,3 +1,10 @@
+## <small>3.6.2 (2026-04-13)</small>
+
+
+#### Fixes
+
+* **core** Fix free shipping tax calculation (#4624) ([3e4fa43](https://github.com/vendurehq/vendure/commit/3e4fa43)), closes [#4624](https://github.com/vendurehq/vendure/issues/4624)
+
 ## <small>3.6.1 (2026-04-09)</small>
 
 
