@@ -413,7 +413,7 @@ import {
     SingleRelationInput,
     createRelationSelectorConfig,
     graphql,
-    CustomFormComponentInputProps,
+    DashboardFormComponentProps,
 } from '@vendure/dashboard';
 
 const productConfig = createRelationSelectorConfig({
@@ -436,7 +436,7 @@ const productConfig = createRelationSelectorConfig({
     }),
 });
 
-export function ProductSelectorComponent({ value, onChange }: CustomFormComponentInputProps) {
+export function ProductSelectorComponent({ value, onChange }: DashboardFormComponentProps) {
     return <SingleRelationInput value={value} onChange={onChange} config={productConfig} />;
 }
 ```
@@ -453,5 +453,5 @@ Features include:
 
 For detailed information about specific types of custom form elements, see these dedicated guides:
 
-- **[Form component examples](./form-component-examples)** - Detailed examples of how to use the APIs available for custom form components.
-- **[Relation selectors](./relation-selectors)** - Build powerful entity selection components with search, pagination, and multi-select capabilities for custom fields and form inputs
+- **[Form component examples](/extending-the-dashboard/custom-form-components/form-component-examples)** - Detailed examples of how to use the APIs available for custom form components.
+- **[Relation selectors](/extending-the-dashboard/custom-form-components/relation-selectors)** - Build powerful entity selection components with search, pagination, and multi-select capabilities for custom fields and form inputs
