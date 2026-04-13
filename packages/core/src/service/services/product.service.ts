@@ -218,10 +218,13 @@ export class ProductService {
             .setParameters(translationQb.getParameters())
             .select('product.id', 'id')
             .addSelect(
-                // eslint-disable-next-line max-len
-                `CASE translation.languageCode WHEN '${ctx.languageCode}' THEN 2 WHEN '${ctx.channel.defaultLanguageCode}' THEN 1 ELSE 0 END`,
+                `CASE translation.languageCode WHEN :userLang THEN 2 WHEN :defaultLang THEN 1 ELSE 0 END`,
                 'sort_order',
             )
+            .setParameters({
+                userLang: ctx.languageCode,
+                defaultLang: ctx.channel.defaultLanguageCode,
+            })
             .orderBy('sort_order', 'DESC');
         // We use getRawOne here to simply get the ID as efficiently as possible,
         // which we then pass to the regular findOne() method which will handle

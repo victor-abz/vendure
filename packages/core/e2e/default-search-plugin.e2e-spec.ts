@@ -511,6 +511,17 @@ describe('Default search plugin', () => {
 
         it('matches partial search term', () => testMatchPartialSearchTerm(testProductsShop));
 
+        // https://github.com/vendurehq/vendure/security/advisories/GHSA-9pp3-53p2-ww9v
+        it('does not error when search term contains special characters', async () => {
+            // A single quote in the search term should not cause a tsquery
+            // syntax error on Postgres. On other DBs this is a no-op.
+            const result = await testProductsShop({
+                term: "laptop'",
+                groupByProduct: true,
+            });
+            expect(result.search.totalItems).toBeDefined();
+        });
+
         it('matches by facetId with AND operator', () => testMatchFacetIdsAnd(testProductsShop));
 
         it('matches by facetId with OR operator', () => testMatchFacetIdsOr(testProductsShop));
