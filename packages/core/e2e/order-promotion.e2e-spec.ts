@@ -1659,6 +1659,149 @@ describe('Promotions applied to Orders', () => {
         });
     });
 
+    // https://github.com/vendurehq/vendure/issues/4353
+    describe('usage limit for auto-applied promotions (no coupon code)', () => {
+        async function createNewActiveOrder() {
+            const { addItemToOrder } = await shopClient.query(addItemToOrderDocument, {
+                productVariantId: getVariantBySlug('item-5000').id,
+                quantity: 1,
+            });
+            return addItemToOrder;
+        }
+
+        describe('usageLimit', () => {
+            let promoWithUsageLimit: PromotionFragment;
+            let completedOrderId: string;
+
+            beforeAll(async () => {
+                promoWithUsageLimit = await createPromotion({
+                    enabled: true,
+                    name: 'Auto-applied with usage limit',
+                    usageLimit: 1,
+                    conditions: [minOrderAmountCondition(1000)],
+                    actions: [freeOrderAction],
+                });
+            });
+
+            afterAll(async () => {
+                await deletePromotion(promoWithUsageLimit.id);
+            });
+
+            it('auto-applies promotion on first order', async () => {
+                await shopClient.asAnonymousUser();
+                const order = await createNewActiveOrder();
+                orderResultGuard.assertSuccess(order);
+
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.discounts.length).toBe(1);
+                expect(activeOrder!.discounts[0].description).toBe('Auto-applied with usage limit');
+                expect(activeOrder!.totalWithTax).toBe(0);
+
+                await shopClient.query(setCustomerDocument, {
+                    input: {
+                        emailAddress: 'auto-limit-guest@test.com',
+                        firstName: 'Auto',
+                        lastName: 'Limit',
+                    },
+                });
+                await proceedToArrangingPayment(shopClient);
+                const result = await addPaymentToOrder(shopClient, testSuccessfulPaymentMethod);
+                orderResultGuard.assertSuccess(result);
+                expect(result.state).toBe('PaymentSettled');
+                expect(result.active).toBe(false);
+                completedOrderId = result.id;
+            });
+
+            it('does not auto-apply promotion after usage limit is reached', async () => {
+                await shopClient.asAnonymousUser();
+                await createNewActiveOrder();
+
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.discounts.length).toBe(0);
+                expect(activeOrder!.totalWithTax).toBe(6000);
+            });
+
+            // #4353 — cancelled orders should not count toward usage limits
+            it('cancelled orders do not count against usage limit', async () => {
+                const { cancelOrder } = await adminClient.query(cancelOrderDocument, {
+                    input: {
+                        orderId: completedOrderId,
+                        cancelShipping: true,
+                        reason: 'test',
+                    },
+                });
+                orderResultGuard.assertSuccess(cancelOrder);
+                expect(cancelOrder.state).toBe('Cancelled');
+
+                await shopClient.asAnonymousUser();
+                await createNewActiveOrder();
+
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.discounts.length).toBe(1);
+                expect(activeOrder!.discounts[0].description).toBe('Auto-applied with usage limit');
+                expect(activeOrder!.totalWithTax).toBe(0);
+            });
+        });
+
+        describe('perCustomerUsageLimit', () => {
+            let promoWithPerCustomerLimit: PromotionFragment;
+
+            beforeAll(async () => {
+                promoWithPerCustomerLimit = await createPromotion({
+                    enabled: true,
+                    name: 'Auto-applied with per-customer limit',
+                    perCustomerUsageLimit: 1,
+                    conditions: [minOrderAmountCondition(1000)],
+                    actions: [freeOrderAction],
+                });
+            });
+
+            afterAll(async () => {
+                await deletePromotion(promoWithPerCustomerLimit.id);
+            });
+
+            function logInAsRegisteredCustomer() {
+                return shopClient.asUserWithCredentials('hayden.zieme12@hotmail.com', 'test');
+            }
+
+            it('auto-applies promotion on first order for signed-in customer', async () => {
+                await logInAsRegisteredCustomer();
+                const order = await createNewActiveOrder();
+                orderResultGuard.assertSuccess(order);
+
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.discounts.length).toBe(1);
+                expect(activeOrder!.discounts[0].description).toBe('Auto-applied with per-customer limit');
+                expect(activeOrder!.totalWithTax).toBe(0);
+
+                await proceedToArrangingPayment(shopClient);
+                const result = await addPaymentToOrder(shopClient, testSuccessfulPaymentMethod);
+                orderResultGuard.assertSuccess(result);
+                expect(result.state).toBe('PaymentSettled');
+                expect(result.active).toBe(false);
+            });
+
+            it('does not auto-apply promotion after per-customer limit is reached', async () => {
+                await logInAsRegisteredCustomer();
+                await createNewActiveOrder();
+
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.discounts.length).toBe(0);
+                expect(activeOrder!.totalWithTax).toBe(6000);
+            });
+
+            it('still auto-applies for a different customer', async () => {
+                await shopClient.asUserWithCredentials('trevor_donnelly7@hotmail.com', 'test');
+                await createNewActiveOrder();
+
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.discounts.length).toBe(1);
+                expect(activeOrder!.discounts[0].description).toBe('Auto-applied with per-customer limit');
+                expect(activeOrder!.totalWithTax).toBe(0);
+            });
+        });
+    });
+
     // https://github.com/vendurehq/vendure/issues/710
     it('removes order-level discount made invalid by removing OrderLine', async () => {
         const promotion = await createPromotion({
