@@ -2124,8 +2124,19 @@ export class OrderService {
         updatedOrderLines?: OrderLine[],
         relations?: RelationPaths<Order>,
     ): Promise<Order> {
-        const promotions = await this.promotionService.getActivePromotionsInChannel(ctx);
+        const allPromotions = await this.promotionService.getActivePromotionsInChannel(ctx);
         const activePromotionsPre = await this.promotionService.getActivePromotionsOnOrder(ctx, order.id);
+
+        // Filter out auto-applied promotions that have exceeded their usage limits.
+        // Coupon-based promotions are already validated in validateCouponCode().
+        // Safe to cache per-request: the active promotion list (allPromotions) is stable
+        // within a single request, so the exhausted set won't change mid-request.
+        const customerId = order.customerId;
+        const cacheKey = CacheKey.ExhaustedPromotions(ctx.channelId, customerId);
+        const exhaustedIds = await this.requestCache.get(ctx, cacheKey, () =>
+            this.promotionService.getExhaustedPromotionIds(ctx, allPromotions, customerId),
+        );
+        const promotions = allPromotions.filter(p => !exhaustedIds.has(p.id.toString()));
 
         // When changing the Order's currencyCode (on account of passing
         // a different currencyCode into the RequestContext), we need to make sure
