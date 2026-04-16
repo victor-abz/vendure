@@ -10,8 +10,9 @@ import { useUserSettings } from '@/vdb/hooks/use-user-settings.js';
 import { getLocaleFallbackPlaceholder } from '@/vdb/utils/get-locale-fallback-placeholder.js';
 import { customFieldConfigFragment } from '@/vdb/providers/server-config.js';
 import { useLingui } from '@lingui/react/macro';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ResultOf } from 'gql.tada';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Control, Controller, ControllerFieldState, useFormContext } from 'react-hook-form';
 import { applyControlProps } from './apply-control-props.js';
 import { FormControlAdapter } from '../../framework/form-engine/form-control-adapter.js';
@@ -93,13 +94,13 @@ export function CustomFieldsForm({ entityType, control, formPathPrefix, disabled
     // Tabbed view
     return (
         <Tabs defaultValue={groupedFields[0]?.tabName} className="w-full">
-            <TabsList className="h-auto w-full flex-wrap justify-start">
+            <ScrollableTabsList>
                 {groupedFields.map(group => (
-                    <TabsTrigger key={group.tabName} value={group.tabName}>
+                    <TabsTrigger key={group.tabName} value={group.tabName} className="shrink-0">
                         {group.tabName === 'general' ? t`General` : group.tabName}
                     </TabsTrigger>
                 ))}
-            </TabsList>
+            </ScrollableTabsList>
             {groupedFields.map(group => (
                 <TabsContent key={group.tabName} value={group.tabName} className="mt-4">
                     <div className="grid @md:grid-cols-2 gap-6">
@@ -119,6 +120,71 @@ export function CustomFieldsForm({ entityType, control, formPathPrefix, disabled
     );
 }
 
+function ScrollableTabsList({ children }: Readonly<{ children: React.ReactNode }>) {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        const updateScrollState = () => {
+            const isRTL = getComputedStyle(el).direction === 'rtl';
+            if (isRTL) {
+                setCanScrollRight(el.scrollLeft < -1);
+                setCanScrollLeft(Math.abs(el.scrollLeft) + el.clientWidth < el.scrollWidth - 1);
+            } else {
+                setCanScrollLeft(el.scrollLeft > 0);
+                setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+            }
+        };
+        updateScrollState();
+        const observer = new ResizeObserver(updateScrollState);
+        observer.observe(el);
+        el.addEventListener('scroll', updateScrollState, { passive: true });
+        return () => {
+            observer.disconnect();
+            el.removeEventListener('scroll', updateScrollState);
+        };
+    }, []);
+
+    const scroll = (direction: 'left' | 'right') => {
+        const el = scrollRef.current;
+        if (!el) return;
+        el.scrollBy({ left: direction === 'left' ? -200 : 200, behavior: 'smooth' });
+    };
+
+    return (
+        <div className="relative">
+            {canScrollLeft && (
+                <button
+                    type="button"
+                    onClick={() => scroll('left')}
+                    className="absolute left-0 top-0 z-10 flex h-full items-center bg-gradient-to-r from-muted via-muted/80 to-transparent pl-1 pr-3"
+                    aria-label="Scroll tabs left"
+                >
+                    <ChevronLeft className="h-4 w-4" />
+                </button>
+            )}
+            <TabsList
+                ref={scrollRef}
+                className="h-auto w-full min-w-0 justify-start overflow-x-auto overflow-y-hidden scrollbar-none"
+            >
+                {children}
+            </TabsList>
+            {canScrollRight && (
+                <button
+                    type="button"
+                    onClick={() => scroll('right')}
+                    className="absolute right-0 top-0 z-10 flex h-full items-center bg-gradient-to-l from-muted via-muted/80 to-transparent pl-3 pr-1"
+                    aria-label="Scroll tabs right"
+                >
+                    <ChevronRight className="h-4 w-4" />
+                </button>
+            )}
+        </div>
+    );
+}
 interface CustomFieldItemProps {
     fieldDef: ConfigurableFieldDef;
     control: Control<any>;
