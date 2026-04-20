@@ -970,7 +970,7 @@
                   "title": "ApiKeyStrategy",
                   "slug": "api-key-strategy",
                   "file": "docs/reference/typescript-api/auth/api-key-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AuthenticationStrategy",
@@ -1000,13 +1000,13 @@
                   "title": "DefaultPasswordValidationStrategy",
                   "slug": "default-password-validation-strategy",
                   "file": "docs/reference/typescript-api/auth/default-password-validation-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultSessionCacheStrategy",
                   "slug": "default-session-cache-strategy",
                   "file": "docs/reference/typescript-api/auth/default-session-cache-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultVerificationTokenStrategy",
@@ -1018,19 +1018,19 @@
                   "title": "EntityAccessControlStrategy",
                   "slug": "entity-access-control-strategy",
                   "file": "docs/reference/typescript-api/auth/entity-access-control-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ExternalAuthenticationService",
                   "slug": "external-authentication-service",
                   "file": "docs/reference/typescript-api/auth/external-authentication-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "InMemorySessionCacheStrategy",
                   "slug": "in-memory-session-cache-strategy",
                   "file": "docs/reference/typescript-api/auth/in-memory-session-cache-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "NativeAuthenticationStrategy",
@@ -1060,13 +1060,13 @@
                   "title": "PermissionDefinition",
                   "slug": "permission-definition",
                   "file": "docs/reference/typescript-api/auth/permission-definition.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SessionCacheStrategy",
                   "slug": "session-cache-strategy",
                   "file": "docs/reference/typescript-api/auth/session-cache-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SuperadminCredentials",
@@ -1098,31 +1098,31 @@
                   "title": "CacheService",
                   "slug": "cache-service",
                   "file": "docs/reference/typescript-api/cache/cache-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CacheStrategy",
                   "slug": "cache-strategy",
                   "file": "docs/reference/typescript-api/cache/cache-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultCachePlugin",
                   "slug": "default-cache-plugin",
                   "file": "docs/reference/typescript-api/cache/default-cache-plugin.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RedisCachePlugin",
                   "slug": "redis-cache-plugin",
                   "file": "docs/reference/typescript-api/cache/redis-cache-plugin.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RedisCacheStrategy",
                   "slug": "redis-cache-strategy",
                   "file": "docs/reference/typescript-api/cache/redis-cache-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RequestContextCacheService",
@@ -1134,16 +1134,16 @@
                   "title": "SelfRefreshingCache",
                   "slug": "self-refreshing-cache",
                   "file": "docs/reference/typescript-api/cache/self-refreshing-cache.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SqlCacheStrategy",
                   "slug": "sql-cache-strategy",
                   "file": "docs/reference/typescript-api/cache/sql-cache-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "Common",
@@ -1154,13 +1154,13 @@
                   "title": "AsyncQueue",
                   "slug": "async-queue",
                   "file": "docs/reference/typescript-api/common/async-queue.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Bootstrap",
                   "slug": "bootstrap",
                   "file": "docs/reference/typescript-api/common/bootstrap.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CurrencyCode",
@@ -1178,7 +1178,7 @@
                   "title": "I18nService",
                   "slug": "i18n-service",
                   "file": "docs/reference/typescript-api/common/i18n-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ID",
@@ -1196,7 +1196,7 @@
                   "title": "Injector",
                   "slug": "injector",
                   "file": "docs/reference/typescript-api/common/injector.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "JobState",
@@ -1323,7 +1323,7 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "Configuration",
@@ -1340,7 +1340,7 @@
                   "title": "CollectionFilter",
                   "slug": "collection-filter",
                   "file": "docs/reference/typescript-api/configuration/collection-filter.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultConfig",
@@ -1358,7 +1358,7 @@
                   "title": "EntityDuplicator",
                   "slug": "entity-duplicator",
                   "file": "docs/reference/typescript-api/configuration/entity-duplicator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EntityId Decorator",
@@ -1370,13 +1370,13 @@
                   "title": "EntityIdStrategy",
                   "slug": "entity-id-strategy",
                   "file": "docs/reference/typescript-api/configuration/entity-id-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EntityOptions",
                   "slug": "entity-options",
                   "file": "docs/reference/typescript-api/configuration/entity-options.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "MergeConfig",
@@ -1388,13 +1388,13 @@
                   "title": "ProductVariantPriceSelectionStrategy",
                   "slug": "product-variant-price-selection-strategy",
                   "file": "docs/reference/typescript-api/configuration/product-variant-price-selection-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductVariantPriceUpdateStrategy",
                   "slug": "product-variant-price-update-strategy",
                   "file": "docs/reference/typescript-api/configuration/product-variant-price-update-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RuntimeVendureConfig",
@@ -1482,7 +1482,7 @@
                   "title": "Calculated",
                   "slug": "calculated",
                   "file": "docs/reference/typescript-api/data-access/calculated.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CalculatedPropertySubscriber",
@@ -1494,7 +1494,7 @@
                   "title": "EntityHydrator",
                   "slug": "entity-hydrator",
                   "file": "docs/reference/typescript-api/data-access/entity-hydrator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "GetEntityOrThrowOptions",
@@ -1512,13 +1512,13 @@
                   "title": "ListQueryBuilder",
                   "slug": "list-query-builder",
                   "file": "docs/reference/typescript-api/data-access/list-query-builder.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TransactionalConnection",
                   "slug": "transactional-connection",
                   "file": "docs/reference/typescript-api/data-access/transactional-connection.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -1570,103 +1570,103 @@
                   "title": "Address",
                   "slug": "address",
                   "file": "docs/reference/typescript-api/entities/address.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Administrator",
                   "slug": "administrator",
                   "file": "docs/reference/typescript-api/entities/administrator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AnonymousSession",
                   "slug": "anonymous-session",
                   "file": "docs/reference/typescript-api/entities/anonymous-session.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ApiKey",
                   "slug": "api-key",
                   "file": "docs/reference/typescript-api/entities/api-key.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Asset",
                   "slug": "asset",
                   "file": "docs/reference/typescript-api/entities/asset.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AuthenticatedSession",
                   "slug": "authenticated-session",
                   "file": "docs/reference/typescript-api/entities/authenticated-session.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AuthenticationMethod",
                   "slug": "authentication-method",
                   "file": "docs/reference/typescript-api/entities/authentication-method.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Channel",
                   "slug": "channel",
                   "file": "docs/reference/typescript-api/entities/channel.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Collection",
                   "slug": "collection",
                   "file": "docs/reference/typescript-api/entities/collection.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Country",
                   "slug": "country",
                   "file": "docs/reference/typescript-api/entities/country.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Customer",
                   "slug": "customer",
                   "file": "docs/reference/typescript-api/entities/customer.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CustomerGroup",
                   "slug": "customer-group",
                   "file": "docs/reference/typescript-api/entities/customer-group.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CustomerHistoryEntry",
                   "slug": "customer-history-entry",
                   "file": "docs/reference/typescript-api/entities/customer-history-entry.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Facet",
                   "slug": "facet",
                   "file": "docs/reference/typescript-api/entities/facet.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FacetValue",
                   "slug": "facet-value",
                   "file": "docs/reference/typescript-api/entities/facet-value.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Fulfillment",
                   "slug": "fulfillment",
                   "file": "docs/reference/typescript-api/entities/fulfillment.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "GlobalSettings",
                   "slug": "global-settings",
                   "file": "docs/reference/typescript-api/entities/global-settings.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "HistoryEntry",
@@ -1678,103 +1678,103 @@
                   "title": "Interfaces",
                   "slug": "interfaces",
                   "file": "docs/reference/typescript-api/entities/interfaces.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Order",
                   "slug": "order",
                   "file": "docs/reference/typescript-api/entities/order.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderableAsset",
                   "slug": "orderable-asset",
                   "file": "docs/reference/typescript-api/entities/orderable-asset.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderHistoryEntry",
                   "slug": "order-history-entry",
                   "file": "docs/reference/typescript-api/entities/order-history-entry.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderLine",
                   "slug": "order-line",
                   "file": "docs/reference/typescript-api/entities/order-line.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderLineReference",
                   "slug": "order-line-reference",
                   "file": "docs/reference/typescript-api/entities/order-line-reference.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderModification",
                   "slug": "order-modification",
                   "file": "docs/reference/typescript-api/entities/order-modification.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Payment",
                   "slug": "payment",
                   "file": "docs/reference/typescript-api/entities/payment.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaymentMethod",
                   "slug": "payment-method",
                   "file": "docs/reference/typescript-api/entities/payment-method.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Product",
                   "slug": "product",
                   "file": "docs/reference/typescript-api/entities/product.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductOption",
                   "slug": "product-option",
                   "file": "docs/reference/typescript-api/entities/product-option.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductOptionGroup",
                   "slug": "product-option-group",
                   "file": "docs/reference/typescript-api/entities/product-option-group.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductVariant",
                   "slug": "product-variant",
                   "file": "docs/reference/typescript-api/entities/product-variant.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductVariantPrice",
                   "slug": "product-variant-price",
                   "file": "docs/reference/typescript-api/entities/product-variant-price.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Promotion",
                   "slug": "promotion",
                   "file": "docs/reference/typescript-api/entities/promotion.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Province",
                   "slug": "province",
                   "file": "docs/reference/typescript-api/entities/province.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Refund",
                   "slug": "refund",
                   "file": "docs/reference/typescript-api/entities/refund.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Region",
@@ -1786,13 +1786,13 @@
                   "title": "Role",
                   "slug": "role",
                   "file": "docs/reference/typescript-api/entities/role.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Seller",
                   "slug": "seller",
                   "file": "docs/reference/typescript-api/entities/seller.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Session",
@@ -1804,79 +1804,79 @@
                   "title": "SettingsStoreEntry",
                   "slug": "settings-store-entry",
                   "file": "docs/reference/typescript-api/entities/settings-store-entry.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ShippingLine",
                   "slug": "shipping-line",
                   "file": "docs/reference/typescript-api/entities/shipping-line.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ShippingMethod",
                   "slug": "shipping-method",
                   "file": "docs/reference/typescript-api/entities/shipping-method.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockLevel",
                   "slug": "stock-level",
                   "file": "docs/reference/typescript-api/entities/stock-level.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockLocation",
                   "slug": "stock-location",
                   "file": "docs/reference/typescript-api/entities/stock-location.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockMovement",
                   "slug": "stock-movement",
                   "file": "docs/reference/typescript-api/entities/stock-movement.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Surcharge",
                   "slug": "surcharge",
                   "file": "docs/reference/typescript-api/entities/surcharge.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Tag",
                   "slug": "tag",
                   "file": "docs/reference/typescript-api/entities/tag.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TaxCategory",
                   "slug": "tax-category",
                   "file": "docs/reference/typescript-api/entities/tax-category.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TaxRate",
                   "slug": "tax-rate",
                   "file": "docs/reference/typescript-api/entities/tax-rate.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "User",
                   "slug": "user",
                   "file": "docs/reference/typescript-api/entities/user.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "VendureEntity",
                   "slug": "vendure-entity",
                   "file": "docs/reference/typescript-api/entities/vendure-entity.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Zone",
                   "slug": "zone",
                   "file": "docs/reference/typescript-api/entities/zone.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -1890,7 +1890,7 @@
                   "title": "Error Types",
                   "slug": "error-types",
                   "file": "docs/reference/typescript-api/errors/error-types.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ErrorHandlerStrategy",
@@ -1908,7 +1908,7 @@
                   "title": "I18nError",
                   "slug": "i18n-error",
                   "file": "docs/reference/typescript-api/errors/i18n-error.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "IsGraphQlErrorResult",
@@ -1934,25 +1934,25 @@
                   "title": "Event Types",
                   "slug": "event-types",
                   "file": "docs/reference/typescript-api/events/event-types.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EventBus",
                   "slug": "event-bus",
                   "file": "docs/reference/typescript-api/events/event-bus.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "VendureEntityEvent",
                   "slug": "vendure-entity-event",
                   "file": "docs/reference/typescript-api/events/vendure-entity-event.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "VendureEvent",
                   "slug": "vendure-event",
                   "file": "docs/reference/typescript-api/events/vendure-event.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -1966,13 +1966,13 @@
                   "title": "FulfillmentHandler",
                   "slug": "fulfillment-handler",
                   "file": "docs/reference/typescript-api/fulfillment/fulfillment-handler.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FulfillmentProcess",
                   "slug": "fulfillment-process",
                   "file": "docs/reference/typescript-api/fulfillment/fulfillment-process.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FulfillmentState",
@@ -2016,13 +2016,13 @@
                   "title": "HttpHealthCheckStrategy",
                   "slug": "http-health-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/http-health-check-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TypeORMHealthCheckStrategy",
                   "slug": "type-ormhealth-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/type-ormhealth-check-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2048,7 +2048,7 @@
                   "title": "DefaultAssetImportStrategy",
                   "slug": "default-asset-import-strategy",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FastImporterService",
@@ -2072,7 +2072,7 @@
                   "title": "ImportParser",
                   "slug": "import-parser",
                   "file": "docs/reference/typescript-api/import-export/import-parser.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "InitialData",
@@ -2104,7 +2104,7 @@
                   "title": "DefaultJobQueuePlugin",
                   "slug": "default-job-queue-plugin",
                   "file": "docs/reference/typescript-api/job-queue/default-job-queue-plugin.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "InMemoryJobBufferStorageStrategy",
@@ -2128,7 +2128,7 @@
                   "title": "Job",
                   "slug": "job",
                   "file": "docs/reference/typescript-api/job-queue/job.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "JobBuffer",
@@ -2152,7 +2152,7 @@
                   "title": "JobQueueService",
                   "slug": "job-queue-service",
                   "file": "docs/reference/typescript-api/job-queue/job-queue-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "JobQueueStrategy",
@@ -2164,7 +2164,7 @@
                   "title": "PollingJobQueueStrategy",
                   "slug": "polling-job-queue-strategy",
                   "file": "docs/reference/typescript-api/job-queue/polling-job-queue-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SqlJobQueueStrategy",
@@ -2176,16 +2176,16 @@
                   "title": "SubscribableJob",
                   "slug": "subscribable-job",
                   "file": "docs/reference/typescript-api/job-queue/subscribable-job.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Types",
                   "slug": "types",
                   "file": "docs/reference/typescript-api/job-queue/types.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "Logger",
@@ -2196,7 +2196,7 @@
                   "title": "DefaultLogger",
                   "slug": "default-logger",
                   "file": "docs/reference/typescript-api/logger/default-logger.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LogLevel",
@@ -2304,7 +2304,7 @@
                   "title": "ActiveOrderService",
                   "slug": "active-order-service",
                   "file": "docs/reference/typescript-api/orders/active-order-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ActiveOrderStrategy",
@@ -2334,7 +2334,7 @@
                   "title": "DefaultGuestCheckoutStrategy",
                   "slug": "default-guest-checkout-strategy",
                   "file": "docs/reference/typescript-api/orders/default-guest-checkout-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultOrderItemPriceCalculationStrategy",
@@ -2364,19 +2364,19 @@
                   "title": "Merge Strategies",
                   "slug": "merge-strategies",
                   "file": "docs/reference/typescript-api/orders/merge-strategies.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderByCodeAccessStrategy",
                   "slug": "order-by-code-access-strategy",
                   "file": "docs/reference/typescript-api/orders/order-by-code-access-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderCodeStrategy",
                   "slug": "order-code-strategy",
                   "file": "docs/reference/typescript-api/orders/order-code-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderInterceptor",
@@ -2394,7 +2394,7 @@
                   "title": "OrderMergeStrategy",
                   "slug": "order-merge-strategy",
                   "file": "docs/reference/typescript-api/orders/order-merge-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderOptions",
@@ -2412,13 +2412,13 @@
                   "title": "OrderProcess",
                   "slug": "order-process",
                   "file": "docs/reference/typescript-api/orders/order-process.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderSellerStrategy",
                   "slug": "order-seller-strategy",
                   "file": "docs/reference/typescript-api/orders/order-seller-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockAllocationStrategy",
@@ -2456,7 +2456,7 @@
                   "title": "Payment Method Types",
                   "slug": "payment-method-types",
                   "file": "docs/reference/typescript-api/payment/payment-method-types.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaymentMethodConfigOptions",
@@ -2468,13 +2468,13 @@
                   "title": "PaymentMethodEligibilityChecker",
                   "slug": "payment-method-eligibility-checker",
                   "file": "docs/reference/typescript-api/payment/payment-method-eligibility-checker.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaymentMethodHandler",
                   "slug": "payment-method-handler",
                   "file": "docs/reference/typescript-api/payment/payment-method-handler.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaymentOptions",
@@ -2542,7 +2542,7 @@
                   "title": "Plugin Utilities",
                   "slug": "plugin-utilities",
                   "file": "docs/reference/typescript-api/plugin/plugin-utilities.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PluginCommonModule",
@@ -2560,7 +2560,7 @@
                   "title": "VendurePluginMetadata",
                   "slug": "vendure-plugin-metadata",
                   "file": "docs/reference/typescript-api/plugin/vendure-plugin-metadata.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2586,7 +2586,7 @@
                   "title": "DefaultStockDisplayStrategy",
                   "slug": "default-stock-display-strategy",
                   "file": "docs/reference/typescript-api/products-stock/default-stock-display-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultStockLocationStrategy",
@@ -2604,7 +2604,7 @@
                   "title": "ProductVariantPriceCalculationStrategy",
                   "slug": "product-variant-price-calculation-strategy",
                   "file": "docs/reference/typescript-api/products-stock/product-variant-price-calculation-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockDisplayStrategy",
@@ -2616,7 +2616,7 @@
                   "title": "StockLocationStrategy",
                   "slug": "stock-location-strategy",
                   "file": "docs/reference/typescript-api/products-stock/stock-location-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2630,19 +2630,19 @@
                   "title": "FacetValueChecker",
                   "slug": "facet-value-checker",
                   "file": "docs/reference/typescript-api/promotions/facet-value-checker.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Promotion Action",
                   "slug": "promotion-action",
                   "file": "docs/reference/typescript-api/promotions/promotion-action.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Promotion Condition",
                   "slug": "promotion-condition",
                   "file": "docs/reference/typescript-api/promotions/promotion-condition.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PromotionOptions",
@@ -2704,7 +2704,7 @@
                   "title": "Transaction Decorator",
                   "slug": "transaction-decorator",
                   "file": "docs/reference/typescript-api/request/transaction-decorator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2724,7 +2724,7 @@
                   "title": "DefaultSchedulerPlugin",
                   "slug": "default-scheduler-plugin",
                   "file": "docs/reference/typescript-api/scheduled-tasks/default-scheduler-plugin.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DefaultSchedulerStrategy",
@@ -2736,7 +2736,7 @@
                   "title": "ScheduledTask",
                   "slug": "scheduled-task",
                   "file": "docs/reference/typescript-api/scheduled-tasks/scheduled-task.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SchedulerOptions",
@@ -2748,13 +2748,13 @@
                   "title": "SchedulerService",
                   "slug": "scheduler-service",
                   "file": "docs/reference/typescript-api/scheduled-tasks/scheduler-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SchedulerStrategy",
                   "slug": "scheduler-strategy",
                   "file": "docs/reference/typescript-api/scheduled-tasks/scheduler-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2768,43 +2768,43 @@
                   "title": "EntityDuplicatorService",
                   "slug": "entity-duplicator-service",
                   "file": "docs/reference/typescript-api/service-helpers/entity-duplicator-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderCalculator",
                   "slug": "order-calculator",
                   "file": "docs/reference/typescript-api/service-helpers/order-calculator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderModifier",
                   "slug": "order-modifier",
                   "file": "docs/reference/typescript-api/service-helpers/order-modifier.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductPriceApplicator",
                   "slug": "product-price-applicator",
                   "file": "docs/reference/typescript-api/service-helpers/product-price-applicator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SlugValidator",
                   "slug": "slug-validator",
                   "file": "docs/reference/typescript-api/service-helpers/slug-validator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TranslatableSaver",
                   "slug": "translatable-saver",
                   "file": "docs/reference/typescript-api/service-helpers/translatable-saver.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TranslatorService",
                   "slug": "translator-service",
                   "file": "docs/reference/typescript-api/service-helpers/translator-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2818,157 +2818,157 @@
                   "title": "AdministratorService",
                   "slug": "administrator-service",
                   "file": "docs/reference/typescript-api/services/administrator-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AssetService",
                   "slug": "asset-service",
                   "file": "docs/reference/typescript-api/services/asset-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AuthService",
                   "slug": "auth-service",
                   "file": "docs/reference/typescript-api/services/auth-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ChannelService",
                   "slug": "channel-service",
                   "file": "docs/reference/typescript-api/services/channel-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CollectionService",
                   "slug": "collection-service",
                   "file": "docs/reference/typescript-api/services/collection-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CountryService",
                   "slug": "country-service",
                   "file": "docs/reference/typescript-api/services/country-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CustomerGroupService",
                   "slug": "customer-group-service",
                   "file": "docs/reference/typescript-api/services/customer-group-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CustomerService",
                   "slug": "customer-service",
                   "file": "docs/reference/typescript-api/services/customer-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EntitySlugService",
                   "slug": "entity-slug-service",
                   "file": "docs/reference/typescript-api/services/entity-slug-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FacetService",
                   "slug": "facet-service",
                   "file": "docs/reference/typescript-api/services/facet-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FacetValueService",
                   "slug": "facet-value-service",
                   "file": "docs/reference/typescript-api/services/facet-value-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FulfillmentService",
                   "slug": "fulfillment-service",
                   "file": "docs/reference/typescript-api/services/fulfillment-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "GlobalSettingsService",
                   "slug": "global-settings-service",
                   "file": "docs/reference/typescript-api/services/global-settings-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "HistoryService",
                   "slug": "history-service",
                   "file": "docs/reference/typescript-api/services/history-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "InitializerService",
                   "slug": "initializer-service",
                   "file": "docs/reference/typescript-api/services/initializer-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderService",
                   "slug": "order-service",
                   "file": "docs/reference/typescript-api/services/order-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderTestingService",
                   "slug": "order-testing-service",
                   "file": "docs/reference/typescript-api/services/order-testing-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaymentMethodService",
                   "slug": "payment-method-service",
                   "file": "docs/reference/typescript-api/services/payment-method-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaymentService",
                   "slug": "payment-service",
                   "file": "docs/reference/typescript-api/services/payment-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductOptionGroupService",
                   "slug": "product-option-group-service",
                   "file": "docs/reference/typescript-api/services/product-option-group-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductOptionService",
                   "slug": "product-option-service",
                   "file": "docs/reference/typescript-api/services/product-option-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductService",
                   "slug": "product-service",
                   "file": "docs/reference/typescript-api/services/product-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProductVariantService",
                   "slug": "product-variant-service",
                   "file": "docs/reference/typescript-api/services/product-variant-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PromotionService",
                   "slug": "promotion-service",
                   "file": "docs/reference/typescript-api/services/promotion-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ProvinceService",
                   "slug": "province-service",
                   "file": "docs/reference/typescript-api/services/province-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RoleService",
                   "slug": "role-service",
                   "file": "docs/reference/typescript-api/services/role-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SearchService",
@@ -2980,79 +2980,79 @@
                   "title": "SellerService",
                   "slug": "seller-service",
                   "file": "docs/reference/typescript-api/services/seller-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SessionService",
                   "slug": "session-service",
                   "file": "docs/reference/typescript-api/services/session-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SettingsStoreService",
                   "slug": "settings-store-service",
                   "file": "docs/reference/typescript-api/services/settings-store-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ShippingMethodService",
                   "slug": "shipping-method-service",
                   "file": "docs/reference/typescript-api/services/shipping-method-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SlugService",
                   "slug": "slug-service",
                   "file": "docs/reference/typescript-api/services/slug-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockLevelService",
                   "slug": "stock-level-service",
                   "file": "docs/reference/typescript-api/services/stock-level-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockLocationService",
                   "slug": "stock-location-service",
                   "file": "docs/reference/typescript-api/services/stock-location-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StockMovementService",
                   "slug": "stock-movement-service",
                   "file": "docs/reference/typescript-api/services/stock-movement-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TagService",
                   "slug": "tag-service",
                   "file": "docs/reference/typescript-api/services/tag-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TaxCategoryService",
                   "slug": "tax-category-service",
                   "file": "docs/reference/typescript-api/services/tax-category-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TaxRateService",
                   "slug": "tax-rate-service",
                   "file": "docs/reference/typescript-api/services/tax-rate-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UserService",
                   "slug": "user-service",
                   "file": "docs/reference/typescript-api/services/user-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ZoneService",
                   "slug": "zone-service",
                   "file": "docs/reference/typescript-api/services/zone-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -3134,13 +3134,13 @@
                   "title": "ShippingCalculator",
                   "slug": "shipping-calculator",
                   "file": "docs/reference/typescript-api/shipping/shipping-calculator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ShippingEligibilityChecker",
                   "slug": "shipping-eligibility-checker",
                   "file": "docs/reference/typescript-api/shipping/shipping-eligibility-checker.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ShippingEligibilityCheckerConfig",
@@ -3178,13 +3178,13 @@
                   "title": "FSM",
                   "slug": "fsm",
                   "file": "docs/reference/typescript-api/state-machine/fsm.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "StateMachineConfig",
                   "slug": "state-machine-config",
                   "file": "docs/reference/typescript-api/state-machine/state-machine-config.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Transitions",
@@ -3222,13 +3222,13 @@
                   "title": "OrderTaxCalculationStrategy",
                   "slug": "order-tax-calculation-strategy",
                   "file": "docs/reference/typescript-api/tax/order-tax-calculation-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TaxLineCalculationStrategy",
                   "slug": "tax-line-calculation-strategy",
                   "file": "docs/reference/typescript-api/tax/tax-line-calculation-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TaxOptions",
@@ -3272,7 +3272,7 @@
                   "title": "TelemetryService",
                   "slug": "telemetry-service",
                   "file": "docs/reference/typescript-api/telemetry/telemetry-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "WrappedMethodArgs",
@@ -3304,7 +3304,7 @@
                   "title": "ErrorResultGuard",
                   "slug": "error-result-guard",
                   "file": "docs/reference/typescript-api/testing/error-result-guard.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "GetSuperadminContext",
@@ -3322,7 +3322,7 @@
                   "title": "SimpleGraphQLClient",
                   "slug": "simple-graph-qlclient",
                   "file": "docs/reference/typescript-api/testing/simple-graph-qlclient.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TestConfig",
@@ -3346,13 +3346,13 @@
                   "title": "TestingLogger",
                   "slug": "testing-logger",
                   "file": "docs/reference/typescript-api/testing/testing-logger.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TestServer",
                   "slug": "test-server",
                   "file": "docs/reference/typescript-api/testing/test-server.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TestServerOptions",
@@ -3372,13 +3372,13 @@
                   "title": "BootstrapWorker",
                   "slug": "bootstrap-worker",
                   "file": "docs/reference/typescript-api/worker/bootstrap-worker.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "VendureWorker",
                   "slug": "vendure-worker",
                   "file": "docs/reference/typescript-api/worker/vendure-worker.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "WorkerHealthCheckConfig",
@@ -3409,7 +3409,7 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "AssetServerPlugin",
@@ -3450,34 +3450,34 @@
                   "title": "ImageTransformStrategy",
                   "slug": "image-transform-strategy",
                   "file": "docs/reference/core-plugins/asset-server-plugin/image-transform-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LocalAssetStorageStrategy",
                   "slug": "local-asset-storage-strategy",
                   "file": "docs/reference/core-plugins/asset-server-plugin/local-asset-storage-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PresetOnlyStrategy",
                   "slug": "preset-only-strategy",
                   "file": "docs/reference/core-plugins/asset-server-plugin/preset-only-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "S3AssetStorageStrategy",
                   "slug": "s3asset-storage-strategy",
                   "file": "docs/reference/core-plugins/asset-server-plugin/s3asset-storage-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "SharpAssetPreviewStrategy",
                   "slug": "sharp-asset-preview-strategy",
                   "file": "docs/reference/core-plugins/asset-server-plugin/sharp-asset-preview-strategy.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "DashboardPlugin",
@@ -3491,7 +3491,7 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "EmailPlugin",
@@ -3502,67 +3502,67 @@
                   "title": "Email Plugin Types",
                   "slug": "email-plugin-types",
                   "file": "docs/reference/core-plugins/email-plugin/email-plugin-types.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Email Utils",
                   "slug": "email-utils",
                   "file": "docs/reference/core-plugins/email-plugin/email-utils.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailEventHandler",
                   "slug": "email-event-handler",
                   "file": "docs/reference/core-plugins/email-plugin/email-event-handler.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailEventHandlerWithAsyncData",
                   "slug": "email-event-handler-with-async-data",
                   "file": "docs/reference/core-plugins/email-plugin/email-event-handler-with-async-data.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailEventListener",
                   "slug": "email-event-listener",
                   "file": "docs/reference/core-plugins/email-plugin/email-event-listener.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailGenerator",
                   "slug": "email-generator",
                   "file": "docs/reference/core-plugins/email-plugin/email-generator.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailPluginOptions",
                   "slug": "email-plugin-options",
                   "file": "docs/reference/core-plugins/email-plugin/email-plugin-options.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailSender",
                   "slug": "email-sender",
                   "file": "docs/reference/core-plugins/email-plugin/email-sender.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "EmailSendEvent",
                   "slug": "email-send-event",
                   "file": "docs/reference/core-plugins/email-plugin/email-send-event.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TemplateLoader",
                   "slug": "template-loader",
                   "file": "docs/reference/core-plugins/email-plugin/template-loader.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Transport Options",
                   "slug": "transport-options",
                   "file": "docs/reference/core-plugins/email-plugin/transport-options.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -3572,7 +3572,7 @@
               "slug": "graphiql-plugin",
               "file": "docs/reference/core-plugins/graphiql-plugin/index.mdx",
               "children": [],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "HardenPlugin",
@@ -3615,7 +3615,7 @@
                   "title": "BullMQPluginOptions",
                   "slug": "bull-mqplugin-options",
                   "file": "docs/reference/core-plugins/job-queue-plugin/bull-mqplugin-options.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -3629,13 +3629,13 @@
                   "title": "GetSdkConfiguration",
                   "slug": "get-sdk-configuration",
                   "file": "docs/reference/core-plugins/telemetry-plugin/get-sdk-configuration.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OtelLogger",
                   "slug": "otel-logger",
                   "file": "docs/reference/core-plugins/telemetry-plugin/otel-logger.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RegisterMethodHooks",
@@ -3650,7 +3650,7 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             }
           ],
           "lastModified": "2026-03-30T21:48:02+02:00"
@@ -3751,13 +3751,13 @@
                   "title": "AssetGallery",
                   "slug": "asset-gallery",
                   "file": "docs/reference/dashboard/components/asset-gallery.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "AssetPickerDialog",
                   "slug": "asset-picker-dialog",
                   "file": "docs/reference/dashboard/components/asset-picker-dialog.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ChannelChip",
@@ -3793,19 +3793,19 @@
                   "title": "FacetValueSelector",
                   "slug": "facet-value-selector",
                   "file": "docs/reference/dashboard/components/facet-value-selector.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PermissionGuard",
                   "slug": "permission-guard",
                   "file": "docs/reference/dashboard/components/permission-guard.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "VendureImage",
                   "slug": "vendure-image",
                   "file": "docs/reference/dashboard/components/vendure-image.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -3819,19 +3819,19 @@
                   "title": "DetailPage",
                   "slug": "detail-page",
                   "file": "docs/reference/dashboard/detail-views/detail-page.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UseDetailPage",
                   "slug": "use-detail-page",
                   "file": "docs/reference/dashboard/detail-views/use-detail-page.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UseGeneratedForm",
                   "slug": "use-generated-form",
                   "file": "docs/reference/dashboard/detail-views/use-generated-form.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -3845,13 +3845,13 @@
                   "title": "ActionBar",
                   "slug": "action-bar",
                   "file": "docs/reference/dashboard/extensions-api/action-bar.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Alerts",
                   "slug": "alerts",
                   "file": "docs/reference/dashboard/extensions-api/alerts.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DataTables",
@@ -3863,43 +3863,43 @@
                   "title": "DefineDashboardExtension",
                   "slug": "define-dashboard-extension",
                   "file": "docs/reference/dashboard/extensions-api/define-dashboard-extension.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DetailForms",
                   "slug": "detail-forms",
                   "file": "docs/reference/dashboard/extensions-api/detail-forms.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FormComponents",
                   "slug": "form-components",
                   "file": "docs/reference/dashboard/extensions-api/form-components.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "HistoryEntries",
                   "slug": "history-entries",
                   "file": "docs/reference/dashboard/extensions-api/history-entries.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Login",
                   "slug": "login",
                   "file": "docs/reference/dashboard/extensions-api/login.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Navigation",
                   "slug": "navigation",
                   "file": "docs/reference/dashboard/extensions-api/navigation.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Page Blocks",
                   "slug": "page-blocks",
                   "file": "docs/reference/dashboard/extensions-api/page-blocks.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Routes",
@@ -3911,7 +3911,7 @@
                   "title": "Toolbar",
                   "slug": "toolbar",
                   "file": "docs/reference/dashboard/extensions-api/toolbar.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "Widgets",
@@ -3955,7 +3955,7 @@
                   "title": "FormFieldWrapper",
                   "slug": "form-field-wrapper",
                   "file": "docs/reference/dashboard/form-components/form-field-wrapper.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "MoneyInput",
@@ -4003,7 +4003,7 @@
                   "title": "TranslatableFormFieldWrapper",
                   "slug": "translatable-form-field-wrapper",
                   "file": "docs/reference/dashboard/form-components/translatable-form-field-wrapper.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4017,19 +4017,19 @@
                   "title": "UseAlerts",
                   "slug": "use-alerts",
                   "file": "docs/reference/dashboard/hooks/use-alerts.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UseAuth",
                   "slug": "use-auth",
                   "file": "docs/reference/dashboard/hooks/use-auth.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UseChannel",
                   "slug": "use-channel",
                   "file": "docs/reference/dashboard/hooks/use-channel.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UseCustomFieldConfig",
@@ -4103,13 +4103,13 @@
                   "title": "Bulk Actions",
                   "slug": "bulk-actions",
                   "file": "docs/reference/dashboard/list-views/bulk-actions.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DataTable",
                   "slug": "data-table",
                   "file": "docs/reference/dashboard/list-views/data-table.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DataTableCellComponent",
@@ -4121,13 +4121,13 @@
                   "title": "ListPage",
                   "slug": "list-page",
                   "file": "docs/reference/dashboard/list-views/list-page.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PaginatedListDataTable",
                   "slug": "paginated-list-data-table",
                   "file": "docs/reference/dashboard/list-views/paginated-list-data-table.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4141,19 +4141,19 @@
                   "title": "Page",
                   "slug": "page",
                   "file": "docs/reference/dashboard/page-layout/page.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PageActionBar",
                   "slug": "page-action-bar",
                   "file": "docs/reference/dashboard/page-layout/page-action-bar.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PageBlock",
                   "slug": "page-block",
                   "file": "docs/reference/dashboard/page-layout/page-block.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "PageTitle",
@@ -4168,7 +4168,7 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 }
               ],
-              "lastModified": "2026-04-20T15:38:10+02:00"
+              "lastModified": "2026-04-20T16:08:16+02:00"
             },
             {
               "title": "Vite Plugin",
@@ -4179,7 +4179,7 @@
                   "title": "VendureDashboardPlugin",
                   "slug": "vendure-dashboard-plugin",
                   "file": "docs/reference/dashboard/vite-plugin/vendure-dashboard-plugin.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4283,7 +4283,7 @@
                   "title": "BulkAction",
                   "slug": "bulk-action",
                   "file": "docs/reference/admin-ui-api/bulk-actions/bulk-action.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RegisterBulkAction",
@@ -4303,7 +4303,7 @@
                   "title": "AssetPickerDialogComponent",
                   "slug": "asset-picker-dialog-component",
                   "file": "docs/reference/admin-ui-api/components/asset-picker-dialog-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ChipComponent",
@@ -4315,25 +4315,25 @@
                   "title": "CurrencyInputComponent",
                   "slug": "currency-input-component",
                   "file": "docs/reference/admin-ui-api/components/currency-input-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DataTable2Component",
                   "slug": "data-table2component",
                   "file": "docs/reference/admin-ui-api/components/data-table2component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DataTableComponent",
                   "slug": "data-table-component",
                   "file": "docs/reference/admin-ui-api/components/data-table-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DatetimePickerComponent",
                   "slug": "datetime-picker-component",
                   "file": "docs/reference/admin-ui-api/components/datetime-picker-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DropdownComponent",
@@ -4345,13 +4345,13 @@
                   "title": "FacetValueSelectorComponent",
                   "slug": "facet-value-selector-component",
                   "file": "docs/reference/admin-ui-api/components/facet-value-selector-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ObjectTreeComponent",
                   "slug": "object-tree-component",
                   "file": "docs/reference/admin-ui-api/components/object-tree-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "OrderStateLabelComponent",
@@ -4363,19 +4363,19 @@
                   "title": "ProductVariantSelectorComponent",
                   "slug": "product-variant-selector-component",
                   "file": "docs/reference/admin-ui-api/components/product-variant-selector-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "RichTextEditorComponent",
                   "slug": "rich-text-editor-component",
                   "file": "docs/reference/admin-ui-api/components/rich-text-editor-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ZoneSelectorComponent",
                   "slug": "zone-selector-component",
                   "file": "docs/reference/admin-ui-api/components/zone-selector-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4459,7 +4459,7 @@
                   "title": "Default Inputs",
                   "slug": "default-inputs",
                   "file": "docs/reference/admin-ui-api/custom-input-components/default-inputs.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FormInputComponent",
@@ -4543,13 +4543,13 @@
                   "title": "IfMultichannelDirective",
                   "slug": "if-multichannel-directive",
                   "file": "docs/reference/admin-ui-api/directives/if-multichannel-directive.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "IfPermissionsDirective",
                   "slug": "if-permissions-directive",
                   "file": "docs/reference/admin-ui-api/directives/if-permissions-directive.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4563,19 +4563,19 @@
                   "title": "BaseDetailComponent",
                   "slug": "base-detail-component",
                   "file": "docs/reference/admin-ui-api/list-detail-views/base-detail-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "BaseEntityResolver",
                   "slug": "base-entity-resolver",
                   "file": "docs/reference/admin-ui-api/list-detail-views/base-entity-resolver.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "BaseListComponent",
                   "slug": "base-list-component",
                   "file": "docs/reference/admin-ui-api/list-detail-views/base-list-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "DetailComponentWithResolver",
@@ -4587,13 +4587,13 @@
                   "title": "TypedBaseDetailComponent",
                   "slug": "typed-base-detail-component",
                   "file": "docs/reference/admin-ui-api/list-detail-views/typed-base-detail-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TypedBaseListComponent",
                   "slug": "typed-base-list-component",
                   "file": "docs/reference/admin-ui-api/list-detail-views/typed-base-list-component.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4651,7 +4651,7 @@
                   "title": "DurationPipe",
                   "slug": "duration-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/duration-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "FileSizePipe",
@@ -4663,43 +4663,43 @@
                   "title": "HasPermissionPipe",
                   "slug": "has-permission-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/has-permission-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LocaleCurrencyNamePipe",
                   "slug": "locale-currency-name-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/locale-currency-name-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LocaleCurrencyPipe",
                   "slug": "locale-currency-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/locale-currency-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LocaleDatePipe",
                   "slug": "locale-date-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/locale-date-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LocaleLanguageNamePipe",
                   "slug": "locale-language-name-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/locale-language-name-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "LocaleRegionNamePipe",
                   "slug": "locale-region-name-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/locale-region-name-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "TimeAgoPipe",
                   "slug": "time-ago-pipe",
                   "file": "docs/reference/admin-ui-api/pipes/time-ago-pipe.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4901,19 +4901,19 @@
                   "title": "DataService",
                   "slug": "data-service",
                   "file": "docs/reference/admin-ui-api/services/data-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "ModalService",
                   "slug": "modal-service",
                   "file": "docs/reference/admin-ui-api/services/modal-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "NotificationService",
                   "slug": "notification-service",
                   "file": "docs/reference/admin-ui-api/services/notification-service.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4947,7 +4947,7 @@
                   "title": "AdminUiExtension",
                   "slug": "admin-ui-extension",
                   "file": "docs/reference/admin-ui-api/ui-devkit/admin-ui-extension.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "CompileUiExtensions",
@@ -4965,7 +4965,7 @@
                   "title": "UiDevkitClient",
                   "slug": "ui-devkit-client",
                   "file": "docs/reference/admin-ui-api/ui-devkit/ui-devkit-client.mdx",
-                  "lastModified": "2026-04-20T15:38:10+02:00"
+                  "lastModified": "2026-04-20T16:08:16+02:00"
                 },
                 {
                   "title": "UiExtensionBuildCommand",
