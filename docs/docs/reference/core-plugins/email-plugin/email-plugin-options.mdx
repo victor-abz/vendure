@@ -2,6 +2,8 @@
 title: "EmailPluginOptions"
 generated: true
 ---
+## EmailPluginOptions
+
 <GenerationInfo sourceFile="packages/email-plugin/src/types.ts" sourceLine="77" packageName="@vendure/email-plugin" />
 
 Configuration for the EmailPlugin.
@@ -71,6 +73,8 @@ better match with custom email sending functionality.
 
 
 </div>
+## GlobalTemplateVarsFn
+
 <GenerationInfo sourceFile="packages/email-plugin/src/types.ts" sourceLine="64" packageName="@vendure/email-plugin" since="2.3.0" />
 
 Allows you to dynamically load the "globalTemplateVars" key async and access Vendure services
@@ -104,6 +108,8 @@ type GlobalTemplateVarsFn = (
     injector: Injector,
 ) => Promise<{ [key: string]: any }>
 ```
+## EmailPluginDevModeOptions
+
 <GenerationInfo sourceFile="packages/email-plugin/src/types.ts" sourceLine="150" packageName="@vendure/email-plugin" />
 
 Configuration for running the EmailPlugin in development mode.
