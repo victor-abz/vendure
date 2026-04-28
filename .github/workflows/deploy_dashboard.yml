@@ -9,7 +9,8 @@ on:
             - 'packages/core/**'
             - 'packages/common/**'
             - 'package.json'
-            - 'package-lock.json'
+            - 'bun.lock'
+            - 'bunfig.toml'
     pull_request:
         types: [opened, synchronize, reopened]
         paths:
@@ -17,7 +18,8 @@ on:
             - 'packages/core/**'
             - 'packages/common/**'
             - 'package.json'
-            - 'package-lock.json'
+            - 'bun.lock'
+            - 'bunfig.toml'
 
 env:
     NODE_OPTIONS: '--max_old_space_size=4096'
@@ -56,10 +58,10 @@ jobs:
                   cp .env.local packages/dashboard/.env.local
 
             - name: Build common and core packages
-              run: npm run build:core-common
+              run: bun run build:core-common
 
             - name: Build Dashboard
-              run: npm run build:standalone --workspace=@vendure/dashboard
+              run: bun run --filter @vendure/dashboard build:standalone
 
             - name: Deploy to Vercel
               id: deploy_vercel
