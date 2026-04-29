@@ -535,6 +535,17 @@ type MergedActionBarItem =
     | { type: 'inline'; element: React.ReactElement<ActionBarItemProps> }
     | { type: 'extension'; item: DashboardActionBarItem };
 
+type PositionedExtensionActionBarItem = {
+    type: 'extension';
+    item: DashboardActionBarItem & { position: ActionBarItemPosition };
+};
+
+function isPositionedExtensionActionBarItem(
+    item: MergedActionBarItem,
+): item is PositionedExtensionActionBarItem {
+    return item.type === 'extension' && !!item.item.position;
+}
+
 /**
  * Merges inline ActionBarItem children with extension items, applying position-based ordering.
  * Uses the same priority sorting as page blocks: before=1, replace=2, after=3.
@@ -545,42 +556,86 @@ function mergeAndSortActionBarItems(
 ): MergedActionBarItem[] {
     const result: MergedActionBarItem[] = [];
 
-    // First, add extension items WITHOUT a position (they go first, preserving current behavior)
-    const unpositionedExtensions = extensionItems.filter(ext => !ext.position);
-    for (const ext of unpositionedExtensions) {
-        result.push({ type: 'extension', item: ext });
+    // Treat inline ActionBarItem children and extension items as the same kind of sortable node.
+    // This lets position.itemId target either an inline ActionBarItem.itemId or another extension item's id.
+    const inlineItems: MergedActionBarItem[] = inlineElements.map(element => ({ type: 'inline', element }));
+    const extensionActionItems: MergedActionBarItem[] = extensionItems.map(item => ({
+        type: 'extension',
+        item,
+    }));
+    const getItemId = (item: MergedActionBarItem): string | undefined =>
+        item.type === 'inline' ? item.element.props.itemId : item.item.id;
+
+    // Sort by order priority: before=1, replace=2, after=3
+    const orderPriority: Record<ActionBarItemPosition['order'], number> = {
+        before: 1,
+        replace: 2,
+        after: 3,
+    };
+
+    // First, use extension items WITHOUT a position as root items (they still go first,
+    // preserving the previous behavior). Inline items are also root items.
+    const rootItems = [
+        ...extensionActionItems.filter(item => !isPositionedExtensionActionBarItem(item)),
+        ...inlineItems,
+    ];
+
+    // Group positioned extension items by their target id. The target id may refer to either
+    // an inline ActionBarItem.itemId or a DashboardActionBarItem.id.
+    const extensionsByTargetId = new Map<string, PositionedExtensionActionBarItem[]>();
+
+    for (const item of extensionActionItems.filter(isPositionedExtensionActionBarItem)) {
+        const targetItems = extensionsByTargetId.get(item.item.position.itemId) ?? [];
+        extensionsByTargetId.set(item.item.position.itemId, [...targetItems, item]);
     }
 
-    // Process each inline element and find extension items targeting it
-    for (const inlineElement of inlineElements) {
-        const itemId = inlineElement.props.itemId;
-        const matchingExtensions = extensionItems.filter(ext => ext.position?.itemId === itemId);
+    const renderedExtensionItems = new Set<DashboardActionBarItem>();
 
-        // Sort by order priority: before=1, replace=2, after=3
-        const sortedExtensions = matchingExtensions.sort((a, b) => {
-            const orderPriority: Record<ActionBarItemPosition['order'], number> = {
-                before: 1,
-                replace: 2,
-                after: 3,
-            };
-            return orderPriority[a.position!.order] - orderPriority[b.position!.order];
-        });
-
-        const hasReplacement = sortedExtensions.some(ext => ext.position?.order === 'replace');
-
-        let inlineInserted = false;
-        for (const ext of sortedExtensions) {
-            // Insert inline element before the first non-"before" extension (if not replaced)
-            if (!inlineInserted && !hasReplacement && ext.position?.order !== 'before') {
-                result.push({ type: 'inline', element: inlineElement });
-                inlineInserted = true;
+    function renderItem(item: MergedActionBarItem) {
+        // Prevent duplicate rendering if multiple paths reference the same extension item.
+        if (item.type === 'extension') {
+            if (renderedExtensionItems.has(item.item)) {
+                return;
             }
-            result.push({ type: 'extension', item: ext });
+            renderedExtensionItems.add(item.item);
         }
 
-        // If all extensions were "before" or there were no extensions, add inline at the end
-        if (!inlineInserted && !hasReplacement) {
-            result.push({ type: 'inline', element: inlineElement });
+        const itemId = getItemId(item);
+        const extensions = itemId
+            ? [...(extensionsByTargetId.get(itemId) ?? [])].sort((a, b) => {
+                  return orderPriority[a.item.position.order] - orderPriority[b.item.position.order];
+              })
+            : [];
+        const hasReplacement = extensions.some(ext => ext.item.position.order === 'replace');
+
+        // Render positioned items in before / replace / after order around their target.
+        for (const extension of extensions.filter(ext => ext.item.position.order === 'before')) {
+            renderItem(extension);
+        }
+
+        if (hasReplacement) {
+            for (const extension of extensions.filter(ext => ext.item.position.order === 'replace')) {
+                renderItem(extension);
+            }
+        } else {
+            result.push(item);
+        }
+
+        for (const extension of extensions.filter(ext => ext.item.position.order === 'after')) {
+            renderItem(extension);
+        }
+    }
+
+    for (const item of rootItems) {
+        renderItem(item);
+    }
+
+    // A positioned extension can be unreachable from the root walk if its target id is
+    // missing, or if positioned extensions only reference each other in a cycle. Render
+    // any remaining extension items so they do not silently disappear.
+    for (const item of extensionActionItems) {
+        if (item.type === 'extension' && !renderedExtensionItems.has(item.item)) {
+            renderItem(item);
         }
     }
 
