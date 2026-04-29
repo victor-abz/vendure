@@ -85,7 +85,7 @@
           "title": "Payment",
           "slug": "payment",
           "file": "docs/guides/core-concepts/payment/index.mdx",
-          "lastModified": "2026-04-08T18:11:57+02:00"
+          "lastModified": "2026-04-29T14:11:39+02:00"
         },
         {
           "title": "Customers",
@@ -704,7 +704,7 @@
           "title": "Checkout Flow",
           "slug": "checkout-flow",
           "file": "docs/guides/storefront/checkout-flow/index.mdx",
-          "lastModified": "2026-04-08T18:11:57+02:00"
+          "lastModified": "2026-04-29T14:11:39+02:00"
         },
         {
           "title": "Customer Accounts",
@@ -2908,7 +2908,7 @@
                   "title": "OrderService",
                   "slug": "order-service",
                   "file": "docs/reference/typescript-api/services/order-service.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-04-29T11:42:53Z"
                 },
                 {
                   "title": "OrderTestingService",
@@ -2956,7 +2956,7 @@
                   "title": "PromotionService",
                   "slug": "promotion-service",
                   "file": "docs/reference/typescript-api/services/promotion-service.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-04-29T11:42:53Z"
                 },
                 {
                   "title": "ProvinceService",
@@ -3706,7 +3706,7 @@
                   "title": "Enums",
                   "slug": "enums",
                   "file": "docs/reference/graphql-api/shop/enums.mdx",
-                  "lastModified": "2026-03-05T15:08:55+01:00"
+                  "lastModified": "2026-04-29T11:42:53Z"
                 },
                 {
                   "title": "Input Objects",
@@ -3730,7 +3730,7 @@
                   "title": "Types",
                   "slug": "object-types",
                   "file": "docs/reference/graphql-api/shop/object-types.mdx",
-                  "lastModified": "2026-03-10T16:50:41+01:00"
+                  "lastModified": "2026-04-29T11:42:53Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
