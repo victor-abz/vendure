@@ -198,7 +198,7 @@ msgstr "これを有効にすると、商品カタログに入力された価格
 #~ msgid "Create variants for your product"
 #~ msgstr "商品のバリエーションを作成"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:258
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:291
 msgid "Draft order completed"
 msgstr "下書き注文を完了しました"
 
@@ -539,7 +539,7 @@ msgstr "すべてのユーザーに表示されるグローバル保存ビュー
 msgid "Search payment methods..."
 msgstr "支払い方法を検索..."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:217
 msgid "Shipping address unset for order"
 msgstr "注文の配送先住所が解除されました"
 
@@ -684,6 +684,11 @@ msgstr "注文の下書きは完了準備ができています"
 msgid "Metadata"
 msgstr "メタデータ"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:251
+msgid "Failed to set shipping method for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:48
 #: src/lib/components/data-table/data-table.tsx:367
 msgid "Filter..."
@@ -735,7 +740,7 @@ msgstr "ナビゲーションを確認"
 msgid "Link target"
 msgstr "リンクターゲット"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:326
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:365
 msgid "Complete draft"
 msgstr "下書きを完了"
 
@@ -786,7 +791,7 @@ msgstr "この返金決済の取引IDを入力してください"
 msgid "Your API Key"
 msgstr "あなたの API Key"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:310
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:349
 msgid "Are you sure you want to delete this draft order?"
 msgstr "この下書き注文を削除してもよろしいですか？"
 
@@ -837,7 +842,7 @@ msgstr "割引"
 msgid "Enter refund note"
 msgstr "返金メモを入力"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:145
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:151
 msgid "Order line removed"
 msgstr "注文ラインを削除しました"
 
@@ -854,6 +859,11 @@ msgstr "キー"
 msgid "Confirm"
 msgstr "確認"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:303
+msgid "Failed to complete draft order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:118
 msgid "Failed to create collection"
 msgstr "コレクションの作成に失敗しました"
@@ -868,7 +878,7 @@ msgstr "商品の作成に失敗しました"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:276
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:233
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:418
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:457
 #: src/lib/components/shared/role-code-label.tsx:8
 msgid "Customer"
 msgstr "顧客"
@@ -878,7 +888,7 @@ msgstr "顧客"
 msgid "Error loading order history: {0}"
 msgstr "注文履歴の読み込みエラー：{0}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:183
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:195
 msgid "Shipping address set for order"
 msgstr "注文の配送先住所が設定されました"
 
@@ -924,7 +934,7 @@ msgstr "<0>{facetName}</0>ファセットのファセット値です。"
 msgid "Successfully added payment to order"
 msgstr "注文に支払いを追加しました"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:191
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:206
 msgid "Billing address set for order"
 msgstr "注文の請求先住所が設定されました"
 
@@ -1001,6 +1011,11 @@ msgstr "割り当て済み"
 #~ msgid "Add another option group"
 #~ msgstr "別のオプショングループを追加"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:270
+msgid "Failed to set coupon code for order: {0}"
+msgstr ""
+
 #: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
 msgstr "Platform & Cloud を探索"
@@ -1022,7 +1037,7 @@ msgstr "コレクションを作成しました"
 msgid "Price"
 msgstr "価格"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:343
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
 msgstr "下書き注文"
@@ -1065,7 +1080,7 @@ msgstr "有効にすると、プロモーションがショップで利用可能
 msgid "When tracked, product variant stock levels will be automatically adjusted when sold. This setting can be overridden by individual product variants."
 msgstr "追跡すると、商品バリエーションの在庫レベルは販売時に自動的に調整されます。この設定は個々の商品バリエーションで上書きできます。"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:218
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:242
 msgid "Shipping method set for order"
 msgstr "注文の配送方法が設定されました"
 
@@ -1109,6 +1124,11 @@ msgstr "アセット"
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:188
 msgid "Email address"
 msgstr "メールアドレス"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:281
+msgid "Failed to remove coupon code from order: {0}"
+msgstr ""
 
 #: src/lib/components/data-input/slug-input.tsx:266
 #: src/lib/components/data-input/slug-input.tsx:267
@@ -1260,7 +1280,7 @@ msgstr ""
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:108
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:111
 msgid "Item added to order"
 msgstr "注文にアイテムを追加しました"
 
@@ -1337,7 +1357,7 @@ msgstr "注文を遷移しました"
 msgid "is before"
 msgstr "より前"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:309
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:348
 msgid "Delete draft order"
 msgstr "下書き注文を削除"
 
@@ -1384,6 +1404,11 @@ msgstr "ビューをグローバルに変換しました"
 #: src/lib/components/data-table/human-readable-operator.tsx:28
 msgid "before"
 msgstr "以前"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:188
+msgid "Failed to set customer for order: {0}"
+msgstr ""
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:745
 msgid "Size"
@@ -1511,6 +1536,11 @@ msgstr "住所を読み込み中..."
 msgid "Select a target collection to move {0} to."
 msgstr "{0}を移動するターゲットコレクションを選択してください。"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:232
+msgid "Failed to unset billing address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_customers/components/customer-history/customer-history-utils.tsx:45
 msgid "Customer details updated"
 msgstr "顧客の詳細を更新しました"
@@ -1559,6 +1589,11 @@ msgstr "最後のページへ"
 msgid "Cancel"
 msgstr "キャンセル"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:95
+msgid "Failed to update order custom fields: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:160
 msgid "Successfully created product variant"
@@ -1590,7 +1625,7 @@ msgstr "新しい税カテゴリ"
 msgid "Partial refund completed"
 msgstr "一部返金が完了しました"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:413
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:452
 msgid "Set custom fields"
 msgstr "カスタムフィールドを設定"
 
@@ -1618,7 +1653,7 @@ msgstr "理由:"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:291
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:248
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:470
 msgid "Shipping address"
 msgstr "配送先住所"
 
@@ -1791,7 +1826,7 @@ msgstr "メモを追加しました"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "フルフィルメントする数量を選択し、フルフィルメントハンドラーを設定"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:207
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:228
 msgid "Billing address unset for order"
 msgstr "注文の請求先住所が削除されました"
 
@@ -2301,6 +2336,11 @@ msgstr "コレクションの移動が完了しました"
 msgid "Registered"
 msgstr "登録済み"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+msgid "Failed to set shipping address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/job-queue.tsx:231
 msgid "Cancel Job"
 msgstr "ジョブをキャンセル"
@@ -2385,7 +2425,7 @@ msgstr "選択されたアイテム"
 msgid "Values"
 msgstr "値"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:161
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:170
 msgid "Customer set for order"
 msgstr "注文に顧客を設定しました"
 
@@ -2561,7 +2601,7 @@ msgstr "この商品からすべてのオプショングループが削除され
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:277
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:463
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:502
 msgid "Billing address"
 msgstr "請求先住所"
 
@@ -3422,7 +3462,7 @@ msgstr "後に行を追加"
 msgid "Tax total"
 msgstr "税合計"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:335
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:374
 msgid "Draft order status"
 msgstr "下書き注文のステータス"
 
@@ -3443,7 +3483,7 @@ msgstr "ファセット値を作成しました"
 msgid "Marketing"
 msgstr "マーケティング"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:275
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:311
 msgid "Draft order deleted"
 msgstr "下書き注文を削除しました"
 
@@ -3757,6 +3797,11 @@ msgstr "説明"
 msgid "Countries"
 msgstr "国"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:160
+msgid "Failed to remove order line: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:182
 msgid "Street Address 2"
 msgstr "番地2"
@@ -3901,7 +3946,7 @@ msgstr "+ {0} 件"
 msgid "Option Groups"
 msgstr "オプショングループ"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:392
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
 msgid "Custom fields"
 msgstr "カスタムフィールド"
 
@@ -4016,6 +4061,11 @@ msgstr "スーパー管理者"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 #~ msgid "Some resources are down"
 #~ msgstr "一部のリソースが停止しています"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:141
+msgid "Failed to update order line: {0}"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:84
 msgid "Insert link"
@@ -4186,6 +4236,11 @@ msgstr "支払い方法を作成しました"
 msgid "Customer information updated"
 msgstr "顧客情報を更新しました"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:318
+msgid "Failed to delete draft order: {0}"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:120
 msgid "Failed to convert view to global"
 msgstr "ビューのグローバル化に失敗しました"
@@ -4317,7 +4372,7 @@ msgstr "OR"
 msgid "Manage tags"
 msgstr "タグを管理"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:247
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:277
 msgid "Coupon code removed from order"
 msgstr "クーポンコードが注文から削除されました"
 
@@ -4339,6 +4394,11 @@ msgstr "ファセット値の更新に失敗しました"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:82
 msgid "Order fulfilled"
 msgstr "注文をフルフィルメントしました"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:210
+msgid "Failed to set billing address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -4394,7 +4454,7 @@ msgstr "この配送方法の適格性チェッカー条件は、現在の注文
 msgid "Add coupon code"
 msgstr "クーポンコードを追加"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:234
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:261
 msgid "Coupon code set for order"
 msgstr "クーポンコードが注文に設定されました"
 
@@ -4791,7 +4851,7 @@ msgstr "システム"
 msgid "Variant name"
 msgstr "バリエーション名"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:504
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:543
 msgid "Remove"
 msgstr "削除"
 
@@ -5160,7 +5220,7 @@ msgstr "テストデータが更新されました。「テストを実行」を
 msgid "is not in"
 msgstr "に含まれない"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:129
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:132
 msgid "Order line updated"
 msgstr "注文ラインを更新しました"
 
@@ -5234,7 +5294,7 @@ msgstr "動画"
 msgid "less than"
 msgstr "より小さい"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:118
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:121
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "バリアントを追加できませんでした。親製品が有効になっていることを確認してください。"
 
@@ -5296,7 +5356,7 @@ msgstr "グローバル言語"
 msgid "New administrator"
 msgstr "新しい管理者"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:316
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:355
 msgid "Delete draft"
 msgstr "下書きを削除"
 
@@ -5605,6 +5665,11 @@ msgstr "オプション値の追加に失敗しました"
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:140
 msgid "Add option value to {groupName}"
 msgstr "{groupName}にオプション値を追加"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:221
+msgid "Failed to unset shipping address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:82
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96

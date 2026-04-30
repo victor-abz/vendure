@@ -198,7 +198,7 @@ msgstr "Når dette er aktivert, vil prisene som er angitt i produktkatalogen ink
 #~ msgid "Create variants for your product"
 #~ msgstr "Opprett varianter for produktet ditt"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:258
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:291
 msgid "Draft order completed"
 msgstr "Utkastbestilling fullført"
 
@@ -539,7 +539,7 @@ msgstr "Administrer globale lagrede visninger som er synlige for alle brukere"
 msgid "Search payment methods..."
 msgstr "Søk betalingsmetoder..."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:217
 msgid "Shipping address unset for order"
 msgstr "Leveringsadresse fjernet for bestilling"
 
@@ -684,6 +684,11 @@ msgstr "Ordreutkastet er klart til å fullføres"
 msgid "Metadata"
 msgstr "Metadata"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:251
+msgid "Failed to set shipping method for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:48
 #: src/lib/components/data-table/data-table.tsx:367
 msgid "Filter..."
@@ -735,7 +740,7 @@ msgstr "Bekreft navigering"
 msgid "Link target"
 msgstr "Lenkemål"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:326
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:365
 msgid "Complete draft"
 msgstr "Fullfør utkast"
 
@@ -786,7 +791,7 @@ msgstr "Skriv inn transaksjons-ID for denne refusjonsoppgjøret"
 msgid "Your API Key"
 msgstr "Din API-nøkkel"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:310
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:349
 msgid "Are you sure you want to delete this draft order?"
 msgstr "Er du sikker på at du vil slette denne utkastbestillingen?"
 
@@ -837,7 +842,7 @@ msgstr "Rabatter"
 msgid "Enter refund note"
 msgstr "Skriv inn refusjonsnotat"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:145
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:151
 msgid "Order line removed"
 msgstr "Bestillingslinje fjernet"
 
@@ -854,6 +859,11 @@ msgstr "Nøkkel"
 msgid "Confirm"
 msgstr "Bekreft"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:303
+msgid "Failed to complete draft order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:118
 msgid "Failed to create collection"
 msgstr "Kunne ikke opprette samling"
@@ -868,7 +878,7 @@ msgstr "Kunne ikke opprette produkt"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:276
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:233
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:418
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:457
 #: src/lib/components/shared/role-code-label.tsx:8
 msgid "Customer"
 msgstr "Kunde"
@@ -878,7 +888,7 @@ msgstr "Kunde"
 msgid "Error loading order history: {0}"
 msgstr "Feil ved lasting av bestillingshistorikk: {0}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:183
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:195
 msgid "Shipping address set for order"
 msgstr "Leveringsadresse satt for bestilling"
 
@@ -924,7 +934,7 @@ msgstr "Dette er fasettverdiene for fasetten <0>{facetName}</0>."
 msgid "Successfully added payment to order"
 msgstr "Betaling lagt til bestilling"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:191
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:206
 msgid "Billing address set for order"
 msgstr "Fakturaadresse satt for bestilling"
 
@@ -1001,6 +1011,11 @@ msgstr "Allokert"
 #~ msgid "Add another option group"
 #~ msgstr "Legg til en annen opsjonsgruppe"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:270
+msgid "Failed to set coupon code for order: {0}"
+msgstr ""
+
 #: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
 msgstr "Utforsk Platform & Cloud"
@@ -1022,7 +1037,7 @@ msgstr "Samling opprettet"
 msgid "Price"
 msgstr "Pris"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:343
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
 msgstr "Utkastbestilling"
@@ -1065,7 +1080,7 @@ msgstr "Når aktivert, er en kampanje tilgjengelig i butikken"
 msgid "When tracked, product variant stock levels will be automatically adjusted when sold. This setting can be overridden by individual product variants."
 msgstr "Når sporet, vil produktvariantens lagernivåer automatisk justeres ved salg. Denne innstillingen kan overstyres av individuelle produktvarianter."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:218
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:242
 msgid "Shipping method set for order"
 msgstr "Leveringsmetode satt for bestilling"
 
@@ -1109,6 +1124,11 @@ msgstr "Ressurser"
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:188
 msgid "Email address"
 msgstr "E-postadresse"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:281
+msgid "Failed to remove coupon code from order: {0}"
+msgstr ""
 
 #: src/lib/components/data-input/slug-input.tsx:266
 #: src/lib/components/data-input/slug-input.tsx:267
@@ -1260,7 +1280,7 @@ msgstr ""
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:108
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:111
 msgid "Item added to order"
 msgstr "Vare lagt til bestilling"
 
@@ -1337,7 +1357,7 @@ msgstr "Bestilling endret"
 msgid "is before"
 msgstr "er før"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:309
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:348
 msgid "Delete draft order"
 msgstr "Slett utkastbestilling"
 
@@ -1384,6 +1404,11 @@ msgstr "Visning konvertert til global"
 #: src/lib/components/data-table/human-readable-operator.tsx:28
 msgid "before"
 msgstr "før"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:188
+msgid "Failed to set customer for order: {0}"
+msgstr ""
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:745
 msgid "Size"
@@ -1511,6 +1536,11 @@ msgstr "Laster adresser..."
 msgid "Select a target collection to move {0} to."
 msgstr "Velg en målsamling å flytte {0} til."
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:232
+msgid "Failed to unset billing address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_customers/components/customer-history/customer-history-utils.tsx:45
 msgid "Customer details updated"
 msgstr "Kundedetaljer oppdatert"
@@ -1559,6 +1589,11 @@ msgstr "Gå til siste side"
 msgid "Cancel"
 msgstr "Avbryt"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:95
+msgid "Failed to update order custom fields: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:160
 msgid "Successfully created product variant"
@@ -1590,7 +1625,7 @@ msgstr "Ny skattekategori"
 msgid "Partial refund completed"
 msgstr "Delvis refusjon fullført"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:413
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:452
 msgid "Set custom fields"
 msgstr "Sett egendefinerte felt"
 
@@ -1618,7 +1653,7 @@ msgstr "Årsak:"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:291
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:248
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:470
 msgid "Shipping address"
 msgstr "Leveringsadresse"
 
@@ -1791,7 +1826,7 @@ msgstr "Notat lagt til"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "Velg antall å oppfylle og konfigurer oppfyllelsesbehandleren"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:207
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:228
 msgid "Billing address unset for order"
 msgstr "Fakturaadresse fjernet fra bestilling"
 
@@ -2301,6 +2336,11 @@ msgstr "Samlinger flyttet vellykket"
 msgid "Registered"
 msgstr "Registrert"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+msgid "Failed to set shipping address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/job-queue.tsx:231
 msgid "Cancel Job"
 msgstr "Avbryt jobb"
@@ -2385,7 +2425,7 @@ msgstr "Valgte varer"
 msgid "Values"
 msgstr "Verdier"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:161
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:170
 msgid "Customer set for order"
 msgstr "Kunde satt for bestilling"
 
@@ -2561,7 +2601,7 @@ msgstr "Dette vil fjerne alle opsjonsgrupper fra dette produktet og returnere ti
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:277
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:463
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:502
 msgid "Billing address"
 msgstr "Fakturaadresse"
 
@@ -3422,7 +3462,7 @@ msgstr "Legg til rad etter"
 msgid "Tax total"
 msgstr "Mva totalt"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:335
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:374
 msgid "Draft order status"
 msgstr "Utkast til ordrestatus"
 
@@ -3443,7 +3483,7 @@ msgstr "Fasettverdi opprettet"
 msgid "Marketing"
 msgstr "Markedsføring"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:275
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:311
 msgid "Draft order deleted"
 msgstr "Utkastbestilling slettet"
 
@@ -3757,6 +3797,11 @@ msgstr "Beskrivelse"
 msgid "Countries"
 msgstr "Land"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:160
+msgid "Failed to remove order line: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:182
 msgid "Street Address 2"
 msgstr "Gateadresse 2"
@@ -3901,7 +3946,7 @@ msgstr "+ {0} flere"
 msgid "Option Groups"
 msgstr "Opsjonsgrupper"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:392
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
 msgid "Custom fields"
 msgstr "Egendefinerte felt"
 
@@ -4016,6 +4061,11 @@ msgstr "Superadministrator"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 #~ msgid "Some resources are down"
 #~ msgstr "Noen ressurser er nede"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:141
+msgid "Failed to update order line: {0}"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:84
 msgid "Insert link"
@@ -4186,6 +4236,11 @@ msgstr "Betalingsmetode opprettet"
 msgid "Customer information updated"
 msgstr "Kundeinformasjon oppdatert"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:318
+msgid "Failed to delete draft order: {0}"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:120
 msgid "Failed to convert view to global"
 msgstr "Kunne ikke konvertere visning til global"
@@ -4317,7 +4372,7 @@ msgstr "ELLER"
 msgid "Manage tags"
 msgstr "Administrer tagger"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:247
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:277
 msgid "Coupon code removed from order"
 msgstr "Kupongkode fjernet fra bestilling"
 
@@ -4339,6 +4394,11 @@ msgstr "Kunne ikke oppdatere fasettverdi"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:82
 msgid "Order fulfilled"
 msgstr "Bestilling oppfylt"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:210
+msgid "Failed to set billing address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -4394,7 +4454,7 @@ msgstr "Denne fraktmetodens berettigelsesbetingelser er ikke oppfylt for gjelden
 msgid "Add coupon code"
 msgstr "Legg til kupongkode"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:234
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:261
 msgid "Coupon code set for order"
 msgstr "Kupongkode satt for bestilling"
 
@@ -4791,7 +4851,7 @@ msgstr "System"
 msgid "Variant name"
 msgstr "Variantnavn"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:504
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:543
 msgid "Remove"
 msgstr "Fjern"
 
@@ -5160,7 +5220,7 @@ msgstr "Testdata har blitt oppdatert. Klikk \"Kjør test\" for å se oppdaterte 
 msgid "is not in"
 msgstr "er ikke i"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:129
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:132
 msgid "Order line updated"
 msgstr "Bestillingslinje oppdatert"
 
@@ -5234,7 +5294,7 @@ msgstr "Video"
 msgid "less than"
 msgstr "mindre enn"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:118
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:121
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "Varianten kunne ikke legges til. Sørg for at foreldreproduktet er aktivert."
 
@@ -5296,7 +5356,7 @@ msgstr "Globale språk"
 msgid "New administrator"
 msgstr "Ny administrator"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:316
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:355
 msgid "Delete draft"
 msgstr "Slett utkast"
 
@@ -5605,6 +5665,11 @@ msgstr "Kunne ikke legge til opsjonsverdi"
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:140
 msgid "Add option value to {groupName}"
 msgstr "Legg til opsjonsverdi til {groupName}"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:221
+msgid "Failed to unset shipping address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:82
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96
