@@ -104,7 +104,7 @@ msgstr "Заголовок 5"
 msgid "Failed to add payment"
 msgstr "Не удалось добавить платёж"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Обновлено"
 
@@ -1498,7 +1498,7 @@ msgstr "Адрес успешно обновлен"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Создано"
 
@@ -3988,7 +3988,7 @@ msgstr "Отправлен"
 #~ msgid "Monitored Resources"
 #~ msgstr "Отслеживаемые ресурсы"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Информация об объекте"
 
@@ -5314,7 +5314,7 @@ msgstr "Нет доступных действий"
 msgid "Failed to update channel"
 msgstr "Не удалось обновить канал"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Общие"
 

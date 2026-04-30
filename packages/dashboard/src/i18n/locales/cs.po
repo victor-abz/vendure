@@ -104,7 +104,7 @@ msgstr "Nadpis 5"
 msgid "Failed to add payment"
 msgstr "Nepodařilo se přidat platbu"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Aktualizováno"
 
@@ -1498,7 +1498,7 @@ msgstr "Adresa úspěšně aktualizována"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Vytvořeno"
 
@@ -3988,7 +3988,7 @@ msgstr "Odesláno"
 #~ msgid "Monitored Resources"
 #~ msgstr "Monitorované zdroje"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Informace o entitě"
 
@@ -5314,7 +5314,7 @@ msgstr "Žádné akce k dispozici"
 msgid "Failed to update channel"
 msgstr "Nepodařilo se aktualizovat kanál"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Obecné"
 

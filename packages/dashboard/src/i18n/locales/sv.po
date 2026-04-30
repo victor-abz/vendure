@@ -45,7 +45,7 @@ msgstr "Ny skattesats"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:150
 msgid "Assign an existing option group or create a new one"
-msgstr "Przypisz istniejącą grupę opcji lub utwórz nową"
+msgstr "Tilldela en befintlig alternativgrupp eller skapa en ny"
 
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:33
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:77
@@ -84,7 +84,7 @@ msgstr "Växla alla"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:123
 msgid "Edit JSON value"
-msgstr "Edytuj wartość JSON"
+msgstr "Redigera JSON-värde"
 
 #: src/app/routes/_authenticated/_customers/components/customer-history/default-customer-history-components.tsx:17
 msgid "Using external authentication strategy: {strategy}"
@@ -104,7 +104,7 @@ msgstr "Rubrik 5"
 msgid "Failed to add payment"
 msgstr "Misslyckades att lägga till betalning"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Uppdaterad"
 
@@ -243,7 +243,7 @@ msgstr "Art.nr:"
 
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:121
 msgid "Add payment"
-msgstr "Dodaj płatność"
+msgstr "Lägg till betalning"
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-single-shipping-method-sheet.tsx:40
 msgid "Test this shipping method by simulating an order to see if it's eligible and what the shipping cost would be."
@@ -276,7 +276,7 @@ msgstr "Beställningar"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:187
 msgid "Select roles"
-msgstr "Wybierz role"
+msgstr "Välj roller"
 
 #: src/app/routes/_authenticated/_roles/roles_.$id.tsx:62
 msgid "Successfully created role"
@@ -296,7 +296,7 @@ msgstr "Misslyckades med att skapa administratör"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:327
 msgid "No"
-msgstr "Nie"
+msgstr "Nej"
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:128
 msgid "Successfully updated product variant"
@@ -401,7 +401,7 @@ msgstr "Synlighet"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:288
 msgid "Product variants"
-msgstr "Warianty produktu"
+msgstr "Produktvarianter"
 
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:36
 #: src/app/routes/_authenticated/_customer-groups/customer-groups_.$id.tsx:85
@@ -420,7 +420,7 @@ msgstr "Byt namn"
 
 #: src/lib/components/layout/language-dialog.tsx:52
 msgid "Choose your preferred display language and locale settings"
-msgstr "Wybierz preferowany język wyświetlania i ustawienia regionalne"
+msgstr "Välj önskat visningsspråk och regionsinställningar"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:89
 #~ msgid "← Back"
@@ -428,7 +428,7 @@ msgstr "Wybierz preferowany język wyświetlania i ustawienia regionalne"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-bulk-actions.tsx:87
 msgid "Successfully removed {successCount} option groups from channel"
-msgstr "Pomyślnie usunięto {successCount} grup opcji z kanału"
+msgstr "{successCount} alternativgrupper togs bort från kanal"
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-single-method-result.tsx:76
 msgid "Shipping method is not eligible for this order"
@@ -515,7 +515,7 @@ msgstr "Ta bort länk"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:123
 msgid "This field is readonly"
-msgstr "To pole jest tylko do odczytu"
+msgstr "Det här fältet är skrivskyddat"
 
 #: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:32
 #: src/lib/framework/dashboard-widget/metrics-widget/index.tsx:80
@@ -545,7 +545,7 @@ msgstr "Leveransadress borttagen för beställning"
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:332
 msgid "Create {enabledCount} variants"
-msgstr "Utwórz {enabledCount} wariantów"
+msgstr "Skapa {enabledCount} varianter"
 
 #. placeholder {0}: entry.data.paymentId
 #. placeholder {1}: entry.data.to
@@ -605,7 +605,7 @@ msgstr "Roller"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:395
 msgid "Grid view"
-msgstr "Widok siatki"
+msgstr "Rutnätsvy"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-card.tsx:48
 msgid "Failed to delete address"
@@ -633,7 +633,7 @@ msgstr "Logga in"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:398
 msgid "List view"
-msgstr "Widok listy"
+msgstr "Listvy"
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-order-builder.tsx:164
 msgid "Test Order"
@@ -645,7 +645,7 @@ msgstr "Välj en kund för att fortsätta"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:73
 msgid "Successfully assigned option group"
-msgstr "Pomyślnie przypisano grupę opcji"
+msgstr "Alternativgrupp tilldelad"
 
 #: src/app/routes/_authenticated/_shipping-methods/components/shipping-method-test-result-wrapper.tsx:30
 msgid "Run Test"
@@ -721,7 +721,7 @@ msgstr "Placerad"
 
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:53
 msgid "Rotating this key will immediately invalidate the current key. Any integrations using it will stop working until updated with the new key."
-msgstr "Rotacja tego klucza natychmiast unieważni bieżący klucz. Wszystkie integracje korzystające z niego przestaną działać do czasu aktualizacji nowym kluczem."
+msgstr "Genom att rotera denna nyckel ogiltigförklaras den aktuella nyckeln direkt. Alla integrationer som använder den slutar fungera tills de uppdateras med den nya nyckeln."
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:163
 msgid "The data that has been passed to the job"
@@ -784,7 +784,7 @@ msgstr "Ange transaktions-ID för denna återbetalning"
 
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:67
 msgid "Your API Key"
-msgstr "Twój API Key"
+msgstr "Din API-nyckel"
 
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:310
 msgid "Are you sure you want to delete this draft order?"
@@ -802,7 +802,7 @@ msgstr "Hittade {0} lämplig fraktmetod{1}"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:746
 msgid "Dimensions"
-msgstr "Wymiary"
+msgstr "Mått"
 
 #: src/lib/components/ui/password-input.tsx:20
 msgid "Show password"
@@ -847,7 +847,7 @@ msgstr "Innehåll:"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:260
 msgid "Key"
-msgstr "Klucz"
+msgstr "Nyckel"
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:360
 #: src/lib/components/shared/navigation-confirmation.tsx:58
@@ -888,7 +888,7 @@ msgstr "Fokuspunkt"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:99
 msgid "Single variant, no options"
-msgstr "Pojedynczy wariant, bez opcji"
+msgstr "En variant, inga alternativ"
 
 #: src/app/routes/_authenticated/_orders/components/use-transition-order-to-state.tsx:107
 msgid "Select the next state for the order"
@@ -963,7 +963,7 @@ msgstr "Leveransadress ändrad"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:63
 msgid "No products found"
-msgstr "Nie znaleziono produktów"
+msgstr "Inga produkter hittades"
 
 #: src/lib/components/shared/rich-text-editor/table-edit-icons.tsx:193
 msgid "Add row before"
@@ -1003,7 +1003,7 @@ msgstr "Allokerad"
 
 #: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
-msgstr "Odkryj Platform & Cloud"
+msgstr "Utforska Platform & Cloud"
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:115
 msgid "Every 5 seconds"
@@ -1030,7 +1030,7 @@ msgstr "Utkast till beställning"
 #: src/app/routes/_authenticated/_system/settings-store.tsx:281
 #: src/app/routes/_authenticated/_system/settings-store.tsx:314
 msgid "Scope"
-msgstr "Zakres"
+msgstr "Omfattning"
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-single-method-result.tsx:58
 msgid "Shipping method is eligible for this order"
@@ -1055,7 +1055,7 @@ msgstr "Ingen betalning eller återbetalning krävs"
 
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:108
 msgid "Download as .env file"
-msgstr "Pobierz jako plik .env"
+msgstr "Ladda ned som .env-fil"
 
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:154
 msgid "When enabled, a promotion is available in the shop"
@@ -1077,7 +1077,7 @@ msgstr "Misslyckades att uppdatera kampanj"
 #: src/lib/components/shared/asset/asset-gallery.tsx:368
 #: src/lib/components/shared/asset/asset-gallery.tsx:380
 msgid "Images"
-msgstr "Obrazy"
+msgstr "Bilder"
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:158
@@ -1141,7 +1141,7 @@ msgstr "Av"
 #: src/app/routes/_authenticated/_system/settings-store.tsx:37
 #: src/app/routes/_authenticated/_system/settings-store.tsx:304
 msgid "Settings Store"
-msgstr "Ustawienia sklepu"
+msgstr "Inställningslager"
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:257
 msgid "Queue"
@@ -1188,7 +1188,7 @@ msgstr "Inga artiklar valda"
 #. placeholder {0}: selected.length
 #: src/lib/components/shared/asset/asset-gallery.tsx:469
 msgid ", {0} selected"
-msgstr ", {0} zaznaczono"
+msgstr ", {0} valda"
 
 #: src/lib/components/shared/country-selector.tsx:86
 msgid "No countries found"
@@ -1196,7 +1196,7 @@ msgstr "Inga länder hittades"
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:176
 msgid "Successfully created variants"
-msgstr "Pomyślnie utworzono warianty"
+msgstr "Varianter skapade"
 
 #: src/lib/components/data-input/slug-input.tsx:280
 #: src/lib/components/data-input/slug-input.tsx:282
@@ -1235,7 +1235,7 @@ msgstr "Betalningsstatus uppdaterad"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:161
 msgid "Create new"
-msgstr "Utwórz nowy"
+msgstr "Skapa ny"
 
 #: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:249
 msgid "Refund total"
@@ -1248,7 +1248,7 @@ msgstr "Adress borttagen"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:195
 msgid "Only roles assigned to your account are available."
-msgstr "Dostępne są tylko role przypisane do Twojego konta."
+msgstr "Endast roller som är tilldelade ditt konto är tillgängliga."
 
 #: src/app/routes/_authenticated/_system/components/cancel-jobs-bulk-action.tsx:63
 msgid "{cancellableCount, plural, one {Cancel {cancellableCount} job} other {Cancel {cancellableCount} jobs}}"
@@ -1270,7 +1270,7 @@ msgstr "Artikel tillagd i beställning"
 
 #: src/app/routes/_authenticated/_products/components/shared-option-group-warning.tsx:13
 msgid "{productCount, plural, one {This option group is used by one other product. Changes will affect it too.} other {This option group is shared across # products. Changes will affect all of them.}}"
-msgstr "{productCount, plural, one {Ta grupa opcji jest używana przez jeden inny produkt. Zmiany będą miały na niego wpływ.} other {Ta grupa opcji jest współdzielona przez # produktów. Zmiany będą miały wpływ na wszystkie.}}"
+msgstr "{productCount, plural, one {Den här alternativgruppen används av en annan produkt. Ändringar påverkar även den.} other {Den här alternativgruppen delas av # produkter. Ändringar påverkar alla.}}"
 
 #: src/lib/components/data-table/views-sheet.tsx:125
 msgid "My Saved Views"
@@ -1288,7 +1288,7 @@ msgstr "Misslyckades att skapa säljare"
 #. placeholder {0}: entityName.toLowerCase()
 #: src/app/common/duplicate-entity-dialog.tsx:87
 msgid "Configure duplication settings for {0}s"
-msgstr "Skonfiguruj ustawienia duplikowania dla {0}s"
+msgstr "Konfigurera dupliceringsinställningar för {0}"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:203
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:245
@@ -1297,7 +1297,7 @@ msgstr "Adresser"
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:143
 msgid "Add a new option value to the {groupName} option group"
-msgstr "Dodaj nową wartość opcji do grupy opcji {groupName}"
+msgstr "Lägg till ett nytt alternativvärde i alternativgruppen {groupName}"
 
 #. placeholder {0}: entry.data.modificationId
 #: src/app/routes/_authenticated/_orders/components/order-history/default-order-history-components.tsx:76
@@ -1387,7 +1387,7 @@ msgstr "före"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:745
 msgid "Size"
-msgstr "Rozmiar"
+msgstr "Storlek"
 
 #. placeholder {0}: formatLanguageName(contentLanguage)
 #: src/lib/components/shared/translatable-form-field.tsx:68
@@ -1498,7 +1498,7 @@ msgstr "Adress uppdaterad"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Skapad"
 
@@ -1602,7 +1602,7 @@ msgstr "Kollektioner"
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:453
 msgid "Delete variant"
-msgstr "Usuń wariant"
+msgstr "Radera variant"
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:249
 msgid "No modifications made"
@@ -1704,7 +1704,7 @@ msgstr "En anledning för återbetalningen krävs"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:194
 msgid "Could not remove option group"
-msgstr "Nie można usunąć grupy opcji"
+msgstr "Kunde inte ta bort alternativgrupp"
 
 #: src/app/routes/_authenticated/_tax-categories/tax-categories_.$id.tsx:77
 msgid "Failed to update tax category"
@@ -1830,7 +1830,7 @@ msgstr "Kod"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:203
 msgid "Failed to remove option groups"
-msgstr "Nie udało się usunąć grup opcji"
+msgstr "Misslyckades med att ta bort alternativgrupper"
 
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:97
 msgid "Order delivered"
@@ -1850,7 +1850,7 @@ msgstr "Är du säker på att du vill ta bort denna adress?"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:77
 msgid "Failed to assign option group"
-msgstr "Nie udało się przypisać grupy opcji"
+msgstr "Misslyckades med att tilldela alternativgrupp"
 
 #: src/app/routes/_authenticated/_assets/assets_.$id.tsx:89
 msgid "Failed to update asset"
@@ -1904,7 +1904,7 @@ msgstr "Återbetala frakt"
 #: src/app/routes/_authenticated/_system/settings-store.tsx:293
 #: src/app/routes/_authenticated/_system/settings-store.tsx:324
 msgid "Readonly"
-msgstr "Tylko do odczytu"
+msgstr "Skrivskyddad"
 
 #: src/lib/components/data-table/views-sheet.tsx:100
 msgid "Failed to duplicate global view"
@@ -2321,7 +2321,7 @@ msgstr "Sats"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:114
 msgid "Size, colour, etc."
-msgstr "Rozmiar, kolor itp."
+msgstr "Storlek, färg etc."
 
 #: src/lib/components/shared/facet-value-selector.tsx:155
 #: src/lib/components/shared/facet-value-selector.tsx:172
@@ -2371,7 +2371,7 @@ msgstr "{0} valda"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:239
 msgid "Search option groups..."
-msgstr "Szukaj grup opcji..."
+msgstr "Sök alternativgrupper..."
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:168
 msgid "Modify order"
@@ -2419,7 +2419,7 @@ msgstr "Ny zon"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:136
 #: src/app/routes/_authenticated/_api-keys/api-keys.tsx:79
 msgid "New API Key"
-msgstr "Nowy API Key"
+msgstr "Ny API-nyckel"
 
 #: src/lib/components/shared/rich-text-editor/table-edit-icons.tsx:164
 msgid "Delete column"
@@ -2427,7 +2427,7 @@ msgstr "Ta bort kolumn"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:157
 msgid "Assign existing"
-msgstr "Przypisz istniejący"
+msgstr "Tilldela befintlig"
 
 #: src/lib/components/data-table/human-readable-operator.tsx:34
 msgid "is null"
@@ -2447,7 +2447,7 @@ msgstr "Standardkanal"
 
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:109
 msgid "Insert a new image with source, title, and dimensions"
-msgstr "Wstaw nowy obraz ze źródłem, tytułem i wymiarami"
+msgstr "Infoga en ny bild med källa, titel och dimensioner"
 
 #: src/app/routes/_authenticated/_facets/facets_.$facetId.values_.$id.tsx:93
 msgid "Failed to create facet value"
@@ -2520,7 +2520,7 @@ msgstr "Fler vyer"
 
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:109
 msgid "Edit the selected image properties"
-msgstr "Edytuj właściwości wybranego obrazu"
+msgstr "Redigera egenskaper för den valda bilden"
 
 #: src/lib/components/data-table/views-sheet.tsx:49
 msgid "Applied view \"{viewName}\""
@@ -2557,7 +2557,7 @@ msgstr "Tillgångar"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:307
 msgid "This will remove all option groups from this product and return to the variant setup choice."
-msgstr "Spowoduje to usunięcie wszystkich grup opcji z tego produktu i powrót do wyboru konfiguracji wariantów."
+msgstr "Detta tar bort alla alternativgrupper från produkten och återgår till variantval."
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:277
@@ -2595,7 +2595,7 @@ msgstr "Rabatt"
 #: src/lib/components/shared/asset/asset-gallery.tsx:367
 #: src/lib/components/shared/asset/asset-gallery.tsx:379
 msgid "All types"
-msgstr "Wszystkie typy"
+msgstr "Alla typer"
 
 #: src/app/routes/_authenticated/_orders/components/draft-order-status.tsx:29
 msgid "Only draft orders can be completed"
@@ -2818,7 +2818,7 @@ msgstr "Länk href"
 
 #: src/lib/utils/get-locale-fallback-placeholder.ts:31
 msgid "Fallback: {value}"
-msgstr "Wartość zastępcza: {value}"
+msgstr "Reservvärde: {value}"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:260
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-container.tsx:30
@@ -2997,7 +2997,7 @@ msgstr "Alternativvärdesnamn"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:214
 #: src/app/routes/_authenticated/_api-keys/api-keys.tsx:46
 msgid "Last used"
-msgstr "Ostatnio użyto"
+msgstr "Senast använd"
 
 #: src/app/routes/_authenticated/_tax-categories/tax-categories_.$id.tsx:112
 msgid "Is default tax category"
@@ -3017,7 +3017,7 @@ msgstr "Region/Provins"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:138
 msgid "Failed to update option group"
-msgstr "Nie udało się zaktualizować grupy opcji"
+msgstr "Misslyckades med att uppdatera alternativgrupp"
 
 #: src/app/routes/_authenticated/_channels/channels_.$id.tsx:183
 msgid "Channel defaults"
@@ -3029,7 +3029,7 @@ msgstr "Misslyckades att skapa skattekategori"
 
 #: src/lib/components/data-table/data-table-filter-dialog.tsx:55
 msgid "Set filter criteria for the {columnId} column"
-msgstr "Ustaw kryteria filtrowania dla kolumny {columnId}"
+msgstr "Ange filterkriterier för kolumnen {columnId}"
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:217
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:53
@@ -3039,7 +3039,7 @@ msgstr "Land"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:97
 msgid "Simple product"
-msgstr "Produkt prosty"
+msgstr "Enkel produkt"
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:137
@@ -3048,7 +3048,7 @@ msgstr "Jobbkö"
 
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:53
 msgid "Please confirm you have saved the API key before closing."
-msgstr "Potwierdź, że zapisano API key przed zamknięciem."
+msgstr "Bekräfta att du har sparat API-nyckeln innan du stänger."
 
 #: src/lib/components/data-table/use-generated-columns.tsx:411
 msgid "Confirm deletion"
@@ -3080,7 +3080,7 @@ msgstr "start"
 
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:35
 msgid "Failed to rotate API key"
-msgstr "Nie udało się wykonać rotacji API key"
+msgstr "Misslyckades med att rotera API-nyckel"
 
 #: src/lib/components/data-table/human-readable-operator.tsx:36
 msgid "in"
@@ -3112,7 +3112,7 @@ msgstr "Bearbetar..."
 #. placeholder {0}: totalItems === 1 ? 'asset' : 'assets'
 #: src/lib/components/shared/asset/asset-gallery.tsx:465
 msgid "{totalItems} {0} found"
-msgstr "Znaleziono {totalItems} {0}"
+msgstr "{totalItems} {0} hittades"
 
 #: src/lib/components/date-range-picker.tsx:126
 msgid "Select date range"
@@ -3126,7 +3126,7 @@ msgstr "Produkt"
 
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:51
 msgid "Rotate API Key"
-msgstr "Rotacja API Key"
+msgstr "Rotera API-nyckel"
 
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:62
 msgid "Category"
@@ -3261,7 +3261,7 @@ msgstr "Välj en adress"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:326
 msgid "Yes"
-msgstr "Tak"
+msgstr "Ja"
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:175
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:246
@@ -3337,7 +3337,7 @@ msgstr "Frakt återbetald"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:376
 msgid "Asset type"
-msgstr "Typ zasobu"
+msgstr "Tillgångstyp"
 
 #: src/app/routes/_authenticated/_stock-locations/stock-locations.tsx:58
 msgid "New Stock Location"
@@ -3380,7 +3380,7 @@ msgstr "Misslyckades att uppdatera leveransstatus"
 
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:233
 msgid "Create a new product variant with options, pricing, and stock"
-msgstr "Utwórz nowy wariant produktu z opcjami, cenami i stanem magazynowym"
+msgstr "Skapa en ny produktvariant med alternativ, pris och lager"
 
 #: src/app/routes/_authenticated/_facets/facets_.$id.tsx:109
 msgid "Private facets are not visible in the shop"
@@ -3399,7 +3399,7 @@ msgstr "Körs inte"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:267
 msgid "Assigned"
-msgstr "Przypisane"
+msgstr "Tilldelad"
 
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:75
 msgid "Heading 1"
@@ -3462,7 +3462,7 @@ msgstr "Sök valutor..."
 
 #: src/lib/components/shared/remove-from-channel-bulk-action.tsx:82
 msgid "Remove from channel"
-msgstr "Usuń z kanału"
+msgstr "Ta bort från kanal"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:169
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:157
@@ -3581,7 +3581,7 @@ msgstr "Adress skapad"
 
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:32
 msgid "API key rotated successfully"
-msgstr "Rotacja API key zakończona pomyślnie"
+msgstr "API-nyckel har roterats"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:141
 msgid "Add option group"
@@ -3616,7 +3616,7 @@ msgstr "Global vy duplicerad"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:210
 #: src/app/routes/_authenticated/_api-keys/api-keys.tsx:66
 msgid "Created by"
-msgstr "Utworzono przez"
+msgstr "Skapad av"
 
 #: src/app/routes/_authenticated/_product-variants/components/add-currency-dropdown.tsx:35
 msgid "Add a price in another currency"
@@ -3719,7 +3719,7 @@ msgstr "Lägg till artikel"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:108
 msgid "Successfully created API key"
-msgstr "Pomyślnie utworzono API key"
+msgstr "API-nyckel skapad"
 
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:165
 msgid "Loading preview…"
@@ -3849,7 +3849,7 @@ msgstr "innehåller inte"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:186
 msgid "Option Group"
-msgstr "Grupa opcji"
+msgstr "Alternativgrupp"
 
 #: src/app/routes/_authenticated/_customers/components/customer-address-card.tsx:132
 msgid "Edit the address details below."
@@ -3878,7 +3878,7 @@ msgstr "Ladda upp"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:112
 msgid "Product with options"
-msgstr "Produkt z opcjami"
+msgstr "Produkt med alternativ"
 
 #. placeholder {0}: filteredTags.length
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:165
@@ -3889,7 +3889,7 @@ msgstr "Visar alla {0} resultat"
 #: src/app/routes/_authenticated/_api-keys/api-keys.tsx:60
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:95
 msgid "Lookup ID"
-msgstr "Identyfikator wyszukiwania"
+msgstr "Sök-ID"
 
 #. placeholder {0}: list.totalItems - 3
 #: src/app/routes/_authenticated/_facets/facets.tsx:65
@@ -3899,7 +3899,7 @@ msgstr "+ {0} till"
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:45
 msgid "Option Groups"
-msgstr "Grupy opcji"
+msgstr "Alternativgrupper"
 
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:392
 msgid "Custom fields"
@@ -3907,7 +3907,7 @@ msgstr "Anpassade fält"
 
 #: src/app/routes/_authenticated/_orders/components/order-process-dialog.tsx:85
 msgid "All possible order states and their transitions. The current state is highlighted."
-msgstr "Wszystkie możliwe stany zamówienia i ich przejścia. Bieżący stan jest wyróżniony."
+msgstr "Alla möjliga ordertillstånd och deras övergångar. Aktuellt tillstånd är markerat."
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:82
@@ -3988,7 +3988,7 @@ msgstr "Skickad"
 #~ msgid "Monitored Resources"
 #~ msgstr "Övervakade resurser"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Entitetsinformation"
 
@@ -4108,7 +4108,7 @@ msgstr "Lagernivåer"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
 msgid "Failed to update API key"
-msgstr "Nie udało się zaktualizować API key"
+msgstr "Misslyckades med att uppdatera API-nyckel"
 
 #: src/lib/framework/dashboard-widget/base-widget.tsx:76
 msgid "{title}"
@@ -4126,7 +4126,7 @@ msgstr "Misslyckades att byta namn på global vy"
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:87
 msgid "Insert a new hyperlink with URL and target options"
-msgstr "Wstaw nowy hiperłącze z URL i opcjami celu"
+msgstr "Infoga en ny hyperlänk med URL och målalternativ"
 
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:194
 msgid "Height"
@@ -4172,7 +4172,7 @@ msgstr "Tillgängliga språk"
 
 #: src/lib/components/data-table/data-table-bulk-actions.tsx:119
 msgid "Reset selection"
-msgstr "Resetuj wybór"
+msgstr "Återställ markering"
 
 #: src/app/routes/_authenticated/_orders/components/order-address.tsx:30
 msgid "No address"
@@ -4219,7 +4219,7 @@ msgstr "Spara en vy som \"Global\" för att göra den tillgänglig för alla anv
 
 #: src/app/routes/_authenticated/_products/components/generate-variants-panel.tsx:179
 msgid "Failed to create variants"
-msgstr "Nie udało się utworzyć wariantów"
+msgstr "Misslyckades med att skapa varianter"
 
 #: src/app/routes/_authenticated/_global-settings/global-settings.tsx:133
 msgid "Sets the stock level at which this a variant is considered to be out of stock. Using a negative value enables backorder support. Can be overridden by product variants."
@@ -4228,7 +4228,7 @@ msgstr "Anger lagernivån vid vilken denna variant anses vara slut i lager. Anv�
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:45
 #: src/app/routes/_authenticated/_api-keys/components/rotate-api-key-button.tsx:68
 msgid "Rotate Key"
-msgstr "Rotacja klucza"
+msgstr "Rotera nyckel"
 
 #: src/app/routes/_authenticated/_products/components/create-product-variants-dialog.tsx:132
 #~ msgid "Failed to create product variants"
@@ -4265,7 +4265,7 @@ msgstr "Regioner"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:438
 msgid "Drop files here to upload"
-msgstr "Upuść pliki tutaj, aby przesłać"
+msgstr "Släpp filer här för att ladda upp"
 
 #: src/app/routes/_authenticated/_customers/components/customer-status-badge.tsx:18
 msgid "Verified"
@@ -4275,7 +4275,7 @@ msgstr "Verifierad"
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:82
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:149
 msgid "New option group"
-msgstr "Nowa grupa opcji"
+msgstr "Ny alternativgrupp"
 
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:58
 #~ msgid "Last updated {0}"
@@ -4291,7 +4291,7 @@ msgstr "Misslyckades att uppdatera roll"
 
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:77
 msgid "This is the only time the full API key will be displayed. Copy or download it now — it cannot be retrieved later."
-msgstr "To jedyna okazja, aby zobaczyć pełny API key. Skopiuj go lub pobierz teraz — nie będzie można go później odzyskać."
+msgstr "Detta är enda tillfället då hela API-nyckeln visas. Kopiera eller ladda ned den nu — den kan inte hämtas senare."
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:104
 msgid "Successfully updated collection"
@@ -4583,7 +4583,7 @@ msgstr "Aktiverad"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:476
 msgid "Items per page"
-msgstr "Pozycji na stronę"
+msgstr "Antal per sida"
 
 #: src/app/routes/_authenticated/_zones/zones.tsx:39
 msgid "Edit members"
@@ -4615,7 +4615,7 @@ msgstr "Förhandsgranska ändringar"
 
 #: src/lib/components/shared/assigned-channels.tsx:52
 msgid "Failed to remove {entityType} from channel"
-msgstr "Nie udało się usunąć {entityType} z kanału"
+msgstr "Misslyckades med att ta bort {entityType} från kanal"
 
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:191
 msgid "Variant deleted successfully"
@@ -4623,7 +4623,7 @@ msgstr "Variant borttagen"
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:87
 msgid "Edit the selected link properties"
-msgstr "Edytuj właściwości wybranego łącza"
+msgstr "Redigera egenskaper för den valda länken"
 
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:75
@@ -4664,7 +4664,7 @@ msgstr "Inställningar"
 #. js-lingui-explicit-id
 #: src/lib/framework/defaults.ts:151
 msgid "Settings Store"
-msgstr "Ustawienia sklepu"
+msgstr "Inställningslager"
 
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:77
 msgid "Heading 3"
@@ -4802,7 +4802,7 @@ msgstr "Misslyckades att uppdatera kund"
 
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:306
 msgid "Remove option groups?"
-msgstr "Usunąć grupy opcji?"
+msgstr "Ta bort alternativgrupper?"
 
 #: src/app/routes/_authenticated/_collections/components/collection-contents-preview-table.tsx:91
 msgid "This is a preview of the collection contents based on the current filter settings. Once you save the collection, the contents will be updated to reflect the new filter settings."
@@ -4927,7 +4927,7 @@ msgstr "Misslyckades att skapa skattesats"
 
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:118
 msgid "I have saved this API key"
-msgstr "Zapisałem ten API key"
+msgstr "Jag har sparat denna API-nyckel"
 
 #: src/lib/components/layout/manage-languages-dialog.tsx:244
 msgid "Configure available languages for your store and channels"
@@ -4952,7 +4952,7 @@ msgstr "Redigera anteckning"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:628
 msgid "No assets found. Try adjusting your filters."
-msgstr "Nie znaleziono zasobów. Spróbuj dostosować filtry."
+msgstr "Inga tillgångar hittades. Försök justera filtren."
 
 #: src/app/routes/_authenticated/_products/components/option-groups-editor.tsx:161
 msgid "Add Option"
@@ -5003,11 +5003,11 @@ msgstr "Status"
 #: src/lib/components/shared/asset/asset-gallery.tsx:370
 #: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
-msgstr "Binarny"
+msgstr "Binär"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$id.tsx:127
 msgid "Successfully updated option group"
-msgstr "Pomyślnie zaktualizowano grupę opcji"
+msgstr "Alternativgrupp uppdaterad"
 
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:43
 #: src/app/routes/_authenticated/_shipping-methods/shipping-methods_.$id.tsx:117
@@ -5108,7 +5108,7 @@ msgstr "innehåller"
 
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:245
 msgid "No option groups found"
-msgstr "Nie znaleziono grup opcji"
+msgstr "Inga alternativgrupper hittades"
 
 #: src/lib/components/data-input/product-multi-selector-input.tsx:91
 msgid "No items found"
@@ -5125,7 +5125,7 @@ msgstr "Levererade artiklar ({0})"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:236
 msgid "Value updated"
-msgstr "Wartość zaktualizowana"
+msgstr "Värde uppdaterat"
 
 #: src/app/routes/_authenticated/_customers/components/customer-status-badge.tsx:28
 msgid "Unverified"
@@ -5183,7 +5183,7 @@ msgstr "Kundgrupper"
 
 #: src/lib/components/shared/assigned-channels.tsx:48
 msgid "Successfully removed {entityType} from channel"
-msgstr "Pomyślnie usunięto {entityType} z kanału"
+msgstr "{entityType} togs bort från kanal"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:81
 #: src/app/routes/_authenticated/_option-groups/option-groups_.$groupId.options_.$id.tsx:90
@@ -5206,7 +5206,7 @@ msgstr "Nuvarande facettvärden"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:80
 msgid "Page {page} of {totalPages}"
-msgstr "Strona {page} z {totalPages}"
+msgstr "Sida {page} av {totalPages}"
 
 #: src/app/routes/_authenticated/_system/components/cancel-jobs-bulk-action.tsx:42
 msgid "Failed to cancel {rejected} job"
@@ -5228,7 +5228,7 @@ msgstr "Ta bort artikel"
 #: src/lib/components/shared/asset/asset-gallery.tsx:369
 #: src/lib/components/shared/asset/asset-gallery.tsx:381
 msgid "Video"
-msgstr "Wideo"
+msgstr "Video"
 
 #: src/lib/components/data-table/human-readable-operator.tsx:48
 msgid "less than"
@@ -5314,7 +5314,7 @@ msgstr "Inga åtgärder tillgängliga"
 msgid "Failed to update channel"
 msgstr "Misslyckades att uppdatera kanal"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Allmänt"
 
@@ -5337,7 +5337,7 @@ msgstr "Zon skapad"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:268
 msgid "Value"
-msgstr "Wartość"
+msgstr "Värde"
 
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:105
 msgid "Customer updated"
@@ -5400,7 +5400,7 @@ msgstr "Medellångt datum"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:169
 msgid "Invalid number"
-msgstr "Nieprawidłowa liczba"
+msgstr "Ogiltigt nummer"
 
 #: src/lib/components/data-table/views-sheet.tsx:152
 msgid "You haven't saved any views yet."
@@ -5412,7 +5412,7 @@ msgstr "Är du säker på att du vill ta bort denna vy? Denna åtgärd kan inte 
 
 #: src/app/routes/_authenticated/_orders/components/order-process-dialog.tsx:73
 msgid "View order process"
-msgstr "Wyświetl proces zamówienia"
+msgstr "Visa orderprocess"
 
 #: src/lib/components/data-table/views-sheet.tsx:100
 msgid "Failed to duplicate view"
@@ -5458,7 +5458,7 @@ msgstr "Kalkylator"
 
 #: src/app/routes/_authenticated/_option-groups/components/option-group-bulk-actions.tsx:78
 msgid "Failed to remove option group from channel: {message}"
-msgstr "Nie udało się usunąć grupy opcji z kanału: {message}"
+msgstr "Misslyckades med att ta bort alternativgrupp från kanal: {message}"
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:161
 msgid "View job data"
@@ -5478,7 +5478,7 @@ msgstr "Beställningsöversikt"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:349
 msgid "Search assets..."
-msgstr "Szukaj zasobów..."
+msgstr "Sök tillgångar..."
 
 #: src/app/routes/_authenticated/_facets/facets.tsx:114
 msgid "New Facet"
@@ -5695,7 +5695,7 @@ msgstr "{count} {entityName} duplicerad"
 
 #: src/app/routes/_authenticated/_option-groups/option-groups.tsx:71
 msgid "New Option Group"
-msgstr "Nowa grupa opcji"
+msgstr "Ny alternativgrupp"
 
 #: src/app/routes/_authenticated/_system/job-queue.tsx:191
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:186
@@ -5708,7 +5708,7 @@ msgstr "Betalning genomförd"
 
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:27
 msgid "Active filters"
-msgstr "Aktywne filtry"
+msgstr "Aktiva filter"
 
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:178
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:54
@@ -5722,7 +5722,7 @@ msgstr "är större än"
 
 #: src/app/routes/_authenticated/_api-keys/components/api-key-secret-dialog.tsx:125
 msgid "Close"
-msgstr "Zamknij"
+msgstr "Stäng"
 
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:127
 msgid "Add payment to order"
@@ -5770,11 +5770,11 @@ msgstr "Utlagd tröskel"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx:239
 msgid "Failed to update value"
-msgstr "Nie udało się zaktualizować wartości"
+msgstr "Misslyckades med att uppdatera värde"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:121
 msgid "Failed to create API key"
-msgstr "Nie udało się utworzyć API key"
+msgstr "Misslyckades med att skapa API-nyckel"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:264
 #: src/app/routes/_authenticated/_orders/components/settle-refund-dialog.tsx:49
@@ -5811,7 +5811,7 @@ msgstr "Zoner"
 
 #: src/lib/components/shared/seller-selector.tsx:37
 msgid "Search sellers..."
-msgstr "Szukaj sprzedawców..."
+msgstr "Sök säljare..."
 
 #: src/app/routes/_authenticated/_promotions/promotions_.$id.tsx:104
 msgid "Successfully created promotion"
@@ -5823,7 +5823,7 @@ msgstr "Alternativ"
 
 #: src/app/routes/_authenticated/_orders/components/order-process-dialog.tsx:82
 msgid "Order process"
-msgstr "Proces zamówienia"
+msgstr "Orderprocess"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:194
 msgid "Phone number"
@@ -5844,7 +5844,7 @@ msgstr "Globala inställningar uppdaterade"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:115
 msgid "Successfully updated API key"
-msgstr "Pomyślnie zaktualizowano API key"
+msgstr "API-nyckel uppdaterad"
 
 #: src/lib/components/layout/manage-languages-dialog.tsx:294
 msgid "These languages will be available for all channels to use"

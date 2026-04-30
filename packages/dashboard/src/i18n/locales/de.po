@@ -104,7 +104,7 @@ msgstr "Überschrift 5"
 msgid "Failed to add payment"
 msgstr "Fehler beim Hinzufügen der Zahlung"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Aktualisiert"
 
@@ -1498,7 +1498,7 @@ msgstr "Adresse erfolgreich aktualisiert"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Erstellt"
 
@@ -3988,7 +3988,7 @@ msgstr "Versandt"
 #~ msgid "Monitored Resources"
 #~ msgstr "Überwachte Ressourcen"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Entitätsinformationen"
 
@@ -5314,7 +5314,7 @@ msgstr "Keine Aktionen verfügbar"
 msgid "Failed to update channel"
 msgstr "Fehler beim Aktualisieren des Kanals"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Allgemein"
 
