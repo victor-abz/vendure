@@ -2,6 +2,7 @@ import { CustomFieldListInput } from '@/vdb/components/data-input/custom-field-l
 import { StructFormInput } from '@/vdb/components/data-input/struct-form-input.js';
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/vdb/components/ui/field.js';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/vdb/components/ui/tabs.js';
+import { getInputComponent } from '@/vdb/framework/extension-api/input-component-extensions.js';
 import { CustomFormComponent } from '@/vdb/framework/form-engine/custom-form-component.js';
 import { ConfigurableFieldDef } from '@/vdb/framework/form-engine/form-engine-types.js';
 import { useChannel } from '@/vdb/hooks/use-channel.js';
@@ -211,7 +212,10 @@ function CustomFieldItem({ fieldDef, control, fieldName, disabled }: Readonly<Cu
     };
     const hasCustomFormComponent = fieldDef.ui?.component;
     const isLocaleField = fieldDef.type === 'localeString' || fieldDef.type === 'localeText';
-    const shouldBeFullWidth = fieldDef.ui?.fullWidth === true;
+    const customInputComponentId = typeof fieldDef.ui?.component === 'string' ? fieldDef.ui.component : undefined;
+    const inputComponent = getInputComponent(customInputComponentId);
+    const shouldBeFullWidth =
+        fieldDef.ui?.fullWidth === true || inputComponent?.metadata?.isFullWidth === true;
     const containerClassName = shouldBeFullWidth ? 'col-span-2' : '';
     const isReadonly = (fieldDef as CustomFieldConfig).readonly ?? false;
 

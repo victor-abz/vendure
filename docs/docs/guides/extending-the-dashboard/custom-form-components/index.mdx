@@ -17,6 +17,26 @@ All form components must implement the [DashboardFormComponent type](/reference/
 This type is based on the props that are made available from `react-hook-form`, which is the
 underlying form library used by the Dashboard.
 
+### Component metadata
+
+In addition to the standard React component signature, a dashboard form component can define a static `metadata` property.
+This lets the dashboard know how your component should be rendered in certain contexts.
+
+- **`isListInput`**: Declare whether your component is intended for list fields. Use `'dynamic'` if it can handle both list and non-list fields.
+- **`isFullWidth`**: When `true`, the dashboard will render the field so it spans the full width of the standard 2-column detail form grids (e.g. `DetailFormGrid`).
+
+```tsx
+import { DashboardFormComponentProps } from '@vendure/dashboard';
+
+export function MyCustomInput(props: DashboardFormComponentProps<string>) {
+    return <textarea value={props.value} onChange={e => props.onChange(e.target.value)} />;
+}
+
+MyCustomInput.metadata = {
+    isFullWidth: true,
+};
+```
+
 Here's an example custom form component that has been annotated to explain the typical parts you will be working with:
 
 ```tsx title="src/plugins/my-plugin/dashboard/components/color-picker.tsx"
