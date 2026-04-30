@@ -104,7 +104,7 @@ msgstr "शीर्षक ५"
 msgid "Failed to add payment"
 msgstr "भुक्तानी थप्न असफल"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "अपडेट गरिएको"
 
@@ -1498,7 +1498,7 @@ msgstr "ठेगाना सफलतापूर्वक अपडेट ग
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "सिर्जना गरिएको"
 
@@ -3988,7 +3988,7 @@ msgstr "पठाइएको"
 #~ msgid "Monitored Resources"
 #~ msgstr "निगरानी गरिएका स्रोतहरू"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "निकाय जानकारी"
 
@@ -5314,7 +5314,7 @@ msgstr "कुनै कार्यहरू उपलब्ध छैनन्
 msgid "Failed to update channel"
 msgstr "च्यानल अपडेट गर्न असफल"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "सामान्य"
 

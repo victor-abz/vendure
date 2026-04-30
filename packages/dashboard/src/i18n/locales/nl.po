@@ -104,7 +104,7 @@ msgstr "Kop 5"
 msgid "Failed to add payment"
 msgstr "Betaling toevoegen mislukt"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Bijgewerkt"
 
@@ -1502,7 +1502,7 @@ msgstr "Adres succesvol bijgewerkt"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Aangemaakt"
 
@@ -3979,7 +3979,7 @@ msgstr "Verzonden"
 #~ msgid "Monitored Resources"
 #~ msgstr "Gemonitorde bronnen"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Entiteitsinformatie"
 
@@ -5309,7 +5309,7 @@ msgstr "Geen acties beschikbaar"
 msgid "Failed to update channel"
 msgstr "Kanaal bijwerken mislukt"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Algemeen"
 

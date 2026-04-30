@@ -104,7 +104,7 @@ msgstr "Título 5"
 msgid "Failed to add payment"
 msgstr "Falha ao adicionar pagamento"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Atualizado"
 
@@ -1498,7 +1498,7 @@ msgstr "Endereço atualizado com sucesso"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Criado"
 
@@ -3988,7 +3988,7 @@ msgstr "Enviado"
 #~ msgid "Monitored Resources"
 #~ msgstr "Recursos monitorados"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Informações da entidade"
 
@@ -5314,7 +5314,7 @@ msgstr "Nenhuma ação disponível"
 msgid "Failed to update channel"
 msgstr "Falha ao atualizar canal"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Geral"
 

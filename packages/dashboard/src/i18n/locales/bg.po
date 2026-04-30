@@ -104,7 +104,7 @@ msgstr "Заглавие 5"
 msgid "Failed to add payment"
 msgstr "Неуспешно добавяне на плащане"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Актуализиран"
 
@@ -1507,7 +1507,7 @@ msgstr "Адресът е актуализиран успешно"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Създаден"
 
@@ -4008,7 +4008,7 @@ msgstr "Изпратена"
 #~ msgid "Monitored Resources"
 #~ msgstr "Наблюдавани ресурси"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Информация за обекта"
 
@@ -5346,7 +5346,7 @@ msgstr "Няма налични действия"
 msgid "Failed to update channel"
 msgstr "Неуспешно актуализиране на канала"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Общи"
 

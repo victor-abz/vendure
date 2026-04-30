@@ -104,7 +104,7 @@ msgstr "כותרת 5"
 msgid "Failed to add payment"
 msgstr "הוספת התשלום נכשלה"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "עודכן"
 
@@ -1498,7 +1498,7 @@ msgstr "הכתובת עודכנה בהצלחה"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "נוצר"
 
@@ -3988,7 +3988,7 @@ msgstr "נשלח"
 #~ msgid "Monitored Resources"
 #~ msgstr "משאבים מנוטרים"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "מידע ישות"
 
@@ -5314,7 +5314,7 @@ msgstr "אין פעולות זמינות"
 msgid "Failed to update channel"
 msgstr "עדכון הערוץ נכשל"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "כללי"
 

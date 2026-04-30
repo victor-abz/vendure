@@ -104,7 +104,7 @@ msgstr "Heading 5"
 msgid "Failed to add payment"
 msgstr "Failed to add payment"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Updated"
 
@@ -1498,7 +1498,7 @@ msgstr "Address updated successfully"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Created"
 
@@ -3988,7 +3988,7 @@ msgstr "Shipped"
 #~ msgid "Monitored Resources"
 #~ msgstr "Monitored Resources"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Entity Information"
 
@@ -5314,7 +5314,7 @@ msgstr "No actions available"
 msgid "Failed to update channel"
 msgstr "Failed to update channel"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "General"
 

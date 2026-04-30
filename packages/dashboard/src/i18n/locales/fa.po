@@ -104,7 +104,7 @@ msgstr "سرفصل ۵"
 msgid "Failed to add payment"
 msgstr "افزودن پرداخت ناموفق بود"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "به‌روزرسانی شد"
 
@@ -1498,7 +1498,7 @@ msgstr "آدرس با موفقیت به‌روزرسانی شد"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "ایجاد شد"
 
@@ -3988,7 +3988,7 @@ msgstr "ارسال شده"
 #~ msgid "Monitored Resources"
 #~ msgstr "منابع نظارت شده"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "اطلاعات موجودیت"
 
@@ -5314,7 +5314,7 @@ msgstr "عملیاتی موجود نیست"
 msgid "Failed to update channel"
 msgstr "به‌روزرسانی کانال ناموفق بود"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "عمومی"
 

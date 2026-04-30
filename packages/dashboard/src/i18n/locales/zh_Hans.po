@@ -104,7 +104,7 @@ msgstr "标题 5"
 msgid "Failed to add payment"
 msgstr "添加支付失败"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "已更新"
 
@@ -1498,7 +1498,7 @@ msgstr "地址已成功更新"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "已创建"
 
@@ -3988,7 +3988,7 @@ msgstr "已发货"
 #~ msgid "Monitored Resources"
 #~ msgstr "监控资源"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "实体信息"
 
@@ -5314,7 +5314,7 @@ msgstr "无可用操作"
 msgid "Failed to update channel"
 msgstr "更新渠道失败"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "常规"
 

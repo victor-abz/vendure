@@ -104,7 +104,7 @@ msgstr "Nagłówek 5"
 msgid "Failed to add payment"
 msgstr "Nie udało się dodać płatności"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:663
+#: src/lib/framework/layout-engine/page-layout.tsx:718
 msgid "Updated"
 msgstr "Zaktualizowano"
 
@@ -1498,7 +1498,7 @@ msgstr "Adres zaktualizowany pomyślnie"
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:226
 #: src/app/routes/_authenticated/_orders/components/fulfillment-details.tsx:124
 #: src/lib/components/shared/asset/asset-gallery.tsx:747
-#: src/lib/framework/layout-engine/page-layout.tsx:650
+#: src/lib/framework/layout-engine/page-layout.tsx:705
 msgid "Created"
 msgstr "Utworzono"
 
@@ -3988,7 +3988,7 @@ msgstr "Wysłane"
 #~ msgid "Monitored Resources"
 #~ msgstr "Monitorowane zasoby"
 
-#: src/lib/framework/layout-engine/page-layout.tsx:622
+#: src/lib/framework/layout-engine/page-layout.tsx:677
 msgid "Entity Information"
 msgstr "Informacje o encji"
 
@@ -5314,7 +5314,7 @@ msgstr "Brak dostępnych akcji"
 msgid "Failed to update channel"
 msgstr "Nie udało się zaktualizować kanału"
 
-#: src/lib/components/shared/custom-fields-form.tsx:99
+#: src/lib/components/shared/custom-fields-form.tsx:101
 msgid "General"
 msgstr "Ogólne"
 
