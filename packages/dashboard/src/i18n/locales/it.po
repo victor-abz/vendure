@@ -5844,7 +5844,7 @@ msgstr "Impostazioni globali aggiornate con successo"
 
 #: src/app/routes/_authenticated/_api-keys/api-keys_.$id.tsx:115
 msgid "Successfully updated API key"
-msgstr "API Key atualizada com sucesso"
+msgstr "Chiave API aggiornata con successo"
 
 #: src/lib/components/layout/manage-languages-dialog.tsx:294
 msgid "These languages will be available for all channels to use"

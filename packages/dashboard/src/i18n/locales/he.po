@@ -2209,7 +2209,7 @@ msgstr "SKU"
 #. js-lingui-explicit-id
 #: src/i18n/common-strings.ts:102
 msgid "fieldName.slug"
-msgstr "slug"
+msgstr "Slug"
 
 #. js-lingui-explicit-id
 #: src/i18n/common-strings.ts:103
@@ -3266,7 +3266,7 @@ msgstr "כן"
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:175
 #: src/app/routes/_authenticated/_products/products_.$id.tsx:246
 msgid "Slug"
-msgstr "slug"
+msgstr "Slug"
 
 #: src/lib/components/shared/asset/asset-focal-point-editor.tsx:97
 msgid "Set Focal Point"
