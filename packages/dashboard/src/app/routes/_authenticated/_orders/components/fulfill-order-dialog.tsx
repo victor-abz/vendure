@@ -120,7 +120,7 @@ export function FulfillOrderDialog({ order, onSuccess }: Readonly<FulfillOrderDi
                 code: defaultHandler.code,
                 arguments: defaultHandler.args.map(arg => ({
                     name: arg.name,
-                    value: arg.defaultValue ?? '',
+                    value: arg.defaultValue != null ? arg.defaultValue.toString() : '',
                 })),
             });
         }
