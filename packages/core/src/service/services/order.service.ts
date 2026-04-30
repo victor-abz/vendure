@@ -85,10 +85,10 @@ import { Channel } from '../../entity/channel/channel.entity';
 import { Customer } from '../../entity/customer/customer.entity';
 import { Fulfillment } from '../../entity/fulfillment/fulfillment.entity';
 import { HistoryEntry } from '../../entity/history-entry/history-entry.entity';
-import { FulfillmentLine } from '../../entity/order-line-reference/fulfillment-line.entity';
-import { OrderLine } from '../../entity/order-line/order-line.entity';
-import { OrderModification } from '../../entity/order-modification/order-modification.entity';
 import { Order } from '../../entity/order/order.entity';
+import { OrderLine } from '../../entity/order-line/order-line.entity';
+import { FulfillmentLine } from '../../entity/order-line-reference/fulfillment-line.entity';
+import { OrderModification } from '../../entity/order-modification/order-modification.entity';
 import { Payment } from '../../entity/payment/payment.entity';
 import { ProductVariant } from '../../entity/product-variant/product-variant.entity';
 import { Promotion } from '../../entity/promotion/promotion.entity';
@@ -1275,22 +1275,32 @@ export class OrderService {
         orderId: ID,
         state: OrderState,
     ): Promise<Order | OrderStateTransitionError> {
-        const order = await this.getOrderOrThrow(ctx, orderId);
-        order.payments = await this.getOrderPayments(ctx, orderId);
-        const fromState = order.state;
-        let finalize: () => Promise<any>;
-        try {
-            const result = await this.orderStateMachine.transition(ctx, order, state);
-            finalize = result.finalize;
-        } catch (e: any) {
-            const transitionError = ctx.translate(e.message, { fromState, toState: state });
-            return new OrderStateTransitionError({ transitionError, fromState, toState: state });
-        }
-        await this.connection.getRepository(ctx, Order).save(order, { reload: false });
-        await this.eventBus.publish(new OrderStateTransitionEvent(fromState, state, ctx, order));
-        await finalize();
-        await this.connection.getRepository(ctx, Order).save(order, { reload: false });
-        return order;
+        // Wrapped in withTransaction so that the in-memory state mutation, the
+        // first save, the onTransitionEnd hooks (which themselves perform DB
+        // writes — stock allocations, history entries, OrderPlacedStrategy
+        // mutations) and the second save all commit or roll back together.
+        // Without this, a throwing onTransitionEnd would leave the order in a
+        // half-committed state (state=new, active=true, orderPlacedAt=null).
+        // Joins any existing transaction in ctx, so callers that already have
+        // @Transaction() are unaffected. See #4686.
+        return this.connection.withTransaction(ctx, async txCtx => {
+            const order = await this.getOrderOrThrow(txCtx, orderId);
+            order.payments = await this.getOrderPayments(txCtx, orderId);
+            const fromState = order.state;
+            let finalize: () => Promise<any>;
+            try {
+                const result = await this.orderStateMachine.transition(txCtx, order, state);
+                finalize = result.finalize;
+            } catch (e: any) {
+                const transitionError = txCtx.translate(e.message, { fromState, toState: state });
+                return new OrderStateTransitionError({ transitionError, fromState, toState: state });
+            }
+            await this.connection.getRepository(txCtx, Order).save(order, { reload: false });
+            await this.eventBus.publish(new OrderStateTransitionEvent(fromState, state, txCtx, order));
+            await finalize();
+            await this.connection.getRepository(txCtx, Order).save(order, { reload: false });
+            return order;
+        });
     }
 
     /**
@@ -1320,26 +1330,30 @@ export class OrderService {
         state: RefundState,
         transactionId?: string,
     ): Promise<Refund | RefundStateTransitionError> {
-        const refund = await this.connection.getEntityOrThrow(ctx, Refund, refundId, {
-            relations: ['payment', 'payment.order'],
+        // Wrapped in withTransaction so the state save and onTransitionEnd hooks
+        // are atomic — see the equivalent comment on transitionToState. #4686.
+        return this.connection.withTransaction(ctx, async txCtx => {
+            const refund = await this.connection.getEntityOrThrow(txCtx, Refund, refundId, {
+                relations: ['payment', 'payment.order'],
+            });
+            if (transactionId && refund.transactionId !== transactionId) {
+                refund.transactionId = transactionId;
+            }
+            const fromState = refund.state;
+            const toState = state;
+            const { finalize } = await this.refundStateMachine.transition(
+                txCtx,
+                refund.payment.order,
+                refund,
+                toState,
+            );
+            await this.connection.getRepository(txCtx, Refund).save(refund);
+            await finalize();
+            await this.eventBus.publish(
+                new RefundStateTransitionEvent(fromState, toState, txCtx, refund, refund.payment.order),
+            );
+            return refund;
         });
-        if (transactionId && refund.transactionId !== transactionId) {
-            refund.transactionId = transactionId;
-        }
-        const fromState = refund.state;
-        const toState = state;
-        const { finalize } = await this.refundStateMachine.transition(
-            ctx,
-            refund.payment.order,
-            refund,
-            toState,
-        );
-        await this.connection.getRepository(ctx, Refund).save(refund);
-        await finalize();
-        await this.eventBus.publish(
-            new RefundStateTransitionEvent(fromState, toState, ctx, refund, refund.payment.order),
-        );
-        return refund;
     }
 
     /**
@@ -1946,24 +1960,28 @@ export class OrderService {
      * Settles a Refund by transitioning it to the `Settled` state.
      */
     async settleRefund(ctx: RequestContext, input: SettleRefundInput): Promise<Refund> {
-        const refund = await this.connection.getEntityOrThrow(ctx, Refund, input.id, {
-            relations: ['payment', 'payment.order'],
+        // Wrapped in withTransaction so the state save and onTransitionEnd hooks
+        // are atomic — see the equivalent comment on transitionToState. #4686.
+        return this.connection.withTransaction(ctx, async txCtx => {
+            const refund = await this.connection.getEntityOrThrow(txCtx, Refund, input.id, {
+                relations: ['payment', 'payment.order'],
+            });
+            refund.transactionId = input.transactionId;
+            const fromState = refund.state;
+            const toState = 'Settled';
+            const { finalize } = await this.refundStateMachine.transition(
+                txCtx,
+                refund.payment.order,
+                refund,
+                toState,
+            );
+            await this.connection.getRepository(txCtx, Refund).save(refund);
+            await finalize();
+            await this.eventBus.publish(
+                new RefundStateTransitionEvent(fromState, toState, txCtx, refund, refund.payment.order),
+            );
+            return refund;
         });
-        refund.transactionId = input.transactionId;
-        const fromState = refund.state;
-        const toState = 'Settled';
-        const { finalize } = await this.refundStateMachine.transition(
-            ctx,
-            refund.payment.order,
-            refund,
-            toState,
-        );
-        await this.connection.getRepository(ctx, Refund).save(refund);
-        await finalize();
-        await this.eventBus.publish(
-            new RefundStateTransitionEvent(fromState, toState, ctx, refund, refund.payment.order),
-        );
-        return refund;
     }
 
     /**

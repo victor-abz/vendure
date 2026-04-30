@@ -2956,7 +2956,7 @@
                   "title": "PromotionService",
                   "slug": "promotion-service",
                   "file": "docs/reference/typescript-api/services/promotion-service.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-04-30T14:07:27Z"
                 },
                 {
                   "title": "ProvinceService",
@@ -3875,7 +3875,7 @@
                   "title": "FormComponents",
                   "slug": "form-components",
                   "file": "docs/reference/dashboard/extensions-api/form-components.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-04-30T14:07:27Z"
                 },
                 {
                   "title": "HistoryEntries",
@@ -4147,13 +4147,13 @@
                   "title": "PageActionBar",
                   "slug": "page-action-bar",
                   "file": "docs/reference/dashboard/page-layout/page-action-bar.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-04-30T14:07:27Z"
                 },
                 {
                   "title": "PageBlock",
                   "slug": "page-block",
                   "file": "docs/reference/dashboard/page-layout/page-block.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-04-30T14:07:27Z"
                 },
                 {
                   "title": "PageTitle",
