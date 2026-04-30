@@ -2431,7 +2431,7 @@ msgstr "既存を割り当て"
 
 #: src/lib/components/data-table/human-readable-operator.tsx:34
 msgid "is null"
-msgstr "NULL"
+msgstr "NULL である"
 
 #: src/app/routes/_authenticated/_customer-groups/components/customer-group-members-sheet.tsx:37
 msgid "These are the customers in the <0>{customerGroupName}</0> customer group."
