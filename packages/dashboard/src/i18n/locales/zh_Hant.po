@@ -198,7 +198,7 @@ msgstr "啟用後，商品目錄中輸入的價格將包含預設稅務區域的
 #~ msgid "Create variants for your product"
 #~ msgstr "為您的商品建立變體"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:258
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:291
 msgid "Draft order completed"
 msgstr "草稿訂單已完成"
 
@@ -539,7 +539,7 @@ msgstr "管理對所有使用者可見的全域儲存檢視"
 msgid "Search payment methods..."
 msgstr "搜尋付款方式..."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:217
 msgid "Shipping address unset for order"
 msgstr "訂單已取消配送地址"
 
@@ -684,6 +684,11 @@ msgstr "訂單草稿已準備就緒可以完成"
 msgid "Metadata"
 msgstr "中繼資料"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:251
+msgid "Failed to set shipping method for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:48
 #: src/lib/components/data-table/data-table.tsx:367
 msgid "Filter..."
@@ -735,7 +740,7 @@ msgstr "確認導覽"
 msgid "Link target"
 msgstr "連結目標"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:326
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:365
 msgid "Complete draft"
 msgstr "完成草稿"
 
@@ -786,7 +791,7 @@ msgstr "輸入此退款結算的交易 ID"
 msgid "Your API Key"
 msgstr "您的 API Key"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:310
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:349
 msgid "Are you sure you want to delete this draft order?"
 msgstr "確定要刪除此草稿訂單嗎？"
 
@@ -837,7 +842,7 @@ msgstr "折扣"
 msgid "Enter refund note"
 msgstr "輸入退款備註"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:145
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:151
 msgid "Order line removed"
 msgstr "訂單行已移除"
 
@@ -854,6 +859,11 @@ msgstr "金鑰"
 msgid "Confirm"
 msgstr "確認"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:303
+msgid "Failed to complete draft order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:118
 msgid "Failed to create collection"
 msgstr "建立集合失敗"
@@ -868,7 +878,7 @@ msgstr "建立商品失敗"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:276
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:233
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:418
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:457
 #: src/lib/components/shared/role-code-label.tsx:8
 msgid "Customer"
 msgstr "客戶"
@@ -878,7 +888,7 @@ msgstr "客戶"
 msgid "Error loading order history: {0}"
 msgstr "載入訂單歷程時發生錯誤：{0}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:183
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:195
 msgid "Shipping address set for order"
 msgstr "訂單已設定配送地址"
 
@@ -924,7 +934,7 @@ msgstr "這些是 <0>{facetName}</0> 屬性的屬性值。"
 msgid "Successfully added payment to order"
 msgstr "已成功向訂單新增付款"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:191
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:206
 msgid "Billing address set for order"
 msgstr "已為訂單設定帳單地址"
 
@@ -1001,6 +1011,11 @@ msgstr "已配置"
 #~ msgid "Add another option group"
 #~ msgstr "新增另一個選項群組"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:270
+msgid "Failed to set coupon code for order: {0}"
+msgstr ""
+
 #: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
 msgstr "探索 Platform & Cloud"
@@ -1022,7 +1037,7 @@ msgstr "已成功建立集合"
 msgid "Price"
 msgstr "價格"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:343
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
 msgstr "草稿訂單"
@@ -1065,7 +1080,7 @@ msgstr "啟用後，促銷在商店中可用"
 msgid "When tracked, product variant stock levels will be automatically adjusted when sold. This setting can be overridden by individual product variants."
 msgstr "追蹤後，商品變體庫存水準將在售出時自動調整。此設定可由各個商品變體覆寫。"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:218
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:242
 msgid "Shipping method set for order"
 msgstr "訂單已設定配送方式"
 
@@ -1109,6 +1124,11 @@ msgstr "資源"
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:188
 msgid "Email address"
 msgstr "電子郵件地址"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:281
+msgid "Failed to remove coupon code from order: {0}"
+msgstr ""
 
 #: src/lib/components/data-input/slug-input.tsx:266
 #: src/lib/components/data-input/slug-input.tsx:267
@@ -1260,7 +1280,7 @@ msgstr ""
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:108
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:111
 msgid "Item added to order"
 msgstr "項目已新增至訂單"
 
@@ -1337,7 +1357,7 @@ msgstr "訂單已轉換"
 msgid "is before"
 msgstr "在之前"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:309
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:348
 msgid "Delete draft order"
 msgstr "刪除草稿訂單"
 
@@ -1384,6 +1404,11 @@ msgstr "檢視已成功轉換為全域"
 #: src/lib/components/data-table/human-readable-operator.tsx:28
 msgid "before"
 msgstr "之前"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:188
+msgid "Failed to set customer for order: {0}"
+msgstr ""
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:745
 msgid "Size"
@@ -1511,6 +1536,11 @@ msgstr "正在載入地址..."
 msgid "Select a target collection to move {0} to."
 msgstr "選取要將 {0} 移動到的目標集合。"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:232
+msgid "Failed to unset billing address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_customers/components/customer-history/customer-history-utils.tsx:45
 msgid "Customer details updated"
 msgstr "客戶詳細資料已更新"
@@ -1559,6 +1589,11 @@ msgstr "前往最後一頁"
 msgid "Cancel"
 msgstr "取消"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:95
+msgid "Failed to update order custom fields: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:160
 msgid "Successfully created product variant"
@@ -1590,7 +1625,7 @@ msgstr "新增稅務類別"
 msgid "Partial refund completed"
 msgstr "部分退款已完成"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:413
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:452
 msgid "Set custom fields"
 msgstr "設定自訂欄位"
 
@@ -1618,7 +1653,7 @@ msgstr "原因:"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:291
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:248
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:470
 msgid "Shipping address"
 msgstr "配送地址"
 
@@ -1791,7 +1826,7 @@ msgstr "備註已新增"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "選取要履行的數量並設定履行處理器"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:207
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:228
 msgid "Billing address unset for order"
 msgstr "已從訂單移除帳單地址"
 
@@ -2301,6 +2336,11 @@ msgstr "集合移動成功"
 msgid "Registered"
 msgstr "已註冊"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+msgid "Failed to set shipping address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/job-queue.tsx:231
 msgid "Cancel Job"
 msgstr "取消工作"
@@ -2385,7 +2425,7 @@ msgstr "已選取項目"
 msgid "Values"
 msgstr "值"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:161
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:170
 msgid "Customer set for order"
 msgstr "訂單已設定客戶"
 
@@ -2561,7 +2601,7 @@ msgstr "這將移除此產品的所有選項群組並返回變體設定選擇。
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:277
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:463
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:502
 msgid "Billing address"
 msgstr "帳單地址"
 
@@ -3422,7 +3462,7 @@ msgstr "在後面新增列"
 msgid "Tax total"
 msgstr "稅金總計"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:335
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:374
 msgid "Draft order status"
 msgstr "草稿訂單狀態"
 
@@ -3443,7 +3483,7 @@ msgstr "已成功建立屬性值"
 msgid "Marketing"
 msgstr "行銷"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:275
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:311
 msgid "Draft order deleted"
 msgstr "草稿訂單已刪除"
 
@@ -3757,6 +3797,11 @@ msgstr "描述"
 msgid "Countries"
 msgstr "國家"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:160
+msgid "Failed to remove order line: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:182
 msgid "Street Address 2"
 msgstr "街道地址 2"
@@ -3901,7 +3946,7 @@ msgstr "+ {0} 個更多"
 msgid "Option Groups"
 msgstr "選項群組"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:392
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
 msgid "Custom fields"
 msgstr "自訂欄位"
 
@@ -4016,6 +4061,11 @@ msgstr "超級管理員"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 #~ msgid "Some resources are down"
 #~ msgstr "部分資源已關閉"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:141
+msgid "Failed to update order line: {0}"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:84
 msgid "Insert link"
@@ -4186,6 +4236,11 @@ msgstr "已成功建立付款方式"
 msgid "Customer information updated"
 msgstr "客戶資訊已更新"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:318
+msgid "Failed to delete draft order: {0}"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:120
 msgid "Failed to convert view to global"
 msgstr "將檢視轉換為全域失敗"
@@ -4317,7 +4372,7 @@ msgstr "或"
 msgid "Manage tags"
 msgstr "管理標籤"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:247
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:277
 msgid "Coupon code removed from order"
 msgstr "優惠券代碼已從訂單中移除"
 
@@ -4339,6 +4394,11 @@ msgstr "更新屬性值失敗"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:82
 msgid "Order fulfilled"
 msgstr "訂單已履行"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:210
+msgid "Failed to set billing address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -4394,7 +4454,7 @@ msgstr "此配送方式的資格檢查器條件不符合目前訂單和配送地
 msgid "Add coupon code"
 msgstr "新增優惠券代碼"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:234
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:261
 msgid "Coupon code set for order"
 msgstr "已為訂單設定優惠券代碼"
 
@@ -4791,7 +4851,7 @@ msgstr "系統"
 msgid "Variant name"
 msgstr "變體名稱"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:504
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:543
 msgid "Remove"
 msgstr "移除"
 
@@ -5160,7 +5220,7 @@ msgstr "測試資料已更新。按一下「執行測試」以查看更新的結
 msgid "is not in"
 msgstr "不在"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:129
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:132
 msgid "Order line updated"
 msgstr "訂單行已更新"
 
@@ -5234,7 +5294,7 @@ msgstr "影片"
 msgid "less than"
 msgstr "小於"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:118
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:121
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "無法新增變體。請確保父產品已啟用。"
 
@@ -5296,7 +5356,7 @@ msgstr "全域語言"
 msgid "New administrator"
 msgstr "新增管理員"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:316
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:355
 msgid "Delete draft"
 msgstr "刪除草稿"
 
@@ -5605,6 +5665,11 @@ msgstr "新增選項值失敗"
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:140
 msgid "Add option value to {groupName}"
 msgstr "向 {groupName} 新增選項值"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:221
+msgid "Failed to unset shipping address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:82
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96

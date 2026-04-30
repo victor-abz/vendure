@@ -198,7 +198,7 @@ msgstr "Bu etkinleştirildiğinde, ürün kataloğuna girilen fiyatlara varsayı
 #~ msgid "Create variants for your product"
 #~ msgstr "Ürününüz için varyantlar oluşturun"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:258
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:291
 msgid "Draft order completed"
 msgstr "Taslak sipariş tamamlandı"
 
@@ -539,7 +539,7 @@ msgstr "Tüm kullanıcılar tarafından görülebilen genel kaydedilmiş görün
 msgid "Search payment methods..."
 msgstr "Ödeme yöntemlerini ara..."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:217
 msgid "Shipping address unset for order"
 msgstr "Sipariş için kargo adresi kaldırıldı"
 
@@ -684,6 +684,11 @@ msgstr "Sipariş taslağı tamamlanmaya hazır"
 msgid "Metadata"
 msgstr "Metadata"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:251
+msgid "Failed to set shipping method for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:48
 #: src/lib/components/data-table/data-table.tsx:367
 msgid "Filter..."
@@ -735,7 +740,7 @@ msgstr "Gezinmeyi onayla"
 msgid "Link target"
 msgstr "Bağlantı hedefi"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:326
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:365
 msgid "Complete draft"
 msgstr "Taslağı tamamla"
 
@@ -786,7 +791,7 @@ msgstr "Bu iade ödemesi için işlem ID'sini girin"
 msgid "Your API Key"
 msgstr "API Anahtarınız"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:310
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:349
 msgid "Are you sure you want to delete this draft order?"
 msgstr "Bu taslak siparişi silmek istediğinizden emin misiniz?"
 
@@ -837,7 +842,7 @@ msgstr "İndirimler"
 msgid "Enter refund note"
 msgstr "İade notu girin"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:145
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:151
 msgid "Order line removed"
 msgstr "Sipariş satırı kaldırıldı"
 
@@ -854,6 +859,11 @@ msgstr "Anahtar"
 msgid "Confirm"
 msgstr "Onayla"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:303
+msgid "Failed to complete draft order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:118
 msgid "Failed to create collection"
 msgstr "Koleksiyon oluşturulamadı"
@@ -868,7 +878,7 @@ msgstr "Ürün oluşturulamadı"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:276
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:233
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:418
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:457
 #: src/lib/components/shared/role-code-label.tsx:8
 msgid "Customer"
 msgstr "Müşteri"
@@ -878,7 +888,7 @@ msgstr "Müşteri"
 msgid "Error loading order history: {0}"
 msgstr "Sipariş geçmişi yüklenirken hata: {0}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:183
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:195
 msgid "Shipping address set for order"
 msgstr "Sipariş için kargo adresi ayarlandı"
 
@@ -924,7 +934,7 @@ msgstr "Bunlar <0>{facetName}</0> özelliği için özellik değerleridir."
 msgid "Successfully added payment to order"
 msgstr "Ödeme siparişe başarıyla eklendi"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:191
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:206
 msgid "Billing address set for order"
 msgstr "Sipariş için fatura adresi ayarlandı"
 
@@ -1001,6 +1011,11 @@ msgstr "Tahsis edildi"
 #~ msgid "Add another option group"
 #~ msgstr "Başka bir seçenek grubu ekle"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:270
+msgid "Failed to set coupon code for order: {0}"
+msgstr ""
+
 #: src/lib/components/layout/nav-user.tsx:102
 msgid "Explore Platform & Cloud"
 msgstr "Platform & Cloud'u Keşfedin"
@@ -1022,7 +1037,7 @@ msgstr "Koleksiyon başarıyla oluşturuldu"
 msgid "Price"
 msgstr "Fiyat"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:304
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:343
 #: src/app/routes/_authenticated/_orders/orders.tsx:115
 msgid "Draft order"
 msgstr "Taslak sipariş"
@@ -1065,7 +1080,7 @@ msgstr "Etkinleştirildiğinde promosyon mağazada kullanılabilir"
 msgid "When tracked, product variant stock levels will be automatically adjusted when sold. This setting can be overridden by individual product variants."
 msgstr "İzlendiğinde, ürün varyantı stok seviyeleri satıldığında otomatik olarak ayarlanacaktır. Bu ayar, tek tek ürün varyantları tarafından geçersiz kılınabilir."
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:218
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:242
 msgid "Shipping method set for order"
 msgstr "Sipariş için kargo yöntemi ayarlandı"
 
@@ -1109,6 +1124,11 @@ msgstr "Varlıklar"
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx:188
 msgid "Email address"
 msgstr "E-posta adresi"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:281
+msgid "Failed to remove coupon code from order: {0}"
+msgstr ""
 
 #: src/lib/components/data-input/slug-input.tsx:266
 #: src/lib/components/data-input/slug-input.tsx:267
@@ -1260,7 +1280,7 @@ msgstr ""
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:108
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:111
 msgid "Item added to order"
 msgstr "Ürün siparişe eklendi"
 
@@ -1337,7 +1357,7 @@ msgstr "Sipariş geçiş yaptı"
 msgid "is before"
 msgstr "öncesinde"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:309
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:348
 msgid "Delete draft order"
 msgstr "Taslak siparişi sil"
 
@@ -1384,6 +1404,11 @@ msgstr "Görünüm başarıyla genele dönüştürüldü"
 #: src/lib/components/data-table/human-readable-operator.tsx:28
 msgid "before"
 msgstr "önce"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:188
+msgid "Failed to set customer for order: {0}"
+msgstr ""
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:745
 msgid "Size"
@@ -1511,6 +1536,11 @@ msgstr "Adresler yükleniyor..."
 msgid "Select a target collection to move {0} to."
 msgstr "{0} öğesini taşımak için bir hedef koleksiyon seçin."
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:232
+msgid "Failed to unset billing address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_customers/components/customer-history/customer-history-utils.tsx:45
 msgid "Customer details updated"
 msgstr "Müşteri bilgileri güncellendi"
@@ -1559,6 +1589,11 @@ msgstr "Son sayfaya git"
 msgid "Cancel"
 msgstr "İptal"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:95
+msgid "Failed to update order custom fields: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:127
 #: src/app/routes/_authenticated/_products/components/add-product-variant-dialog.tsx:160
 msgid "Successfully created product variant"
@@ -1590,7 +1625,7 @@ msgstr "Yeni vergi kategorisi"
 msgid "Partial refund completed"
 msgstr "Kısmi iade tamamlandı"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:413
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:452
 msgid "Set custom fields"
 msgstr "Özel alanları ayarla"
 
@@ -1618,7 +1653,7 @@ msgstr "Sebep:"
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:291
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:248
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:470
 msgid "Shipping address"
 msgstr "Kargo adresi"
 
@@ -1791,7 +1826,7 @@ msgstr "Not eklendi"
 msgid "Select quantities to fulfill and configure the fulfillment handler"
 msgstr "Teslim edilecek miktarları seçin ve teslimat işleyicisini yapılandırın"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:207
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:228
 msgid "Billing address unset for order"
 msgstr "Siparişten fatura adresi kaldırıldı"
 
@@ -2301,6 +2336,11 @@ msgstr "Koleksiyonlar başarıyla taşındı"
 msgid "Registered"
 msgstr "Kayıtlı"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:199
+msgid "Failed to set shipping address for order: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/job-queue.tsx:231
 msgid "Cancel Job"
 msgstr "İşi İptal Et"
@@ -2385,7 +2425,7 @@ msgstr "Seçili Öğeler"
 msgid "Values"
 msgstr "Değerler"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:161
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:170
 msgid "Customer set for order"
 msgstr "Sipariş için müşteri ayarlandı"
 
@@ -2561,7 +2601,7 @@ msgstr "Bu, bu üründeki tüm seçenek gruplarını kaldıracak ve varyant kuru
 
 #: src/app/routes/_authenticated/_orders/components/order-detail-shared.tsx:299
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:277
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:463
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:502
 msgid "Billing address"
 msgstr "Fatura adresi"
 
@@ -3422,7 +3462,7 @@ msgstr "Sonrasına satır ekle"
 msgid "Tax total"
 msgstr "Toplam vergi"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:335
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:374
 msgid "Draft order status"
 msgstr "Taslak sipariş durumu"
 
@@ -3443,7 +3483,7 @@ msgstr "Özellik değeri başarıyla oluşturuldu"
 msgid "Marketing"
 msgstr "Pazarlama"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:275
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:311
 msgid "Draft order deleted"
 msgstr "Taslak sipariş silindi"
 
@@ -3757,6 +3797,11 @@ msgstr "Açıklama"
 msgid "Countries"
 msgstr "Ülkeler"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:160
+msgid "Failed to remove order line: {0}"
+msgstr ""
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx:182
 msgid "Street Address 2"
 msgstr "Sokak Adresi 2"
@@ -3901,7 +3946,7 @@ msgstr "+ {0} daha"
 msgid "Option Groups"
 msgstr "Seçenek Grupları"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:392
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:431
 msgid "Custom fields"
 msgstr "Özel alanlar"
 
@@ -4016,6 +4061,11 @@ msgstr "Süper Yönetici"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 #~ msgid "Some resources are down"
 #~ msgstr "Bazı kaynaklar çalışmıyor"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:141
+msgid "Failed to update order line: {0}"
+msgstr ""
 
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx:84
 msgid "Insert link"
@@ -4186,6 +4236,11 @@ msgstr "Ödeme yöntemi başarıyla oluşturuldu"
 msgid "Customer information updated"
 msgstr "Müşteri bilgileri güncellendi"
 
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:318
+msgid "Failed to delete draft order: {0}"
+msgstr ""
+
 #: src/lib/components/data-table/views-sheet.tsx:120
 msgid "Failed to convert view to global"
 msgstr "Görünüm genele dönüştürülemedi"
@@ -4317,7 +4372,7 @@ msgstr "VEYA"
 msgid "Manage tags"
 msgstr "Etiketleri yönet"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:247
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:277
 msgid "Coupon code removed from order"
 msgstr "Kupon kodu siparişten kaldırıldı"
 
@@ -4339,6 +4394,11 @@ msgstr "Özellik değeri güncellenemedi"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:82
 msgid "Order fulfilled"
 msgstr "Sipariş teslim edildi"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:210
+msgid "Failed to set billing address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:271
 msgid "No shipping address"
@@ -4394,7 +4454,7 @@ msgstr "Bu kargo yönteminin uygunluk kontrolü koşulları mevcut sipariş ve k
 msgid "Add coupon code"
 msgstr "Kupon kodu ekle"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:234
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:261
 msgid "Coupon code set for order"
 msgstr "Sipariş için kupon kodu ayarlandı"
 
@@ -4791,7 +4851,7 @@ msgstr "Sistem"
 msgid "Variant name"
 msgstr "Varyant adı"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:504
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:543
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -5160,7 +5220,7 @@ msgstr "Test verileri güncellendi. Güncellenmiş sonuçları görmek için \"T
 msgid "is not in"
 msgstr "içinde değil"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:129
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:132
 msgid "Order line updated"
 msgstr "Sipariş satırı güncellendi"
 
@@ -5234,7 +5294,7 @@ msgstr "Video"
 msgid "less than"
 msgstr "küçüktür"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:118
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:121
 msgid "The variant could not be added. Ensure the parent product is enabled."
 msgstr "Varyant eklenemedi. Ana ürünün etkin olduğundan emin olun."
 
@@ -5296,7 +5356,7 @@ msgstr "Genel Diller"
 msgid "New administrator"
 msgstr "Yeni yönetici"
 
-#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:316
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:355
 msgid "Delete draft"
 msgstr "Taslağı sil"
 
@@ -5605,6 +5665,11 @@ msgstr "Seçenek değeri eklenemedi"
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:140
 msgid "Add option value to {groupName}"
 msgstr "{groupName}'e seçenek değeri ekle"
+
+#. placeholder {0}: error.message
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:221
+msgid "Failed to unset shipping address for order: {0}"
+msgstr ""
 
 #: src/app/routes/_authenticated/_orders/components/add-surcharge-form.tsx:82
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:96
