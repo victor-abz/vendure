@@ -27,6 +27,7 @@ function PromotionListPage() {
             listQuery={promotionListDocument}
             route={Route}
             title={<Trans>Promotions</Trans>}
+            defaultSort={[{ id: 'createdAt', desc: true }]}
             defaultVisibility={{
                 name: true,
                 couponCode: true,
