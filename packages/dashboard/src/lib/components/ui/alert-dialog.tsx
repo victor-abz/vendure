@@ -1,5 +1,5 @@
 import { cn } from '@/vdb/lib/utils.js';
-import { AlertDialog as AlertDialogPrimitive } from '@base-ui/react/alert-dialog';
+import { AlertDialogPrimitive } from '@vendure-io/ui/lib/base-ui';
 
 export {
     AlertDialog,

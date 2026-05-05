@@ -1,5 +1,5 @@
 import { cn } from '@/vdb/lib/utils.js';
-import { Dialog as DialogPrimitive } from '@base-ui/react/dialog';
+import { DialogPrimitive } from '@vendure-io/ui/lib/base-ui';
 
 export {
     Dialog,
