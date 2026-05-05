@@ -2,16 +2,17 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ActionBarItem } from './action-bar-item-wrapper.js';
-import { PageActionBar, PageBlock, PageLayout } from './page-layout.js';
-import { registerDashboardActionBarItem, registerDashboardPageBlock } from './layout-extensions.js';
-import { PageContext } from './page-provider.js';
-import { globalRegistry } from '../registry/global-registry.js';
 import { UserSettingsContext, type UserSettingsContextType } from '../../providers/user-settings.js';
 import type { ActionBarItemPosition } from '../extension-api/types/layout.js';
+import { globalRegistry } from '../registry/global-registry.js';
+import { ActionBarItem } from './action-bar-item-wrapper.js';
+import { registerDashboardActionBarItem, registerDashboardPageBlock } from './layout-extensions.js';
+import { PageActionBar, PageBlock, PageLayout } from './page-layout.js';
+import { PageContext } from './page-provider.js';
 
 const useIsMobileMock = vi.hoisted(() => vi.fn(() => false));
 const useCopyToClipboardMock = vi.hoisted(() => vi.fn(() => [null, vi.fn()]));
+const hasPermissionsMock = vi.hoisted(() => vi.fn(() => true));
 
 vi.mock('@/vdb/hooks/use-mobile.js', () => ({
     useIsMobile: useIsMobileMock,
@@ -23,7 +24,7 @@ vi.mock('@uidotdev/usehooks', () => ({
 
 vi.mock('@/vdb/hooks/use-permissions.js', () => ({
     usePermissions: () => ({
-        hasPermissions: () => true,
+        hasPermissions: hasPermissionsMock,
     }),
 }));
 
@@ -37,6 +38,7 @@ function registerBlock(
     id: string,
     order: 'before' | 'after' | 'replace',
     pageId = 'customer-list',
+    requiresPermission: string[] = [],
 ): void {
     registerDashboardPageBlock({
         id,
@@ -47,14 +49,11 @@ function registerBlock(
             position: { blockId: 'list-table', order },
         },
         component: ({ context }) => <div data-testid={`page-block-${id}`}>{context.pageId}</div>,
-});
+        requiresPermission: requiresPermission,
+    });
 }
 
-function registerActionBarItem(
-    id: string,
-    position?: ActionBarItemPosition,
-    pageId = 'customer-list',
-): void {
+function registerActionBarItem(id: string, position?: ActionBarItemPosition, pageId = 'customer-list'): void {
     registerDashboardActionBarItem({
         pageId,
         id,
@@ -165,6 +164,7 @@ describe('PageLayout', () => {
         useIsMobileMock.mockReset();
         useCopyToClipboardMock.mockReset();
         useCopyToClipboardMock.mockReturnValue([null, vi.fn()]);
+        hasPermissionsMock.mockReset();
         const pageBlockRegistry = globalRegistry.get('dashboardPageBlockRegistry');
         pageBlockRegistry.clear();
         const actionBarItemRegistry = globalRegistry.get('dashboardActionBarItemRegistry');
@@ -178,10 +178,10 @@ describe('PageLayout', () => {
 
         const markup = renderPageLayout(
             <PageBlock column="main" blockId="list-table">
-        <div data-testid="page-block-original">original</div>
+                <div data-testid="page-block-original">original</div>
             </PageBlock>,
-        { isDesktop: true },
-    );
+            { isDesktop: true },
+        );
 
         expect(getRenderedBlockIds(markup)).toEqual([
             'page-block-before-1',
@@ -197,10 +197,10 @@ describe('PageLayout', () => {
 
         const markup = renderPageLayout(
             <PageBlock column="main" blockId="list-table">
-        <div data-testid="page-block-original">original</div>
+                <div data-testid="page-block-original">original</div>
             </PageBlock>,
-        { isDesktop: true },
-    );
+            { isDesktop: true },
+        );
 
         expect(getRenderedBlockIds(markup)).toEqual(['page-block-replacement-1', 'page-block-replacement-2']);
     });
@@ -211,16 +211,34 @@ describe('PageLayout', () => {
 
         const markup = renderPageLayout(
             <PageBlock column="main" blockId="list-table">
-        <div data-testid="page-block-original">original</div>
+                <div data-testid="page-block-original">original</div>
             </PageBlock>,
-        { isDesktop: false },
-    );
+            { isDesktop: false },
+        );
 
         expect(getRenderedBlockIds(markup)).toEqual([
             'page-block-before-mobile',
             'page-block-original',
             'page-block-after-mobile',
         ]);
+    });
+
+    it("won't render blocks without required permissions", () => {
+        hasPermissionsMock.mockReturnValueOnce(false);
+
+        registerBlock('permission-guard', 'before', 'customer-list', ['permission-2']);
+
+        const markup = renderPageLayout(
+            <PageBlock column="main" blockId="list-table">
+                <div data-testid="page-block-original">original</div>
+            </PageBlock>,
+            { isDesktop: true },
+        );
+
+        const blockIds = getRenderedBlockIds(markup);
+
+        expect(blockIds).toEqual(['page-block-original']);
+        expect(blockIds).not.toContain('page-block-permission-guard');
     });
 
     it('positions an extension action bar item before another extension item', () => {
