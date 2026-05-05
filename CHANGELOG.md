@@ -1,3 +1,41 @@
+## <small>3.6.3 (2026-05-05)</small>
+
+
+#### Fixes
+
+* **admin-ui** Handle tokenMethod array form when generating ui-config (#4656) (#4663) ([a8ea074](https://github.com/vendurehq/vendure/commit/a8ea074)), closes [#4656](https://github.com/vendurehq/vendure/issues/4656) [#4663](https://github.com/vendurehq/vendure/issues/4663)
+* **core** Avoid OOM in product-to-channel assign/remove via query relation strategy (#4669) ([801d9c0](https://github.com/vendurehq/vendure/commit/801d9c0)), closes [#4669](https://github.com/vendurehq/vendure/issues/4669)
+* **core** Create job queues in onModuleInit instead of onApplicationBootstrap (#4680) ([bc72b22](https://github.com/vendurehq/vendure/commit/bc72b22)), closes [#4680](https://github.com/vendurehq/vendure/issues/4680)
+* **core** Enforce usage limits for auto-applied promotions (#4405) ([3ec7ee3](https://github.com/vendurehq/vendure/commit/3ec7ee3)), closes [#4405](https://github.com/vendurehq/vendure/issues/4405)
+* **core** Fix Asset update when custom field relations defined (#4696) ([db6d327](https://github.com/vendurehq/vendure/commit/db6d327)), closes [#4696](https://github.com/vendurehq/vendure/issues/4696)
+* **core** Handle undefined relation in entity hydrator (#4672) ([20876e1](https://github.com/vendurehq/vendure/commit/20876e1)), closes [#4672](https://github.com/vendurehq/vendure/issues/4672)
+* **core** Make state-machine transitions atomic on hook failure (#4689) ([0153518](https://github.com/vendurehq/vendure/commit/0153518)), closes [#4689](https://github.com/vendurehq/vendure/issues/4689)
+* **core** Prevent coupon usage limit bypass via concurrent checkout race condition (#4660) ([b276364](https://github.com/vendurehq/vendure/commit/b276364)), closes [#4660](https://github.com/vendurehq/vendure/issues/4660)
+* **core** Prevent duplicate execution of fast scheduled tasks (#4681) ([8f9a98e](https://github.com/vendurehq/vendure/commit/8f9a98e)), closes [#4681](https://github.com/vendurehq/vendure/issues/4681)
+* **core** Resolve customer user via relation instead of email lookup (#4468) ([aeb692b](https://github.com/vendurehq/vendure/commit/aeb692b)), closes [#4468](https://github.com/vendurehq/vendure/issues/4468)
+* **dashboard** Add dynamic y axis width to chart widget (#4516) ([8b4446b](https://github.com/vendurehq/vendure/commit/8b4446b)), closes [#4516](https://github.com/vendurehq/vendure/issues/4516)
+* **dashboard** Add error messages to update draft order mutations (#4381) ([7eeacd7](https://github.com/vendurehq/vendure/commit/7eeacd7)), closes [#4381](https://github.com/vendurehq/vendure/issues/4381)
+* **dashboard** Add missing include nested fragments in order modification preview (#4640) ([5047ef8](https://github.com/vendurehq/vendure/commit/5047ef8)), closes [#4640](https://github.com/vendurehq/vendure/issues/4640)
+* **dashboard** Add missing Italian translations (#4645) ([8bd2a1f](https://github.com/vendurehq/vendure/commit/8bd2a1f)), closes [#4645](https://github.com/vendurehq/vendure/issues/4645)
+* **dashboard** Check required permissions when rendering custom page (#4679) ([600c0df](https://github.com/vendurehq/vendure/commit/600c0df)), closes [#4679](https://github.com/vendurehq/vendure/issues/4679)
+* **dashboard** correct mistranslated Swedish strings in sv.po (#4684) ([ebef82e](https://github.com/vendurehq/vendure/commit/ebef82e)), closes [#4684](https://github.com/vendurehq/vendure/issues/4684)
+* **dashboard** Drop direct @base-ui/react imports (#4697) ([3f253d3](https://github.com/vendurehq/vendure/commit/3f253d3)), closes [#4697](https://github.com/vendurehq/vendure/issues/4697)
+* **dashboard** Ensure fulfillment arg default value is a string (#4658) ([3ffaf88](https://github.com/vendurehq/vendure/commit/3ffaf88)), closes [#4658](https://github.com/vendurehq/vendure/issues/4658)
+* **dashboard** Fall back to original block on denied replace extension (#4694) ([31bc0ff](https://github.com/vendurehq/vendure/commit/31bc0ff)), closes [#4694](https://github.com/vendurehq/vendure/issues/4694)
+* **dashboard** Fix saving asset when custom fields are defined (#4695) ([a5576b2](https://github.com/vendurehq/vendure/commit/a5576b2)), closes [#4695](https://github.com/vendurehq/vendure/issues/4695)
+* **dashboard** Handle empty customFields selection (#4652) ([c2574d1](https://github.com/vendurehq/vendure/commit/c2574d1)), closes [#4652](https://github.com/vendurehq/vendure/issues/4652)
+* **dashboard** Implement `isFullWidth` metadata prop (#4638) ([7682dee](https://github.com/vendurehq/vendure/commit/7682dee)), closes [#4638](https://github.com/vendurehq/vendure/issues/4638)
+* **dashboard** Inline route literal for tanstack router-generator (#4666) ([78c5d9c](https://github.com/vendurehq/vendure/commit/78c5d9c)), closes [#4666](https://github.com/vendurehq/vendure/issues/4666)
+* **dashboard** Repair wrong-language msgstrs across hr/nb/tr/it/ja/ko/he/ro and harden i18n:apply (#4685) ([59612c1](https://github.com/vendurehq/vendure/commit/59612c1)), closes [#4685](https://github.com/vendurehq/vendure/issues/4685)
+* **dashboard** Set default sort on promotions list (#4688) ([a07e967](https://github.com/vendurehq/vendure/commit/a07e967)), closes [#4688](https://github.com/vendurehq/vendure/issues/4688)
+* **dashboard** Support action bar positioning relative to extensions (#4676) ([2672fe2](https://github.com/vendurehq/vendure/commit/2672fe2)), closes [#4676](https://github.com/vendurehq/vendure/issues/4676)
+* **job-queue-plugin** Fix filtering in BullMQJobQueuePlugin (#4523) ([86d2a52](https://github.com/vendurehq/vendure/commit/86d2a52)), closes [#4523](https://github.com/vendurehq/vendure/issues/4523)
+
+#### Features
+
+* **dashboard** Add bulk cancel action and human-readable duration t… (#4361) ([a3f5a92](https://github.com/vendurehq/vendure/commit/a3f5a92)), closes [#4361](https://github.com/vendurehq/vendure/issues/4361)
+* **dashboard** Add Romanian translations (#4598) ([88467a2](https://github.com/vendurehq/vendure/commit/88467a2)), closes [#4598](https://github.com/vendurehq/vendure/issues/4598)
+
 ## <small>3.6.2 (2026-04-13)</small>
 
 
