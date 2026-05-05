@@ -12,7 +12,7 @@ import { PageContext } from './page-provider.js';
 
 const useIsMobileMock = vi.hoisted(() => vi.fn(() => false));
 const useCopyToClipboardMock = vi.hoisted(() => vi.fn(() => [null, vi.fn()]));
-const hasPermissionsMock = vi.hoisted(() => vi.fn(() => true));
+const hasPermissionsMock = vi.hoisted(() => vi.fn((_perms: string[]) => true));
 
 vi.mock('@/vdb/hooks/use-mobile.js', () => ({
     useIsMobile: useIsMobileMock,
@@ -39,6 +39,7 @@ function registerBlock(
     order: 'before' | 'after' | 'replace',
     pageId = 'customer-list',
     requiresPermission: string[] = [],
+    shouldRender?: () => boolean,
 ): void {
     registerDashboardPageBlock({
         id,
@@ -49,7 +50,8 @@ function registerBlock(
             position: { blockId: 'list-table', order },
         },
         component: ({ context }) => <div data-testid={`page-block-${id}`}>{context.pageId}</div>,
-        requiresPermission: requiresPermission,
+        requiresPermission,
+        shouldRender,
     });
 }
 
@@ -151,6 +153,15 @@ function renderActionBar(
     );
 }
 
+function renderWithOriginal({ isDesktop = true } = {}) {
+    return renderPageLayout(
+        <PageBlock column="main" blockId="list-table">
+            <div data-testid="page-block-original">original</div>
+        </PageBlock>,
+        { isDesktop },
+    );
+}
+
 function getRenderedBlockIds(markup: string) {
     return Array.from(markup.matchAll(/data-testid="(page-block-[^"]+)"/g)).map(match => match[1]);
 }
@@ -224,21 +235,70 @@ describe('PageLayout', () => {
     });
 
     it("won't render blocks without required permissions", () => {
-        hasPermissionsMock.mockReturnValueOnce(false);
+        hasPermissionsMock.mockReturnValue(false);
 
         registerBlock('permission-guard', 'before', 'customer-list', ['permission-2']);
 
-        const markup = renderPageLayout(
-            <PageBlock column="main" blockId="list-table">
-                <div data-testid="page-block-original">original</div>
-            </PageBlock>,
-            { isDesktop: true },
-        );
+        expect(getRenderedBlockIds(renderWithOriginal())).toEqual(['page-block-original']);
+    });
 
-        const blockIds = getRenderedBlockIds(markup);
+    // #4679 follow-up — when a `replace`-ordered extension block requires a permission the user
+    // does not have, the slot is rendered empty instead of falling back to the original child.
+    // Root cause: `replacementBlockExists` is computed in page-layout.tsx without consulting
+    // `hasPermissions`, so the original block is suppressed even though the replacement is then
+    // filtered out by the new permission check at the `ExtensionBlock` resolution site.
+    it('falls back to the original block when a replace-ordered extension is denied by permissions', () => {
+        hasPermissionsMock.mockReturnValue(false);
 
-        expect(blockIds).toEqual(['page-block-original']);
-        expect(blockIds).not.toContain('page-block-permission-guard');
+        registerBlock('permission-replacement', 'replace', 'customer-list', ['restricted-permission']);
+
+        expect(getRenderedBlockIds(renderWithOriginal())).toEqual(['page-block-original']);
+    });
+
+    // Multi-block variant of the regression test above. With the bug present, `replacementBlockExists`
+    // would be `true` (any block with `order === 'replace'` triggered it, regardless of permissions),
+    // suppressing the original. The expected result `[]` would have failed this assertion.
+    it('falls back to the original block when ALL replace-ordered extensions are permission-denied', () => {
+        hasPermissionsMock.mockReturnValue(false);
+
+        registerBlock('replacement-1', 'replace', 'customer-list', ['perm-1']);
+        registerBlock('replacement-2', 'replace', 'customer-list', ['perm-2']);
+
+        expect(getRenderedBlockIds(renderWithOriginal())).toEqual(['page-block-original']);
+    });
+
+    // Documents the mixed-permission case: when at least one replacement is allowed,
+    // the original child is suppressed (since a real replacement renders) and only
+    // permitted replacements appear. Note: this scenario passes both pre- and post-fix
+    // — it covers the per-block JSX gate, not `replacementBlockExists`.
+    it('renders only allowed replacements when replace permissions are mixed (original suppressed)', () => {
+        hasPermissionsMock.mockImplementation((perms: string[]) => perms.includes('allowed-perm'));
+
+        registerBlock('replacement-allowed', 'replace', 'customer-list', ['allowed-perm']);
+        registerBlock('replacement-denied', 'replace', 'customer-list', ['denied-perm']);
+
+        // toEqual is exact — proves replacement-denied is absent AND original is absent
+        expect(getRenderedBlockIds(renderWithOriginal())).toEqual(['page-block-replacement-allowed']);
+    });
+
+    it('falls back to the original block when a replace-ordered extension shouldRender returns false', () => {
+        // Explicit: hasPermissions must return true so that shouldRender is the *only* veto under test.
+        // Without this, the post-`mockReset` mock returns undefined (falsy) and the test would pass
+        // for the wrong reason if check ordering inside `willBlockRender` were ever changed.
+        hasPermissionsMock.mockReturnValue(true);
+
+        registerBlock('replacement-disabled', 'replace', 'customer-list', [], () => false);
+
+        expect(getRenderedBlockIds(renderWithOriginal())).toEqual(['page-block-original']);
+    });
+
+    it('renders only the original when both before- and replace-ordered extensions are permission-denied', () => {
+        hasPermissionsMock.mockReturnValue(false);
+
+        registerBlock('before-denied', 'before', 'customer-list', ['restricted']);
+        registerBlock('replace-denied', 'replace', 'customer-list', ['restricted']);
+
+        expect(getRenderedBlockIds(renderWithOriginal())).toEqual(['page-block-original']);
     });
 
     it('positions an extension action bar item before another extension item', () => {
