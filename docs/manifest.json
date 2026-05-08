@@ -3831,7 +3831,7 @@
                   "title": "UseGeneratedForm",
                   "slug": "use-generated-form",
                   "file": "docs/reference/dashboard/detail-views/use-generated-form.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-05-08T12:27:16+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4056,6 +4056,12 @@
                   "lastModified": "2026-02-25T13:59:17+01:00"
                 },
                 {
+                  "title": "UseIsServerConfigLoaded",
+                  "slug": "use-is-server-config-loaded",
+                  "file": "docs/reference/dashboard/hooks/use-is-server-config-loaded.mdx",
+                  "lastModified": "2026-05-08T12:27:16+02:00"
+                },
+                {
                   "title": "UseLocalFormat",
                   "slug": "use-local-format",
                   "file": "docs/reference/dashboard/hooks/use-local-format.mdx",
@@ -4109,7 +4115,7 @@
                   "title": "DataTable",
                   "slug": "data-table",
                   "file": "docs/reference/dashboard/list-views/data-table.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-05-08T12:27:16+02:00"
                 },
                 {
                   "title": "DataTableCellComponent",
@@ -4141,25 +4147,25 @@
                   "title": "Page",
                   "slug": "page",
                   "file": "docs/reference/dashboard/page-layout/page.mdx",
-                  "lastModified": "2026-05-05T13:21:48+02:00"
+                  "lastModified": "2026-05-08T12:27:16+02:00"
                 },
                 {
                   "title": "PageActionBar",
                   "slug": "page-action-bar",
                   "file": "docs/reference/dashboard/page-layout/page-action-bar.mdx",
-                  "lastModified": "2026-05-05T13:21:48+02:00"
+                  "lastModified": "2026-05-08T12:27:16+02:00"
                 },
                 {
                   "title": "PageBlock",
                   "slug": "page-block",
                   "file": "docs/reference/dashboard/page-layout/page-block.mdx",
-                  "lastModified": "2026-05-05T13:21:48+02:00"
+                  "lastModified": "2026-05-08T12:27:16+02:00"
                 },
                 {
                   "title": "PageTitle",
                   "slug": "page-title",
                   "file": "docs/reference/dashboard/page-layout/page-title.mdx",
-                  "lastModified": "2026-05-05T13:21:48+02:00"
+                  "lastModified": "2026-05-08T12:27:16+02:00"
                 },
                 {
                   "title": "UsePageBlock",
@@ -4168,7 +4174,7 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 }
               ],
-              "lastModified": "2026-05-05T13:21:48+02:00"
+              "lastModified": "2026-05-08T12:27:16+02:00"
             },
             {
               "title": "Vite Plugin",

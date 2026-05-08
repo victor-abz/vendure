@@ -3,11 +3,13 @@ import { NavigationConfirmation } from '@/vdb/components/shared/navigation-confi
 import { PermissionGuard } from '@/vdb/components/shared/permission-guard.js';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/vdb/components/ui/card.js';
 import { Form } from '@/vdb/components/ui/form.js';
+import { Skeleton } from '@/vdb/components/ui/skeleton.js';
 import { useCustomFieldConfig } from '@/vdb/hooks/use-custom-field-config.js';
 import { useLocalFormat } from '@/vdb/hooks/use-local-format.js';
 import { useIsMobile } from '@/vdb/hooks/use-mobile.js';
 import { usePage } from '@/vdb/hooks/use-page.js';
 import { usePermissions } from '@/vdb/hooks/use-permissions.js';
+import { useIsServerConfigLoaded } from '@/vdb/hooks/use-server-config.js';
 import { cn } from '@/vdb/lib/utils.js';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { CheckIcon, CopyIcon, EllipsisVerticalIcon, InfoIcon } from 'lucide-react';
@@ -968,6 +970,24 @@ export function CustomFieldsPageBlock({
     control: Control<any, any>;
 }>) {
     const customFieldConfig = useCustomFieldConfig(entityType);
+    const isServerConfigLoaded = useIsServerConfigLoaded();
+
+    // Until the server config has resolved we don't know whether this entity
+    // has custom fields or not. Render a skeleton placeholder block so the
+    // page layout doesn't visibly jump once the config arrives. Once loaded
+    // and we're confident there are no custom fields, render nothing.
+    if (!isServerConfigLoaded) {
+        return (
+            <PageBlock column={column} blockId="custom-fields">
+                <div className="space-y-4" aria-hidden="true">
+                    <Skeleton className="h-4 w-24" />
+                    <Skeleton className="h-9 w-full" />
+                    <Skeleton className="h-4 w-24" />
+                    <Skeleton className="h-9 w-full" />
+                </div>
+            </PageBlock>
+        );
+    }
     if (!customFieldConfig || customFieldConfig.length === 0) {
         return null;
     }

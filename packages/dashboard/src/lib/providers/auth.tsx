@@ -123,6 +123,9 @@ export function AuthProvider({ children }: Readonly<{ children: React.ReactNode 
             return api.query(CurrentUserQuery);
         },
         retry: false, // Disable retries to avoid waiting for multiple attempts
+        // Auth state is invalidated explicitly on login/logout, so don't let
+        // background refetches re-verify on every focus / re-mount.
+        staleTime: Infinity,
     });
 
     // Set active channel if needed
