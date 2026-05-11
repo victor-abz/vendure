@@ -8,6 +8,16 @@ export const STOREFRONT_BRANCH = 'main';
  * introduce breaking changes.
  */
 export const TYPESCRIPT_VERSION = '5.8.2';
+/**
+ * Vite must be a direct dependency of the scaffolded project because the
+ * generated vite.config.mts imports `vite` directly, and strict
+ * (non-hoisting) package managers like pnpm don't expose transitive deps.
+ * The range tracks @vendure/dashboard's declaration so the scaffold stays
+ * on the same Vite major line as the dashboard (currently v7); the caret
+ * caps at <8.0.0, which is important because Vite 8 ships a Rolldown-based
+ * bundler with breaking changes.
+ */
+export const VITE_VERSION = '^7.3.1';
 
 // Port scanning
 export const PORT_SCAN_RANGE = 20;

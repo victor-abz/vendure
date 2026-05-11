@@ -12,7 +12,7 @@ import pc from 'picocolors';
 import semver from 'semver';
 import * as tar from 'tar';
 
-import { STOREFRONT_BRANCH, STOREFRONT_REPO, TYPESCRIPT_VERSION } from './constants';
+import { STOREFRONT_BRANCH, STOREFRONT_REPO, TYPESCRIPT_VERSION, VITE_VERSION } from './constants';
 import { log } from './logger';
 import { CliLogLevel, DbType } from './types';
 
@@ -236,6 +236,7 @@ export function getDependencies(
         'concurrently',
         'ts-node',
         `typescript@${TYPESCRIPT_VERSION}`,
+        `vite@${VITE_VERSION}`,
     ];
     return { dependencies, devDependencies };
 }
