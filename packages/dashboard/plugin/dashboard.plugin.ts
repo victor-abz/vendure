@@ -189,10 +189,29 @@ export class DashboardPlugin implements NestModule {
             limit: this.rateLimitRequests,
             standardHeaders: true,
             legacyHeaders: false,
+            // Content-hashed bundles under /assets/ are immutable and a single
+            // page load fires ~190 chunk requests; counting them against the
+            // bucket exhausts it within a few tabs (see #4665).
+            skip: req => req.path.startsWith('/assets/'),
         });
 
         const dashboardServer = express.Router();
         dashboardServer.use(limiter);
+        // Serve hashed assets with a long-lived immutable Cache-Control header
+        // so CDNs and browsers can cache them indefinitely. This is safe because
+        // Vite emits content-hashed filenames into /assets — a missing chunk
+        // means a stale reference, so the explicit 404 handler below stops the
+        // request from falling through to the SPA index.html shell, which would
+        // otherwise be served with the asset's expected MIME and crash the app
+        // on "Unexpected token '<'".
+        dashboardServer.use(
+            '/assets',
+            express.static(path.join(dashboardPath, 'assets'), {
+                maxAge: '1y',
+                immutable: true,
+            }),
+        );
+        dashboardServer.use('/assets', (_req, res) => res.status(404).end());
         dashboardServer.use(express.static(dashboardPath));
         dashboardServer.use((req, res) => {
             res.sendFile('index.html', { root: dashboardPath });
@@ -271,6 +290,9 @@ export class DashboardPlugin implements NestModule {
             limit: this.rateLimitRequests,
             standardHeaders: true,
             legacyHeaders: false,
+            // See note in createStaticServer — /assets/* is immutable and a
+            // single page load fires ~190 chunk requests.
+            skip: req => req.path.startsWith('/assets/'),
         });
 
         // Pre-create handlers to avoid recreating them on each request
