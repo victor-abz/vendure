@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vendure.io">
-    <img alt="Vendure logo" height="60" width="auto" src="https://a.storyblok.com/f/328257/699x480/8dbb4c7a3c/logo-icon.png">
+    <img alt="Vendure logo" height="60" width="auto" src="https://assets.vendure.io/brand/logo-icon-vendure-blue.svg">
   </a>
 </p>
 
@@ -8,7 +8,7 @@
   Vendure Core
 </h1>
 <h3 align="center">
-    The Open Source Foundation of Vendure — The Enterprise Commerce Platform
+    Headless TypeScript commerce backend on NestJS. GraphQL API, plugin-first, runs anywhere.
 </h3>
 <h4 align="center">
   <a href="https://docs.vendure.io">Documentation</a> |
@@ -17,7 +17,7 @@
 
 <p align="center">
   <a href="https://github.com/vendurehq/vendure/blob/master/LICENSE.md">
-    <img src="https://img.shields.io/badge/license-GPL-blue.svg" alt="Vendure is released under the GPLv3 license." />
+    <img src="https://img.shields.io/badge/license-GPLv3-blue.svg" alt="Vendure Core is released under the GPLv3 license." />
   </a>
   <a href="https://twitter.com/intent/follow?screen_name=vendure_io">
     <img src="https://img.shields.io/twitter/follow/vendure_io" alt="Follow @vendure_io" />
@@ -26,41 +26,53 @@
     <img src="https://img.shields.io/badge/join-our%20discord-7289DA.svg" alt="Join our Discord" />
   </a>
   <a href="https://github.com/vendurehq/vendure/blob/master/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome." />
   </a>
 </p>
 
 ## What is Vendure Core
 
-Vendure Core is the open source heart of [Vendure](https://vendure.io), the enterprise commerce platform. Built with _TypeScript_ and _Node.js_, it provides a robust foundation for building enterprise-grade digital commerce applications with exceptional scalability and maintainability.
+Vendure Core is the open-source TypeScript backend that powers [Vendure](https://vendure.io), the enterprise commerce platform. One coherent, extensible backend for catalog, orders, pricing, promotions, and customers in one place, so teams don't have to choose between rigid SaaS and assembling a DIY stack of services.
 
-- **Built for heavy customization**: Extensible plugin architecture allows you to tailor every aspect of your commerce solution
-- **Modern, AI-optimized tech stack**: Built on TypeScript, Node.js, NestJS, and GraphQL for outstanding performance and developer experience
-- **Headless architecture**: API-first design enables seamless multichannel commerce across any frontend
-- **Enterprise-ready**: Trusted by thousands of teams worldwide, from startups to Fortune 500 companies
-- **Rich feature set**: Comprehensive out-of-the-box functionality with customizable admin dashboard and commerce framework
+- **Plugin architecture, no forks required**: Extend or override any part of the system through stable plugin contracts. Customise the edges without patching the core.
+- **TypeScript, Node.js, NestJS, GraphQL**: A coherent stack with strong types end to end, a large ecosystem, no proprietary query language, and agent-ready APIs that work with your developers' AI tools.
+- **One backend, every channel**: A single extensible core serves any frontend or channel through a GraphQL API, so you avoid stitching together separate commerce services.
+- **Production-tested at scale**: Used in production by enterprise teams. Plugin contracts give you safe extension points without patching core.
+- **Built-in commerce building blocks**: Catalog, orders, customers, promotions, channels, tax, shipping, payments, and stock, with the primitives teams need from day one.
 
-Whether you're building a B2B platform, multi-vendor marketplace, or D2C storefront, Vendure Core provides the flexible foundation to create unique commerce experiences tailored to your business needs.
+## What's in this repo
 
-## Getting Started
+Vendure is a Lerna monorepo. The packages you'll touch most:
 
-Visit our [Getting Started guide](https://docs.vendure.io/guides/getting-started/installation/) to get Vendure Core up and running locally in _less than 2 minutes_ with a single command.
+- **`@vendure/core`**: the framework itself. Entities, services, GraphQL APIs, the plugin system.
+- **`@vendure/create`**: `npx @vendure/create` scaffolds a new project.
+- **`@vendure/dashboard`**: the React-based admin dashboard.
+- **`@vendure/cli`**: dev tooling for generating plugins, migrations, etc.
+- **Official plugins**: `email-plugin`, `asset-server-plugin`, `job-queue-plugin`, `harden-plugin`, `telemetry-plugin`, `graphiql-plugin`.
+- **`@vendure/testing`**: e2e test harness with a programmable mock server.
 
-**Need Help?** Our community is here to help, join [our Discord](https://www.vendure.io/community) for support and discussions!
+Runs on any Node.js host: self-hosted, Docker, Kubernetes, or any cloud. Managed hosting is available via [Vendure Cloud](https://vendure.io/products/cloud).
 
-## Upgrades & Plugins 
+## Getting started
 
-Patch releases ship monthly, minor releases quarterly. Check out our [release notes](https://github.com/vendurehq/vendure/releases) to keep up-to-date with the latest releases.
+Visit our [Getting Started guide](https://docs.vendure.io/guides/getting-started/installation/) to spin up Vendure Core locally with a single command.
 
+Questions? Join [our Discord](https://www.vendure.io/community) for support and discussions.
 
 ## Contribution
 
-Contributions to Vendure Core are welcome and highly appreciated! Whether you're fixing bugs, adding features, or improving documentation, your help makes Vendure Core better for everyone.
+Contributions are welcome: bugs, features, or docs. Our **[Contribution Guide](./CONTRIBUTING.md)** covers everything from setting up your development environment to submitting your first pull request.
 
-Our **[Contribution Guide](./CONTRIBUTING.md)** is covering everything from setting up your development environment to submitting your first pull request.
+Pick up a [labelled issue](https://github.com/vendurehq/vendure/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22%F0%9F%91%8B%20contributions%20welcome%22) as a good first contribution.
 
-**Ready to get started?** Check out [these issues](https://github.com/vendurehq/vendure/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22%F0%9F%91%8B%20contributions%20welcome%22) for a good first task to start!
+## Upgrades & plugins
+
+Patch releases ship regularly. Check our [release notes](https://github.com/vendurehq/vendure/releases) to keep up to date.
 
 ## License
 
-Vendure Core is licensed under the [GPLv3 license](./LICENSE.md). To learn more about the full Vendure platform and cloud offering, check out our [pricing page](https://vendure.io/pricing).
+Vendure Core is licensed under the [GPLv3 license](./LICENSE.md). To learn more about the full Vendure platform and cloud offering, see our [pricing page](https://vendure.io/pricing).
+
+## Professional services
+
+Need help getting your build to production? Our team offers [professional services](https://vendure.io/professional-services): architecture review, implementation support, and launch readiness from the people who build Vendure.
