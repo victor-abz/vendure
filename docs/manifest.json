@@ -2956,7 +2956,7 @@
                   "title": "PromotionService",
                   "slug": "promotion-service",
                   "file": "docs/reference/typescript-api/services/promotion-service.mdx",
-                  "lastModified": "2026-04-29T16:04:40+02:00"
+                  "lastModified": "2026-04-30T17:21:55+02:00"
                 },
                 {
                   "title": "ProvinceService",
@@ -4185,7 +4185,7 @@
                   "title": "VendureDashboardPlugin",
                   "slug": "vendure-dashboard-plugin",
                   "file": "docs/reference/dashboard/vite-plugin/vendure-dashboard-plugin.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-05-11T20:29:42Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
