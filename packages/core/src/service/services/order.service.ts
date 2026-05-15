@@ -85,10 +85,10 @@ import { Channel } from '../../entity/channel/channel.entity';
 import { Customer } from '../../entity/customer/customer.entity';
 import { Fulfillment } from '../../entity/fulfillment/fulfillment.entity';
 import { HistoryEntry } from '../../entity/history-entry/history-entry.entity';
-import { Order } from '../../entity/order/order.entity';
-import { OrderLine } from '../../entity/order-line/order-line.entity';
 import { FulfillmentLine } from '../../entity/order-line-reference/fulfillment-line.entity';
+import { OrderLine } from '../../entity/order-line/order-line.entity';
 import { OrderModification } from '../../entity/order-modification/order-modification.entity';
+import { Order } from '../../entity/order/order.entity';
 import { Payment } from '../../entity/payment/payment.entity';
 import { ProductVariant } from '../../entity/product-variant/product-variant.entity';
 import { Promotion } from '../../entity/promotion/promotion.entity';
@@ -231,12 +231,22 @@ export class OrderService {
             'shippingLines',
             'surcharges',
         ];
-        if (
-            relations &&
-            effectiveRelations.includes('lines.productVariant') &&
-            !effectiveRelations.includes('lines.productVariant.taxCategory')
-        ) {
-            effectiveRelations.push('lines.productVariant.taxCategory');
+        // Any caller requesting `lines.productVariant` (directly or via a sub-relation
+        // path) implies the variant will be loaded into the split lines query and
+        // translated below. TypeORM doesn't honour transitive `eager: true` relations
+        // (like `ProductVariant.translations`) when an explicit `relations` array is
+        // passed to `setFindOptions`, so we inject `taxCategory` and `translations`
+        // ourselves to keep `applyChannelPriceAndTax` + `translator.translate` correct.
+        const wantsLineVariant = effectiveRelations.some(
+            r => r === 'lines.productVariant' || r.startsWith('lines.productVariant.'),
+        );
+        if (relations && wantsLineVariant) {
+            if (!effectiveRelations.includes('lines.productVariant.taxCategory')) {
+                effectiveRelations.push('lines.productVariant.taxCategory');
+            }
+            if (!effectiveRelations.includes('lines.productVariant.translations')) {
+                effectiveRelations.push('lines.productVariant.translations');
+            }
         }
 
         // Split relations into two groups for different loading strategies:
@@ -277,7 +287,7 @@ export class OrderService {
                 order.lines = lines;
             }
 
-            if (effectiveRelations.includes('lines.productVariant')) {
+            if (wantsLineVariant) {
                 for (const line of order.lines) {
                     line.productVariant = this.translator.translate(
                         await this.productVariantService.applyChannelPriceAndTax(
