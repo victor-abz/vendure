@@ -240,9 +240,7 @@ const createEntityConfigs = (i18n: any) => ({
                         slug
                         isPrivate
                         position
-                        productVariants {
-                            totalItems
-                        }
+                        productVariantCount
                         featuredAsset {
                             id
                             preview
@@ -255,7 +253,7 @@ const createEntityConfigs = (i18n: any) => ({
         label: (item: any) => (
             <EntityLabel
                 title={item.name}
-                subtitle={`${item.slug} • ${item.productVariants?.totalItems || 0} products`}
+                subtitle={`${item.slug} • ${item.productVariantCount || 0} products`}
                 imageUrl={item.featuredAsset?.preview}
                 placeholderLetter="C"
                 statusIndicator={<StatusBadge condition={item.isPrivate} text="Private" />}
