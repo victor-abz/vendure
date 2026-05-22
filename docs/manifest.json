@@ -2078,13 +2078,13 @@
                   "title": "DefaultAssetImportStrategy",
                   "slug": "default-asset-import-strategy",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T14:06:02Z"
                 },
                 {
                   "title": "DefaultAssetImportStrategyOptions",
                   "slug": "default-asset-import-strategy-options",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy-options.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T14:06:02Z"
                 },
                 {
                   "title": "FastImporterService",
@@ -2722,7 +2722,7 @@
                   "title": "Relations Decorator",
                   "slug": "relations-decorator",
                   "file": "docs/reference/typescript-api/request/relations-decorator.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-05-21T14:06:02Z"
                 },
                 {
                   "title": "RequestContext",
@@ -4169,7 +4169,7 @@
                   "title": "PaginatedListDataTable",
                   "slug": "paginated-list-data-table",
                   "file": "docs/reference/dashboard/list-views/paginated-list-data-table.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T14:06:02Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
