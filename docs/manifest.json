@@ -482,7 +482,7 @@
           "title": "Telemetry",
           "slug": "telemetry",
           "file": "docs/guides/how-to/telemetry/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-05-21T12:14:16+02:00"
         }
       ]
     },
@@ -2048,13 +2048,13 @@
                   "title": "DefaultAssetImportStrategy",
                   "slug": "default-asset-import-strategy",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T10:10:42Z"
                 },
                 {
                   "title": "DefaultAssetImportStrategyOptions",
                   "slug": "default-asset-import-strategy-options",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy-options.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T10:10:42Z"
                 },
                 {
                   "title": "FastImporterService",
@@ -3635,7 +3635,7 @@
                   "title": "GetSdkConfiguration",
                   "slug": "get-sdk-configuration",
                   "file": "docs/reference/core-plugins/telemetry-plugin/get-sdk-configuration.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-05-22T06:44:59Z"
                 },
                 {
                   "title": "OtelLogger",
@@ -4139,7 +4139,7 @@
                   "title": "PaginatedListDataTable",
                   "slug": "paginated-list-data-table",
                   "file": "docs/reference/dashboard/list-views/paginated-list-data-table.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T10:10:42Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
