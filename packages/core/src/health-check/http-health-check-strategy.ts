@@ -1,5 +1,4 @@
 import { Injectable, Scope } from '@nestjs/common';
-import fetch from 'node-fetch';
 
 import { Injector } from '../common/injector';
 import { HealthCheckStrategy } from '../config/system/health-check-strategy';
@@ -61,9 +60,9 @@ export class HttpHealthCheckStrategy implements HealthCheckStrategy {
 }
 
 /**
- * A simple HTTP health indicator that pings a URL via `node-fetch` and converts
- * any error into a `HealthCheckError`. Subclasses {@link HealthIndicator} to
- * pick up the shared `getStatus()` helper.
+ * A simple HTTP health indicator that pings a URL via the native `fetch` API
+ * and converts any error into a `HealthCheckError`. Subclasses {@link HealthIndicator}
+ * to pick up the shared `getStatus()` helper.
  *
  * @deprecated This class is part of the deprecated health check feature and will be removed in v4.0.0.
  */
@@ -91,7 +90,12 @@ export class CustomHttpHealthIndicator extends HealthIndicator {
         let isHealthy = false;
 
         try {
-            await fetch(url, { timeout });
+            // Native `fetch` doesn't support a `timeout` option (node-fetch did);
+            // use AbortSignal.timeout when a positive timeout is supplied. Bare
+            // truthiness, not `!= null`, because `AbortSignal.timeout(0)` would
+            // fire immediately whereas the prior `node-fetch` semantics treated
+            // `timeout: 0` as "no timeout".
+            await fetch(url, timeout ? { signal: AbortSignal.timeout(timeout) } : undefined);
             isHealthy = true;
         } catch (err) {
             this.generateHttpError(key, err);

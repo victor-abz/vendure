@@ -50,7 +50,6 @@
         "@nestjs/typeorm": "^11.0.0",
         "@vendure/common": "3.6.3",
         "bcrypt": "^6.0.0",
-        "body-parser": "^1.20.2",
         "cookie-session": "^2.1.0",
         "cron-time-generator": "^2.0.3",
         "croner": "^10.0.1",

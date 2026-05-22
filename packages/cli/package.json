@@ -39,6 +39,7 @@
         "@clack/prompts": "^0.7.0",
         "@vendure/common": "3.6.3",
         "commander": "^11.0.0",
+        "cross-spawn": "^7.0.6",
         "dotenv": "^16.4.5",
         "fs-extra": "^11.2.0",
         "picocolors": "^1.0.0",
