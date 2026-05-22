@@ -163,7 +163,7 @@
           "title": "Healthchecks",
           "slug": "healthchecks",
           "file": "docs/guides/core-concepts/healthchecks/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-05-21T17:28:11+02:00"
         },
         {
           "title": "Auth",
@@ -728,7 +728,7 @@
           "title": "Using Docker",
           "slug": "using-docker",
           "file": "docs/guides/deployment/using-docker.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-05-21T17:28:11+02:00"
         },
         {
           "title": "Horizontal Scaling",
@@ -2001,28 +2001,58 @@
               "file": "docs/reference/typescript-api/health-check/index.mdx",
               "children": [
                 {
+                  "title": "HealthCheckError",
+                  "slug": "health-check-error",
+                  "file": "docs/reference/typescript-api/health-check/health-check-error.mdx",
+                  "lastModified": "2026-05-21T17:40:03+02:00"
+                },
+                {
                   "title": "HealthCheckRegistryService",
                   "slug": "health-check-registry-service",
                   "file": "docs/reference/typescript-api/health-check/health-check-registry-service.mdx",
-                  "lastModified": "2026-03-10T13:44:11+01:00"
+                  "lastModified": "2026-05-21T17:28:23+02:00"
                 },
                 {
                   "title": "HealthCheckStrategy",
                   "slug": "health-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/health-check-strategy.mdx",
-                  "lastModified": "2026-03-10T13:44:11+01:00"
+                  "lastModified": "2026-05-21T17:28:23+02:00"
+                },
+                {
+                  "title": "HealthIndicator",
+                  "slug": "health-indicator",
+                  "file": "docs/reference/typescript-api/health-check/health-indicator.mdx",
+                  "lastModified": "2026-05-21T17:40:03+02:00"
+                },
+                {
+                  "title": "HealthIndicatorFunction",
+                  "slug": "health-indicator-function",
+                  "file": "docs/reference/typescript-api/health-check/health-indicator-function.mdx",
+                  "lastModified": "2026-05-21T17:40:03+02:00"
+                },
+                {
+                  "title": "HealthIndicatorResult",
+                  "slug": "health-indicator-result",
+                  "file": "docs/reference/typescript-api/health-check/health-indicator-result.mdx",
+                  "lastModified": "2026-05-21T17:40:03+02:00"
+                },
+                {
+                  "title": "HealthIndicatorStatus",
+                  "slug": "health-indicator-status",
+                  "file": "docs/reference/typescript-api/health-check/health-indicator-status.mdx",
+                  "lastModified": "2026-05-21T17:40:03+02:00"
                 },
                 {
                   "title": "HttpHealthCheckStrategy",
                   "slug": "http-health-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/http-health-check-strategy.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-05-21T17:28:23+02:00"
                 },
                 {
                   "title": "TypeORMHealthCheckStrategy",
                   "slug": "type-ormhealth-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/type-ormhealth-check-strategy.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-05-22T06:58:21Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2048,13 +2078,13 @@
                   "title": "DefaultAssetImportStrategy",
                   "slug": "default-asset-import-strategy",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T17:28:23+02:00"
                 },
                 {
                   "title": "DefaultAssetImportStrategyOptions",
                   "slug": "default-asset-import-strategy-options",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy-options.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T17:28:23+02:00"
                 },
                 {
                   "title": "FastImporterService",
@@ -4139,7 +4169,7 @@
                   "title": "PaginatedListDataTable",
                   "slug": "paginated-list-data-table",
                   "file": "docs/reference/dashboard/list-views/paginated-list-data-table.mdx",
-                  "lastModified": "2026-05-22T14:56:03+02:00"
+                  "lastModified": "2026-05-21T17:28:23+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
