@@ -195,8 +195,7 @@
       },
       "dependencies": {
         "@clack/prompts": "^0.7.0",
-        "@vendure/common": "3.6.2",
-        "change-case": "^4.1.2",
+        "@vendure/common": "3.6.3",
         "commander": "^11.0.0",
         "dotenv": "^16.4.5",
         "fs-extra": "^11.2.0",
@@ -207,8 +206,8 @@
         "tsconfig-paths": "^4.2.0",
       },
       "devDependencies": {
-        "@vendure/core": "3.6.2",
-        "@vendure/testing": "3.6.2",
+        "@vendure/core": "3.6.3",
+        "@vendure/testing": "3.6.3",
         "cross-env": "^7.0.3",
         "typescript": "5.8.2",
       },
@@ -558,7 +557,7 @@
       "version": "3.6.3",
       "dependencies": {
         "@graphql-typed-document-node/core": "^3.2.0",
-        "@vendure/common": "3.6.2",
+        "@vendure/common": "3.6.3",
         "faker": "^4.1.0",
         "form-data": "^4.0.0",
         "graphql": "~16.11.0",
@@ -571,7 +570,7 @@
         "@types/mysql": "^2.15.26",
         "@types/node-fetch": "^2.6.4",
         "@types/pg": "^8.11.2",
-        "@vendure/core": "3.6.2",
+        "@vendure/core": "3.6.3",
         "mysql2": "^3.15.0",
         "pg": "^8.11.3",
         "rimraf": "^5.0.5",
