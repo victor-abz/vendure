@@ -591,7 +591,7 @@ const createEntityConfigs = (i18n: any) => ({
         label: (item: any) => (
             <EntityLabel
                 title={item.name}
-                subtitle={`ID: ${item.id}`}
+                subtitle={item.name}
                 placeholderLetter={item.name?.[0]?.toUpperCase() || 'S'}
                 rounded
                 tooltipText={item.name}
