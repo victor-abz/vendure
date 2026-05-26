@@ -60,6 +60,8 @@ jobs:
               with:
                   app-id: ${{ secrets.CI_BOT_APP_ID }}
                   private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+                  # Least privilege: token is only used to commit & push the regenerated manifest.
+                  permission-contents: write
 
             - name: Checkout
               uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1

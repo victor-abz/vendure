@@ -22,6 +22,13 @@ jobs:
         with:
           app-id: ${{ secrets.CI_BOT_APP_ID }}
           private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+          # Least privilege: the CLA assistant stores signatures (contents), comments on PRs
+          # (pull-requests), sets the CLA commit status that gates merge (statuses), and
+          # re-triggers itself on "recheck" (actions). All four are required by the action.
+          permission-contents: write
+          permission-pull-requests: write
+          permission-statuses: write
+          permission-actions: write
 
       # Third-party actions are pinned to commit SHAs to prevent supply chain attacks
       # via mutable version tags. See https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions#using-third-party-actions
