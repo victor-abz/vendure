@@ -130,15 +130,23 @@ jobs:
           git add .
           git commit -m "chore: Bump version for ${{ matrix.type }} pre-release"
 
-      # Publish to npm with appropriate dist-tag
+      # Publish to npm with appropriate dist-tag.
       # Note: we do not use `lerna publish` because at the time of writing, it fails to publish
       # using the Trusted Publishing workflow for some reason.
       # We use a custom script to handle publishConfig.directory for packages like @vendure/admin-ui
       # that need to publish from a nested directory.
+      #
+      # Release publishes use `npm stage publish` — the version lands in npm's staging area and
+      # requires manual maintainer approval (with 2FA) before going live on the public registry.
+      # Approve all staged packages at once with: scripts/npm-stage-approve-all.sh <version>
+      # Nightly builds still use direct `npm publish` because they target non-default dist-tags
+      # (`master` / `minor`) that nobody installs unless they opt in explicitly.
+      #
+      # No --tag here is intentional: releases go to the default `latest` tag.
       - name: Publish to NPM (release)
         if: matrix.type == 'release'
         run: |
-          bunx lerna exec --no-private -- 'publish_dir=$(node -p "require(\"./package.json\").publishConfig?.directory || \".\"") && cd "$publish_dir" && npm publish --access public'
+          bunx lerna exec --no-private -- 'publish_dir=$(node -p "require(\"./package.json\").publishConfig?.directory || \".\"") && cd "$publish_dir" && npm stage publish --access public'
 
       - name: Publish to NPM (master-nightly)
         if: matrix.type == 'master-nightly' && steps.commit_check.outputs.should_publish == 'true'
