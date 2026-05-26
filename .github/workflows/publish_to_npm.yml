@@ -23,6 +23,16 @@ on:
 jobs:
   # Determine which publish type(s) to run based on trigger
   setup:
+    # Restrict who can manually trigger a publish. `schedule` (nightlies) and
+    # `release` events are unaffected; only `workflow_dispatch` is gated, and
+    # only the listed maintainers may dispatch. A non-permitted dispatch skips
+    # this job, and `publish` (needs: setup) is skipped with it.
+    # This is the UX/first-line guard; actual enforcement against branch-based
+    # bypass is the `npm-publish` environment + npm trust `--env` binding below.
+    if: >-
+      github.event_name != 'workflow_dispatch' ||
+      github.actor == 'michaelbromley' ||
+      github.actor == 'dlhck'
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -41,6 +51,13 @@ jobs:
   publish:
     needs: setup
     runs-on: ubuntu-latest
+    # The OIDC token minted for this job carries an `environment: npm-publish`
+    # claim, which the npm trusted publishers require (`npm trust --env`). The
+    # environment's deployment-branch policy (master, minor, v* tags) is
+    # enforced by GitHub before the job runs, so a publish cannot originate
+    # from an arbitrary branch — closing the workflow_dispatch branch-bypass.
+    # The environment has NO required reviewers, so nightlies stay unattended.
+    environment: npm-publish
     permissions:
       contents: read
       id-token: write

@@ -41,6 +41,12 @@ source "$SCRIPT_DIR/_vendure-packages.sh"
 
 REPO="vendurehq/vendure"
 WORKFLOW_FILE="publish_to_npm.yml"
+# GitHub Actions environment the publish job runs in. Binding the trust to this
+# environment means npm only accepts OIDC tokens carrying this `environment`
+# claim — and GitHub only grants that claim to runs allowed by the environment's
+# deployment-branch policy. The `environment:` key MUST be present on the publish
+# job in publish_to_npm.yml before running this, or every publish will be rejected.
+ENVIRONMENT="npm-publish"
 
 ASSUME_YES=0
 DRY_RUN=0
@@ -61,6 +67,7 @@ echo "    if existing trust entry found: npm trust revoke <pkg> --id <id>"
 echo "    npm trust github <pkg> \\"
 echo "        --file $WORKFLOW_FILE \\"
 echo "        --repo $REPO \\"
+echo "        --environment $ENVIRONMENT \\"
 echo "        --allow-publish --allow-stage-publish --yes"
 echo "    npm access set mfa=publish <pkg>"
 echo
@@ -148,6 +155,7 @@ for pkg in "${VENDURE_PACKAGES[@]}"; do
       if npm trust github "$pkg" \
           --file "$WORKFLOW_FILE" \
           --repo "$REPO" \
+          --environment "$ENVIRONMENT" \
           --allow-publish \
           --allow-stage-publish \
           --yes; then
@@ -163,7 +171,7 @@ for pkg in "${VENDURE_PACKAGES[@]}"; do
         echo "  !! revoked but the replacement could not be created, so CI publishing" >&2
         echo "  !! for this package is broken until fixed. Re-run this script to retry," >&2
         echo "  !! or recreate manually: npm trust github $pkg --file $WORKFLOW_FILE \\" >&2
-        echo "  !!   --repo $REPO --allow-publish --allow-stage-publish" >&2
+        echo "  !!   --repo $REPO --environment $ENVIRONMENT --allow-publish --allow-stage-publish" >&2
         failed+=("$pkg (trust — LEFT WITH NO ENTRY; re-run to fix)")
       else
         failed+=("$pkg (trust)")
