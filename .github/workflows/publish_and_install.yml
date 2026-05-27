@@ -141,14 +141,17 @@ jobs:
             - name: Kill dev server after smoke tests
               shell: bash
               run: |
-                  # Kill everything on port 3000 so dashboard tests can start fresh
-                  # (npm run dev spawns child processes that aren't killed by killing the parent)
+                  # Kill everything on ports 3000 and 5173 so the dashboard tests can start fresh.
+                  # `npm run dev` spawns child processes (server on 3000, dashboard Vite on 5173)
+                  # that aren't killed by killing the parent, so we kill by port. Freeing 5173 here
+                  # is essential: otherwise the smoke-test dashboard lingers and the next step's
+                  # dashboard fails to bind it.
                   if [[ "$RUNNER_OS" == "Windows" ]]; then
-                      # Windows: use netstat to find PID and taskkill
-                      netstat -ano | grep ':3000' | grep 'LISTENING' | awk '{print $5}' | head -1 | xargs -r taskkill //F //PID 2>/dev/null || true
+                      # Windows: use netstat to find PIDs and taskkill
+                      netstat -ano | grep -E ':(3000|5173)[[:space:]]' | grep 'LISTENING' | awk '{print $5}' | sort -u | xargs -r -I {} taskkill //F //PID {} 2>/dev/null || true
                   else
                       # Linux/macOS: use lsof
-                      lsof -ti:3000 | xargs kill 2>/dev/null || true
+                      lsof -ti:3000,5173 | xargs kill 2>/dev/null || true
                   fi
             - name: Copy files (Windows)
               if: runner.os == 'Windows'
@@ -186,27 +189,17 @@ jobs:
             - name: Start dashboard and run tests
               run: |
                 cd ~/install/test-app
-                # start the dev server in the background
+                # `npm run dev` already starts BOTH the Vendure server (port 3000) and the
+                # dashboard Vite dev server (port 5173) concurrently. Starting a second Vite
+                # on 5173 here caused an intermittent EADDRINUSE race against the one that
+                # `npm run dev` had already bound, so we rely on the single dev process.
                 npm run dev &
                 DEV_PID=$!
-                # Wait for the dev server to be available (use /health endpoint, not root)
+                # Wait for the server (use /health endpoint, not root) and the dashboard to be available
                 wait-on http://localhost:3000/health --timeout 60000
-                # Start the dashboard with --strictPort to fail fast if port is in use
-                npx vite --port 5173 --strictPort &
-                DASHBOARD_PID=$!
-                # Give Vite a moment to start or fail
-                sleep 3
-                # Check if Vite process is still running (it will exit immediately if port is in use)
-                if ! kill -0 $DASHBOARD_PID 2>/dev/null; then
-                    echo "Vite failed to start - port 5173 may be in use"
-                    exit 1
-                fi
-                # Wait for the dashboard to be available
                 wait-on http://localhost:5173/dashboard --timeout 120000
                 # Run the dashboard tests
                 NODE_PATH=~/install/test-app/node_modules node $GITHUB_WORKSPACE/.github/workflows/scripts/dashboard-tests.js
-                # Clean up dashboard process
-                kill $DASHBOARD_PID 2>/dev/null || true
                 # Clean up dev server process
                 kill $DEV_PID 2>/dev/null || true
             - name: Upload dashboard test screenshots
