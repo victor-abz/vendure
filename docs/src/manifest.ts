@@ -651,6 +651,7 @@ const manifestInput: DocsPackageManifestInput = {
         {
             title: 'Deployment',
             slug: 'deployment',
+            file: file('docs/guides/deployment/index.mdx'),
             children: [
                 {
                     title: 'Production Configuration',
