@@ -729,7 +729,7 @@
           "title": "Using Docker",
           "slug": "using-docker",
           "file": "docs/guides/deployment/using-docker.mdx",
-          "lastModified": "2026-05-26T10:57:06+02:00"
+          "lastModified": "2026-05-27T11:00:24+02:00"
         },
         {
           "title": "Horizontal Scaling",
