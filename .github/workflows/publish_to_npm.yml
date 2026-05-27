@@ -23,16 +23,19 @@ on:
 jobs:
   # Determine which publish type(s) to run based on trigger
   setup:
-    # Restrict who can manually trigger a publish. `schedule` (nightlies) and
-    # `release` events are unaffected; only `workflow_dispatch` is gated, and
-    # only the listed maintainers may dispatch. A non-permitted dispatch skips
-    # this job, and `publish` (needs: setup) is skipped with it.
+    # Restrict who can trigger a publish to the listed maintainers. Both
+    # `workflow_dispatch` (manual) and `release` (a published GitHub Release)
+    # are user-initiated, so both are gated on `github.actor`; a publish
+    # triggered by anyone else skips this job, and `publish` (needs: setup)
+    # is skipped with it. `schedule` (nightly cron) is not user-initiated and
+    # is always allowed.
     # This is the UX/first-line guard; actual enforcement against branch-based
-    # bypass is the `npm-publish` environment + npm trust `--env` binding below.
+    # bypass is the `npm-publish` environment + npm trust `--env` binding below,
+    # and creation of the `v*` release tags is restricted by a tag ruleset.
     if: >-
-      github.event_name != 'workflow_dispatch' ||
-      github.actor == 'michaelbromley' ||
-      github.actor == 'dlhck'
+      github.event_name == 'schedule' ||
+      ((github.event_name == 'release' || github.event_name == 'workflow_dispatch') &&
+       (github.actor == 'michaelbromley' || github.actor == 'dlhck'))
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
