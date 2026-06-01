@@ -138,12 +138,17 @@ jobs:
               uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
               with:
                   path: ~/.cache/ms-playwright
-                  key: playwright-${{ runner.os }}-${{ hashFiles('**/bun.lock') }}
-                  restore-keys: |
-                      playwright-${{ runner.os }}-
+                  # The key version prefix (v2) lets us evict caches poisoned by an
+                  # earlier incomplete browser install. No restore-keys: a prefix
+                  # fallback would drag stale browser binaries forward on a Playwright
+                  # version bump, and an exact hit on that poisoned cache then skips
+                  # the install step indefinitely.
+                  key: playwright-v2-${{ runner.os }}-${{ hashFiles('**/bun.lock') }}
             - name: Install Playwright browsers
               if: steps.playwright-cache.outputs.cache-hit != 'true'
-              run: bunx playwright install chromium
+              # chromium-headless-shell is a separate download since Playwright 1.49
+              # and is what headless CI runs actually launch.
+              run: bunx playwright install chromium chromium-headless-shell
               working-directory: packages/dashboard
             - name: Install Playwright system deps
               run: bunx playwright install-deps chromium
