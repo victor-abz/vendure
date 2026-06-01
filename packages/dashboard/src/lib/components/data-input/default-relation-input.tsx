@@ -553,11 +553,13 @@ const createEntityConfigs = (i18n: any) => ({
         idKey: 'id',
         labelKey: 'lastName',
         placeholder: i18n`Search administrator...`,
-        searchFilterOperator: 'OR',
+        // Match the search term against any of the name/email fields independently
         buildSearchFilter: (term: string) => ({
-            firstName: { contains: term },
-            lastName: { contains: term },
-            emailAddress: { contains: term },
+            _or: [
+                { firstName: { contains: term } },
+                { lastName: { contains: term } },
+                { emailAddress: { contains: term } },
+            ],
         }),
         listQuery: graphql(`
             query GetAdministratorsForRelationSelector($options: AdministratorListOptions) {
