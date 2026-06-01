@@ -33,6 +33,11 @@ export interface RelationSelectorConfig<T = any> {
     multiple?: boolean;
     /** Custom filter function for search */
     buildSearchFilter?: (searchTerm: string) => any;
+    /**
+     * Logical operator applied to the search filter fields. Use 'OR' when
+     * `buildSearchFilter` returns multiple fields that should be matched independently.
+     */
+    searchFilterOperator?: 'AND' | 'OR';
     /** Custom filter function for fetching by IDs */
     buildIdsFilter?: (ids: string[]) => any;
     /** Custom label renderer function for rich display */
@@ -132,6 +137,9 @@ export function useRelationSelector<T>(config: RelationSelectorConfig<T>) {
             // Add search filter if there's a search term
             if (debouncedSearch.trim().length > 0) {
                 variables.options.filter = buildFilter(debouncedSearch.trim());
+                if (config.searchFilterOperator) {
+                    variables.options.filterOperator = config.searchFilterOperator;
+                }
             }
 
             const response = (await api.query(config.listQuery, variables)) as any;

@@ -550,7 +550,15 @@ const createEntityConfigs = (i18n: any) => ({
     }),
 
     Administrator: createRelationSelectorConfig({
-        ...createBaseEntityConfig('Administrator', i18n, 'emailAddress', 'lastName'),
+        idKey: 'id',
+        labelKey: 'lastName',
+        placeholder: i18n`Search administrator...`,
+        searchFilterOperator: 'OR',
+        buildSearchFilter: (term: string) => ({
+            firstName: { contains: term },
+            lastName: { contains: term },
+            emailAddress: { contains: term },
+        }),
         listQuery: graphql(`
             query GetAdministratorsForRelationSelector($options: AdministratorListOptions) {
                 administrators(options: $options) {
@@ -591,7 +599,7 @@ const createEntityConfigs = (i18n: any) => ({
         label: (item: any) => (
             <EntityLabel
                 title={item.name}
-                subtitle={item.name}
+                subtitle={''}
                 placeholderLetter={item.name?.[0]?.toUpperCase() || 'S'}
                 rounded
                 tooltipText={item.name}
