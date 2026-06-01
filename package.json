@@ -82,8 +82,7 @@
   },
   "trustedDependencies": [
     "husky",
-    "better-sqlite3",
-    "puppeteer"
+    "better-sqlite3"
   ],
   "workspaces": [
     "packages/*"
