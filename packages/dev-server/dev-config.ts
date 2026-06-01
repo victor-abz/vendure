@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
+import { OnApplicationBootstrap } from '@nestjs/common';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { ADMIN_API_PATH, API_PORT, SHOP_API_PATH } from '@vendure/common/lib/shared-constants';
-import { OnApplicationBootstrap } from '@nestjs/common';
 import {
     DefaultJobQueuePlugin,
     DefaultLogger,
@@ -64,7 +64,7 @@ class ReadonlySettingsTestPlugin implements OnApplicationBootstrap {
  */
 export const devConfig: VendureConfig = {
     apiOptions: {
-        port: API_PORT,
+        port: Number(process.env.API_PORT) || API_PORT,
         adminApiPath: ADMIN_API_PATH,
         adminApiPlayground: {
             settings: {
