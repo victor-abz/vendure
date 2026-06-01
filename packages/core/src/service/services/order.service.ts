@@ -337,15 +337,9 @@ export class OrderService {
         options?: ListQueryOptions<Order>,
         relations?: RelationPaths<Order>,
     ): Promise<PaginatedList<Order>> {
-        const effectiveRelations = (relations ?? ['lines', 'customer', 'channels', 'shippingLines']).filter(
-            r =>
-                // Don't join productVariant because it messes with the
-                // price calculation in certain edge-case field resolver scenarios
-                !r.includes('productVariant'),
-        );
         return this.listQueryBuilder
             .build(Order, options, {
-                relations: effectiveRelations,
+                relations: relations ?? ['lines', 'customer', 'channels', 'shippingLines'],
                 channelId: ctx.channelId,
                 ctx,
             })
