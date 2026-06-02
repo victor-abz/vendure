@@ -2,14 +2,15 @@ import { lingui } from '@lingui/vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
+import { randomUUID } from 'node:crypto';
 import path from 'path';
 import { PluginOption } from 'vite';
 
 import { PathAdapter } from './types.js';
 import { PackageScannerConfig } from './utils/compiler.js';
 import { adminApiSchemaPlugin } from './vite-plugin-admin-api-schema.js';
-import { configLoaderPlugin } from './vite-plugin-config-loader.js';
 import { bundleEntryPlugin } from './vite-plugin-bundle-entry.js';
+import { configLoaderPlugin } from './vite-plugin-config-loader.js';
 import { viteConfigPlugin } from './vite-plugin-config.js';
 import { dashboardMetadataPlugin } from './vite-plugin-dashboard-metadata.js';
 import { gqlTadaPlugin } from './vite-plugin-gql-tada.js';
@@ -194,6 +195,9 @@ type PluginMapEntry = {
  */
 export function vendureDashboardPlugin(options: VitePluginVendureDashboardOptions): PluginOption[] {
     const tempDir = options.tempCompilationDir ?? path.join(import.meta.dirname, './.vendure-dashboard-temp');
+    const tempInstanceId = `${process.pid}-${randomUUID()}`;
+    const compilationTempDir = path.join(tempDir, 'compiler', tempInstanceId);
+    const gqlTadaTempDir = path.join(tempDir, 'gql-tada', tempInstanceId);
     const normalizedVendureConfigPath = getNormalizedVendureConfigPath(options.vendureConfigPath);
     const packageRoot = getDashboardPackageRoot();
     const linguiConfigPath = path.join(packageRoot, 'lingui.config.js');
@@ -260,7 +264,7 @@ export function vendureDashboardPlugin(options: VitePluginVendureDashboardOption
             plugin: () =>
                 configLoaderPlugin({
                     vendureConfigPath: normalizedVendureConfigPath,
-                    outputPath: tempDir,
+                    outputPath: compilationTempDir,
                     pathAdapter: options.pathAdapter,
                     pluginPackageScanner: options.pluginPackageScanner,
                     module: options.module,
@@ -294,7 +298,11 @@ export function vendureDashboardPlugin(options: VitePluginVendureDashboardOption
             key: 'gqlTada',
             plugin: () =>
                 options.gqlOutputPath &&
-                gqlTadaPlugin({ gqlTadaOutputPath: options.gqlOutputPath, tempDir, packageRoot }),
+                gqlTadaPlugin({
+                    gqlTadaOutputPath: options.gqlOutputPath,
+                    tempDir: gqlTadaTempDir,
+                    packageRoot,
+                }),
         },
         {
             key: 'transformIndexHtml',

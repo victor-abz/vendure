@@ -29,6 +29,10 @@ import { FieldTestPlugin } from './test-plugins/field-test/field-test-plugin';
 import { ReviewsPlugin } from './test-plugins/reviews/reviews-plugin';
 
 const IS_INSTRUMENTED = process.env.IS_INSTRUMENTED === 'true';
+const dashboardAppDir =
+    path.basename(__dirname) === 'dist'
+        ? path.join(__dirname, './dashboard')
+        : path.join(__dirname, './dist/dashboard');
 
 @VendurePlugin({
     imports: [PluginCommonModule],
@@ -197,7 +201,7 @@ export const devConfig: VendureConfig = {
         }),
         DashboardPlugin.init({
             route: 'dashboard',
-            appDir: path.join(__dirname, './dist'),
+            appDir: dashboardAppDir,
         }),
     ],
 };
