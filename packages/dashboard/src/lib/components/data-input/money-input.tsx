@@ -77,7 +77,11 @@ export function MoneyInput(props: Readonly<MoneyInputProps>) {
                 isFocused.current = true;
             }}
             onChange={e => {
-                const inputValue = e.target.value;
+                const el = e.target;
+                const selectionStart = el.selectionStart;
+                const selectionEnd = el.selectionEnd;
+                const inputValue = el.value;
+
                 // Allow empty input
                 if (inputValue === '') {
                     setDisplayValue('');
@@ -88,7 +92,20 @@ export function MoneyInput(props: Readonly<MoneyInputProps>) {
                 if (!/^[0-9.]*$/.test(inputValue)) {
                     return;
                 }
+
                 setDisplayValue(inputValue);
+
+                // Preserve caret position when updating a controlled input value.
+                // Without this, the cursor may jump to the end on each keystroke.
+                requestAnimationFrame(() => {
+                    if (!isFocused.current) {
+                        return;
+                    }
+                    if (selectionStart != null && selectionEnd != null && document.activeElement === el) {
+                        el.setSelectionRange(selectionStart, selectionEnd);
+                    }
+                });
+
                 const parsed = parseFloat(inputValue);
                 if (!isNaN(parsed)) {
                     onChange(toMinorUnits(parsed));
