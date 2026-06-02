@@ -2080,13 +2080,13 @@
                   "title": "DefaultAssetImportStrategy",
                   "slug": "default-asset-import-strategy",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy.mdx",
-                  "lastModified": "2026-05-22T11:02:41Z"
+                  "lastModified": "2026-05-22T14:56:03+02:00"
                 },
                 {
                   "title": "DefaultAssetImportStrategyOptions",
                   "slug": "default-asset-import-strategy-options",
                   "file": "docs/reference/typescript-api/import-export/default-asset-import-strategy-options.mdx",
-                  "lastModified": "2026-05-22T11:02:41Z"
+                  "lastModified": "2026-05-22T14:56:03+02:00"
                 },
                 {
                   "title": "FastImporterService",
@@ -3869,7 +3869,7 @@
                   "title": "UseGeneratedForm",
                   "slug": "use-generated-form",
                   "file": "docs/reference/dashboard/detail-views/use-generated-form.mdx",
-                  "lastModified": "2026-06-02T05:31:15Z"
+                  "lastModified": "2026-06-02T07:50:38+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4171,7 +4171,7 @@
                   "title": "PaginatedListDataTable",
                   "slug": "paginated-list-data-table",
                   "file": "docs/reference/dashboard/list-views/paginated-list-data-table.mdx",
-                  "lastModified": "2026-05-22T11:02:41Z"
+                  "lastModified": "2026-05-22T14:56:03+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -4223,7 +4223,7 @@
                   "title": "VendureDashboardPlugin",
                   "slug": "vendure-dashboard-plugin",
                   "file": "docs/reference/dashboard/vite-plugin/vendure-dashboard-plugin.mdx",
-                  "lastModified": "2026-05-22T14:07:25Z"
+                  "lastModified": "2026-06-02T07:50:38+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
