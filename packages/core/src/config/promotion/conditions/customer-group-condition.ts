@@ -16,12 +16,18 @@ let groupIdCache: Cache;
 
 export const customerGroup = new PromotionCondition({
     code: 'customer_group',
-    description: [{ languageCode: LanguageCode.en, value: 'Customer is a member of the specified group' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Customer is a member of the specified group' },
+        { languageCode: LanguageCode.cs, value: 'Zákazník je členem zadané skupiny' },
+    ],
     args: {
         customerGroupId: {
             type: 'ID',
             ui: { component: 'customer-group-form-input' },
-            label: [{ languageCode: LanguageCode.en, value: 'Customer group' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Customer group' },
+                { languageCode: LanguageCode.cs, value: 'Skupina zákazníků' },
+            ],
         },
     },
     async init(injector) {

@@ -7,6 +7,10 @@ export const digitalShippingEligibilityChecker = new ShippingEligibilityChecker(
             languageCode: LanguageCode.en,
             value: 'Allows only orders that contain at least 1 digital product',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Povoluje pouze objednávky, které obsahují alespoň 1 digitální produkt',
+        },
     ],
     args: {},
     check: (ctx, order, args) => {

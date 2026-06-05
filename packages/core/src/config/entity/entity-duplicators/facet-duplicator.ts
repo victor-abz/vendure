@@ -27,6 +27,10 @@ export const facetDuplicator = new EntityDuplicator({
             languageCode: LanguageCode.en,
             value: 'Default duplicator for Facets',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Výchozí duplikátor pro facety',
+        },
     ],
     requiresPermission: [Permission.CreateFacet, Permission.CreateCatalog],
     forEntities: ['Facet'],
@@ -34,7 +38,10 @@ export const facetDuplicator = new EntityDuplicator({
         includeFacetValues: {
             type: 'boolean',
             defaultValue: true,
-            label: [{ languageCode: LanguageCode.en, value: 'Include facet values' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Include facet values' },
+                { languageCode: LanguageCode.cs, value: 'Zahrnout hodnoty facet' },
+            ],
         },
     },
     init(injector: Injector) {

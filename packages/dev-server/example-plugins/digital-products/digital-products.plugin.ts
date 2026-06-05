@@ -17,7 +17,10 @@ import { DigitalShippingLineAssignmentStrategy } from './config/digital-shipping
             type: 'boolean',
             name: 'isDigital',
             defaultValue: false,
-            label: [{ languageCode: LanguageCode.en, value: 'This product is digital' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'This product is digital' },
+                { languageCode: LanguageCode.cs, value: 'Tento produkt je digitální' },
+            ],
             public: true,
         });
         config.customFields.ShippingMethod.push({
@@ -26,6 +29,7 @@ import { DigitalShippingLineAssignmentStrategy } from './config/digital-shipping
             defaultValue: false,
             label: [
                 { languageCode: LanguageCode.en, value: 'This shipping method handles digital products' },
+                { languageCode: LanguageCode.cs, value: 'Tato metoda dopravy zpracovává digitální produkty' },
             ],
             public: true,
         });
@@ -34,7 +38,10 @@ import { DigitalShippingLineAssignmentStrategy } from './config/digital-shipping
             name: 'downloadUrls',
             nullable: true,
             list: true,
-            label: [{ languageCode: LanguageCode.en, value: 'Urls of any digital purchases' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Urls of any digital purchases' },
+                { languageCode: LanguageCode.cs, value: 'URL adresy všech digitálních nákupů' },
+            ],
             public: true,
         });
         config.shippingOptions.fulfillmentHandlers.push(digitalFulfillmentHandler);

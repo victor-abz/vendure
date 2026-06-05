@@ -18,6 +18,10 @@ export const multivendorPaymentMethodHandler = new PaymentMethodHandler({
             languageCode: LanguageCode.en,
             value: 'Multivendor Payment Provider',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Poskytovatel plateb pro multivendor',
+        },
     ],
     args: {},
     createPayment: async (ctx, order, amount, args, metadata) => {

@@ -128,9 +128,13 @@ import { MultivendorPluginOptions } from './types';
     configuration: config => {
         config.customFields.Seller.push({
             name: 'connectedAccountId',
-            label: [{ languageCode: LanguageCode.en, value: 'Connected account ID' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Connected account ID' },
+                { languageCode: LanguageCode.cs, value: 'ID propojeného účtu' },
+            ],
             description: [
                 { languageCode: LanguageCode.en, value: 'The ID used to process connected payments' },
+                { languageCode: LanguageCode.cs, value: 'ID používané pro zpracování propojených plateb' },
             ],
             type: 'string',
             public: false,
@@ -199,6 +203,10 @@ export class MultivendorPlugin implements OnApplicationBootstrap {
                     {
                         languageCode: LanguageCode.en,
                         name: 'Connected Payments',
+                    },
+                    {
+                        languageCode: LanguageCode.cs,
+                        name: 'Propojené platby',
                     },
                 ],
             });

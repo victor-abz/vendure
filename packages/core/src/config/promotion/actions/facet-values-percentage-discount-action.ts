@@ -33,5 +33,6 @@ export const discountOnItemWithFacets = new PromotionItemAction({
     },
     description: [
         { languageCode: LanguageCode.en, value: 'Discount products with these facets by { discount }%' },
+        { languageCode: LanguageCode.cs, value: 'Zlevnit produkty s těmito facetami o { discount }%' },
     ],
 });

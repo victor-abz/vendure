@@ -24,7 +24,10 @@ const gripeSDK = {
  */
 export const examplePaymentHandler = new PaymentMethodHandler({
     code: 'example-payment-provider',
-    description: [{ languageCode: LanguageCode.en, value: 'Example Payment Provider' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Example Payment Provider' },
+        { languageCode: LanguageCode.cs, value: 'Ukázkový poskytovatel plateb' },
+    ],
     args: {
         automaticCapture: { type: 'boolean', required: false },
         apiKey: { type: 'string', required: false },

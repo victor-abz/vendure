@@ -15,6 +15,10 @@ export const digitalFulfillmentHandler = new FulfillmentHandler({
             languageCode: LanguageCode.en,
             value: 'Generates product keys for the digital download',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Generuje produktové klíče pro digitální stažení',
+        },
     ],
 
     args: {},

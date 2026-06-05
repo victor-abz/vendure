@@ -1,6 +1,6 @@
 import { LanguageCode } from '@vendure/common/lib/generated-types';
 
-import { CreatePaymentResult, PaymentMethodHandler } from './payment-method-handler';
+import { PaymentMethodHandler } from './payment-method-handler';
 
 /**
  * @description
@@ -31,6 +31,10 @@ export const dummyPaymentHandler = new PaymentMethodHandler({
             languageCode: LanguageCode.en,
             value: 'A dummy payment provider intended for testing and development only.',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Fiktivní poskytovatel plateb určený pouze pro testování a vývoj.',
+        },
     ],
     args: {
         automaticSettle: {
@@ -40,11 +44,19 @@ export const dummyPaymentHandler = new PaymentMethodHandler({
                     languageCode: LanguageCode.en,
                     value: 'Authorize and settle in 1 step',
                 },
+                {
+                    languageCode: LanguageCode.cs,
+                    value: 'Autorizovat a vypořádat v 1 kroku',
+                },
             ],
             description: [
                 {
                     languageCode: LanguageCode.en,
                     value: 'If enabled, Payments will be created in the "Settled" state.',
+                },
+                {
+                    languageCode: LanguageCode.cs,
+                    value: 'Pokud je povoleno, platby budou vytvářeny ve stavu "Settled".',
                 },
             ],
             required: true,

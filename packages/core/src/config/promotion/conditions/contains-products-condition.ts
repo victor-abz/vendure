@@ -9,6 +9,7 @@ export const containsProducts = new PromotionCondition({
     code: 'contains_products',
     description: [
         { languageCode: LanguageCode.en, value: 'Buy at least { minimum } of the specified products' },
+        { languageCode: LanguageCode.cs, value: 'Kupte alespoň { minimum } z určených produktů' },
     ],
     args: {
         minimum: {
@@ -20,7 +21,10 @@ export const containsProducts = new PromotionCondition({
             type: 'ID',
             list: true,
             ui: { component: 'product-selector-form-input' },
-            label: [{ languageCode: LanguageCode.en, value: 'Product variants' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Product variants' },
+                { languageCode: LanguageCode.cs, value: 'Varianty produktu' },
+            ],
         },
     },
     async check(ctx, order, args) {

@@ -10,7 +10,10 @@ let entityHydrator: EntityHydrator;
  */
 export const multivendorShippingEligibilityChecker = new ShippingEligibilityChecker({
     code: 'multivendor-shipping-eligibility-checker',
-    description: [{ languageCode: LanguageCode.en, value: 'Multivendor Shipping Eligibility Checker' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Multivendor Shipping Eligibility Checker' },
+        { languageCode: LanguageCode.cs, value: 'Kontrola způsobilosti dopravy pro multivendor' },
+    ],
     args: {},
     init(injector) {
         entityHydrator = injector.get(EntityHydrator);

@@ -9,6 +9,7 @@ export const hasFacetValues = new PromotionCondition({
     code: 'at_least_n_with_facets',
     description: [
         { languageCode: LanguageCode.en, value: 'Buy at least { minimum } products with the given facets' },
+        { languageCode: LanguageCode.cs, value: 'Kupte alespoň { minimum } produktů s danými facetami' },
     ],
     args: {
         minimum: {

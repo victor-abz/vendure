@@ -1,7 +1,5 @@
 import { LanguageCode } from '@vendure/common/lib/generated-types';
-import { ID } from '@vendure/common/lib/shared-types';
 
-import { idsAreEqual } from '../../../common/utils';
 import { buyXGetYFreeCondition } from '../conditions/buy-x-get-y-free-condition';
 import { PromotionItemAction } from '../promotion-action';
 
@@ -11,6 +9,10 @@ export const buyXGetYFreeAction = new PromotionItemAction({
         {
             languageCode: LanguageCode.en,
             value: 'Buy X products, get Y products free',
+        },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Kupte X produktů, získejte Y produktů zdarma',
         },
     ],
     args: {},

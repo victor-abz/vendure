@@ -31,6 +31,10 @@ export const productDuplicator = new EntityDuplicator({
             languageCode: LanguageCode.en,
             value: 'Default duplicator for Products',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Výchozí duplikátor pro produkty',
+        },
     ],
     requiresPermission: [Permission.CreateProduct, Permission.CreateCatalog],
     forEntities: ['Product'],
@@ -38,7 +42,10 @@ export const productDuplicator = new EntityDuplicator({
         includeVariants: {
             type: 'boolean',
             defaultValue: true,
-            label: [{ languageCode: LanguageCode.en, value: 'Include variants' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Include variants' },
+                { languageCode: LanguageCode.cs, value: 'Zahrnout varianty' },
+            ],
         },
     },
     init(injector: Injector) {

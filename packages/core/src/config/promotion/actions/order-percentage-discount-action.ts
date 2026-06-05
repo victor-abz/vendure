@@ -18,5 +18,8 @@ export const orderPercentageDiscount = new PromotionOrderAction({
         const orderTotal = ctx.channel.pricesIncludeTax ? order.subTotalWithTax : order.subTotal;
         return -orderTotal * (args.discount / 100);
     },
-    description: [{ languageCode: LanguageCode.en, value: 'Discount order by { discount }%' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Discount order by { discount }%' },
+        { languageCode: LanguageCode.cs, value: 'Zlevnit objednávku o { discount }%' },
+    ],
 });

@@ -25,6 +25,10 @@ export const collectionDuplicator = new EntityDuplicator({
             languageCode: LanguageCode.en,
             value: 'Default duplicator for Collections',
         },
+        {
+            languageCode: LanguageCode.cs,
+            value: 'Výchozí duplikátor pro kolekce',
+        },
     ],
     requiresPermission: [Permission.CreateCollection, Permission.CreateCatalog],
     forEntities: ['Collection'],

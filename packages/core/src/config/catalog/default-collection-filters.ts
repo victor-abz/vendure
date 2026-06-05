@@ -26,12 +26,20 @@ export function randomSuffix(prefix: string) {
  */
 export const combineWithAndArg: ConfigArgDef<'boolean'> = {
     type: 'boolean',
-    label: [{ languageCode: LanguageCode.en, value: 'Combination mode' }],
+    label: [
+        { languageCode: LanguageCode.en, value: 'Combination mode' },
+        { languageCode: LanguageCode.cs, value: 'Režim kombinace' },
+    ],
     description: [
         {
             languageCode: LanguageCode.en,
             // eslint-disable-next-line max-len
             value: 'If this filter is being combined with other filters, do all conditions need to be satisfied (AND), or just one or the other (OR)?',
+        },
+        {
+            languageCode: LanguageCode.cs,
+            // eslint-disable-next-line max-len
+            value: 'Pokud je tento filtr kombinován s dalšími filtry, musí být splněny všechny podmínky (AND), nebo stačí jedna z nich (OR)?',
         },
     ],
     defaultValue: true,
@@ -51,11 +59,17 @@ export const facetValueCollectionFilter = new CollectionFilter({
             ui: {
                 component: 'facet-value-form-input',
             },
-            label: [{ languageCode: LanguageCode.en, value: 'Facet values' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Facet values' },
+                { languageCode: LanguageCode.cs, value: 'Hodnoty facety' },
+            ],
         },
         containsAny: {
             type: 'boolean',
-            label: [{ languageCode: LanguageCode.en, value: 'Contains any' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Contains any' },
+                { languageCode: LanguageCode.cs, value: 'Obsahuje alespoň jednu' },
+            ],
             description: [
                 {
                     languageCode: LanguageCode.en,
@@ -63,12 +77,21 @@ export const facetValueCollectionFilter = new CollectionFilter({
                         'If checked, product variants must have at least one of the selected facet values. ' +
                         'If not checked, the variant must have all selected values.',
                 },
+                {
+                    languageCode: LanguageCode.cs,
+                    value:
+                        'Pokud je zaškrtnuto, varianty produktu musí mít alespoň jednu z vybraných hodnot facety. ' +
+                        'Pokud není zaškrtnuto, varianta musí mít všechny vybrané hodnoty.',
+                },
             ],
         },
         combineWithAnd: combineWithAndArg,
     },
     code: 'facet-value-filter',
-    description: [{ languageCode: LanguageCode.en, value: 'Filter by facet values' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Filter by facet values' },
+        { languageCode: LanguageCode.cs, value: 'Filtrovat podle hodnot facet' },
+    ],
     apply: (qb, args) => {
         const ids = args.facetValueIds;
 
@@ -145,7 +168,10 @@ export const variantNameCollectionFilter = new CollectionFilter({
         combineWithAnd: combineWithAndArg,
     },
     code: 'variant-name-filter',
-    description: [{ languageCode: LanguageCode.en, value: 'Filter by product variant name' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Filter by product variant name' },
+        { languageCode: LanguageCode.cs, value: 'Filtrovat podle názvu varianty produktu' },
+    ],
     apply: (qb, args) => {
         let translationAlias = 'variant_name_filter_translation';
         const termName = randomSuffix('term');
@@ -201,7 +227,10 @@ export const variantIdCollectionFilter = new CollectionFilter({
         variantIds: {
             type: 'ID',
             list: true,
-            label: [{ languageCode: LanguageCode.en, value: 'Product variants' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Product variants' },
+                { languageCode: LanguageCode.cs, value: 'Varianty produktu' },
+            ],
             ui: {
                 component: 'product-multi-form-input',
                 selectionMode: 'variant',
@@ -210,7 +239,10 @@ export const variantIdCollectionFilter = new CollectionFilter({
         combineWithAnd: combineWithAndArg,
     },
     code: 'variant-id-filter',
-    description: [{ languageCode: LanguageCode.en, value: 'Manually select product variants' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Manually select product variants' },
+        { languageCode: LanguageCode.cs, value: 'Ručně vybrat varianty produktu' },
+    ],
     apply: (qb, args) => {
         const emptyIds = args.variantIds.length === 0;
         const variantIdsKey = randomSuffix('variantIds');
@@ -235,7 +267,10 @@ export const productIdCollectionFilter = new CollectionFilter({
         productIds: {
             type: 'ID',
             list: true,
-            label: [{ languageCode: LanguageCode.en, value: 'Products' }],
+            label: [
+                { languageCode: LanguageCode.en, value: 'Products' },
+                { languageCode: LanguageCode.cs, value: 'Produkty' },
+            ],
             ui: {
                 component: 'product-multi-form-input',
                 selectionMode: 'product',
@@ -244,7 +279,10 @@ export const productIdCollectionFilter = new CollectionFilter({
         combineWithAnd: combineWithAndArg,
     },
     code: 'product-id-filter',
-    description: [{ languageCode: LanguageCode.en, value: 'Manually select products' }],
+    description: [
+        { languageCode: LanguageCode.en, value: 'Manually select products' },
+        { languageCode: LanguageCode.cs, value: 'Ručně vybrat produkty' },
+    ],
     apply: (qb, args) => {
         const emptyIds = args.productIds.length === 0;
         const productIdsKey = randomSuffix('productIds');
