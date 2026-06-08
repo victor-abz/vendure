@@ -94,20 +94,14 @@ export class MinMaxOrderInterceptor implements OrderInterceptor {
             type: 'int',
             min: 0,
             name: 'minOrderQuantity',
-            label: [
-                { languageCode: LanguageCode.en, value: 'Minimum order quantity' },
-                { languageCode: LanguageCode.cs, value: 'Minimální množství objednávky' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Minimum order quantity' }],
             nullable: true,
         });
         config.customFields.ProductVariant.push({
             type: 'int',
             min: 0,
             name: 'maxOrderQuantity',
-            label: [
-                { languageCode: LanguageCode.en, value: 'Maximum order quantity' },
-                { languageCode: LanguageCode.cs, value: 'Maximální množství objednávky' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Maximum order quantity' }],
             nullable: true,
         });
         config.orderOptions.orderInterceptors.push(new MinMaxOrderInterceptor());
