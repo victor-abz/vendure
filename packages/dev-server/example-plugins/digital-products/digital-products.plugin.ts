@@ -26,7 +26,6 @@ import { DigitalShippingLineAssignmentStrategy } from './config/digital-shipping
             defaultValue: false,
             label: [
                 { languageCode: LanguageCode.en, value: 'This shipping method handles digital products' },
-                { languageCode: LanguageCode.cs, value: 'Tato metoda dopravy zpracovává digitální produkty' },
             ],
             public: true,
         });

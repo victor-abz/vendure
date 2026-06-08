@@ -200,10 +200,6 @@ export class MultivendorPlugin implements OnApplicationBootstrap {
                         languageCode: LanguageCode.en,
                         name: 'Connected Payments',
                     },
-                    {
-                        languageCode: LanguageCode.cs,
-                        name: 'Propojené platby',
-                    },
                 ],
             });
             await this.channelService.assignToChannels(
