@@ -1,6 +1,6 @@
 import { LanguageCode } from '@vendure/common/lib/generated-types';
 
-import { PaymentMethodHandler } from './payment-method-handler';
+import { CreatePaymentResult, PaymentMethodHandler } from './payment-method-handler';
 
 /**
  * @description

@@ -1,5 +1,7 @@
 import { LanguageCode } from '@vendure/common/lib/generated-types';
+import { ID } from '@vendure/common/lib/shared-types';
 
+import { idsAreEqual } from '../../../common/utils';
 import { buyXGetYFreeCondition } from '../conditions/buy-x-get-y-free-condition';
 import { PromotionItemAction } from '../promotion-action';
 
