@@ -11,10 +11,6 @@ export const buyXGetYFreeCondition = new PromotionCondition({
             languageCode: LanguageCode.en,
             value: 'Buy X products, get Y products free',
         },
-        {
-            languageCode: LanguageCode.cs,
-            value: 'Kupte X produktů, získejte Y produktů zdarma',
-        },
     ],
     args: {
         amountX: {
@@ -26,10 +22,7 @@ export const buyXGetYFreeCondition = new PromotionCondition({
             type: 'ID',
             list: true,
             ui: { component: 'product-selector-form-input' },
-            label: [
-                { languageCode: LanguageCode.en, value: 'Buy amountX of these variants' },
-                { languageCode: LanguageCode.cs, value: 'Kupte amountX těchto variant' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Buy amountX of these variants' }],
         },
         amountY: {
             type: 'int',
@@ -40,10 +33,7 @@ export const buyXGetYFreeCondition = new PromotionCondition({
             type: 'ID',
             list: true,
             ui: { component: 'product-selector-form-input' },
-            label: [
-                { languageCode: LanguageCode.en, value: 'Get amountY of these variants for free' },
-                { languageCode: LanguageCode.cs, value: 'Získejte amountY těchto variant zdarma' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Get amountY of these variants for free' }],
         },
     },
     async check(ctx, order, args) {

@@ -7,10 +7,7 @@ import { PromotionItemAction } from '../promotion-action';
 
 export const productsPercentageDiscount = new PromotionItemAction({
     code: 'products_percentage_discount',
-    description: [
-        { languageCode: LanguageCode.en, value: 'Discount specified products by { discount }%' },
-        { languageCode: LanguageCode.cs, value: 'Zlevnit vybrané produkty o { discount }%' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'Discount specified products by { discount }%' }],
     args: {
         discount: {
             type: 'float',
@@ -24,10 +21,7 @@ export const productsPercentageDiscount = new PromotionItemAction({
             type: 'ID',
             list: true,
             ui: { component: 'product-selector-form-input' },
-            label: [
-                { languageCode: LanguageCode.en, value: 'Product variants' },
-                { languageCode: LanguageCode.cs, value: 'Varianty produktu' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Product variants' }],
         },
     },
     execute(ctx, orderLine, args) {

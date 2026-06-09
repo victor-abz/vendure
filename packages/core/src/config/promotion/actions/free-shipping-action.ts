@@ -8,8 +8,5 @@ export const freeShipping = new PromotionShippingAction({
     execute(ctx, shippingLine, order, args) {
         return shippingLine.listPriceIncludesTax ? -shippingLine.priceWithTax : -shippingLine.price;
     },
-    description: [
-        { languageCode: LanguageCode.en, value: 'Free shipping' },
-        { languageCode: LanguageCode.cs, value: 'Doprava zdarma' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'Free shipping' }],
 });

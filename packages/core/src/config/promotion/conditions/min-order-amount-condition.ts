@@ -3,10 +3,7 @@ import { LanguageCode } from '@vendure/common/lib/generated-types';
 import { PromotionCondition } from '../promotion-condition';
 
 export const minimumOrderAmount = new PromotionCondition({
-    description: [
-        { languageCode: LanguageCode.en, value: 'If order total is greater than { amount }' },
-        { languageCode: LanguageCode.cs, value: 'Pokud je celková hodnota objednávky větší než { amount }' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'If order total is greater than { amount }' }],
     code: 'minimum_order_amount',
     args: {
         amount: {

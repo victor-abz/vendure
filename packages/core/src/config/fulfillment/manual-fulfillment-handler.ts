@@ -4,10 +4,7 @@ import { FulfillmentHandler } from './fulfillment-handler';
 
 export const manualFulfillmentHandler = new FulfillmentHandler({
     code: 'manual-fulfillment',
-    description: [
-        { languageCode: LanguageCode.en, value: 'Manually enter fulfillment details' },
-        { languageCode: LanguageCode.cs, value: 'Ručně zadat detaily plnění' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'Manually enter fulfillment details' }],
     args: {
         method: {
             type: 'string',

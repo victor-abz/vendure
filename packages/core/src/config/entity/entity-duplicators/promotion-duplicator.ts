@@ -26,10 +26,6 @@ export const promotionDuplicator = new EntityDuplicator({
             languageCode: LanguageCode.en,
             value: 'Default duplicator for Promotions',
         },
-        {
-            languageCode: LanguageCode.cs,
-            value: 'Výchozí duplikátor pro promoce',
-        },
     ],
     requiresPermission: [Permission.CreatePromotion],
     forEntities: ['Promotion'],

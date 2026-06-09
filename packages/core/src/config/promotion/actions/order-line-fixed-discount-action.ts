@@ -15,8 +15,5 @@ export const orderLineFixedDiscount = new PromotionLineAction({
     execute(ctx, orderLine, args) {
         return -args.discount;
     },
-    description: [
-        { languageCode: LanguageCode.en, value: 'Discount orderLine by fixed amount' },
-        { languageCode: LanguageCode.cs, value: 'Zlevnit položku objednávky o pevnou částku' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'Discount orderLine by fixed amount' }],
 });

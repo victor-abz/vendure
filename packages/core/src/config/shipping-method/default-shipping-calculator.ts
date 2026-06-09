@@ -12,19 +12,13 @@ export enum TaxSetting {
 
 export const defaultShippingCalculator = new ShippingCalculator({
     code: 'default-shipping-calculator',
-    description: [
-        { languageCode: LanguageCode.en, value: 'Default Flat-Rate Shipping Calculator' },
-        { languageCode: LanguageCode.cs, value: 'Výchozí kalkulátor dopravy s pevnou sazbou' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'Default Flat-Rate Shipping Calculator' }],
     args: {
         rate: {
             type: 'int',
             defaultValue: 0,
             ui: { component: 'currency-form-input' },
-            label: [
-                { languageCode: LanguageCode.en, value: 'Shipping price' },
-                { languageCode: LanguageCode.cs, value: 'Cena dopravy' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Shipping price' }],
         },
         includesTax: {
             type: 'string',
@@ -33,41 +27,26 @@ export const defaultShippingCalculator = new ShippingCalculator({
                 component: 'select-form-input',
                 options: [
                     {
-                        label: [
-                            { languageCode: LanguageCode.en, value: 'Includes tax' },
-                            { languageCode: LanguageCode.cs, value: 'Včetně daně' },
-                        ],
+                        label: [{ languageCode: LanguageCode.en, value: 'Includes tax' }],
                         value: TaxSetting.include,
                     },
                     {
-                        label: [
-                            { languageCode: LanguageCode.en, value: 'Excludes tax' },
-                            { languageCode: LanguageCode.cs, value: 'Bez daně' },
-                        ],
+                        label: [{ languageCode: LanguageCode.en, value: 'Excludes tax' }],
                         value: TaxSetting.exclude,
                     },
                     {
-                        label: [
-                            { languageCode: LanguageCode.en, value: 'Auto (based on Channel)' },
-                            { languageCode: LanguageCode.cs, value: 'Automaticky (podle kanálu)' },
-                        ],
+                        label: [{ languageCode: LanguageCode.en, value: 'Auto (based on Channel)' }],
                         value: TaxSetting.auto,
                     },
                 ],
             },
-            label: [
-                { languageCode: LanguageCode.en, value: 'Price includes tax' },
-                { languageCode: LanguageCode.cs, value: 'Cena zahrnuje daň' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Price includes tax' }],
         },
         taxRate: {
             type: 'float',
             defaultValue: 0,
             ui: { component: 'number-form-input', suffix: '%', min: 0 },
-            label: [
-                { languageCode: LanguageCode.en, value: 'Tax rate' },
-                { languageCode: LanguageCode.cs, value: 'Sazba daně' },
-            ],
+            label: [{ languageCode: LanguageCode.en, value: 'Tax rate' }],
         },
     },
     calculate: (ctx, order, args) => {

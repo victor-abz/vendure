@@ -16,8 +16,5 @@ export const orderFixedDiscount = new PromotionOrderAction({
         const upperBound = ctx.channel.pricesIncludeTax ? order.subTotalWithTax : order.subTotal;
         return -Math.min(args.discount, upperBound);
     },
-    description: [
-        { languageCode: LanguageCode.en, value: 'Discount order by fixed amount' },
-        { languageCode: LanguageCode.cs, value: 'Zlevnit objednávku o pevnou částku' },
-    ],
+    description: [{ languageCode: LanguageCode.en, value: 'Discount order by fixed amount' }],
 });

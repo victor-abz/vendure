@@ -10,10 +10,6 @@ export const buyXGetYFreeAction = new PromotionItemAction({
             languageCode: LanguageCode.en,
             value: 'Buy X products, get Y products free',
         },
-        {
-            languageCode: LanguageCode.cs,
-            value: 'Kupte X produktů, získejte Y produktů zdarma',
-        },
     ],
     args: {},
     conditions: [buyXGetYFreeCondition],
