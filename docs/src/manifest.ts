@@ -594,6 +594,11 @@ const manifestInput: DocsPackageManifestInput = {
                     slug: 'migration',
                     file: file('docs/guides/extending-the-dashboard/migration/index.mdx'),
                 },
+                {
+                    title: 'Custom Providers',
+                    slug: 'custom-providers',
+                    file: file('docs/guides/extending-the-dashboard/custom-providers/index.mdx'),
+                },
             ],
         },
         {
