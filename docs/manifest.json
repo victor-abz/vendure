@@ -651,6 +651,12 @@
           "slug": "migration",
           "file": "docs/guides/extending-the-dashboard/migration/index.mdx",
           "lastModified": "2026-03-23T10:11:25+01:00"
+        },
+        {
+          "title": "Custom Providers",
+          "slug": "custom-providers",
+          "file": "docs/guides/extending-the-dashboard/custom-providers/index.mdx",
+          "lastModified": "2026-06-16T13:09:22+02:00"
         }
       ]
     },
