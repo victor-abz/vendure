@@ -946,7 +946,7 @@
                   "title": "AssetOptions",
                   "slug": "asset-options",
                   "file": "docs/reference/typescript-api/assets/asset-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "AssetPreviewStrategy",
@@ -990,7 +990,7 @@
                   "title": "AuthOptions",
                   "slug": "auth-options",
                   "file": "docs/reference/typescript-api/auth/auth-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "BcryptPasswordHashingStrategy",
@@ -1002,13 +1002,13 @@
                   "title": "CookieOptions",
                   "slug": "cookie-options",
                   "file": "docs/reference/typescript-api/auth/cookie-options.mdx",
-                  "lastModified": "2026-06-23T15:36:24Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "CustomerChannelAssignmentStrategy",
                   "slug": "customer-channel-assignment-strategy",
                   "file": "docs/reference/typescript-api/auth/customer-channel-assignment-strategy.mdx",
-                  "lastModified": "2026-06-24T09:29:11Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "DefaultPasswordValidationStrategy",
@@ -1086,7 +1086,7 @@
                   "title": "SuperadminCredentials",
                   "slug": "superadmin-credentials",
                   "file": "docs/reference/typescript-api/auth/superadmin-credentials.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "VerificationTokenStrategy",
@@ -1348,7 +1348,7 @@
                   "title": "ApiOptions",
                   "slug": "api-options",
                   "file": "docs/reference/typescript-api/configuration/api-options.mdx",
-                  "lastModified": "2026-06-23T15:36:24Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "CollectionFilter",
@@ -1360,7 +1360,7 @@
                   "title": "DefaultConfig",
                   "slug": "default-config",
                   "file": "docs/reference/typescript-api/configuration/default-config.mdx",
-                  "lastModified": "2026-06-23T15:36:24Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "DefaultSlugStrategy",
@@ -1390,7 +1390,7 @@
                   "title": "EntityOptions",
                   "slug": "entity-options",
                   "file": "docs/reference/typescript-api/configuration/entity-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "MergeConfig",
@@ -1414,7 +1414,7 @@
                   "title": "RuntimeVendureConfig",
                   "slug": "runtime-vendure-config",
                   "file": "docs/reference/typescript-api/configuration/runtime-vendure-config.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "SettingsStoreFields",
@@ -1432,19 +1432,19 @@
                   "title": "SystemOptions",
                   "slug": "system-options",
                   "file": "docs/reference/typescript-api/configuration/system-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "TrustProxyOptions",
                   "slug": "trust-proxy-options",
                   "file": "docs/reference/typescript-api/configuration/trust-proxy-options.mdx",
-                  "lastModified": "2026-06-23T15:36:24Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "VendureConfig",
                   "slug": "vendure-config",
                   "file": "docs/reference/typescript-api/configuration/vendure-config.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2116,7 +2116,7 @@
                   "title": "ImportExportOptions",
                   "slug": "import-export-options",
                   "file": "docs/reference/typescript-api/import-export/import-export-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "ImportParser",
@@ -2196,7 +2196,7 @@
                   "title": "JobQueueOptions",
                   "slug": "job-queue-options",
                   "file": "docs/reference/typescript-api/job-queue/job-queue-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "JobQueueService",
@@ -2450,7 +2450,7 @@
                   "title": "OrderOptions",
                   "slug": "order-options",
                   "file": "docs/reference/typescript-api/orders/order-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "OrderPlacedStrategy",
@@ -2530,7 +2530,7 @@
                   "title": "PaymentOptions",
                   "slug": "payment-options",
                   "file": "docs/reference/typescript-api/payment/payment-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "PaymentProcess",
@@ -2624,7 +2624,7 @@
                   "title": "CatalogOptions",
                   "slug": "catalog-options",
                   "file": "docs/reference/typescript-api/products-stock/catalog-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "DefaultProductVariantPriceCalculationStrategy",
@@ -2698,7 +2698,7 @@
                   "title": "PromotionOptions",
                   "slug": "promotion-options",
                   "file": "docs/reference/typescript-api/promotions/promotion-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2792,7 +2792,7 @@
                   "title": "SchedulerOptions",
                   "slug": "scheduler-options",
                   "file": "docs/reference/typescript-api/scheduled-tasks/scheduler-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "SchedulerService",
@@ -2904,7 +2904,7 @@
                   "title": "CustomerChannelAssignmentService",
                   "slug": "customer-channel-assignment-service",
                   "file": "docs/reference/typescript-api/services/customer-channel-assignment-service.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "CustomerGroupService",
@@ -3214,7 +3214,7 @@
                   "title": "ShippingOptions",
                   "slug": "shipping-options",
                   "file": "docs/reference/typescript-api/shipping/shipping-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "ShouldRunCheckFn",
@@ -3290,7 +3290,7 @@
                   "title": "TaxOptions",
                   "slug": "tax-options",
                   "file": "docs/reference/typescript-api/tax/tax-options.mdx",
-                  "lastModified": "2026-06-24T09:25:30Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "TaxZoneStrategy",
@@ -3544,10 +3544,10 @@
                   "title": "DashboardPluginOptions",
                   "slug": "dashboard-plugin-options",
                   "file": "docs/reference/core-plugins/dashboard-plugin/dashboard-plugin-options.mdx",
-                  "lastModified": "2026-06-23T15:47:56Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 }
               ],
-              "lastModified": "2026-06-23T15:47:56Z"
+              "lastModified": "2026-06-24T09:45:17Z"
             },
             {
               "title": "EmailPlugin",
@@ -3913,7 +3913,7 @@
                   "title": "Custom Providers",
                   "slug": "custom-providers",
                   "file": "docs/reference/dashboard/extensions-api/custom-providers.mdx",
-                  "lastModified": "2026-06-23T15:36:24Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "DataTables",
@@ -3925,7 +3925,7 @@
                   "title": "DefineDashboardExtension",
                   "slug": "define-dashboard-extension",
                   "file": "docs/reference/dashboard/extensions-api/define-dashboard-extension.mdx",
-                  "lastModified": "2026-06-23T15:36:24Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "DetailForms",
@@ -4151,7 +4151,7 @@
                   "title": "UseUiLanguageLoader",
                   "slug": "use-ui-language-loader",
                   "file": "docs/reference/dashboard/hooks/use-ui-language-loader.mdx",
-                  "lastModified": "2026-06-23T15:47:56Z"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "UseWidgetFilters",
