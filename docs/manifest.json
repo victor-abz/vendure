@@ -3556,10 +3556,10 @@
                   "title": "DashboardPluginOptions",
                   "slug": "dashboard-plugin-options",
                   "file": "docs/reference/core-plugins/dashboard-plugin/dashboard-plugin-options.mdx",
-                  "lastModified": "2026-06-24T13:43:54+02:00"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 }
               ],
-              "lastModified": "2026-06-24T13:43:54+02:00"
+              "lastModified": "2026-06-24T09:45:17Z"
             },
             {
               "title": "EmailPlugin",
@@ -3937,7 +3937,7 @@
                   "title": "DefineDashboardExtension",
                   "slug": "define-dashboard-extension",
                   "file": "docs/reference/dashboard/extensions-api/define-dashboard-extension.mdx",
-                  "lastModified": "2026-06-24T13:43:54+02:00"
+                  "lastModified": "2026-06-24T16:28:55+02:00"
                 },
                 {
                   "title": "DetailForms",
@@ -4163,7 +4163,7 @@
                   "title": "UseUiLanguageLoader",
                   "slug": "use-ui-language-loader",
                   "file": "docs/reference/dashboard/hooks/use-ui-language-loader.mdx",
-                  "lastModified": "2026-06-24T13:43:54+02:00"
+                  "lastModified": "2026-06-24T09:45:17Z"
                 },
                 {
                   "title": "UseWidgetFilters",
