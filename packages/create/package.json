@@ -19,7 +19,8 @@
         "copy-assets": "rimraf assets && ts-node ./build.ts",
         "build": "npm run copy-assets && rimraf lib && tsc -p ./tsconfig.build.json",
         "watch": "npm run copy-assets && rimraf lib && tsc -p ./tsconfig.build.json -w",
-        "lint": "eslint --fix ."
+        "lint": "eslint --fix .",
+        "test": "vitest --config vitest.config.mts --run"
     },
     "homepage": "https://www.vendure.io",
     "funding": "https://github.com/sponsors/michaelbromley",
