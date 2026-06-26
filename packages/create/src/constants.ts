@@ -18,6 +18,12 @@ export const TYPESCRIPT_VERSION = '5.8.2';
  * bundler with breaking changes.
  */
 export const VITE_VERSION = '^7.3.1';
+/**
+ * `concurrently` runs the generated `dev`/`start` scripts. The major is pinned because
+ * the `<pm>:script:*` shorthand expansion (relied on by both the server scripts and the
+ * monorepo root) is a feature whose behaviour could change across majors.
+ */
+export const CONCURRENTLY_VERSION = '^9.0.0';
 
 // Port scanning
 export const PORT_SCAN_RANGE = 20;

@@ -17,7 +17,7 @@ Useful links:
 ## Development
 
 ```
-npm run dev
+{{pmRunScript "dev"}}
 ```
 
 will start the Vendure server, [worker](https://www.vendure.io/docs/developer-guide/vendure-worker/) and Dashboard.
@@ -25,7 +25,7 @@ will start the Vendure server, [worker](https://www.vendure.io/docs/developer-gu
 ## Build
 
 ```
-npm run build
+{{pmRunScript "build"}}
 ```
 
 will compile the TypeScript sources and build the Dashboard into the `/dist` directory.
@@ -40,7 +40,7 @@ hosting environment.
 You can run the built files directly with the `start` script:
 
 ```
-npm run start
+{{pmRunScript "start"}}
 ```
 
 You could also consider using a process manager like [pm2](https://pm2.keymetrics.io/) to run and manage
@@ -58,10 +58,10 @@ This builds an image and tags it with the name "vendure". We can then run it wit
 
 ```
 # Run the server
-docker run -dp 3000:3000 -e "DB_HOST=host.docker.internal" --name vendure-server vendure npm run start:server
+docker run -dp 3000:3000 -e "DB_HOST=host.docker.internal" --name vendure-server vendure {{pmRunScript "start:server"}}
 
 # Run the worker
-docker run -dp 3000:3000 -e "DB_HOST=host.docker.internal" --name vendure-worker vendure npm run start:worker
+docker run -dp 3000:3000 -e "DB_HOST=host.docker.internal" --name vendure-worker vendure {{pmRunScript "start:worker"}}
 ```
 
 Here is a breakdown of the command used above:
@@ -76,7 +76,7 @@ the host machine. Note that `host.docker.internal` only exists in a Docker Deskt
 used in development.
 - `--name vendure-server` - we give the container a human-readable name.
 - `vendure` - we are referencing the tag we set up during the build.
-- `npm run start:server` - this last part is the actual command that should be run inside the container.
+- `{{pmRunScript "start:server"}}` - this last part is the actual command that should be run inside the container.
 
 ### Docker Compose
 
@@ -105,7 +105,7 @@ These should be located in the `./src/plugins` directory.
 To create a new plugin run:
 
 ```
-npx vendure add
+{{pmExec}} vendure add
 ```
 
 and select `[Plugin] Create a new Vendure plugin`.
@@ -118,7 +118,7 @@ will be required whenever you make changes to the `customFields` config or defin
 To generate a new migration, run:
 
 ```
-npx vendure migrate
+{{pmExec}} vendure migrate
 ```
 
 The generated migration file will be found in the `./src/migrations/` directory, and should be committed to source control.
