@@ -166,6 +166,7 @@ export async function createVendureApp(
         dockerComposeSource,
         tsconfigDashboardSource,
         viteConfigSource,
+        agentsSource,
         populateProducts,
         includeStorefront,
     } =
@@ -371,6 +372,7 @@ export async function createVendureApp(
                 fs.writeFile(path.join(serverRoot, 'tsconfig.dashboard.json'), tsconfigDashboardSource),
             )
             .then(() => fs.writeFile(path.join(serverRoot, 'vite.config.mts'), viteConfigSource))
+            .then(() => writeFileIfMissing(path.join(root, 'AGENTS.md'), agentsSource))
             .then(() => createDirectoryStructure(serverRoot))
             .then(() => copyEmailTemplates(serverRoot));
     } catch (e: any) {
@@ -762,4 +764,11 @@ async function copyEmailTemplates(root: string) {
         log(err);
         process.exit(0);
     }
+}
+
+async function writeFileIfMissing(filePath: string, contents: string) {
+    if (await fs.pathExists(filePath)) {
+        return;
+    }
+    await fs.outputFile(filePath, contents);
 }

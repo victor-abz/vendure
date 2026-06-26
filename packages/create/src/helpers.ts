@@ -35,6 +35,7 @@ export function isSafeToCreateProjectIn(root: string, name: string) {
         '.gitignore',
         '.idea',
         'README.md',
+        'AGENTS.md',
         'LICENSE',
         '.hg',
         '.hgignore',
