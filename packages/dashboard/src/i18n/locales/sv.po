@@ -718,8 +718,8 @@ msgstr "Kort datum"
 msgid "Available currencies"
 msgstr "Tillgängliga valutor"
 
-#. placeholder {0}: selectedItems.length
-#: src/lib/components/data-input/product-multi-selector-input.tsx:373
+#. placeholder {0}: selectedIds.size
+#: src/lib/components/data-input/product-multi-selector-input.tsx:473
 msgid "Select {0} Items"
 msgstr "Välj {0} artiklar"
 
@@ -1205,7 +1205,7 @@ msgstr "Visa jobbresultat"
 msgid "Test your shipping methods by simulating a new order."
 msgstr "Testa dina fraktmetoder genom att simulera en ny beställning."
 
-#: src/lib/components/data-input/product-multi-selector-input.tsx:337
+#: src/lib/components/data-input/product-multi-selector-input.tsx:433
 msgid "No items selected"
 msgstr "Inga artiklar valda"
 
@@ -1278,7 +1278,7 @@ msgstr "Endast roller som är tilldelade ditt konto är tillgängliga."
 msgid "{cancellableCount, plural, one {Cancel {cancellableCount} job} other {Cancel {cancellableCount} jobs}}"
 msgstr ""
 
-#: src/lib/components/data-input/product-multi-selector-input.tsx:399
+#: src/lib/components/data-input/product-multi-selector-input.tsx:499
 #: src/lib/components/shared/configurable-operation-multi-selector.tsx:265
 #: src/lib/components/shared/configurable-operation-selector.tsx:140
 msgid "{buttonText}"
@@ -1593,7 +1593,7 @@ msgstr "Gå till sista sidan"
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:273
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:493
 #: src/app/routes/_authenticated/_system/settings-store.tsx:140
-#: src/lib/components/data-input/product-multi-selector-input.tsx:370
+#: src/lib/components/data-input/product-multi-selector-input.tsx:470
 #: src/lib/components/data-table/data-table-bulk-action-item.tsx:122
 #: src/lib/components/data-table/use-generated-columns.tsx:423
 #: src/lib/components/data-table/views-sheet.tsx:217
@@ -2441,7 +2441,7 @@ msgstr "Sök alternativgrupper..."
 msgid "Modify order"
 msgstr "Ändra beställning"
 
-#: src/lib/components/data-input/product-multi-selector-input.tsx:322
+#: src/lib/components/data-input/product-multi-selector-input.tsx:418
 msgid "Selected Items"
 msgstr "Valda artiklar"
 
@@ -2990,8 +2990,8 @@ msgstr ""
 #: src/app/routes/_authenticated/_orders/components/state-transition-control.tsx:77
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:192
 #: src/app/routes/_authenticated/_tax-categories/tax-categories.tsx:44
-#: src/lib/components/data-input/product-multi-selector-input.tsx:281
-#: src/lib/components/data-input/product-multi-selector-input.tsx:284
+#: src/lib/components/data-input/product-multi-selector-input.tsx:377
+#: src/lib/components/data-input/product-multi-selector-input.tsx:380
 #: src/lib/components/data-input/relation-selector.tsx:404
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:439
 msgid "{0}"
@@ -4444,6 +4444,10 @@ msgstr "Misslyckades att uppdatera facettvärde"
 msgid "Order fulfilled"
 msgstr "Beställning levererad"
 
+#: src/lib/components/data-input/product-multi-selector-input.tsx:437
+msgid "Loading selected items..."
+msgstr ""
+
 #. placeholder {0}: error.message
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:210
 msgid "Failed to set billing address for order: {0}"
@@ -4848,7 +4852,7 @@ msgstr "Lägg till taggar..."
 #~ msgstr "Kunde inte skapa produktalternativgrupp"
 
 #. placeholder {0}: selectedIds.length
-#: src/lib/components/data-input/product-multi-selector-input.tsx:404
+#: src/lib/components/data-input/product-multi-selector-input.tsx:504
 msgid "{0} items selected"
 msgstr "{0} artiklar valda"
 
@@ -5229,7 +5233,7 @@ msgstr "innehåller"
 msgid "No option groups found"
 msgstr "Inga alternativgrupper hittades"
 
-#: src/lib/components/data-input/product-multi-selector-input.tsx:91
+#: src/lib/components/data-input/product-multi-selector-input.tsx:162
 msgid "No items found"
 msgstr "Inga artiklar hittades"
 
@@ -5587,7 +5591,7 @@ msgstr "Visa jobbdata"
 msgid "Move to the top level"
 msgstr "Flytta till toppnivå"
 
-#: src/lib/components/data-input/product-multi-selector-input.tsx:329
+#: src/lib/components/data-input/product-multi-selector-input.tsx:425
 msgid "Clear"
 msgstr "Rensa"
 
@@ -5855,7 +5859,7 @@ msgstr "Lägg till betalning till beställning"
 #: src/app/routes/_authenticated/_assets/components/asset-tag-filter.tsx:122
 #: src/app/routes/_authenticated/_option-groups/components/option-group-products-block.tsx:59
 #: src/app/routes/_authenticated/_products/components/add-option-group-dialog.tsx:245
-#: src/lib/components/data-input/product-multi-selector-input.tsx:83
+#: src/lib/components/data-input/product-multi-selector-input.tsx:154
 #: src/lib/components/data-input/relation-selector.tsx:427
 #: src/lib/components/shared/country-selector.tsx:86
 #: src/lib/components/shared/customer-group-selector.tsx:56
