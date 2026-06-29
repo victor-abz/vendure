@@ -43,6 +43,7 @@ import {
     getMonorepoRootPackageJson,
     getPackageManagerInfo,
     getServerPackageScripts,
+    getSingleProjectPackageJson,
     installPackages,
     isSafeToCreateProjectIn,
     registerTemplateHelpers,
@@ -230,7 +231,7 @@ export async function createVendureApp(
         // Generate root package.json with package-manager-aware workspace scripts
         fs.writeFileSync(
             path.join(root, 'package.json'),
-            JSON.stringify(getMonorepoRootPackageJson(appName, pmInfo), null, 2) + os.EOL,
+            JSON.stringify(getMonorepoRootPackageJson(appName, pmInfo, dbType), null, 2) + os.EOL,
         );
 
         // pnpm does not read the package.json `workspaces` field; it requires a
@@ -267,15 +268,9 @@ export async function createVendureApp(
         );
     } else {
         // Single project structure (original behavior)
-        const packageJsonContents = {
-            name: appName,
-            version: DEFAULT_PROJECT_VERSION,
-            private: true,
-            scripts: getServerPackageScripts(),
-        };
         fs.writeFileSync(
             path.join(root, 'package.json'),
-            JSON.stringify(packageJsonContents, null, 2) + os.EOL,
+            JSON.stringify(getSingleProjectPackageJson(appName, pmInfo, dbType), null, 2) + os.EOL,
         );
         fs.ensureDirSync(path.join(root, 'src'));
     }

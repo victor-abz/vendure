@@ -16,6 +16,7 @@ import * as tar from 'tar';
 
 import {
     CONCURRENTLY_VERSION,
+    DEFAULT_PROJECT_VERSION,
     SOCKET_TIMEOUT_MS,
     STOREFRONT_BRANCH,
     STOREFRONT_REPO,
@@ -346,6 +347,7 @@ export function getServerPackageScripts(): Record<string, string> {
 export function getMonorepoRootPackageJson(
     name: string,
     pmInfo: PackageManagerInfo,
+    dbType: DbType,
 ): Record<string, unknown> {
     const ws = (workspace: string, script: string) => pmInfo.workspaceScript(workspace, script);
     const pkg: Record<string, unknown> = {
@@ -370,7 +372,50 @@ export function getMonorepoRootPackageJson(
     if (pmInfo.usesPackageJsonWorkspaces) {
         pkg.workspaces = ['apps/*'];
     }
+    // pnpm reads `onlyBuiltDependencies` from the workspace root, where it governs every
+    // package in the workspace (the deps themselves live in apps/server).
+    if (pmInfo.name === 'pnpm') {
+        pkg.pnpm = { onlyBuiltDependencies: getPnpmOnlyBuiltDependencies(dbType) };
+    }
     return pkg;
+}
+
+/**
+ * Returns the root package.json for the single-project (non-monorepo) layout.
+ */
+export function getSingleProjectPackageJson(
+    name: string,
+    pmInfo: PackageManagerInfo,
+    dbType: DbType,
+): Record<string, unknown> {
+    const pkg: Record<string, unknown> = {
+        name,
+        version: DEFAULT_PROJECT_VERSION,
+        private: true,
+        scripts: getServerPackageScripts(),
+    };
+    if (pmInfo.name === 'pnpm') {
+        pkg.pnpm = { onlyBuiltDependencies: getPnpmOnlyBuiltDependencies(dbType) };
+    }
+    return pkg;
+}
+
+/**
+ * Native dependencies whose install/build scripts pnpm v10 blocks by default. Listed
+ * under `pnpm.onlyBuiltDependencies` so their build scripts run — otherwise e.g.
+ * better-sqlite3's native binding is never compiled and the server crashes on startup.
+ * `bcrypt` (core), `sharp` (asset-server-plugin) and `esbuild` (vite) are always present;
+ * SQLite adds `better-sqlite3`.
+ *
+ * This list is derived from the scaffold's transitive native deps; re-check it against
+ * `getDependencies()` whenever Vendure's direct native-dep surface changes.
+ */
+export function getPnpmOnlyBuiltDependencies(dbType: DbType): string[] {
+    const deps = ['bcrypt', 'esbuild', 'sharp'];
+    if (dbType === 'sqlite') {
+        deps.push('better-sqlite3');
+    }
+    return deps.sort((a, b) => a.localeCompare(b));
 }
 
 /**
