@@ -46,6 +46,7 @@ import { OrderByCodeAccessStrategy } from './order/order-by-code-access-strategy
 import { OrderCodeStrategy } from './order/order-code-strategy';
 import { OrderInterceptor } from './order/order-interceptor';
 import { OrderItemPriceCalculationStrategy } from './order/order-item-price-calculation-strategy';
+import { OrderLineDiscountDistributionStrategy } from './order/order-line-discount-distribution-strategy';
 import { OrderMergeStrategy } from './order/order-merge-strategy';
 import { OrderPlacedStrategy } from './order/order-placed-strategy';
 import { OrderProcess } from './order/order-process';
@@ -670,6 +671,16 @@ export interface OrderOptions {
      * @default DefaultChangedPriceHandlingStrategy
      */
     changedPriceHandlingStrategy?: ChangedPriceHandlingStrategy;
+    /**
+     * @description
+     * Defines how an order-level promotion discount is distributed (prorated) across the OrderLines
+     * of an Order. The default redistributes a canceled line's share onto the remaining lines; a
+     * custom strategy can keep each line's share stable across refunds.
+     *
+     * @since 3.7.0
+     * @default DefaultOrderLineDiscountDistributionStrategy
+     */
+    orderLineDiscountDistributionStrategy?: OrderLineDiscountDistributionStrategy;
     /**
      * @description
      * Defines the point of the order process at which the Order is set as "placed".
