@@ -58,6 +58,7 @@
         "cronstrue": "^3.14.0",
         "csv-parse": "^6.2.1",
         "express": "^5.1.0",
+        "file-type": "^19.0.0",
         "fs-extra": "^11.2.0",
         "graphql": "^16.11.0",
         "graphql-fields": "^2.0.3",

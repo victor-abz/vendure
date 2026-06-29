@@ -4,8 +4,8 @@ import { VendureConfig } from '@vendure/core';
 import FormData from 'form-data';
 import fs from 'fs';
 import { DocumentNode } from 'graphql';
-import { print } from 'graphql/language/printer';
 import gql from 'graphql-tag';
+import { print } from 'graphql/language/printer';
 import fetch, { RequestInit, Response } from 'node-fetch';
 import { stringify } from 'querystring';
 
@@ -250,8 +250,14 @@ export class SimpleGraphQLClient {
         mutation: DocumentNode;
         filePaths: string[];
         mapVariables: (filePaths: string[]) => any;
+        /**
+         * Overrides the `Content-Type` of individual file parts, keyed by their index in
+         * `filePaths`. Used to simulate a client spoofing the Content-Type header
+         * independently of the actual file contents (e.g. via a proxy tool).
+         */
+        contentTypeOverrides?: { [index: number]: string };
     }): Promise<any> {
-        const { mutation, filePaths, mapVariables } = options;
+        const { mutation, filePaths, mapVariables, contentTypeOverrides } = options;
 
         const postData = createUploadPostData(mutation, filePaths, mapVariables);
         const body = new FormData();
@@ -264,10 +270,11 @@ export class SimpleGraphQLClient {
                     .join(',') +
                 '}',
         );
-        for (const filePath of postData.filePaths) {
+        postData.filePaths.forEach((filePath, index) => {
             const file = fs.readFileSync(filePath.file);
-            body.append(filePath.name, file, { filename: filePath.file });
-        }
+            const contentType = contentTypeOverrides?.[index];
+            body.append(filePath.name, file, { filename: filePath.file, contentType });
+        });
 
         const result = await fetch(this.apiUrl, {
             method: 'POST',
