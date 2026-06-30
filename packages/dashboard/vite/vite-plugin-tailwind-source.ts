@@ -2,6 +2,7 @@ import path from 'node:path';
 import { Plugin } from 'vite';
 
 import { CompileResult } from './utils/compiler.js';
+import { filterActivePluginInfo } from './utils/get-active-plugin-info.js';
 import { getDashboardPaths } from './utils/get-dashboard-paths.js';
 import { ConfigLoaderApi, getConfigLoaderApi } from './vite-plugin-config-loader.js';
 import { fixWindowsPath } from './vite-plugin-vendure-dashboard.js';
@@ -69,8 +70,9 @@ export function dashboardTailwindSourcePlugin(
                 if (!loadVendureConfigResult) {
                     loadVendureConfigResult = await configLoaderApi.getVendureConfig();
                 }
-                const { pluginInfo } = loadVendureConfigResult;
-                const dashboardExtensionDirs = getDashboardPaths(pluginInfo);
+                const { pluginInfo, vendureConfig } = loadVendureConfigResult;
+                const activePluginInfo = filterActivePluginInfo(pluginInfo, vendureConfig);
+                const dashboardExtensionDirs = getDashboardPaths(activePluginInfo);
 
                 const vendureUiSrcPath = resolveVendureUiSourcePath();
                 if (vendureUiSrcPath) {

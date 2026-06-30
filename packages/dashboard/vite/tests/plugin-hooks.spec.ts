@@ -4,6 +4,7 @@ import type { Plugin } from 'vite';
 import { describe, expect, it, vi } from 'vitest';
 
 import { PluginInfo } from '../types.js';
+import { filterActivePluginInfo } from '../utils/get-active-plugin-info.js';
 import { bundleEntryPlugin } from '../vite-plugin-bundle-entry.js';
 import { viteConfigPlugin } from '../vite-plugin-config.js';
 import { dashboardMetadataPlugin } from '../vite-plugin-dashboard-metadata.js';
@@ -53,22 +54,41 @@ function callHandleHotUpdate(plugin: Plugin, ctx: Record<string, any>) {
 
 // ─── Shared test factories ──────────────────────────────────────────────────
 
-function createFakeConfigLoaderPlugin(pluginInfo: PluginInfo[]) {
+/**
+ * Builds a fake `VendureConfig.plugins` array whose class names match the
+ * supplied PluginInfo entries, so that `filterActivePluginInfo` treats every
+ * entry as active by default. Pass an explicit `activePluginNames` set to
+ * mark only a subset as active (used to test filtering behaviour).
+ */
+function buildFakePluginsArray(pluginInfo: PluginInfo[], activePluginNames?: Set<string>) {
+    return pluginInfo
+        .filter(p => (activePluginNames ? activePluginNames.has(p.name) : true))
+        .map(p => {
+            const cls = class {};
+            Object.defineProperty(cls, 'name', { value: p.name });
+            return cls;
+        });
+}
+
+function createFakeConfigLoaderPlugin(pluginInfo: PluginInfo[], activePluginNames?: Set<string>) {
+    const plugins = buildFakePluginsArray(pluginInfo, activePluginNames);
     return {
         name: 'vendure:config-loader',
         api: {
             getVendureConfig: () =>
                 Promise.resolve({
                     pluginInfo,
-                    vendureConfig: {},
+                    vendureConfig: { plugins },
                     exportedSymbolName: 'config',
                 }),
         },
     };
 }
 
-function setupConfigLoaderPlugin(plugin: Plugin, pluginInfo: PluginInfo[]) {
-    callConfigResolved(plugin, { plugins: [createFakeConfigLoaderPlugin(pluginInfo)] });
+function setupConfigLoaderPlugin(plugin: Plugin, pluginInfo: PluginInfo[], activePluginNames?: Set<string>) {
+    callConfigResolved(plugin, {
+        plugins: [createFakeConfigLoaderPlugin(pluginInfo, activePluginNames)],
+    });
     return plugin;
 }
 
@@ -410,8 +430,8 @@ describe('viteConfigPlugin', () => {
 // ─── dashboardMetadataPlugin ─────────────────────────────────────────────────
 
 describe('dashboardMetadataPlugin', () => {
-    function setupPlugin(pluginInfo: PluginInfo[]) {
-        return setupConfigLoaderPlugin(dashboardMetadataPlugin(), pluginInfo);
+    function setupPlugin(pluginInfo: PluginInfo[], activePluginNames?: Set<string>) {
+        return setupConfigLoaderPlugin(dashboardMetadataPlugin(), pluginInfo, activePluginNames);
     }
 
     it('resolveId returns resolved ID for virtual:dashboard-extensions', () => {
@@ -489,6 +509,29 @@ describe('dashboardMetadataPlugin', () => {
         const fakeContext = { debug: noop, info: noop };
         const result = await callLoad(plugin, fakeContext, 'some-other-id');
         expect(result).toBeUndefined();
+    });
+
+    // #4706 — only plugins present in the runtime VendureConfig.plugins array
+    // should have their dashboard extensions bundled.
+    it('load filters out discovered plugins not active in vendureConfig.plugins', async () => {
+        const plugin = setupPlugin(
+            [
+                { name: 'ActivePlugin', pluginPath: '/a/plugin.js', dashboardEntryPath: './ui.tsx' },
+                {
+                    name: 'InactivePlugin',
+                    pluginPath: '/b/plugin.js',
+                    dashboardEntryPath: './ui.tsx',
+                },
+            ],
+            new Set(['ActivePlugin']),
+        );
+        const fakeContext = { debug: noop, info: noop };
+        const result = await callLoad(plugin, fakeContext, '\0virtual:dashboard-extensions');
+        const expectedActive = pathToFileURL(path.resolve('/a', './ui.tsx')).toString();
+        const expectedInactive = pathToFileURL(path.resolve('/b', './ui.tsx')).toString();
+        expect(result).toContain(expectedActive);
+        expect(result).not.toContain(expectedInactive);
+        expect((result.match(/await import/g) || []).length).toBe(1);
     });
 });
 
@@ -583,8 +626,8 @@ describe('hmrPlugin', () => {
 // ─── dashboardTailwindSourcePlugin ───────────────────────────────────────────
 
 describe('dashboardTailwindSourcePlugin', () => {
-    function setupPlugin(pluginInfo: PluginInfo[]) {
-        return setupConfigLoaderPlugin(dashboardTailwindSourcePlugin(), pluginInfo);
+    function setupPlugin(pluginInfo: PluginInfo[], activePluginNames?: Set<string>) {
+        return setupConfigLoaderPlugin(dashboardTailwindSourcePlugin(), pluginInfo, activePluginNames);
     }
 
     const markerComment =
@@ -641,6 +684,32 @@ describe('dashboardTailwindSourcePlugin', () => {
         expect(hasSourceDirective).toBe(false);
     });
 
+    // #4706 — Tailwind @source directives should only be emitted for plugins
+    // actually present in the runtime VendureConfig.plugins array.
+    it('emits @source directives only for plugins active in vendureConfig.plugins', async () => {
+        const plugin = setupPlugin(
+            [
+                {
+                    name: 'ActivePlugin',
+                    pluginPath: '/active/plugin.js',
+                    dashboardEntryPath: './dashboard/index.tsx',
+                },
+                {
+                    name: 'InactivePlugin',
+                    pluginPath: '/inactive/plugin.js',
+                    dashboardEntryPath: './dashboard/index.tsx',
+                },
+            ],
+            new Set(['ActivePlugin']),
+        );
+        const css = `@tailwind base;\n${markerComment}\n@tailwind components;`;
+        const result = await callTransformWithContext(plugin, {}, css, '/some/app/styles.css');
+        const sourceLines: string[] = result.code
+            .split('\n')
+            .filter((l: string) => l.trimStart().startsWith("@source '"));
+        expect(sourceLines.some((l: string) => l.includes("'/active/dashboard'"))).toBe(true);
+        expect(sourceLines.some((l: string) => l.includes('/inactive/'))).toBe(false);
+    });
     // Tests for the bundle-mode (#4719 `useExperimentalBundle`) extension entry
     describe('useExperimentalBundle: extension-tailwind.css handling', () => {
         function setupBundlePlugin(pluginInfo: PluginInfo[], packageRoot = '/fake/dashboard') {
@@ -845,5 +914,56 @@ describe('viteConfigPlugin: useExperimentalBundle', () => {
         expect(off.optimizeDeps.exclude).toContain('@/vdb');
         expect(on.optimizeDeps.exclude).toContain('@vendure/dashboard');
         expect(on.optimizeDeps.exclude).toContain('@/vdb');
+    });
+});
+
+// ─── filterActivePluginInfo ──────────────────────────────────────────────────
+
+describe('filterActivePluginInfo', () => {
+    function makePluginInfo(name: string): PluginInfo {
+        return { name, pluginPath: `/${name}.js`, dashboardEntryPath: './ui.tsx' };
+    }
+
+    function makePluginClass(name: string) {
+        const cls = class {};
+        Object.defineProperty(cls, 'name', { value: name });
+        return cls;
+    }
+
+    it('keeps only entries whose class name appears in vendureConfig.plugins', () => {
+        const result = filterActivePluginInfo(
+            [makePluginInfo('A'), makePluginInfo('B'), makePluginInfo('C')],
+            { plugins: [makePluginClass('A'), makePluginClass('C')] },
+        );
+        expect(result.map(p => p.name)).toEqual(['A', 'C']);
+    });
+
+    it('returns an empty array when vendureConfig.plugins is empty', () => {
+        const result = filterActivePluginInfo([makePluginInfo('A')], { plugins: [] });
+        expect(result).toEqual([]);
+    });
+
+    // Fails open: a missing `plugins` key means "no filtering information",
+    // not "disable everything", so the discovered pluginInfo is returned as-is.
+    it('returns pluginInfo unchanged when the plugins key is missing', () => {
+        const result = filterActivePluginInfo([makePluginInfo('A')], {} as { plugins?: undefined });
+        expect(result.map(p => p.name)).toEqual(['A']);
+    });
+
+    // Some plugins return a NestJS DynamicModule from their `init()` method
+    // (`{ module: SomePluginClass, providers: [...] }`); the helper must
+    // unwrap that to read the class name.
+    it('reads class name from DynamicModule entries', () => {
+        const result = filterActivePluginInfo([makePluginInfo('DynamicOne')], {
+            plugins: [{ module: makePluginClass('DynamicOne') } as any],
+        });
+        expect(result.map(p => p.name)).toEqual(['DynamicOne']);
+    });
+
+    it('ignores entries without a resolvable class name', () => {
+        const result = filterActivePluginInfo([makePluginInfo('A'), makePluginInfo('B')], {
+            plugins: [null as any, undefined as any, {} as any, makePluginClass('A')],
+        });
+        expect(result.map(p => p.name)).toEqual(['A']);
     });
 });
