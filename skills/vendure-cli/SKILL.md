@@ -4,7 +4,8 @@ description: >-
   Use the Vendure CLI (`vendure`) to scaffold, run, build, migrate and
   maintain a Vendure ecommerce project. Use whenever working inside a Vendure
   project that needs a dev server, a production build, database migrations,
-  plugin/entity/service scaffolding, GraphQL schema generation, or codemods.
+  plugin/entity/service scaffolding, GraphQL schema generation, diagnostic
+  checks, or codemods.
 allowed-tools: Bash, Read, Edit, Glob, Grep
 ---
 
@@ -22,9 +23,10 @@ that contains a Vendure package under `packages/`, `apps/`, `libs/`,
 
 `dev`, `build`, and `start` resolve the project directory from the current
 working directory if it contains `@vendure/core`, or by scanning those monorepo
-package directories. `add`, `migrate`, and `schema` analyze the TypeScript
-project from `process.cwd()` and require a `tsconfig*.json` there, so do not
-assume they work from arbitrary nested subdirectories.
+package directories. `add`, `migrate`, `schema`, and config-dependent `doctor`
+checks analyze the TypeScript project from `process.cwd()` and require a
+`tsconfig*.json` there, so do not assume they work from arbitrary nested
+subdirectories.
 
 ## Running the CLI
 
@@ -53,15 +55,16 @@ It does not use Bun for those generated dependency installs.
 
 ## Commands
 
-| Command   | Use it to…                                              | Reference             |
-| --------- | ------------------------------------------------------- | --------------------- |
-| `dev`     | Run server + worker + dashboard in development mode     | `commands/dev.md`     |
-| `build`   | Compile the project for production                      | `commands/build.md`   |
-| `start`   | Run an already-built project                            | `commands/start.md`   |
-| `add`     | Scaffold a plugin, entity, service, API extension, etc. | `commands/add.md`     |
-| `migrate` | Generate, run or revert database migrations             | `commands/migrate.md` |
-| `schema`  | Generate a GraphQL schema file from the Admin/Shop API  | `commands/schema.md`  |
-| `codemod` | Run automated code transforms (e.g. UI migrations)      | `commands/codemod.md` |
+| Command   | Use it to…                                                | Reference             |
+| --------- | --------------------------------------------------------- | --------------------- |
+| `dev`     | Run server + worker + dashboard in development mode       | `commands/dev.md`     |
+| `build`   | Compile the project for production                        | `commands/build.md`   |
+| `start`   | Run an already-built project                              | `commands/start.md`   |
+| `add`     | Scaffold a plugin, entity, service, API extension, etc.   | `commands/add.md`     |
+| `migrate` | Generate, run or revert database migrations               | `commands/migrate.md` |
+| `schema`  | Generate a GraphQL schema file from the Admin/Shop API    | `commands/schema.md`  |
+| `doctor`  | Diagnose project, dependency, config, schema and DB health | `commands/doctor.md`  |
+| `codemod` | Run automated code transforms (e.g. UI migrations)        | `commands/codemod.md` |
 
 ## Critical rules for agents
 
