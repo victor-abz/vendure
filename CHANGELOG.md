@@ -1,3 +1,37 @@
+## <small>3.6.5 (2026-07-01)</small>
+
+
+#### Fixes
+
+* **core** Accept SVG uploads rejected by content-type validation (#4899) ([037056a](https://github.com/vendurehq/vendure/commit/037056a)), closes [#4899](https://github.com/vendurehq/vendure/issues/4899)
+* **core** Enforce channel scoping on entity update operations (#4821) ([38c8569](https://github.com/vendurehq/vendure/commit/38c8569)), closes [#4821](https://github.com/vendurehq/vendure/issues/4821)
+* **core** Exclude draft orders from promotion usage limit counts (#4854) ([c9c92e8](https://github.com/vendurehq/vendure/commit/c9c92e8)), closes [#4854](https://github.com/vendurehq/vendure/issues/4854)
+* **core** Prevent duplicate-key errors in DefaultSearchPlugin index writes (#4809) ([60b6c78](https://github.com/vendurehq/vendure/commit/60b6c78)), closes [#4809](https://github.com/vendurehq/vendure/issues/4809)
+* **core** Prevent unbounded i18next preload growth (#4824) ([c8c0b79](https://github.com/vendurehq/vendure/commit/c8c0b79)), closes [#4824](https://github.com/vendurehq/vendure/issues/4824)
+* **core** Seed StockLevel on variant channel assignment (#4864) ([8850fa7](https://github.com/vendurehq/vendure/commit/8850fa7)), closes [#4864](https://github.com/vendurehq/vendure/issues/4864)
+* **core** Stop silent telemetry data loss on Vercel/Netlify and under ESM (#4804) ([ce4166e](https://github.com/vendurehq/vendure/commit/ce4166e)), closes [#4804](https://github.com/vendurehq/vendure/issues/4804)
+* **create** Allow pnpm to build native deps in generated project (#4893) ([3f81a7c](https://github.com/vendurehq/vendure/commit/3f81a7c)), closes [#4893](https://github.com/vendurehq/vendure/issues/4893)
+* **create** Install workspace deps from root in monorepo mode (#4907) ([4c7ec02](https://github.com/vendurehq/vendure/commit/4c7ec02)), closes [#4907](https://github.com/vendurehq/vendure/issues/4907)
+* **dashboard** Add missing Russian translations for order actions (#4838) ([3757897](https://github.com/vendurehq/vendure/commit/3757897)), closes [#4838](https://github.com/vendurehq/vendure/issues/4838)
+* **dashboard** Guard getHTML() against destroyed rich text editor (#4859) ([d38e3a3](https://github.com/vendurehq/vendure/commit/d38e3a3)), closes [#4859](https://github.com/vendurehq/vendure/issues/4859)
+* **dashboard** Guard order list state cells against undefined state (#4839) ([7dc6e2d](https://github.com/vendurehq/vendure/commit/7dc6e2d)), closes [#4839](https://github.com/vendurehq/vendure/issues/4839)
+* **dashboard** Isolate PageContext in asset picker dialog (#4439) ([d753b56](https://github.com/vendurehq/vendure/commit/d753b56)), closes [#4439](https://github.com/vendurehq/vendure/issues/4439)
+* **dashboard** Only send edited stock levels on variant update (#4834) ([32f9d8f](https://github.com/vendurehq/vendure/commit/32f9d8f)), closes [#4834](https://github.com/vendurehq/vendure/issues/4834)
+* **dashboard** Prevent facet value chip remove button from being hidden on long… (#4712) ([69a9ad8](https://github.com/vendurehq/vendure/commit/69a9ad8)), closes [#4712](https://github.com/vendurehq/vendure/issues/4712)
+* **dashboard** Redirect to list when detail entity not found in active channel (#4874) ([b74fdba](https://github.com/vendurehq/vendure/commit/b74fdba)), closes [#4874](https://github.com/vendurehq/vendure/issues/4874)
+* **dashboard** Render full-width PageBlock with column="full" (#4829) ([d2cec2e](https://github.com/vendurehq/vendure/commit/d2cec2e)), closes [#4829](https://github.com/vendurehq/vendure/issues/4829)
+* **dashboard** Serve Assets SPA route when hard-loading /dashboard/assets (#4855) ([8a41e82](https://github.com/vendurehq/vendure/commit/8a41e82)), closes [#4855](https://github.com/vendurehq/vendure/issues/4855)
+* **dashboard** Set default addresses when selecting customer on draft order (#4810) ([a32ed3d](https://github.com/vendurehq/vendure/commit/a32ed3d)), closes [#4810](https://github.com/vendurehq/vendure/issues/4810)
+* **dashboard** Show full saved selection in product multi-selector (#4845) ([d61f3ff](https://github.com/vendurehq/vendure/commit/d61f3ff)), closes [#4845](https://github.com/vendurehq/vendure/issues/4845)
+* **dashboard** Stabilise useUiLanguageLoader callback to prevent render loop (#4851) ([f80fc85](https://github.com/vendurehq/vendure/commit/f80fc85)), closes [#4851](https://github.com/vendurehq/vendure/issues/4851)
+* **dashboard** Stop nesting t macro inside plural for job cancel toasts (#4870) ([1c8f224](https://github.com/vendurehq/vendure/commit/1c8f224)), closes [#4870](https://github.com/vendurehq/vendure/issues/4870)
+* **dashboard** Support enum fields in list filters and form defaults (#4843) ([d1588cb](https://github.com/vendurehq/vendure/commit/d1588cb)), closes [#4843](https://github.com/vendurehq/vendure/issues/4843)
+* **email-plugin** Add pooled SMTP options to SMTPTransportOptions (#4861) ([34e4eb1](https://github.com/vendurehq/vendure/commit/34e4eb1)), closes [#4861](https://github.com/vendurehq/vendure/issues/4861)
+
+#### Features
+
+* **create** Support for bun, pnpm, yarn when creating new project (#4877) ([c5a2785](https://github.com/vendurehq/vendure/commit/c5a2785)), closes [#4877](https://github.com/vendurehq/vendure/issues/4877)
+
 ## <small>3.6.4 (2026-06-01)</small>
 
 
