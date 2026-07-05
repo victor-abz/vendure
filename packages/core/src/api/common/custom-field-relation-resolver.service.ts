@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ID } from '@vendure/common/lib/shared-types';
+import DataLoader from 'dataloader';
 import { FindOptionsUtils } from 'typeorm/find-options/FindOptionsUtils';
 
 import { Translatable } from '../../common/types/locale-types';
@@ -29,31 +30,79 @@ export class CustomFieldRelationResolverService {
 
     /**
      * @description
-     * Used to dynamically resolve related entities in custom fields. Based on the field
-     * config, this method is able to query the correct entity or entities from the database
-     * to be returned through the GraphQL API.
+     * Dynamically resolves related entities in custom fields using request-scoped
+     * DataLoader batching to eliminate N+1 query overhead in list contexts.
      */
     async resolveRelation(config: ResolveRelationConfig): Promise<VendureEntity | VendureEntity[]> {
         const { ctx, entityId, entityName, fieldDef } = config;
 
-        const subQb = this.connection
-            .getRepository(ctx, entityName)
-            .createQueryBuilder('entity')
-            .leftJoin(`entity.customFields.${fieldDef.name}`, 'relationEntity')
-            .select('relationEntity.id')
-            .where('entity.id = :id');
+        // Establish a unique cache key for this context loop combining entity and custom field constraints
+        const loaderKey = `CustomFieldRelationLoader:${entityName}:${fieldDef.name}`;
+        
+        // Attach a dynamic memory store to the RequestContext instance if not already initialized
+        const ctxWithCache = ctx as any;
+        if (!ctxWithCache._customFieldLoaders) {
+            ctxWithCache._customFieldLoaders = {};
+        }
 
-        const qb = this.connection
-            .getRepository(ctx, fieldDef.entity)
-            .createQueryBuilder('relation')
-            .where(`relation.id IN (${subQb.getQuery()})`)
-            .setParameters({ id: entityId });
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        FindOptionsUtils.joinEagerRelations(qb, qb.alias, qb.expressionMap.mainAlias!.metadata);
+        // Initialize the loader if it doesn't exist for the current tick
+        if (!ctxWithCache._customFieldLoaders[loaderKey]) {
+            ctxWithCache._customFieldLoaders[loaderKey] = new DataLoader<ID, VendureEntity[]>(async (ids) => {
+                // Fetch the inner relationship mapping across all batched parent IDs at once
+                const subQb = this.connection
+                    .getRepository(ctx, entityName)
+                    .createQueryBuilder('entity')
+                    .leftJoin(`entity.customFields.${fieldDef.name}`, 'relationEntity')
+                    .select(['entity.id AS entity_id', 'relationEntity.id AS relation_id'])
+                    .where('entity.id IN (:...ids)', { ids });
 
-        const result = fieldDef.list ? await qb.getMany() : await qb.getOne();
+                const rawMappings = await subQb.getRawMany();
 
-        return await this.translateEntity(ctx, result, fieldDef);
+                // Group relation IDs by their parent entity keys
+                const mappingMap = new Map<ID, ID[]>();
+                for (const row of rawMappings) {
+                    const eId = row.entity_id;
+                    const rId = row.relation_id;
+                    if (rId) {
+                        if (!mappingMap.has(eId)) mappingMap.set(eId, []);
+                        mappingMap.get(eId)!.push(rId);
+                    }
+                }
+
+                // Extract all unique relation IDs to fetch the structural target records efficiently
+                const allRelationIds = Array.from(new Set(rawMappings.map(row => row.relation_id).filter(Boolean)));
+
+                let relations: VendureEntity[] = [];
+                if (allRelationIds.length > 0) {
+                    const qb = this.connection
+                        .getRepository(ctx, fieldDef.entity)
+                        .createQueryBuilder('relation')
+                        .where('relation.id IN (:...allRelationIds)', { allRelationIds });
+
+                    FindOptionsUtils.joinEagerRelations(qb, qb.alias, qb.expressionMap.mainAlias!.metadata);
+                    relations = await qb.getMany();
+                }
+
+                const relationMap = new Map<ID, VendureEntity>();
+                for (const rel of relations) {
+                    relationMap.set(rel.id, rel);
+                }
+
+                // Map grouped entities back to their exact original request positions to preserve array invariants
+                return ids.map(id => {
+                    const targetIds = mappingMap.get(id) || [];
+                    return targetIds.map(tId => relationMap.get(tId)!).filter(Boolean);
+                });
+            });
+        }
+
+        const loader = ctxWithCache._customFieldLoaders[loaderKey];
+        const batchResult = await loader.load(entityId);
+
+        // Adjust formatting dynamically depending on whether the schema structure expects an array collection or single value
+        const finalResult = fieldDef.list ? batchResult : (batchResult[0] || null);
+
+        return await this.translateEntity(ctx, finalResult, fieldDef);
     }
 
     async translateEntity(
