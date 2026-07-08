@@ -107,7 +107,6 @@ import { OrderLineEvent } from '../../event-bus/events/order-line-event';
 import { OrderStateTransitionEvent } from '../../event-bus/events/order-state-transition-event';
 import { RefundEvent } from '../../event-bus/events/refund-event';
 import { RefundStateTransitionEvent } from '../../event-bus/events/refund-state-transition-event';
-import { ShippingMethodEvent } from '../../event-bus/events/shipping-method-event';
 import { CustomFieldRelationService } from '../helpers/custom-field-relation/custom-field-relation.service';
 import { FulfillmentState } from '../helpers/fulfillment-state-machine/fulfillment-state';
 import { ListQueryBuilder } from '../helpers/list-query-builder/list-query-builder';
@@ -174,9 +173,11 @@ export class OrderService implements OnApplicationBootstrap {
 
     /** @internal */
     onApplicationBootstrap() {
-        // Unassigning or deleting a ShippingMethod still referenced by an active order
-        // leaves a stale ShippingLine that breaks the order. Both handlers block so the
-        // cleanup shares the removal's transaction and a failure rolls it back.
+        // Unassigning a ShippingMethod from a channel leaves a stale ShippingLine on
+        // active orders in that channel, which can no longer use the method. The
+        // handler blocks so the cleanup shares the removal's transaction and a failure
+        // rolls it back. (Deletion is intentionally left alone: a soft-deleted method
+        // stays resolvable on existing orders — see issue #716.)
         this.eventBus.registerBlockingEventHandler({
             id: 'order-service-remove-unassigned-shipping-method-from-active-orders',
             event: ChangeChannelEvent,
@@ -187,21 +188,6 @@ export class OrderService implements OnApplicationBootstrap {
                         event.entity.id,
                         event.channelIds,
                     );
-                }
-            },
-        });
-        this.eventBus.registerBlockingEventHandler({
-            id: 'order-service-remove-deleted-shipping-method-from-active-orders',
-            event: ShippingMethodEvent,
-            handler: async event => {
-                if (event.type === 'deleted') {
-                    // A deletion is not channel-scoped, so recalculate active orders
-                    // across every channel the method was assigned to.
-                    const method = await this.connection
-                        .getRepository(event.ctx, ShippingMethod)
-                        .findOne({ where: { id: event.entity.id }, relations: ['channels'] });
-                    const channelIds = method?.channels.map(channel => channel.id) ?? [];
-                    await this.removeShippingMethodFromActiveOrders(event.ctx, event.entity.id, channelIds);
                 }
             },
         });

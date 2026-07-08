@@ -856,18 +856,20 @@ describe('ShippingMethod resolver', () => {
             }
         });
 
-        it('recalculates promotion-adjusted totals after a shipping method is deleted', async () => {
+        it('recalculates promotion-adjusted totals after unassignment', async () => {
             const couponCode = 'SHIPPING-4494';
             try {
-                // The promotion is only active in the channel it is created in, so
-                // set up the method and promotion in the order's channel.
-                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
-                const { createShippingMethod: deletableMethod } = await adminClient.query(
+                const { createShippingMethod: method } = await adminClient.query(
                     createShippingMethodDocument,
-                    { input: shippingMethodInput('deletable-method', 'Deletable Method') },
+                    { input: shippingMethodInput('promo-method', 'Promo Method') },
                 );
-                const deletableMethodId = deletableMethod.id;
+                const methodId = method.id;
+                await adminClient.query(assignShippingMethodsToChannelDocument, {
+                    input: { channelId: secondChannelId, shippingMethodIds: [methodId] },
+                });
 
+                // The promotion is only active in the channel it is created in.
+                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
                 await adminClient.query(createPromotionDocument, {
                     input: {
                         enabled: true,
@@ -884,11 +886,12 @@ describe('ShippingMethod resolver', () => {
                         ],
                     },
                 });
+                adminClient.setChannelToken('e2e-default-channel');
 
                 shopClient.setChannelToken(SECOND_CHANNEL_TOKEN);
                 await shopClient.asAnonymousUser();
                 await shopClient.query(addItemToOrderDocument, { productVariantId: 'T_1', quantity: 1 });
-                await shopClient.query(setShippingMethodDocument, { id: [deletableMethodId] });
+                await shopClient.query(setShippingMethodDocument, { id: [methodId] });
                 await shopClient.query(applyCouponCodeDocument, { couponCode });
 
                 const { activeOrder: before } = await shopClient.query(getActiveOrderDocument);
@@ -896,8 +899,9 @@ describe('ShippingMethod resolver', () => {
                 expect(before!.discounts.length).toBeGreaterThan(0);
                 const discountedSubTotal = before!.subTotal;
 
-                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
-                await adminClient.query(deleteShippingMethodDocument, { id: deletableMethodId });
+                await adminClient.query(removeShippingMethodsFromChannelDocument, {
+                    input: { channelId: secondChannelId, shippingMethodIds: [methodId] },
+                });
 
                 shopClient.setChannelToken(SECOND_CHANNEL_TOKEN);
                 const { activeOrder: after } = await shopClient.query(getActiveOrderDocument);
