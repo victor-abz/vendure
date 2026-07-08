@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { DeletionResult, LanguageCode } from '@vendure/common/lib/generated-types';
+import { CurrencyCode, DeletionResult, LanguageCode } from '@vendure/common/lib/generated-types';
 import {
+    ChangeChannelEvent,
     defaultShippingCalculator,
     defaultShippingEligibilityChecker,
+    EventBus,
     ShippingCalculator,
+    ShippingMethod,
 } from '@vendure/core';
 import { createErrorResultGuard, createTestEnvironment, ErrorResultGuard } from '@vendure/testing';
 import path from 'path';
@@ -19,6 +22,7 @@ import { graphql, ResultOf } from './graphql/graphql-admin';
 import {
     assignProductVariantToChannelDocument,
     createChannelDocument,
+    createPromotionDocument,
     createShippingMethodDocument,
     deleteShippingMethodDocument,
     getOrderDocument,
@@ -28,6 +32,7 @@ import {
 import {
     addItemToOrderDocument,
     addPaymentDocument,
+    applyCouponCodeDocument,
     getActiveOrderDocument,
     getActiveShippingMethodsDocument,
     setCustomerDocument,
@@ -677,6 +682,253 @@ describe('ShippingMethod resolver', () => {
                 expect(order.shippingLines).toHaveLength(1);
                 expect(order.shippingLines[0].shippingMethod.id).toBe(shippingMethodId);
                 expect(order.shippingLines[0].shippingMethod.name).toBe('Channel Test Method');
+            } finally {
+                shopClient.setChannelToken('e2e-default-channel');
+                adminClient.setChannelToken('e2e-default-channel');
+            }
+        });
+    });
+
+    // https://github.com/vendure-ecommerce/vendure/issues/4494
+    describe('shipping line removal - additional scenarios', () => {
+        const ROLLBACK_METHOD_CODE = 'rollback-test-method';
+        const GBP_CHANNEL_TOKEN = 'gbp-shipping-channel-token';
+        const SECOND_CHANNEL_TOKEN = 'second-shipping-channel-token';
+        let gbpChannelId: string;
+        let secondChannelId: string;
+        let multiChannelMethodId: string;
+        let rollbackMethodId: string;
+
+        function shippingMethodInput(code: string, name: string, rate = '500') {
+            return {
+                code,
+                fulfillmentHandler: manualFulfillmentHandler.code,
+                checker: {
+                    code: defaultShippingEligibilityChecker.code,
+                    arguments: [{ name: 'orderMinimum', value: '0' }],
+                },
+                calculator: {
+                    code: defaultShippingCalculator.code,
+                    arguments: [
+                        { name: 'rate', value: rate },
+                        { name: 'includesTax', value: 'auto' },
+                        { name: 'taxRate', value: '0' },
+                    ],
+                },
+                translations: [{ languageCode: LanguageCode.en, name, description: '' }],
+            };
+        }
+
+        beforeAll(async () => {
+            const { createChannel: gbpChannel } = await adminClient.query(createChannelDocument, {
+                input: {
+                    code: 'gbp-shipping-channel',
+                    token: GBP_CHANNEL_TOKEN,
+                    defaultLanguageCode: LanguageCode.en,
+                    currencyCode: CurrencyCode.GBP,
+                    pricesIncludeTax: false,
+                    defaultShippingZoneId: 'T_1',
+                    defaultTaxZoneId: 'T_1',
+                },
+            });
+            gbpChannelId = gbpChannel.id;
+
+            const { createChannel: secondChannel } = await adminClient.query(createChannelDocument, {
+                input: {
+                    code: 'second-shipping-channel',
+                    token: SECOND_CHANNEL_TOKEN,
+                    defaultLanguageCode: LanguageCode.en,
+                    currencyCode: CurrencyCode.USD,
+                    pricesIncludeTax: false,
+                    defaultShippingZoneId: 'T_1',
+                    defaultTaxZoneId: 'T_1',
+                },
+            });
+            secondChannelId = secondChannel.id;
+
+            const { createShippingMethod: multiMethod } = await adminClient.query(
+                createShippingMethodDocument,
+                { input: shippingMethodInput('multi-channel-method', 'Multi Channel Method') },
+            );
+            multiChannelMethodId = multiMethod.id;
+
+            const { createShippingMethod: rollbackMethod } = await adminClient.query(
+                createShippingMethodDocument,
+                { input: shippingMethodInput(ROLLBACK_METHOD_CODE, 'Rollback Method') },
+            );
+            rollbackMethodId = rollbackMethod.id;
+
+            for (const channelId of [gbpChannelId, secondChannelId]) {
+                await adminClient.query(assignShippingMethodsToChannelDocument, {
+                    input: { channelId, shippingMethodIds: [multiChannelMethodId] },
+                });
+                await adminClient.query(assignProductVariantToChannelDocument, {
+                    input: { channelId, productVariantIds: ['T_1'] },
+                });
+            }
+            await adminClient.query(assignShippingMethodsToChannelDocument, {
+                input: { channelId: secondChannelId, shippingMethodIds: [rollbackMethodId] },
+            });
+
+            // Simulate a mid-removal failure to prove the transaction rolls back.
+            const eventBus = server.app.get(EventBus);
+            eventBus.registerBlockingEventHandler({
+                id: 'e2e-4494-rollback-shipping-method-throw',
+                event: ChangeChannelEvent,
+                handler: async event => {
+                    if (
+                        event.entityType === ShippingMethod &&
+                        event.type === 'removed' &&
+                        (event.entity as ShippingMethod).code === ROLLBACK_METHOD_CODE
+                    ) {
+                        throw new Error('Simulated failure during shipping method removal');
+                    }
+                },
+            });
+        });
+
+        async function createActiveOrder(channelToken: string, shippingMethodId: string) {
+            shopClient.setChannelToken(channelToken);
+            await shopClient.asAnonymousUser();
+            await shopClient.query(addItemToOrderDocument, { productVariantId: 'T_1', quantity: 1 });
+            await shopClient.query(setShippingMethodDocument, { id: [shippingMethodId] });
+            const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+            return activeOrder!;
+        }
+
+        it('recalculates every affected active order in a channel, not just the first', async () => {
+            try {
+                const orderA = await createActiveOrder(SECOND_CHANNEL_TOKEN, multiChannelMethodId);
+                const orderB = await createActiveOrder(SECOND_CHANNEL_TOKEN, multiChannelMethodId);
+                expect(orderA.id).not.toBe(orderB.id);
+                expect(orderA.shipping).toBe(500);
+                expect(orderB.shipping).toBe(500);
+
+                await adminClient.query(removeShippingMethodsFromChannelDocument, {
+                    input: { channelId: secondChannelId, shippingMethodIds: [multiChannelMethodId] },
+                });
+
+                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                for (const orderId of [orderA.id, orderB.id]) {
+                    const { order } = await adminClient.query(getOrderDocument, { id: orderId });
+                    expect(order!.shippingLines).toHaveLength(0);
+                    expect(order!.shipping).toBe(0);
+                    expect(order!.total).toBe(order!.subTotal);
+                }
+            } finally {
+                shopClient.setChannelToken('e2e-default-channel');
+                adminClient.setChannelToken('e2e-default-channel');
+                // Restore the assignment for later tests.
+                await adminClient.query(assignShippingMethodsToChannelDocument, {
+                    input: { channelId: secondChannelId, shippingMethodIds: [multiChannelMethodId] },
+                });
+            }
+        });
+
+        it('only recalculates the channel it was unassigned from, preserving currency', async () => {
+            try {
+                const gbpOrder = await createActiveOrder(GBP_CHANNEL_TOKEN, multiChannelMethodId);
+                const usdOrder = await createActiveOrder(SECOND_CHANNEL_TOKEN, multiChannelMethodId);
+                expect(gbpOrder.currencyCode).toBe(CurrencyCode.GBP);
+                expect(gbpOrder.shipping).toBe(500);
+                expect(usdOrder.shipping).toBe(500);
+
+                // Unassign from the GBP channel while the admin acts from the default
+                // (USD) channel: recalculation must still use the order's GBP currency.
+                await adminClient.query(removeShippingMethodsFromChannelDocument, {
+                    input: { channelId: gbpChannelId, shippingMethodIds: [multiChannelMethodId] },
+                });
+
+                adminClient.setChannelToken(GBP_CHANNEL_TOKEN);
+                const { order: gbpAfter } = await adminClient.query(getOrderDocument, { id: gbpOrder.id });
+                expect(gbpAfter!.shippingLines).toHaveLength(0);
+                expect(gbpAfter!.shipping).toBe(0);
+                expect(gbpAfter!.total).toBe(gbpAfter!.subTotal);
+                expect(gbpAfter!.currencyCode).toBe(CurrencyCode.GBP);
+
+                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                const { order: usdAfter } = await adminClient.query(getOrderDocument, { id: usdOrder.id });
+                expect(usdAfter!.shippingLines).toHaveLength(1);
+                expect(usdAfter!.shipping).toBe(500);
+            } finally {
+                shopClient.setChannelToken('e2e-default-channel');
+                adminClient.setChannelToken('e2e-default-channel');
+            }
+        });
+
+        it('recalculates promotion-adjusted totals after a shipping method is deleted', async () => {
+            const couponCode = 'SHIPPING-4494';
+            try {
+                // The promotion is only active in the channel it is created in, so
+                // set up the method and promotion in the order's channel.
+                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                const { createShippingMethod: deletableMethod } = await adminClient.query(
+                    createShippingMethodDocument,
+                    { input: shippingMethodInput('deletable-method', 'Deletable Method') },
+                );
+                const deletableMethodId = deletableMethod.id;
+
+                await adminClient.query(createPromotionDocument, {
+                    input: {
+                        enabled: true,
+                        couponCode,
+                        translations: [
+                            { languageCode: LanguageCode.en, name: '10% off order', description: '' },
+                        ],
+                        conditions: [],
+                        actions: [
+                            {
+                                code: 'order_percentage_discount',
+                                arguments: [{ name: 'discount', value: '10' }],
+                            },
+                        ],
+                    },
+                });
+
+                shopClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                await shopClient.asAnonymousUser();
+                await shopClient.query(addItemToOrderDocument, { productVariantId: 'T_1', quantity: 1 });
+                await shopClient.query(setShippingMethodDocument, { id: [deletableMethodId] });
+                await shopClient.query(applyCouponCodeDocument, { couponCode });
+
+                const { activeOrder: before } = await shopClient.query(getActiveOrderDocument);
+                expect(before!.shipping).toBe(500);
+                expect(before!.discounts.length).toBeGreaterThan(0);
+                const discountedSubTotal = before!.subTotal;
+
+                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                await adminClient.query(deleteShippingMethodDocument, { id: deletableMethodId });
+
+                shopClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                const { activeOrder: after } = await shopClient.query(getActiveOrderDocument);
+                expect(after!.shippingLines).toHaveLength(0);
+                expect(after!.shipping).toBe(0);
+                expect(after!.discounts.length).toBeGreaterThan(0);
+                expect(after!.subTotal).toBe(discountedSubTotal);
+                expect(after!.total).toBe(after!.subTotal);
+            } finally {
+                shopClient.setChannelToken('e2e-default-channel');
+                adminClient.setChannelToken('e2e-default-channel');
+            }
+        });
+
+        it('rolls back the unassignment when the removal handler fails', async () => {
+            try {
+                const order = await createActiveOrder(SECOND_CHANNEL_TOKEN, rollbackMethodId);
+                expect(order.shippingLines).toHaveLength(1);
+
+                await expect(
+                    adminClient.query(removeShippingMethodsFromChannelDocument, {
+                        input: { channelId: secondChannelId, shippingMethodIds: [rollbackMethodId] },
+                    }),
+                ).rejects.toThrow();
+
+                // The rolled-back transaction must leave the order untouched.
+                shopClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                const { activeOrder } = await shopClient.query(getActiveOrderDocument);
+                expect(activeOrder!.shippingLines).toHaveLength(1);
+                expect(activeOrder!.shippingLines[0].shippingMethod.id).toBe(rollbackMethodId);
+                expect(activeOrder!.shipping).toBe(500);
             } finally {
                 shopClient.setChannelToken('e2e-default-channel');
                 adminClient.setChannelToken('e2e-default-channel');

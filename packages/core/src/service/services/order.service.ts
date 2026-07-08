@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import {
     AddPaymentToOrderResult,
     ApplyCouponCodeResult,
@@ -107,6 +107,7 @@ import { OrderLineEvent } from '../../event-bus/events/order-line-event';
 import { OrderStateTransitionEvent } from '../../event-bus/events/order-state-transition-event';
 import { RefundEvent } from '../../event-bus/events/refund-event';
 import { RefundStateTransitionEvent } from '../../event-bus/events/refund-state-transition-event';
+import { ShippingMethodEvent } from '../../event-bus/events/shipping-method-event';
 import { CustomFieldRelationService } from '../helpers/custom-field-relation/custom-field-relation.service';
 import { FulfillmentState } from '../helpers/fulfillment-state-machine/fulfillment-state';
 import { ListQueryBuilder } from '../helpers/list-query-builder/list-query-builder';
@@ -144,7 +145,7 @@ import { StockLevelService } from './stock-level.service';
  */
 @Injectable()
 @Instrument()
-export class OrderService {
+export class OrderService implements OnApplicationBootstrap {
     constructor(
         private connection: TransactionalConnection,
         private configService: ConfigService,
@@ -169,15 +170,38 @@ export class OrderService {
         private requestCache: RequestContextCacheService,
         private translator: TranslatorService,
         private stockLevelService: StockLevelService,
-    ) {
+    ) {}
+
+    /** @internal */
+    onApplicationBootstrap() {
+        // Unassigning or deleting a ShippingMethod still referenced by an active order
+        // leaves a stale ShippingLine that breaks the order. Both handlers block so the
+        // cleanup shares the removal's transaction and a failure rolls it back.
         this.eventBus.registerBlockingEventHandler({
-            id: 'order-service-remove-shipping-method-from-active-orders',
+            id: 'order-service-remove-unassigned-shipping-method-from-active-orders',
             event: ChangeChannelEvent,
             handler: async event => {
                 if (event.entityType === ShippingMethod && event.type === 'removed') {
                     await this.removeShippingMethodFromActiveOrders(
-                        event as ChangeChannelEvent<ShippingMethod>,
+                        event.ctx,
+                        event.entity.id,
+                        event.channelIds,
                     );
+                }
+            },
+        });
+        this.eventBus.registerBlockingEventHandler({
+            id: 'order-service-remove-deleted-shipping-method-from-active-orders',
+            event: ShippingMethodEvent,
+            handler: async event => {
+                if (event.type === 'deleted') {
+                    // A deletion is not channel-scoped, so recalculate active orders
+                    // across every channel the method was assigned to.
+                    const method = await this.connection
+                        .getRepository(event.ctx, ShippingMethod)
+                        .findOne({ where: { id: event.entity.id }, relations: ['channels'] });
+                    const channelIds = method?.channels.map(channel => channel.id) ?? [];
+                    await this.removeShippingMethodFromActiveOrders(event.ctx, event.entity.id, channelIds);
                 }
             },
         });
@@ -2459,19 +2483,22 @@ export class OrderService {
         }
     }
 
-    private async removeShippingMethodFromActiveOrders(event: ChangeChannelEvent<ShippingMethod>) {
-        const shippingMethodId = event.entity.id;
-        const { ctx } = event;
-
-        for (const channelId of event.channelIds) {
+    private async removeShippingMethodFromActiveOrders(
+        ctx: RequestContext,
+        shippingMethodId: ID,
+        channelIds: ID[],
+    ) {
+        // Orders are recalculated serially inside the removal transaction, holding
+        // write locks for its duration. A bulk unassign touching many active orders
+        // may trip the blocking-handler slow-warning; a post-commit job queue would
+        // scale better but would trade away the atomic rollback guarantee.
+        for (const channelId of channelIds) {
             const channel = await this.channelService.findOne(ctx, channelId);
             if (!channel) {
                 continue;
             }
-            // Create a context scoped to the affected channel so that
-            // applyPriceAdjustments calculates promotions/taxes for the
-            // correct channel rather than the admin's channel.
-            // We use copy() to preserve the transaction from event.ctx.
+            // Scope to the affected channel so applyPriceAdjustments uses its
+            // promotions/taxes/currency, not those of the triggering channel.
             const orderCtx = ctx.copy(channel);
 
             const affectedOrders = await this.connection
@@ -2505,16 +2532,15 @@ export class OrderService {
             });
 
             for (const order of orders) {
-                // We must manually remove the affected shipping lines because this handler
-                // runs inside the same transaction as the channel removal. The shipping method
-                // is still visible via the channel-scoped ctx, so applyShipping would not
-                // detect the removal on its own.
+                // Remove the lines manually: the method is still visible via the
+                // channel-scoped ctx inside this transaction, so applyShipping would
+                // not detect the removal on its own.
                 const shippingLinesToRemove = order.shippingLines.filter(sl =>
                     idsAreEqual(sl.shippingMethodId, shippingMethodId),
                 );
                 if (shippingLinesToRemove.length) {
                     const shippingLineIdsToRemove = shippingLinesToRemove.map(sl => sl.id);
-                    // Unlink order lines from the shipping lines about to be deleted
+                    // Detach order lines first to avoid an FK violation on delete.
                     for (const line of order.lines) {
                         if (
                             line.shippingLineId &&
