@@ -1029,6 +1029,10 @@ msgstr "Qoralama buyurtma"
 msgid "Scope"
 msgstr "Qamrov"
 
+#: src/app/routes/_authenticated/_promotions/components/promotion-conditions-selector.tsx:37
+msgid "Add condition"
+msgstr "Shart qoʻshish"
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-single-method-result.tsx:58
 msgid "Shipping method is eligible for this order"
 msgstr "Yetkazib berish usuli ushbu buyurtmaga mos"
@@ -1249,8 +1253,6 @@ msgid "{cancellableCount, plural, one {Cancel {cancellableCount} job} other {Can
 msgstr "{cancellableCount, plural, one {{cancellableCount} ta ishni bekor qilish} other {{cancellableCount} ta ishni bekor qilish}}"
 
 #: src/lib/components/data-input/product-multi-selector-input.tsx:499
-#: src/lib/components/shared/configurable-operation-multi-selector.tsx:265
-#: src/lib/components/shared/configurable-operation-selector.tsx:140
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
@@ -3375,6 +3377,10 @@ msgstr "Teglarni boshqarish"
 msgid "Items refunded"
 msgstr "Elementlar qaytarildi"
 
+#: src/app/routes/_authenticated/_promotions/components/promotion-actions-selector.tsx:37
+msgid "Add action"
+msgstr "Amal qoʻshish"
+
 #. placeholder {0}: entityName.toLowerCase()
 #: src/app/common/duplicate-entity-dialog.tsx:85
 msgid "Duplicate {0}s"
@@ -4004,6 +4010,10 @@ msgstr "Teglar"
 #: src/lib/components/shared/role-code-label.tsx:6
 msgid "Super Admin"
 msgstr "Super Admin"
+
+#: src/app/routes/_authenticated/_promotions/components/promotion-actions-selector.tsx:38
+msgid "Available Actions"
+msgstr "Mavjud amallar"
 
 #. placeholder {0}: error.message
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:143
@@ -4988,6 +4998,11 @@ msgstr "Standart til"
 msgid "Status"
 msgstr "Holat"
 
+#: src/lib/components/shared/configurable-operation-multi-selector.tsx:298
+#: src/lib/components/shared/configurable-operation-selector.tsx:155
+msgid "No options found"
+msgstr "Variantlar topilmadi"
+
 #: src/lib/components/shared/asset/asset-gallery.tsx:370
 #: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
@@ -5687,6 +5702,10 @@ msgstr "Hali natija yo'q"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:61
 msgid "Payment settled"
 msgstr "To'lov hisoblashildi"
+
+#: src/app/routes/_authenticated/_promotions/components/promotion-conditions-selector.tsx:38
+msgid "Available Conditions"
+msgstr "Mavjud shartlar"
 
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:27
 msgid "Active filters"

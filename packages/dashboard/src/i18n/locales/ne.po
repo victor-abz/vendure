@@ -1061,6 +1061,10 @@ msgstr "मस्यौदा अर्डर"
 msgid "Scope"
 msgstr "दायरा"
 
+#: src/app/routes/_authenticated/_promotions/components/promotion-conditions-selector.tsx:37
+msgid "Add condition"
+msgstr "सर्त थप्नुहोस्"
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-single-method-result.tsx:58
 msgid "Shipping method is eligible for this order"
 msgstr "यो ढुवानी विधि यो अर्डरको लागि योग्य छ"
@@ -1289,8 +1293,6 @@ msgid "{cancellableCount, plural, one {Cancel {cancellableCount} job} other {Can
 msgstr ""
 
 #: src/lib/components/data-input/product-multi-selector-input.tsx:499
-#: src/lib/components/shared/configurable-operation-multi-selector.tsx:265
-#: src/lib/components/shared/configurable-operation-selector.tsx:140
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
@@ -3475,6 +3477,10 @@ msgstr "ट्यागहरू व्यवस्थापन गर्नु�
 msgid "Items refunded"
 msgstr "वस्तुहरू फिर्ता गरियो"
 
+#: src/app/routes/_authenticated/_promotions/components/promotion-actions-selector.tsx:37
+msgid "Add action"
+msgstr "कार्य थप्नुहोस्"
+
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:325
 #~ msgid "Assign options to existing variant"
 #~ msgstr "अवस्थित भेरियन्टमा विकल्पहरू असाइन गर्नुहोस्"
@@ -4140,6 +4146,10 @@ msgstr "सुपर प्रशासक"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 #~ msgid "Some resources are down"
 #~ msgstr "केही स्रोतहरू डाउन छन्"
+
+#: src/app/routes/_authenticated/_promotions/components/promotion-actions-selector.tsx:38
+msgid "Available Actions"
+msgstr "उपलब्ध कार्यहरू"
 
 #. placeholder {0}: error.message
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:143
@@ -5172,6 +5182,11 @@ msgstr "पूर्वनिर्धारित भाषा"
 msgid "Status"
 msgstr "स्थिति"
 
+#: src/lib/components/shared/configurable-operation-multi-selector.tsx:298
+#: src/lib/components/shared/configurable-operation-selector.tsx:155
+msgid "No options found"
+msgstr "कुनै विकल्प फेला परेन"
+
 #: src/lib/components/shared/asset/asset-gallery.tsx:370
 #: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
@@ -5895,6 +5910,10 @@ msgstr "अझै कुनै परिणाम छैन"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:61
 msgid "Payment settled"
 msgstr "भुक्तानी सम्पन्न भयो"
+
+#: src/app/routes/_authenticated/_promotions/components/promotion-conditions-selector.tsx:38
+msgid "Available Conditions"
+msgstr "उपलब्ध सर्तहरू"
 
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:27
 msgid "Active filters"
