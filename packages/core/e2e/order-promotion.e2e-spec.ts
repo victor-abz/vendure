@@ -52,7 +52,9 @@ import {
     deletePromotionDocument,
     getFacetListDocument,
     getProductsWithVariantPricesDocument,
+    getPromotionDocument,
     removeCustomersFromGroupDocument,
+    updatePromotionDocument,
 } from './graphql/shared-definitions';
 import {
     addItemToOrderDocument,
@@ -598,6 +600,57 @@ describe('Promotions applied to Orders', () => {
             await deletePromotion(promotion.id);
         });
 
+        // #4889 — minimum of 0 must not create an unconditional discount
+        it('containsProducts does not apply when minimum is 0', async () => {
+            const item5000 = getVariantBySlug('item-5000')!;
+            const promotion = await createPromotion({
+                enabled: true,
+                name: 'Contains products, minimum 0',
+                conditions: [{
+                    code: containsProducts.code,
+                    arguments: [
+                        { name: 'minimum', value: '0' },
+                        { name: 'productVariantIds', value: JSON.stringify([item5000.id]) },
+                    ],
+                }],
+                actions: [freeOrderAction],
+            });
+            // add an item that is NOT in productVariantIds
+            const { addItemToOrder } = await shopClient.query(addItemToOrderDocument, {
+                productVariantId: getVariantBySlug('item-1000').id,
+                quantity: 1,
+            });
+            orderResultGuard.assertSuccess(addItemToOrder);
+            expect(addItemToOrder.discounts.length).toBe(0);
+            await deletePromotion(promotion.id);
+        });
+
+        // #4889 — same guard for the facet-based condition
+        it('atLeastNWithFacets does not apply when minimum is 0', async () => {
+            const { facets } = await adminClient.query(getFacetListDocument);
+            const saleFacetValue = facets.items[0].values[0];
+            const promotion = await createPromotion({
+                enabled: true,
+                name: 'Facets, minimum 0',
+                conditions: [{
+                    code: hasFacetValues.code,
+                    arguments: [
+                        { name: 'minimum', value: '0' },
+                        { name: 'facets', value: `["${saleFacetValue.id}"]` },
+                    ],
+                }],
+                actions: [freeOrderAction],
+            });
+            // add an item WITHOUT the Sale facet
+            const { addItemToOrder } = await shopClient.query(addItemToOrderDocument, {
+                productVariantId: getVariantBySlug('item-1000').id,
+                quantity: 1,
+            });
+            orderResultGuard.assertSuccess(addItemToOrder);
+            expect(addItemToOrder.discounts.length).toBe(0);
+            await deletePromotion(promotion.id);
+        });
+
         it('customerGroup', async () => {
             const { createCustomerGroup } = await adminClient.query(createCustomerGroupDocument, {
                 input: { name: 'Test Group', customerIds: ['T_1'] },
@@ -640,6 +693,64 @@ describe('Promotions applied to Orders', () => {
             expect(adjustOrderLine.totalWithTax).toBe(12000);
             expect(adjustOrderLine.discounts.length).toBe(0);
 
+            await deletePromotion(promotion.id);
+        });
+
+        // https://github.com/vendurehq/vendure/issues/4856
+        // A read → save round-trip (what the dashboard does on any edit) must not
+        // corrupt the customerGroupId. Before the fix, encode re-quoted the id
+        // (`'T_1'` → `'"T_1"'`), which then mis-decoded on the way back in and
+        // silently cleared the customer group. The single-create `customerGroup`
+        // test above never exercises this read → re-encode → save path where the
+        // corruption occurs, so this guards the round-trip explicitly.
+        it('customerGroup id survives a read-back → re-save round-trip', async () => {
+            const { createCustomerGroup } = await adminClient.query(createCustomerGroupDocument, {
+                input: { name: 'Round-trip Group', customerIds: ['T_1'] },
+            });
+
+            const promotion = await createPromotion({
+                enabled: true,
+                name: 'Round-trip promotion',
+                conditions: [
+                    {
+                        code: customerGroup.code,
+                        arguments: [{ name: 'customerGroupId', value: createCustomerGroup.id }],
+                    },
+                ],
+                actions: [freeOrderAction],
+            });
+
+            // Read the promotion back — this encodes the condition args for the client.
+            const { promotion: readBack } = await adminClient.query(getPromotionDocument, {
+                id: promotion.id,
+            });
+            const encodedGroupId = readBack!.conditions[0].args.find(
+                a => a.name === 'customerGroupId',
+            )?.value;
+            // Encode must emit the raw id, not a re-quoted `'"T_1"'`.
+            expect(encodedGroupId).toBe(createCustomerGroup.id);
+
+            // Save it again unchanged, exactly as the dashboard does on edit.
+            const { updatePromotion } = await adminClient.query(updatePromotionDocument, {
+                input: {
+                    id: promotion.id,
+                    conditions: readBack!.conditions.map(c => ({
+                        code: c.code,
+                        arguments: c.args.map(a => ({ name: a.name, value: a.value })),
+                    })),
+                },
+            });
+            const savedGroupId = (updatePromotion as PromotionFragment).conditions[0].args.find(
+                a => a.name === 'customerGroupId',
+            )?.value;
+            // After the round-trip the id is still the original group, not a corrupted
+            // `-1` (AutoIncrement) or a quote-accumulated value.
+            expect(savedGroupId).toBe(createCustomerGroup.id);
+
+            await adminClient.query(removeCustomersFromGroupDocument, {
+                groupId: createCustomerGroup.id,
+                customerIds: ['T_1'],
+            });
             await deletePromotion(promotion.id);
         });
     });

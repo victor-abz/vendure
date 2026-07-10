@@ -18,7 +18,7 @@ msgstr ""
 msgid "Full Name"
 msgstr "Повне ім'я"
 
-#: src/lib/components/data-input/relation-selector.tsx:408
+#: src/lib/components/data-input/relation-selector.tsx:409
 msgid "Select items"
 msgstr "Вибрати елементи"
 
@@ -90,7 +90,7 @@ msgstr "Редагувати значення JSON"
 msgid "Using external authentication strategy: {strategy}"
 msgstr "Використання зовнішньої стратегії аутентифікації: {strategy}"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:225
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:230
 msgid "Select a reason..."
 msgstr "Виберіть причину..."
 
@@ -153,7 +153,7 @@ msgstr "Видалено {selectionLength} ресурсів"
 msgid "Successfully updated tax rate"
 msgstr "Податкову ставку успішно оновлено"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:237
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:242
 msgid "Enter custom reason..."
 msgstr "Введіть власну причину..."
 
@@ -167,6 +167,11 @@ msgstr "Тип"
 #: src/lib/components/data-input/default-relation-input.tsx:676
 msgid "Select {0}"
 msgstr "Вибрати {0}"
+
+#. placeholder {0}: selectedItems.length
+#: src/lib/components/data-input/relation-selector.tsx:408
+msgid "Add more ({0} selected)"
+msgstr ""
 
 #: src/app/routes/_authenticated/_facets/facets.tsx:67
 msgid "View values"
@@ -219,6 +224,10 @@ msgstr "Автооновлення: {0}"
 msgid "Deleted {deleted} {entityName}"
 msgstr "Видалено {deleted} {entityName}"
 
+#: src/lib/components/shared/asset/asset-properties.tsx:32
+msgid "File Size"
+msgstr ""
+
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:13
 #~ msgid "Healthchecks"
 #~ msgstr "Перевірки стану"
@@ -241,7 +250,7 @@ msgstr "{fulfilled, plural, one {Успішно скасовано {fulfilled} �
 msgid "Seller"
 msgstr "Продавець"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:131
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:136
 msgid "SKU:"
 msgstr "Артикул:"
 
@@ -396,7 +405,7 @@ msgstr "Нова роль"
 msgid "Failed to delete assets: {message}"
 msgstr "Не вдалося видалити ресурси: {message}"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:105
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:109
 msgid "Return to stock"
 msgstr "Повернути на склад"
 
@@ -809,6 +818,7 @@ msgid "Found {0} eligible shipping method{1}"
 msgstr "Знайдено {0} підходящих способ(ів) доставки"
 
 #: src/lib/components/shared/asset/asset-gallery.tsx:746
+#: src/lib/components/shared/asset/asset-properties.tsx:39
 msgid "Dimensions"
 msgstr "Розміри"
 
@@ -817,7 +827,7 @@ msgid "Show password"
 msgstr "Показати пароль"
 
 #. placeholder {0}: formatCurrency(refund.totalRefundableAmount, order.currencyCode)
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:282
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:287
 msgid "(max: {0})"
 msgstr "(макс: {0})"
 
@@ -1051,6 +1061,10 @@ msgstr "Чернетка замовлення"
 msgid "Scope"
 msgstr "Область дії"
 
+#: src/app/routes/_authenticated/_promotions/components/promotion-conditions-selector.tsx:37
+msgid "Add condition"
+msgstr "Додати умову"
+
 #: src/app/routes/_authenticated/_shipping-methods/components/test-single-method-result.tsx:58
 msgid "Shipping method is eligible for this order"
 msgstr "Спосіб доставки підходить для цього замовлення"
@@ -1261,7 +1275,7 @@ msgstr "Стан платежу успішно оновлено"
 msgid "Create new"
 msgstr "Створити новий"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:249
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:254
 msgid "Refund total"
 msgstr "Сума повернення"
 
@@ -1279,8 +1293,6 @@ msgid "{cancellableCount, plural, one {Cancel {cancellableCount} job} other {Can
 msgstr ""
 
 #: src/lib/components/data-input/product-multi-selector-input.tsx:499
-#: src/lib/components/shared/configurable-operation-multi-selector.tsx:265
-#: src/lib/components/shared/configurable-operation-selector.tsx:140
 msgid "{buttonText}"
 msgstr "{buttonText}"
 
@@ -1496,7 +1508,7 @@ msgstr "Країни"
 msgid "Failed to rename view"
 msgstr "Не вдалося перейменувати подання"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:306
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:311
 msgid "Available"
 msgstr "Доступно"
 
@@ -1518,6 +1530,10 @@ msgstr "Групи клієнтів"
 #: src/lib/framework/defaults.ts:98
 msgid "Customers"
 msgstr "Клієнти"
+
+#: src/app/routes/_authenticated/_shipping-methods/components/shipping-calculator-selector.tsx:37
+msgid "Select Shipping Calculator"
+msgstr ""
 
 #: src/lib/components/layout/language-dialog.tsx:103
 msgid "Sample Formatting"
@@ -1588,7 +1604,7 @@ msgstr "Перейти на останню сторінку"
 #: src/app/routes/_authenticated/_orders/components/add-manual-payment-dialog.tsx:168
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:311
 #: src/app/routes/_authenticated/_orders/components/order-modification-preview-dialog.tsx:352
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:358
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:363
 #: src/app/routes/_authenticated/_orders/components/settle-refund-dialog.tsx:71
 #: src/app/routes/_authenticated/_products/components/assign-facet-values-dialog.tsx:273
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:498
@@ -1655,6 +1671,10 @@ msgstr "Встановити користувацькі поля"
 msgid "Collections"
 msgstr "Колекції"
 
+#: src/app/routes/_authenticated/_shipping-methods/components/shipping-eligibility-checker-selector.tsx:37
+msgid "Select Shipping Eligibility Checker"
+msgstr ""
+
 #: src/app/routes/_authenticated/_products/products_.$id_.variants.tsx:458
 msgid "Delete variant"
 msgstr "Видалити варіант"
@@ -1713,6 +1733,7 @@ msgstr "Групи клієнтів"
 
 #: src/app/routes/_authenticated/_system/scheduled-tasks.tsx:123
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:58
+#: src/lib/components/data-display/boolean.tsx:22
 #: src/lib/components/layout/nav-user.tsx:155
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -1865,7 +1886,7 @@ msgstr "Дублювати"
 msgid "No results"
 msgstr "Немає результатів"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:89
+#: src/lib/components/data-table/data-table-view-options.tsx:95
 msgid "Column settings"
 msgstr "Налаштування стовпців"
 
@@ -1951,7 +1972,7 @@ msgstr "Не вдалося розширити документ запиту"
 msgid "Failed to update note"
 msgstr "Не вдалося оновити примітку"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:201
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:206
 msgid "Refund shipping"
 msgstr "Повернути вартість доставки"
 
@@ -2356,6 +2377,10 @@ msgstr "Встановлює мови, доступні для всіх кана
 msgid "Collections moved successfully"
 msgstr "Колекції успішно переміщено"
 
+#: src/lib/components/data-input/relation-selector.tsx:411
+msgid "Change selection"
+msgstr ""
+
 #: src/app/routes/_authenticated/_customers/components/customer-status-badge.tsx:23
 msgid "Registered"
 msgstr "Зареєстровано"
@@ -2670,6 +2695,10 @@ msgstr "Лише чернетки замовлень можуть бути за�
 msgid "Failed to update product"
 msgstr "Не вдалося оновити товар"
 
+#: src/app/routes/_authenticated/_collections/components/collection-filters-selector.tsx:26
+msgid "Add collection filter"
+msgstr ""
+
 #. placeholder {0}: adjustedLines.length
 #: src/app/routes/_authenticated/_orders/components/order-modification-summary.tsx:152
 msgid "Adjusting {0} lines"
@@ -2693,7 +2722,7 @@ msgstr "Канал"
 #~ msgstr "Перевірки стану"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:170
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:317
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:322
 msgid "Amount"
 msgstr "Сума"
 
@@ -2708,7 +2737,7 @@ msgid "New customer"
 msgstr "Новий клієнт"
 
 #: src/app/routes/_authenticated/_orders/components/order-table.tsx:33
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:90
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:94
 msgid "Image"
 msgstr "Зображення"
 
@@ -2893,7 +2922,7 @@ msgstr "Резервне значення: {value}"
 msgid "Order history"
 msgstr "Історія замовлень"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:263
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:268
 msgid "Override"
 msgstr "Перевизначити"
 
@@ -2992,7 +3021,6 @@ msgstr ""
 #: src/app/routes/_authenticated/_tax-categories/tax-categories.tsx:44
 #: src/lib/components/data-input/product-multi-selector-input.tsx:377
 #: src/lib/components/data-input/product-multi-selector-input.tsx:380
-#: src/lib/components/data-input/relation-selector.tsx:404
 #: src/lib/components/shared/rich-text-editor/responsive-toolbar.tsx:439
 msgid "{0}"
 msgstr "{0}"
@@ -3005,7 +3033,7 @@ msgstr "Нова зона"
 msgid "Failed to update collection position"
 msgstr "Не вдалося оновити позицію колекції"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:102
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:106
 msgid "Refund"
 msgstr "Повернення"
 
@@ -3146,6 +3174,10 @@ msgstr "Метрики замовлень"
 msgid "Select display language"
 msgstr "Виберіть мову відображення"
 
+#: src/app/routes/_authenticated/_payment-methods/components/payment-handler-selector.tsx:37
+msgid "Select Payment Handler"
+msgstr ""
+
 #: src/app/routes/_authenticated/_profile/profile.tsx:128
 msgid "Authentication methods"
 msgstr "Методи автентифікації"
@@ -3181,7 +3213,7 @@ msgstr "Варіанти товару"
 msgid "Manage Global Views"
 msgstr "Керування глобальними поданнями"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:365
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:370
 msgid "Processing..."
 msgstr "Обробка..."
 
@@ -3196,7 +3228,7 @@ msgstr "Виберіть період"
 
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:87
 #: src/app/routes/_authenticated/_orders/components/order-table.tsx:44
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:93
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:97
 msgid "Product"
 msgstr "Товар"
 
@@ -3275,12 +3307,12 @@ msgstr "Усього замовлень"
 msgid "No eligible shipping methods found for this order."
 msgstr "Для цього замовлення не знайдено підходящих способів доставки."
 
-#: src/app/routes/_authenticated/_products/components/product-options-table.tsx:118
+#: src/app/routes/_authenticated/_products/components/product-options-table.tsx:126
 msgid "Add product option"
 msgstr "Додати опцію товару"
 
 #: src/app/routes/_authenticated/_orders/components/order-table-totals.tsx:66
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:189
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:194
 #: src/app/routes/_authenticated/_orders/orders.tsx:85
 msgid "Shipping"
 msgstr "Доставка"
@@ -3394,6 +3426,10 @@ msgstr "не дорівнює"
 #~ msgid "e.g. Size"
 #~ msgstr "наприклад, Розмір"
 
+#: src/app/routes/_authenticated/_payment-methods/components/payment-eligibility-checker-selector.tsx:38
+msgid "No checkers found"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:142
 msgid "Settle payment"
 msgstr "Провести платіж"
@@ -3424,7 +3460,7 @@ msgstr "Нове місце зберігання"
 msgid "{successfulRefundCount} payment(s) refunded before failure. Check order history for details."
 msgstr "{successfulRefundCount} платіж(ів) повернено до помилки. Перевірте історію замовлення для деталей."
 
-#: src/lib/components/data-input/relation-selector.tsx:411
+#: src/lib/components/data-input/relation-selector.tsx:412
 msgid "Select item"
 msgstr "Вибрати елемент"
 
@@ -3440,6 +3476,10 @@ msgstr "Керування тегами"
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-utils.tsx:110
 msgid "Items refunded"
 msgstr "Товари повернено"
+
+#: src/app/routes/_authenticated/_promotions/components/promotion-actions-selector.tsx:37
+msgid "Add action"
+msgstr "Додати дію"
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:325
 #~ msgid "Assign options to existing variant"
@@ -3664,7 +3704,7 @@ msgid "Add option group"
 msgstr "Додати групу опцій"
 
 #. placeholder {0}: formatCurrency(refund.amountToRefundTotal, order.currencyCode)
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:367
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:372
 msgid "Refund {0}"
 msgstr "Повернути {0}"
 
@@ -3910,7 +3950,7 @@ msgctxt "theme"
 msgid "Light"
 msgstr "Світла"
 
-#: src/lib/components/data-table/data-table-view-options.tsx:120
+#: src/lib/components/data-table/data-table-view-options.tsx:130
 msgid "Reset"
 msgstr "Скинути"
 
@@ -3918,6 +3958,10 @@ msgstr "Скинути"
 #: src/lib/components/data-table/human-readable-operator.tsx:26
 msgid "is equal to"
 msgstr "дорівнює"
+
+#: src/lib/components/shared/asset/asset-properties.tsx:17
+msgid "Source File"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:249
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx:408
@@ -4087,7 +4131,7 @@ msgstr "Сума замовлення"
 msgid "Visible to admins only"
 msgstr "Видимо лише адміністраторам"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:99
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:103
 msgid "Qty"
 msgstr "К-сть"
 
@@ -4102,6 +4146,10 @@ msgstr "Суперадміністратор"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx:74
 #~ msgid "Some resources are down"
 #~ msgstr "Деякі ресурси недоступні"
+
+#: src/app/routes/_authenticated/_promotions/components/promotion-actions-selector.tsx:38
+msgid "Available Actions"
+msgstr "Доступні дії"
 
 #. placeholder {0}: error.message
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx:143
@@ -4206,7 +4254,7 @@ msgid "{title}"
 msgstr "{title}"
 
 #: src/app/routes/_authenticated/_orders/components/fulfill-order-dialog.tsx:244
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:83
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:87
 #: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx:178
 msgid "Order lines"
 msgstr "Рядки замовлення"
@@ -4229,7 +4277,7 @@ msgstr "Потрібне повернення в розмірі {formattedDiff}.
 
 #: src/app/routes/_authenticated/_orders/components/edit-order-table.tsx:100
 #: src/app/routes/_authenticated/_orders/components/order-table.tsx:57
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:96
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:100
 msgid "Unit price"
 msgstr "Ціна за одиницю"
 
@@ -4285,6 +4333,10 @@ msgstr ""
 #: src/lib/components/data-table/views-sheet.tsx:120
 msgid "Failed to convert view to global"
 msgstr "Не вдалося перетворити подання на глобальне"
+
+#: src/app/routes/_authenticated/_payment-methods/components/payment-eligibility-checker-selector.tsx:37
+msgid "Select Payment Eligibility Checker"
+msgstr ""
 
 #: src/lib/components/data-table/filters/data-table-enum-filter.tsx:53
 msgid "Select operator"
@@ -4696,6 +4748,7 @@ msgstr "Регіон / Область"
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:55
 #: src/app/routes/_authenticated/_tax-rates/tax-rates.tsx:57
 #: src/app/routes/_authenticated/_zones/components/zone-countries-table.tsx:57
+#: src/lib/components/data-display/boolean.tsx:22
 #: src/lib/components/layout/nav-user.tsx:152
 msgid "Enabled"
 msgstr "Увімкнено"
@@ -4798,13 +4851,17 @@ msgstr "Ласкаво просимо до Vendure"
 msgid "Shipping Methods"
 msgstr "Способи доставки"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:144
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:149
 msgid "({maxRefundable} refundable)"
 msgstr "({maxRefundable} до повернення)"
 
 #: src/app/routes/_authenticated/_administrators/administrators.tsx:73
 msgid "Identifier"
 msgstr "Ідентифікатор"
+
+#: src/app/routes/_authenticated/_shipping-methods/components/fulfillment-handler-selector.tsx:51
+msgid "Select a fulfillment handler"
+msgstr ""
 
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx:118
 msgid "Failed to update collection"
@@ -4907,6 +4964,7 @@ msgid "System"
 msgstr "Система"
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx:290
+#: src/app/routes/_authenticated/_products/components/product-variants-table.tsx:81
 msgid "Variant name"
 msgstr "Назва варіанта"
 
@@ -4941,7 +4999,7 @@ msgstr "Податкові ставки"
 msgid "Failed to load global settings"
 msgstr "Не вдалося завантажити глобальні налаштування"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:75
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:79
 msgid "Select items to refund and optionally return to stock"
 msgstr "Виберіть позиції для повернення та за бажанням поверніть на склад"
 
@@ -5124,6 +5182,11 @@ msgstr "Мова за замовчуванням"
 msgid "Status"
 msgstr "Статус"
 
+#: src/lib/components/shared/configurable-operation-multi-selector.tsx:298
+#: src/lib/components/shared/configurable-operation-selector.tsx:155
+msgid "No options found"
+msgstr "Опцій не знайдено"
+
 #: src/lib/components/shared/asset/asset-gallery.tsx:370
 #: src/lib/components/shared/asset/asset-gallery.tsx:382
 msgid "Binary"
@@ -5230,6 +5293,10 @@ msgstr "Не вдалося обробити повернення"
 msgid "First name"
 msgstr "Ім'я"
 
+#: src/lib/components/shared/product-variant-selector.tsx:83
+msgid "Add item to order"
+msgstr ""
+
 #: src/lib/components/data-table/human-readable-operator.tsx:58
 msgid "contains"
 msgstr "містить"
@@ -5301,7 +5368,7 @@ msgid "Duplicate value \"{trimmed}\" already exists"
 msgstr "Дублююче значення \"{trimmed}\" вже існує"
 
 #: src/app/routes/_authenticated/_orders/components/payment-details.tsx:233
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:217
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:222
 msgid "Reason"
 msgstr "Причина"
 
@@ -5382,7 +5449,7 @@ msgstr "Мова"
 msgid "New Collection"
 msgstr "Нова колекція"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:72
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:76
 msgid "Refund and cancel order"
 msgstr "Повернути та скасувати замовлення"
 
@@ -5710,6 +5777,7 @@ msgstr "Завантаження колекцій..."
 msgid "Successfully updated facet value"
 msgstr "Значення фасету успішно оновлено"
 
+#: src/lib/components/shared/entity-assets.tsx:290
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx:135
 msgid "Add asset"
 msgstr "Додати ресурс"
@@ -5779,6 +5847,10 @@ msgstr "Дата створення"
 msgid "Failed to create product variant"
 msgstr "Не вдалося створити варіант товару"
 
+#: src/lib/components/data-input/relation-selector.tsx:417
+msgid "Search..."
+msgstr ""
+
 #. placeholder {0}: formatLanguageName(contentLanguage)
 #: src/lib/components/layout/channel-switcher.tsx:130
 msgid "Language: {0}"
@@ -5839,6 +5911,10 @@ msgstr "Результатів поки немає"
 msgid "Payment settled"
 msgstr "Платіж проведено"
 
+#: src/app/routes/_authenticated/_promotions/components/promotion-conditions-selector.tsx:38
+msgid "Available Conditions"
+msgstr "Доступні умови"
+
 #: src/lib/components/data-table/data-table-active-filters-popover.tsx:27
 msgid "Active filters"
 msgstr "Активні фільтри"
@@ -5885,7 +5961,7 @@ msgstr "Адреси не знайдено"
 msgid "Fulfillment ID"
 msgstr "ID виконання"
 
-#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:290
+#: src/app/routes/_authenticated/_orders/components/refund-order-dialog.tsx:295
 msgid "Select payments to refund"
 msgstr "Виберіть платежі для повернення"
 

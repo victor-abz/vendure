@@ -172,6 +172,7 @@
       "dependencies": {
         "file-type": "^19.0.0",
         "fs-extra": "^11.2.0",
+        "mime-types": "^3.0.2",
         "sharp": "~0.34.5",
       },
       "devDependencies": {
@@ -179,8 +180,9 @@
         "@aws-sdk/lib-storage": "^3.529.1",
         "@types/express": "^5.0.1",
         "@types/fs-extra": "^11.0.4",
-        "@vendure/common": "3.6.3",
-        "@vendure/core": "3.6.3",
+        "@types/mime-types": "^3.0.1",
+        "@vendure/common": "3.7.0",
+        "@vendure/core": "3.7.0",
         "express": "^5.1.0",
         "rimraf": "^5.0.5",
         "typescript": "5.8.2",
@@ -235,7 +237,7 @@
         "@nestjs/graphql": "~13.1.0",
         "@nestjs/platform-express": "^11.0.12",
         "@nestjs/typeorm": "^11.0.0",
-        "@vendure/common": "3.6.4",
+        "@vendure/common": "3.7.0",
         "bcrypt": "^6.0.0",
         "cookie-session": "^2.1.0",
         "cron-time-generator": "^2.0.3",
