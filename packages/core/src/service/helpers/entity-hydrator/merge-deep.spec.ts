@@ -69,6 +69,40 @@ describe('mergeDeep()', () => {
         expect(merged[1].productVariant.facetValues?.[0].facet.code).toBe('weight');
     });
 
+    // https://github.com/vendurehq/vendure/issues/4955 (OSS-642)
+    // A target relation array can contain undefined holes (e.g. surcharges / payments /
+    // shippingLines after OrderPlacedEvent). The id-based reordering must not dereference
+    // those holes — otherwise mergeDeep throws `Cannot read properties of undefined`,
+    // crashing EntityHydrator.hydrate() and (via EmailPlugin loadData) silently dropping
+    // the order-confirmation email.
+    it('should not crash when the target array has an undefined leading element', () => {
+        const a = [undefined, { id: 2, name: 'B' }];
+        const b = [
+            { id: 1, name: 'A' },
+            { id: 2, name: 'B' },
+        ];
+
+        let merged: any;
+        expect(() => (merged = mergeDeep(a as any, b as any))).not.toThrow();
+        expect(merged[0].id).toBe(1);
+        expect(merged[1].id).toBe(2);
+    });
+
+    it('should not crash when the target array has an undefined element in the middle', () => {
+        const a = [{ id: 1, name: 'A' }, undefined, { id: 3, name: 'C' }];
+        const b = [
+            { id: 1, name: 'A' },
+            { id: 2, name: 'B' },
+            { id: 3, name: 'C' },
+        ];
+
+        let merged: any;
+        expect(() => (merged = mergeDeep(a as any, b as any))).not.toThrow();
+        expect(merged[0].id).toBe(1);
+        expect(merged[1].id).toBe(2);
+        expect(merged[2].id).toBe(3);
+    });
+
     it('should handle circular objects', () => {
         const first = {
             name: 'John',

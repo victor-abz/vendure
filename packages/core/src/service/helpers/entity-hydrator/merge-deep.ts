@@ -33,7 +33,15 @@ export function mergeDeep<T extends { [key: string]: any }>(
     }
 
     if (Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.length > 1) {
-        if (a[0].hasOwnProperty('id')) {
+        // Only attempt id-based reordering when both arrays are fully populated with
+        // entities. A relation array can legitimately contain `undefined` holes (e.g.
+        // surcharges/payments/shippingLines on an Order after OrderPlacedEvent); the
+        // reordering below dereferences every element (`.hasOwnProperty`, `.id`), so a
+        // hole would throw and crash EntityHydrator.hydrate() — silently dropping the
+        // order-confirmation email when hydrate() is called from an EmailPlugin loadData
+        // handler. When there are holes we skip reordering and fall through to the
+        // index-based merge below, which handles `undefined` entries safely. See #4955.
+        if (a.every(item => item != null) && b.every(item => item != null) && a[0].hasOwnProperty('id')) {
             // If the array contains entities, we can use the id to match them up
             // so that we ensure that we don't merge properties from different entities
             // with the same index.
