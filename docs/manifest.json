@@ -260,7 +260,7 @@
           "title": "Plugins",
           "slug": "plugins",
           "file": "docs/guides/developer-guide/plugins/index.mdx",
-          "lastModified": "2026-06-26T15:49:47+02:00"
+          "lastModified": "2026-07-20T16:45:15+02:00"
         },
         {
           "title": "Security",
@@ -392,7 +392,7 @@
           "title": "Stand-alone Scripts",
           "slug": "stand-alone-scripts",
           "file": "docs/guides/developer-guide/stand-alone-scripts/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-07-20T16:45:15+02:00"
         },
         {
           "title": "Translations",
@@ -2772,7 +2772,7 @@
                   "title": "RequestContextService",
                   "slug": "request-context-service",
                   "file": "docs/reference/typescript-api/request/request-context-service.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-07-20T16:45:15+02:00"
                 },
                 {
                   "title": "Transaction Decorator",
