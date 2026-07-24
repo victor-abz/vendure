@@ -1192,7 +1192,7 @@
                   "title": "Bootstrap",
                   "slug": "bootstrap",
                   "file": "docs/reference/typescript-api/common/bootstrap.mdx",
-                  "lastModified": "2026-07-24T07:56:00Z"
+                  "lastModified": "2026-07-24T11:20:03+02:00"
                 },
                 {
                   "title": "CurrencyCode",
@@ -1252,7 +1252,7 @@
                   "title": "Middleware",
                   "slug": "middleware",
                   "file": "docs/reference/typescript-api/common/middleware.mdx",
-                  "lastModified": "2026-07-24T08:15:19Z"
+                  "lastModified": "2026-07-24T11:20:03+02:00"
                 },
                 {
                   "title": "PaginatedList",
@@ -2892,7 +2892,7 @@
                   "title": "AdministratorService",
                   "slug": "administrator-service",
                   "file": "docs/reference/typescript-api/services/administrator-service.mdx",
-                  "lastModified": "2026-07-24T07:56:00Z"
+                  "lastModified": "2026-07-24T11:20:03+02:00"
                 },
                 {
                   "title": "AssetService",
@@ -3432,7 +3432,7 @@
                   "title": "TestServer",
                   "slug": "test-server",
                   "file": "docs/reference/typescript-api/testing/test-server.mdx",
-                  "lastModified": "2026-07-24T08:47:32Z"
+                  "lastModified": "2026-07-24T11:20:03+02:00"
                 },
                 {
                   "title": "TestServerOptions",
@@ -3452,7 +3452,7 @@
                   "title": "BootstrapWorker",
                   "slug": "bootstrap-worker",
                   "file": "docs/reference/typescript-api/worker/bootstrap-worker.mdx",
-                  "lastModified": "2026-07-24T07:56:00Z"
+                  "lastModified": "2026-07-24T11:20:03+02:00"
                 },
                 {
                   "title": "VendureWorker",
