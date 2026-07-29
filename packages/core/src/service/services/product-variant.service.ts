@@ -18,7 +18,7 @@ import { In, IsNull } from 'typeorm';
 import { RequestContext } from '../../api/common/request-context';
 import { RelationPaths } from '../../api/decorators/relations.decorator';
 import { RequestContextCacheService } from '../../cache/request-context-cache.service';
-import { ForbiddenError, UserInputError } from '../../common/error/errors';
+import { EntityNotFoundError, ForbiddenError, UserInputError } from '../../common/error/errors';
 import { Instrument } from '../../common/instrument-decorator';
 import { roundMoney } from '../../common/round-money';
 import { ListQueryOptions } from '../../common/types/common-types';
@@ -773,11 +773,32 @@ export class ProductVariantService {
         }
     }
 
-    async softDelete(ctx: RequestContext, id: ID | ID[]): Promise<DeletionResponse> {
+    async softDelete(
+        ctx: RequestContext,
+        id: ID | ID[],
+        checkChannel: boolean = true,
+    ): Promise<DeletionResponse> {
         const ids = Array.isArray(id) ? id : [id];
-        const variants = await this.connection
-            .getRepository(ctx, ProductVariant)
-            .find({ where: { id: In(ids) } });
+        // Scope the lookup to the active channel so a channel-scoped admin cannot soft-delete a
+        // ProductVariant that belongs only to another channel via the deleteProductVariant(s)
+        // mutations. A requested id not in the active channel is treated as not found, consistent
+        // with the channel-scoped lookups used elsewhere (e.g. `ProductService.softDelete`).
+        // The check is skipped for the trusted product-deletion cascade (see `ProductService.softDelete`),
+        // which has already verified the parent Product's channel and must cascade to every one of
+        // its variants regardless of their individual channel membership.
+        let variants: ProductVariant[];
+        if (checkChannel) {
+            variants = await this.connection.findByIdsInChannel(ctx, ProductVariant, ids, ctx.channelId, {});
+            const foundIds = new Set(variants.map(variant => `${variant.id}`));
+            const missingId = ids.find(candidate => !foundIds.has(`${candidate}`));
+            if (missingId != null) {
+                throw new EntityNotFoundError('ProductVariant', missingId);
+            }
+        } else {
+            variants = await this.connection
+                .getRepository(ctx, ProductVariant)
+                .find({ where: { id: In(ids) } });
+        }
         for (const variant of variants) {
             variant.deletedAt = new Date();
         }
