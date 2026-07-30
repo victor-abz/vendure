@@ -146,6 +146,7 @@ function createSortParameter(schema: GraphQLSchema, targetType: GraphQLObjectTyp
             .reduce((result, field) => {
                 const fieldConfig: GraphQLInputFieldConfig = {
                     type: SortOrder,
+                    description: field.description ?? undefined,
                 };
                 return {
                     ...result,
@@ -204,6 +205,7 @@ function createFilterParameter(schema: GraphQLSchema, targetType: GraphQLObjectT
                 }
                 const fieldConfig: GraphQLInputFieldConfig = {
                     type: filterType,
+                    description: field.description ?? undefined,
                 };
                 return {
                     ...result,

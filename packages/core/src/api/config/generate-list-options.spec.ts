@@ -350,4 +350,32 @@ describe('generateListOptions()', () => {
                    }`),
         );
     });
+
+    it('propagates source field descriptions to the generated sort and filter parameters', () => {
+        const input = `
+               ${COMMON_TYPES}
+               type Query {
+                   people: PersonList
+               }
+
+               type Person {
+                   """The person's full name"""
+                   name: String!
+                   """Age in years"""
+                   age: Int!
+               }
+           `;
+
+        const result = generateListOptions(buildSchema(input));
+
+        const sortParameter = result.getType('PersonSortParameter') as any;
+        expect(sortParameter.getFields().name.description).toBe("The person's full name");
+        expect(sortParameter.getFields().age.description).toBe('Age in years');
+
+        const filterParameter = result.getType('PersonFilterParameter') as any;
+        expect(filterParameter.getFields().name.description).toBe("The person's full name");
+        expect(filterParameter.getFields().age.description).toBe('Age in years');
+        // fields without a source description remain undescribed
+        expect(filterParameter.getFields()._and.description ?? undefined).toBeUndefined();
+    });
 });
