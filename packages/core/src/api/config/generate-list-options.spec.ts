@@ -375,7 +375,7 @@ describe('generateListOptions()', () => {
         const filterParameter = result.getType('PersonFilterParameter') as any;
         expect(filterParameter.getFields().name.description).toBe("The person's full name");
         expect(filterParameter.getFields().age.description).toBe('Age in years');
-        // fields without a source description remain undescribed
-        expect(filterParameter.getFields()._and.description ?? undefined).toBeUndefined();
+        // synthetic fields without a source description remain undescribed
+        expect(filterParameter.getFields()._and.description).toBeUndefined();
     });
 });
