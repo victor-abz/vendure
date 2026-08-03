@@ -219,6 +219,7 @@ export class AdministratorService {
         if (!administrator) {
             throw new EntityNotFoundError('Administrator', input.id);
         }
+        await this.checkActiveUserCanManageAdministrator(ctx, administrator);
         if (input.roleIds) {
             await this.checkActiveUserCanGrantRoles(ctx, input.roleIds);
         }
@@ -296,6 +297,18 @@ export class AdministratorService {
             if (!activeUserHasRequiredPermissions) {
                 throw new UserInputError('error.active-user-does-not-have-sufficient-permissions');
             }
+        }
+    }
+
+    /**
+     * Ensures the active user holds all of the target administrator's permissions on all of the target's
+     * channels before allowing the target to be modified, so a lower-privileged administrator cannot
+     * modify a higher-privileged one (including a SuperAdmin).
+     */
+    private async checkActiveUserCanManageAdministrator(ctx: RequestContext, administrator: Administrator) {
+        const targetRoleIds = administrator.user.roles.map(role => role.id);
+        if (targetRoleIds.length) {
+            await this.checkActiveUserCanGrantRoles(ctx, targetRoleIds);
         }
     }
 

@@ -127,7 +127,7 @@ All the necessary infrastructure is defined in the root [docker-compose.yml](./d
 you will need to start a database, for example:
 
 ```bash
-docker-compose up -d mariadb
+docker compose up -d mariadb
 ```
 
 MariaDB/MySQL is the default that will be used by the dev server if you don't explicitly set the `DB` environment variable.
@@ -135,7 +135,7 @@ MariaDB/MySQL is the default that will be used by the dev server if you don't ex
 If for example you are doing development on the Elasticsearch plugin, you will also need to start the Elasticsearch container:
 
 ```bash
-docker-compose up -d elasticsearch
+docker compose up -d elasticsearch
 ```
 
 ### 4. Populate test data
@@ -156,7 +156,7 @@ If you want to develop against **PostgreSQL**:
 1. Run the `postgres_16` Docker container.
 
 ```bash
-docker-compose up -d postgres_16
+docker compose up -d postgres_16
 ```
 
 2. Create a .env file in `/packages/dev-server` and declare the `DB` variable inside it:
