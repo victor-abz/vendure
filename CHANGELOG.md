@@ -1,5 +1,9 @@
 ## <small>3.7.2 (2026-08-03)</small>
 
+#### Security
+
+* **core** Secure `adjustDraftOrderLine` mutation from unauthorized access [GHSA-hc75-2v4j-x372](https://github.com/vendurehq/vendure/security/advisories/GHSA-hc75-2v4j-x372)
+* **core** Fix privilege escalation via updateAdministrator password reset [GHSA-v85r-wfgv-jcqc](https://github.com/vendurehq/vendure/security/advisories/GHSA-v85r-wfgv-jcqc)
 
 #### Fixes
 
