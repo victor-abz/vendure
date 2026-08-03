@@ -1,8 +1,8 @@
-import type { GlobalSettingsService } from '../../service/index';
 import { GlobalFlag } from '@vendure/common/lib/generated-types';
 import { ID } from '@vendure/common/lib/shared-types';
 import ms from 'ms';
 import { filter } from 'rxjs/operators';
+import type { GlobalSettingsService } from '../../service/index';
 
 import { RequestContext } from '../../api/common/request-context';
 import { Cache, CacheService, RequestContextCacheService } from '../../cache/index';
@@ -11,7 +11,7 @@ import { ProductVariant } from '../../entity/index';
 import { OrderLine } from '../../entity/order-line/order-line.entity';
 import { StockLevel } from '../../entity/stock-level/stock-level.entity';
 import { StockLocation } from '../../entity/stock-location/stock-location.entity';
-import { EventBus, StockLocationEvent } from '../../event-bus/index';
+import { ChangeChannelEvent, EventBus, StockLocationEvent } from '../../event-bus/index';
 
 import { BaseStockLocationStrategy } from './default-stock-location-strategy';
 import { AvailableStock, LocationWithQuantity, StockLocationStrategy } from './stock-location-strategy';
@@ -59,11 +59,21 @@ export class MultiChannelStockLocationStrategy extends BaseStockLocationStrategy
             getKey: id => this.getCacheKey(id),
         });
 
-        // When a StockLocation is updated, we need to invalidate the cache
+        // When a StockLocation is updated, we need to invalidate the cache.
+        // Note: `Cache.delete()` applies the configured `getKey` function itself,
+        // so it must be passed the raw id, not the result of `getCacheKey()`.
         this.eventBus
             .ofType(StockLocationEvent)
             .pipe(filter(event => event.type !== 'created'))
-            .subscribe(({ entity }) => this.channelIdCache.delete(this.getCacheKey(entity.id)));
+            .subscribe(({ entity }) => this.channelIdCache.delete(entity.id));
+
+        // Assigning a StockLocation to a Channel (or removing it) does not emit a
+        // StockLocationEvent, so we also need to invalidate the cache on ChangeChannelEvents
+        // which relate to StockLocations.
+        this.eventBus
+            .ofType(ChangeChannelEvent)
+            .pipe(filter(event => event.entityType === StockLocation))
+            .subscribe(({ entity }) => this.channelIdCache.delete(entity.id));
     }
 
     /**
