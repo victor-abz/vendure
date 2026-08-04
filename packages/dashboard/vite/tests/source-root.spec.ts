@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import { randomUUID } from 'node:crypto';
 import os from 'node:os';
-import path from 'node:path';
+import path, { posix, win32 } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { commonAncestorDir, compile } from '../utils/compiler.js';
@@ -45,13 +45,13 @@ async function createProject(imported: 'above' | 'below') {
             ? path.join(root, 'shared', 'util.ts')
             : path.join(root, 'src', 'lib', 'util.ts');
 
-    await fs.outputFile(utilPath, 'export const appName = "shop";\n');
+    await fs.outputFile(utilPath, 'export const hostname = "shop.example.com";\n');
     await fs.outputFile(
         path.join(root, 'src', 'vendure-config.ts'),
         [
             `import type { VendureConfig } from '@vendure/core';`,
-            `import { appName } from '${importPath}';`,
-            `export const config: VendureConfig = { apiOptions: { port: 3000 }, __n: appName } as any;`,
+            `import { hostname } from '${importPath}';`,
+            `export const config: VendureConfig = { apiOptions: { port: 3000, hostname } } as any;`,
         ].join('\n'),
     );
 
@@ -75,23 +75,39 @@ async function compileProject(configPath: string, sourceRoot?: string) {
 
 describe('commonAncestorDir', () => {
     it('returns the deepest shared directory', () => {
-        const base = path.resolve(path.sep, 'projects', 'shop');
-        expect(commonAncestorDir([path.join(base, 'src'), path.join(base, 'shared')])).toBe(base);
+        expect(commonAncestorDir(['/projects/shop/src', '/projects/shop/shared'], posix)).toBe(
+            '/projects/shop',
+        );
     });
 
-    it('returns an absolute root when the paths only share the filesystem root', () => {
-        // Joining a prefix that stops at the root yields "" on POSIX and a
-        // drive-relative "C:" on Windows; neither may be returned as-is, or the
-        // emitted paths stop resolving under outputPath.
-        const root = path.parse(path.resolve(path.sep)).root;
-        const ancestor = commonAncestorDir([path.resolve(path.sep, 'alpha'), path.resolve(path.sep, 'beta')]);
-
-        expect(ancestor).toBe(root);
-        expect(path.isAbsolute(ancestor as string)).toBe(true);
+    it('returns the filesystem root when that is all the paths share', () => {
+        expect(commonAncestorDir(['/alpha', '/beta'], posix)).toBe('/');
     });
 
     it('returns undefined for an empty list', () => {
         expect(commonAncestorDir([])).toBeUndefined();
+    });
+
+    // Windows path casing is not stable in practice: process.cwd(), a resolved
+    // relative import and a tsconfig path alias can each report a different
+    // drive letter or segment casing for the same directory. Passing win32
+    // explicitly keeps these covered when the suite runs on Linux.
+    describe('with Windows paths', () => {
+        it('ignores drive letter casing', () => {
+            expect(commonAncestorDir(['C:\\repo\\app\\src', 'c:\\repo\\shared'], win32)).toBe('C:\\repo');
+        });
+
+        it('ignores segment casing rather than widening to the drive root', () => {
+            expect(commonAncestorDir(['C:\\Repo\\app\\src', 'C:\\repo\\shared'], win32)).toBe('C:\\Repo');
+        });
+
+        it('returns the drive root when that is all the paths share', () => {
+            expect(commonAncestorDir(['C:\\alpha', 'C:\\beta'], win32)).toBe('C:\\');
+        });
+
+        it('returns undefined across different drives', () => {
+            expect(commonAncestorDir(['C:\\a', 'D:\\b'], win32)).toBeUndefined();
+        });
     });
 });
 
@@ -106,9 +122,9 @@ describe('#5086 compiler source root', () => {
         expect(listFiles(path.dirname(outputPath))).toEqual(
             listFiles(outputPath).map(file => `${path.basename(outputPath)}/${file}`),
         );
-        // Reaching a loaded config proves getCompiledConfigPath followed the
-        // emit layout rather than assuming the output root.
-        expect(result.vendureConfig.apiOptions?.port).toBe(3000);
+        // Reaching a loaded config proves the compiled path followed the emit
+        // layout rather than assuming the output root.
+        expect(result.vendureConfig.apiOptions?.hostname).toBe('shop.example.com');
 
         await fs.remove(outputRoot);
         await fs.remove(root);
@@ -119,7 +135,7 @@ describe('#5086 compiler source root', () => {
         const { outputRoot, outputPath, result } = await compileProject(configPath);
 
         expect(listFiles(outputPath)).toEqual(['lib/util.js', 'package.json', 'vendure-config.js']);
-        expect(result.vendureConfig.apiOptions?.port).toBe(3000);
+        expect(result.vendureConfig.apiOptions?.hostname).toBe('shop.example.com');
 
         await fs.remove(outputRoot);
         await fs.remove(root);
@@ -130,7 +146,7 @@ describe('#5086 compiler source root', () => {
         const { outputRoot, outputPath, result } = await compileProject(configPath, root);
 
         expect(listFiles(outputPath)).toEqual(['package.json', 'shared/util.js', 'src/vendure-config.js']);
-        expect(result.vendureConfig.apiOptions?.port).toBe(3000);
+        expect(result.vendureConfig.apiOptions?.hostname).toBe('shop.example.com');
 
         await fs.remove(outputRoot);
         await fs.remove(root);
@@ -138,13 +154,16 @@ describe('#5086 compiler source root', () => {
 
     it('does not mistake a leading-dot filename for an escape', async () => {
         const root = await fs.mkdtemp(path.join(os.tmpdir(), 'vendure-source-root-'));
-        await fs.outputFile(path.join(root, 'src', '..util.ts'), 'export const appName = "shop";\n');
+        await fs.outputFile(
+            path.join(root, 'src', '..util.ts'),
+            'export const hostname = "shop.example.com";\n',
+        );
         await fs.outputFile(
             path.join(root, 'src', 'vendure-config.ts'),
             [
                 `import type { VendureConfig } from '@vendure/core';`,
-                `import { appName } from './..util.js';`,
-                `export const config: VendureConfig = { apiOptions: { port: 3000 }, __n: appName } as any;`,
+                `import { hostname } from './..util.js';`,
+                `export const config: VendureConfig = { apiOptions: { port: 3000, hostname } } as any;`,
             ].join('\n'),
         );
 
@@ -153,7 +172,7 @@ describe('#5086 compiler source root', () => {
         );
 
         expect(listFiles(outputPath)).toContain('..util.js');
-        expect(result.vendureConfig.apiOptions?.port).toBe(3000);
+        expect(result.vendureConfig.apiOptions?.hostname).toBe('shop.example.com');
 
         await fs.remove(outputRoot);
         await fs.remove(root);

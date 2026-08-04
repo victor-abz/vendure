@@ -17,17 +17,6 @@ export type GetCompiledConfigPathFn = (params: {
     inputRootDir: string;
     outputPath: string;
     configFileName: string;
-    /**
-     * @description
-     * The config's path relative to `outputPath`, reflecting where the compiler
-     * actually emitted it. This equals `configFileName` unless the source root
-     * was widened because the config imports a file from above its own
-     * directory, in which case the config is nested to keep that file inside
-     * `outputPath`.
-     *
-     * @since 3.8.0
-     */
-    configOutputRelativePath?: string;
 }) => string;
 
 export type TransformTsConfigPathMappingsFn = (params: {

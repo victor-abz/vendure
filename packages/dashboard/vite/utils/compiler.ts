@@ -18,40 +18,55 @@ import { findTsConfigPaths } from './tsconfig-utils.js';
 const defaultPathAdapter: Required<
     Pick<PathAdapter, 'getCompiledConfigPath' | 'transformTsConfigPathMappings'>
 > = {
-    // `configOutputRelativePath` is the config's location within `outputPath`, which
-    // only differs from the bare filename when the source root had to be widened to
-    // keep an upward import inside the output directory.
-    getCompiledConfigPath: ({ outputPath, configFileName, configOutputRelativePath }) =>
-        path.join(outputPath, configOutputRelativePath ?? configFileName),
+    getCompiledConfigPath: ({ outputPath, configFileName }) => path.join(outputPath, configFileName),
     transformTsConfigPathMappings: ({ patterns }) => patterns,
 };
 
+/** Minimal surface of `node:path` used by the path helpers, so tests can pass `path.win32`. */
+type PathImpl = Pick<typeof path, 'relative' | 'resolve' | 'dirname' | 'isAbsolute' | 'sep'>;
+
+/**
+ * Whether `child` is `parent` itself or sits below it.
+ *
+ * Uses `path.relative` rather than comparing strings, so the platform's own
+ * rules apply: on Windows that means case-insensitive matching and correct
+ * handling of drive and UNC roots.
+ */
+function isWithin(parent: string, child: string, pathImpl: PathImpl = path): boolean {
+    const relative = pathImpl.relative(parent, child);
+    return (
+        relative === '' ||
+        (relative !== '..' && !relative.startsWith(`..${pathImpl.sep}`) && !pathImpl.isAbsolute(relative))
+    );
+}
+
 /**
  * Deepest directory containing all of the given paths, or `undefined` when they
- * share no common root (e.g. different Windows drives).
+ * share no common root, as with different Windows drives.
  *
- * Exported for testing.
+ * Walks up from the first path until it contains the rest, which keeps the
+ * platform's path semantics in `path.relative` instead of restating them here.
+ *
+ * `pathImpl` is injectable so the Windows behaviour can be covered from any
+ * platform; production callers use the default.
  */
-export function commonAncestorDir(dirs: string[]): string | undefined {
+export function commonAncestorDir(dirs: string[], pathImpl: PathImpl = path): string | undefined {
     if (dirs.length === 0) {
         return undefined;
     }
-    const resolved = dirs.map(dir => path.resolve(dir));
-    const segments = resolved.map(dir => dir.split(path.sep));
-    const [first] = segments;
-    let shared = 0;
-    while (shared < first.length && segments.every(parts => parts[shared] === first[shared])) {
-        shared++;
+    let ancestor = pathImpl.resolve(dirs[0]);
+    for (const dir of dirs.slice(1)) {
+        const target = pathImpl.resolve(dir);
+        while (!isWithin(ancestor, target, pathImpl)) {
+            const parent = pathImpl.dirname(ancestor);
+            if (parent === ancestor) {
+                // Reached the root without containing `target`.
+                return undefined;
+            }
+            ancestor = parent;
+        }
     }
-    if (shared === 0) {
-        return undefined;
-    }
-    const joined = first.slice(0, shared).join(path.sep);
-    // A prefix that stops at the filesystem root does not join back into an
-    // absolute path: it yields "" on POSIX and a drive-relative "C:" on Windows.
-    // Both have to become the parsed root, otherwise path.relative() below emits
-    // paths that no longer sit under outputPath.
-    return path.isAbsolute(joined) ? joined : path.parse(resolved[0]).root;
+    return ancestor;
 }
 
 export interface PackageScannerConfig {
@@ -146,17 +161,18 @@ async function compileInternal(options: CompilerOptions): Promise<CompileResult>
     // Custom pathAdapter implementations (e.g. in monorepos) rely on this being just
     // the filename, not a relative path — they hardcode the directory structure themselves.
     const configFileName = path.basename(vendureConfigPath);
-    const compiledConfigFilePath = pathToFileURL(
-        getCompiledConfigPath({
-            inputRootDir: path.dirname(vendureConfigPath),
-            outputPath,
-            configFileName,
-            // Where the config actually landed under outputPath. Equal to
-            // configFileName unless the source root was widened to keep an
-            // upward import inside the output directory.
-            configOutputRelativePath: path.relative(sourceRoot, vendureConfigPath),
-        }),
-    ).href.replace(/\.ts$/, '.js');
+    // A custom adapter owns its own layout, so it keeps deciding where the config
+    // is. The default follows the emit: that is the config's path relative to the
+    // resolved source root, which is the bare filename unless the root widened to
+    // keep an upward import inside outputPath.
+    const compiledConfigPath = pathAdapter?.getCompiledConfigPath
+        ? pathAdapter.getCompiledConfigPath({
+              inputRootDir: path.dirname(vendureConfigPath),
+              outputPath,
+              configFileName,
+          })
+        : path.join(outputPath, path.relative(sourceRoot, vendureConfigPath));
+    const compiledConfigFilePath = pathToFileURL(compiledConfigPath).href.replace(/\.ts$/, '.js');
 
     await writePackageJson(outputPath, options.module);
 
@@ -283,10 +299,21 @@ async function compileTypeScript({
     // below would produce a leading `..` and emit that file outside outputPath,
     // past the package.json written to mark the output's module type.
     const configDir = path.dirname(inputPath);
-    const sourceRoot =
-        customSourceRoot ??
-        commonAncestorDir([configDir, ...sourceFiles.map(file => path.dirname(file))]) ??
-        configDir;
+    let sourceRoot = customSourceRoot;
+    if (!sourceRoot) {
+        const resolvedRoot = commonAncestorDir([configDir, ...sourceFiles.map(file => path.dirname(file))]);
+        if (!resolvedRoot) {
+            // Only reachable when the files span roots that share no ancestor,
+            // such as two Windows drives. Falling back to the config directory
+            // would guarantee an escape and report it as one, which says nothing
+            // about the actual cause.
+            throw new Error(
+                `The Vendure config and the files it imports span multiple filesystem roots, so no common source root exists. ` +
+                    `Set pathAdapter.sourceRoot to the directory the compiled output should be relative to.`,
+            );
+        }
+        sourceRoot = resolvedRoot;
+    }
 
     // 4. Transpile each file individually
     // Note: emitDecoratorMetadata with transpileModule emits `Object` for all
