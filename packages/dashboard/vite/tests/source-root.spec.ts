@@ -192,6 +192,12 @@ describe('#5086 compiler source root', () => {
             }),
         ).rejects.toThrow(/outside the output directory/);
 
+        // Rejecting is only half of it: the file that would have escaped must
+        // not have been written on the way to the error.
+        expect(listFiles(path.dirname(outputPath))).toEqual(
+            listFiles(outputPath).map(file => `${path.basename(outputPath)}/${file}`),
+        );
+
         await fs.remove(outputRoot);
         await fs.remove(root);
     }, 120_000);
