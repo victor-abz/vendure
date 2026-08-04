@@ -321,6 +321,7 @@ msgstr "Qidirish uchun kamida 2 ta belgi kiriting..."
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
 #: src/app/routes/_authenticated/_profile/profile.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "Last name"
 msgstr "Familiya"
 
@@ -485,6 +486,10 @@ msgstr "Mahsulot varianti yaratildi"
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx
 msgid "Parent product"
 msgstr "Asosiy mahsulot"
+
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Create new customer"
+msgstr ""
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx
 #: src/lib/components/shared/customer-address-form.tsx
@@ -723,6 +728,10 @@ msgstr "Qisqa sana"
 msgid "Available currencies"
 msgstr "Mavjud valyutalar"
 
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Search customers..."
+msgstr ""
+
 #. placeholder {0}: selectedIds.size
 #: src/lib/components/data-input/product-multi-selector-input.tsx
 msgid "Select {0} Items"
@@ -895,6 +904,11 @@ msgstr "Mahsulotni yaratib bo'lmadi"
 #: src/lib/components/shared/role-code-label.tsx
 msgid "Customer"
 msgstr "Mijoz"
+
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx
+msgid "Update address"
+msgstr ""
 
 #. placeholder {0}: error.message
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-container.tsx
@@ -1140,6 +1154,7 @@ msgid "Assets"
 msgstr "Assetlar"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "Email address"
 msgstr "Elektron pochta manzili"
 
@@ -1612,6 +1627,7 @@ msgstr "Oxirgi sahifaga o'tish"
 #: src/lib/components/shared/assign-to-channel-dialog.tsx
 #: src/lib/components/shared/confirmation-dialog.tsx
 #: src/lib/components/shared/customer-address-form.tsx
+#: src/lib/components/shared/customer-selector.tsx
 #: src/lib/components/shared/navigation-confirmation.tsx
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx
@@ -1700,6 +1716,10 @@ msgstr "Soliq toifalari"
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx
 msgid "Private collections are not visible in the shop"
 msgstr "Maxfiy to'plamlar do'konda ko'rinmaydi"
+
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Create customer"
+msgstr ""
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx
 #: src/app/routes/_authenticated/_products/products_.$id.tsx
@@ -3367,8 +3387,8 @@ msgid "Shipping Methods"
 msgstr "Yetkazib berish usullari"
 
 #: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx
-msgid "Select an address"
-msgstr "Manzilni tanlang"
+#~ msgid "Select an address"
+#~ msgstr "Manzilni tanlang"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx
 msgid "Yes"
@@ -3420,6 +3440,10 @@ msgstr "quyidagidan kichik yoki teng"
 #: src/lib/components/data-table/human-readable-operator.tsx
 msgid "is not equal to"
 msgstr "quyidagiga teng emas"
+
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Existing customer"
+msgstr ""
 
 #: src/app/routes/_authenticated/_payment-methods/components/payment-eligibility-checker-selector.tsx
 msgid "No checkers found"
@@ -3556,6 +3580,10 @@ msgstr "Faset qiymati yaratildi"
 msgid "Marketing"
 msgstr "Marketing"
 
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx
+msgid "Existing address"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx
 msgid "Draft order deleted"
 msgstr "Qoralama buyurtma o'chirildi"
@@ -3578,6 +3606,7 @@ msgid "Remove from channel"
 msgstr "Kanaldan olib tashlash"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
+#: src/lib/components/shared/customer-selector.tsx
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx
 msgid "Title"
 msgstr "Sarlavha"
@@ -4749,6 +4778,10 @@ msgstr "A'zolarni tahrirlash"
 msgid "Stock on hand"
 msgstr "Mavjud zaxira"
 
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx
+msgid "New address"
+msgstr ""
+
 #: src/lib/components/data-table/data-table-filter-dialog.tsx
 msgid "Filter by {columnId}"
 msgstr "{columnId} bo'yicha filtrlash"
@@ -5146,6 +5179,11 @@ msgstr "Standart til"
 msgid "Status"
 msgstr "Holat"
 
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx
+msgid "Okay"
+msgstr ""
+
 #: src/lib/components/shared/configurable-operation-multi-selector.tsx
 #: src/lib/components/shared/configurable-operation-selector.tsx
 msgid "No options found"
@@ -5250,6 +5288,7 @@ msgstr "Pul qaytarishni qayta ishlab bo'lmadi"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
 #: src/app/routes/_authenticated/_profile/profile.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "First name"
 msgstr "Ismi"
 
@@ -5981,6 +6020,7 @@ msgid "Order process"
 msgstr "Buyurtma jarayoni"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "Phone number"
 msgstr "Telefon raqami"
 

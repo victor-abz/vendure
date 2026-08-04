@@ -345,6 +345,7 @@ msgstr "至少输入 2 个字符进行搜索..."
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
 #: src/app/routes/_authenticated/_profile/profile.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "Last name"
 msgstr "姓"
 
@@ -513,6 +514,10 @@ msgstr "成功创建产品选项"
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx
 msgid "Parent product"
 msgstr "父级产品"
+
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Create new customer"
+msgstr ""
 
 #: src/app/routes/_authenticated/_shipping-methods/components/test-address-form.tsx
 #: src/lib/components/shared/customer-address-form.tsx
@@ -751,6 +756,10 @@ msgstr "短日期"
 msgid "Available currencies"
 msgstr "可用货币"
 
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Search customers..."
+msgstr ""
+
 #. placeholder {0}: selectedIds.size
 #: src/lib/components/data-input/product-multi-selector-input.tsx
 msgid "Select {0} Items"
@@ -923,6 +932,11 @@ msgstr "创建商品失败"
 #: src/lib/components/shared/role-code-label.tsx
 msgid "Customer"
 msgstr "客户"
+
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx
+#: src/app/routes/_authenticated/_orders/orders_.$id_.modify.tsx
+msgid "Update address"
+msgstr ""
 
 #. placeholder {0}: error.message
 #: src/app/routes/_authenticated/_orders/components/order-history/order-history-container.tsx
@@ -1172,6 +1186,7 @@ msgid "Assets"
 msgstr "资源"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "Email address"
 msgstr "电子邮件地址"
 
@@ -1665,6 +1680,7 @@ msgstr "转到末页"
 #: src/lib/components/shared/assign-to-channel-dialog.tsx
 #: src/lib/components/shared/confirmation-dialog.tsx
 #: src/lib/components/shared/customer-address-form.tsx
+#: src/lib/components/shared/customer-selector.tsx
 #: src/lib/components/shared/navigation-confirmation.tsx
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx
 #: src/lib/components/shared/rich-text-editor/link-dialog.tsx
@@ -1761,6 +1777,10 @@ msgstr "税务类别"
 #: src/app/routes/_authenticated/_collections/collections_.$id.tsx
 msgid "Private collections are not visible in the shop"
 msgstr "私有集合在商店中不可见"
+
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Create customer"
+msgstr ""
 
 #: src/app/routes/_authenticated/_product-variants/product-variants_.$id.tsx
 #: src/app/routes/_authenticated/_products/products_.$id.tsx
@@ -3459,8 +3479,8 @@ msgid "Shipping Methods"
 msgstr "配送方式"
 
 #: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx
-msgid "Select an address"
-msgstr "选择一个地址"
+#~ msgid "Select an address"
+#~ msgstr "选择一个地址"
 
 #: src/app/routes/_authenticated/_system/settings-store.tsx
 msgid "Yes"
@@ -3516,6 +3536,10 @@ msgstr "不等于"
 #: src/app/routes/_authenticated/_system/healthchecks.tsx
 #~ msgid "Refresh"
 #~ msgstr "刷新"
+
+#: src/lib/components/shared/customer-selector.tsx
+msgid "Existing customer"
+msgstr ""
 
 #: src/app/routes/_authenticated/_products/components/create-product-options-dialog.tsx
 #~ msgid "e.g. Size"
@@ -3667,6 +3691,10 @@ msgstr "已成功创建属性值"
 msgid "Marketing"
 msgstr "营销"
 
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx
+msgid "Existing address"
+msgstr ""
+
 #: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx
 msgid "Draft order deleted"
 msgstr "草稿订单已删除"
@@ -3689,6 +3717,7 @@ msgid "Remove from channel"
 msgstr "从渠道中移除"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
+#: src/lib/components/shared/customer-selector.tsx
 #: src/lib/components/shared/rich-text-editor/image-dialog.tsx
 msgid "Title"
 msgstr "标题"
@@ -4905,6 +4934,10 @@ msgstr "编辑成员"
 msgid "Stock on hand"
 msgstr "现有库存"
 
+#: src/app/routes/_authenticated/_orders/components/customer-address-selector.tsx
+msgid "New address"
+msgstr ""
+
 #: src/lib/components/data-table/data-table-filter-dialog.tsx
 msgid "Filter by {columnId}"
 msgstr "按 {columnId} 筛选"
@@ -5330,6 +5363,11 @@ msgstr "默认语言"
 msgid "Status"
 msgstr "状态"
 
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx
+#: src/app/routes/_authenticated/_orders/orders_.draft.$id.tsx
+msgid "Okay"
+msgstr ""
+
 #: src/lib/components/shared/configurable-operation-multi-selector.tsx
 #: src/lib/components/shared/configurable-operation-selector.tsx
 msgid "No options found"
@@ -5438,6 +5476,7 @@ msgstr "处理退款失败"
 #: src/app/routes/_authenticated/_administrators/administrators_.$id.tsx
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
 #: src/app/routes/_authenticated/_profile/profile.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "First name"
 msgstr "名"
 
@@ -6193,6 +6232,7 @@ msgid "Order process"
 msgstr "订单流程"
 
 #: src/app/routes/_authenticated/_customers/customers_.$id.tsx
+#: src/lib/components/shared/customer-selector.tsx
 msgid "Phone number"
 msgstr "电话号码"
 
