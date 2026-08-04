@@ -29,12 +29,15 @@ const defaultPathAdapter: Required<
 /**
  * Deepest directory containing all of the given paths, or `undefined` when they
  * share no common root (e.g. different Windows drives).
+ *
+ * Exported for testing.
  */
-function commonAncestorDir(dirs: string[]): string | undefined {
+export function commonAncestorDir(dirs: string[]): string | undefined {
     if (dirs.length === 0) {
         return undefined;
     }
-    const segments = dirs.map(dir => path.resolve(dir).split(path.sep));
+    const resolved = dirs.map(dir => path.resolve(dir));
+    const segments = resolved.map(dir => dir.split(path.sep));
     const [first] = segments;
     let shared = 0;
     while (shared < first.length && segments.every(parts => parts[shared] === first[shared])) {
@@ -43,7 +46,12 @@ function commonAncestorDir(dirs: string[]): string | undefined {
     if (shared === 0) {
         return undefined;
     }
-    return first.slice(0, shared).join(path.sep) || path.sep;
+    const joined = first.slice(0, shared).join(path.sep);
+    // A prefix that stops at the filesystem root does not join back into an
+    // absolute path: it yields "" on POSIX and a drive-relative "C:" on Windows.
+    // Both have to become the parsed root, otherwise path.relative() below emits
+    // paths that no longer sit under outputPath.
+    return path.isAbsolute(joined) ? joined : path.parse(resolved[0]).root;
 }
 
 export interface PackageScannerConfig {

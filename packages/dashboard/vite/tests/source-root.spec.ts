@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-import { compile } from '../utils/compiler.js';
+import { commonAncestorDir, compile } from '../utils/compiler.js';
 
 // #5086 — the source root defaulted to the config's own directory, so a config
 // importing from above it produced a relative path with a leading `..` and the
@@ -72,6 +72,28 @@ async function compileProject(configPath: string, sourceRoot?: string) {
 
     return { outputRoot, outputPath, result };
 }
+
+describe('commonAncestorDir', () => {
+    it('returns the deepest shared directory', () => {
+        const base = path.resolve(path.sep, 'projects', 'shop');
+        expect(commonAncestorDir([path.join(base, 'src'), path.join(base, 'shared')])).toBe(base);
+    });
+
+    it('returns an absolute root when the paths only share the filesystem root', () => {
+        // Joining a prefix that stops at the root yields "" on POSIX and a
+        // drive-relative "C:" on Windows; neither may be returned as-is, or the
+        // emitted paths stop resolving under outputPath.
+        const root = path.parse(path.resolve(path.sep)).root;
+        const ancestor = commonAncestorDir([path.resolve(path.sep, 'alpha'), path.resolve(path.sep, 'beta')]);
+
+        expect(ancestor).toBe(root);
+        expect(path.isAbsolute(ancestor as string)).toBe(true);
+    });
+
+    it('returns undefined for an empty list', () => {
+        expect(commonAncestorDir([])).toBeUndefined();
+    });
+});
 
 describe('#5086 compiler source root', () => {
     it('keeps a config importing from above its directory inside outputPath', async () => {
