@@ -18,9 +18,33 @@ import { findTsConfigPaths } from './tsconfig-utils.js';
 const defaultPathAdapter: Required<
     Pick<PathAdapter, 'getCompiledConfigPath' | 'transformTsConfigPathMappings'>
 > = {
-    getCompiledConfigPath: ({ outputPath, configFileName }) => path.join(outputPath, configFileName),
+    // `configOutputRelativePath` is the config's location within `outputPath`, which
+    // only differs from the bare filename when the source root had to be widened to
+    // keep an upward import inside the output directory.
+    getCompiledConfigPath: ({ outputPath, configFileName, configOutputRelativePath }) =>
+        path.join(outputPath, configOutputRelativePath ?? configFileName),
     transformTsConfigPathMappings: ({ patterns }) => patterns,
 };
+
+/**
+ * Deepest directory containing all of the given paths, or `undefined` when they
+ * share no common root (e.g. different Windows drives).
+ */
+function commonAncestorDir(dirs: string[]): string | undefined {
+    if (dirs.length === 0) {
+        return undefined;
+    }
+    const segments = dirs.map(dir => path.resolve(dir).split(path.sep));
+    const [first] = segments;
+    let shared = 0;
+    while (shared < first.length && segments.every(parts => parts[shared] === first[shared])) {
+        shared++;
+    }
+    if (shared === 0) {
+        return undefined;
+    }
+    return first.slice(0, shared).join(path.sep) || path.sep;
+}
 
 export interface PackageScannerConfig {
     nodeModulesRoot?: string;
@@ -87,7 +111,7 @@ async function compileInternal(options: CompilerOptions): Promise<CompileResult>
 
     // 1. Compile TypeScript files
     const compileStart = Date.now();
-    await compileTypeScript({
+    const { sourceRoot } = await compileTypeScript({
         inputPath: vendureConfigPath,
         outputPath,
         logger,
@@ -119,6 +143,10 @@ async function compileInternal(options: CompilerOptions): Promise<CompileResult>
             inputRootDir: path.dirname(vendureConfigPath),
             outputPath,
             configFileName,
+            // Where the config actually landed under outputPath. Equal to
+            // configFileName unless the source root was widened to keep an
+            // upward import inside the output directory.
+            configOutputRelativePath: path.relative(sourceRoot, vendureConfigPath),
         }),
     ).href.replace(/\.ts$/, '.js');
 
@@ -204,7 +232,7 @@ async function compileTypeScript({
     logger: Logger;
     module: 'commonjs' | 'esm';
     sourceRoot?: string;
-}): Promise<void> {
+}): Promise<{ sourceRoot: string }> {
     await fs.ensureDir(outputPath);
 
     // Find tsconfig paths for resolving path aliases in the import tree
@@ -239,8 +267,18 @@ async function compileTypeScript({
     // Compiled files preserve their directory structure relative to this root.
     // In monorepos, set pathAdapter.sourceRoot to the workspace root so that
     // e.g. apps/server/src/config.ts → {output}/apps/server/src/config.js.
-    // Defaults to the config file's directory, placing it at the output root.
-    const sourceRoot = customSourceRoot ?? path.dirname(inputPath);
+    //
+    // The default is the deepest directory containing the config and every file
+    // it imports. For a config whose imports all sit alongside or below it, that
+    // is exactly its own directory, so the layout is unchanged. It only widens
+    // when a collected file lives above the config — otherwise `path.relative`
+    // below would produce a leading `..` and emit that file outside outputPath,
+    // past the package.json written to mark the output's module type.
+    const configDir = path.dirname(inputPath);
+    const sourceRoot =
+        customSourceRoot ??
+        commonAncestorDir([configDir, ...sourceFiles.map(file => path.dirname(file))]) ??
+        configDir;
 
     // 4. Transpile each file individually
     // Note: emitDecoratorMetadata with transpileModule emits `Object` for all
@@ -270,8 +308,32 @@ async function compileTypeScript({
         const relativePath = path.relative(sourceRoot, filePath);
         const outputFilePath = path.join(outputPath, relativePath).replace(/\.tsx?$/, '.js');
 
+        // An emit outside outputPath escapes the package.json written there to
+        // declare the module type, and Node then resolves the file against the
+        // enclosing project instead. Fail here rather than at config load, where
+        // it surfaces as an unrelated "exports is not defined" error.
+        assertWithinOutputPath(outputFilePath, outputPath, filePath);
+
         await fs.ensureDir(path.dirname(outputFilePath));
         await fs.writeFile(outputFilePath, result.outputText);
+    }
+
+    return { sourceRoot };
+}
+
+function assertWithinOutputPath(outputFilePath: string, outputPath: string, sourceFile: string): void {
+    const relativeToOutput = path.relative(outputPath, outputFilePath);
+    // Compare against a path segment rather than a `..` prefix, so a file whose
+    // own name begins with dots is not mistaken for an escape.
+    const escapes =
+        relativeToOutput === '..' ||
+        relativeToOutput.startsWith(`..${path.sep}`) ||
+        path.isAbsolute(relativeToOutput);
+    if (escapes) {
+        throw new Error(
+            `Compiling "${sourceFile}" would emit to "${outputFilePath}", which is outside the output directory "${outputPath}". ` +
+                `Set pathAdapter.sourceRoot to a directory containing every file the config imports.`,
+        );
     }
 }
 
