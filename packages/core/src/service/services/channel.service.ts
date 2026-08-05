@@ -8,7 +8,11 @@ import {
     UpdateChannelInput,
     UpdateChannelResult,
 } from '@vendure/common/lib/generated-types';
-import { DEFAULT_CHANNEL_CODE } from '@vendure/common/lib/shared-constants';
+import {
+    CUSTOMER_ROLE_CODE,
+    DEFAULT_CHANNEL_CODE,
+    SUPER_ADMIN_ROLE_CODE,
+} from '@vendure/common/lib/shared-constants';
 import { ID, PaginatedList, Type } from '@vendure/common/lib/shared-types';
 import { unique } from '@vendure/common/lib/unique';
 import { FindOptionsWhere } from 'typeorm';
@@ -34,6 +38,7 @@ import { Channel } from '../../entity/channel/channel.entity';
 import { Order } from '../../entity/order/order.entity';
 import { ProductVariantPrice } from '../../entity/product-variant/product-variant-price.entity';
 import { ProductVariant } from '../../entity/product-variant/product-variant.entity';
+import { Role } from '../../entity/role/role.entity';
 import { Seller } from '../../entity/seller/seller.entity';
 import { Session } from '../../entity/session/session.entity';
 import { Zone } from '../../entity/zone/zone.entity';
@@ -365,6 +370,7 @@ export class ChannelService {
         }
         await this.customFieldRelationService.updateRelations(ctx, Channel, input, newChannel);
         await this.allChannels.refresh(ctx);
+        await this.assignDefaultRolesToChannel(ctx, newChannel.id);
         await this.eventBus.publish(new ChannelEvent(ctx, newChannel, 'created', input));
         return newChannel;
     }
@@ -562,5 +568,27 @@ export class ChannelService {
                 return new LanguageNotAvailableError({ languageCode: input.defaultLanguageCode });
             }
         }
+    }
+
+    /**
+     * Assigns the SuperAdmin and Customer roles to the given channel. Called
+     * during channel creation to ensure that the SuperAdmin always has access
+     * to all channels, and that customers can authenticate against them.
+     */
+    private async assignDefaultRolesToChannel(ctx: RequestContext, channelId: ID): Promise<void> {
+        const superAdminRole = await this.connection.getRepository(ctx, Role).findOne({
+            where: { code: SUPER_ADMIN_ROLE_CODE },
+        });
+        if (!superAdminRole) {
+            throw new InternalServerError('error.super-admin-role-not-found');
+        }
+        const customerRole = await this.connection.getRepository(ctx, Role).findOne({
+            where: { code: CUSTOMER_ROLE_CODE },
+        });
+        if (!customerRole) {
+            throw new InternalServerError('error.customer-role-not-found');
+        }
+        await this.assignToChannels(ctx, Role, superAdminRole.id, [channelId]);
+        await this.assignToChannels(ctx, Role, customerRole.id, [channelId]);
     }
 }
