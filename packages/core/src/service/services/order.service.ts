@@ -2307,12 +2307,17 @@ export class OrderService {
      * @description
      * Applies promotions, taxes and shipping to the Order. If the `updatedOrderLines` argument is passed in,
      * then all of those OrderLines will have their prices re-calculated using the configured {@link OrderItemPriceCalculationStrategy}.
+     *
+     * Pass `options.recalculateShipping: false` to leave the Order's existing ShippingLines untouched.
+     * This is needed when the Order's ShippingMethods cannot be resolved in the current Channel, e.g.
+     * for a seller Order whose ShippingLines were already calculated on the aggregate Order.
      */
     async applyPriceAdjustments(
         ctx: RequestContext,
         order: Order,
         updatedOrderLines?: OrderLine[],
         relations?: RelationPaths<Order>,
+        options?: { recalculateShipping?: boolean },
     ): Promise<Order> {
         const allPromotions = await this.promotionService.getActivePromotionsInChannel(ctx);
         const activePromotionsPre = await this.promotionService.getActivePromotionsOnOrder(ctx, order.id);
@@ -2379,6 +2384,7 @@ export class OrderService {
             order,
             promotions,
             updatedOrderLines ?? [],
+            options,
         );
 
         const shippingLineIdsPost = updatedOrder.shippingLines.map(l => l.id);

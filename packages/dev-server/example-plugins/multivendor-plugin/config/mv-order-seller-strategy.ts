@@ -122,7 +122,12 @@ export class MultivendorSellerStrategy implements OrderSellerStrategy {
             }
             const sellerCtx = ctx.copy();
             (sellerCtx as any)._channel = fullSellerChannel;
-            await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder);
+            // Shipping is not recalculated: the ShippingLines were already calculated on the
+            // aggregate Order, and ShippingMethod resolution is Channel-scoped, so a method which
+            // is not assigned to the seller Channel would be dropped from the seller Order.
+            await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
+                recalculateShipping: false,
+            });
             await this.entityHydrator.hydrate(ctx, sellerChannel, { relations: ['seller'] });
             const result = await this.orderService.addPaymentToOrder(ctx, sellerOrder.id, {
                 method: paymentMethod.code,

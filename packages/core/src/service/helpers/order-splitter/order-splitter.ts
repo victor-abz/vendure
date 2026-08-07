@@ -83,7 +83,13 @@ export class OrderSplitter {
                 .of(order)
                 .add(sellerOrder);
             const sellerCtx = await this.createSellerChannelContext(ctx, partialOrder.channelId);
-            await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder);
+            // Shipping is deliberately not recalculated here. The ShippingLines were duplicated from
+            // the aggregate Order, where they were already calculated, and ShippingMethod resolution
+            // is Channel-scoped: a ShippingMethod which is not assigned to the seller Channel would
+            // not be found, and the ShippingLine would be silently dropped from the seller Order.
+            await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
+                recalculateShipping: false,
+            });
             sellerOrders.push(sellerOrder);
         }
         await orderSellerStrategy.afterSellerOrdersCreated?.(ctx, order, sellerOrders);
