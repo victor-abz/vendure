@@ -110,7 +110,26 @@ export class MultivendorSellerStrategy implements OrderSellerStrategy {
                 );
             }
             sellerOrder.surcharges = [await this.createPlatformFeeSurcharge(ctx, sellerOrder)];
-            await this.orderService.applyPriceAdjustments(ctx, sellerOrder);
+            // Price adjustments must be applied in the seller Channel's context, otherwise
+            // Promotions are resolved from the aggregate Order's Channel and leak into this
+            // seller Order. Everything other than the Channel is carried over from `ctx`.
+            // The Channel on `sellerOrder.channels` is a stub carrying only an id, so it is
+            // re-fetched here to get the defaultTaxZone needed to calculate the Order.
+            const fullSellerChannel = await this.channelService.findOne(ctx, sellerChannel.id);
+            if (!fullSellerChannel) {
+                throw new InternalServerError(`Could not load Channel ${sellerChannel.id as string}`);
+            }
+            const sellerCtx = new RequestContext({
+                req: ctx.req,
+                apiType: ctx.apiType,
+                channel: fullSellerChannel,
+                languageCode: ctx.languageCode,
+                currencyCode: ctx.currencyCode,
+                session: ctx.session,
+                isAuthorized: ctx.isAuthorized,
+                authorizedAsOwnerOnly: ctx.authorizedAsOwnerOnly,
+            });
+            await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder);
             await this.entityHydrator.hydrate(ctx, sellerChannel, { relations: ['seller'] });
             const result = await this.orderService.addPaymentToOrder(ctx, sellerOrder.id, {
                 method: paymentMethod.code,

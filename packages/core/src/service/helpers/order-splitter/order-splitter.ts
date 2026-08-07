@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { OrderType } from '@vendure/common/lib/generated-types';
 import { pick } from '@vendure/common/lib/pick';
+import { ID } from '@vendure/common/lib/shared-types';
 
 import { RequestContext } from '../../../api/common/request-context';
 import { ConfigService } from '../../../config/config.service';
@@ -80,11 +81,39 @@ export class OrderSplitter {
                 .relation('sellerOrders')
                 .of(order)
                 .add(sellerOrder);
-            await this.orderService.applyPriceAdjustments(ctx, sellerOrder);
+            const sellerCtx = await this.createSellerChannelContext(ctx, partialOrder.channelId);
+            await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder);
             sellerOrders.push(sellerOrder);
         }
         await orderSellerStrategy.afterSellerOrdersCreated?.(ctx, order, sellerOrders);
         return order.sellerOrders;
+    }
+
+    /**
+     * A seller Order belongs to the seller's Channel, so price adjustments must be applied in a
+     * RequestContext scoped to that Channel. Otherwise Promotions are resolved from the aggregate
+     * Order's Channel and leak into seller Orders belonging to other Channels.
+     *
+     * Everything other than the Channel is carried over from the original context: the session
+     * (so Promotion conditions which depend on the Customer still evaluate correctly), and the
+     * currencyCode (so that a seller Channel with a different default currency does not cause the
+     * seller Order to be re-priced into that currency).
+     */
+    private async createSellerChannelContext(ctx: RequestContext, channelId: ID): Promise<RequestContext> {
+        const sellerChannel = await this.channelService.findOne(ctx, channelId);
+        if (!sellerChannel) {
+            return ctx;
+        }
+        return new RequestContext({
+            req: ctx.req,
+            apiType: ctx.apiType,
+            channel: sellerChannel,
+            languageCode: ctx.languageCode,
+            currencyCode: ctx.currencyCode,
+            session: ctx.session,
+            isAuthorized: ctx.isAuthorized,
+            authorizedAsOwnerOnly: ctx.authorizedAsOwnerOnly,
+        });
     }
 
     private async duplicateOrderLine(ctx: RequestContext, line: OrderLine): Promise<OrderLine> {
