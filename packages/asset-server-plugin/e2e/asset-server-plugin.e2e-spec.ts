@@ -40,6 +40,11 @@ describe('AssetServerPlugin', () => {
     const { server, adminClient } = createTestEnvironment(
         mergeConfig(testConfig(), {
             // logger: new DefaultLogger({ level: LogLevel.Info }),
+            // Permit text/html uploads so the security-headers tests can exercise the non-SVG
+            // markup branch; the defaults (image/* etc.) would reject it.
+            assetOptions: {
+                permittedFileTypes: ['image/*', 'video/*', 'audio/*', '.pdf', 'text/html'],
+            },
             plugins: [
                 AssetServerPlugin.init({
                     assetUploadDir: path.join(__dirname, TEST_ASSET_DIR),
@@ -118,6 +123,15 @@ describe('AssetServerPlugin', () => {
         it('serves an SVG source as an attachment with nosniff and a locked-down CSP', async () => {
             const svgAsset = await uploadAsset('test.svg');
             const res = await fetch(svgAsset.source);
+
+            expect(res.headers.get('content-disposition')).toContain('attachment');
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(CSP);
+        });
+
+        it('serves an HTML asset as an attachment (non-SVG markup branch)', async () => {
+            const htmlAsset = await uploadAsset('test.html');
+            const res = await fetch(htmlAsset.source);
 
             expect(res.headers.get('content-disposition')).toContain('attachment');
             expect(res.headers.get('x-content-type-options')).toBe('nosniff');
