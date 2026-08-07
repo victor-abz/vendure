@@ -4,6 +4,7 @@ import { pick } from '@vendure/common/lib/pick';
 import { ID } from '@vendure/common/lib/shared-types';
 
 import { RequestContext } from '../../../api/common/request-context';
+import { InternalServerError } from '../../../common/error/errors';
 import { ConfigService } from '../../../config/config.service';
 import { TransactionalConnection } from '../../../connection/transactional-connection';
 import { Channel } from '../../../entity/channel/channel.entity';
@@ -103,7 +104,7 @@ export class OrderSplitter {
     private async createSellerChannelContext(ctx: RequestContext, channelId: ID): Promise<RequestContext> {
         const sellerChannel = await this.channelService.findOne(ctx, channelId);
         if (!sellerChannel) {
-            return ctx;
+            throw new InternalServerError(`Could not load Channel ${channelId as string}`);
         }
         const sellerCtx = ctx.copy();
         (sellerCtx as any)._channel = sellerChannel;

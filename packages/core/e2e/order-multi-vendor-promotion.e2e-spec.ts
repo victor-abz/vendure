@@ -83,9 +83,14 @@ const GET_ORDER_DISCOUNTS = gql`
                 id
                 code
             }
+            lines {
+                linePriceWithTax
+                proratedLinePriceWithTax
+            }
             discounts {
                 description
                 amount
+                amountWithTax
             }
         }
     }
@@ -249,7 +254,8 @@ describe('Multi-vendor order promotions', () => {
         const { order: aggregate } = await adminClient.query(GET_SELLER_ORDER_IDS, { id: orderId });
         const sellerOrders: Array<{
             channels: Array<{ code: string }>;
-            discounts: Array<{ description: string }>;
+            lines: Array<{ linePriceWithTax: number; proratedLinePriceWithTax: number }>;
+            discounts: Array<{ description: string; amount: number; amountWithTax: number }>;
         }> = [];
         for (const sellerOrder of aggregate.sellerOrders) {
             const { order } = await adminClient.query(GET_ORDER_DISCOUNTS, { id: sellerOrder.id });
@@ -261,6 +267,15 @@ describe('Multi-vendor order promotions', () => {
         const alices = sellerOrders.find(o => o.channels.some(c => c.code === 'alices-wares'))!;
 
         expect(bobs.discounts.map(d => d.description)).toEqual(['bobs 10% off']);
+        // The discount must be calculated against Bob's own seller Order, not the aggregate
+        // Order. Bob's lines total 155880 with tax; the discount is less than a flat 10% of that
+        // because the order_percentage_discount action is applied against subTotalWithTax, which
+        // also carries the multivendor plugin's negative platform fee surcharge.
+        expect(bobs.discounts[0].amountWithTax).toBe(-13897);
+        expect(bobs.discounts[0].amount).toBe(-11581);
+        // The discount lands on Bob's own lines.
+        const bobsLine = bobs.lines[0];
+        expect(bobsLine.linePriceWithTax - bobsLine.proratedLinePriceWithTax).toBe(13897);
         // Alice's Channel has no Promotion assigned, so her seller Order must have none.
         expect(alices.discounts).toEqual([]);
     });
