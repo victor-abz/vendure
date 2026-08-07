@@ -378,4 +378,70 @@ describe('generateListOptions()', () => {
         // synthetic fields without a source description remain undescribed
         expect(filterParameter.getFields()._and.description).toBeUndefined();
     });
+
+    it('propagates descriptions from fields of a pre-declared filter/sort parameter input', () => {
+        const input = `
+               ${COMMON_TYPES}
+               type Query {
+                   people: PersonList
+               }
+
+               type Person {
+                   name: String!
+               }
+
+               input PersonFilterParameter {
+                   """A custom filter field"""
+                   custom: StringOperators
+               }
+
+               input PersonSortParameter {
+                   """A custom sort field"""
+                   custom: SortOrder
+               }
+           `;
+
+        const result = generateListOptions(buildSchema(input));
+
+        // fields merged in from the pre-declared input keep their description…
+        const filterParameter = result.getType('PersonFilterParameter') as any;
+        expect(filterParameter.getFields().custom.description).toBe('A custom filter field');
+        const sortParameter = result.getType('PersonSortParameter') as any;
+        expect(sortParameter.getFields().custom.description).toBe('A custom sort field');
+        // …alongside the fields derived from the source type
+        expect(filterParameter.getFields().name).toBeDefined();
+        expect(sortParameter.getFields().name).toBeDefined();
+    });
+
+    it('lets a pre-declared filter/sort field win over a colliding source field, description included', () => {
+        const input = `
+               ${COMMON_TYPES}
+               type Query {
+                   people: PersonList
+               }
+
+               type Person {
+                   """Source name description"""
+                   name: String!
+               }
+
+               input PersonFilterParameter {
+                   """Overridden filter description"""
+                   name: StringOperators
+               }
+
+               input PersonSortParameter {
+                   """Overridden sort description"""
+                   name: SortOrder
+               }
+           `;
+
+        const result = generateListOptions(buildSchema(input));
+
+        // on a name collision the pre-declared input's field wins, carrying its own description
+        const filterParameter = result.getType('PersonFilterParameter') as any;
+        expect(filterParameter.getFields().name.description).toBe('Overridden filter description');
+        const sortParameter = result.getType('PersonSortParameter') as any;
+        expect(sortParameter.getFields().name.description).toBe('Overridden sort description');
+    });
 });
