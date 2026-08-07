@@ -102,6 +102,48 @@ describe('AssetServerPlugin', () => {
         expect(Buffer.compare(responseBuffer, previewFile)).toBe(0);
     });
 
+    // GHSA-f4r3-h6jf-4m29: harden the headers on served assets so that a permitted-but-scriptable
+    // asset (SVG in particular) cannot execute script when opened directly or embedded.
+    describe('security headers', () => {
+        const CSP = "default-src 'none'; script-src 'none'; sandbox";
+        const uploadAsset = async (fileName: string): Promise<FragmentOf<typeof assetFragment>> => {
+            const { createAssets } = await adminClient.fileUploadMutation({
+                mutation: createAssetsDocument,
+                filePaths: [path.join(__dirname, `fixtures/assets/${fileName}`)],
+                mapVariables: filePaths => ({ input: filePaths.map(() => ({ file: null })) }),
+            });
+            return createAssets[0];
+        };
+
+        it('serves an SVG source as an attachment with nosniff and a locked-down CSP', async () => {
+            const svgAsset = await uploadAsset('test.svg');
+            const res = await fetch(svgAsset.source);
+
+            expect(res.headers.get('content-disposition')).toContain('attachment');
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(CSP);
+        });
+
+        it('does not force-download a non-markup asset, but still sends nosniff + CSP', async () => {
+            const jpgAsset = await uploadAsset('test.jpg');
+            const res = await fetch(jpgAsset.source);
+
+            expect(res.headers.get('content-disposition')).toBeNull();
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(CSP);
+        });
+
+        it('sets the same headers on transformed images', async () => {
+            const jpgAsset = await uploadAsset('test.jpg');
+            // cache=false so this transform doesn't write to the cache dir that the later
+            // "cache initially empty" test asserts on — the header path runs regardless of caching.
+            const res = await fetch(`${jpgAsset.preview}?w=57&h=57&cache=false`);
+
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(CSP);
+        });
+    });
+
     it('can handle non-latin filenames', async () => {
         const FILE_NAME_ZH = '白飯';
         const filesToUpload = [path.join(__dirname, `fixtures/assets/${FILE_NAME_ZH}.jpg`)];
