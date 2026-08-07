@@ -94,26 +94,20 @@ export class OrderSplitter {
      * RequestContext scoped to that Channel. Otherwise Promotions are resolved from the aggregate
      * Order's Channel and leak into seller Orders belonging to other Channels.
      *
-     * Everything other than the Channel is carried over from the original context: the session
-     * (so Promotion conditions which depend on the Customer still evaluate correctly), and the
-     * currencyCode (so that a seller Channel with a different default currency does not cause the
-     * seller Order to be re-priced into that currency).
+     * The context is copied rather than constructed from scratch so that everything else is
+     * carried over: the session (so Promotion conditions which depend on the Customer still
+     * evaluate correctly), the currencyCode (so that a seller Channel with a different default
+     * currency does not cause the seller Order to be re-priced into that currency), and the
+     * transaction manager (so that the price adjustments are saved inside the same transaction).
      */
     private async createSellerChannelContext(ctx: RequestContext, channelId: ID): Promise<RequestContext> {
         const sellerChannel = await this.channelService.findOne(ctx, channelId);
         if (!sellerChannel) {
             return ctx;
         }
-        return new RequestContext({
-            req: ctx.req,
-            apiType: ctx.apiType,
-            channel: sellerChannel,
-            languageCode: ctx.languageCode,
-            currencyCode: ctx.currencyCode,
-            session: ctx.session,
-            isAuthorized: ctx.isAuthorized,
-            authorizedAsOwnerOnly: ctx.authorizedAsOwnerOnly,
-        });
+        const sellerCtx = ctx.copy();
+        (sellerCtx as any)._channel = sellerChannel;
+        return sellerCtx;
     }
 
     private async duplicateOrderLine(ctx: RequestContext, line: OrderLine): Promise<OrderLine> {
