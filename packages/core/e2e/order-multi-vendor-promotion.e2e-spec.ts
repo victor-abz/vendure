@@ -197,7 +197,10 @@ describe('Multi-vendor order promotions', () => {
                 ],
             },
         });
-        expect(createPromotion.id).toBeDefined();
+        // Surface the actual error if an ErrorResult comes back, rather than an unhelpful
+        // "expected undefined to be defined".
+        expect(createPromotion.errorCode, createPromotion.message).toBeUndefined();
+        expect(createPromotion.name).toBe('bobs 10% off');
 
         // Assert the Promotion really is scoped to Bob's Channel, so that the assertion
         // at the end of this suite cannot pass for the wrong reason.

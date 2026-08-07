@@ -96,10 +96,11 @@ export class OrderSplitter {
      * Order's Channel and leak into seller Orders belonging to other Channels.
      *
      * The context is copied rather than constructed from scratch so that everything else is
-     * carried over: the session (so Promotion conditions which depend on the Customer still
-     * evaluate correctly), the currencyCode (so that a seller Channel with a different default
-     * currency does not cause the seller Order to be re-priced into that currency), and the
-     * transaction manager (so that the price adjustments are saved inside the same transaction).
+     * carried over: the session (which the built-in Promotion conditions do not read, but
+     * plugin-supplied conditions and strategies may), the currencyCode (so that a seller Channel
+     * with a different default currency does not cause the seller Order to be re-priced into that
+     * currency), and the transaction manager (so that the price adjustments are saved inside the
+     * same transaction).
      */
     private async createSellerChannelContext(ctx: RequestContext, channelId: ID): Promise<RequestContext> {
         const sellerChannel = await this.channelService.findOne(ctx, channelId);
