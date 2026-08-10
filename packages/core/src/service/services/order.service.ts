@@ -2308,9 +2308,11 @@ export class OrderService {
      * Applies promotions, taxes and shipping to the Order. If the `updatedOrderLines` argument is passed in,
      * then all of those OrderLines will have their prices re-calculated using the configured {@link OrderItemPriceCalculationStrategy}.
      *
-     * Pass `options.recalculateShipping: false` to leave the Order's existing ShippingLines untouched.
-     * This is needed when the Order's ShippingMethods cannot be resolved in the current Channel, e.g.
-     * for a seller Order whose ShippingLines were already calculated on the aggregate Order.
+     * Pass `options.recalculateShipping: false` to leave the Order's existing ShippingLine prices
+     * untouched. This is needed when the Order's ShippingMethods cannot be resolved in the current
+     * Channel, e.g. for a seller Order whose ShippingLines were already calculated on the aggregate
+     * Order. Shipping Promotions are re-applied either way, so that ShippingLine adjustments always
+     * reflect the Promotions of the current Channel.
      */
     async applyPriceAdjustments(
         ctx: RequestContext,

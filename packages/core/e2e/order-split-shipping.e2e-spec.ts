@@ -102,6 +102,21 @@ const GET_SHIPPING_METHODS = gql`
     }
 `;
 
+const CREATE_PROMOTION = gql`
+    mutation ($input: CreatePromotionInput!) {
+        createPromotion(input: $input) {
+            ... on Promotion {
+                id
+                name
+            }
+            ... on ErrorResult {
+                errorCode
+                message
+            }
+        }
+    }
+`;
+
 const GET_SELLER_ORDER_SHIPPING = gql`
     query ($id: ID!) {
         order(id: $id) {
@@ -144,6 +159,8 @@ describe('Order splitting with a default-Channel-only ShippingMethod', () => {
     let sellerVariantId: string;
     let shippingMethodCode: string;
     let orderId: string;
+    let aggregateShippingWithTax: number;
+    let secondOrderId: string;
 
     type OrderSuccessResult =
         | FragmentOf<typeof updatedOrderFragment>
@@ -223,6 +240,7 @@ describe('Order splitting with a default-Channel-only ShippingMethod', () => {
         });
         orderResultGuard.assertSuccess(setOrderShippingMethod);
         expect(setOrderShippingMethod.shippingWithTax).toBeGreaterThan(0);
+        aggregateShippingWithTax = setOrderShippingMethod.shippingWithTax;
 
         const { transitionOrderToState } = await shopClient.query(transitionToStateDocument, {
             state: 'ArrangingPayment',
@@ -243,6 +261,64 @@ describe('Order splitting with a default-Channel-only ShippingMethod', () => {
         expect(sellerOrder.channels.map((c: { code: string }) => c.code)).toContain('seller-channel');
         expect(sellerOrder.shippingLines.length).toBe(1);
         expect(sellerOrder.shippingLines[0].shippingMethod.code).toBe(shippingMethodCode);
-        expect(sellerOrder.shippingWithTax).toBeGreaterThan(0);
+        // The ShippingLine carries over at exactly the price calculated on the aggregate Order.
+        expect(sellerOrder.shippingWithTax).toBe(aggregateShippingWithTax);
+        expect(sellerOrder.shippingLines[0].priceWithTax).toBe(aggregateShippingWithTax);
+    });
+
+    // A shipping Promotion assigned only to the default Channel must not discount the seller
+    // Order's shipping: the ShippingLine adjustments are duplicated from the aggregate Order, so
+    // they have to be re-evaluated against the seller Channel's Promotions.
+    it('a default-Channel shipping Promotion does not discount the seller Order', async () => {
+        const { createPromotion } = await adminClient.query(CREATE_PROMOTION, {
+            input: {
+                enabled: true,
+                conditions: [
+                    {
+                        code: 'minimum_order_amount',
+                        arguments: [
+                            { name: 'amount', value: '1' },
+                            { name: 'taxInclusive', value: 'true' },
+                        ],
+                    },
+                ],
+                actions: [{ code: 'free_shipping', arguments: [] }],
+                translations: [{ languageCode: 'en', name: 'default channel free shipping' }],
+            },
+        });
+        expect(createPromotion.errorCode, createPromotion.message).toBeUndefined();
+        expect(createPromotion.name).toBe('default channel free shipping');
+
+        await shopClient.asUserWithCredentials('hayden.zieme12@hotmail.com', 'test');
+        await shopClient.query(addItemToOrderDocument, {
+            productVariantId: sellerVariantId,
+            quantity: 1,
+        });
+        await shopClient.query(setShippingAddressDocument, {
+            input: { streetLine1: '12 the street', postalCode: '123456', countryCode: 'US' },
+        });
+        const { eligibleShippingMethods } = await shopClient.query(getEligibleShippingMethodsDocument);
+        const { setOrderShippingMethod } = await shopClient.query(setShippingMethodDocument, {
+            id: [eligibleShippingMethods[0].id],
+        });
+        orderResultGuard.assertSuccess(setOrderShippingMethod);
+        // Guard against a false pass: the Promotion must actually be discounting the aggregate
+        // Order's shipping, otherwise the seller Order assertion below proves nothing.
+        expect(setOrderShippingMethod.shippingWithTax).toBe(0);
+
+        const { transitionOrderToState } = await shopClient.query(transitionToStateDocument, {
+            state: 'ArrangingPayment',
+        });
+        orderResultGuard.assertSuccess(transitionOrderToState);
+        const { addPaymentToOrder } = await shopClient.query(addPaymentDocument, {
+            input: { method: testSuccessfulPaymentMethod.code, metadata: {} },
+        });
+        orderResultGuard.assertSuccess(addPaymentToOrder);
+        secondOrderId = addPaymentToOrder.id;
+
+        const { order } = await adminClient.query(GET_SELLER_ORDER_SHIPPING, { id: secondOrderId });
+        const sellerOrder = order.sellerOrders[0];
+        expect(sellerOrder.shippingLines.length).toBe(1);
+        expect(sellerOrder.shippingWithTax).toBe(aggregateShippingWithTax);
     });
 });

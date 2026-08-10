@@ -122,9 +122,10 @@ export class MultivendorSellerStrategy implements OrderSellerStrategy {
             }
             const sellerCtx = ctx.copy();
             (sellerCtx as any)._channel = fullSellerChannel;
-            // Shipping is not recalculated: the ShippingLines were already calculated on the
+            // ShippingLine prices are not recalculated: they were already calculated on the
             // aggregate Order, and ShippingMethod resolution is Channel-scoped, so a method which
             // is not assigned to the seller Channel would be dropped from the seller Order.
+            // Shipping Promotions are still re-applied in the seller Channel.
             await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
                 recalculateShipping: false,
             });

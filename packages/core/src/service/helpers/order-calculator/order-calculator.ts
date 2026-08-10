@@ -103,8 +103,11 @@ export class OrderCalculator {
         }
         if (options?.recalculateShipping !== false) {
             await this.applyShipping(ctx, order);
-            await this.applyShippingPromotions(ctx, order, promotions);
         }
+        // Shipping Promotions are always re-applied, even when the ShippingLine prices are not
+        // recalculated: the existing adjustments were calculated against a different set of
+        // Promotions, and leaving them in place would carry that discount over unvalidated.
+        await this.applyShippingPromotions(ctx, order, promotions);
         this.calculateOrderTotals(order);
         return order;
     }

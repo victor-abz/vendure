@@ -83,10 +83,12 @@ export class OrderSplitter {
                 .of(order)
                 .add(sellerOrder);
             const sellerCtx = await this.createSellerChannelContext(ctx, partialOrder.channelId);
-            // Shipping is deliberately not recalculated here. The ShippingLines were duplicated from
-            // the aggregate Order, where they were already calculated, and ShippingMethod resolution
-            // is Channel-scoped: a ShippingMethod which is not assigned to the seller Channel would
-            // not be found, and the ShippingLine would be silently dropped from the seller Order.
+            // ShippingLine prices are deliberately not recalculated here. The ShippingLines were
+            // duplicated from the aggregate Order, where they were already calculated, and
+            // ShippingMethod resolution is Channel-scoped: a ShippingMethod which is not assigned to
+            // the seller Channel would not be found, and the ShippingLine would be silently dropped
+            // from the seller Order. Shipping Promotions are still re-applied in the seller Channel,
+            // so the duplicated adjustments do not carry the aggregate Channel's discounts over.
             await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
                 recalculateShipping: false,
             });
@@ -105,8 +107,9 @@ export class OrderSplitter {
      * carried over: the session (which the built-in Promotion conditions do not read, but
      * plugin-supplied conditions and strategies may), the currencyCode (so that a seller Channel
      * with a different default currency does not cause the seller Order to be re-priced into that
-     * currency), and the transaction manager (so that the price adjustments are saved inside the
-     * same transaction).
+     * currency), the languageCode (the seller Order is a copy of the customer's Order, so it keeps
+     * the language the customer ordered in rather than the seller Channel's default), and the
+     * transaction manager (so that the price adjustments are saved inside the same transaction).
      */
     private async createSellerChannelContext(ctx: RequestContext, channelId: ID): Promise<RequestContext> {
         const sellerChannel = await this.channelService.findOne(ctx, channelId);
