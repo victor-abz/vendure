@@ -55,7 +55,7 @@ export class OrderCalculator {
         order: Order,
         promotions: Promotion[],
         updatedOrderLines: OrderLine[] = [],
-        options?: { recalculateShipping?: boolean },
+        options?: { recalculateShipping?: boolean; recalculateShippingPromotions?: boolean },
     ): Promise<Order> {
         const { taxZoneStrategy } = this.configService.taxOptions;
         // We reset the promotions array as all promotions
@@ -101,13 +101,17 @@ export class OrderCalculator {
                 await this.applyTaxes(ctx, order, activeTaxZone);
             }
         }
-        if (options?.recalculateShipping !== false) {
+        const recalculateShipping = options?.recalculateShipping !== false;
+        if (recalculateShipping) {
             await this.applyShipping(ctx, order);
         }
-        // Shipping Promotions are always re-applied, even when the ShippingLine prices are not
-        // recalculated: the existing adjustments were calculated against a different set of
-        // Promotions, and leaving them in place would carry that discount over unvalidated.
-        await this.applyShippingPromotions(ctx, order, promotions);
+        // Shipping Promotions follow the ShippingLine prices unless told otherwise. A caller which
+        // keeps the existing prices but needs the adjustments revalidated against a different set
+        // of Promotions - a seller Order being priced in its own Channel, say - opts in with
+        // `recalculateShippingPromotions`.
+        if (options?.recalculateShippingPromotions ?? recalculateShipping) {
+            await this.applyShippingPromotions(ctx, order, promotions);
+        }
         this.calculateOrderTotals(order);
         return order;
     }

@@ -2311,15 +2311,16 @@ export class OrderService {
      * Pass `options.recalculateShipping: false` to leave the Order's existing ShippingLine prices
      * untouched. This is needed when the Order's ShippingMethods cannot be resolved in the current
      * Channel, e.g. for a seller Order whose ShippingLines were already calculated on the aggregate
-     * Order. Shipping Promotions are re-applied either way, so that ShippingLine adjustments always
-     * reflect the Promotions of the current Channel.
+     * Order. The existing shipping Promotion adjustments are then left in place too, unless
+     * `options.recalculateShippingPromotions: true` is also passed, which revalidates them against
+     * the Promotions of the current Channel.
      */
     async applyPriceAdjustments(
         ctx: RequestContext,
         order: Order,
         updatedOrderLines?: OrderLine[],
         relations?: RelationPaths<Order>,
-        options?: { recalculateShipping?: boolean },
+        options?: { recalculateShipping?: boolean; recalculateShippingPromotions?: boolean },
     ): Promise<Order> {
         const allPromotions = await this.promotionService.getActivePromotionsInChannel(ctx);
         const activePromotionsPre = await this.promotionService.getActivePromotionsOnOrder(ctx, order.id);

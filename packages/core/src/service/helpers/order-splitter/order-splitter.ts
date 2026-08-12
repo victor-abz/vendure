@@ -91,6 +91,7 @@ export class OrderSplitter {
             // so the duplicated adjustments do not carry the aggregate Channel's discounts over.
             await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
                 recalculateShipping: false,
+                recalculateShippingPromotions: true,
             });
             sellerOrders.push(sellerOrder);
         }

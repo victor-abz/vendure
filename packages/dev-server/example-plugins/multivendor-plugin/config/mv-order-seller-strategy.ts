@@ -128,6 +128,7 @@ export class MultivendorSellerStrategy implements OrderSellerStrategy {
             // Shipping Promotions are still re-applied in the seller Channel.
             await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
                 recalculateShipping: false,
+                recalculateShippingPromotions: true,
             });
             await this.entityHydrator.hydrate(ctx, sellerChannel, { relations: ['seller'] });
             const result = await this.orderService.addPaymentToOrder(ctx, sellerOrder.id, {
