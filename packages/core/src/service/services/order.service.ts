@@ -2314,6 +2314,16 @@ export class OrderService {
      * Order. The existing shipping Promotion adjustments are then left in place too, unless
      * `options.recalculateShippingPromotions: true` is also passed, which revalidates them against
      * the Promotions of the current Channel.
+     *
+     * Note that `recalculateShipping: false` also leaves the ShippingLine's `taxLines` and
+     * `listPriceIncludesTax` as they were, since both are produced by the ShippingMethod's
+     * {@link ShippingCalculator} and that is only run when the prices are recalculated. The
+     * OrderLine taxes are still recalculated for the current Channel's tax zone, so an Order priced
+     * this way in a Channel which resolves to a different tax zone, or which has a different
+     * `pricesIncludeTax` setting, ends up with its lines and its shipping taxed on different bases.
+     * The built-in `defaultShippingCalculator` takes its tax rate from a ShippingMethod arg
+     * rather than from the tax zone, so this only affects the `includesTax: 'auto'` setting and
+     * custom ShippingCalculators which derive their tax rate from the RequestContext.
      */
     async applyPriceAdjustments(
         ctx: RequestContext,

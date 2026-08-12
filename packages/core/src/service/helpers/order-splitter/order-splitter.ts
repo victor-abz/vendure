@@ -89,6 +89,14 @@ export class OrderSplitter {
             // the seller Channel would not be found, and the ShippingLine would be silently dropped
             // from the seller Order. Shipping Promotions are still re-applied in the seller Channel,
             // so the duplicated adjustments do not carry the aggregate Channel's discounts over.
+            //
+            // The ShippingLine's taxLines are duplicated along with the prices, so they describe the
+            // aggregate Channel's tax basis, whereas the OrderLine taxes below are recalculated for
+            // the seller Channel's tax zone. A seller Channel resolving to a different tax zone, or
+            // configured with a different pricesIncludeTax, therefore taxes its lines and its
+            // shipping on different bases. Recalculating the shipping tax is not possible here for
+            // the same reason the prices are held: the ShippingMethod which produces the tax rate
+            // may not be assigned to the seller Channel at all.
             await this.orderService.applyPriceAdjustments(sellerCtx, sellerOrder, undefined, undefined, {
                 recalculateShipping: false,
                 recalculateShippingPromotions: true,
