@@ -2848,7 +2848,7 @@
                   "title": "OrderCalculator",
                   "slug": "order-calculator",
                   "file": "docs/reference/typescript-api/service-helpers/order-calculator.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-08-12T07:47:05Z"
                 },
                 {
                   "title": "OrderModifier",
@@ -2988,7 +2988,7 @@
                   "title": "OrderService",
                   "slug": "order-service",
                   "file": "docs/reference/typescript-api/services/order-service.mdx",
-                  "lastModified": "2026-08-10T10:40:35+02:00"
+                  "lastModified": "2026-08-12T07:47:05Z"
                 },
                 {
                   "title": "OrderTestingService",
