@@ -105,7 +105,7 @@ export class OrderCalculator {
         if (recalculateShipping) {
             await this.applyShipping(ctx, order);
         }
-        // Shipping Promotions follow the ShippingLine prices unless told otherwise. A caller which
+        // Shipping Promotions are re-applied when the ShippingLine prices are recalculated. A caller which
         // keeps the existing prices but needs the adjustments revalidated against a different set
         // of Promotions - a seller Order being priced in its own Channel, say - opts in with
         // `recalculateShippingPromotions`.
