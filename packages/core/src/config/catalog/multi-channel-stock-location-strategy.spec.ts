@@ -11,6 +11,7 @@ import { StockLocation } from '../../entity/stock-location/stock-location.entity
 import { ChangeChannelEvent } from '../../event-bus/events/change-channel-event';
 import { StockLocationEvent } from '../../event-bus/events/stock-location-event';
 import { ensureConfigLoaded } from '../config-helpers';
+import { Logger } from '../logger/vendure-logger';
 
 /**
  * Unit tests for the MultiChannelStockLocationStrategy channelId cache invalidation.
@@ -21,6 +22,8 @@ import { ensureConfigLoaded } from '../config-helpers';
  */
 
 const cacheStore = new Map<string, any>();
+/** When set, the backing store rejects deletes, simulating an unavailable cache backend. */
+let deleteRejection: Error | undefined;
 const mockCacheService = {
     createCache: (config: any) =>
         new Cache(config, {
@@ -30,13 +33,18 @@ const mockCacheService = {
                 return Promise.resolve();
             },
             delete: (key: string) => {
+                if (deleteRejection) {
+                    return Promise.reject(deleteRejection);
+                }
                 cacheStore.delete(key);
                 return Promise.resolve();
             },
         } as any),
 } as any;
 
-const eventStream = new Subject<any>();
+// Replaced before each test: `init()` subscribes and nothing tears the subscription down,
+// so a shared stream would deliver one event to every strategy built so far.
+let eventStream = new Subject<any>();
 const mockEventBus = {
     ofType: (type: any) => eventStream.asObservable().pipe(filter((e: any) => e.constructor === type)),
 } as any;
@@ -93,6 +101,8 @@ describe('MultiChannelStockLocationStrategy', () => {
 
     beforeEach(async () => {
         cacheStore.clear();
+        deleteRejection = undefined;
+        eventStream = new Subject<any>();
         channelsInDb = [channel1];
         getEntityOrThrow.mockClear();
         // Dynamic import to avoid vitest circular dependency issue
@@ -158,6 +168,18 @@ describe('MultiChannelStockLocationStrategy', () => {
 
         const fresh = await strategy.getAvailableStock(ctxChannel2, 1, [stockLevel]);
         expect(fresh.stockOnHand).toBe(0);
+    });
+
+    it('logs rather than throws when the cache backend rejects the invalidation', async () => {
+        const logError = vi.spyOn(Logger, 'error').mockImplementation(() => undefined);
+        deleteRejection = new Error('cache backend unavailable');
+
+        eventStream.next(new ChangeChannelEvent(ctxChannel1, stockLocation, [2], 'assigned', StockLocation));
+        await flushEventHandlers();
+
+        expect(logError).toHaveBeenCalledTimes(1);
+        expect(logError.mock.calls[0][0]).toContain('cache backend unavailable');
+        logError.mockRestore();
     });
 
     it('does not invalidate the cache on ChangeChannelEvents for other entity types', async () => {
