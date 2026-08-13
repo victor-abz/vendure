@@ -2331,12 +2331,30 @@ export class OrderService implements OnApplicationBootstrap {
      * @description
      * Applies promotions, taxes and shipping to the Order. If the `updatedOrderLines` argument is passed in,
      * then all of those OrderLines will have their prices re-calculated using the configured {@link OrderItemPriceCalculationStrategy}.
+     *
+     * Pass `options.recalculateShipping: false` to leave the Order's existing ShippingLine prices
+     * untouched. This is needed when the Order's ShippingMethods cannot be resolved in the current
+     * Channel, e.g. for a seller Order whose ShippingLines were already calculated on the aggregate
+     * Order. The existing shipping Promotion adjustments are then left in place too, unless
+     * `options.recalculateShippingPromotions: true` is also passed, which revalidates them against
+     * the Promotions of the current Channel.
+     *
+     * Note that `recalculateShipping: false` also leaves the ShippingLine's `taxLines` and
+     * `listPriceIncludesTax` as they were, since both are produced by the ShippingMethod's
+     * {@link ShippingCalculator} and that is only run when the prices are recalculated. The
+     * OrderLine taxes are still recalculated for the current Channel's tax zone, so an Order priced
+     * this way in a Channel which resolves to a different tax zone, or which has a different
+     * `pricesIncludeTax` setting, ends up with its lines and its shipping taxed on different bases.
+     * The built-in `defaultShippingCalculator` takes its tax rate from a ShippingMethod arg
+     * rather than from the tax zone, so this only affects the `includesTax: 'auto'` setting and
+     * custom ShippingCalculators which derive their tax rate from the RequestContext.
      */
     async applyPriceAdjustments(
         ctx: RequestContext,
         order: Order,
         updatedOrderLines?: OrderLine[],
         relations?: RelationPaths<Order>,
+        options?: { recalculateShipping?: boolean; recalculateShippingPromotions?: boolean },
     ): Promise<Order> {
         const allPromotions = await this.promotionService.getActivePromotionsInChannel(ctx);
         const activePromotionsPre = await this.promotionService.getActivePromotionsOnOrder(ctx, order.id);
@@ -2403,6 +2421,7 @@ export class OrderService implements OnApplicationBootstrap {
             order,
             promotions,
             updatedOrderLines ?? [],
+            options,
         );
 
         const shippingLineIdsPost = updatedOrder.shippingLines.map(l => l.id);

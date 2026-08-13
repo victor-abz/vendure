@@ -14,7 +14,7 @@ including:
 ```ts title="Signature"
 class OrderCalculator {
     constructor(configService: ConfigService, zoneService: ZoneService, taxRateService: TaxRateService, shippingMethodService: ShippingMethodService, shippingCalculator: ShippingCalculator, requestContextCache: RequestContextCacheService)
-    applyPriceAdjustments(ctx: RequestContext, order: Order, promotions: Promotion[], updatedOrderLines: OrderLine[] = [], options?: { recalculateShipping?: boolean }) => Promise<Order>;
+    applyPriceAdjustments(ctx: RequestContext, order: Order, promotions: Promotion[], updatedOrderLines: OrderLine[] = [], options?: { recalculateShipping?: boolean; recalculateShippingPromotions?: boolean }) => Promise<Order>;
     calculateOrderTotals(order: Order) => ;
 }
 ```
@@ -23,7 +23,7 @@ class OrderCalculator {
 
 ### applyPriceAdjustments
 
-<MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, order: <a href='/reference/typescript-api/entities/order#order'>Order</a>, promotions: <a href='/reference/typescript-api/entities/promotion#promotion'>Promotion</a>[], updatedOrderLines: <a href='/reference/typescript-api/entities/order-line#orderline'>OrderLine</a>[] = [], options?: { recalculateShipping?: boolean }) => Promise<<a href='/reference/typescript-api/entities/order#order'>Order</a>>`}   />
+<MemberInfo kind="method" type={`(ctx: <a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>, order: <a href='/reference/typescript-api/entities/order#order'>Order</a>, promotions: <a href='/reference/typescript-api/entities/promotion#promotion'>Promotion</a>[], updatedOrderLines: <a href='/reference/typescript-api/entities/order-line#orderline'>OrderLine</a>[] = [], options?: { recalculateShipping?: boolean; recalculateShippingPromotions?: boolean }) => Promise<<a href='/reference/typescript-api/entities/order#order'>Order</a>>`}   />
 
 Applies taxes and promotions to an Order. Mutates the order object.
 Returns an array of any OrderItems which had new adjustments
