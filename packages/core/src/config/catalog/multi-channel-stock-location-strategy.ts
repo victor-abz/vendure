@@ -12,9 +12,12 @@ import { OrderLine } from '../../entity/order-line/order-line.entity';
 import { StockLevel } from '../../entity/stock-level/stock-level.entity';
 import { StockLocation } from '../../entity/stock-location/stock-location.entity';
 import { ChangeChannelEvent, EventBus, StockLocationEvent } from '../../event-bus/index';
+import { Logger } from '../logger/vendure-logger';
 
 import { BaseStockLocationStrategy } from './default-stock-location-strategy';
 import { AvailableStock, LocationWithQuantity, StockLocationStrategy } from './stock-location-strategy';
+
+const loggerCtx = 'MultiChannelStockLocationStrategy';
 
 /**
  * @description
@@ -65,7 +68,7 @@ export class MultiChannelStockLocationStrategy extends BaseStockLocationStrategy
         this.eventBus
             .ofType(StockLocationEvent)
             .pipe(filter(event => event.type !== 'created'))
-            .subscribe(({ entity }) => this.channelIdCache.delete(entity.id));
+            .subscribe(({ entity }) => this.invalidateChannelIdCache(entity.id));
 
         // Assigning a StockLocation to a Channel (or removing it) does not emit a
         // StockLocationEvent, so we also need to invalidate the cache on ChangeChannelEvents
@@ -73,7 +76,7 @@ export class MultiChannelStockLocationStrategy extends BaseStockLocationStrategy
         this.eventBus
             .ofType(ChangeChannelEvent)
             .pipe(filter(event => event.entityType === StockLocation))
-            .subscribe(({ entity }) => this.channelIdCache.delete(entity.id));
+            .subscribe(({ entity }) => this.invalidateChannelIdCache(entity.id));
     }
 
     /**
@@ -172,6 +175,24 @@ export class MultiChannelStockLocationStrategy extends BaseStockLocationStrategy
 
     private getCacheKey(stockLocationId: ID) {
         return `MultiChannelStockLocationStrategy:StockLocationChannelIds:${stockLocationId}`;
+    }
+
+    /**
+     * Invalidation runs in an event subscriber, so there is nothing to await the returned
+     * promise. A rejection here would otherwise be silent, leaving the stale channel id list
+     * to live out its full TTL.
+     */
+    private invalidateChannelIdCache(stockLocationId: ID) {
+        void this.channelIdCache
+            .delete(stockLocationId)
+            .catch(err =>
+                Logger.error(
+                    `Failed to invalidate StockLocation channel id cache for id ${stockLocationId}: ${
+                        err instanceof Error ? err.message : String(err)
+                    }`,
+                    loggerCtx,
+                ),
+            );
     }
 
     private getStockLevelsForVariant(ctx: RequestContext, productVariantId: ID): Promise<StockLevel[]> {
