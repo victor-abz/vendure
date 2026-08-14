@@ -789,8 +789,7 @@ export class ProductVariantService {
         let variants: ProductVariant[];
         if (checkChannel) {
             variants = await this.connection.findByIdsInChannel(ctx, ProductVariant, ids, ctx.channelId, {});
-            const foundIds = new Set(variants.map(variant => `${variant.id}`));
-            const missingId = ids.find(candidate => !foundIds.has(`${candidate}`));
+            const missingId = ids.find(candidate => !variants.some(v => idsAreEqual(v.id, candidate)));
             if (missingId != null) {
                 throw new EntityNotFoundError('ProductVariant', missingId);
             }
