@@ -368,18 +368,32 @@ describe('generateListOptions()', () => {
 
         const result = generateListOptions(buildSchema(input));
 
-        const sortParameter = result.getType('PersonSortParameter') as any;
-        expect(sortParameter.getFields().name.description).toBe("The person's full name");
-        expect(sortParameter.getFields().age.description).toBe('Age in years');
+        expect(printType(result.getType('PersonSortParameter')!)).toBe(
+            removeLeadingWhitespace(`
+                   input PersonSortParameter {
+                     """The person's full name"""
+                     name: SortOrder
 
-        const filterParameter = result.getType('PersonFilterParameter') as any;
-        expect(filterParameter.getFields().name.description).toBe("The person's full name");
-        expect(filterParameter.getFields().age.description).toBe('Age in years');
-        // synthetic fields without a source description remain undescribed
-        expect(filterParameter.getFields()._and.description).toBeUndefined();
+                     """Age in years"""
+                     age: SortOrder
+                   }`),
+        );
+
+        expect(printType(result.getType('PersonFilterParameter')!)).toBe(
+            removeLeadingWhitespace(`
+                   input PersonFilterParameter {
+                     """The person's full name"""
+                     name: StringOperators
+
+                     """Age in years"""
+                     age: NumberOperators
+                     _and: [PersonFilterParameter!]
+                     _or: [PersonFilterParameter!]
+                   }`),
+        );
     });
 
-    it('propagates descriptions from fields of a pre-declared filter/sort parameter input', () => {
+    it('propagates descriptions from a pre-existing sort and filter parameter', () => {
         const input = `
                ${COMMON_TYPES}
                type Query {
@@ -390,27 +404,38 @@ describe('generateListOptions()', () => {
                    name: String!
                }
 
-               input PersonFilterParameter {
-                   """A custom filter field"""
-                   custom: StringOperators
+               input PersonSortParameter {
+                   """Sort by relevance score"""
+                   score: SortOrder
                }
 
-               input PersonSortParameter {
-                   """A custom sort field"""
-                   custom: SortOrder
+               input PersonFilterParameter {
+                   """Filter by nickname"""
+                   nickname: StringOperators
                }
            `;
 
         const result = generateListOptions(buildSchema(input));
 
-        // fields merged in from the pre-declared input keep their description…
-        const filterParameter = result.getType('PersonFilterParameter') as any;
-        expect(filterParameter.getFields().custom.description).toBe('A custom filter field');
-        const sortParameter = result.getType('PersonSortParameter') as any;
-        expect(sortParameter.getFields().custom.description).toBe('A custom sort field');
-        // …alongside the fields derived from the source type
-        expect(filterParameter.getFields().name).toBeDefined();
-        expect(sortParameter.getFields().name).toBeDefined();
+        expect(printType(result.getType('PersonSortParameter')!)).toBe(
+            removeLeadingWhitespace(`
+                   input PersonSortParameter {
+                     """Sort by relevance score"""
+                     score: SortOrder
+                     name: SortOrder
+                   }`),
+        );
+
+        expect(printType(result.getType('PersonFilterParameter')!)).toBe(
+            removeLeadingWhitespace(`
+                   input PersonFilterParameter {
+                     """Filter by nickname"""
+                     nickname: StringOperators
+                     name: StringOperators
+                     _and: [PersonFilterParameter!]
+                     _or: [PersonFilterParameter!]
+                   }`),
+        );
     });
 
     it('lets a pre-declared filter/sort field win over a colliding source field, description included', () => {
@@ -438,10 +463,22 @@ describe('generateListOptions()', () => {
 
         const result = generateListOptions(buildSchema(input));
 
-        // on a name collision the pre-declared input's field wins, carrying its own description
-        const filterParameter = result.getType('PersonFilterParameter') as any;
-        expect(filterParameter.getFields().name.description).toBe('Overridden filter description');
-        const sortParameter = result.getType('PersonSortParameter') as any;
-        expect(sortParameter.getFields().name.description).toBe('Overridden sort description');
+        expect(printType(result.getType('PersonSortParameter')!)).toBe(
+            removeLeadingWhitespace(`
+                   input PersonSortParameter {
+                     """Overridden sort description"""
+                     name: SortOrder
+                   }`),
+        );
+
+        expect(printType(result.getType('PersonFilterParameter')!)).toBe(
+            removeLeadingWhitespace(`
+                   input PersonFilterParameter {
+                     """Overridden filter description"""
+                     name: StringOperators
+                     _and: [PersonFilterParameter!]
+                     _or: [PersonFilterParameter!]
+                   }`),
+        );
     });
 });
