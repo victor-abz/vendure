@@ -103,6 +103,7 @@ export async function runProjectCheck(configFlag?: string): Promise<CheckResult>
         message,
         details,
         packageManager,
+        monorepoRoot: monorepoInfo.isMonorepo ? monorepoInfo.root : undefined,
     };
 }
 

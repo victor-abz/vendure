@@ -26,12 +26,14 @@ export async function doctorCommand(options?: DoctorOptions) {
     let loadedConfig: RuntimeVendureConfig | undefined;
     let packageManager: string | undefined;
     let vendureVersion: string | undefined;
+    let monorepoRoot: string | undefined;
 
     // Check 1: Project detection & config discovery
     if (checksToRun.includes('project')) {
         const projectResult = await runProjectCheck(options?.config);
         results.push(projectResult);
         packageManager = projectResult.packageManager;
+        monorepoRoot = projectResult.monorepoRoot;
 
         // If project check fails, skip remaining checks that depend on it
         if (projectResult.status === 'fail' && checksToRun.length > 1) {
@@ -56,7 +58,7 @@ export async function doctorCommand(options?: DoctorOptions) {
 
     // Check 2: Dependency version alignment, singleton duplication, DB driver
     if (checksToRun.includes('dependencies')) {
-        results.push(await runDependencyCheck());
+        results.push(await runDependencyCheck({ monorepoRoot }));
     }
 
     // Check 3: Config loading, validation, plugin compatibility
