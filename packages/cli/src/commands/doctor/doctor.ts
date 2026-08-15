@@ -10,6 +10,7 @@ import { runSchemaCheck } from './checks/schema-check';
 import { formatConsoleReport } from './formatters/console-formatter';
 import { formatJsonReport } from './formatters/json-formatter';
 import { CheckResult, DoctorOptions, DoctorReport } from './types';
+import { detectMonorepoStructure } from '../../utilities/monorepo-utils';
 
 const ALL_CHECKS = ['project', 'dependencies', 'config', 'schema', 'database'] as const;
 const VALID_PROFILES = ['production'] as const;
@@ -58,6 +59,14 @@ export async function doctorCommand(options?: DoctorOptions) {
 
     // Check 2: Dependency version alignment, singleton duplication, DB driver
     if (checksToRun.includes('dependencies')) {
+        // If the project check didn't run, detect monorepo root directly
+        // so hoisted dependencies are still found.
+        if (!monorepoRoot) {
+            const monorepoInfo = detectMonorepoStructure(process.cwd());
+            if (monorepoInfo.isMonorepo) {
+                monorepoRoot = monorepoInfo.root;
+            }
+        }
         results.push(await runDependencyCheck({ monorepoRoot }));
     }
 
