@@ -34,16 +34,17 @@ import {
     OrderLimitError,
 } from '../../../common/error/generated-graphql-shop-errors';
 import { Instrument } from '../../../common/instrument-decorator';
+import { roundMoney } from '../../../common/round-money';
 import { idsAreEqual } from '../../../common/utils';
 import { ConfigService } from '../../../config/config.service';
 import { CustomFieldConfig } from '../../../config/custom-field/custom-field-types';
 import { TransactionalConnection } from '../../../connection/transactional-connection';
 import { VendureEntity } from '../../../entity/base/base.entity';
+import { Order } from '../../../entity/order/order.entity';
+import { OrderLine } from '../../../entity/order-line/order-line.entity';
 import { FulfillmentLine } from '../../../entity/order-line-reference/fulfillment-line.entity';
 import { OrderModificationLine } from '../../../entity/order-line-reference/order-modification-line.entity';
-import { OrderLine } from '../../../entity/order-line/order-line.entity';
 import { OrderModification } from '../../../entity/order-modification/order-modification.entity';
-import { Order } from '../../../entity/order/order.entity';
 import { Payment } from '../../../entity/payment/payment.entity';
 import { ProductVariant } from '../../../entity/product-variant/product-variant.entity';
 import { ShippingLine } from '../../../entity/shipping-line/shipping-line.entity';
@@ -333,8 +334,26 @@ export class OrderModifier {
         for (const line of lineInputs) {
             const orderLine = fullOrder.lines.find(l => idsAreEqual(l.id, line.orderLineId));
             if (orderLine) {
+                const newQuantity = orderLine.quantity - line.quantity;
+                // `OrderLine.getUnitAdjustmentsTotal()` treats a `PROMOTION`-type adjustment's
+                // amount as the total discount for the line's *current* quantity, since
+                // `OrderCalculator.applyOrderItemPromotions()` always (re)computes it that way via
+                // `addAdjustment()`. Reducing the quantity here bypasses that recalculation
+                // entirely, so without rescaling, a `PROMOTION` adjustment's stored total would stay
+                // pinned to the pre-cancellation quantity while `OrderLine.quantity` moves on - the
+                // exact mismatch reported in #5127. `DISTRIBUTED_ORDER_PROMOTION` (and any other)
+                // adjustments are left untouched: their per-unit share is always read relative to
+                // `orderPlacedQuantity`, by design, so that cancelling part of a line does not let
+                // its surviving units absorb a bigger share of an order-level discount.
+                const adjustmentScaleFactor = orderLine.quantity > 0 ? newQuantity / orderLine.quantity : 0;
+                const rescaledAdjustments = (orderLine.adjustments ?? []).map(adjustment =>
+                    adjustment.type === AdjustmentType.PROMOTION
+                        ? { ...adjustment, amount: roundMoney(adjustment.amount * adjustmentScaleFactor) }
+                        : adjustment,
+                );
                 await this.connection.getRepository(ctx, OrderLine).update(line.orderLineId, {
-                    quantity: orderLine.quantity - line.quantity,
+                    quantity: newQuantity,
+                    adjustments: rescaledAdjustments,
                 });
 
                 await this.eventBus.publish(new OrderLineEvent(ctx, order, orderLine, 'cancelled'));

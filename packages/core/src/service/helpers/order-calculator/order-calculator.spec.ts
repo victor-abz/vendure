@@ -21,8 +21,8 @@ import {
     TaxLineCalculationStrategy,
 } from '../../../config/tax/tax-line-calculation-strategy';
 import { Promotion } from '../../../entity';
-import { OrderLine } from '../../../entity/order-line/order-line.entity';
 import { Order } from '../../../entity/order/order.entity';
+import { OrderLine } from '../../../entity/order-line/order-line.entity';
 import { ShippingLine } from '../../../entity/shipping-line/shipping-line.entity';
 import { Surcharge } from '../../../entity/surcharge/surcharge.entity';
 import { EventBus } from '../../../event-bus/event-bus';
@@ -445,6 +445,62 @@ describe('OrderCalculator', () => {
                     expect(order.lines[0].adjustments.length).toBe(1);
                     expect(order.lines[0].adjustments[0].description).toBe('50% off each item');
                     expect(order.totalWithTax).toBe(1350);
+                    assertOrderTotalsAddUp(order);
+                });
+            });
+
+            // https://github.com/vendurehq/vendure/issues/5127 (continuation of #3098)
+            describe('quantity reduced below orderPlacedQuantity after recalculation (#5127)', () => {
+                const promotion = new Promotion({
+                    id: 1,
+                    name: '40% off each item',
+                    conditions: [{ code: alwaysTrueCondition.code, args: [] }],
+                    promotionConditions: [alwaysTrueCondition],
+                    actions: [
+                        {
+                            code: percentageItemAction.code,
+                            args: [{ name: 'discount', value: '40' }],
+                        },
+                    ],
+                    promotionActions: [percentageItemAction],
+                });
+
+                it('keeps the 40% discount after a modifyOrder-style recalculation at a reduced quantity', async () => {
+                    const ctx = createRequestContext({ pricesIncludeTax: true });
+                    const order = createOrder({
+                        ctx,
+                        lines: [
+                            {
+                                listPrice: 2975,
+                                taxCategory: taxCategoryZero,
+                                quantity: 20,
+                            },
+                        ],
+                    });
+                    await orderCalculator.applyPriceAdjustments(ctx, order, [promotion], [order.lines[0]]);
+
+                    // simulate order placement: the line's orderPlacedQuantity is fixed at 20
+                    order.lines[0].orderPlacedQuantity = 20;
+                    expect(order.lines[0].proratedLinePriceWithTax).toBe(
+                        Math.round(order.lines[0].linePriceWithTax * 0.6),
+                    );
+
+                    // Simulate `modifyOrder` reducing the quantity from 20 to 2 - the same
+                    // `OrderCalculator.applyPriceAdjustments()` call that a real `modifyOrder`
+                    // mutation makes, which clears and freshly recomputes `adjustments` against the
+                    // *new* (already-reduced) quantity.
+                    order.lines[0].quantity = 2;
+                    await orderCalculator.applyPriceAdjustments(ctx, order, [promotion], [order.lines[0]]);
+
+                    expect(order.lines[0].quantity).toBe(2);
+                    expect(order.lines[0].orderPlacedQuantity).toBe(20);
+                    // Before the fix, dividing the already-current-quantity-scaled adjustment total by
+                    // `Math.max(orderPlacedQuantity, quantity)` a second time silently rescaled this
+                    // down to a ~4% discount (quantity / orderPlacedQuantity = 2 / 20 = 10% of the
+                    // correct 40%).
+                    expect(order.lines[0].proratedLinePriceWithTax).toBe(
+                        Math.round(order.lines[0].linePriceWithTax * 0.6),
+                    );
                     assertOrderTotalsAddUp(order);
                 });
             });

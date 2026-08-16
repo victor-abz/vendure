@@ -2606,6 +2606,130 @@ describe('Order modification', () => {
         });
     });
 
+    describe('reducing OrderLine quantity below orderPlacedQuantity keeps the discount ratio (#5127)', () => {
+        type CanceledOrderFragment = FragmentOf<typeof canceledOrderFragment>;
+        const canceledOrderGuard: ErrorResultGuard<CanceledOrderFragment> = createErrorResultGuard(
+            input => !!input.lines,
+        );
+
+        it('modifyOrder: reducing quantity via order modification keeps the 50% discount', async () => {
+            await adminClient.query(createPromotionDocument, {
+                input: {
+                    couponCode: 'HALF_5127_MODIFY',
+                    enabled: true,
+                    conditions: [],
+                    actions: [
+                        {
+                            code: productsPercentageDiscount.code,
+                            arguments: [
+                                { name: 'discount', value: '50' },
+                                { name: 'productVariantIds', value: JSON.stringify(['T_1']) },
+                            ],
+                        },
+                    ],
+                    translations: [{ languageCode: LanguageCode.en, name: '50% off T_1 (#5127 modify)' }],
+                },
+            });
+
+            await shopClient.asUserWithCredentials('hayden.zieme12@hotmail.com', 'test');
+            await shopClient.query(addItemToOrderWithCustomFieldsDocument, {
+                productVariantId: 'T_1',
+                quantity: 20,
+            } as any);
+            await shopClient.query(applyCouponCodeDocument, { couponCode: 'HALF_5127_MODIFY' });
+            await proceedToArrangingPayment(shopClient);
+            const placedOrder = await addPaymentToOrder(shopClient, testSuccessfulPaymentMethod);
+            orderGuard.assertSuccess(placedOrder);
+
+            const placedLine = placedOrder.lines[0];
+            expect(placedLine.discountedUnitPriceWithTax).toBe(placedLine.unitPriceWithTax / 2);
+
+            const transitionOrderToState = await adminTransitionOrderToState(placedOrder.id, 'Modifying');
+            orderGuard.assertSuccess(transitionOrderToState);
+
+            // Reduce the quantity from 20 down to 2, well below the orderPlacedQuantity of 20.
+            const { modifyOrder } = await adminClient.query(modifyOrderDocument, {
+                input: {
+                    dryRun: false,
+                    orderId: placedOrder.id,
+                    adjustOrderLines: [{ orderLineId: placedLine.id, quantity: 2 }],
+                    refund: {
+                        paymentId: placedOrder.payments![0].id,
+                        reason: 'reduced quantity (#5127)',
+                    },
+                },
+            });
+            orderWithModificationsGuard.assertSuccess(modifyOrder);
+
+            const modifiedLine = modifyOrder.lines.find(l => l.id === placedLine.id)!;
+            expect(modifiedLine.quantity).toBe(2);
+            expect(modifiedLine.orderPlacedQuantity).toBe(20);
+            // Before the fix, `OrderCalculator.applyPriceAdjustments` (triggered by `modifyOrder`)
+            // already recomputes `adjustments` freshly against the *new* quantity of 2 - i.e. the
+            // stored adjustment total is already correctly scaled. The read-side getters then divided
+            // that already-correct total by `Math.max(orderPlacedQuantity, quantity)` a second time,
+            // silently rescaling the 50% discount down to `quantity / orderPlacedQuantity` (2/20 = 10%)
+            // of its correct value.
+            expect(modifiedLine.discountedLinePriceWithTax).toBe(modifiedLine.linePriceWithTax / 2);
+        });
+
+        it('cancelOrder: partially cancelling a line keeps the 50% discount ratio on the remaining units', async () => {
+            await adminClient.query(createPromotionDocument, {
+                input: {
+                    couponCode: 'HALF_5127_CANCEL',
+                    enabled: true,
+                    conditions: [],
+                    actions: [
+                        {
+                            code: productsPercentageDiscount.code,
+                            arguments: [
+                                { name: 'discount', value: '50' },
+                                { name: 'productVariantIds', value: JSON.stringify(['T_1']) },
+                            ],
+                        },
+                    ],
+                    translations: [{ languageCode: LanguageCode.en, name: '50% off T_1 (#5127 cancel)' }],
+                },
+            });
+
+            await shopClient.asUserWithCredentials('hayden.zieme12@hotmail.com', 'test');
+            await shopClient.query(addItemToOrderWithCustomFieldsDocument, {
+                productVariantId: 'T_1',
+                quantity: 20,
+            } as any);
+            await shopClient.query(applyCouponCodeDocument, { couponCode: 'HALF_5127_CANCEL' });
+            await proceedToArrangingPayment(shopClient);
+            const placedOrder = await addPaymentToOrder(shopClient, testSuccessfulPaymentMethod);
+            orderGuard.assertSuccess(placedOrder);
+
+            const placedLine = placedOrder.lines[0];
+            const unitPriceWithTax = placedLine.unitPriceWithTax;
+
+            // Cancel 18 of the 20 units, going through `OrderModifier.cancelOrderByOrderLines()` - a
+            // path which, unlike `modifyOrder`, does *not* recalculate promotions from scratch.
+            const { cancelOrder } = await adminClient.query(cancelOrderDocument, {
+                input: {
+                    orderId: placedOrder.id,
+                    lines: [{ orderLineId: placedLine.id, quantity: 18 }],
+                    reason: 'partial cancellation (#5127)',
+                },
+            });
+            canceledOrderGuard.assertSuccess(cancelOrder);
+
+            const { order } = await adminClient.query(getOrderWithLineDiscountsDocument, {
+                id: placedOrder.id,
+            });
+            const remainingLine = order!.lines.find(l => l.id === placedLine.id)!;
+
+            expect(remainingLine.quantity).toBe(2);
+            expect(remainingLine.orderPlacedQuantity).toBe(20);
+            // The remaining 2 units should still carry the full 50% discount: half of their combined
+            // list price, i.e. exactly one unit's price.
+            expect(remainingLine.proratedLinePriceWithTax).toBe(unitPriceWithTax);
+            expect(remainingLine.discounts[0].amountWithTax).toBe(-unitPriceWithTax);
+        });
+    });
+
     async function adminTransitionOrderToState(id: string, state: string) {
         const result = await adminClient.query(adminTransitionToStateDocument, {
             id,
