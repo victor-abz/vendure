@@ -3754,7 +3754,7 @@
                   "title": "Input Objects",
                   "slug": "input-types",
                   "file": "docs/reference/graphql-api/admin/input-types.mdx",
-                  "lastModified": "2026-03-10T16:50:41+01:00"
+                  "lastModified": "2026-08-14T14:30:25+02:00"
                 },
                 {
                   "title": "Mutations",
@@ -3792,7 +3792,7 @@
                   "title": "Input Objects",
                   "slug": "input-types",
                   "file": "docs/reference/graphql-api/shop/input-types.mdx",
-                  "lastModified": "2026-02-23T21:37:46+01:00"
+                  "lastModified": "2026-08-14T14:30:25+02:00"
                 },
                 {
                   "title": "Mutations",
