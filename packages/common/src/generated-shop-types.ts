@@ -2173,19 +2173,34 @@ export type OrderAddress = {
 export type OrderFilterParameter = {
     _and?: InputMaybe<Array<OrderFilterParameter>>;
     _or?: InputMaybe<Array<OrderFilterParameter>>;
+    /** An order is active as long as the payment process has not been completed */
     active?: InputMaybe<BooleanOperators>;
+    /** A unique code for the Order */
     code?: InputMaybe<StringOperators>;
     createdAt?: InputMaybe<DateOperators>;
     currencyCode?: InputMaybe<StringOperators>;
     id?: InputMaybe<IdOperators>;
+    /**
+     * The date & time that the Order was placed, i.e. the Customer
+     * completed the checkout and the Order is no longer "active"
+     */
     orderPlacedAt?: InputMaybe<DateOperators>;
     shipping?: InputMaybe<NumberOperators>;
     shippingWithTax?: InputMaybe<NumberOperators>;
     state?: InputMaybe<StringOperators>;
+    /**
+     * The subTotal is the total of all OrderLines in the Order. This figure also includes any Order-level
+     * discounts which have been prorated (proportionally distributed) amongst the items of each OrderLine.
+     * To get a total of all OrderLines which does not account for prorated discounts, use the
+     * sum of `OrderLine.discountedLinePrice` values.
+     */
     subTotal?: InputMaybe<NumberOperators>;
+    /** Same as subTotal, but inclusive of tax */
     subTotalWithTax?: InputMaybe<NumberOperators>;
+    /** Equal to subTotal plus shipping */
     total?: InputMaybe<NumberOperators>;
     totalQuantity?: InputMaybe<NumberOperators>;
+    /** The final payable amount. Equal to subTotalWithTax plus shippingWithTax */
     totalWithTax?: InputMaybe<NumberOperators>;
     type?: InputMaybe<StringOperators>;
     updatedAt?: InputMaybe<DateOperators>;
@@ -2305,17 +2320,31 @@ export type OrderPaymentStateError = ErrorResult & {
 };
 
 export type OrderSortParameter = {
+    /** A unique code for the Order */
     code?: InputMaybe<SortOrder>;
     createdAt?: InputMaybe<SortOrder>;
     id?: InputMaybe<SortOrder>;
+    /**
+     * The date & time that the Order was placed, i.e. the Customer
+     * completed the checkout and the Order is no longer "active"
+     */
     orderPlacedAt?: InputMaybe<SortOrder>;
     shipping?: InputMaybe<SortOrder>;
     shippingWithTax?: InputMaybe<SortOrder>;
     state?: InputMaybe<SortOrder>;
+    /**
+     * The subTotal is the total of all OrderLines in the Order. This figure also includes any Order-level
+     * discounts which have been prorated (proportionally distributed) amongst the items of each OrderLine.
+     * To get a total of all OrderLines which does not account for prorated discounts, use the
+     * sum of `OrderLine.discountedLinePrice` values.
+     */
     subTotal?: InputMaybe<SortOrder>;
+    /** Same as subTotal, but inclusive of tax */
     subTotalWithTax?: InputMaybe<SortOrder>;
+    /** Equal to subTotal plus shipping */
     total?: InputMaybe<SortOrder>;
     totalQuantity?: InputMaybe<SortOrder>;
+    /** The final payable amount. Equal to subTotalWithTax plus shippingWithTax */
     totalWithTax?: InputMaybe<SortOrder>;
     updatedAt?: InputMaybe<SortOrder>;
 };
