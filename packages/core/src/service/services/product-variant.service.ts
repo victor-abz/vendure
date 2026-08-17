@@ -773,19 +773,25 @@ export class ProductVariantService {
         }
     }
 
+    /**
+     * @description
+     * Soft-deletes the ProductVariant(s) with the given id(s).
+     *
+     * The lookup is scoped to the active Channel, so an id which does not belong to
+     * `ctx.channelId` throws an {@link EntityNotFoundError}. Previously an unknown or
+     * out-of-channel id was silently reported as deleted.
+     *
+     * @param checkChannel - Set to `false` only for trusted internal cascades which have
+     * already verified the parent entity's Channel, such as `ProductService.softDelete`.
+     * A global Product deletion must reach every one of its variants, including any which
+     * were individually removed from the active Channel.
+     */
     async softDelete(
         ctx: RequestContext,
         id: ID | ID[],
         checkChannel: boolean = true,
     ): Promise<DeletionResponse> {
         const ids = Array.isArray(id) ? id : [id];
-        // Scope the lookup to the active channel so a channel-scoped admin cannot soft-delete a
-        // ProductVariant that belongs only to another channel via the deleteProductVariant(s)
-        // mutations. A requested id not in the active channel is treated as not found, consistent
-        // with the channel-scoped lookups used elsewhere (e.g. `ProductService.softDelete`).
-        // The check is skipped for the trusted product-deletion cascade (see `ProductService.softDelete`),
-        // which has already verified the parent Product's channel and must cascade to every one of
-        // its variants regardless of their individual channel membership.
         let variants: ProductVariant[];
         if (checkChannel) {
             variants = await this.connection.findByIdsInChannel(ctx, ProductVariant, ids, ctx.channelId, {});
