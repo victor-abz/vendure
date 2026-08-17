@@ -9,7 +9,14 @@ import path from 'path';
 import { getValidFormat } from './common';
 import { ImageTransformParameters, ImageTransformStrategy } from './config/image-transform-strategy';
 import { S3AssetStorageStrategy } from './config/s3-asset-storage-strategy';
-import { ASSET_SERVER_PLUGIN_INIT_OPTIONS, DEFAULT_CACHE_HEADER, loggerCtx } from './constants';
+import {
+    ASSET_CSP_HEADER,
+    ASSET_MARKUP_CSP_HEADER,
+    ASSET_SERVER_PLUGIN_INIT_OPTIONS,
+    DEFAULT_CACHE_HEADER,
+    loggerCtx,
+    MARKUP_MIME_TYPES,
+} from './constants';
 import { transformImage } from './transform-image';
 import { AssetServerOptions, ImageTransformMode, ImageTransformPreset } from './types';
 
@@ -304,24 +311,22 @@ export class AssetServer {
      *
      * - `X-Content-Type-Options: nosniff` stops the browser from re-interpreting a response as a
      *   more dangerous type than its declared `Content-Type`.
-     * - The `Content-Security-Policy` denies scripts and subresources and sandboxes the document,
-     *   so even a markup asset rendered as a top-level document cannot execute script.
+     * - The `Content-Security-Policy` denies scripts and subresources on every asset; for markup
+     *   types it additionally sandboxes the document, so even a markup asset rendered as a
+     *   top-level document cannot execute script (see `ASSET_MARKUP_CSP_HEADER` for why the
+     *   `sandbox` token is markup-only).
      * - For markup types we additionally force `Content-Disposition: attachment`, so the browser
      *   downloads rather than renders them. This does not affect `<img src>` previews (embedded
      *   images ignore the header and never execute embedded scripts); the only visible change is
      *   that opening such an asset's URL directly downloads it.
-     *
-     * Note: the `sandbox` directive applies to every asset, so opening a PDF's URL directly in a
-     * Chromium-based browser downloads it rather than showing it in the built-in viewer (the
-     * viewer runs a sandboxed plugin document). Inline `<embed>`/`<object>` PDF rendering is
-     * likewise blocked. Images are unaffected. This is deliberate hardening, but it is a visible
-     * behaviour change for setups that relied on inline PDF viewing.
      */
     private setAssetSecurityHeaders(res: Response, mimeType: string) {
         res.setHeader('X-Content-Type-Options', 'nosniff');
-        res.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'none'; sandbox");
         if (this.isMarkupMimeType(mimeType)) {
+            res.setHeader('Content-Security-Policy', ASSET_MARKUP_CSP_HEADER);
             res.setHeader('Content-Disposition', 'attachment');
+        } else {
+            res.setHeader('Content-Security-Policy', ASSET_CSP_HEADER);
         }
     }
 
@@ -331,11 +336,6 @@ export class AssetServer {
      */
     private isMarkupMimeType(mimeType: string): boolean {
         const normalized = mimeType.split(';')[0].trim().toLowerCase();
-        return (
-            normalized === 'text/html' ||
-            normalized === 'text/xml' ||
-            normalized === 'application/xml' ||
-            normalized.endsWith('+xml')
-        );
+        return MARKUP_MIME_TYPES.includes(normalized) || normalized.endsWith('+xml');
     }
 }

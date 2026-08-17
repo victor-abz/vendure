@@ -40,10 +40,10 @@ describe('AssetServerPlugin', () => {
     const { server, adminClient } = createTestEnvironment(
         mergeConfig(testConfig(), {
             // logger: new DefaultLogger({ level: LogLevel.Info }),
-            // Permit text/html uploads so the security-headers tests can exercise the non-SVG
-            // markup branch; the defaults (image/* etc.) would reject it.
+            // The types these tests actually upload. `text/html` is added on top of the usual
+            // image/pdf set so the security-headers tests can exercise the non-SVG markup branch.
             assetOptions: {
-                permittedFileTypes: ['image/*', 'video/*', 'audio/*', '.pdf', 'text/html'],
+                permittedFileTypes: ['image/*', '.pdf', 'text/html'],
             },
             plugins: [
                 AssetServerPlugin.init({
@@ -105,57 +105,6 @@ describe('AssetServerPlugin', () => {
         const previewFile = await fs.readFile(previewFilePath);
 
         expect(Buffer.compare(responseBuffer, previewFile)).toBe(0);
-    });
-
-    // GHSA-f4r3-h6jf-4m29: harden the headers on served assets so that a permitted-but-scriptable
-    // asset (SVG in particular) cannot execute script when opened directly or embedded.
-    describe('security headers', () => {
-        const CSP = "default-src 'none'; script-src 'none'; sandbox";
-        const uploadAsset = async (fileName: string): Promise<FragmentOf<typeof assetFragment>> => {
-            const { createAssets } = await adminClient.fileUploadMutation({
-                mutation: createAssetsDocument,
-                filePaths: [path.join(__dirname, `fixtures/assets/${fileName}`)],
-                mapVariables: filePaths => ({ input: filePaths.map(() => ({ file: null })) }),
-            });
-            return createAssets[0];
-        };
-
-        it('serves an SVG source as an attachment with nosniff and a locked-down CSP', async () => {
-            const svgAsset = await uploadAsset('test.svg');
-            const res = await fetch(svgAsset.source);
-
-            expect(res.headers.get('content-disposition')).toContain('attachment');
-            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
-            expect(res.headers.get('content-security-policy')).toBe(CSP);
-        });
-
-        it('serves an HTML asset as an attachment (non-SVG markup branch)', async () => {
-            const htmlAsset = await uploadAsset('test.html');
-            const res = await fetch(htmlAsset.source);
-
-            expect(res.headers.get('content-disposition')).toContain('attachment');
-            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
-            expect(res.headers.get('content-security-policy')).toBe(CSP);
-        });
-
-        it('does not force-download a non-markup asset, but still sends nosniff + CSP', async () => {
-            const jpgAsset = await uploadAsset('test.jpg');
-            const res = await fetch(jpgAsset.source);
-
-            expect(res.headers.get('content-disposition')).toBeNull();
-            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
-            expect(res.headers.get('content-security-policy')).toBe(CSP);
-        });
-
-        it('sets the same headers on transformed images', async () => {
-            const jpgAsset = await uploadAsset('test.jpg');
-            // cache=false so this transform doesn't write to the cache dir that the later
-            // "cache initially empty" test asserts on — the header path runs regardless of caching.
-            const res = await fetch(`${jpgAsset.preview}?w=57&h=57&cache=false`);
-
-            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
-            expect(res.headers.get('content-security-policy')).toBe(CSP);
-        });
     });
 
     it('can handle non-latin filenames', async () => {
@@ -249,6 +198,69 @@ describe('AssetServerPlugin', () => {
             const files = await fs.readdir(cacheFileDir);
 
             expect(files.length).toBe(2);
+        });
+    });
+
+    // GHSA-f4r3-h6jf-4m29: harden the headers on served assets so that a permitted-but-scriptable
+    // asset (SVG in particular) cannot execute script when opened directly or embedded.
+    describe('security headers', () => {
+        const BASE_CSP = "default-src 'none'; script-src 'none'";
+        const MARKUP_CSP = `${BASE_CSP}; sandbox`;
+        const uploadAsset = async (fileName: string): Promise<FragmentOf<typeof assetFragment>> => {
+            const { createAssets } = await adminClient.fileUploadMutation({
+                mutation: createAssetsDocument,
+                filePaths: [path.join(__dirname, `fixtures/assets/${fileName}`)],
+                mapVariables: filePaths => ({ input: filePaths.map(() => ({ file: null })) }),
+            });
+            return createAssets[0];
+        };
+
+        it('serves an SVG source as an attachment with nosniff and a sandboxed CSP', async () => {
+            const svgAsset = await uploadAsset('test.svg');
+            const res = await fetch(svgAsset.source);
+
+            expect(res.headers.get('content-type')).toContain('image/svg+xml');
+            expect(res.headers.get('content-disposition')).toBe('attachment');
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(MARKUP_CSP);
+        });
+
+        it('serves an HTML asset as an attachment (non-SVG markup branch)', async () => {
+            const htmlAsset = await uploadAsset('test.html');
+            const res = await fetch(htmlAsset.source);
+
+            expect(res.headers.get('content-type')).toContain('text/html');
+            expect(res.headers.get('content-disposition')).toBe('attachment');
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(MARKUP_CSP);
+        });
+
+        it('does not force-download or sandbox a non-markup asset, but still sends nosniff + CSP', async () => {
+            const jpgAsset = await uploadAsset('test.jpg');
+            const res = await fetch(jpgAsset.source);
+
+            expect(res.headers.get('content-disposition')).toBeNull();
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(BASE_CSP);
+        });
+
+        // The regression this split fixes: a PDF must NOT get the `sandbox` token (which forced a
+        // download in Chromium) nor `Content-Disposition: attachment`, so it still renders inline.
+        it('does not sandbox or force-download a PDF', async () => {
+            const pdfAsset = await uploadAsset('test.pdf');
+            const res = await fetch(pdfAsset.source);
+
+            expect(res.headers.get('content-disposition')).toBeNull();
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(BASE_CSP);
+        });
+
+        it('sets the same headers on transformed images', async () => {
+            const jpgAsset = await uploadAsset('test.jpg');
+            const res = await fetch(`${jpgAsset.preview}?w=57&h=57`);
+
+            expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+            expect(res.headers.get('content-security-policy')).toBe(BASE_CSP);
         });
     });
 
