@@ -25,6 +25,7 @@ import {
     createRoleDocument,
     deleteProductDocument,
     deleteProductVariantDocument,
+    deleteProductVariantsDocument,
     getChannelsDocument,
     getProductVariantListDocument,
     getProductWithVariantsDocument,
@@ -1102,7 +1103,9 @@ describe('ChannelAware Products and ProductVariants', () => {
                 await adminClient.asUserWithCredentials('deleter2@test.com', 'test');
                 adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
                 await adminClient.query(deleteProductVariantDocument, { id: defaultOnlyVariantId });
-            }, 'No ProductVariant with the id'),
+                // Deferred so `defaultOnlyVariantId` (set in beforeAll) is read at throw time, not
+                // at test-registration time when it is still undefined.
+            }, () => `No ProductVariant with the id "${defaultOnlyVariantId.replace(/^T_/, '')}" could be found`),
         );
 
         it('the variant still exists after the cross-channel delete attempt', async () => {
@@ -1208,6 +1211,103 @@ describe('ChannelAware Products and ProductVariants', () => {
             });
             expect(productVariants.items).toEqual([]);
         });
+
+        it(
+            'deleting an unknown variant id throws rather than reporting DELETED',
+            assertThrowsWithMessage(async () => {
+                await adminClient.asSuperAdmin();
+                adminClient.setChannelToken(E2E_DEFAULT_CHANNEL_TOKEN);
+                await adminClient.query(deleteProductVariantDocument, { id: 'T_999999' });
+            }, 'No ProductVariant with the id "999999" could be found'),
+        );
+
+        // deleteProductVariants is @Transaction()-wrapped, so a batch containing an id outside the
+        // active channel is rejected in full rather than partially applied. Skipped on sqljs, whose
+        // transaction rollback is a no-op (see database-transactions.e2e-spec.ts), so a partial
+        // delete would persist and mask the guarantee this test asserts.
+        it.skipIf(!process.env.DB || process.env.DB === 'sqljs')(
+            'deleteProductVariants discards the whole batch when one id is not in the active channel',
+            async () => {
+                await adminClient.asSuperAdmin();
+                adminClient.setChannelToken(E2E_DEFAULT_CHANNEL_TOKEN);
+
+                // A variant which lives only in the default channel, plus one assigned to T_2 as well.
+                const { createProduct } = await adminClient.query(createProductDocument, {
+                    input: {
+                        translations: [
+                            {
+                                languageCode: LanguageCode.en,
+                                name: 'OSS-666 Bulk Product',
+                                slug: 'oss-666-bulk',
+                                description: '',
+                            },
+                        ],
+                    },
+                });
+                const { createProductVariants } = await adminClient.query(createProductVariantsDocument, {
+                    input: [
+                        {
+                            productId: createProduct.id,
+                            sku: 'OSS-666-BULK',
+                            optionIds: [],
+                            translations: [{ languageCode: LanguageCode.en, name: 'OSS-666 Bulk Variant' }],
+                        },
+                    ],
+                });
+                productVariantGuard.assertSuccess(createProductVariants[0]);
+                const defaultOnlyId = createProductVariants[0].id;
+
+                const { createProduct: sharedProduct } = await adminClient.query(createProductDocument, {
+                    input: {
+                        translations: [
+                            {
+                                languageCode: LanguageCode.en,
+                                name: 'OSS-666 Bulk Shared Product',
+                                slug: 'oss-666-bulk-shared',
+                                description: '',
+                            },
+                        ],
+                    },
+                });
+                const { createProductVariants: sharedVariants } = await adminClient.query(
+                    createProductVariantsDocument,
+                    {
+                        input: [
+                            {
+                                productId: sharedProduct.id,
+                                sku: 'OSS-666-BULK-SHARED',
+                                optionIds: [],
+                                translations: [
+                                    { languageCode: LanguageCode.en, name: 'OSS-666 Bulk Shared Variant' },
+                                ],
+                            },
+                        ],
+                    },
+                );
+                productVariantGuard.assertSuccess(sharedVariants[0]);
+                const sharedId = sharedVariants[0].id;
+                await adminClient.query(assignProductToChannelDocument, {
+                    input: { channelId: 'T_2', productIds: [sharedProduct.id] },
+                });
+
+                // A T_2 admin deletes both in one call. Only one of them is in T_2.
+                await adminClient.asUserWithCredentials('deleter2@test.com', 'test');
+                adminClient.setChannelToken(SECOND_CHANNEL_TOKEN);
+                await expect(
+                    adminClient.query(deleteProductVariantsDocument, { ids: [sharedId, defaultOnlyId] }),
+                ).rejects.toThrow('No ProductVariant with the id');
+
+                // The batch was rejected in full: the variant the admin *could* have deleted survives.
+                await adminClient.asSuperAdmin();
+                adminClient.setChannelToken(E2E_DEFAULT_CHANNEL_TOKEN);
+                const { productVariants } = await adminClient.query(getProductVariantListDocument, {
+                    options: { filter: { id: { in: [sharedId, defaultOnlyId] } } },
+                });
+                expect(productVariants.items.map(v => v.id).sort()).toEqual(
+                    [sharedId, defaultOnlyId].sort(),
+                );
+            },
+        );
     });
 });
 
