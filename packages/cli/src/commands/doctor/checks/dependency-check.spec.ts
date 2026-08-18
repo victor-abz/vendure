@@ -135,4 +135,58 @@ describe('dependency-check', () => {
 
         expect(result.details?.some(d => d.includes('No duplicate singleton dependencies'))).toBe(true);
     });
+
+    it('finds @vendure/* packages hoisted to monorepo root', async () => {
+        vi.mocked(fs.existsSync).mockImplementation((p: any) => {
+            const pathStr = String(p);
+            // Local node_modules exists but has no @vendure packages
+            if (pathStr === '/app/node_modules') return true;
+            // Monorepo root node_modules exists
+            if (pathStr === '/root/node_modules') return true;
+            // @vendure packages only at root
+            if (pathStr.startsWith('/root/node_modules/@vendure')) return true;
+            return false;
+        });
+        vi.mocked(fs.readJsonSync).mockImplementation((p: any) => {
+            const pathStr = String(p);
+            if (pathStr.startsWith('/root/node_modules/@vendure')) {
+                return { version: '3.7.2' };
+            }
+            return {};
+        });
+        vi.mocked(fs.readdirSync).mockReturnValue([]);
+        vi.mocked(fs.readFileSync).mockReturnValue('');
+
+        const result = await runDependencyCheck({
+            nodeModulesPath: '/app/node_modules',
+            monorepoRoot: '/root',
+        });
+
+        expect(result.details?.some(d => d.includes('All @vendure/* packages at 3.7.2'))).toBe(true);
+    });
+
+    it('finds DB driver via require.resolve when hoisted', async () => {
+        // Mock createRequire to return a resolver that finds the driver
+        const { createRequire: mockCreateRequire } = await import('node:module');
+        vi.mocked(mockCreateRequire).mockReturnValue({
+            resolve: vi.fn().mockReturnValue('/root/node_modules/pg/package.json'),
+        } as any);
+
+        vi.mocked(fs.existsSync).mockReturnValue(true);
+        vi.mocked(fs.readJsonSync).mockImplementation((p: any) => {
+            if (String(p) === '/root/node_modules/pg/package.json') {
+                return { version: '8.20.0', name: 'pg' };
+            }
+            return { version: '3.7.2' };
+        });
+        vi.mocked(fs.readdirSync).mockReturnValue([]);
+        // Config file with postgres type
+        vi.mocked(fs.readFileSync).mockReturnValue(
+            'dbConnectionOptions: { type: \'postgres\' }',
+        );
+
+        const result = await runDependencyCheck({ nodeModulesPath: '/app/node_modules' });
+
+        expect(result.details?.some(d => d.includes('DB driver pg') && d.includes('8.20.0'))).toBe(true);
+    });
 });

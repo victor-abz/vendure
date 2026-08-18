@@ -1,4 +1,6 @@
 import { log } from '@clack/prompts';
+import fs from 'fs-extra';
+import path from 'node:path';
 import { RuntimeVendureConfig } from '@vendure/core';
 
 import { runConfigCheck } from './checks/config-check';
@@ -63,7 +65,7 @@ export async function doctorCommand(options?: DoctorOptions) {
         // so hoisted dependencies are still found.
         if (!monorepoRoot) {
             const monorepoInfo = detectMonorepoStructure(process.cwd());
-            if (monorepoInfo.isMonorepo) {
+            if (monorepoInfo.isMonorepo && monorepoInfo.root && hasWorkspaceMarker(monorepoInfo.root)) {
                 monorepoRoot = monorepoInfo.root;
             }
         }
@@ -191,4 +193,33 @@ function outputReport(report: DoctorReport, options?: DoctorOptions): void {
 
 function capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+/**
+ * Validates that a candidate monorepo root actually has a workspace configuration file.
+ * This prevents false positives from detectMonorepoStructure's path-substring matching
+ * (e.g. /home/me/apps/my-shop would falsely detect /home/me as the root).
+ */
+function hasWorkspaceMarker(dir: string): boolean {
+    const markers = [
+        'pnpm-workspace.yaml',
+        'lerna.json',
+        'nx.json',
+        'turbo.json',
+    ];
+    for (const marker of markers) {
+        if (fs.existsSync(path.join(dir, marker))) {
+            return true;
+        }
+    }
+    // Check for "workspaces" in package.json (npm/yarn workspaces)
+    try {
+        const pkg = fs.readJsonSync(path.join(dir, 'package.json'));
+        if (pkg.workspaces) {
+            return true;
+        }
+    } catch {
+        // no package.json or unreadable
+    }
+    return false;
 }

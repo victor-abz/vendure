@@ -324,24 +324,49 @@ function checkDbDriver(
         };
     }
 
+    // Use require.resolve with the cwd as the resolution base.
+    // This follows Node's module resolution algorithm, walking up
+    // ancestor node_modules directories -- correctly finding packages
+    // hoisted to a workspace root.
+    const localRequire = createRequire(path.join(cwd, 'package.json'));
+    let version: string | undefined;
+
+    // First try resolving the package.json directly (works for most packages).
+    // Some packages (e.g. mysql2 3.x) omit ./package.json from their exports
+    // map, causing ERR_PACKAGE_PATH_NOT_EXPORTED. In that case, fall back to
+    // resolving the main entry point and walking up to the package directory.
     try {
-        // Use require.resolve with the cwd as the resolution base.
-        // This follows Node's module resolution algorithm, walking up
-        // ancestor node_modules directories -- correctly finding packages
-        // hoisted to a workspace root.
-        const localRequire = createRequire(path.join(cwd, 'package.json'));
         const resolvedPath = localRequire.resolve(`${driverPkg}/package.json`);
-        const version = readPackageVersion(resolvedPath);
-        return {
-            status: 'pass',
-            message: `DB driver ${driverPkg}${version ? ` (${version})` : ''} installed for type "${dbType}"`,
-        };
+        version = readPackageVersion(resolvedPath);
     } catch {
-        return {
-            status: 'fail',
-            message: `DB driver "${driverPkg}" not installed (required for dbConnectionOptions.type: "${dbType}")`,
-        };
+        try {
+            const entryPath = localRequire.resolve(driverPkg);
+            // Walk up from the resolved entry to find the package.json
+            let dir = path.dirname(entryPath);
+            const root = path.parse(dir).root;
+            while (dir !== root) {
+                const pkgJsonPath = path.join(dir, 'package.json');
+                if (fs.existsSync(pkgJsonPath)) {
+                    const pkg = fs.readJsonSync(pkgJsonPath);
+                    if (pkg.name === driverPkg) {
+                        version = pkg.version;
+                        break;
+                    }
+                }
+                dir = path.dirname(dir);
+            }
+        } catch {
+            return {
+                status: 'fail',
+                message: `DB driver "${driverPkg}" not installed (required for dbConnectionOptions.type: "${dbType}")`,
+            };
+        }
     }
+
+    return {
+        status: 'pass',
+        message: `DB driver ${driverPkg}${version ? ` (${version})` : ''} installed for type "${dbType}"`,
+    };
 }
 
 /**

@@ -103,8 +103,27 @@ export async function runProjectCheck(configFlag?: string): Promise<CheckResult>
         message,
         details,
         packageManager,
-        monorepoRoot: monorepoInfo.isMonorepo ? monorepoInfo.root : undefined,
+        monorepoRoot: monorepoInfo.isMonorepo && monorepoInfo.root && hasWorkspaceMarker(monorepoInfo.root)
+            ? monorepoInfo.root
+            : undefined,
     };
+}
+
+/**
+ * Checks if a directory has a workspace configuration marker file,
+ * confirming it is genuinely a monorepo root rather than a false positive
+ * from path-substring detection.
+ */
+function hasWorkspaceMarker(dir: string): boolean {
+    const markers = ['pnpm-workspace.yaml', 'lerna.json', 'nx.json', 'turbo.json'];
+    for (const marker of markers) {
+        if (fs.existsSync(path.join(dir, marker))) return true;
+    }
+    try {
+        const pkg = fs.readJsonSync(path.join(dir, 'package.json'));
+        if (pkg.workspaces) return true;
+    } catch { /* no package.json */ }
+    return false;
 }
 
 function detectPackageManager(cwd: string): string {

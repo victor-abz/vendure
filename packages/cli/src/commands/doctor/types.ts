@@ -7,7 +7,7 @@ export interface CheckResult {
     details?: string[];
     /** Only set by the project check. Omitted from JSON output when undefined. */
     packageManager?: string;
-    /** Only set by the project check when a monorepo is detected. */
+    /** @internal Only set by the project check. Used to thread monorepo root to dependency check. */
     monorepoRoot?: string;
 }
 
