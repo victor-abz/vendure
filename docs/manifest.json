@@ -1,7 +1,7 @@
 {
   "id": "core",
   "name": "Vendure Core Documentation",
-  "version": "3.7.1",
+  "version": "3.7.2",
   "vendureVersion": "v3",
   "navigation": [
     {
@@ -2672,7 +2672,7 @@
                   "title": "MultiChannelStockLocationStrategy",
                   "slug": "multi-channel-stock-location-strategy",
                   "file": "docs/reference/typescript-api/products-stock/multi-channel-stock-location-strategy.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-08-17T12:00:11+02:00"
                 },
                 {
                   "title": "ProductVariantPriceCalculationStrategy",
@@ -2766,7 +2766,7 @@
                   "title": "RequestContext",
                   "slug": "request-context",
                   "file": "docs/reference/typescript-api/request/request-context.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-08-17T12:00:11+02:00"
                 },
                 {
                   "title": "RequestContextService",
@@ -2848,7 +2848,7 @@
                   "title": "OrderCalculator",
                   "slug": "order-calculator",
                   "file": "docs/reference/typescript-api/service-helpers/order-calculator.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-08-12T07:47:05Z"
                 },
                 {
                   "title": "OrderModifier",
@@ -2988,7 +2988,7 @@
                   "title": "OrderService",
                   "slug": "order-service",
                   "file": "docs/reference/typescript-api/services/order-service.mdx",
-                  "lastModified": "2026-06-30T07:18:09+02:00"
+                  "lastModified": "2026-08-17T12:00:11+02:00"
                 },
                 {
                   "title": "OrderTestingService",
@@ -3036,7 +3036,7 @@
                   "title": "PromotionService",
                   "slug": "promotion-service",
                   "file": "docs/reference/typescript-api/services/promotion-service.mdx",
-                  "lastModified": "2026-06-30T07:18:09+02:00"
+                  "lastModified": "2026-08-10T09:00:52Z"
                 },
                 {
                   "title": "ProvinceService",
@@ -3078,7 +3078,7 @@
                   "title": "ShippingMethodService",
                   "slug": "shipping-method-service",
                   "file": "docs/reference/typescript-api/services/shipping-method-service.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-08-17T12:00:11+02:00"
                 },
                 {
                   "title": "SlugService",
@@ -3754,7 +3754,7 @@
                   "title": "Input Objects",
                   "slug": "input-types",
                   "file": "docs/reference/graphql-api/admin/input-types.mdx",
-                  "lastModified": "2026-03-10T16:50:41+01:00"
+                  "lastModified": "2026-08-14T14:30:25+02:00"
                 },
                 {
                   "title": "Mutations",
@@ -3792,7 +3792,7 @@
                   "title": "Input Objects",
                   "slug": "input-types",
                   "file": "docs/reference/graphql-api/shop/input-types.mdx",
-                  "lastModified": "2026-02-23T21:37:46+01:00"
+                  "lastModified": "2026-08-14T14:30:25+02:00"
                 },
                 {
                   "title": "Mutations",
@@ -4213,7 +4213,7 @@
                   "title": "ListPage",
                   "slug": "list-page",
                   "file": "docs/reference/dashboard/list-views/list-page.mdx",
-                  "lastModified": "2026-06-24T13:43:54+02:00"
+                  "lastModified": "2026-08-10T09:00:52Z"
                 },
                 {
                   "title": "PaginatedListDataTable",

@@ -120,7 +120,7 @@ export function AddManualPaymentDialog({ order, onSuccess }: Readonly<AddManualP
             >
                 <Trans>Add payment</Trans>
             </Button>
-            <Dialog open={open}>
+            <Dialog open={open} onOpenChange={open => !open && handleCancel()}>
                 <DialogContent className="sm:max-w-[500px]">
                     <DialogHeader>
                         <DialogTitle>
