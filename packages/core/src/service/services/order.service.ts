@@ -279,11 +279,6 @@ export class OrderService implements OnApplicationBootstrap {
         // Main order relations - loaded with 'query' strategy for performance
         const orderRelations = effectiveRelations.filter(r => !r.startsWith('lines'));
 
-        // Lines relations - loaded with 'join' strategy to enable multi-column sorting
-        const lineRelations = effectiveRelations
-            .filter(r => r.startsWith('lines.'))
-            .map(r => r.replace('lines.', ''));
-
         qb.setFindOptions({
             relations: orderRelations,
             relationLoadStrategy: 'query',
@@ -301,6 +296,19 @@ export class OrderService implements OnApplicationBootstrap {
             const hasLinesRelations = effectiveRelations.some(r => r.startsWith('lines'));
             if (hasLinesRelations) {
                 const linesQb = this.connection.getRepository(ctx, OrderLine).createQueryBuilder('line');
+                const metadata = linesQb.connection.getMetadata(OrderLine);
+                const customFieldRelations = metadata.relations
+                    .filter(relation => relation.propertyPath.startsWith('customFields.'))
+                    .map(relation => relation.propertyPath)
+                
+                // Lines relations - loaded with 'join' strategy to enable multi-column sorting
+                const lineRelations = [
+                    ...effectiveRelations
+                    .filter(r => r.startsWith('lines.'))
+                    .map(r => r.replace('lines.', '')),
+                    ...customFieldRelations,
+                ]
+
                 linesQb
                     .setFindOptions({
                         relations: lineRelations,
