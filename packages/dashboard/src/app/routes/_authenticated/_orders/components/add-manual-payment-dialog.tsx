@@ -76,7 +76,7 @@ export function AddManualPaymentDialog({ order, onSuccess }: Readonly<AddManualP
                 input: {
                     orderId: order.id,
                     method: data.method,
-                    transactionId: data.transactionId,
+                    transactionId: data.transactionId || undefined,
                     metadata: {},
                 },
             });
