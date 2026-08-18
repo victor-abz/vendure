@@ -581,6 +581,42 @@ test.describe('Orders', () => {
             ).toBeVisible({ timeout: 10_000 });
         });
 
+        // #5027 — Dialog for new payment has Transaction ID set as optional
+        test('should transition order state after adding payment', async ({ page }) => {
+            test.setTimeout(60_000);
+
+            const client = new VendureAdminClient(page);
+            await client.login();
+            const orderId = await createNewOrder(client);
+
+            await page.goto(`/orders/${orderId}`);
+            await page.getByRole('button', { name: /Add payment/i }).click();
+
+            // The payment dialog should open
+            const dialog = page.locator('[role="dialog"]');
+            await expect(dialog).toBeVisible({ timeout: 5_000 });
+            await expect(dialog.getByText(/Add payment/i).first()).toBeVisible();
+
+            // the payment method options should open
+            const selectPaymentMethod = dialog.getByRole('button', { name: /Select item/ });
+            await expect(selectPaymentMethod).toBeVisible({ timeout: 10_000 });
+            await selectPaymentMethod.click();
+
+            const standardPayment = dialog.getByRole('option', { name: /Test Payment/ });
+            await expect(standardPayment).toBeVisible({ timeout: 10_000 });
+            await standardPayment.click();
+
+            const request = page.waitForRequest(req => req.url().includes('/admin-api'));
+            await dialog.getByRole('button', { name: /Add payment/ }).click();
+            await request;
+
+            // Add fulfillment to the order
+            const { order } = await client.gql(`query ($id: ID!) { order(id: $id) { payments { id } } }`, {
+                id: orderId,
+            });
+            expect(order.payments).toHaveLength(1);
+        });
+
         test('should open refund dialog and show order lines', async ({ page }) => {
             test.setTimeout(60_000);
 
@@ -788,10 +824,10 @@ async function createFulfilledOrder(client: VendureAdminClient): Promise<string>
 }
 
 /**
- * Creates a payment method (idempotent), builds a fully-paid order via the
- * Admin API, and returns the order ID in "PaymentSettled" state.
+ * Creates a payment method (idempotent), builds an order via the
+ * Admin API, and returns the order ID.
  */
-async function createPaidOrder(client: VendureAdminClient): Promise<string> {
+async function createNewOrder(client: VendureAdminClient) {
     // Ensure a payment method exists
     const { paymentMethods } = await client.gql(`query { paymentMethods { items { id } } }`);
     if (paymentMethods.items.length === 0) {
@@ -881,6 +917,16 @@ async function createPaidOrder(client: VendureAdminClient): Promise<string> {
     `,
         { id: orderId },
     );
+
+    return orderId;
+}
+
+/**
+ * Creates a payment method (idempotent), builds a fully-paid order via the
+ * Admin API, and returns the order ID in "PaymentSettled" state.
+ */
+async function createPaidOrder(client: VendureAdminClient): Promise<string> {
+    const orderId = await createNewOrder(client);
 
     await client.gql(
         `
