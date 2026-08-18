@@ -606,12 +606,15 @@ test.describe('Orders', () => {
             await expect(standardPayment).toBeVisible({ timeout: 10_000 });
             await standardPayment.click();
 
+            const request = page.waitForRequest(req => req.url().includes('/admin-api'));
             await dialog.getByRole('button', { name: /Add payment/ }).click();
+            await request;
 
-            // Wait for success
-            await expect(
-                page.locator('[data-sonner-toast]').filter({ hasNotText: /error/i }).first(),
-            ).toBeVisible({ timeout: 10_000 });
+            // Add fulfillment to the order
+            const { order } = await client.gql(`query ($id: ID!) { order(id: $id) { payments { id } } }`, {
+                id: orderId,
+            });
+            expect(order.payments).toHaveLength(1);
         });
 
         test('should open refund dialog and show order lines', async ({ page }) => {
