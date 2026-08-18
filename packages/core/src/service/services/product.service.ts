@@ -303,9 +303,13 @@ export class ProductService {
         await this.connection.getRepository(ctx, Product).save(product, { reload: false });
         await this.eventBus.publish(new ProductEvent(ctx, product, 'deleted', productId));
 
+        // The Product's channel was already verified above, so cascade to every one of its
+        // variants (passing `checkChannel: false`): a global product soft-delete must delete all
+        // its variants, including any that were individually removed from the active channel.
         const variantResult = await this.productVariantService.softDelete(
             ctx,
             product.variants.map(v => v.id),
+            false,
         );
         if (variantResult.result === DeletionResult.NOT_DELETED) {
             await this.connection.rollBackTransaction(ctx);

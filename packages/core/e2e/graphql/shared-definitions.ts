@@ -672,6 +672,15 @@ export const deleteProductVariantDocument = graphql(`
     }
 `);
 
+export const deleteProductVariantsDocument = graphql(`
+    mutation DeleteProductVariants($ids: [ID!]!) {
+        deleteProductVariants(ids: $ids) {
+            result
+            message
+        }
+    }
+`);
+
 export const assignProductToChannelDocument = graphql(
     `
         mutation AssignProductsToChannel($input: AssignProductsToChannelInput!) {
