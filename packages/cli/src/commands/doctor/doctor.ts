@@ -1,6 +1,4 @@
 import { log } from '@clack/prompts';
-import fs from 'fs-extra';
-import path from 'node:path';
 import { RuntimeVendureConfig } from '@vendure/core';
 
 import { runConfigCheck } from './checks/config-check';
@@ -12,7 +10,6 @@ import { runSchemaCheck } from './checks/schema-check';
 import { formatConsoleReport } from './formatters/console-formatter';
 import { formatJsonReport } from './formatters/json-formatter';
 import { CheckResult, DoctorOptions, DoctorReport } from './types';
-import { detectMonorepoStructure } from '../../utilities/monorepo-utils';
 
 const ALL_CHECKS = ['project', 'dependencies', 'config', 'schema', 'database'] as const;
 const VALID_PROFILES = ['production'] as const;
@@ -29,14 +26,12 @@ export async function doctorCommand(options?: DoctorOptions) {
     let loadedConfig: RuntimeVendureConfig | undefined;
     let packageManager: string | undefined;
     let vendureVersion: string | undefined;
-    let monorepoRoot: string | undefined;
 
     // Check 1: Project detection & config discovery
     if (checksToRun.includes('project')) {
         const projectResult = await runProjectCheck(options?.config);
         results.push(projectResult);
         packageManager = projectResult.packageManager;
-        monorepoRoot = projectResult.monorepoRoot;
 
         // If project check fails, skip remaining checks that depend on it
         if (projectResult.status === 'fail' && checksToRun.length > 1) {
@@ -59,17 +54,11 @@ export async function doctorCommand(options?: DoctorOptions) {
         }
     }
 
-    // Check 2: Dependency version alignment, singleton duplication, DB driver
+    // Check 2: Dependency version alignment, singleton duplication, DB driver.
+    // Uses require.resolve for version alignment and DB driver (handles hoisting),
+    // and a tree scan for duplicate detection.
     if (checksToRun.includes('dependencies')) {
-        // If the project check didn't run, detect monorepo root directly
-        // so hoisted dependencies are still found.
-        if (!monorepoRoot) {
-            const monorepoInfo = detectMonorepoStructure(process.cwd());
-            if (monorepoInfo.isMonorepo && monorepoInfo.root && hasWorkspaceMarker(monorepoInfo.root)) {
-                monorepoRoot = monorepoInfo.root;
-            }
-        }
-        results.push(await runDependencyCheck({ monorepoRoot }));
+        results.push(await runDependencyCheck());
     }
 
     // Check 3: Config loading, validation, plugin compatibility
@@ -193,33 +182,4 @@ function outputReport(report: DoctorReport, options?: DoctorOptions): void {
 
 function capitalize(s: string): string {
     return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-/**
- * Validates that a candidate monorepo root actually has a workspace configuration file.
- * This prevents false positives from detectMonorepoStructure's path-substring matching
- * (e.g. /home/me/apps/my-shop would falsely detect /home/me as the root).
- */
-function hasWorkspaceMarker(dir: string): boolean {
-    const markers = [
-        'pnpm-workspace.yaml',
-        'lerna.json',
-        'nx.json',
-        'turbo.json',
-    ];
-    for (const marker of markers) {
-        if (fs.existsSync(path.join(dir, marker))) {
-            return true;
-        }
-    }
-    // Check for "workspaces" in package.json (npm/yarn workspaces)
-    try {
-        const pkg = fs.readJsonSync(path.join(dir, 'package.json'));
-        if (pkg.workspaces) {
-            return true;
-        }
-    } catch {
-        // no package.json or unreadable
-    }
-    return false;
 }
