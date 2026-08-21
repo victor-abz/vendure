@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+import { hasWorkspaceMarker } from '../../../utilities/monorepo-utils';
 import { CheckResult } from '../types';
 
 /**
@@ -106,10 +107,15 @@ export async function runDependencyCheck(): Promise<CheckResult> {
     // Duplicates are a warning rather than a failure because in monorepos,
     // nested copies (e.g. msw bundling its own graphql) may not actually
     // cause runtime issues for the Vendure application.
-    // This uses a tree scan from cwd/node_modules since require.resolve
-    // only returns a single resolved path and cannot detect duplicates.
-    if (fs.existsSync(modulesDir)) {
-        const duplicates = findDuplicatePackages(modulesDir, SINGLETON_PACKAGES);
+    // This uses a tree scan since require.resolve only returns a single
+    // resolved path and cannot detect duplicates. When cwd/node_modules
+    // doesn't exist (hoisted monorepo), walk up to the nearest workspace
+    // root and scan from there.
+    const scanDir = fs.existsSync(modulesDir)
+        ? modulesDir
+        : findNearestNodeModules(cwd);
+    if (scanDir) {
+        const duplicates = findDuplicatePackages(scanDir, SINGLETON_PACKAGES);
         for (const [pkg, versions] of duplicates) {
             if (versions.length > 1) {
                 if (worstStatus === 'pass') worstStatus = 'warn';
@@ -295,6 +301,24 @@ function findNestedPackageVersions(modulesDir: string, targetPkg: string): strin
     }
 
     return versions;
+}
+
+/**
+ * Walks up from cwd to find the nearest ancestor directory that has both a
+ * workspace marker and a node_modules directory. Used for duplicate detection
+ * when the local cwd/node_modules doesn't exist (packages hoisted to root).
+ */
+function findNearestNodeModules(cwd: string): string | undefined {
+    let dir = path.dirname(cwd);
+    const root = path.parse(dir).root;
+    while (dir !== root) {
+        const candidate = path.join(dir, 'node_modules');
+        if (fs.existsSync(candidate) && hasWorkspaceMarker(dir)) {
+            return candidate;
+        }
+        dir = path.dirname(dir);
+    }
+    return undefined;
 }
 
 /**
