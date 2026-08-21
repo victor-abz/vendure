@@ -77,6 +77,17 @@ export async function runDependencyCheck(): Promise<CheckResult> {
     // This handles hoisted packages in monorepos and pnpm layouts correctly,
     // since it follows Node's actual module resolution algorithm.
     const vendureVersions = getInstalledVendureVersions(cwd);
+
+    // If no local node_modules AND no vendure packages resolved anywhere,
+    // dependencies are likely not installed at all.
+    if (!fs.existsSync(modulesDir) && vendureVersions.size === 0) {
+        return {
+            name: 'Dependencies',
+            status: 'fail',
+            message: 'node_modules not found. Run your package manager install first.',
+        };
+    }
+
     if (vendureVersions.size > 0) {
         const versions = new Set(vendureVersions.values());
         if (versions.size > 1) {

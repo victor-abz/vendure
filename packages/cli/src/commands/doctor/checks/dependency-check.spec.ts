@@ -26,13 +26,22 @@ describe('dependency-check', () => {
         fs.mkdirpSync(appDir);
         fs.writeJsonSync(path.join(appDir, 'package.json'), {
             name: 'api',
-            dependencies: { pg: '8.20.0' },
+            dependencies: { '@vendure/core': '3.7.2', pg: '8.20.0' },
         });
         // Config file that references postgres
         fs.writeFileSync(
             path.join(appDir, 'vendure-config.ts'),
             'export const config = { dbConnectionOptions: { type: \'postgres\' } };',
         );
+        // @vendure/core hoisted to workspace root (needed so the "not installed" early return doesn't fire)
+        const corePkgDir = path.join(tmpDir, 'node_modules', '@vendure', 'core');
+        fs.mkdirpSync(corePkgDir);
+        fs.writeJsonSync(path.join(corePkgDir, 'package.json'), {
+            name: '@vendure/core',
+            version: '3.7.2',
+            main: 'index.js',
+        });
+        fs.writeFileSync(path.join(corePkgDir, 'index.js'), '');
         // pg hoisted to workspace root
         fs.mkdirpSync(path.join(tmpDir, 'node_modules', 'pg'));
         fs.writeJsonSync(path.join(tmpDir, 'node_modules', 'pg', 'package.json'), {

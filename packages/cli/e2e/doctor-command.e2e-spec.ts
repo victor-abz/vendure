@@ -133,22 +133,20 @@ describe('CLI Doctor Command E2E', () => {
     });
 
     describe('dependency check', () => {
-        it('should handle missing node_modules gracefully', async () => {
+        it('should report when node_modules is missing', async () => {
             testProject = createTestProject('doctor-no-modules');
 
             // The default test project doesn't run npm install,
-            // so node_modules won't exist. The dependency check uses
-            // require.resolve which may or may not find packages from
-            // ancestor directories; either way it should not crash.
+            // so node_modules won't exist and no packages are resolvable
             const result = await testProject.runCliCommand(
                 ['doctor', '--check', 'dependencies', '--format', 'json'],
                 { expectError: true },
             );
 
+            expect(result.exitCode).toBe(1);
             const report = JSON.parse(result.stdout);
-            expect(report).toHaveProperty('overallStatus');
-            expect(report.checks).toHaveLength(1);
-            expect(report.checks[0].name).toBe('Dependencies');
+            expect(report.checks[0].status).toBe('fail');
+            expect(report.checks[0].message).toContain('node_modules not found');
         });
     });
 
