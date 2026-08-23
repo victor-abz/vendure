@@ -238,8 +238,11 @@ class ActiveQueue<Data extends JobData<Data> = object> {
     }
 
     private async onFailOrComplete(job: Job<Data>) {
-        await this.jobQueueStrategy.update(job);
-        this.removeJobFromActive(job);
+        try {
+            await this.jobQueueStrategy.update(job);
+        } finally {
+            this.removeJobFromActive(job);
+        }
     }
 
     private removeJobFromActive(job: Job<Data>) {
