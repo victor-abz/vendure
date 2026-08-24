@@ -15,10 +15,7 @@ import { createPathTransformer } from './path-transformer.js';
 import { discoverPlugins } from './plugin-discovery.js';
 import { findTsConfigPaths } from './tsconfig-utils.js';
 
-const defaultPathAdapter: Required<
-    Pick<PathAdapter, 'getCompiledConfigPath' | 'transformTsConfigPathMappings'>
-> = {
-    getCompiledConfigPath: ({ outputPath, configFileName }) => path.join(outputPath, configFileName),
+const defaultPathAdapter: Required<Pick<PathAdapter, 'transformTsConfigPathMappings'>> = {
     transformTsConfigPathMappings: ({ patterns }) => patterns,
 };
 
@@ -67,6 +64,38 @@ export function commonAncestorDir(dirs: string[], pathImpl: PathImpl = path): st
         }
     }
     return ancestor;
+}
+
+/**
+ * The source root used when no explicit `pathAdapter.sourceRoot` is set: the
+ * deepest directory containing the config and every local file it imports.
+ *
+ * For a config whose imports all sit alongside or below it, that is exactly its
+ * own directory, so the layout is unchanged. It only widens when a collected
+ * file lives above the config — otherwise the emit would produce a leading `..`
+ * and write that file outside outputPath, past the package.json written there
+ * to declare the output's module type.
+ *
+ * `pathImpl` is injectable so the multi-root failure can be exercised on any
+ * platform; production callers use the default.
+ */
+export function resolveDefaultSourceRoot(
+    configDir: string,
+    importedDirs: string[],
+    pathImpl: PathImpl = path,
+): string {
+    const resolvedRoot = commonAncestorDir([configDir, ...importedDirs], pathImpl);
+    if (!resolvedRoot) {
+        // Only reachable when the files span roots that share no ancestor,
+        // such as two Windows drives. Falling back to the config directory
+        // would guarantee an escape and report it as one, which says nothing
+        // about the actual cause.
+        throw new Error(
+            `The Vendure config and the files it imports span multiple filesystem roots, so no common source root exists. ` +
+                `Set pathAdapter.sourceRoot to the directory the compiled output should be relative to.`,
+        );
+    }
+    return resolvedRoot;
 }
 
 export interface PackageScannerConfig {
@@ -124,8 +153,6 @@ async function withCompileLock<T>(key: string, fn: () => Promise<T>): Promise<T>
 
 async function compileInternal(options: CompilerOptions): Promise<CompileResult> {
     const { vendureConfigPath, outputPath, pathAdapter, logger = noopLogger, pluginPackageScanner } = options;
-    const getCompiledConfigPath =
-        pathAdapter?.getCompiledConfigPath ?? defaultPathAdapter.getCompiledConfigPath;
     const transformTsConfigPathMappings =
         pathAdapter?.transformTsConfigPathMappings ?? defaultPathAdapter.transformTsConfigPathMappings;
 
@@ -134,12 +161,18 @@ async function compileInternal(options: CompilerOptions): Promise<CompileResult>
 
     // 1. Compile TypeScript files
     const compileStart = Date.now();
-    const { sourceRoot } = await compileTypeScript({
-        inputPath: vendureConfigPath,
+    const { sourceRoot, tsConfigInfo, sourceFiles } = await resolveSourceContext(
+        vendureConfigPath,
+        pathAdapter?.sourceRoot,
+        logger,
+    );
+    await compileTypeScript({
         outputPath,
+        sourceRoot,
+        tsConfigInfo,
+        sourceFiles,
         logger,
         module: options.module ?? 'commonjs',
-        sourceRoot: pathAdapter?.sourceRoot,
     });
     logger.info(`TypeScript compilation completed in ${Date.now() - compileStart}ms`);
 
@@ -233,32 +266,22 @@ async function writePackageJson(outputPath: string, module?: 'commonjs' | 'esm')
 }
 
 /**
- * Compiles TypeScript files to JavaScript using per-file transpilation.
+ * Resolves the source root the compiled output is laid out relative to, and
+ * returns everything `compileTypeScript` needs so each step runs exactly once.
  *
- * Instead of using `ts.createProgram()` (which resolves all imports including
- * node_modules type definitions and can OOM on projects with heavy dependencies),
- * this function:
- * 1. Walks the import tree via lightweight AST parsing to find all local source files
- * 2. Transpiles each file individually with `ts.transpileModule()` (no type resolution)
- *
- * This avoids loading massive `.d.ts` files from packages like `openai`, `ai`, etc.
- * See: https://github.com/vendurehq/vendure/issues/4559
+ * An explicit `pathAdapter.sourceRoot` wins unchanged. The default is computed
+ * by `resolveDefaultSourceRoot` from the config directory and every directory
+ * collected from its import tree.
  */
-async function compileTypeScript({
-    inputPath,
-    outputPath,
-    logger,
-    module,
-    sourceRoot: customSourceRoot,
-}: {
-    inputPath: string;
-    outputPath: string;
-    logger: Logger;
-    module: 'commonjs' | 'esm';
-    sourceRoot?: string;
-}): Promise<{ sourceRoot: string }> {
-    await fs.ensureDir(outputPath);
-
+async function resolveSourceContext(
+    inputPath: string,
+    customSourceRoot: string | undefined,
+    logger: Logger,
+): Promise<{
+    sourceRoot: string;
+    tsConfigInfo?: { baseUrl: string; paths: Record<string, string[]> };
+    sourceFiles: string[];
+}> {
     // Find tsconfig paths for resolving path aliases in the import tree
     const originalTsConfigInfo = await findTsConfigPaths(
         inputPath,
@@ -270,52 +293,73 @@ async function compileTypeScript({
     logger.debug(`tsConfig paths: ${JSON.stringify(originalTsConfigInfo?.paths, null, 2)}`);
     logger.debug(`tsConfig baseUrl: ${originalTsConfigInfo?.baseUrl ?? 'UNKNOWN'}`);
 
-    // 1. Collect all local source files by walking the import tree
+    // Collect all local source files by walking the import tree
     const collectStart = Date.now();
     const sourceFiles = await collectLocalSourceFiles(inputPath, originalTsConfigInfo);
     logger.debug(`Collected ${sourceFiles.length} source files in ${Date.now() - collectStart}ms`);
 
-    // 2. Build path transformer for ESM mode
+    let sourceRoot = customSourceRoot;
+    if (!sourceRoot) {
+        sourceRoot = resolveDefaultSourceRoot(
+            path.dirname(inputPath),
+            sourceFiles.map(file => path.dirname(file)),
+        );
+    }
+    if (path.relative(sourceRoot, path.dirname(inputPath)) !== '') {
+        // Widening keeps an upward import inside outputPath (#5086), but it
+        // also moves the config off the output root. Surface that layout
+        // change rather than letting users discover it in the emitted tree.
+        logger.warn(
+            `Source root widened to "${sourceRoot}" so every file the config imports stays inside outputPath.`,
+        );
+    } else {
+        logger.debug(`Resolved source root: ${sourceRoot}`);
+    }
+
+    return { sourceRoot, tsConfigInfo: originalTsConfigInfo, sourceFiles };
+}
+
+/**
+ * Compiles TypeScript files to JavaScript using per-file transpilation.
+ *
+ * Instead of using `ts.createProgram()` (which resolves all imports including
+ * node_modules type definitions and can OOM on projects with heavy dependencies),
+ * this function:
+ * 1. Transpiles each given source file individually with `ts.transpileModule()` (no type resolution)
+ * 2. Validates every emit lands inside outputPath before writing anything
+ *
+ * This avoids loading massive `.d.ts` files from packages like `openai`, `ai`, etc.
+ * See: https://github.com/vendurehq/vendure/issues/4559
+ */
+async function compileTypeScript({
+    outputPath,
+    logger,
+    module,
+    sourceRoot,
+    tsConfigInfo,
+    sourceFiles,
+}: {
+    outputPath: string;
+    logger: Logger;
+    module: 'commonjs' | 'esm';
+    sourceRoot: string;
+    tsConfigInfo?: { baseUrl: string; paths: Record<string, string[]> };
+    sourceFiles: string[];
+}): Promise<void> {
+    await fs.ensureDir(outputPath);
+
+    // Build path transformer for ESM mode
     // This is necessary because tsconfig-paths.register() only works for CommonJS require(),
     // not for ESM import(). We need to transform the import paths during transpilation.
     let pathTransformer: ts.TransformerFactory<ts.SourceFile> | undefined;
-    if (module === 'esm' && originalTsConfigInfo) {
+    if (module === 'esm' && tsConfigInfo) {
         logger.debug('Adding path transformer for ESM mode');
         pathTransformer = createPathTransformer({
-            baseUrl: originalTsConfigInfo.baseUrl,
-            paths: originalTsConfigInfo.paths,
+            baseUrl: tsConfigInfo.baseUrl,
+            paths: tsConfigInfo.paths,
         });
     }
 
-    // 3. Determine the source root for computing output directory structure.
-    // Compiled files preserve their directory structure relative to this root.
-    // In monorepos, set pathAdapter.sourceRoot to the workspace root so that
-    // e.g. apps/server/src/config.ts → {output}/apps/server/src/config.js.
-    //
-    // The default is the deepest directory containing the config and every file
-    // it imports. For a config whose imports all sit alongside or below it, that
-    // is exactly its own directory, so the layout is unchanged. It only widens
-    // when a collected file lives above the config — otherwise `path.relative`
-    // below would produce a leading `..` and emit that file outside outputPath,
-    // past the package.json written to mark the output's module type.
-    const configDir = path.dirname(inputPath);
-    let sourceRoot = customSourceRoot;
-    if (!sourceRoot) {
-        const resolvedRoot = commonAncestorDir([configDir, ...sourceFiles.map(file => path.dirname(file))]);
-        if (!resolvedRoot) {
-            // Only reachable when the files span roots that share no ancestor,
-            // such as two Windows drives. Falling back to the config directory
-            // would guarantee an escape and report it as one, which says nothing
-            // about the actual cause.
-            throw new Error(
-                `The Vendure config and the files it imports span multiple filesystem roots, so no common source root exists. ` +
-                    `Set pathAdapter.sourceRoot to the directory the compiled output should be relative to.`,
-            );
-        }
-        sourceRoot = resolvedRoot;
-    }
-
-    // 4. Transpile each file individually
     // Note: emitDecoratorMetadata with transpileModule emits `Object` for all
     // imported types since there is no type resolver. This is acceptable because
     // the compiled output is only used for config loading and plugin discovery,
@@ -331,6 +375,15 @@ async function compileTypeScript({
         ? { after: [pathTransformer] }
         : undefined;
 
+    // Transpile first and validate every destination before writing anything,
+    // so a rejected compile cannot leave partially written output behind.
+    interface PendingEmit {
+        sourceFile: string;
+        outputFilePath: string;
+        outputText: string;
+    }
+    const pendingEmits: PendingEmit[] = [];
+
     for (const filePath of sourceFiles) {
         const content = await fs.readFile(filePath, 'utf-8');
         const result = ts.transpileModule(content, {
@@ -343,30 +396,30 @@ async function compileTypeScript({
         const relativePath = path.relative(sourceRoot, filePath);
         const outputFilePath = path.join(outputPath, relativePath).replace(/\.tsx?$/, '.js');
 
-        // An emit outside outputPath escapes the package.json written there to
-        // declare the module type, and Node then resolves the file against the
-        // enclosing project instead. Fail here rather than at config load, where
-        // it surfaces as an unrelated "exports is not defined" error.
-        assertWithinOutputPath(outputFilePath, outputPath, filePath);
-
-        await fs.ensureDir(path.dirname(outputFilePath));
-        await fs.writeFile(outputFilePath, result.outputText);
+        pendingEmits.push({ sourceFile: filePath, outputFilePath, outputText: result.outputText });
     }
 
-    return { sourceRoot };
+    for (const emit of pendingEmits) {
+        assertWithinOutputPath(emit.outputFilePath, outputPath);
+    }
+
+    for (const emit of pendingEmits) {
+        await fs.ensureDir(path.dirname(emit.outputFilePath));
+        await fs.writeFile(emit.outputFilePath, emit.outputText);
+    }
 }
 
-function assertWithinOutputPath(outputFilePath: string, outputPath: string, sourceFile: string): void {
-    const relativeToOutput = path.relative(outputPath, outputFilePath);
-    // Compare against a path segment rather than a `..` prefix, so a file whose
-    // own name begins with dots is not mistaken for an escape.
-    const escapes =
-        relativeToOutput === '..' ||
-        relativeToOutput.startsWith(`..${path.sep}`) ||
-        path.isAbsolute(relativeToOutput);
-    if (escapes) {
+function assertWithinOutputPath(outputFilePath: string, outputPath: string): void {
+    // An emit outside outputPath escapes the package.json written there to
+    // declare the module type, and Node then resolves the file against the
+    // enclosing project instead. Fail here rather than at config load, where
+    // it surfaces as an unrelated "exports is not defined" error.
+    //
+    // `isWithin` compares via path.relative against a segment boundary, so a
+    // file whose own name begins with dots is not mistaken for an escape.
+    if (!isWithin(outputPath, outputFilePath)) {
         throw new Error(
-            `Compiling "${sourceFile}" would emit to "${outputFilePath}", which is outside the output directory "${outputPath}". ` +
+            `"${outputFilePath}" is outside the output directory "${outputPath}". ` +
                 `Set pathAdapter.sourceRoot to a directory containing every file the config imports.`,
         );
     }
