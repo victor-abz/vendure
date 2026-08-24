@@ -5,6 +5,7 @@ import {
     CurrencyCode,
     DeletionResponse,
     DeletionResult,
+    Permission,
     UpdateChannelInput,
     UpdateChannelResult,
 } from '@vendure/common/lib/generated-types';
@@ -19,6 +20,7 @@ import { ErrorResultUnion, isGraphQlErrorResult } from '../../common/error/error
 import {
     ChannelNotFoundError,
     EntityNotFoundError,
+    ForbiddenError,
     InternalServerError,
     UserInputError,
 } from '../../common/error/errors';
@@ -369,10 +371,17 @@ export class ChannelService {
         return newChannel;
     }
 
+    /**
+     * @description
+     * Updates a Channel. Throws a ForbiddenError if the active user does not hold the
+     * `UpdateChannel` permission on the target Channel. A SuperAdmin is exempt. A RequestContext
+     * with no session skips the check.
+     */
     async update(
         ctx: RequestContext,
         input: UpdateChannelInput,
     ): Promise<ErrorResultUnion<UpdateChannelResult, Channel>> {
+        this.assertHasPermissionOnChannel(ctx, input.id, Permission.UpdateChannel);
         const channel = await this.findOne(ctx, input.id);
         if (!channel) {
             throw new EntityNotFoundError('Channel', input.id);
@@ -465,7 +474,14 @@ export class ChannelService {
         return assertFound(this.findOne(ctx, channel.id));
     }
 
+    /**
+     * @description
+     * Deletes a Channel. Throws a ForbiddenError if the active user does not hold the
+     * `DeleteChannel` permission on the target Channel. A SuperAdmin is exempt. A RequestContext
+     * with no session skips the check.
+     */
     async delete(ctx: RequestContext, id: ID): Promise<DeletionResponse> {
+        this.assertHasPermissionOnChannel(ctx, id, Permission.DeleteChannel);
         const channel = await this.connection.getEntityOrThrow(ctx, Channel, id);
         if (channel.code === DEFAULT_CHANNEL_CODE)
             return {
@@ -484,6 +500,32 @@ export class ChannelService {
         return {
             result: DeletionResult.DELETED,
         };
+    }
+
+    /**
+     * A Channel may only be modified by a user who holds the required permission on that particular
+     * Channel, see GHSA-22x4-937q-5fr5.
+     *
+     * A SuperAdmin is exempt, because the SuperAdmin permission is global. We check it against the
+     * active Channel rather than the target Channel, since a Channel created programmatically via
+     * ChannelService.create() does not necessarily have the SuperAdmin Role assigned to it.
+     *
+     * A RequestContext with no session is skipped, because it belongs to an internal server-side
+     * call such as Populator.setChannelDefaults(), which calls update() with RequestContext.empty().
+     * With the default AuthGuard an unauthenticated API request cannot reach this point. Note that
+     * the skip fails open: a custom EntityAccessControlStrategy which admits sessionless requests
+     * would bypass this check.
+     */
+    private assertHasPermissionOnChannel(ctx: RequestContext, channelId: ID, permission: Permission) {
+        if (!ctx.session?.user) {
+            return;
+        }
+        if (ctx.userHasPermissions([Permission.SuperAdmin])) {
+            return;
+        }
+        if (!ctx.userHasPermissions([permission], channelId)) {
+            throw new ForbiddenError();
+        }
     }
 
     /**

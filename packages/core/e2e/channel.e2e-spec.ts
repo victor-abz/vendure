@@ -27,6 +27,7 @@ import {
     createAdministratorDocument,
     createChannelDocument,
     createRoleDocument,
+    deleteChannelDocument,
     getChannelsDocument,
     getCustomerListDocument,
     getProductListDocument,
@@ -421,15 +422,6 @@ describe('Channels', () => {
         );
     });
 });
-
-const deleteChannelDocument = graphql(`
-    mutation DeleteChannel($id: ID!) {
-        deleteChannel(id: $id) {
-            message
-            result
-        }
-    }
-`);
 
 const getChannelDocument = graphql(`
     query GetChannel($id: ID!) {
