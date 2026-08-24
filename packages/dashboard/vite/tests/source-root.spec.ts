@@ -227,6 +227,7 @@ describe('#5086 compiler source root', () => {
                     outputRoot: outRoot,
                     outputPath,
                     result,
+                    logger,
                 } = await compileProject(configPath, {
                     sourceRoot: root,
                 });
@@ -238,6 +239,9 @@ describe('#5086 compiler source root', () => {
                     'src/vendure-config.js',
                 ]);
                 expect(result.vendureConfig.apiOptions?.hostname).toBe('shop.example.com');
+                // An explicit root is the adapter author's deliberate layout
+                // choice, so it must not be reported as an implicit widening.
+                expect(logger.warns.filter(w => w.includes('widened'))).toEqual([]);
             } finally {
                 await removeDirs(outputRoot ?? '', root);
             }

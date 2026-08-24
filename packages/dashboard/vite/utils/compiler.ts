@@ -305,7 +305,11 @@ async function resolveSourceContext(
             sourceFiles.map(file => path.dirname(file)),
         );
     }
-    if (path.relative(sourceRoot, path.dirname(inputPath)) !== '') {
+    if (customSourceRoot) {
+        // An explicit root is the adapter author's deliberate layout choice,
+        // not a widening the compiler decided — report it without alarm.
+        logger.debug(`Using sourceRoot from pathAdapter: ${sourceRoot}`);
+    } else if (path.relative(sourceRoot, path.dirname(inputPath)) !== '') {
         // Widening keeps an upward import inside outputPath (#5086), but it
         // also moves the config off the output root. Surface that layout
         // change rather than letting users discover it in the emitted tree.
