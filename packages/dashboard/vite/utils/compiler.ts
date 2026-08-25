@@ -227,6 +227,7 @@ async function compileInternal(options: CompilerOptions): Promise<CompileResult>
 
     await registerTsConfigPaths({
         outputPath,
+        sourceRoot,
         configPath: vendureConfigPath,
         logger,
         phase: 'loading',
@@ -489,16 +490,26 @@ async function collectLocalSourceFiles(
 
 async function registerTsConfigPaths(options: {
     outputPath: string;
+    sourceRoot: string;
     configPath: string;
     logger: Logger;
     phase: 'compiling' | 'loading';
     transformTsConfigPathMappings: Required<PathAdapter>['transformTsConfigPathMappings'];
 }) {
-    const { outputPath, configPath, logger, phase, transformTsConfigPathMappings } = options;
+    const { outputPath, sourceRoot, configPath, logger, phase, transformTsConfigPathMappings } = options;
     const tsConfigInfo = await findTsConfigPaths(configPath, logger, phase, transformTsConfigPathMappings);
     if (tsConfigInfo) {
+        // Path patterns resolve relative to the tsconfig's own baseUrl, but the
+        // runtime registration points imports at the emit root. Re-express the
+        // baseUrl in emitted coordinates so a widened root (#5086) keeps
+        // aliases pointing at the same files: with `<root>/src/tsconfig.json`
+        // using baseUrl "." and the root widened to `<root>`, aliases must
+        // resolve against `<outputPath>/src`, not `<outputPath>`.
+        const emittedBaseUrl = isWithin(sourceRoot, tsConfigInfo.baseUrl)
+            ? path.join(outputPath, path.relative(sourceRoot, tsConfigInfo.baseUrl))
+            : outputPath;
         const params: RegisterParams = {
-            baseUrl: outputPath,
+            baseUrl: emittedBaseUrl,
             paths: tsConfigInfo.paths,
         };
         logger.debug(`Registering tsconfig paths: ${JSON.stringify(params, null, 2)}`);
