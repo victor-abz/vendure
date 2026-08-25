@@ -15,16 +15,25 @@ describe('PollingJobQueueStrategy', () => {
         } as any);
     });
 
-    afterEach(() => {
+    let activeProcess: ((job: Job) => Promise<any>) | undefined;
+
+    afterEach(async () => {
+        // strategy.destroy() does not touch the ActiveQueue timer, so without
+        // an explicit stop() the polling loop keeps running against a
+        // torn-down mock in the next test. Calling stop() here — rather than
+        // at the end of each test body — means it still runs even when the
+        // test fails on an assertion or a waitFor timeout above it.
+        if (activeProcess) {
+            await strategy.stop('test', activeProcess);
+            activeProcess = undefined;
+        }
         strategy.destroy();
     });
 
     it('releases the concurrency slot even when the settling update() throws', async () => {
         const originalUpdate = strategy.update.bind(strategy);
-        let updateCallCount = 0;
         vi.spyOn(strategy, 'update').mockImplementation(async (job: Job) => {
-            updateCallCount++;
-            if (updateCallCount === 2) {
+            if (job.id === 'job-1' && job.isSettled) {
                 // Simulate the settling update for the first job failing,
                 // e.g. a transient DB error.
                 throw new Error('simulated update failure');
@@ -40,6 +49,7 @@ describe('PollingJobQueueStrategy', () => {
             processed.push(job.id as string);
             return true;
         };
+        activeProcess = process;
         await strategy.start('test', process);
 
         await vi.waitFor(
@@ -48,7 +58,37 @@ describe('PollingJobQueueStrategy', () => {
             },
             { timeout: 2000, interval: 20 },
         );
+    });
 
-        await strategy.stop('test', process);
+    it('releases the concurrency slot even when the initial (pre-process) update() throws', async () => {
+        const originalUpdate = strategy.update.bind(strategy);
+        let updateCallCount = 0;
+        vi.spyOn(strategy, 'update').mockImplementation(async (job: Job) => {
+            updateCallCount++;
+            if (updateCallCount === 1) {
+                // Simulate the initial "mark as running" update for the first
+                // job failing before process() ever runs.
+                throw new Error('simulated update failure');
+            }
+            return originalUpdate(job);
+        });
+
+        await strategy.add(new Job({ id: 'job-1', queueName: 'test', data: {} }));
+        await strategy.add(new Job({ id: 'job-2', queueName: 'test', data: {} }));
+
+        const processed: string[] = [];
+        const process = async (job: Job) => {
+            processed.push(job.id as string);
+            return true;
+        };
+        activeProcess = process;
+        await strategy.start('test', process);
+
+        await vi.waitFor(
+            () => {
+                expect(processed).toEqual(['job-2']);
+            },
+            { timeout: 2000, interval: 20 },
+        );
     });
 });
