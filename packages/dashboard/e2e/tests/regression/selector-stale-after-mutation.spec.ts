@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { VendureAdminClient } from '../../utils/vendure-admin-client.js';
+
 // Regression: entity selector dropdowns must reflect newly created entities
 // without a full page reload.
 //
@@ -47,44 +49,48 @@ test.describe('Entity selectors refetch after mutation', () => {
         await page.goto('/tax-rates');
         await expect(page.getByTestId('page-heading')).toBeVisible({ timeout: 10_000 });
 
-        // Prime the ['zones'] cache and confirm the zone does not exist yet.
-        await openTaxRateZoneDropdown();
-        await expect(page.getByRole('option').first()).toBeVisible();
-        await expect(page.getByRole('option', { name: uniqueZoneName })).toHaveCount(0);
-        await page.keyboard.press('Escape');
+        try {
+            // Prime the ['zones'] cache and confirm the zone does not exist yet.
+            await openTaxRateZoneDropdown();
+            await expect(page.getByRole('option').first()).toBeVisible();
+            await expect(page.getByRole('option', { name: uniqueZoneName })).toHaveCount(0);
+            await page.keyboard.press('Escape');
 
-        // Create the new zone, navigating client-side via the sidebar.
-        await gotoViaSidebar('Zones');
-        await page.getByRole('button', { name: 'New Zone' }).click();
-        await expect(page).toHaveURL(/\/zones\/new$/);
-        const nameField = page.locator('[data-slot="field"]').filter({
-            has: page.locator('[data-slot="field-label"]').getByText('Name', { exact: true }),
-        });
-        await nameField.getByRole('textbox').fill(uniqueZoneName);
-        await page.getByRole('button', { name: 'Create', exact: true }).click();
-        await expect(page.locator('[data-sonner-toast]').filter({ hasText: /created/i })).toBeVisible({
-            timeout: 10_000,
-        });
+            // Create the new zone, navigating client-side via the sidebar.
+            await gotoViaSidebar('Zones');
+            await page.getByRole('button', { name: 'New Zone' }).click();
+            await expect(page).toHaveURL(/\/zones\/new$/);
+            const nameField = page.locator('[data-slot="field"]').filter({
+                has: page.locator('[data-slot="field-label"]').getByText('Name', { exact: true }),
+            });
+            await nameField.getByRole('textbox').fill(uniqueZoneName);
+            await page.getByRole('button', { name: 'Create', exact: true }).click();
+            await expect(page.locator('[data-sonner-toast]').filter({ hasText: /created/i })).toBeVisible({
+                timeout: 10_000,
+            });
 
-        // Re-open the Tax Rate page (client-side). ZoneSelector remounts and,
-        // with the staleTime opt-in removed, refetches ['zones'] — so the new
-        // zone appears without any reload.
-        await openTaxRateZoneDropdown();
-        await expect(page.getByRole('option', { name: uniqueZoneName })).toBeVisible({
-            timeout: 10_000,
-        });
-        await page.keyboard.press('Escape');
-
-        // Cleanup: delete the zone we created.
-        await gotoViaSidebar('Zones');
-        await expect(page.getByTestId('page-heading')).toBeVisible({ timeout: 10_000 });
-        const zoneRow = page.locator('table tbody tr').filter({ hasText: uniqueZoneName });
-        await zoneRow.getByRole('checkbox').click();
-        await page.getByRole('button', { name: /Actions/i }).click();
-        await page.locator('[role="menu"]').getByText('Delete', { exact: true }).click();
-        await page.locator('[role="alertdialog"]').getByRole('button', { name: 'Continue' }).click();
-        await expect(page.locator('table tbody tr').filter({ hasText: uniqueZoneName })).toHaveCount(0, {
-            timeout: 10_000,
-        });
+            // Re-open the Tax Rate page (client-side). ZoneSelector remounts and,
+            // with the staleTime opt-in removed, refetches ['zones'] — so the new
+            // zone appears without any reload.
+            await openTaxRateZoneDropdown();
+            await expect(page.getByRole('option', { name: uniqueZoneName })).toBeVisible({
+                timeout: 10_000,
+            });
+            await page.keyboard.press('Escape');
+        } finally {
+            // Always remove the created zone, even if an assertion above failed,
+            // so it does not leak into subsequent runs. Done via the Admin API so
+            // cleanup does not depend on the page being in a usable state.
+            const client = new VendureAdminClient(page);
+            await client.login();
+            const found = await client.gql(
+                `query ($options: ZoneListOptions) { zones(options: $options) { items { id } } }`,
+                { options: { filter: { name: { eq: uniqueZoneName } } } },
+            );
+            const zoneId = found?.zones?.items?.[0]?.id;
+            if (zoneId) {
+                await client.gql(`mutation ($id: ID!) { deleteZone(id: $id) { result } }`, { id: zoneId });
+            }
+        }
     });
 });
