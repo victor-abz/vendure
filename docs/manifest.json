@@ -266,7 +266,7 @@
           "title": "Security",
           "slug": "security",
           "file": "docs/guides/developer-guide/security/index.mdx",
-          "lastModified": "2026-02-12T16:47:03+01:00"
+          "lastModified": "2026-08-26T14:25:41+02:00"
         },
         {
           "title": "API Keys",
@@ -747,7 +747,7 @@
           "title": "Production Configuration",
           "slug": "production-configuration",
           "file": "docs/guides/deployment/production-configuration/index.mdx",
-          "lastModified": "2026-05-26T10:57:06+02:00"
+          "lastModified": "2026-08-26T14:25:41+02:00"
         },
         {
           "title": "Using Docker",
@@ -1366,7 +1366,7 @@
                   "title": "ApiOptions",
                   "slug": "api-options",
                   "file": "docs/reference/typescript-api/configuration/api-options.mdx",
-                  "lastModified": "2026-06-30T07:18:09+02:00"
+                  "lastModified": "2026-08-26T14:25:41+02:00"
                 },
                 {
                   "title": "CollectionFilter",
