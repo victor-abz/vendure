@@ -2,32 +2,30 @@
 title: "RequestContextService"
 generated: true
 ---
-## RequestContextService
-
-<GenerationInfo sourceFile="packages/core/src/service/helpers/request-context/request-context.service.ts" sourceLine="58" packageName="@vendure/core" />
+<GenerationInfo sourceFile="packages/core/src/service/helpers/request-context/request-context.service.ts" sourceLine="25" packageName="@vendure/core" />
 
 Creates new [RequestContext](/reference/typescript-api/request/request-context#requestcontext) instances.
 
 ```ts title="Signature"
 class RequestContextService {
-    createDefaultContext(config?: CreateDefaultRequestContextConfig) => Promise<RequestContext>;
-    create(config: CreateRequestContextConfig) => Promise<RequestContext>;
+    create(config: {
+        req?: Request;
+        apiType: ApiType;
+        channelOrToken?: Channel | string;
+        languageCode?: LanguageCode;
+        currencyCode?: CurrencyCode;
+        user?: User;
+        activeOrderId?: ID;
+    }) => Promise<RequestContext>;
     fromRequest(req: Request, info?: GraphQLResolveInfo, requiredPermissions?: Permission[], session?: CachedSession) => Promise<RequestContext>;
 }
 ```
 
 <div className="members-wrapper">
 
-### createDefaultContext
-
-<MemberInfo kind="method" type={`(config?: <a href='/reference/typescript-api/request/request-context-service#createdefaultrequestcontextconfig'>CreateDefaultRequestContextConfig</a>) => Promise<<a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>>`}  since="3.6.5"  />
-
-Creates a RequestContext based on the default Channel. This is useful when a service method
-must be called outside the normal request-response cycle and needs a context that has a valid
-`languageCode` derived from the default Channel's configuration.
 ### create
 
-<MemberInfo kind="method" type={`(config: <a href='/reference/typescript-api/request/request-context-service#createrequestcontextconfig'>CreateRequestContextConfig</a>) => Promise<<a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>>`}  since="1.5.0"  />
+<MemberInfo kind="method" type={`(config: {         req?: Request;         apiType: <a href='/reference/typescript-api/request/api-type#apitype'>ApiType</a>;         channelOrToken?: <a href='/reference/typescript-api/entities/channel#channel'>Channel</a> | string;         languageCode?: <a href='/reference/typescript-api/common/language-code#languagecode'>LanguageCode</a>;         currencyCode?: <a href='/reference/typescript-api/common/currency-code#currencycode'>CurrencyCode</a>;         user?: <a href='/reference/typescript-api/entities/user#user'>User</a>;         activeOrderId?: <a href='/reference/typescript-api/common/id#id'>ID</a>;     }) => Promise<<a href='/reference/typescript-api/request/request-context#requestcontext'>RequestContext</a>>`}  since="1.5.0"  />
 
 Creates a RequestContext based on the config provided. This can be useful when interacting
 with services outside the request-response cycle, for example in stand-alone scripts or in
@@ -39,76 +37,6 @@ worker jobs.
 Creates a new RequestContext based on an Express request object. This is used internally
 in the API layer by the AuthGuard, and creates the RequestContext which is then passed
 to all resolvers & controllers.
-
-
-</div>
-## CreateDefaultRequestContextConfig
-
-<GenerationInfo sourceFile="packages/core/src/service/helpers/request-context/request-context.service.ts" sourceLine="28" packageName="@vendure/core" since="3.6.5" />
-
-Optional overrides passed to `RequestContextService.createDefaultContext`. This is
-effectively an all-optional version of the [RequestContext](/reference/typescript-api/request/request-context#requestcontext) constructor parameters.
-
-```ts title="Signature"
-type CreateDefaultRequestContextConfig = Partial<ConstructorParameters<typeof RequestContext>[0]>
-```
-## CreateRequestContextConfig
-
-<GenerationInfo sourceFile="packages/core/src/service/helpers/request-context/request-context.service.ts" sourceLine="40" packageName="@vendure/core" since="1.5.0" />
-
-Configuration accepted by `RequestContextService.create`. Used to construct a
-RequestContext outside of the normal request-response cycle, e.g. in stand-alone scripts
-or worker jobs.
-
-```ts title="Signature"
-interface CreateRequestContextConfig {
-    req?: Request;
-    apiType: ApiType;
-    channelOrToken?: Channel | string;
-    languageCode?: LanguageCode;
-    currencyCode?: CurrencyCode;
-    user?: User;
-    activeOrderId?: ID;
-}
-```
-
-<div className="members-wrapper">
-
-### req
-
-<MemberInfo kind="property" type={`Request`}   />
-
-
-### apiType
-
-<MemberInfo kind="property" type={`<a href='/reference/typescript-api/request/api-type#apitype'>ApiType</a>`}   />
-
-
-### channelOrToken
-
-<MemberInfo kind="property" type={`<a href='/reference/typescript-api/entities/channel#channel'>Channel</a> | string`}   />
-
-
-### languageCode
-
-<MemberInfo kind="property" type={`<a href='/reference/typescript-api/common/language-code#languagecode'>LanguageCode</a>`}   />
-
-
-### currencyCode
-
-<MemberInfo kind="property" type={`<a href='/reference/typescript-api/common/currency-code#currencycode'>CurrencyCode</a>`}   />
-
-
-### user
-
-<MemberInfo kind="property" type={`<a href='/reference/typescript-api/entities/user#user'>User</a>`}   />
-
-
-### activeOrderId
-
-<MemberInfo kind="property" type={`<a href='/reference/typescript-api/common/id#id'>ID</a>`}   />
-
-
 
 
 </div>

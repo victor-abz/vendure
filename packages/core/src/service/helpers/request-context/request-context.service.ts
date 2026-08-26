@@ -18,42 +18,9 @@ import { getUserChannelsPermissions } from '../utils/get-user-channels-permissio
 
 /**
  * @description
- * Optional overrides passed to {@link RequestContextService.createDefaultContext}. This is
- * effectively an all-optional version of the {@link RequestContext} constructor parameters.
- *
- * @docsCategory request
- * @docsPage RequestContextService
- * @since 3.6.5
- */
-export type CreateDefaultRequestContextConfig = Partial<ConstructorParameters<typeof RequestContext>[0]>;
-
-/**
- * @description
- * Configuration accepted by {@link RequestContextService.create}. Used to construct a
- * RequestContext outside of the normal request-response cycle, e.g. in stand-alone scripts
- * or worker jobs.
- *
- * @docsCategory request
- * @docsPage RequestContextService
- * @since 1.5.0
- */
-export interface CreateRequestContextConfig {
-    req?: Request;
-    apiType: ApiType;
-    channelOrToken?: Channel | string;
-    languageCode?: LanguageCode;
-    currencyCode?: CurrencyCode;
-    user?: User;
-    activeOrderId?: ID;
-}
-
-/**
- * @description
  * Creates new {@link RequestContext} instances.
  *
  * @docsCategory request
- * @docsPage RequestContextService
- * @docsWeight 0
  */
 @Injectable()
 export class RequestContextService {
@@ -65,35 +32,21 @@ export class RequestContextService {
 
     /**
      * @description
-     * Creates a RequestContext based on the default Channel. This is useful when a service method
-     * must be called outside the normal request-response cycle and needs a context that has a valid
-     * `languageCode` derived from the default Channel's configuration.
-     * @param config optional manual configuration overwriting the default values
-     *
-     * @since 3.6.5
-     */
-    async createDefaultContext(config?: CreateDefaultRequestContextConfig): Promise<RequestContext> {
-        const channel = await this.channelService.getDefaultChannel();
-        return new RequestContext({
-            apiType: 'admin',
-            channel,
-            isAuthorized: true,
-            authorizedAsOwnerOnly: false,
-            languageCode: channel.defaultLanguageCode ?? this.configService.defaultLanguageCode,
-            currencyCode: channel.defaultCurrencyCode,
-            ...config,
-        });
-    }
-
-    /**
-     * @description
      * Creates a RequestContext based on the config provided. This can be useful when interacting
      * with services outside the request-response cycle, for example in stand-alone scripts or in
      * worker jobs.
      *
      * @since 1.5.0
      */
-    async create(config: CreateRequestContextConfig): Promise<RequestContext> {
+    async create(config: {
+        req?: Request;
+        apiType: ApiType;
+        channelOrToken?: Channel | string;
+        languageCode?: LanguageCode;
+        currencyCode?: CurrencyCode;
+        user?: User;
+        activeOrderId?: ID;
+    }): Promise<RequestContext> {
         const { req, apiType, channelOrToken, languageCode, currencyCode, user, activeOrderId } = config;
         let channel: Channel;
         if (channelOrToken instanceof Channel) {

@@ -507,7 +507,7 @@ export class AssetService {
                     ? maybeFilePathOrCtx
                     : maybeCtx instanceof RequestContext
                       ? maybeCtx
-                      : await this.requestContextService.createDefaultContext();
+                      : await this.requestContextService.create({ apiType: 'admin' });
             const result = await this.createAssetInternal(ctx, stream, filename, mimetype);
             if (isGraphQlErrorResult(result)) {
                 return result;
@@ -630,7 +630,7 @@ export class AssetService {
             // Create default translation using context language
             assetTranslations = [
                 new AssetTranslation({
-                    languageCode: ctx.languageCode,
+                    languageCode: ctx.languageCode ?? this.configService.defaultLanguageCode,
                     name: defaultName,
                     base: savedAsset,
                 }),
