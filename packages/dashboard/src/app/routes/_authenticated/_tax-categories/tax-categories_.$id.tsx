@@ -16,7 +16,6 @@ import { ActionBarItem } from '@/vdb/framework/layout-engine/action-bar-item-wra
 import { detailPageRouteLoader } from '@/vdb/framework/page/detail-page-route-loader.js';
 import { useDetailPage } from '@/vdb/framework/page/use-detail-page.js';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
 import {
@@ -47,7 +46,6 @@ function TaxCategoryDetailPage() {
     const navigate = useNavigate();
     const creatingNewEntity = params.id === NEW_ENTITY_PATH;
     const { t } = useLingui();
-    const queryClient = useQueryClient();
 
     const { form, submitHandler, entity, isPending, resetForm } = useDetailPage({
         pageId,
@@ -69,7 +67,6 @@ function TaxCategoryDetailPage() {
                     ? t`Successfully created tax category`
                     : t`Successfully updated tax category`,
             );
-            await queryClient.invalidateQueries({ queryKey: ['taxCategories'] });
             form.reset(form.getValues());
             if (creatingNewEntity) {
                 await navigate({ to: `../$id`, params: { id: data.id } });
