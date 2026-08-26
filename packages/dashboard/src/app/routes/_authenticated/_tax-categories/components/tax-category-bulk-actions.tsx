@@ -8,6 +8,7 @@ export const DeleteTaxCategoriesBulkAction: BulkActionComponent<any> = ({ select
             mutationDocument={deleteTaxCategoriesDocument}
             entityName="tax categories"
             requiredPermissions={['DeleteTaxCategory']}
+            invalidateQueries={['taxCategories']}
             selection={selection}
             table={table}
         />
