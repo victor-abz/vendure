@@ -49,6 +49,7 @@ import { ChangeChannelEvent } from '../../event-bus/events/change-channel-event'
 import { ChannelEvent } from '../../event-bus/events/channel-event';
 import { CustomFieldRelationService } from '../helpers/custom-field-relation/custom-field-relation.service';
 import { ListQueryBuilder } from '../helpers/list-query-builder/list-query-builder';
+import { isChannelAwareMetadata } from '../helpers/utils/is-channel-aware-metadata';
 import { patchEntity } from '../helpers/utils/patch-entity';
 
 import { GlobalSettingsService } from './global-settings.service';
@@ -541,9 +542,7 @@ export class ChannelService {
      */
     public isChannelAware(entity: VendureEntity): entity is VendureEntity & ChannelAware {
         const entityType = Object.getPrototypeOf(entity).constructor;
-        return !!this.connection.rawConnection
-            .getMetadata(entityType)
-            .relations.find(r => r.type === Channel && r.propertyName === 'channels');
+        return isChannelAwareMetadata(this.connection.rawConnection.getMetadata(entityType));
     }
 
     /**
