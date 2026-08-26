@@ -39,7 +39,7 @@ import {
 } from '@vendure/common/lib/generated-types';
 import { omit } from '@vendure/common/lib/omit';
 import { ID, PaginatedList } from '@vendure/common/lib/shared-types';
-import { summate } from '@vendure/common/lib/shared-utils';
+import { getGraphQlInputName, summate } from '@vendure/common/lib/shared-utils';
 import { EntityManager, In, IsNull, LockNotSupportedOnGivenDriverError } from 'typeorm';
 import { FindOptionsUtils } from 'typeorm/find-options/FindOptionsUtils';
 
@@ -125,6 +125,7 @@ import { isForeignKeyViolationError } from '../helpers/utils/db-errors';
 import { getOrdersFromLines, totalCoveredByPayments } from '../helpers/utils/order-utils';
 import { patchEntity } from '../helpers/utils/patch-entity';
 
+import { RelationCustomFieldConfig } from '../../config';
 import { ChannelService } from './channel.service';
 import { CountryService } from './country.service';
 import { CustomerService } from './customer.service';
@@ -279,6 +280,11 @@ export class OrderService implements OnApplicationBootstrap {
         // Main order relations - loaded with 'query' strategy for performance
         const orderRelations = effectiveRelations.filter(r => !r.startsWith('lines'));
 
+        // Lines relations - loaded with 'join' strategy to enable multi-column sorting
+        const lineRelations = effectiveRelations
+            .filter(r => r.startsWith('lines.'))
+            .map(r => r.replace('lines.', ''));
+
         qb.setFindOptions({
             relations: orderRelations,
             relationLoadStrategy: 'query',
@@ -296,19 +302,6 @@ export class OrderService implements OnApplicationBootstrap {
             const hasLinesRelations = effectiveRelations.some(r => r.startsWith('lines'));
             if (hasLinesRelations) {
                 const linesQb = this.connection.getRepository(ctx, OrderLine).createQueryBuilder('line');
-                const metadata = linesQb.connection.getMetadata(OrderLine);
-                const customFieldRelations = metadata.relations
-                    .filter(relation => relation.propertyPath.startsWith('customFields.'))
-                    .map(relation => relation.propertyPath)
-                
-                // Lines relations - loaded with 'join' strategy to enable multi-column sorting
-                const lineRelations = [
-                    ...effectiveRelations
-                    .filter(r => r.startsWith('lines.'))
-                    .map(r => r.replace('lines.', '')),
-                    ...customFieldRelations,
-                ]
-
                 linesQb
                     .setFindOptions({
                         relations: lineRelations,
@@ -2172,6 +2165,43 @@ export class OrderService implements OnApplicationBootstrap {
                 const freshGuestOrder = guestOrder ? await this.findOne(txCtx, guestOrder.id) : undefined;
                 if (!freshGuestOrder && guestOrder) {
                     return existingOrder;
+                }
+                const relationFields = this.configService.customFields.OrderLine.filter(
+                    (config): config is RelationCustomFieldConfig => config.type === 'relation',
+                );
+
+                if (freshGuestOrder && relationFields.length > 0) {
+                    // Hydrate relation custom fields before merging because OrderLine relations are
+                    // not loaded by default. The merge strategy needs their IDs to correctly compare
+                    // custom fields and avoid merging lines with different relation values.
+                    const linesWithRelations = await this.connection.getRepository(txCtx, OrderLine).find({
+                        where: { id: In(freshGuestOrder.lines.map(l => l.id)) },
+                        relations: relationFields.map(config => `customFields.${config.name}`),
+                    });
+                    const relationCustomFields = new Map<ID, Record<string, ID | ID[]>>();
+                    for (const line of linesWithRelations) {
+                        const customFields: Record<string, ID | ID[]> = {};
+                        for (const config of relationFields) {
+                            const relation = (line.customFields as Record<string, any>)?.[config.name];
+                            if (config.list) {
+                                if (Array.isArray(relation) && relation.length) {
+                                    customFields[getGraphQlInputName(config)] = relation.map(r => r.id);
+                                }
+                            } else if (relation) {
+                                customFields[getGraphQlInputName(config)] = relation.id;
+                            }
+                        }
+                        if (Object.keys(customFields).length) {
+                            relationCustomFields.set(line.id, customFields);
+                        }
+                    }
+                    for (const line of freshGuestOrder.lines) {
+                        const relationIds = relationCustomFields.get(line.id);
+
+                        if (relationIds) {
+                            Object.assign(line.customFields, relationIds);
+                        }
+                    }
                 }
 
                 const mergeResult = await this.orderMerger.merge(txCtx, freshGuestOrder, existingOrder);
