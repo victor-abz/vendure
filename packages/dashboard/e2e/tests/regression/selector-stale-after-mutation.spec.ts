@@ -22,6 +22,17 @@ test.describe('Entity selectors refetch after mutation', () => {
     test.describe.configure({ mode: 'serial' });
 
     const uniqueZoneName = `E2E Selector Zone ${Date.now()}`;
+    let zoneId = '';
+
+    // Runs even if the test body throws, so the created zone never leaks into
+    // subsequent runs (the e2e seed data is cached).
+    test.afterEach(async ({ page }) => {
+        if (!zoneId) return;
+        const client = new VendureAdminClient(page);
+        await client.login();
+        await client.gql(`mutation ($id: ID!) { deleteZone(id: $id) { result } }`, { id: zoneId });
+        zoneId = '';
+    });
 
     // #5177, #5182 — a newly created zone must appear in the Tax Rate page's
     // zone selector without a page reload (the class of selector-staleness bug).
@@ -49,48 +60,36 @@ test.describe('Entity selectors refetch after mutation', () => {
         await page.goto('/tax-rates');
         await expect(page.getByTestId('page-heading')).toBeVisible({ timeout: 10_000 });
 
-        try {
-            // Prime the ['zones'] cache and confirm the zone does not exist yet.
-            await openTaxRateZoneDropdown();
-            await expect(page.getByRole('option').first()).toBeVisible();
-            await expect(page.getByRole('option', { name: uniqueZoneName })).toHaveCount(0);
-            await page.keyboard.press('Escape');
+        // Prime the ['zones'] cache and confirm the zone does not exist yet.
+        await openTaxRateZoneDropdown();
+        await expect(page.getByRole('option').first()).toBeVisible();
+        await expect(page.getByRole('option', { name: uniqueZoneName })).toHaveCount(0);
+        await page.keyboard.press('Escape');
 
-            // Create the new zone, navigating client-side via the sidebar.
-            await gotoViaSidebar('Zones');
-            await page.getByRole('button', { name: 'New Zone' }).click();
-            await expect(page).toHaveURL(/\/zones\/new$/);
-            const nameField = page.locator('[data-slot="field"]').filter({
-                has: page.locator('[data-slot="field-label"]').getByText('Name', { exact: true }),
-            });
-            await nameField.getByRole('textbox').fill(uniqueZoneName);
-            await page.getByRole('button', { name: 'Create', exact: true }).click();
-            await expect(page.locator('[data-sonner-toast]').filter({ hasText: /created/i })).toBeVisible({
-                timeout: 10_000,
-            });
+        // Create the new zone, navigating client-side via the sidebar.
+        await gotoViaSidebar('Zones');
+        await page.getByRole('button', { name: 'New Zone' }).click();
+        await expect(page).toHaveURL(/\/zones\/new$/);
+        const nameField = page.locator('[data-slot="field"]').filter({
+            has: page.locator('[data-slot="field-label"]').getByText('Name', { exact: true }),
+        });
+        await nameField.getByRole('textbox').fill(uniqueZoneName);
+        await page.getByRole('button', { name: 'Create', exact: true }).click();
+        await expect(page.locator('[data-sonner-toast]').filter({ hasText: /created/i })).toBeVisible({
+            timeout: 10_000,
+        });
 
-            // Re-open the Tax Rate page (client-side). ZoneSelector remounts and,
-            // with the staleTime opt-in removed, refetches ['zones'] — so the new
-            // zone appears without any reload.
-            await openTaxRateZoneDropdown();
-            await expect(page.getByRole('option', { name: uniqueZoneName })).toBeVisible({
-                timeout: 10_000,
-            });
-            await page.keyboard.press('Escape');
-        } finally {
-            // Always remove the created zone, even if an assertion above failed,
-            // so it does not leak into subsequent runs. Done via the Admin API so
-            // cleanup does not depend on the page being in a usable state.
-            const client = new VendureAdminClient(page);
-            await client.login();
-            const found = await client.gql(
-                `query ($options: ZoneListOptions) { zones(options: $options) { items { id } } }`,
-                { options: { filter: { name: { eq: uniqueZoneName } } } },
-            );
-            const zoneId = found?.zones?.items?.[0]?.id;
-            if (zoneId) {
-                await client.gql(`mutation ($id: ID!) { deleteZone(id: $id) { result } }`, { id: zoneId });
-            }
-        }
+        // Capture the created zone id from the URL for cleanup in afterEach.
+        await expect(page).toHaveURL(/\/zones\/(?!new$)[^/]+$/);
+        zoneId = new URL(page.url()).pathname.split('/').pop() ?? '';
+
+        // Re-open the Tax Rate page (client-side). ZoneSelector remounts and,
+        // with the staleTime opt-in removed, refetches ['zones'] — so the new
+        // zone appears without any reload.
+        await openTaxRateZoneDropdown();
+        await expect(page.getByRole('option', { name: uniqueZoneName })).toBeVisible({
+            timeout: 10_000,
+        });
+        await page.keyboard.press('Escape');
     });
 });
