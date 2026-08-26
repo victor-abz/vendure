@@ -91,4 +91,45 @@ describe('PollingJobQueueStrategy', () => {
             { timeout: 2000, interval: 20 },
         );
     });
+
+    it('keeps an in-flight initial update visible to shutdown, so stop() waits for it', async () => {
+        let releaseUpdate: (() => void) | undefined;
+        const updateGate = new Promise<void>(resolve => {
+            releaseUpdate = resolve;
+        });
+        const originalUpdate = strategy.update.bind(strategy);
+        let sawInitialUpdate = false;
+        vi.spyOn(strategy, 'update').mockImplementation(async (job: Job) => {
+            if (job.id === 'job-1' && !job.isSettled && !sawInitialUpdate) {
+                // Simulate a slow initial "mark as running" update, e.g. a slow
+                // DB write, so there is a real window between next() resolving
+                // and the job being marked active.
+                sawInitialUpdate = true;
+                await updateGate;
+            }
+            return originalUpdate(job);
+        });
+
+        await strategy.add(new Job({ id: 'job-1', queueName: 'test', data: {} }));
+
+        const processed: string[] = [];
+        const process = async (job: Job) => {
+            processed.push(job.id as string);
+            return true;
+        };
+        activeProcess = process;
+        await strategy.start('test', process);
+
+        await vi.waitFor(() => expect(sawInitialUpdate).toBe(true), { timeout: 2000, interval: 10 });
+
+        // If the job isn't tracked as active yet, stop() would see zero active
+        // jobs and resolve immediately, letting shutdown continue before the
+        // job is ever processed.
+        const stopPromise = strategy.stop('test', process);
+        activeProcess = undefined;
+        releaseUpdate?.();
+        await stopPromise;
+
+        expect(processed).toEqual(['job-1']);
+    });
 });

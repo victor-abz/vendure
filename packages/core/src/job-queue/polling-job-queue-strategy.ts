@@ -120,13 +120,17 @@ class ActiveQueue<Data extends JobData<Data> = object> {
                 for (let i = runningJobsCount; i < this.concurrency; i++) {
                     const nextJob = await this.jobQueueStrategy.next(this.queueName);
                     if (nextJob) {
-                        // Only track the job as active once this initial status update
-                        // succeeds. Pushing first and updating after would leave the
-                        // concurrency slot permanently wedged if update() throws, since
-                        // process() never runs and so the .finally() that would normally
-                        // remove it from activeJobs never runs either.
-                        await this.jobQueueStrategy.update(nextJob);
+                        // Track the job as active before awaiting the initial status update,
+                        // so it stays visible to awaitRunningJobsOrTimeout() during a shutdown
+                        // that races this update. If the update throws, remove it again so the
+                        // concurrency slot isn't wedged.
                         this.activeJobs.push(nextJob);
+                        try {
+                            await this.jobQueueStrategy.update(nextJob);
+                        } catch (err) {
+                            this.removeJobFromActive(nextJob);
+                            throw err;
+                        }
                         const onProgress = (job: Job) => this.jobQueueStrategy.update(job);
                         nextJob.on('progress', onProgress);
                         const cancellationSub = interval(this.pollInterval * 5)
