@@ -103,7 +103,7 @@ function CollectionListPage() {
     }, [navigate]);
 
     // NOTE: queryFn must be pure (no setState side effects) because TanStack Query
-    // skips queryFn entirely when data is served from cache (staleTime: 5min). If we
+    // skips queryFn entirely when data is served from cache. If we
     // called setAccumulatedChildren inside queryFn, a re-mounted component would get
     // cache hits but accumulatedChildren would never be populated, so children wouldn't
     // render. Instead we sync via useEffect below, which fires for both cache hits and
@@ -130,7 +130,6 @@ function CollectionListPage() {
                             totalItems: result.collections.totalItems,
                         };
                     },
-                    staleTime: 1000 * 60 * 5,
                 } satisfies FetchQueryOptions;
             }),
     });
@@ -174,7 +173,6 @@ function CollectionListPage() {
                             totalItems: result.collections.totalItems,
                         };
                     },
-                    staleTime: 1000 * 60 * 5,
                 } satisfies FetchQueryOptions;
             }),
     });

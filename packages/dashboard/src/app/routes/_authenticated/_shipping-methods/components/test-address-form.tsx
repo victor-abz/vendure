@@ -78,7 +78,6 @@ export function TestAddressForm({ onAddressChange }: Readonly<TestAddressFormPro
     const { data: countriesData, isLoading: isLoadingCountries } = useQuery({
         queryKey: ['availableCountries'],
         queryFn: () => api.query(getAvailableCountriesDocument),
-        staleTime: 1000 * 60 * 60 * 24, // 24 hours
     });
 
     const previousValuesRef = useRef<string>('');

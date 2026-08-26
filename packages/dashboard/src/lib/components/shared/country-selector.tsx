@@ -58,7 +58,6 @@ export function CountrySelector(props: CountrySelectorProps) {
                     filterOperator: searchTerm ? 'OR' : undefined,
                 },
             }),
-        staleTime: 1000 * 60 * 60, // 1 hour
     });
 
     const handleSearch = (value: string) => {
