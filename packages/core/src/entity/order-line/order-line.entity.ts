@@ -1,7 +1,7 @@
 import { Adjustment, AdjustmentType, Discount, TaxLine } from '@vendure/common/lib/generated-types';
 import { DeepPartial, ID } from '@vendure/common/lib/shared-types';
 import { summate } from '@vendure/common/lib/shared-utils';
-import { Column, Entity, Index, ManyToOne, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, Index, ManyToOne, OneToMany } from 'typeorm';
 
 import { Calculated } from '../../common/calculated-decorator';
 import { roundMoney } from '../../common/round-money';
@@ -13,8 +13,8 @@ import { Channel } from '../channel/channel.entity';
 import { CustomOrderLineFields } from '../custom-entity-fields';
 import { EntityId } from '../entity-id.decorator';
 import { Money } from '../money.decorator';
-import { Order } from '../order/order.entity';
 import { OrderLineReference } from '../order-line-reference/order-line-reference.entity';
+import { Order } from '../order/order.entity';
 import { ProductVariant } from '../product-variant/product-variant.entity';
 import { ShippingLine } from '../shipping-line/shipping-line.entity';
 import { Allocation } from '../stock-movement/allocation.entity';
@@ -368,6 +368,26 @@ export class OrderLine extends VendureEntity implements HasCustomFields {
     }
 
     /**
+     * @description
+     * Rescales this line's `PROMOTION`-type adjustments from `this.quantity` to `newQuantity`,
+     * mutating `this.adjustments` in place. Used where a quantity reduction bypasses
+     * `OrderCalculator` recalculation (see `OrderModifier.cancelOrderByOrderLines()`), to keep
+     * those adjustments matching the "already scaled to `this.quantity`" basis that
+     * `quantityBasisFor()` assumes for `PROMOTION` (see #5127). Does not touch `this.quantity`
+     * itself - callers are expected to assign that separately, after rescaling.
+     */
+    rescaleAdjustmentsForQuantity(newQuantity: number) {
+        // Guards a lineInput requesting a no-op (0-quantity) cancellation on a line that is
+        // already fully cancelled (quantity 0), which would otherwise divide 0 / 0.
+        const scaleFactor = this.quantity > 0 ? newQuantity / this.quantity : 0;
+        this.adjustments = (this.adjustments ?? []).map(adjustment =>
+            adjustment.type === AdjustmentType.PROMOTION
+                ? { ...adjustment, amount: roundMoney(adjustment.amount * scaleFactor) }
+                : adjustment,
+        );
+    }
+
+    /**
      * Clears Adjustments from all OrderItems of the given type. If no type
      * is specified, then all adjustments are removed.
      */
@@ -457,30 +477,22 @@ export class OrderLine extends VendureEntity implements HasCustomFields {
 
     /**
      * @description
-     * Returns the quantity that `adjustment.amount` (a line total) should be divided by to get a
-     * correct per-unit share, given how that adjustment's total is (re-)computed:
-     *
-     * - `PROMOTION` adjustments (item- and line-level `PromotionAction`s) are always freshly
-     *   computed against `this.quantity` on every recalculation -
-     *   `OrderCalculator.applyOrderItemPromotions()` clears and rebuilds them via `addAdjustment()`
-     *   with the current quantity every time - so `this.quantity` is the correct, already-matching
-     *   basis. A quantity reduction that bypasses recalculation entirely (a partial cancellation via
-     *   `OrderModifier.cancelOrderByOrderLines()`) explicitly rescales these adjustments to the new
-     *   quantity for the same reason (see #5127).
-     * - `DISTRIBUTED_ORDER_PROMOTION` adjustments are a per-line *share* of an order-level
-     *   promotion, redistributed by weight across lines on every recalculation - reducing this
-     *   line's quantity does not proportionally shrink its freshly-computed share (a single
-     *   remaining line can still be assigned the *entire* order-level discount). Dividing by the
-     *   quantity as it stood when the order was placed keeps this line's per-unit share of the
-     *   discount fixed, rather than letting the surviving units of a partially cancelled/refunded
-     *   line absorb a share meant for units that no longer exist. `OTHER`-type adjustments use the
-     *   same conservative basis, since core never adds this type to an `OrderLine` and a plugin that
-     *   does so has no documented scaling contract to assume otherwise.
+     * The quantity that `adjustment.amount` (a line total) should be divided by to get a correct
+     * per-unit share. `PROMOTION` adjustments are always freshly recomputed against the current
+     * `this.quantity`, so that is their basis. Other types (`DISTRIBUTED_ORDER_PROMOTION`, `OTHER`)
+     * are a per-line share of an order-level amount that is redistributed by weight on every
+     * recalculation, so their basis is pinned to `orderPlacedQuantity` - otherwise a partially
+     * cancelled/refunded line's surviving units could absorb a bigger share than they're due. See
+     * #5127 for the full reasoning.
      */
     private quantityBasisFor(adjustment: Adjustment): number {
-        if (adjustment.type === AdjustmentType.PROMOTION) {
-            return this.quantity;
+        switch (adjustment.type) {
+            case AdjustmentType.PROMOTION:
+                return this.quantity;
+            case AdjustmentType.DISTRIBUTED_ORDER_PROMOTION:
+            case AdjustmentType.OTHER:
+            default:
+                return Math.max(this.orderPlacedQuantity, this.quantity);
         }
-        return Math.max(this.orderPlacedQuantity, this.quantity);
     }
 }

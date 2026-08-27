@@ -21,8 +21,8 @@ import {
     TaxLineCalculationStrategy,
 } from '../../../config/tax/tax-line-calculation-strategy';
 import { Promotion } from '../../../entity';
-import { Order } from '../../../entity/order/order.entity';
 import { OrderLine } from '../../../entity/order-line/order-line.entity';
+import { Order } from '../../../entity/order/order.entity';
 import { ShippingLine } from '../../../entity/shipping-line/shipping-line.entity';
 import { Surcharge } from '../../../entity/surcharge/surcharge.entity';
 import { EventBus } from '../../../event-bus/event-bus';
@@ -481,26 +481,22 @@ describe('OrderCalculator', () => {
 
                     // simulate order placement: the line's orderPlacedQuantity is fixed at 20
                     order.lines[0].orderPlacedQuantity = 20;
-                    expect(order.lines[0].proratedLinePriceWithTax).toBe(
-                        Math.round(order.lines[0].linePriceWithTax * 0.6),
-                    );
+                    // listPrice 2975 * 20 = 59500, 60% of that (i.e. after a 40% discount) is 35700
+                    expect(order.lines[0].proratedLinePriceWithTax).toBe(35700);
 
                     // Simulate `modifyOrder` reducing the quantity from 20 to 2 - the same
                     // `OrderCalculator.applyPriceAdjustments()` call that a real `modifyOrder`
                     // mutation makes, which clears and freshly recomputes `adjustments` against the
-                    // *new* (already-reduced) quantity.
+                    // *new* (already-reduced) quantity. See #5127 for why, pre-fix, this silently
+                    // rescaled the discount down to quantity / orderPlacedQuantity (2 / 20 = 10%) of
+                    // its correct value.
                     order.lines[0].quantity = 2;
                     await orderCalculator.applyPriceAdjustments(ctx, order, [promotion], [order.lines[0]]);
 
                     expect(order.lines[0].quantity).toBe(2);
                     expect(order.lines[0].orderPlacedQuantity).toBe(20);
-                    // Before the fix, dividing the already-current-quantity-scaled adjustment total by
-                    // `Math.max(orderPlacedQuantity, quantity)` a second time silently rescaled this
-                    // down to a ~4% discount (quantity / orderPlacedQuantity = 2 / 20 = 10% of the
-                    // correct 40%).
-                    expect(order.lines[0].proratedLinePriceWithTax).toBe(
-                        Math.round(order.lines[0].linePriceWithTax * 0.6),
-                    );
+                    // listPrice 2975 * 2 = 5950, 60% of that is 3570
+                    expect(order.lines[0].proratedLinePriceWithTax).toBe(3570);
                     assertOrderTotalsAddUp(order);
                 });
             });

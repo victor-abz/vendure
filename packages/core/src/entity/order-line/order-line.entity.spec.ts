@@ -11,7 +11,7 @@ describe('OrderLine entity', () => {
     });
 
     describe('discounts', () => {
-        const promotionAdjustment: Adjustment = {
+        const distributedOrderPromotionAdjustment: Adjustment = {
             adjustmentSource: 'PROMOTION:1',
             type: AdjustmentType.DISTRIBUTED_ORDER_PROMOTION,
             description: 'half price',
@@ -19,14 +19,26 @@ describe('OrderLine entity', () => {
             data: {},
         };
 
-        function createOrderLine(quantity: number, orderPlacedQuantity: number): OrderLine {
+        const itemPromotionAdjustment: Adjustment = {
+            adjustmentSource: 'PROMOTION:2',
+            type: AdjustmentType.PROMOTION,
+            description: '40% off',
+            amount: -400,
+            data: {},
+        };
+
+        function createOrderLine(
+            quantity: number,
+            orderPlacedQuantity: number,
+            adjustments: Adjustment[] = [distributedOrderPromotionAdjustment],
+        ): OrderLine {
             return new OrderLine({
                 quantity,
                 orderPlacedQuantity,
                 listPrice: 1000,
                 listPriceIncludesTax: true,
                 taxLines: [{ description: 'vat', taxRate: 20 }],
-                adjustments: [promotionAdjustment],
+                adjustments,
             });
         }
 
@@ -43,6 +55,33 @@ describe('OrderLine entity', () => {
 
             expect(line.discounts[0].amount).toBe(0);
             expect(line.discounts[0].amountWithTax).toBe(0);
+        });
+
+        // #5127 — a PROMOTION adjustment's stored amount is already scaled to the current
+        // quantity, unlike DISTRIBUTED_ORDER_PROMOTION, so it must not be divided again by
+        // orderPlacedQuantity.
+        it('does not re-divide a PROMOTION adjustment by orderPlacedQuantity', () => {
+            const line = createOrderLine(2, 20, [itemPromotionAdjustment]);
+
+            expect(line.discounts[0].amountWithTax).toBe(-400);
+        });
+
+        it('applies each adjustment type on its own basis when both are present', () => {
+            const line = createOrderLine(2, 20, [
+                distributedOrderPromotionAdjustment,
+                itemPromotionAdjustment,
+            ]);
+
+            const distributed = line.discounts.find(d => d.adjustmentSource === 'PROMOTION:1');
+            const item = line.discounts.find(d => d.adjustmentSource === 'PROMOTION:2');
+            expect(distributed?.amountWithTax).toBe(-50);
+            expect(item?.amountWithTax).toBe(-400);
+        });
+
+        it('does not divide a PROMOTION adjustment by zero when orderPlacedQuantity is 0', () => {
+            const line = createOrderLine(2, 0, [itemPromotionAdjustment]);
+
+            expect(line.discounts[0].amountWithTax).toBe(-400);
         });
     });
 });

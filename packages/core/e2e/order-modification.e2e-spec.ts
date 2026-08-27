@@ -2642,7 +2642,8 @@ describe('Order modification', () => {
             orderGuard.assertSuccess(placedOrder);
 
             const placedLine = placedOrder.lines[0];
-            expect(placedLine.discountedUnitPriceWithTax).toBe(placedLine.unitPriceWithTax / 2);
+            const placedUnitPriceWithTax = placedLine.unitPriceWithTax;
+            expect(placedLine.discountedUnitPriceWithTax).toBe(placedUnitPriceWithTax / 2);
 
             const transitionOrderToState = await adminTransitionOrderToState(placedOrder.id, 'Modifying');
             orderGuard.assertSuccess(transitionOrderToState);
@@ -2664,13 +2665,12 @@ describe('Order modification', () => {
             const modifiedLine = modifyOrder.lines.find(l => l.id === placedLine.id)!;
             expect(modifiedLine.quantity).toBe(2);
             expect(modifiedLine.orderPlacedQuantity).toBe(20);
-            // Before the fix, `OrderCalculator.applyPriceAdjustments` (triggered by `modifyOrder`)
-            // already recomputes `adjustments` freshly against the *new* quantity of 2 - i.e. the
-            // stored adjustment total is already correctly scaled. The read-side getters then divided
-            // that already-correct total by `Math.max(orderPlacedQuantity, quantity)` a second time,
-            // silently rescaling the 50% discount down to `quantity / orderPlacedQuantity` (2/20 = 10%)
-            // of its correct value.
-            expect(modifiedLine.discountedLinePriceWithTax).toBe(modifiedLine.linePriceWithTax / 2);
+            // Both assertions are pinned to `placedUnitPriceWithTax`, captured before the
+            // modification, rather than to `modifiedLine`'s own fields - see #5127 for why the
+            // pre-fix read-side getters silently rescaled the discount down to 10% of its correct
+            // value here.
+            expect(modifiedLine.linePriceWithTax).toBe(placedUnitPriceWithTax * 2);
+            expect(modifiedLine.discountedLinePriceWithTax).toBe(placedUnitPriceWithTax);
         });
 
         it('cancelOrder: partially cancelling a line keeps the 50% discount ratio on the remaining units', async () => {
@@ -2726,7 +2726,203 @@ describe('Order modification', () => {
             // The remaining 2 units should still carry the full 50% discount: half of their combined
             // list price, i.e. exactly one unit's price.
             expect(remainingLine.proratedLinePriceWithTax).toBe(unitPriceWithTax);
+            expect(remainingLine.discounts.length).toBe(1);
             expect(remainingLine.discounts[0].amountWithTax).toBe(-unitPriceWithTax);
+        });
+
+        // #5127 — DefaultOrderLineDiscountDistributionStrategy.getWeight() reads
+        // line.proratedLinePriceWithTax, so an order-level DISTRIBUTED_ORDER_PROMOTION's split
+        // across lines depends on the very value this fix changes for a reduced line. These two
+        // tests put an item-level PROMOTION and an order-level DISTRIBUTED_ORDER_PROMOTION on the
+        // same order, then reduce the discounted line's quantity, to guard the split against
+        // corruption from that interaction.
+        it('modifyOrder: order-level discount split survives reducing one line of a multi-line order', async () => {
+            await adminClient.query(createPromotionDocument, {
+                input: {
+                    couponCode: 'ITEM_5127_COMBO_MODIFY',
+                    enabled: true,
+                    conditions: [],
+                    actions: [
+                        {
+                            code: productsPercentageDiscount.code,
+                            arguments: [
+                                { name: 'discount', value: '50' },
+                                { name: 'productVariantIds', value: JSON.stringify(['T_1']) },
+                            ],
+                        },
+                    ],
+                    translations: [
+                        { languageCode: LanguageCode.en, name: '50% off T_1 (#5127 combo modify)' },
+                    ],
+                },
+            });
+            await adminClient.query(createPromotionDocument, {
+                input: {
+                    couponCode: 'ORDER_5127_COMBO_MODIFY',
+                    enabled: true,
+                    conditions: [],
+                    actions: [
+                        {
+                            code: orderFixedDiscount.code,
+                            arguments: [{ name: 'discount', value: '500' }],
+                        },
+                    ],
+                    translations: [
+                        { languageCode: LanguageCode.en, name: '$5 off order (#5127 combo modify)' },
+                    ],
+                },
+            });
+
+            await shopClient.asUserWithCredentials('hayden.zieme12@hotmail.com', 'test');
+            await shopClient.query(addItemToOrderWithCustomFieldsDocument, {
+                productVariantId: 'T_1',
+                quantity: 20,
+            } as any);
+            await shopClient.query(addItemToOrderWithCustomFieldsDocument, {
+                productVariantId: 'T_4',
+                quantity: 1,
+            } as any);
+            await shopClient.query(applyCouponCodeDocument, { couponCode: 'ITEM_5127_COMBO_MODIFY' });
+            await shopClient.query(applyCouponCodeDocument, { couponCode: 'ORDER_5127_COMBO_MODIFY' });
+            await proceedToArrangingPayment(shopClient);
+            const placedOrder = await addPaymentToOrder(shopClient, testSuccessfulPaymentMethod);
+            orderGuard.assertSuccess(placedOrder);
+
+            const placedDiscountedLine = placedOrder.lines.find(l => l.productVariant.id === 'T_1')!;
+            const placedOtherLine = placedOrder.lines.find(l => l.productVariant.id === 'T_4')!;
+            const placedUnitPriceWithTax = placedDiscountedLine.unitPriceWithTax;
+
+            const transitionOrderToState = await adminTransitionOrderToState(placedOrder.id, 'Modifying');
+            orderGuard.assertSuccess(transitionOrderToState);
+
+            const { modifyOrder } = await adminClient.query(modifyOrderDocument, {
+                input: {
+                    dryRun: false,
+                    orderId: placedOrder.id,
+                    adjustOrderLines: [{ orderLineId: placedDiscountedLine.id, quantity: 2 }],
+                    refund: {
+                        paymentId: placedOrder.payments![0].id,
+                        reason: 'reduced quantity (#5127 combo modify)',
+                    },
+                },
+            });
+            orderWithModificationsGuard.assertSuccess(modifyOrder);
+
+            const modifiedDiscountedLine = modifyOrder.lines.find(l => l.id === placedDiscountedLine.id)!;
+            const modifiedOtherLine = modifyOrder.lines.find(l => l.id === placedOtherLine.id)!;
+
+            // The item-level 50% discount on the reduced line survives, independently of the
+            // order-level discount below.
+            expect(modifiedDiscountedLine.discountedLinePriceWithTax).toBe(placedUnitPriceWithTax);
+
+            // The order-level $5 discount is still split, in full, across the two lines - it is
+            // neither dropped nor double-counted by combining it with the item-level discount.
+            const discountedLineOrderShare =
+                modifiedDiscountedLine.proratedLinePriceWithTax -
+                modifiedDiscountedLine.discountedLinePriceWithTax;
+            const otherLineOrderShare =
+                modifiedOtherLine.proratedLinePriceWithTax - modifiedOtherLine.discountedLinePriceWithTax;
+            expect(discountedLineOrderShare + otherLineOrderShare).toBe(-500);
+            expect(modifiedOtherLine.discountedLinePriceWithTax).toBe(placedOtherLine.unitPriceWithTax);
+
+            expect(modifyOrder.totalWithTax).toBe(modifyOrder.subTotalWithTax + modifyOrder.shippingWithTax);
+        });
+
+        it('cancelOrder: order-level discount split survives partially cancelling one line of a multi-line order', async () => {
+            await adminClient.query(createPromotionDocument, {
+                input: {
+                    couponCode: 'ITEM_5127_COMBO_CANCEL',
+                    enabled: true,
+                    conditions: [],
+                    actions: [
+                        {
+                            code: productsPercentageDiscount.code,
+                            arguments: [
+                                { name: 'discount', value: '50' },
+                                { name: 'productVariantIds', value: JSON.stringify(['T_1']) },
+                            ],
+                        },
+                    ],
+                    translations: [
+                        { languageCode: LanguageCode.en, name: '50% off T_1 (#5127 combo cancel)' },
+                    ],
+                },
+            });
+            await adminClient.query(createPromotionDocument, {
+                input: {
+                    couponCode: 'ORDER_5127_COMBO_CANCEL',
+                    enabled: true,
+                    conditions: [],
+                    actions: [
+                        {
+                            code: orderFixedDiscount.code,
+                            arguments: [{ name: 'discount', value: '500' }],
+                        },
+                    ],
+                    translations: [
+                        { languageCode: LanguageCode.en, name: '$5 off order (#5127 combo cancel)' },
+                    ],
+                },
+            });
+
+            await shopClient.asUserWithCredentials('hayden.zieme12@hotmail.com', 'test');
+            await shopClient.query(addItemToOrderWithCustomFieldsDocument, {
+                productVariantId: 'T_1',
+                quantity: 20,
+            } as any);
+            await shopClient.query(addItemToOrderWithCustomFieldsDocument, {
+                productVariantId: 'T_4',
+                quantity: 1,
+            } as any);
+            await shopClient.query(applyCouponCodeDocument, { couponCode: 'ITEM_5127_COMBO_CANCEL' });
+            await shopClient.query(applyCouponCodeDocument, { couponCode: 'ORDER_5127_COMBO_CANCEL' });
+            await proceedToArrangingPayment(shopClient);
+            const placedOrder = await addPaymentToOrder(shopClient, testSuccessfulPaymentMethod);
+            orderGuard.assertSuccess(placedOrder);
+
+            const placedDiscountedLine = placedOrder.lines.find(l => l.productVariant.id === 'T_1')!;
+            const placedOtherLine = placedOrder.lines.find(l => l.productVariant.id === 'T_4')!;
+            const unitPriceWithTax = placedDiscountedLine.unitPriceWithTax;
+
+            const { cancelOrder } = await adminClient.query(cancelOrderDocument, {
+                input: {
+                    orderId: placedOrder.id,
+                    lines: [{ orderLineId: placedDiscountedLine.id, quantity: 18 }],
+                    reason: 'partial cancellation (#5127 combo cancel)',
+                },
+            });
+            canceledOrderGuard.assertSuccess(cancelOrder);
+
+            const { order } = await adminClient.query(getOrderWithLineDiscountsDocument, {
+                id: placedOrder.id,
+            });
+            const remainingDiscountedLine = order!.lines.find(l => l.id === placedDiscountedLine.id)!;
+            const remainingOtherLine = order!.lines.find(l => l.id === placedOtherLine.id)!;
+
+            expect(remainingDiscountedLine.quantity).toBe(2);
+            expect(remainingDiscountedLine.orderPlacedQuantity).toBe(20);
+
+            // The order-level discount is present on both lines; the item-level discount only on
+            // the discounted one. Tell them apart that way, rather than by adjustmentSource format.
+            const otherLineSources = new Set(remainingOtherLine.discounts.map(d => d.adjustmentSource));
+            const itemDiscounts = remainingDiscountedLine.discounts.filter(
+                d => !otherLineSources.has(d.adjustmentSource),
+            );
+            const discountedLineOrderLevelDiscounts = remainingDiscountedLine.discounts.filter(d =>
+                otherLineSources.has(d.adjustmentSource),
+            );
+
+            // The item-level 50% discount on the remaining 2 units still equals half their
+            // combined list price, independently of the order-level discount split below.
+            expect(itemDiscounts.length).toBe(1);
+            expect(itemDiscounts[0].amountWithTax).toBe(-unitPriceWithTax);
+
+            // The order-level $5 discount is still split, in full, across both lines - neither
+            // dropped nor double-counted by combining it with the item-level discount.
+            const orderLevelDiscountTotal =
+                summate(discountedLineOrderLevelDiscounts, 'amountWithTax') +
+                summate(remainingOtherLine.discounts, 'amountWithTax');
+            expect(orderLevelDiscountTotal).toBe(-500);
         });
     });
 
