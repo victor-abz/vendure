@@ -2170,37 +2170,15 @@ export class OrderService implements OnApplicationBootstrap {
                     (config): config is RelationCustomFieldConfig => config.type === 'relation',
                 );
 
-                if (freshGuestOrder && relationFields.length > 0) {
+                if (relationFields.length > 0) {
                     // Hydrate relation custom fields before merging because OrderLine relations are
                     // not loaded by default. The merge strategy needs their IDs to correctly compare
                     // custom fields and avoid merging lines with different relation values.
-                    const linesWithRelations = await this.connection.getRepository(txCtx, OrderLine).find({
-                        where: { id: In(freshGuestOrder.lines.map(l => l.id)) },
-                        relations: relationFields.map(config => `customFields.${config.name}`),
-                    });
-                    const relationCustomFields = new Map<ID, Record<string, ID | ID[]>>();
-                    for (const line of linesWithRelations) {
-                        const customFields: Record<string, ID | ID[]> = {};
-                        for (const config of relationFields) {
-                            const relation = (line.customFields as Record<string, any>)?.[config.name];
-                            if (config.list) {
-                                if (Array.isArray(relation) && relation.length) {
-                                    customFields[getGraphQlInputName(config)] = relation.map(r => r.id);
-                                }
-                            } else if (relation) {
-                                customFields[getGraphQlInputName(config)] = relation.id;
-                            }
-                        }
-                        if (Object.keys(customFields).length) {
-                            relationCustomFields.set(line.id, customFields);
-                        }
+                    if (freshGuestOrder) {
+                        await this.hydrateRelationCustomFields(freshGuestOrder, txCtx, relationFields);
                     }
-                    for (const line of freshGuestOrder.lines) {
-                        const relationIds = relationCustomFields.get(line.id);
-
-                        if (relationIds) {
-                            Object.assign(line.customFields, relationIds);
-                        }
+                    if (existingOrder) {
+                        await this.hydrateRelationCustomFields(existingOrder, txCtx, relationFields);
                     }
                 }
 
@@ -2599,6 +2577,39 @@ export class OrderService implements OnApplicationBootstrap {
                     sl => !idsAreEqual(sl.shippingMethodId, shippingMethodId),
                 );
                 await this.applyPriceAdjustments(orderCtx, order);
+            }
+        }
+    }
+    private async hydrateRelationCustomFields(
+        order: Order,
+        txCtx: RequestContext,
+        relationFields: RelationCustomFieldConfig[],
+    ) {
+        const linesWithRelations = await this.connection.getRepository(txCtx, OrderLine).find({
+            where: { id: In(order.lines.map(l => l.id)) },
+            relations: relationFields.map(config => `customFields.${config.name}`),
+        });
+        const relationCustomFields = new Map<ID, Record<string, ID | ID[]>>();
+        for (const line of linesWithRelations) {
+            const customFields: Record<string, ID | ID[]> = {};
+            for (const config of relationFields) {
+                const relation = (line.customFields as Record<string, any>)?.[config.name];
+                if (config.list) {
+                    if (Array.isArray(relation) && relation.length) {
+                        customFields[getGraphQlInputName(config)] = relation.map(r => r.id);
+                    }
+                } else if (relation) {
+                    customFields[getGraphQlInputName(config)] = relation.id;
+                }
+            }
+            if (Object.keys(customFields).length) {
+                relationCustomFields.set(line.id, customFields);
+            }
+        }
+        for (const line of order.lines) {
+            const relationIds = relationCustomFields.get(line.id);
+            if (relationIds) {
+                Object.assign(line.customFields, relationIds);
             }
         }
     }

@@ -139,7 +139,7 @@ describe('Order merging', () => {
         await server.init({
             initialData,
             productsCsvPath: path.join(__dirname, 'fixtures/e2e-products-full.csv'),
-            customerCount: 13,
+            customerCount: 14,
         });
         await adminClient.asSuperAdmin();
         const result = await adminClient.query(getCustomerListDocument);
@@ -438,5 +438,21 @@ describe('Order merging', () => {
         expect(existingLine?.quantity).toBe(1);
         expect(guestLine).toBeDefined();
         expect(guestLine?.quantity).toBe(3);
+    });
+    it('MergeOrdersStrategy merges lines with the same relation custom field', async () => {
+        const result = await testMerge({
+            strategy: new MergeOrdersStrategy(),
+            customerEmailAddress: customers[13].emailAddress,
+            existingOrderLines: [
+                { productVariantId: 'T_1', quantity: 1, customFields: { relationFieldId: 'T_4' } },
+            ],
+            guestOrderLines: [
+                { productVariantId: 'T_1', quantity: 3, customFields: { relationFieldId: 'T_4' } },
+            ],
+        });
+        expect(result.lines).toHaveLength(1);
+        expect(result.lines[0].productVariant.id).toBe('T_1');
+        expect(result.lines[0].quantity).toBe(3);
+        expect(result.lines[0].customFields.relationField?.id).toBe('T_4');
     });
 });
