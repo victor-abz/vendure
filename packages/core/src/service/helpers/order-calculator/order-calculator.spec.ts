@@ -487,9 +487,7 @@ describe('OrderCalculator', () => {
                     // Simulate `modifyOrder` reducing the quantity from 20 to 2 - the same
                     // `OrderCalculator.applyPriceAdjustments()` call that a real `modifyOrder`
                     // mutation makes, which clears and freshly recomputes `adjustments` against the
-                    // *new* (already-reduced) quantity. See #5127 for why, pre-fix, this silently
-                    // rescaled the discount down to quantity / orderPlacedQuantity (2 / 20 = 10%) of
-                    // its correct value.
+                    // new, already-reduced quantity.
                     order.lines[0].quantity = 2;
                     await orderCalculator.applyPriceAdjustments(ctx, order, [promotion], [order.lines[0]]);
 

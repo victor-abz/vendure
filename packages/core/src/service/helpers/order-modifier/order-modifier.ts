@@ -333,12 +333,10 @@ export class OrderModifier {
         for (const line of lineInputs) {
             const orderLine = fullOrder.lines.find(l => idsAreEqual(l.id, line.orderLineId));
             if (orderLine) {
-                const newQuantity = orderLine.quantity - line.quantity;
-                // A partial cancellation bypasses `OrderCalculator` recalculation entirely, so
-                // `PROMOTION`-type adjustments must be rescaled to the new quantity here to keep
-                // the invariant `OrderLine.quantityBasisFor()` relies on (see #5127).
-                orderLine.rescaleAdjustmentsForQuantity(newQuantity);
-                orderLine.quantity = newQuantity;
+                // A partial cancellation bypasses `OrderCalculator` recalculation entirely, so the
+                // `PROMOTION` adjustments are rescaled here to preserve the invariant that they are
+                // stored scaled to the current quantity.
+                orderLine.setQuantityRescalingAdjustments(orderLine.quantity - line.quantity);
                 await this.connection.getRepository(ctx, OrderLine).update(line.orderLineId, {
                     quantity: orderLine.quantity,
                     adjustments: orderLine.adjustments,
@@ -590,7 +588,9 @@ export class OrderModifier {
                 );
                 if (isGraphQlErrorResult(validationResult)) {
                     return validationResult as
-                        CouponCodeExpiredError | CouponCodeInvalidError | CouponCodeLimitError;
+                        | CouponCodeExpiredError
+                        | CouponCodeInvalidError
+                        | CouponCodeLimitError;
                 }
                 const canonicalCode = validationResult.couponCode;
                 if (!canonicalCouponCodes.some(cc => couponCodesMatch(cc, canonicalCode))) {

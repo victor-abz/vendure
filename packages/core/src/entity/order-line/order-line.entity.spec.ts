@@ -10,23 +10,23 @@ describe('OrderLine entity', () => {
         await ensureConfigLoaded();
     });
 
+    const distributedOrderPromotionAdjustment: Adjustment = {
+        adjustmentSource: 'PROMOTION:1',
+        type: AdjustmentType.DISTRIBUTED_ORDER_PROMOTION,
+        description: 'half price',
+        amount: -500,
+        data: {},
+    };
+
+    const itemPromotionAdjustment: Adjustment = {
+        adjustmentSource: 'PROMOTION:2',
+        type: AdjustmentType.PROMOTION,
+        description: '40% off',
+        amount: -400,
+        data: {},
+    };
+
     describe('discounts', () => {
-        const distributedOrderPromotionAdjustment: Adjustment = {
-            adjustmentSource: 'PROMOTION:1',
-            type: AdjustmentType.DISTRIBUTED_ORDER_PROMOTION,
-            description: 'half price',
-            amount: -500,
-            data: {},
-        };
-
-        const itemPromotionAdjustment: Adjustment = {
-            adjustmentSource: 'PROMOTION:2',
-            type: AdjustmentType.PROMOTION,
-            description: '40% off',
-            amount: -400,
-            data: {},
-        };
-
         function createOrderLine(
             quantity: number,
             orderPlacedQuantity: number,
@@ -78,10 +78,50 @@ describe('OrderLine entity', () => {
             expect(item?.amountWithTax).toBe(-400);
         });
 
-        it('does not divide a PROMOTION adjustment by zero when orderPlacedQuantity is 0', () => {
-            const line = createOrderLine(2, 0, [itemPromotionAdjustment]);
+        it('is zero, not NaN, for a PROMOTION adjustment on a fully-cancelled line', () => {
+            const line = createOrderLine(0, 20, [itemPromotionAdjustment]);
 
-            expect(line.discounts[0].amountWithTax).toBe(-400);
+            expect(line.discounts[0].amount).toBe(0);
+            expect(line.discounts[0].amountWithTax).toBe(0);
+        });
+    });
+
+    describe('setQuantityRescalingAdjustments()', () => {
+        function createOrderLine(quantity: number, adjustments: Adjustment[]): OrderLine {
+            return new OrderLine({
+                quantity,
+                orderPlacedQuantity: quantity,
+                listPrice: 2975,
+                listPriceIncludesTax: true,
+                taxLines: [{ description: 'vat', taxRate: 20 }],
+                adjustments,
+            });
+        }
+
+        it('scales PROMOTION adjustments to the new quantity', () => {
+            const line = createOrderLine(20, [
+                { ...itemPromotionAdjustment, amount: -29750 },
+                { ...distributedOrderPromotionAdjustment, amount: -500 },
+            ]);
+
+            line.setQuantityRescalingAdjustments(2);
+
+            expect(line.quantity).toBe(2);
+            expect(line.adjustments.find(a => a.type === AdjustmentType.PROMOTION)?.amount).toBe(-2975);
+            expect(
+                line.adjustments.find(a => a.type === AdjustmentType.DISTRIBUTED_ORDER_PROMOTION)?.amount,
+            ).toBe(-500);
+        });
+
+        // A fully cancelled line reads as zero-discount either way, so zeroing the stored amounts
+        // would only destroy the record of the discount that had applied.
+        it('leaves the adjustments intact when the line is fully cancelled', () => {
+            const line = createOrderLine(20, [{ ...itemPromotionAdjustment, amount: -29750 }]);
+
+            line.setQuantityRescalingAdjustments(0);
+
+            expect(line.quantity).toBe(0);
+            expect(line.adjustments[0].amount).toBe(-29750);
         });
     });
 });

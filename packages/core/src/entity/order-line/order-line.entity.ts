@@ -369,22 +369,25 @@ export class OrderLine extends VendureEntity implements HasCustomFields {
 
     /**
      * @description
-     * Rescales this line's `PROMOTION`-type adjustments from `this.quantity` to `newQuantity`,
-     * mutating `this.adjustments` in place. Used where a quantity reduction bypasses
-     * `OrderCalculator` recalculation (see `OrderModifier.cancelOrderByOrderLines()`), to keep
-     * those adjustments matching the "already scaled to `this.quantity`" basis that
-     * `quantityBasisFor()` assumes for `PROMOTION` (see #5127). Does not touch `this.quantity`
-     * itself - callers are expected to assign that separately, after rescaling.
+     * Sets this line's quantity to `newQuantity`, rescaling its `PROMOTION`-type adjustments to
+     * match. Used where a quantity reduction bypasses `OrderCalculator` recalculation (see
+     * `OrderModifier.cancelOrderByOrderLines()`), to preserve the invariant that `PROMOTION`
+     * amounts are stored scaled to the current quantity.
+     *
+     * A `newQuantity` of 0 sets the quantity but leaves the adjustments untouched: the getters
+     * short-circuit on an empty line either way, so scaling them to zero would only erase the
+     * record of the discount that had applied, which plugins and accounting exports read back.
      */
-    rescaleAdjustmentsForQuantity(newQuantity: number) {
-        // Guards a lineInput requesting a no-op (0-quantity) cancellation on a line that is
-        // already fully cancelled (quantity 0), which would otherwise divide 0 / 0.
-        const scaleFactor = this.quantity > 0 ? newQuantity / this.quantity : 0;
-        this.adjustments = (this.adjustments ?? []).map(adjustment =>
-            adjustment.type === AdjustmentType.PROMOTION
-                ? { ...adjustment, amount: roundMoney(adjustment.amount * scaleFactor) }
-                : adjustment,
-        );
+    setQuantityRescalingAdjustments(newQuantity: number) {
+        if (0 < newQuantity) {
+            const scaleFactor = newQuantity / this.quantity;
+            this.adjustments = (this.adjustments ?? []).map(adjustment =>
+                adjustment.type === AdjustmentType.PROMOTION
+                    ? { ...adjustment, amount: roundMoney(adjustment.amount * scaleFactor) }
+                    : adjustment,
+            );
+        }
+        this.quantity = newQuantity;
     }
 
     /**
@@ -486,13 +489,18 @@ export class OrderLine extends VendureEntity implements HasCustomFields {
      * #5127 for the full reasoning.
      */
     private quantityBasisFor(adjustment: Adjustment): number {
-        switch (adjustment.type) {
-            case AdjustmentType.PROMOTION:
-                return this.quantity;
-            case AdjustmentType.DISTRIBUTED_ORDER_PROMOTION:
-            case AdjustmentType.OTHER:
-            default:
-                return Math.max(this.orderPlacedQuantity, this.quantity);
-        }
+        const basis = (() => {
+            switch (adjustment.type) {
+                case AdjustmentType.PROMOTION:
+                    return this.quantity;
+                case AdjustmentType.DISTRIBUTED_ORDER_PROMOTION:
+                case AdjustmentType.OTHER:
+                default:
+                    return Math.max(this.orderPlacedQuantity, this.quantity);
+            }
+        })();
+        // An empty line has no units to divide across; every caller discards the result in that
+        // case, and 1 keeps a future caller that forgets from producing NaN (cf. #5101).
+        return basis === 0 ? 1 : basis;
     }
 }
