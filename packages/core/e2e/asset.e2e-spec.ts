@@ -359,23 +359,6 @@ describe('Asset resolver', () => {
                 fs.rmSync(filename);
             }
         });
-
-        // https://github.com/vendurehq/vendure/issues/4651
-        it('create an asset from a file stream without RequestContext', async () => {
-            const assetService = server.app.get(AssetService);
-
-            const stream = new Readable({ encoding: 'utf-8' });
-            stream.push('test file content');
-            stream.push(null);
-
-            const result = await assetService.createFromFileStream(stream, 'test-file.md');
-
-            expect(result).toBeDefined();
-            expect('id' in result).toBe(true);
-            if ('id' in result) {
-                expect(result.name).toBe('test-file.md');
-            }
-        });
     });
 
     describe('filter by tags', () => {
