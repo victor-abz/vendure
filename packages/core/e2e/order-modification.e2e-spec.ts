@@ -2880,11 +2880,16 @@ describe('Order modification', () => {
 
             // A partial cancellation does not redistribute the order-level discount, so the
             // reduced line keeps the per-unit share it was assigned at placement, and the
-            // untouched line keeps its share in full.
-            expect(orderLevelShareOf(remainingDiscountedLine) / remainingDiscountedLine.quantity).toBeCloseTo(
-                orderLevelShareOf(placedLines.get('T_1')!) / placedLines.get('T_1')!.quantity,
-                6,
+            // untouched line keeps its share in full. The per-unit rate itself is exact, but
+            // `orderLevelShareOf` is a line total rounded to the nearest minor unit, so scale the
+            // placement rate by the reduced quantity and round the same way rather than comparing
+            // two already-rounded per-unit values, which can differ by a fraction of a cent.
+            const placedDiscountedShareLine = placedLines.get('T_1')!;
+            const expectedRemainingShare = Math.round(
+                (orderLevelShareOf(placedDiscountedShareLine) / placedDiscountedShareLine.quantity) *
+                    remainingDiscountedLine.quantity,
             );
+            expect(orderLevelShareOf(remainingDiscountedLine)).toBe(expectedRemainingShare);
             expect(orderLevelShareOf(remainingLines.get('T_4')!)).toBe(
                 orderLevelShareOf(placedLines.get('T_4')!),
             );
