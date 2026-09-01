@@ -1,6 +1,63 @@
 ## <small>3.7.3 (2026-09-01)</small>
 
 
+#### Security
+
+This release fixes a number of vulnerabilities which were responsibly disclosed to us via GitHub
+security advisories. Full details of each are in the linked advisory.
+
+* **core** Fix unauthenticated takeover of external/SSO customer accounts via `registerCustomerAccount` ([GHSA-wr5h-x3x6-4h23](https://github.com/vendurehq/vendure/security/advisories/GHSA-wr5h-x3x6-4h23))
+* **core** Fix cross-channel IDOR in Order payment, refund, fulfillment and customer note operations ([GHSA-7qvr-c5vf-xxfh](https://github.com/vendurehq/vendure/security/advisories/GHSA-7qvr-c5vf-xxfh))
+* **core** Channel-scope the source entity in the assign-to-channel and remove-from-channel mutations ([GHSA-422x-jq57-j238](https://github.com/vendurehq/vendure/security/advisories/GHSA-422x-jq57-j238))
+* **core** Channel-scope the source entity looked up by the `duplicateEntity` mutation ([GHSA-f94w-2928-x43p](https://github.com/vendurehq/vendure/security/advisories/GHSA-f94w-2928-x43p))
+* **core** Scope Administrator reads to the administrators the caller has authority over ([GHSA-37j3-p93w-fq6w](https://github.com/vendurehq/vendure/security/advisories/GHSA-37j3-p93w-fq6w))
+* **core** Channel-scope the `updateChannel` and `deleteChannel` mutations ([GHSA-22x4-937q-5fr5](https://github.com/vendurehq/vendure/security/advisories/GHSA-22x4-937q-5fr5))
+* **core** Close the remaining account enumeration timing oracle for accounts with no native password ([GHSA-c63h-3vvx-48ph](https://github.com/vendurehq/vendure/security/advisories/GHSA-c63h-3vvx-48ph))
+* **core** Warn at startup about the permissive default CORS config, and add `apiOptions.csrfPrevention` to block Login CSRF ([GHSA-vr2h-89r2-9rwv](https://github.com/vendurehq/vendure/security/advisories/GHSA-vr2h-89r2-9rwv))
+* **core** Stop returning the session token in job data over the Admin API ([GHSA-32jm-mf7r-7qw5](https://github.com/vendurehq/vendure/security/advisories/GHSA-32jm-mf7r-7qw5))
+* **asset-server-plugin** Fix stored XSS via SVG upload by hardening the headers used to serve assets ([GHSA-f4r3-h6jf-4m29](https://github.com/vendurehq/vendure/security/advisories/GHSA-f4r3-h6jf-4m29))
+* **core** Bump `file-type` to `^21.3.1` to fix an infinite loop on malformed ASF input (#5099) ([GHSA-5v7r-6r5c-r473](https://github.com/advisories/GHSA-5v7r-6r5c-r473))
+* **asset-server-plugin** Bump `file-type` to `^21.3.1` (#5099) ([GHSA-5v7r-6r5c-r473](https://github.com/advisories/GHSA-5v7r-6r5c-r473))
+
+##### Behaviour changes from the security fixes
+
+* `registerCustomerAccount` no longer stores the supplied password when an account already exists for
+  that email address through another authentication strategy and has no password yet. A verification
+  token is emailed to the address instead, and the password is set by passing that token to
+  `verifyCustomerAccount`. This happens whatever the value of `authOptions.requireVerification`, so
+  such a customer cannot log in immediately after registering. The caller-supplied `firstName`,
+  `lastName`, `phoneNumber` and custom fields are now ignored whenever a User already exists for the
+  email address.
+* The `administrators` and `administrator` queries now only return administrators whose roles the
+  caller has authority over. A channel-scoped administrator no longer sees staff belonging only to
+  other channels.
+* `updateChannel` and `deleteChannel` now only act on channels the caller's role is scoped to.
+* `duplicateEntity`, the assign-to-channel and remove-from-channel mutations, and the Order payment,
+  refund, fulfillment and customer note operations now throw when the target entity is not visible in
+  the active channel, where they previously succeeded.
+* Job data returned over the Admin API no longer includes the session token. Upgrading stops new
+  leakage, but tokens may already be present in historical job records. After upgrading, purge
+  settled job data and consider invalidating existing administrator sessions. The token is still
+  written to the job record itself; the change which stops `RequestContext.serialize()` persisting it
+  in the first place alters the type of `RequestContext.session` and so lands in the next minor
+  release.
+* `apiOptions.csrfPrevention` is new and defaults to `false`, so nothing changes unless you enable it.
+  If you do, every client which uploads files or uses `GET` for queries must send the
+  `Apollo-Require-Preflight` header. `@vendure/admin-ui`, `@vendure/dashboard` and `@vendure/testing`
+  already do. Vendure now also logs a warning at startup when `apiOptions.cors` reflects any origin
+  together with `credentials: true`, which is the default. Set an explicit origin allowlist in
+  production.
+* The asset server now sends `X-Content-Type-Options: nosniff` and a `Content-Security-Policy` on
+  every asset, and serves markup assets (SVG, HTML, XML) with `Content-Disposition: attachment`.
+  Opening such an asset's URL directly now downloads it rather than rendering it. Images embedded
+  with `<img src>` are unaffected.
+* `file-type` v21 renames four MIME types to their IANA registrations (`audio/x-flac` to
+  `audio/flac`, `video/x-matroska` to `video/matroska`, `application/x-apache-arrow` to
+  `application/vnd.apache.arrow.file`, `application/x-parquet` to
+  `application/vnd.apache.parquet`). If you list any of the old values explicitly in
+  `assetOptions.permittedFileTypes`, update them, otherwise those uploads will be rejected. The
+  default wildcard config (`image/*`, `video/*`, `audio/*`, `.pdf`) is unaffected.
+
 #### Perf
 
 * **core** remove the per-request stock query stampede (#5224) ([19d5ca4](https://github.com/vendurehq/vendure/commit/19d5ca4)), closes [#5224](https://github.com/vendurehq/vendure/issues/5224)
@@ -79,14 +136,6 @@
 * **create** add TanStack Start storefront option (#5144) ([1c0c8b7](https://github.com/vendurehq/vendure/commit/1c0c8b7)), closes [#5144](https://github.com/vendurehq/vendure/issues/5144)
 * **dashboard** Allow creating customer and address inline on draft … (#4952) ([54ee8d3](https://github.com/vendurehq/vendure/commit/54ee8d3)), closes [#4952](https://github.com/vendurehq/vendure/issues/4952)
 * **dashboard** Support multi-channel selection in assign-to-channel follow-up (#5036) ([b8004ae](https://github.com/vendurehq/vendure/commit/b8004ae)), closes [#5036](https://github.com/vendurehq/vendure/issues/5036)
-
-## Unreleased
-
-#### Security
-
-* **core** Bump `file-type` to `^21.3.1` to fix an infinite loop on malformed ASF input (#5099) [GHSA-5v7r-6r5c-r473](https://github.com/advisories/GHSA-5v7r-6r5c-r473)
-* **asset-server-plugin** Bump `file-type` to `^21.3.1` (#5099) [GHSA-5v7r-6r5c-r473](https://github.com/advisories/GHSA-5v7r-6r5c-r473)
-* **core** Note: `file-type` v21 renames four MIME types to their IANA registrations (`audio/x-flac` to `audio/flac`, `video/x-matroska` to `video/matroska`, `application/x-apache-arrow` to `application/vnd.apache.arrow.file`, `application/x-parquet` to `application/vnd.apache.parquet`). If you list any of the old values explicitly in `assetOptions.permittedFileTypes`, update them, otherwise those uploads will be rejected. The default wildcard config (`image/*`, `video/*`, `audio/*`, `.pdf`) is unaffected.
 
 ## <small>3.7.2 (2026-08-03)</small>
 
