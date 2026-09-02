@@ -5,13 +5,14 @@ import { rescaleOrderLinePromotionAdjustments } from './v3_8_orderline_promotion
 
 interface Row {
     id: number;
+    orderId?: number;
     quantity: number;
     orderPlacedQuantity: number;
     adjustments: string | null;
 }
 
 interface ModificationRow {
-    orderLineId: number;
+    orderId: number;
     createdAt: string;
 }
 
@@ -42,14 +43,10 @@ const defaultMetadata: Record<string, MetadataNames> = {
         },
         relations: { order: 'orderId' },
     },
-    OrderModificationLine: {
-        tablePath: 'order_line_reference',
-        columns: {},
-        relations: { orderLine: 'orderLineId', modification: 'modificationId' },
-    },
     OrderModification: {
         tablePath: 'order_modification',
-        columns: { id: 'id', createdAt: 'createdAt' },
+        columns: { createdAt: 'createdAt' },
+        relations: { order: 'orderId' },
     },
     OrderHistoryEntry: {
         tablePath: 'history_entry',
@@ -78,7 +75,11 @@ function createQueryRunner(
     metadataOverrides: Partial<Record<string, MetadataNames>> = {},
 ) {
     const executed: ExecutedQuery[] = [];
-    const selectResults = [rows, history.modifications ?? [], history.cancellations ?? []];
+    const selectResults = [
+        rows.map(row => ({ orderId: 1, ...row })),
+        history.modifications ?? [],
+        history.cancellations ?? [],
+    ];
     let selectIndex = 0;
     const metadata = { ...defaultMetadata, ...metadataOverrides };
     const queryRunner = {
@@ -200,7 +201,47 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+            },
+        );
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner);
+
+        expect(updatesFrom(executed)).toEqual([]);
+    });
+
+    it("leaves a cancelled line alone when another line's later modification recalculated the order", async () => {
+        // B was cancelled first. Reducing A in modifyOrder records A's cancellation before the
+        // order-level modification, whose promotion pass then rewrites both lines.
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    orderId: 42,
+                    quantity: 10,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-10000)]),
+                },
+                {
+                    id: 2,
+                    orderId: 42,
+                    quantity: 10,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-10000)]),
+                },
+            ],
+            {
+                modifications: [{ orderId: 42, createdAt: '2026-01-03T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-01T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 2, quantity: 10 }] }),
+                    },
+                    {
+                        createdAt: '2026-01-02T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 10 }] }),
+                    },
+                ],
             },
         );
 
@@ -220,7 +261,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-03T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-03T00:00:00.000Z' }],
                 cancellations: [
                     {
                         createdAt: '2026-01-02T00:00:00.000Z',
@@ -246,7 +287,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
                 cancellations: [
                     {
                         createdAt: '2026-01-02T00:00:00.000Z',
@@ -274,7 +315,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
                 cancellations: [
                     {
                         createdAt: '2026-01-02T00:00:00.000Z',
@@ -302,7 +343,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
                 cancellations: [
                     {
                         createdAt: '2026-01-02T00:00:00.000Z',
@@ -332,7 +373,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
                 cancellations: [
                     {
                         createdAt: '2026-01-03T00:00:00.000Z',
@@ -361,7 +402,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                 },
             ],
             {
-                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                modifications: [{ orderId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
                 cancellations: [
                     {
                         createdAt: '2026-01-01T00:00:00.000Z',
@@ -434,14 +475,10 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
                     },
                     relations: { order: 'order_fk' },
                 },
-                OrderModificationLine: {
-                    tablePath: 'tenant.pref_line_refs',
-                    columns: {},
-                    relations: { orderLine: 'line_fk', modification: 'modification_fk' },
-                },
                 OrderModification: {
                     tablePath: 'tenant.pref_modifications',
-                    columns: { id: 'modification_pk', createdAt: 'created_on' },
+                    columns: { createdAt: 'created_on' },
+                    relations: { order: 'modification_order_fk' },
                 },
                 OrderHistoryEntry: {
                     tablePath: 'tenant.pref_history',
@@ -455,7 +492,6 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
 
         const sql = executed.map(query => query.sql).join('\n');
         expect(sql).toContain('"tenant"."pref_order_lines"');
-        expect(sql).toContain('"tenant"."pref_line_refs"');
         expect(sql).toContain('"tenant"."pref_modifications"');
         expect(sql).toContain('"tenant"."pref_history"');
         for (const name of [
@@ -464,9 +500,7 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
             'placed_qty',
             'price_adjustments',
             'order_fk',
-            'line_fk',
-            'modification_fk',
-            'modification_pk',
+            'modification_order_fk',
             'created_on',
             'event_type',
             'payload',

@@ -3,19 +3,19 @@ import { HistoryEntryType } from '@vendure/common/lib/generated-types';
 import { EntityMetadata, QueryRunner } from 'typeorm';
 
 import { OrderHistoryEntry } from '../entity/history-entry/order-history-entry.entity';
-import { OrderModificationLine } from '../entity/order-line-reference/order-modification-line.entity';
 import { OrderLine } from '../entity/order-line/order-line.entity';
 import { OrderModification } from '../entity/order-modification/order-modification.entity';
 
 interface CandidateRow {
     id: string | number;
+    orderId: string | number;
     quantity: number;
     orderPlacedQuantity: number;
     adjustments: string | null;
 }
 
 interface ModificationRow {
-    orderLineId: string | number;
+    orderId: string | number;
     createdAt: Date | string;
 }
 
@@ -39,9 +39,10 @@ const AMBIGUOUS_BASIS = Symbol('AMBIGUOUS_BASIS');
 export interface RescaleOrderLinePromotionAdjustmentsOptions {
     /**
      * @description
-     * The quantity basis for each OrderLine whose latest modification and cancellation have the
-     * same timestamp. Use the current quantity when the modification happened last, or the
-     * quantity before the later cancellation when the cancellation happened last.
+     * The quantity basis for each OrderLine whose cancellation and containing Order's latest
+     * modification have the same timestamp. Use the current quantity when the modification
+     * happened last, or the quantity before the later cancellation when the cancellation happened
+     * last.
      */
     ambiguousOrderLineQuantityBases?: Readonly<Record<string, number>>;
 }
@@ -59,9 +60,9 @@ function toTime(value: Date | string | null): number | null {
  * if they are already scaled to the current quantity and must be left alone.
  *
  * `PROMOTION` amounts are rewritten in full whenever `OrderCalculator` runs, which is what
- * `OrderModifier.modifyOrder()` ends in. A pre-#5127 `cancelOrderByOrderLines()` is the only
- * thing that reduced `quantity` without rewriting them, so only a line whose most recent
- * quantity change came from a cancellation is stale.
+ * `OrderModifier.modifyOrder()` ends in for every line in the order. A pre-#5127
+ * `cancelOrderByOrderLines()` is the only thing that reduced `quantity` without rewriting them,
+ * so only a line whose most recent order-wide recalculation predates its cancellation is stale.
  */
 function getStoredQuantityBasis(
     row: CandidateRow,
@@ -119,11 +120,10 @@ function getRelationColumnName(metadata: EntityMetadata, propertyName: string): 
  * getters (which divide a `PROMOTION` adjustment by the *current* `quantity`,
  * instead of `orderPlacedQuantity`) would otherwise inflate their discount.
  *
- * Lines whose quantity was reduced by an `OrderModification` are left alone:
  * `OrderModifier.modifyOrder()` ends in `applyPriceAdjustments()`, which recomputes the
- * `PROMOTION` amounts against the new quantity, so they are already correct and rescaling
- * them again would shrink them. For a subsequently-cancelled line, the stored basis is its
- * current quantity plus the quantities in order-cancellation history after its latest
+ * `PROMOTION` amounts for every line in the order, including lines not referenced by the
+ * `OrderModification`. For a subsequently-cancelled line, the stored basis is its current
+ * quantity plus the quantities in order-cancellation history after the order's latest
  * `OrderModification`.
  *
  * Some databases can store a modification and cancellation with the same timestamp. Their
@@ -161,7 +161,6 @@ export async function rescaleOrderLinePromotionAdjustments(
     const escTable = (tablePath: string) => tablePath.split('.').map(esc).join('.');
     const param = (index: number) => queryRunner.connection.driver.createParameter('p', index);
     const orderLineMetadata = queryRunner.connection.getMetadata(OrderLine);
-    const modificationLineMetadata = queryRunner.connection.getMetadata(OrderModificationLine);
     const modificationMetadata = queryRunner.connection.getMetadata(OrderModification);
     const historyMetadata = queryRunner.connection.getMetadata(OrderHistoryEntry);
 
@@ -171,13 +170,8 @@ export async function rescaleOrderLinePromotionAdjustments(
     const orderLineQuantity = esc(getColumnName(orderLineMetadata, 'quantity'));
     const orderLinePlacedQuantity = esc(getColumnName(orderLineMetadata, 'orderPlacedQuantity'));
     const orderLineAdjustments = esc(getColumnName(orderLineMetadata, 'adjustments'));
-    const modificationLineTable = escTable(modificationLineMetadata.tablePath);
-    const modificationLineOrderLineId = esc(getRelationColumnName(modificationLineMetadata, 'orderLine'));
-    const modificationLineModificationId = esc(
-        getRelationColumnName(modificationLineMetadata, 'modification'),
-    );
     const modificationTable = escTable(modificationMetadata.tablePath);
-    const modificationId = esc(getColumnName(modificationMetadata, 'id'));
+    const modificationOrderId = esc(getRelationColumnName(modificationMetadata, 'order'));
     const modificationCreatedAt = esc(getColumnName(modificationMetadata, 'createdAt'));
     const historyTable = escTable(historyMetadata.tablePath);
     const historyOrderId = esc(getRelationColumnName(historyMetadata, 'order'));
@@ -187,6 +181,7 @@ export async function rescaleOrderLinePromotionAdjustments(
 
     const rows: CandidateRow[] = await queryRunner.query(
         `SELECT ol.${orderLineId} AS ${esc('id')},
+                ol.${orderLineOrderId} AS ${esc('orderId')},
                 ol.${orderLineQuantity} AS ${esc('quantity')},
                 ol.${orderLinePlacedQuantity} AS ${esc('orderPlacedQuantity')},
                 ol.${orderLineAdjustments} AS ${esc('adjustments')}
@@ -197,16 +192,16 @@ export async function rescaleOrderLinePromotionAdjustments(
     );
 
     const modifications: ModificationRow[] = await queryRunner.query(
-        `SELECT olr.${modificationLineOrderLineId} AS ${esc('orderLineId')},
+        `SELECT om.${modificationOrderId} AS ${esc('orderId')},
                 om.${modificationCreatedAt} AS ${esc('createdAt')}
-         FROM ${modificationLineTable} olr
-         INNER JOIN ${modificationTable} om
-           ON om.${modificationId} = olr.${modificationLineModificationId}
-         INNER JOIN ${orderLineTable} ol
-           ON ol.${orderLineId} = olr.${modificationLineOrderLineId}
-         WHERE ol.${orderLineQuantity} < ol.${orderLinePlacedQuantity}
-           AND ol.${orderLineQuantity} > 0
-           AND ol.${orderLinePlacedQuantity} > 0`,
+         FROM ${modificationTable} om
+         WHERE EXISTS (
+             SELECT 1 FROM ${orderLineTable} ol
+             WHERE ol.${orderLineOrderId} = om.${modificationOrderId}
+               AND ol.${orderLineQuantity} < ol.${orderLinePlacedQuantity}
+               AND ol.${orderLineQuantity} > 0
+               AND ol.${orderLinePlacedQuantity} > 0
+         )`,
     );
     const cancellationHistory: CancellationHistoryRow[] = await queryRunner.query(
         `SELECT h.${historyCreatedAt} AS ${esc('createdAt')},
@@ -223,10 +218,10 @@ export async function rescaleOrderLinePromotionAdjustments(
         [HistoryEntryType.ORDER_CANCELLATION],
     );
 
-    const modificationsByLineId = new Map<string, ModificationRow[]>();
+    const modificationsByOrderId = new Map<string, ModificationRow[]>();
     for (const modification of modifications) {
-        const lineId = String(modification.orderLineId);
-        modificationsByLineId.set(lineId, [...(modificationsByLineId.get(lineId) ?? []), modification]);
+        const orderId = String(modification.orderId);
+        modificationsByOrderId.set(orderId, [...(modificationsByOrderId.get(orderId) ?? []), modification]);
     }
     const cancellationsByLineId = new Map<string, CancellationEvent[]>();
     for (const historyRow of cancellationHistory) {
@@ -252,7 +247,7 @@ export async function rescaleOrderLinePromotionAdjustments(
         const lineId = String(row.id);
         const inferredBasis = getStoredQuantityBasis(
             row,
-            modificationsByLineId.get(lineId) ?? [],
+            modificationsByOrderId.get(String(row.orderId)) ?? [],
             cancellationsByLineId.get(lineId) ?? [],
         );
         let basis: number | undefined;
