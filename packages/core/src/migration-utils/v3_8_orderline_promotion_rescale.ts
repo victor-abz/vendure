@@ -38,7 +38,7 @@ function getStoredQuantityBasis(row: CandidateRow): number | undefined {
         return row.orderPlacedQuantity;
     }
     const lastCancelledAt = toTime(row.lastCancelledAt);
-    if (lastCancelledAt == null || lastCancelledAt < lastModifiedAt) {
+    if (lastCancelledAt == null || lastCancelledAt <= lastModifiedAt) {
         // The modification wrote the amounts after any cancellation, so they already match the
         // current quantity.
         return undefined;

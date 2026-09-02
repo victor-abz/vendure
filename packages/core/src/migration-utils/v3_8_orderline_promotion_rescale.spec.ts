@@ -150,6 +150,24 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
         expect(updatesFrom(executed)).toEqual([]);
     });
 
+    it('leaves a line untouched when the modification and cancellation have equal timestamps', async () => {
+        const { queryRunner, executed } = createQueryRunner([
+            {
+                id: 1,
+                quantity: 8,
+                orderPlacedQuantity: 20,
+                adjustments: JSON.stringify([promotion(-11900)]),
+                lastCancelledAt: '2026-01-02T00:00:00.000Z',
+                lastModifiedAt: '2026-01-02T00:00:00.000Z',
+                modificationDelta: -2,
+            },
+        ]);
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner);
+
+        expect(updatesFrom(executed)).toEqual([]);
+    });
+
     it('rescales a modified-then-cancelled line from its post-modification quantity', async () => {
         // Placed at 20, modified down to 10 (which rewrote the amount to -14875), then 8 units
         // cancelled. The basis is 10, not the placement quantity of 20.
