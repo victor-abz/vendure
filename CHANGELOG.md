@@ -12,6 +12,7 @@ security advisories. Full details of each are in the linked advisory.
 * **core** Channel-scope the source entity looked up by the `duplicateEntity` mutation ([GHSA-f94w-2928-x43p](https://github.com/vendurehq/vendure/security/advisories/GHSA-f94w-2928-x43p))
 * **core** Scope Administrator reads to the administrators the caller has authority over ([GHSA-37j3-p93w-fq6w](https://github.com/vendurehq/vendure/security/advisories/GHSA-37j3-p93w-fq6w))
 * **core** Channel-scope the `updateChannel` and `deleteChannel` mutations ([GHSA-22x4-937q-5fr5](https://github.com/vendurehq/vendure/security/advisories/GHSA-22x4-937q-5fr5))
+* **core** Channel-scope the `ProductOptionGroup` lookup in `createProductOption` ([GHSA-gg28-cx38-jxxr](https://github.com/vendurehq/vendure/security/advisories/GHSA-gg28-cx38-jxxr))
 * **core** Close the remaining account enumeration timing oracle for accounts with no native password ([GHSA-c63h-3vvx-48ph](https://github.com/vendurehq/vendure/security/advisories/GHSA-c63h-3vvx-48ph))
 * **core** Warn at startup about the permissive default CORS config, and add `apiOptions.csrfPrevention` to block Login CSRF ([GHSA-vr2h-89r2-9rwv](https://github.com/vendurehq/vendure/security/advisories/GHSA-vr2h-89r2-9rwv))
 * **core** Stop returning the session token in job data over the Admin API ([GHSA-32jm-mf7r-7qw5](https://github.com/vendurehq/vendure/security/advisories/GHSA-32jm-mf7r-7qw5))
@@ -32,9 +33,9 @@ security advisories. Full details of each are in the linked advisory.
   caller has authority over. A channel-scoped administrator no longer sees staff belonging only to
   other channels.
 * `updateChannel` and `deleteChannel` now only act on channels the caller's role is scoped to.
-* `duplicateEntity`, the assign-to-channel and remove-from-channel mutations, and the Order payment,
-  refund, fulfillment and customer note operations now throw when the target entity is not visible in
-  the active channel, where they previously succeeded.
+* `duplicateEntity`, the assign-to-channel and remove-from-channel mutations, `createProductOption`,
+  and the Order payment, refund, fulfillment and customer note operations now throw when the target
+  entity is not visible in the active channel, where they previously succeeded.
 * Job data returned over the Admin API no longer includes the session token. Upgrading stops new
   leakage, but tokens may already be present in historical job records. After upgrading, purge
   settled job data and consider invalidating existing administrator sessions. The token is still
