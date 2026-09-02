@@ -8,15 +8,55 @@ interface Row {
     quantity: number;
     orderPlacedQuantity: number;
     adjustments: string | null;
-    lastCancelledAt?: string | null;
-    lastModifiedAt?: string | null;
-    modificationDelta?: number | null;
+}
+
+interface ModificationRow {
+    orderLineId: number;
+    createdAt: string;
+}
+
+interface CancellationRow {
+    createdAt: string;
+    data: string;
 }
 
 interface ExecutedQuery {
     sql: string;
     params: any[];
 }
+
+interface MetadataNames {
+    tablePath: string;
+    columns: Record<string, string>;
+    relations?: Record<string, string>;
+}
+
+const defaultMetadata: Record<string, MetadataNames> = {
+    OrderLine: {
+        tablePath: 'order_line',
+        columns: {
+            id: 'id',
+            quantity: 'quantity',
+            orderPlacedQuantity: 'orderPlacedQuantity',
+            adjustments: 'adjustments',
+        },
+        relations: { order: 'orderId' },
+    },
+    OrderModificationLine: {
+        tablePath: 'order_line_reference',
+        columns: {},
+        relations: { orderLine: 'orderLineId', modification: 'modificationId' },
+    },
+    OrderModification: {
+        tablePath: 'order_modification',
+        columns: { id: 'id', createdAt: 'createdAt' },
+    },
+    OrderHistoryEntry: {
+        tablePath: 'history_entry',
+        columns: { createdAt: 'createdAt', type: 'type', data: 'data' },
+        relations: { order: 'orderId' },
+    },
+};
 
 function promotion(amount: number) {
     return { adjustmentSource: 'PROMOTION:1', type: 'PROMOTION', description: '50% off', amount, data: {} };
@@ -32,26 +72,45 @@ function distributed(amount: number) {
     };
 }
 
-function createQueryRunner(rows: Row[]) {
+function createQueryRunner(
+    rows: Row[],
+    history: { modifications?: ModificationRow[]; cancellations?: CancellationRow[] } = {},
+    metadataOverrides: Partial<Record<string, MetadataNames>> = {},
+) {
     const executed: ExecutedQuery[] = [];
+    const selectResults = [rows, history.modifications ?? [], history.cancellations ?? []];
+    let selectIndex = 0;
+    const metadata = { ...defaultMetadata, ...metadataOverrides };
     const queryRunner = {
         connection: {
             driver: {
                 escape: (name: string) => `"${name}"`,
                 createParameter: (_name: string, index: number) => `$${index + 1}`,
             },
+            getMetadata: (target: { name: string }) => {
+                const names = metadata[target.name];
+                if (!names) {
+                    throw new Error(`Missing metadata for ${target.name}`);
+                }
+                return {
+                    tablePath: names.tablePath,
+                    findColumnWithPropertyName: (propertyName: string) => {
+                        const databaseName = names.columns[propertyName];
+                        return databaseName ? { databaseName } : undefined;
+                    },
+                    findRelationWithPropertyPath: (propertyPath: string) => {
+                        const databaseName = names.relations?.[propertyPath];
+                        return databaseName ? { joinColumns: [{ databaseName }] } : undefined;
+                    },
+                };
+            },
         },
-        query: vi.fn(async (sql: string, params: any[] = []) => {
+        query: vi.fn((sql: string, params: any[] = []) => {
             executed.push({ sql, params });
             if (sql.trim().startsWith('SELECT')) {
-                return rows.map(row => ({
-                    lastCancelledAt: null,
-                    lastModifiedAt: null,
-                    modificationDelta: null,
-                    ...row,
-                }));
+                return Promise.resolve(selectResults[selectIndex++]);
             }
-            return [];
+            return Promise.resolve([]);
         }),
     } as unknown as QueryRunner;
     return { queryRunner, executed };
@@ -113,19 +172,37 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
         expect(writtenAdjustmentsFor(executed, 1)).toEqual([promotion(-2975), distributed(-500)]);
     });
 
-    it('leaves a line reduced by an OrderModification untouched', async () => {
-        // modifyOrder() ends in applyPriceAdjustments(), so -2975 is already the correct amount
-        // for the 2 remaining units. Rescaling it again would give -297.
+    it('leaves fully-cancelled lines untouched', async () => {
         const { queryRunner, executed } = createQueryRunner([
             {
                 id: 1,
-                quantity: 2,
+                quantity: 0,
                 orderPlacedQuantity: 20,
-                adjustments: JSON.stringify([promotion(-2975)]),
-                lastModifiedAt: '2026-01-02T00:00:00.000Z',
-                modificationDelta: -18,
+                adjustments: JSON.stringify([promotion(-29750)]),
             },
         ]);
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner);
+
+        expect(updatesFrom(executed)).toEqual([]);
+    });
+
+    it('leaves a line reduced by an OrderModification untouched', async () => {
+        // modifyOrder() ends in applyPriceAdjustments(), so -2975 is already the correct amount
+        // for the 2 remaining units. Rescaling it again would give -297.
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 2,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-2975)]),
+                },
+            ],
+            {
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+            },
+        );
 
         await rescaleOrderLinePromotionAdjustments(queryRunner);
 
@@ -133,59 +210,174 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
     });
 
     it('leaves a line untouched when the modification is more recent than the cancellation', async () => {
-        const { queryRunner, executed } = createQueryRunner([
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 8,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-11900)]),
+                },
+            ],
             {
-                id: 1,
-                quantity: 8,
-                orderPlacedQuantity: 20,
-                adjustments: JSON.stringify([promotion(-11900)]),
-                lastCancelledAt: '2026-01-02T00:00:00.000Z',
-                lastModifiedAt: '2026-01-03T00:00:00.000Z',
-                modificationDelta: -2,
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-03T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-02T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 10 }] }),
+                    },
+                ],
             },
-        ]);
+        );
 
         await rescaleOrderLinePromotionAdjustments(queryRunner);
 
         expect(updatesFrom(executed)).toEqual([]);
     });
 
-    it('leaves a line untouched when the modification and cancellation have equal timestamps', async () => {
-        const { queryRunner, executed } = createQueryRunner([
+    it('rejects an ambiguous equal-timestamp history before writing', async () => {
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 8,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-11900)]),
+                },
+            ],
             {
-                id: 1,
-                quantity: 8,
-                orderPlacedQuantity: 20,
-                adjustments: JSON.stringify([promotion(-11900)]),
-                lastCancelledAt: '2026-01-02T00:00:00.000Z',
-                lastModifiedAt: '2026-01-02T00:00:00.000Z',
-                modificationDelta: -2,
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-02T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 2 }] }),
+                    },
+                ],
             },
-        ]);
+        );
 
-        await rescaleOrderLinePromotionAdjustments(queryRunner);
+        await expect(rescaleOrderLinePromotionAdjustments(queryRunner)).rejects.toThrow(
+            'Cannot safely determine the stored quantity basis for OrderLine IDs: 1',
+        );
 
         expect(updatesFrom(executed)).toEqual([]);
+    });
+
+    it('accepts an explicit current-quantity basis for an equal-timestamp modify-after-cancel line', async () => {
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 8,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-8000)]),
+                },
+            ],
+            {
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-02T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 2 }] }),
+                    },
+                ],
+            },
+        );
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner, {
+            ambiguousOrderLineQuantityBases: { 1: 8 },
+        });
+
+        expect(updatesFrom(executed)).toEqual([]);
+    });
+
+    it('accepts an explicit pre-cancellation basis for an equal-timestamp cancel-after-modify line', async () => {
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 8,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-10000)]),
+                },
+            ],
+            {
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-02T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 2 }] }),
+                    },
+                ],
+            },
+        );
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner, {
+            ambiguousOrderLineQuantityBases: { 1: 10 },
+        });
+
+        expect(writtenAdjustmentsFor(executed, 1)).toEqual([promotion(-8000)]);
     });
 
     it('rescales a modified-then-cancelled line from its post-modification quantity', async () => {
         // Placed at 20, modified down to 10 (which rewrote the amount to -14875), then 8 units
         // cancelled. The basis is 10, not the placement quantity of 20.
-        const { queryRunner, executed } = createQueryRunner([
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 2,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-14875)]),
+                },
+            ],
             {
-                id: 1,
-                quantity: 2,
-                orderPlacedQuantity: 20,
-                adjustments: JSON.stringify([promotion(-14875)]),
-                lastCancelledAt: '2026-01-03T00:00:00.000Z',
-                lastModifiedAt: '2026-01-02T00:00:00.000Z',
-                modificationDelta: -10,
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-03T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 8 }] }),
+                    },
+                ],
             },
-        ]);
+        );
 
         await rescaleOrderLinePromotionAdjustments(queryRunner);
 
         expect(writtenAdjustmentsFor(executed, 1)).toEqual([promotion(-2975)]);
+    });
+
+    it('uses the latest modification basis after earlier and later standalone cancellations', async () => {
+        // Placed at 20, cancelled to 15, modified to 10, then cancelled to 5. The latest
+        // modification rewrote the amount on a basis of 10; summing its -5 delta from placement
+        // would incorrectly produce a basis of 15 by ignoring the first standalone cancellation.
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 5,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-10000)]),
+                },
+            ],
+            {
+                modifications: [{ orderLineId: 1, createdAt: '2026-01-02T00:00:00.000Z' }],
+                cancellations: [
+                    {
+                        createdAt: '2026-01-01T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 5 }] }),
+                    },
+                    {
+                        createdAt: '2026-01-03T00:00:00.000Z',
+                        data: JSON.stringify({ lines: [{ orderLineId: 1, quantity: 5 }] }),
+                    },
+                ],
+            },
+        );
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner);
+
+        expect(writtenAdjustmentsFor(executed, 1)).toEqual([promotion(-5000)]);
     });
 
     it('skips lines with no PROMOTION adjustment', async () => {
@@ -218,6 +410,70 @@ describe('rescaleOrderLinePromotionAdjustments()', () => {
         expect(update.sql).not.toContain('-2975');
         expect(update.params[0]).toBe(1);
         expect(JSON.parse(update.params[1])[0].description).toBe(`Bob's 50\\% off`);
+    });
+
+    it('uses entity metadata for schema-qualified table paths and physical column names', async () => {
+        const { queryRunner, executed } = createQueryRunner(
+            [
+                {
+                    id: 1,
+                    quantity: 2,
+                    orderPlacedQuantity: 20,
+                    adjustments: JSON.stringify([promotion(-29750)]),
+                },
+            ],
+            {},
+            {
+                OrderLine: {
+                    tablePath: 'tenant.pref_order_lines',
+                    columns: {
+                        id: 'line_pk',
+                        quantity: 'current_qty',
+                        orderPlacedQuantity: 'placed_qty',
+                        adjustments: 'price_adjustments',
+                    },
+                    relations: { order: 'order_fk' },
+                },
+                OrderModificationLine: {
+                    tablePath: 'tenant.pref_line_refs',
+                    columns: {},
+                    relations: { orderLine: 'line_fk', modification: 'modification_fk' },
+                },
+                OrderModification: {
+                    tablePath: 'tenant.pref_modifications',
+                    columns: { id: 'modification_pk', createdAt: 'created_on' },
+                },
+                OrderHistoryEntry: {
+                    tablePath: 'tenant.pref_history',
+                    columns: { createdAt: 'created_on', type: 'event_type', data: 'payload' },
+                    relations: { order: 'order_fk' },
+                },
+            },
+        );
+
+        await rescaleOrderLinePromotionAdjustments(queryRunner);
+
+        const sql = executed.map(query => query.sql).join('\n');
+        expect(sql).toContain('"tenant"."pref_order_lines"');
+        expect(sql).toContain('"tenant"."pref_line_refs"');
+        expect(sql).toContain('"tenant"."pref_modifications"');
+        expect(sql).toContain('"tenant"."pref_history"');
+        for (const name of [
+            'line_pk',
+            'current_qty',
+            'placed_qty',
+            'price_adjustments',
+            'order_fk',
+            'line_fk',
+            'modification_fk',
+            'modification_pk',
+            'created_on',
+            'event_type',
+            'payload',
+        ]) {
+            expect(sql).toContain(`"${name}"`);
+        }
+        expect(sql).not.toContain('"order_line"');
     });
 
     it('updates all affected rows in a single statement', async () => {
