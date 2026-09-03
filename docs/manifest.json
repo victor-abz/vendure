@@ -1734,7 +1734,7 @@
                   "title": "OrderLine",
                   "slug": "order-line",
                   "file": "docs/reference/typescript-api/entities/order-line.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-09-03T12:03:40Z"
                 },
                 {
                   "title": "OrderLineReference",
@@ -2309,6 +2309,12 @@
                   "slug": "migration-options",
                   "file": "docs/reference/typescript-api/migration/migration-options.mdx",
                   "lastModified": "2026-01-28T14:49:21+01:00"
+                },
+                {
+                  "title": "RescaleOrderLinePromotionAdjustments",
+                  "slug": "rescale-order-line-promotion-adjustments",
+                  "file": "docs/reference/typescript-api/migration/rescale-order-line-promotion-adjustments.mdx",
+                  "lastModified": "2026-09-03T12:03:40Z"
                 },
                 {
                   "title": "RevertLastMigration",
