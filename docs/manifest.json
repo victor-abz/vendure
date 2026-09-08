@@ -1570,13 +1570,13 @@
                   "title": "MysqlSearchStrategy",
                   "slug": "mysql-search-strategy",
                   "file": "docs/reference/typescript-api/default-search-plugin/mysql-search-strategy.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-09-08T15:28:16Z"
                 },
                 {
                   "title": "PostgresSearchStrategy",
                   "slug": "postgres-search-strategy",
                   "file": "docs/reference/typescript-api/default-search-plugin/postgres-search-strategy.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-09-08T15:28:16Z"
                 },
                 {
                   "title": "SearchStrategy",
@@ -1588,7 +1588,7 @@
                   "title": "SqliteSearchStrategy",
                   "slug": "sqlite-search-strategy",
                   "file": "docs/reference/typescript-api/default-search-plugin/sqlite-search-strategy.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-09-08T15:28:16Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
