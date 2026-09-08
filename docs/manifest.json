@@ -163,7 +163,7 @@
           "title": "Healthchecks",
           "slug": "healthchecks",
           "file": "docs/guides/core-concepts/healthchecks/index.mdx",
-          "lastModified": "2026-05-22T15:41:37+02:00"
+          "lastModified": "2026-09-08T16:41:57+02:00"
         },
         {
           "title": "Auth",
@@ -753,7 +753,7 @@
           "title": "Using Docker",
           "slug": "using-docker",
           "file": "docs/guides/deployment/using-docker.mdx",
-          "lastModified": "2026-05-27T11:00:24+02:00"
+          "lastModified": "2026-09-08T16:41:57+02:00"
         },
         {
           "title": "Horizontal Scaling",
@@ -1432,7 +1432,7 @@
                   "title": "RuntimeVendureConfig",
                   "slug": "runtime-vendure-config",
                   "file": "docs/reference/typescript-api/configuration/runtime-vendure-config.mdx",
-                  "lastModified": "2026-09-01T11:20:23+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 },
                 {
                   "title": "SettingsStoreFields",
@@ -1450,7 +1450,7 @@
                   "title": "SystemOptions",
                   "slug": "system-options",
                   "file": "docs/reference/typescript-api/configuration/system-options.mdx",
-                  "lastModified": "2026-09-01T11:20:23+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 },
                 {
                   "title": "TrustProxyOptions",
@@ -1462,7 +1462,7 @@
                   "title": "VendureConfig",
                   "slug": "vendure-config",
                   "file": "docs/reference/typescript-api/configuration/vendure-config.mdx",
-                  "lastModified": "2026-09-01T11:20:23+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
@@ -2036,19 +2036,19 @@
                   "title": "HealthCheckError",
                   "slug": "health-check-error",
                   "file": "docs/reference/typescript-api/health-check/health-check-error.mdx",
-                  "lastModified": "2026-05-22T15:41:37+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 },
                 {
                   "title": "HealthCheckRegistryService",
                   "slug": "health-check-registry-service",
                   "file": "docs/reference/typescript-api/health-check/health-check-registry-service.mdx",
-                  "lastModified": "2026-05-22T15:41:37+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 },
                 {
                   "title": "HealthCheckStrategy",
                   "slug": "health-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/health-check-strategy.mdx",
-                  "lastModified": "2026-05-22T15:41:37+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 },
                 {
                   "title": "HealthIndicator",
@@ -2078,13 +2078,13 @@
                   "title": "HttpHealthCheckStrategy",
                   "slug": "http-health-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/http-health-check-strategy.mdx",
-                  "lastModified": "2026-05-22T16:47:46+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 },
                 {
                   "title": "TypeORMHealthCheckStrategy",
                   "slug": "type-ormhealth-check-strategy",
                   "file": "docs/reference/typescript-api/health-check/type-ormhealth-check-strategy.mdx",
-                  "lastModified": "2026-05-22T15:41:37+02:00"
+                  "lastModified": "2026-09-08T16:41:57+02:00"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"
