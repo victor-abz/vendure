@@ -1716,7 +1716,7 @@
                   "title": "Order",
                   "slug": "order",
                   "file": "docs/reference/typescript-api/entities/order.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-09-09T16:31:13+02:00"
                 },
                 {
                   "title": "OrderableAsset",
@@ -1872,7 +1872,7 @@
                   "title": "Surcharge",
                   "slug": "surcharge",
                   "file": "docs/reference/typescript-api/entities/surcharge.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-09-09T16:31:13+02:00"
                 },
                 {
                   "title": "Tag",
