@@ -1,7 +1,7 @@
 import { DeletionResult, LogicalOperator, SortOrder } from '@vendure/common/lib/generated-types';
 import { omit } from '@vendure/common/lib/omit';
 import { pick } from '@vendure/common/lib/pick';
-import { Asset, AssetService, ChannelService, mergeConfig } from '@vendure/core';
+import { Asset, AssetService, ChannelService, mergeConfig, RequestContextService } from '@vendure/core';
 import { createErrorResultGuard, createTestEnvironment, ErrorResultGuard } from '@vendure/testing';
 import fs from 'fs-extra';
 import path from 'node:path';
@@ -613,8 +613,9 @@ describe('Asset resolver', () => {
         });
     });
 
-    // Placed last because creating an asset advances the auto-increment id, which the
-    // hardcoded-id assertions in the tests above rely on.
+    // This block and the one after it must stay at the end of the file: each creates an asset,
+    // which advances the auto-increment id that the total-count and hardcoded-id assertions in
+    // the tests above rely on.
     describe('MIME type content validation (GHSA-88rq-mq4v-frmm)', () => {
         // An SVG that begins with an XML prolog is reported by `file-type` as the generic
         // `application/xml`, which must not cause the permitted `image/svg+xml` upload to be
@@ -639,7 +640,8 @@ describe('Asset resolver', () => {
         });
     });
 
-    // https://github.com/vendurehq/vendure/issues/4651
+    // Guards against the default translation being saved with a null languageCode when no
+    // RequestContext is passed. https://github.com/vendurehq/vendure/issues/4651
     describe('createFromFileStream without a RequestContext', () => {
         const assetGuard: ErrorResultGuard<Asset> = createErrorResultGuard(input => input.id != null);
 
@@ -648,7 +650,7 @@ describe('Asset resolver', () => {
             const defaultChannel = await server.app.get(ChannelService).getDefaultChannel();
 
             const result = await assetService.createFromFileStream(
-                Readable.from(['test file content']),
+                Readable.from([Buffer.from('%PDF-1.4\n%%EOF\n')]),
                 'test-file.pdf',
             );
 
@@ -657,7 +659,13 @@ describe('Asset resolver', () => {
             expect(result.translations.map(t => t.languageCode)).toEqual([
                 defaultChannel.defaultLanguageCode,
             ]);
+
+            // The returned entity carries the Channel ids the service assigned in memory, so it is
+            // also read back to check what reached the database. Both matter.
             expect(result.channels.map(c => c.id)).toEqual([defaultChannel.id]);
+            const ctx = await server.app.get(RequestContextService).create({ apiType: 'admin' });
+            const persisted = await assetService.findOne(ctx, result.id, ['channels']);
+            expect(persisted?.channels.map(c => c.id)).toEqual([defaultChannel.id]);
         });
     });
 });
