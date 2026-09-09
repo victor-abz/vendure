@@ -137,24 +137,41 @@ export async function runMigrations(
             process.exitCode = 1;
         }
     } finally {
-        await checkMigrationStatus(connection, report);
-        await connection.close();
-        resetConfig();
+        try {
+            await checkMigrationStatus(connection, report);
+        } finally {
+            await connection.close();
+            resetConfig();
+        }
     }
     return migrationsRan;
 }
 
 async function checkMigrationStatus(connection: Connection, report: (d: MigrationDiagnostic) => void) {
-    // Against a database with no migration history the schema builder reports the entire schema
-    // as pending, which is what a project looks like before its first migration is applied. That
-    // is not drift, so there is nothing useful to say about it.
-    const executed = await new MigrationExecutor(connection).getExecutedMigrations();
-    if (!executed.length) {
+    // Against a database with no tables at all the schema builder reports the entire schema as
+    // pending, which is what a project looks like before it has been set up. That is not drift,
+    // so there is nothing useful to say about it.
+    //
+    // The `migrations` table is the wrong discriminator here: a schema built with
+    // `synchronize: true` has every table and no migration history, because TypeORM only writes
+    // that table when it runs a migration. Reporting drift is exactly what that developer needs
+    // when they switch to `synchronize: false` and change an entity.
+    if (!(await hasAnyEntityTable(connection))) {
         return;
     }
     const builderLog = await connection.driver.createSchemaBuilder().log();
     if (builderLog.upQueries.length) {
         report({ type: 'schema-out-of-sync', queries: builderLog.upQueries.map(q => q.query) });
+    }
+}
+
+async function hasAnyEntityTable(connection: Connection): Promise<boolean> {
+    const queryRunner = connection.createQueryRunner();
+    try {
+        const tables = await queryRunner.getTables(connection.entityMetadatas.map(m => m.tablePath));
+        return tables.length > 0;
+    } finally {
+        await queryRunner.release();
     }
 }
 
@@ -177,13 +194,14 @@ export function describeDiagnostic(diagnostic: MigrationDiagnostic): string[] {
             // The cwd only explains the failure for a relative pattern. The scaffolded config uses
             // `path.join(__dirname, ...)`, where pointing at the working directory sends the user
             // looking for a problem that is not there.
-            const relative = diagnostic.patterns.some(pattern => !path.isAbsolute(pattern));
+            const anyRelative = diagnostic.patterns.some(pattern => !path.isAbsolute(pattern));
             return [
                 'No migration files matched the configured `migrations` patterns, but this database has migrations recorded as applied.',
-                relative
-                    ? `Patterns are resolved relative to the current directory (${diagnostic.cwd}):`
-                    : 'Nothing on disk matches these patterns. If they point at compiled output, check that it has been built:',
+                'Nothing on disk matches these patterns. If they point at compiled output, check that it has been built:',
                 ...diagnostic.patterns.map(pattern => ' - ' + pattern),
+                ...(anyRelative
+                    ? [`Relative patterns are resolved against the current directory (${diagnostic.cwd}).`]
+                    : []),
             ];
         }
         case 'schema-out-of-sync': {

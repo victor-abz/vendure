@@ -59,6 +59,24 @@ describe('buildMigrationReport()', () => {
         expect(report.details).not.toContain('/elsewhere');
     });
 
+    it('mentions the working directory only as it applies when patterns are mixed', () => {
+        const report = buildMigrationReport(
+            [],
+            [
+                {
+                    type: 'no-migrations-matched',
+                    patterns: ['/project/dist/migrations/*.js', 'migrations/*.ts'],
+                    cwd: '/elsewhere',
+                },
+            ],
+        );
+
+        expect(report.details).toContain('/project/dist/migrations/*.js');
+        expect(report.details).toContain(
+            'Relative patterns are resolved against the current directory (/elsewhere)',
+        );
+    });
+
     it('caps the rendered drift queries', () => {
         const queries = Array.from({ length: 25 }, (_, i) => `CREATE TABLE \`t${i}\` (id int)`);
         const report = buildMigrationReport([], [{ type: 'schema-out-of-sync', queries }]);
