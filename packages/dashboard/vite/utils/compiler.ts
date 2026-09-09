@@ -296,8 +296,22 @@ async function resolveSourceContext(
 
     // Collect all local source files by walking the import tree
     const collectStart = Date.now();
-    const sourceFiles = await collectLocalSourceFiles(inputPath, originalTsConfigInfo);
+    const { sourceFiles, skippedPackageJsonFiles } = await collectLocalSourceFiles(
+        inputPath,
+        originalTsConfigInfo,
+    );
     logger.debug(`Collected ${sourceFiles.length} source files in ${Date.now() - collectStart}ms`);
+
+    // The import stays in the emitted JavaScript, so leaving this silent means the
+    // config fails to load with a bare "Cannot find module" naming a file the author
+    // can see on disk.
+    if (skippedPackageJsonFiles.length) {
+        logger.warn(
+            `A package.json cannot be copied into the compiled config output, because its "type" field ` +
+                `decides how the compiled files beside it are loaded. Loading the config will fail on ` +
+                `${skippedPackageJsonFiles.join(', ')}. Read the file at runtime instead of importing it.`,
+        );
+    }
 
     let sourceRoot = customSourceRoot;
     if (!sourceRoot) {
@@ -468,8 +482,9 @@ function assertWithinOutputPath(outputFilePath: string, outputPath: string): voi
 async function collectLocalSourceFiles(
     entryFile: string,
     tsConfigInfo?: { baseUrl: string; paths: Record<string, string[]> },
-): Promise<string[]> {
+): Promise<{ sourceFiles: string[]; skippedPackageJsonFiles: string[] }> {
     const visited = new Set<string>();
+    const skippedPackageJson = new Set<string>();
 
     async function processFile(filePath: string) {
         const resolved = await resolveSourceFile(filePath);
@@ -483,7 +498,10 @@ async function collectLocalSourceFiles(
         // the one written there to declare the module type, and in any nested
         // directory its own "type" field decides how the compiled .js files beside
         // it are loaded, which breaks them.
-        if (path.basename(resolved) === 'package.json') return;
+        if (path.basename(resolved) === 'package.json') {
+            skippedPackageJson.add(resolved);
+            return;
+        }
 
         if (visited.has(resolved)) return;
         visited.add(resolved);
@@ -499,6 +517,7 @@ async function collectLocalSourceFiles(
 
         ts.forEachChild(sf, node => {
             if (!ts.isImportDeclaration(node) && !ts.isExportDeclaration(node)) return;
+            if (isTypeOnlyImportOrExport(node)) return;
             const moduleSpecifier = node.moduleSpecifier;
             if (!moduleSpecifier || !ts.isStringLiteral(moduleSpecifier)) return;
             const importPath = moduleSpecifier.text;
@@ -521,7 +540,37 @@ async function collectLocalSourceFiles(
     }
 
     await processFile(entryFile);
-    return [...visited];
+    return { sourceFiles: [...visited], skippedPackageJsonFiles: [...skippedPackageJson] };
+}
+
+function isTypeOnlyImportOrExport(node: ts.ImportDeclaration | ts.ExportDeclaration) {
+    if (ts.isImportDeclaration(node)) {
+        const importClause = node.importClause;
+        if (!importClause) {
+            return false;
+        }
+        if (importClause.isTypeOnly) {
+            return true;
+        }
+        const namedBindings = importClause.namedBindings;
+        return (
+            !importClause.name &&
+            !!namedBindings &&
+            ts.isNamedImports(namedBindings) &&
+            namedBindings.elements.length > 0 &&
+            namedBindings.elements.every(element => element.isTypeOnly)
+        );
+    }
+
+    if (node.isTypeOnly) {
+        return true;
+    }
+    return (
+        !!node.exportClause &&
+        ts.isNamedExports(node.exportClause) &&
+        node.exportClause.elements.length > 0 &&
+        node.exportClause.elements.every(element => element.isTypeOnly)
+    );
 }
 
 async function registerTsConfigPaths(options: {
