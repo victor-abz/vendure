@@ -8,7 +8,6 @@ import { TEST_SETUP_TIMEOUT_MS, testConfig } from '../../../e2e-common/test-conf
 
 import { graphql } from './graphql/graphql-admin';
 import { graphql as graphqlShop } from './graphql/graphql-shop';
-import { assertThrowsWithMessage } from './utils/assert-throws-with-message';
 
 /**
  * These tests need their own config because `custom-fields.e2e-spec.ts` relies on Customer
@@ -102,17 +101,14 @@ describe('Custom fields on RegisterCustomerInput', () => {
         await server.destroy();
     });
 
-    it(
-        'throws if a custom field value is invalid',
-        assertThrowsWithMessage(async () => {
-            await shopClient.query(registerDocument, {
+    it('rejects an invalid value and creates no account', async () => {
+        await expect(
+            shopClient.query(registerDocument, {
                 emailAddress: 'register-validation-invalid@test.com',
                 value: 'nope',
-            });
-        }, "The value ['nope'] is not valid"),
-    );
+            }),
+        ).rejects.toThrow("The value ['nope'] is not valid");
 
-    it('does not create an account when validation fails', async () => {
         const { customers } = await adminClient.query(getCustomerByEmailDocument, {
             emailAddress: 'register-validation-invalid@test.com',
         });
@@ -147,6 +143,7 @@ describe('Custom fields on RegisterCustomerInput', () => {
             emailAddress: 'register-default@test.com',
         });
 
+        expect(customers.totalItems).toBe(1);
         expect(customers.items[0].customFields.defaultOnRegister).toBe('the-default');
     });
 });

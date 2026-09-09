@@ -41,10 +41,12 @@ export class CustomFieldProcessingInterceptor implements NestInterceptor {
             this.createInputsWithCustomFields.add(`Create${entityName}Input`);
             this.updateInputsWithCustomFields.add(`Update${entityName}Input`);
         });
-        // RegisterCustomerInput carries Customer custom fields but is not named CreateCustomerInput.
-        this.createInputsWithCustomFields.add('RegisterCustomerInput');
         // Note: OrderLineCustomFieldsInput is handled separately since it's used in both
         // create operations (addItemToOrder) and update operations (adjustOrderLine)
+
+        // RegisterCustomerInput carries Customer custom fields but is not named CreateCustomerInput.
+        // getEntityNameFromInputType() maps it back to Customer.
+        this.createInputsWithCustomFields.add('RegisterCustomerInput');
     }
 
     async intercept(context: ExecutionContext, next: CallHandler<any>) {
@@ -220,6 +222,7 @@ export class CustomFieldProcessingInterceptor implements NestInterceptor {
 
     private getEntityNameFromInputType(typeName: string): string {
         if (typeName === 'RegisterCustomerInput') {
+            // Added to createInputsWithCustomFields in the constructor.
             return 'Customer';
         }
         // Remove "Create" or "Update" prefix and "Input" suffix
