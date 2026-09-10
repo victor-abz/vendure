@@ -1476,7 +1476,7 @@
                   "title": "CustomFieldConfig",
                   "slug": "custom-field-config",
                   "file": "docs/reference/typescript-api/custom-fields/custom-field-config.mdx",
-                  "lastModified": "2026-03-24T11:06:42Z"
+                  "lastModified": "2026-09-10T15:52:53Z"
                 },
                 {
                   "title": "CustomFieldType",
@@ -1485,25 +1485,31 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 },
                 {
+                  "title": "IsLocalizedCustomFieldType",
+                  "slug": "is-localized-custom-field-type",
+                  "file": "docs/reference/typescript-api/custom-fields/is-localized-custom-field-type.mdx",
+                  "lastModified": "2026-09-10T15:52:53Z"
+                },
+                {
                   "title": "StructCustomFieldConfig",
                   "slug": "struct-custom-field-config",
                   "file": "docs/reference/typescript-api/custom-fields/struct-custom-field-config.mdx",
-                  "lastModified": "2026-03-24T11:06:42Z"
+                  "lastModified": "2026-09-10T15:52:53Z"
                 },
                 {
                   "title": "StructFieldConfig",
                   "slug": "struct-field-config",
                   "file": "docs/reference/typescript-api/custom-fields/struct-field-config.mdx",
-                  "lastModified": "2026-03-24T11:06:42Z"
+                  "lastModified": "2026-09-10T15:52:53Z"
                 },
                 {
                   "title": "TypedCustomSingleFieldConfig",
                   "slug": "typed-custom-single-field-config",
                   "file": "docs/reference/typescript-api/custom-fields/typed-custom-single-field-config.mdx",
-                  "lastModified": "2026-03-24T11:06:42Z"
+                  "lastModified": "2026-09-10T15:52:53Z"
                 }
               ],
-              "lastModified": "2026-03-24T11:07:09Z"
+              "lastModified": "2026-09-10T15:52:53Z"
             },
             {
               "title": "Data Access",
@@ -2140,7 +2146,7 @@
                   "title": "ImportParser",
                   "slug": "import-parser",
                   "file": "docs/reference/typescript-api/import-export/import-parser.mdx",
-                  "lastModified": "2026-04-20T16:08:16+02:00"
+                  "lastModified": "2026-09-10T15:52:53Z"
                 },
                 {
                   "title": "InitialData",
