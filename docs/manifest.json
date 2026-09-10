@@ -2287,12 +2287,6 @@
               "file": "docs/reference/typescript-api/migration/index.mdx",
               "children": [
                 {
-                  "title": "DescribeDiagnostic",
-                  "slug": "describe-diagnostic",
-                  "file": "docs/reference/typescript-api/migration/describe-diagnostic.mdx",
-                  "lastModified": "2026-09-01T08:40:40Z"
-                },
-                {
                   "title": "GenerateMigration",
                   "slug": "generate-migration",
                   "file": "docs/reference/typescript-api/migration/generate-migration.mdx",
@@ -2323,12 +2317,6 @@
                   "lastModified": "2026-01-28T14:49:21+01:00"
                 },
                 {
-                  "title": "NoMigrationsMatchedDiagnostic",
-                  "slug": "no-migrations-matched-diagnostic",
-                  "file": "docs/reference/typescript-api/migration/no-migrations-matched-diagnostic.mdx",
-                  "lastModified": "2026-08-25T09:10:29Z"
-                },
-                {
                   "title": "RescaleOrderLinePromotionAdjustments",
                   "slug": "rescale-order-line-promotion-adjustments",
                   "file": "docs/reference/typescript-api/migration/rescale-order-line-promotion-adjustments.mdx",
@@ -2351,12 +2339,6 @@
                   "slug": "run-migrations-options",
                   "file": "docs/reference/typescript-api/migration/run-migrations-options.mdx",
                   "lastModified": "2026-09-01T08:40:40Z"
-                },
-                {
-                  "title": "SchemaOutOfSyncDiagnostic",
-                  "slug": "schema-out-of-sync-diagnostic",
-                  "file": "docs/reference/typescript-api/migration/schema-out-of-sync-diagnostic.mdx",
-                  "lastModified": "2026-08-25T09:10:29Z"
                 }
               ],
               "lastModified": "2026-01-28T14:49:21+01:00"

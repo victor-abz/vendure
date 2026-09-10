@@ -4,13 +4,15 @@ import { describe, expect, it } from 'vitest';
 import { buildMigrationReport } from './migration-report';
 
 const unmatched: MigrationDiagnostic = {
-    type: 'no-migrations-matched',
-    patterns: ['dist/migrations/*.js'],
-    cwd: '/project',
+    code: 'no-migrations-matched',
+    lines: ['No migration files matched the configured `migrations` patterns.', ' - dist/migrations/*.js'],
 };
 const outOfSync: MigrationDiagnostic = {
-    type: 'schema-out-of-sync',
-    queries: ['ALTER TABLE `product` ADD `foo` varchar(255)'],
+    code: 'schema-out-of-sync',
+    lines: [
+        'Your database schema does not match your current configuration.',
+        ' - ALTER TABLE `product` ADD `foo` varchar(255)',
+    ],
 };
 
 describe('buildMigrationReport()', () => {
@@ -36,7 +38,6 @@ describe('buildMigrationReport()', () => {
         expect(report.summary).toBe('No migration files could be loaded');
         expect(report.message).not.toContain('No pending migrations found');
         expect(report.details).toContain('dist/migrations/*.js');
-        expect(report.details).toContain('/project');
         expect(report.hasWarnings).toBe(true);
     });
 
@@ -50,40 +51,14 @@ describe('buildMigrationReport()', () => {
         expect(report.hasWarnings).toBe(true);
     });
 
-    it('does not blame the working directory when the patterns are absolute', () => {
-        const report = buildMigrationReport([], [
-            { type: 'no-migrations-matched', patterns: ['/project/dist/migrations/*.js'], cwd: '/elsewhere' },
-        ]);
+    // The drift list can be the whole schema, which is more than a terminal should render
+    it('caps the rendered lines', () => {
+        const lines = Array.from({ length: 25 }, (_, i) => ` - CREATE TABLE \`t${i}\` (id int)`);
+        const report = buildMigrationReport([], [{ code: 'schema-out-of-sync', lines }]);
 
-        expect(report.details).toContain('/project/dist/migrations/*.js');
-        expect(report.details).not.toContain('/elsewhere');
-    });
-
-    it('mentions the working directory only as it applies when patterns are mixed', () => {
-        const report = buildMigrationReport(
-            [],
-            [
-                {
-                    type: 'no-migrations-matched',
-                    patterns: ['/project/dist/migrations/*.js', 'migrations/*.ts'],
-                    cwd: '/elsewhere',
-                },
-            ],
-        );
-
-        expect(report.details).toContain('/project/dist/migrations/*.js');
-        expect(report.details).toContain(
-            'Relative patterns are resolved against the current directory (/elsewhere)',
-        );
-    });
-
-    it('caps the rendered drift queries', () => {
-        const queries = Array.from({ length: 25 }, (_, i) => `CREATE TABLE \`t${i}\` (id int)`);
-        const report = buildMigrationReport([], [{ type: 'schema-out-of-sync', queries }]);
-
-        expect(report.details).toContain('CREATE TABLE `t9` (id int)');
-        expect(report.details).not.toContain('CREATE TABLE `t10` (id int)');
-        expect(report.details).toContain('...and 15 more changes');
+        expect(report.details).toContain('CREATE TABLE `t10` (id int)');
+        expect(report.details).not.toContain('CREATE TABLE `t11` (id int)');
+        expect(report.details).toContain('...and 14 more');
     });
 
     it('renders every diagnostic', () => {

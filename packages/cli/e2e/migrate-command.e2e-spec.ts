@@ -250,6 +250,9 @@ describe(
                 expect(result.hasWarnings).toBe(true);
                 expect(result.message).toContain('No migration files matched');
                 expect(result.message).not.toContain('No pending migrations found');
+                // The fixture config uses `path.join(__dirname, ...)`, and an absolute pattern
+                // ignores the working directory, so pointing at it would misdirect the user
+                expect(result.message).not.toContain('resolved against the current directory');
             });
 
             // #5001 — a schema built with `synchronize: true` has no migration history, so an

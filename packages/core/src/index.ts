@@ -18,13 +18,8 @@ export * from './event-bus/index';
 export * from './health-check/index';
 export * from './i18n/index';
 export * from './job-queue/index';
-export { describeDiagnostic, generateMigration, revertLastMigration, runMigrations } from './migrate';
-export type {
-    MigrationDiagnostic,
-    NoMigrationsMatchedDiagnostic,
-    RunMigrationsOptions,
-    SchemaOutOfSyncDiagnostic,
-} from './migrate';
+export { generateMigration, revertLastMigration, runMigrations } from './migrate';
+export type { MigrationDiagnostic, RunMigrationsOptions } from './migrate';
 export * from './migration-utils/index';
 export * from './plugin/index';
 export * from './process-context/index';

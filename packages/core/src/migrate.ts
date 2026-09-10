@@ -9,6 +9,7 @@ import { camelCase } from 'typeorm/util/StringUtils';
 import { preBootstrapConfig } from './bootstrap';
 import { resetConfig } from './config/config-helpers';
 import { VendureConfig } from './config/vendure-config';
+import { Product } from './entity/product/product.entity';
 
 /**
  * @description
@@ -32,60 +33,37 @@ export interface MigrationOptions {
 
 /**
  * @description
- * The configured `migrations` patterns matched no files, but the database has migrations
- * recorded as applied. The patterns must therefore have stopped matching, for example because
- * they point at compiled output which has not been built.
- *
- * @docsCategory migration
- * @since 3.7.2
- */
-export interface NoMigrationsMatchedDiagnostic {
-    type: 'no-migrations-matched';
-    /**
-     * @description
-     * The glob patterns configured in `dbConnectionOptions.migrations`.
-     */
-    patterns: string[];
-    /**
-     * @description
-     * The directory the patterns were resolved against.
-     */
-    cwd: string;
-}
-
-/**
- * @description
- * The database schema does not match the current entity configuration, so a new migration
- * needs to be generated.
- *
- * @docsCategory migration
- * @since 3.7.2
- */
-export interface SchemaOutOfSyncDiagnostic {
-    type: 'schema-out-of-sync';
-    /**
-     * @description
-     * The SQL statements which would bring the schema back into line with the configuration.
-     */
-    queries: string[];
-}
-
-/**
- * @description
  * A condition detected while running migrations which cannot be inferred from the return value
  * of {@link runMigrations}.
  *
  * @docsCategory migration
- * @since 3.7.2
+ * @since 3.7.4
  */
-export type MigrationDiagnostic = NoMigrationsMatchedDiagnostic | SchemaOutOfSyncDiagnostic;
+export interface MigrationDiagnostic {
+    /**
+     * @description
+     * Identifies the condition:
+     *
+     * - `no-migrations-matched`: the configured `migrations` patterns matched no files, but the
+     *   database has migrations recorded as applied. The patterns must therefore have stopped
+     *   matching, for example because they point at compiled output which has not been built.
+     * - `schema-out-of-sync`: the database schema does not match the current entity
+     *   configuration, so a new migration needs to be generated.
+     */
+    code: 'no-migrations-matched' | 'schema-out-of-sync';
+    /**
+     * @description
+     * The condition rendered as lines of human-readable text.
+     */
+    lines: string[];
+}
 
 /**
  * @description
  * Options for {@link runMigrations}.
  *
  * @docsCategory migration
- * @since 3.7.2
+ * @since 3.7.4
  */
 export interface RunMigrationsOptions {
     /**
@@ -114,7 +92,7 @@ export async function runMigrations(
     const migrationsRan: string[] = [];
     const report = (diagnostic: MigrationDiagnostic) => {
         options?.onDiagnostic?.(diagnostic);
-        log(pc.yellow(describeDiagnostic(diagnostic).join('\n')));
+        log(pc.yellow(diagnostic.lines.join('\n')));
     };
     try {
         const unmatched = await detectUnmatchedPatterns(connection);
@@ -156,63 +134,32 @@ async function checkMigrationStatus(connection: Connection, report: (d: Migratio
     // `synchronize: true` has every table and no migration history, because TypeORM only writes
     // that table when it runs a migration. Reporting drift is exactly what that developer needs
     // when they switch to `synchronize: false` and change an entity.
-    if (!(await hasAnyEntityTable(connection))) {
+    if (!(await hasBeenSetUp(connection))) {
         return;
     }
     const builderLog = await connection.driver.createSchemaBuilder().log();
     if (builderLog.upQueries.length) {
-        report({ type: 'schema-out-of-sync', queries: builderLog.upQueries.map(q => q.query) });
+        report({
+            code: 'schema-out-of-sync',
+            lines: [
+                'Your database schema does not match your current configuration. Generate a new migration for the following changes:',
+                ...builderLog.upQueries.map(q => ' - ' + q.query),
+            ],
+        });
     }
 }
 
-async function hasAnyEntityTable(connection: Connection): Promise<boolean> {
+/**
+ * Asking about one known table keeps this to a single statement. Loading every entity table
+ * would answer the same question, but `createSchemaBuilder().log()` already does that on its
+ * own query runner, so the work would be done twice on every run.
+ */
+async function hasBeenSetUp(connection: Connection): Promise<boolean> {
     const queryRunner = connection.createQueryRunner();
     try {
-        const tables = await queryRunner.getTables(connection.entityMetadatas.map(m => m.tablePath));
-        return tables.length > 0;
+        return await queryRunner.hasTable(connection.getMetadata(Product).tablePath);
     } finally {
         await queryRunner.release();
-    }
-}
-
-/**
- * The full drift list can be the entire schema, which is more than a terminal should be asked
- * to render. The queries themselves remain on the diagnostic for programmatic consumers.
- */
-const maxDescribedQueries = 10;
-
-/**
- * @description
- * Renders a {@link MigrationDiagnostic} as lines of human-readable text.
- *
- * @docsCategory migration
- * @since 3.7.2
- */
-export function describeDiagnostic(diagnostic: MigrationDiagnostic): string[] {
-    switch (diagnostic.type) {
-        case 'no-migrations-matched': {
-            // The cwd only explains the failure for a relative pattern. The scaffolded config uses
-            // `path.join(__dirname, ...)`, where pointing at the working directory sends the user
-            // looking for a problem that is not there.
-            const anyRelative = diagnostic.patterns.some(pattern => !path.isAbsolute(pattern));
-            return [
-                'No migration files matched the configured `migrations` patterns, but this database has migrations recorded as applied.',
-                'Nothing on disk matches these patterns. If they point at compiled output, check that it has been built:',
-                ...diagnostic.patterns.map(pattern => ' - ' + pattern),
-                ...(anyRelative
-                    ? [`Relative patterns are resolved against the current directory (${diagnostic.cwd}).`]
-                    : []),
-            ];
-        }
-        case 'schema-out-of-sync': {
-            const shown = diagnostic.queries.slice(0, maxDescribedQueries);
-            const remaining = diagnostic.queries.length - shown.length;
-            return [
-                'Your database schema does not match your current configuration. Generate a new migration for the following changes:',
-                ...shown.map(query => ' - ' + query),
-                ...(remaining ? [` ...and ${remaining} more change${remaining === 1 ? '' : 's'}`] : []),
-            ];
-        }
     }
 }
 
@@ -227,9 +174,9 @@ export function describeDiagnostic(diagnostic: MigrationDiagnostic): string[] {
  * discriminator is the `migrations` table. If the database has migrations on record but nothing
  * loaded, the patterns can only have stopped matching.
  */
-async function detectUnmatchedPatterns(
-    connection: Connection,
-): Promise<NoMigrationsMatchedDiagnostic | undefined> {
+async function detectUnmatchedPatterns(connection: Connection): Promise<MigrationDiagnostic | undefined> {
+    // Giving up as soon as any class loaded means a config which mixes a working pattern with a
+    // broken one will not warn. That is no worse than the current behaviour.
     if (connection.migrations.length) {
         return;
     }
@@ -243,7 +190,21 @@ async function detectUnmatchedPatterns(
     if (!executed.length) {
         return;
     }
-    return { type: 'no-migrations-matched', patterns, cwd: process.cwd() };
+    // The cwd only explains the failure for a relative pattern. The scaffolded config uses
+    // `path.join(__dirname, ...)`, where pointing at the working directory sends the user looking
+    // for a problem that is not there.
+    const anyRelative = patterns.some(pattern => !path.isAbsolute(pattern));
+    return {
+        code: 'no-migrations-matched',
+        lines: [
+            'No migration files matched the configured `migrations` patterns, but this database has migrations recorded as applied.',
+            'Nothing on disk matches these patterns. If they point at compiled output, check that it has been built:',
+            ...patterns.map(pattern => ' - ' + pattern),
+            ...(anyRelative
+                ? [`Relative patterns are resolved against the current directory (${process.cwd()}).`]
+                : []),
+        ],
+    };
 }
 
 function getConfiguredPatterns(configuredMigrations: DataSourceOptions['migrations']): string[] {
