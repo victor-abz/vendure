@@ -9,6 +9,7 @@ import { CellContext, flexRender } from '@tanstack/react-table';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 
+import { AdditionalColumns } from '../shared/paginated-list-data-table.js';
 import { useGeneratedColumns } from './use-generated-columns.js';
 
 // The display component registry is a module-level Map with no removal API, so an entry
@@ -39,13 +40,18 @@ const cellContext = {
  * `createElement` for any function cell, so a cell using hooks behaves here as it does in
  * a real table; calling `column.cell(context)` directly would not.
  */
-function renderColumnCell(pageId: string, columnId: string): string {
+function renderColumnCell(
+    pageId: string,
+    columnId: string,
+    additionalColumns?: AdditionalColumns<any>,
+): string {
     const captured: { columns?: Array<{ id?: string; cell?: any }> } = {};
 
     function Harness() {
         const { columns } = useGeneratedColumns({
             fields,
             customizeColumns,
+            additionalColumns,
             includeSelectionColumn: false,
             includeActionsColumn: false,
         });
@@ -133,5 +139,40 @@ describe('useGeneratedColumns display component precedence', () => {
         executeDashboardExtensionCallbacks();
 
         expect(renderColumnCell(pageId, 'price')).toBe('<span>via-extension-api</span>');
+    });
+});
+
+describe('useGeneratedColumns additionalColumns', () => {
+    const additionalColumns: AdditionalColumns<any> = {
+        inventoryStatus: { cell: () => <span>additional-column-cell</span> },
+    };
+
+    it('gives precedence to a registered display component over an additional column cell', () => {
+        const pageId = 'test-page-additional-column-registered';
+
+        // An additional column id is usually not a field on the row, so a real component
+        // reads `row.original` rather than `value`.
+        addDisplayComponent({
+            pageId,
+            blockId: BLOCK_ID,
+            field: 'inventoryStatus',
+            component: ({ row }: CellContext<any, any>) => (
+                <span>{`registered-additional-column-display-component:${row.original.sku as string}`}</span>
+            ),
+        });
+
+        expect(renderColumnCell(pageId, 'inventoryStatus', additionalColumns)).toBe(
+            '<span>registered-additional-column-display-component:SKU-1</span>',
+        );
+    });
+
+    it('falls back to the additional column cell when no display component is registered', () => {
+        expect(
+            renderColumnCell(
+                'test-page-additional-column-unregistered',
+                'inventoryStatus',
+                additionalColumns,
+            ),
+        ).toBe('<span>additional-column-cell</span>');
     });
 });
