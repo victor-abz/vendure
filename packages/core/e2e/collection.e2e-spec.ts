@@ -27,6 +27,8 @@ import {
     assignCollectionsToChannelDocument,
     createChannelDocument,
     createCollectionDocument,
+    createProductDocument,
+    createProductVariantsDocument,
     deleteProductDocument,
     deleteProductVariantDocument,
     getAssetListDocument,
@@ -2161,6 +2163,148 @@ describe('Collection resolver', () => {
         });
     });
 
+    describe('combining an AND-ed and an OR-ed filter', () => {
+        // https://github.com/vendurehq/vendure/issues/5415
+        it('does not duplicate variants pulled in by the OR-ed filter when they have multiple translations', async () => {
+            adminClient.setChannelToken(E2E_DEFAULT_CHANNEL_TOKEN);
+
+            const { createProduct: nameMatchProduct } = await adminClient.query(createProductDocument, {
+                input: {
+                    translations: [
+                        {
+                            languageCode: LanguageCode.en,
+                            name: 'combineWithAnd regression name match',
+                            slug: 'combine-with-and-regression-name-match',
+                            description: '',
+                        },
+                    ],
+                },
+            });
+            const { createProductVariants: nameMatchVariants } = await adminClient.query(
+                createProductVariantsDocument,
+                {
+                    input: [
+                        {
+                            productId: nameMatchProduct.id,
+                            sku: 'COMBINE-REGRESSION-CAMERA',
+                            optionIds: [],
+                            translations: [
+                                { languageCode: LanguageCode.en, name: 'combineWithAndRegressionCamera' },
+                            ],
+                        },
+                    ],
+                },
+            );
+
+            // Two products, since a Product cannot have two variants with no options.
+            const { createProduct: orMatchProductA } = await adminClient.query(createProductDocument, {
+                input: {
+                    translations: [
+                        {
+                            languageCode: LanguageCode.en,
+                            name: 'combineWithAnd regression id match A',
+                            slug: 'combine-with-and-regression-id-match-a',
+                            description: '',
+                        },
+                    ],
+                },
+            });
+            const { createProduct: orMatchProductB } = await adminClient.query(createProductDocument, {
+                input: {
+                    translations: [
+                        {
+                            languageCode: LanguageCode.en,
+                            name: 'combineWithAnd regression id match B',
+                            slug: 'combine-with-and-regression-id-match-b',
+                            description: '',
+                        },
+                    ],
+                },
+            });
+            const { createProductVariants: orMatchVariants } = await adminClient.query(
+                createProductVariantsDocument,
+                {
+                    input: [
+                        {
+                            productId: orMatchProductA.id,
+                            sku: 'COMBINE-REGRESSION-OR-A',
+                            optionIds: [],
+                            translations: [
+                                { languageCode: LanguageCode.en, name: 'combineWithAndRegressionOrA' },
+                            ],
+                        },
+                        {
+                            productId: orMatchProductB.id,
+                            sku: 'COMBINE-REGRESSION-OR-B',
+                            optionIds: [],
+                            translations: [
+                                { languageCode: LanguageCode.en, name: 'combineWithAndRegressionOrB' },
+                            ],
+                        },
+                    ],
+                },
+            );
+
+            // These only match via the OR-ed productId filter; multiple translations triggered the bug.
+            await adminClient.query(updateProductVariantsDocument, {
+                input: orMatchVariants.map(v => ({
+                    id: v.id,
+                    translations: [
+                        { languageCode: LanguageCode.en, name: v.name },
+                        { languageCode: LanguageCode.de, name: `${v.name} (DE)` },
+                        { languageCode: LanguageCode.fr, name: `${v.name} (FR)` },
+                    ],
+                })),
+            });
+
+            const { createCollection } = await adminClient.query(createCollectionDocument, {
+                input: {
+                    translations: [
+                        {
+                            languageCode: LanguageCode.en,
+                            name: 'combineWithAnd regression collection',
+                            description: '',
+                            slug: 'combine-with-and-regression-collection',
+                        },
+                    ],
+                    filters: [
+                        {
+                            code: variantNameCollectionFilter.code,
+                            arguments: [
+                                { name: 'operator', value: 'contains' },
+                                { name: 'term', value: 'combinewithandregressioncamera' },
+                                { name: 'combineWithAnd', value: 'true' },
+                            ],
+                        },
+                        {
+                            code: productIdCollectionFilter.code,
+                            arguments: [
+                                {
+                                    name: 'productIds',
+                                    value: `["${orMatchProductA.id}", "${orMatchProductB.id}"]`,
+                                },
+                                { name: 'combineWithAnd', value: 'false' },
+                            ],
+                        },
+                    ],
+                },
+            });
+            await awaitRunningJobs(adminClient, 5000);
+
+            const result = await adminClient.query(getCollectionProductVariantsDocument, {
+                id: createCollection.id,
+            });
+            collectionResultGuard.assertSuccess(result.collection);
+
+            const expectedNames = [
+                ...nameMatchVariants.map(v => v.name),
+                ...orMatchVariants.map(v => v.name),
+            ].sort();
+            // De-duplicated union of both filter branches, each variant appearing exactly once.
+            expect(result.collection.productVariants.items.map(i => i.name).sort()).toEqual(expectedNames);
+        });
+    });
+
     describe('cross-channel update protection', () => {
         const CHANNEL_A_TOKEN = 'coll-cross-channel-a';
         const CHANNEL_B_TOKEN = 'coll-cross-channel-b';
@@ -2229,6 +2373,54 @@ describe('Collection resolver', () => {
             });
             expect(collection?.name).toBe('Channel-A Collection');
         });
+    });
+
+    // https://github.com/vendurehq/vendure/issues/5415
+    it('AND-ed variantName filters can match different translations of a variant', async () => {
+        adminClient.setChannelToken(E2E_DEFAULT_CHANNEL_TOKEN);
+        const hardDriveVariantIds = ['T_11', 'T_12', 'T_13', 'T_14', 'T_15'];
+        await adminClient.query(updateProductVariantsDocument, {
+            input: hardDriveVariantIds.map(id => ({
+                id,
+                translations: [{ languageCode: LanguageCode.de, name: `Festplatte ${id}` }],
+            })),
+        });
+
+        const { createCollection } = await adminClient.query(createCollectionDocument, {
+            input: {
+                translations: [
+                    {
+                        languageCode: LanguageCode.en,
+                        name: 'drive and festplatte',
+                        description: '',
+                        slug: 'drive-and-festplatte',
+                    },
+                ],
+                filters: [
+                    {
+                        code: variantNameCollectionFilter.code,
+                        arguments: [
+                            { name: 'operator', value: 'contains' },
+                            { name: 'term', value: 'drive' },
+                        ],
+                    },
+                    {
+                        code: variantNameCollectionFilter.code,
+                        arguments: [
+                            { name: 'operator', value: 'contains' },
+                            { name: 'term', value: 'festplatte' },
+                        ],
+                    },
+                ],
+            },
+        });
+        await awaitRunningJobs(adminClient, 5000);
+
+        const result = await adminClient.query(getCollectionProductVariantsDocument, {
+            id: createCollection.id,
+        });
+        collectionResultGuard.assertSuccess(result.collection);
+        expect(result.collection.productVariants.items.map(i => i.id).sort()).toEqual(hardDriveVariantIds);
     });
 
     function getFacetValueId(code: string): string {
