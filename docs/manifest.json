@@ -2190,7 +2190,7 @@
                   "title": "InMemoryJobQueueStrategy",
                   "slug": "in-memory-job-queue-strategy",
                   "file": "docs/reference/typescript-api/job-queue/in-memory-job-queue-strategy.mdx",
-                  "lastModified": "2026-01-28T14:49:21+01:00"
+                  "lastModified": "2026-09-29T09:13:57Z"
                 },
                 {
                   "title": "InspectableJobQueueStrategy",
