@@ -123,8 +123,8 @@ export class StockLevelService {
                 productVariantIds: this.uniqueIds(ids),
             })
             .andWhere('channel.id = :channelId', { channelId: ctx.channelId })
-            // Reproduces the order the unbatched `productVariantId = :id` query got for free from
-            // the unique (productVariantId, stockLocationId) index, which an IN (...) scan may not.
+            // An IN (...) query gives no row order guarantee, so sort to keep the order of
+            // `stockLevels` stable for API clients.
             .orderBy('stockLevel.stockLocationId', 'ASC')
             .getMany();
         return this.groupByVariantId(ids, stockLevels);
